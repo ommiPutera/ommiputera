@@ -9,6 +9,7 @@
     "@remix-run/node": "^1.6.3",
     "@remix-run/react": "^1.6.3",
     "@remix-run/vercel": "^1.6.3",
+    "styled-components": "^5.3.3",
     "@vercel/node": "^1.15.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
@@ -19,6 +20,7 @@
     "@remix-run/serve": "^1.6.3",
     "@types/react": "^17.0.45",
     "@types/react-dom": "^17.0.17",
+    "@types/styled-components": "^5.1.24",
     "eslint": "^8.15.0",
     "typescript": "^4.6.4"
   },
