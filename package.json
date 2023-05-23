@@ -4,6 +4,7 @@
   "scripts": {
     "build": "remix build",
     "dev": "remix dev",
+    "clean": "rm -rf ./node_modules/ .cache/",
     "typecheck": "tsc"
   },
   "dependencies": {
