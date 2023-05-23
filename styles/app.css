@@ -1,13 +1,64 @@
 :root {
-  --color-primary-light: hsl(210, 100%, 98%);
-  --color-primary-100: hsl(210, 100%, 95%);
-  --color-primary-200: hsl(210, 100%, 85%);
-  --color-primary-300: hsl(210, 100%, 80%);
-  --color-primary-400: hsl(210, 100%, 75%);
-  --color-primary-500: hsl(210, 100%, 60%);
-  --color-primary-600: hsl(210, 100%, 50%);
-  --color-primary-700: hsl(210, 100%, 40%);
-  --color-primary-800: hsl(210, 100%, 30%);
-  --color-primary-900: hsl(210, 100%, 20%);
-  --color-primary-dark: hsl(210, 100%, 2%);
+  --color-black: #000;
+  --color-white: #fff;
+  --color-blue-100: #e8f2ff;
+  --color-blue-500: #4b96ff;
+  --color-slate-500: #a9adc1;
+  --color-gray-100: #f7f7f7;
+  --color-gray-200: #e6e9ee;
+  --color-gray-300: #dde0e4;
+  --color-gray-400: #818890;
+  --color-gray-500: #535661;
+  --color-gray-600: #4b4c53;
+  --color-gray-700: #3a3d4a;
+  --color-gray-800: #2e3039;
+  --color-gray-900: #1f2028;
+  --color-green-100: #e7f9ed;
+  --color-green-500: #30c85e;
+  --color-green-600: #68d94a;
+  --color-red-500: #ff4545;
+  --color-yellow-500: #ffd644;
+
+  --color-team-unknown: #818890;
+  --color-team-blue: #36a3ff;
+  --color-team-red: #ff4545;
+  /* yellow in light mode is... hard */
+  --color-team-yellow: #a08600;
+  --color-yellow-500: #a08600;
+  --color-yellow-500-inverted: #ffd644;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.underlined {
+  position: relative;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.underlined:focus {
+  outline: none;
+  text-decoration: none !important;
+}
+
+.underlined:after {
+  content: '';
+  height: 2px;
+  transform: scaleX(0);
+  transition: transform 0.25s ease;
+  transform-origin: left;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  display: block;
+  position: absolute;
+}
+
+.underlined:hover:after,
+.underlined:focus:after,
+.active.underlined:after {
+  background-color: currentColor;
+  transform: scaleX(1);
 }

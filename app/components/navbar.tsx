@@ -1,19 +1,33 @@
 import { Link } from "@remix-run/react";
 
-const LINKS = [{ name: "Post", to: "/post" }];
+const LINKS = [
+  { name: "Post", to: "/post" },
+  { name: "About", to: "/about" },
+];
 
-function Navbar() {
+function Index() {
   return (
-    <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
-      NavbarIndex
-      <ul className="hidden lg:flex">
-        {LINKS.map((link) => (
-          <NavLink key={link.to} to={link.to}>
-            {link.name}
-          </NavLink>
-        ))}
-      </ul>
-    </nav>
+    <div className="px-5vw py-9 lg:py-12">
+      <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
+        <div className="flex justify-center gap-4 align-middle">
+          <Link
+            prefetch="intent"
+            to="/"
+            className="text-primary underlined block whitespace-nowrap text-2xl font-medium transition focus:outline-none"
+          >
+            <h4>ommiputera.com</h4>
+          </Link>
+        </div>
+
+        <ul className="hidden lg:flex">
+          {LINKS.map((link) => (
+            <NavLink key={link.to} to={link.to}>
+              {link.name}
+            </NavLink>
+          ))}
+        </ul>
+      </nav>
+    </div>
   );
 }
 
@@ -31,4 +45,4 @@ function NavLink({
   );
 }
 
-export { Navbar };
+export { Index as Navbar };
