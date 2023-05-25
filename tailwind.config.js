@@ -1,7 +1,10 @@
+const path = require('path')
 const defaultTheme = require('tailwindcss/defaultTheme')
+const fromRoot = p => path.join(__dirname, p)
 
 module.exports = {
-  content: './app/**/*.+(js|jsx|ts|tsx|mdx|md)',
+  mode: 'jit',
+  content: [fromRoot('./app/**/*.+(js|jsx|ts|tsx|mdx|md)')],
   darkMode: 'class',
   theme: {
     screens: {
