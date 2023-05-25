@@ -2,9 +2,10 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
+    "build": "prisma generate && remix build",
     "dev": "remix dev",
     "clean": "rm -rf ./node_modules/ .cache/",
+    "postinstall": "prisma generate",
     "typecheck": "tsc"
   },
   "prisma": {
