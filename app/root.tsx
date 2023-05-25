@@ -27,6 +27,7 @@ function App() {
     <html lang="en" className={`${theme}`}>
       <head>
         <meta charSet="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
         <Meta />
         <Links />
       </head>
@@ -45,10 +46,6 @@ export const meta: V2_MetaFunction = ({data}) => {
   const requestInfo = data?.requestInfo
   return [
     {title: 'Ommi Putera - Personal Website'},
-    {
-      name: 'viewport',
-      content: 'width=device-width,initial-scale=1,viewport-fit=cover',
-    },
     {
       name: 'theme-color',
       content: requestInfo?.session.theme === 'dark' ? '#1F2028' : '#FFF',

@@ -29,11 +29,14 @@ const getPreferredTheme = () =>
 
 function ThemeProvider({children}: {children: React.ReactNode}) {
   const [theme, setThemeState] = React.useState<Theme | null>(() => {
-    if (typeof window !== 'object') return null
+    if (typeof window !== 'object') return 'dark'
     return getPreferredTheme()
   })
   const persistTheme = useFetcher()
   const persistThemeRef = React.useRef(persistTheme)
+  React.useEffect(() => {
+    persistThemeRef.current = persistTheme
+  }, [persistTheme])
 
   React.useEffect(() => {
     const mediaQuery = window.matchMedia(prefersLightMQ)
