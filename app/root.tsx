@@ -7,10 +7,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import appStyles from './styles/app.css'
-import stylesheet from './styles/tailwind.css'
-import {Navbar} from './components/navbar'
-import {ThemeProvider, useTheme} from './utils/theme-provider'
+import appStyles from '~/styles/app.css'
+import stylesheet from '~/styles/tailwind.css'
+import {Navbar} from '~/components/navbar'
+import {ThemeProvider, useTheme} from '~/utils/theme-provider'
 
 export default function AppWithProviders() {
   return (

@@ -28,8 +28,114 @@
   --color-yellow-500-inverted: #ffd644;
 }
 
+.light,
+.dark .text-inverse {
+  --color-team-unknown: var(--color-black);
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-gray-100);
+  --bg-alt: var(--color-gray-200);
+  --border-secondary: var(--color-gray-200);
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-gray-500);
+  color-scheme: light;
+}
+
+.dark,
+.light .text-inverse {
+  --color-team-yellow: #ffd644;
+  --color-yellow-500: #ffd644;
+  --color-yellow-500-inverted: #a08600;
+  --color-team-unknown: var(--color-white);
+  --bg-primary: var(--color-gray-900);
+  --bg-secondary: var(--color-gray-800);
+  --bg-alt: var(--color-gray-700);
+  --border-secondary: var(--color-gray-600);
+  --text-primary: var(--color-white);
+  --text-secondary: var(--color-slate-500);
+  color-scheme: dark;
+}
+
+.set-color-team-current-yellow {
+  --color-team-current: var(--color-team-yellow);
+}
+
+.set-color-team-current-red {
+  --color-team-current: var(--color-team-red);
+}
+
+.set-color-team-current-blue {
+  --color-team-current: var(--color-team-blue);
+}
+
+.dark .set-color-team-current-unknown {
+  --color-team-current: var(--color-white);
+}
+
+.light .set-color-team-current-unknown {
+  --color-team-current: var(--color-black);
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+body {
+  overflow-x: hidden;
+}
+
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  -webkit-box-shadow: 0 0 0 999px var(--color-gray-100) inset !important;
+  box-shadow: 0 0 0 999px var(--color-gray-100) inset !important;
+  background-clip: content-box !important;
+}
+
+.dark input:-webkit-autofill,
+.dark input:-webkit-autofill:hover,
+.dark input:-webkit-autofill:focus,
+.dark input:-webkit-autofill:active {
+  -webkit-text-fill-color: white !important;
+  -webkit-box-shadow: 0 0 0 999px var(--color-gray-800) inset !important;
+  box-shadow: 0 0 0 999px var(--color-gray-800) inset !important;
+  background-clip: content-box !important;
+}
+
+input:-webkit-autofill::first-line {
+  font-size: 1.125rem;
+  font-weight: 500;
+  font-family: Matter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    'Noto Color Emoji';
+}
+
+/* I kinda feel like this should be the default... 🤷‍♂️ */
+[hidden] {
+  pointer-events: none;
+}
+
+/* These elements get removed before hydration but they can look funny before hydrating */
+dark-mode,
+light-mode {
+  display: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :focus {
+    transition: outline-offset 0.1s ease;
+    outline-offset: 4px;
+  }
+}
+
+a {
+  color: var(--color-team-current);
 }
 
 .underlined {
@@ -45,9 +151,10 @@
 
 .underlined:after {
   content: '';
-  height: 4px;
+  height: 2px;
+  border-radius: 3px;
   transform: scaleX(0);
-  transition: transform 0.25s ease;
+  transition: transform 0.3s ease;
   transform-origin: left;
   left: 0;
   bottom: -4px;
@@ -61,4 +168,40 @@
 .active.underlined:after {
   background-color: currentColor;
   transform: scaleX(1);
+}
+
+@media (prefers-reduced-motion) {
+  .underlined:after {
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
+
+  .underlined:hover:after,
+  .underlined:focus:after,
+  .active.underlined:after {
+    opacity: 1;
+  }
+}
+
+/* transistor embed has rounded edges with white background 😬 */
+.dark iframe[src*='transistor'] {
+  border-radius: 8px;
+}
+
+.yt-lite {
+  border-radius: 0.5rem;
+  max-height: 90vh;
+  max-width: 90vw;
+}
+/* this is for react-lite-youtube-embed */
+/* Annoyingly the background image can be a pixel taller than the video in front of it when the video is playing */
+.lyt-activated {
+  background-image: none !important;
+}
+
+.quote-child > *:first-child:before {
+  content: '“';
+}
+.quote-child > *:last-child:after {
+  content: '”';
 }

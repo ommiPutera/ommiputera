@@ -17,7 +17,7 @@ export const meta: V2_MetaFunction = () => {
 export default function Index() {
   const data = useLoaderData<LoaderData>()
   return (
-    <div>
+    <div className="px-5vw py-9 lg:py-12">
       {data.jokes.map(joke => (
         <p key={joke.id}>{joke.name}</p>
       ))}
