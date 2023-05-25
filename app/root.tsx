@@ -7,9 +7,10 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import appStyles from '~/styles/app.css'
-import stylesheet from '~/styles/tailwind.css'
 import {Navbar} from '~/components/navbar'
+import appStyles from '~/styles/app.css'
+import tailwindStyles from '~/styles/tailwind.css'
+import vendorsStyles from '~/styles/vendors.css'
 import {ThemeProvider, useTheme} from '~/utils/theme-provider'
 
 export default function AppWithProviders() {
@@ -40,8 +41,19 @@ function App() {
   )
 }
 
-export const meta: V2_MetaFunction = () => {
-  return [{viewport: 'width=device-width,initial-scale=1,viewport-fit=cover'}]
+export const meta: V2_MetaFunction = ({data}) => {
+  const requestInfo = data?.requestInfo
+  return [
+    {title: 'Ommi Putera - Personal Website'},
+    {
+      name: 'viewport',
+      content: 'width=device-width,initial-scale=1,viewport-fit=cover',
+    },
+    {
+      name: 'theme-color',
+      content: requestInfo?.session.theme === 'dark' ? '#1F2028' : '#FFF',
+    },
+  ]
 }
 
 export const links: LinksFunction = () => {
@@ -85,6 +97,7 @@ export const links: LinksFunction = () => {
       href: '/favicons/favicon-16x16.png',
     },
     {rel: 'stylesheet', href: appStyles},
-    {rel: 'stylesheet', href: stylesheet},
+    {rel: 'stylesheet', href: tailwindStyles},
+    {rel: 'stylesheet', href: vendorsStyles},
   ]
 }
