@@ -10,7 +10,7 @@ export const loader = async () => {
   return data
 }
 
-export const meta: V2_MetaFunction = () => {
+export const meta: V2_MetaFunction = ({matches}) => {
   return [{title: 'Post pages'}]
 }
 

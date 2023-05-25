@@ -28,6 +28,10 @@ function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta
+          name="theme-color"
+          content={theme === 'dark' ? '#1F2028' : '#FFF'}
+        />
         <Meta />
         <Links />
       </head>
@@ -42,15 +46,8 @@ function App() {
   )
 }
 
-export const meta: V2_MetaFunction = ({data}) => {
-  const requestInfo = data?.requestInfo
-  return [
-    {title: 'Ommi Putera - Personal Website'},
-    {
-      name: 'theme-color',
-      content: requestInfo?.session.theme === 'dark' ? '#1F2028' : '#FFF',
-    },
-  ]
+export const meta: V2_MetaFunction = () => {
+  return [{title: 'Ommi Putera - Personal Website'}]
 }
 
 export const links: LinksFunction = () => {
