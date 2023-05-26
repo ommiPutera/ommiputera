@@ -4,8 +4,7 @@
   "sideEffects": false,
   "description": "A remix version of ommiputera.com",
   "engines": {
-    "node": "18",
-    "npm": "8"
+    "node": "16"
   },
   "scripts": {
     "build": "prisma generate && remix build",
