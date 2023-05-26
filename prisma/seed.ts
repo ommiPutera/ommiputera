@@ -43,5 +43,9 @@ function getJokes() {
       name: 'Elevator',
       content: `My first time using an elevator was an uplifting experience. The second time let me down.`,
     },
+    {
+      name: 'Ommi',
+      content: `My first time using an elevator was an uplifting experience. The second time let me down.`,
+    },
   ]
 }
