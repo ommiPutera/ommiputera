@@ -29,7 +29,7 @@ const getPreferredTheme = () =>
 
 function ThemeProvider({children}: {children: React.ReactNode}) {
   const [theme, setThemeState] = React.useState<Theme | null>(() => {
-    if (typeof window !== 'object') return null
+    if (typeof window !== 'object') return 'dark'
     return getPreferredTheme()
   })
   const persistTheme = useFetcher()
