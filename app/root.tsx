@@ -73,8 +73,8 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
+    {rel: 'stylesheet', href: vendorsStyles},
     {rel: 'stylesheet', href: appStyles},
     {rel: 'stylesheet', href: tailwindStyles},
-    {rel: 'stylesheet', href: vendorsStyles},
   ]
 }

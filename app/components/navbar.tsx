@@ -1,17 +1,21 @@
 import {Link} from '@remix-run/react'
 import {
   Menu,
-  MenuList,
   MenuButton,
-  MenuItem,
   MenuLink,
+  useMenuButtonContext,
+  MenuPopover,
+  MenuItems,
 } from '@reach/menu-button'
-import {motion, useReducedMotion} from 'framer-motion'
+import {BurgerMenu} from '~/utils/icons'
+import {AnimatePresence, useReducedMotion, motion} from 'framer-motion'
 
 const LINKS = [
   {name: 'Post', to: '/post'},
   {name: 'About', to: '/about'},
 ]
+
+const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
 
 function Index() {
   return (
@@ -35,24 +39,7 @@ function MobileNav() {
   )
 }
 
-const topVariants = {
-  open: {rotate: 45, y: 7, originX: '16px', originY: '10px'},
-  closed: {rotate: 0, y: 0, originX: 0, originY: 0},
-}
-
-const centerVariants = {
-  open: {opacity: 0},
-  closed: {opacity: 1},
-}
-
-const bottomVariants = {
-  open: {rotate: -45, y: -5, originX: '16px', originY: '22px'},
-  closed: {rotate: 0, y: 0, originX: 0, originY: 0},
-}
-
 function MobileMenu() {
-  const shouldReduceMotion = useReducedMotion()
-  const transition = shouldReduceMotion ? {duration: 0} : {}
   return (
     <Menu>
       {({isExpanded}) => {
@@ -60,52 +47,58 @@ function MobileMenu() {
         return (
           <>
             <MenuButton className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <motion.rect
-                  animate={state}
-                  variants={topVariants}
-                  transition={transition}
-                  x="6"
-                  y="9"
-                  width="20"
-                  height="2"
-                  rx="1"
-                  fill="currentColor"
-                />
-                <motion.rect
-                  animate={state}
-                  variants={centerVariants}
-                  transition={transition}
-                  x="6"
-                  y="15"
-                  width="20"
-                  height="2"
-                  rx="1"
-                  fill="currentColor"
-                />
-                <motion.rect
-                  animate={state}
-                  variants={bottomVariants}
-                  transition={transition}
-                  x="6"
-                  y="21"
-                  width="20"
-                  height="2"
-                  rx="1"
-                  fill="currentColor"
-                />
-              </svg>
+              <BurgerMenu state={state} />
             </MenuButton>
+            <MobileMenuList />
           </>
         )
       }}
     </Menu>
+  )
+}
+
+function MobileMenuList() {
+  const {isExpanded} = useMenuButtonContext()
+  const shouldReduceMotion = useReducedMotion()
+  return (
+    <AnimatePresence>
+      {isExpanded ? (
+        <MenuPopover
+          position={r => ({
+            top: `calc(${Number(r?.top) + Number(r?.height)}px + 2.25rem)`, // 2.25 rem = py-9 from navbar
+            left: 0,
+            bottom: 0,
+            right: 0,
+          })}
+          style={{display: 'block'}}
+          className="z-50"
+        >
+          <motion.div
+            initial={{y: -50, opacity: 0}}
+            animate={{y: 0, opacity: 1}}
+            exit={{y: -50, opacity: 0}}
+            transition={{
+              duration: shouldReduceMotion ? 0 : 0.15,
+              ease: 'linear',
+            }}
+            className="bg-primary flex h-full flex-col overflow-y-scroll border-t border-gray-200 pb-12 dark:border-gray-600"
+          >
+            <MenuItems className="border-none bg-transparent p-0">
+              {MOBILE_LINKS.map(link => (
+                <MenuLink
+                  className="hover:bg-secondary focus:bg-secondary text-primary border-b border-gray-200 px-5vw py-9 text-center text-base dark:border-gray-600"
+                  key={link.to}
+                  as={Link}
+                  to={link.to}
+                >
+                  {link.name}
+                </MenuLink>
+              ))}
+            </MenuItems>
+          </motion.div>
+        </MenuPopover>
+      ) : null}
+    </AnimatePresence>
   )
 }
 
@@ -140,7 +133,7 @@ function Logo() {
     <Link
       prefetch="intent"
       to="/"
-      className="ml-2 block whitespace-nowrap text-xl transition focus:outline-none"
+      className="block whitespace-nowrap text-xl transition focus:outline-none"
     >
       <h1>ommiputera.com</h1>
     </Link>

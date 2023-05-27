@@ -13,6 +13,11 @@ module.exports = {
       xl: '1500px', // this is the "design resolution"
     },
     colors: {
+      transparent: 'transparent',
+      current: 'currentColor',
+      white: 'var(--color-white)',
+      black: 'var(--color-black)',
+
       gray: {
         100: 'var(--color-gray-100)',
         200: 'var(--color-gray-200)',

@@ -30,3 +30,21 @@
   font-style: normal;
   font-display: swap;
 }
+
+@layer utilities {
+  .bg-primary {
+    @apply bg-white dark:bg-gray-900;
+  }
+
+  .bg-secondary {
+    @apply bg-gray-100 dark:bg-gray-800;
+  }
+
+  .text-primary {
+    @apply text-black dark:text-white;
+  }
+
+  .text-secondary {
+    @apply text-gray-500 dark:text-slate-500;
+  }
+}
