@@ -2,7 +2,13 @@ import {motion, useReducedMotion} from 'framer-motion'
 
 const BurgerMenu = ({state}: {state: string}) => {
   const shouldReduceMotion = useReducedMotion()
-  const transition = shouldReduceMotion ? {duration: 0} : {}
+  const transition = shouldReduceMotion
+    ? {
+        opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+        rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+        scale: {duration: shouldReduceMotion ? 0 : 0.5},
+      }
+    : {}
 
   const topVariants = {
     open: {rotate: 45, y: 7, originX: '16px', originY: '10px'},

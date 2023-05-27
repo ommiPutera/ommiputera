@@ -1,4 +1,4 @@
-import {Link} from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import {
   Menu,
   MenuButton,
@@ -78,21 +78,21 @@ function MobileMenuList() {
             animate={{y: 0, opacity: 1}}
             exit={{y: -50, opacity: 0}}
             transition={{
-              duration: shouldReduceMotion ? 0 : 0.15,
+              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+              scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
-            className="bg-primary flex h-full flex-col overflow-y-scroll border-t border-gray-200 pb-12 dark:border-gray-600"
+            className="bg-primary flex h-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
           >
             <MenuItems className="border-none bg-transparent p-0">
+              <h5 className="text px-5vw pb-4 text-xs font-medium tracking-wider text-gray-200">
+                NAVIGATION
+              </h5>
               {MOBILE_LINKS.map(link => (
-                <MenuLink
-                  className="hover:bg-secondary focus:bg-secondary text-primary border-b border-gray-200 px-5vw py-9 text-center text-base dark:border-gray-600"
-                  key={link.to}
-                  as={Link}
-                  to={link.to}
-                >
+                <MobileNavLink key={link.to} to={link.to}>
                   {link.name}
-                </MenuLink>
+                </MobileNavLink>
               ))}
             </MenuItems>
           </motion.div>
@@ -102,19 +102,40 @@ function MobileMenuList() {
   )
 }
 
+function MobileNavLink({
+  to,
+  children,
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+  const location = useLocation()
+  return (
+    <MenuLink
+      className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-0 text-left text-4xl font-light dark:border-gray-600"
+      as={Link}
+      to={to}
+    >
+      <div className="flex items-center justify-between">
+        {children}
+        {location.pathname === to && (
+          <div className="h-2 w-2 rounded-full bg-white"></div>
+        )}
+      </div>
+    </MenuLink>
+  )
+}
+
 function DesktopNav() {
   return (
     <ul className="hidden lg:flex">
       {LINKS.map(link => (
-        <NavLink key={link.to} to={link.to} className="underlined">
+        <DesktopNavLink key={link.to} to={link.to} className="underlined">
           {link.name}
-        </NavLink>
+        </DesktopNavLink>
       ))}
     </ul>
   )
 }
 
-function NavLink({
+function DesktopNavLink({
   to,
   children,
   ...rest
@@ -133,7 +154,7 @@ function Logo() {
     <Link
       prefetch="intent"
       to="/"
-      className="block whitespace-nowrap text-xl transition focus:outline-none"
+      className="block whitespace-nowrap text-xl font-medium transition focus:outline-none"
     >
       <h1>ommiputera.com</h1>
     </Link>
