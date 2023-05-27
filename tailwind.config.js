@@ -32,6 +32,9 @@ module.exports = {
       red: {
         500: 'var(--color-red-500)',
       },
+      slate: {
+        500: 'var(--color-slate-500)',
+      },
     },
     extend: {
       maxWidth: {

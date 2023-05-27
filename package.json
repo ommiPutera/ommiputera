@@ -25,6 +25,7 @@
     "@remix-run/vercel": "^1.15.0",
     "@tailwindcss/typography": "^0.5.9",
     "@vercel/node": "^2.6.2",
+    "clsx": "^1.2.1",
     "framer-motion": "^10.12.16",
     "isbot": "^3.6.5",
     "postcss-import": "^15.1.0",

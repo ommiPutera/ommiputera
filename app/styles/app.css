@@ -152,12 +152,12 @@ a {
 .underlined:after {
   content: '';
   height: 2px;
-  border-radius: 3px;
+  border-radius: 4px;
   transform: scaleX(0);
   transition: transform 0.3s ease;
   transform-origin: left;
   left: 0;
-  bottom: -4px;
+  bottom: -5px;
   width: 100%;
   display: block;
   position: absolute;
@@ -181,27 +181,4 @@ a {
   .active.underlined:after {
     opacity: 1;
   }
-}
-
-/* transistor embed has rounded edges with white background 😬 */
-.dark iframe[src*='transistor'] {
-  border-radius: 8px;
-}
-
-.yt-lite {
-  border-radius: 0.5rem;
-  max-height: 90vh;
-  max-width: 90vw;
-}
-/* this is for react-lite-youtube-embed */
-/* Annoyingly the background image can be a pixel taller than the video in front of it when the video is playing */
-.lyt-activated {
-  background-image: none !important;
-}
-
-.quote-child > *:first-child:before {
-  content: '“';
-}
-.quote-child > *:last-child:after {
-  content: '”';
 }

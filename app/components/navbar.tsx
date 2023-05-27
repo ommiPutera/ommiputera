@@ -9,6 +9,7 @@ import {
 } from '@reach/menu-button'
 import {BurgerMenu} from '~/utils/icons'
 import {AnimatePresence, useReducedMotion, motion} from 'framer-motion'
+import clsx from 'clsx'
 
 const LINKS = [
   {name: 'Post', to: '/post'},
@@ -32,28 +33,22 @@ function Index() {
 function MobileNav() {
   return (
     <div className="flex items-center justify-center lg:hidden">
-      <div className="block ">
-        <MobileMenu />
+      <div className="block">
+        <Menu>
+          {({isExpanded}) => {
+            const state = isExpanded ? 'open' : 'closed'
+            return (
+              <>
+                <MenuButton className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
+                  <BurgerMenu state={state} />
+                </MenuButton>
+                <MobileMenuList />
+              </>
+            )
+          }}
+        </Menu>
       </div>
     </div>
-  )
-}
-
-function MobileMenu() {
-  return (
-    <Menu>
-      {({isExpanded}) => {
-        const state = isExpanded ? 'open' : 'closed'
-        return (
-          <>
-            <MenuButton className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-              <BurgerMenu state={state} />
-            </MenuButton>
-            <MobileMenuList />
-          </>
-        )
-      }}
-    </Menu>
   )
 }
 
@@ -85,8 +80,8 @@ function MobileMenuList() {
             }}
             className="bg-primary flex h-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
           >
-            <MenuItems className="border-none bg-transparent p-0">
-              <h5 className="text px-5vw pb-4 text-xs font-medium tracking-wider text-gray-200">
+            <MenuItems className="border-none bg-transparent py-0">
+              <h5 className="text border-t border-gray-600 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
                 NAVIGATION
               </h5>
               {MOBILE_LINKS.map(link => (
@@ -107,6 +102,8 @@ function MobileNavLink({
   children,
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
+  const isSelected =
+    to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
     <MenuLink
       className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-0 text-left text-4xl font-light dark:border-gray-600"
@@ -115,9 +112,7 @@ function MobileNavLink({
     >
       <div className="flex items-center justify-between">
         {children}
-        {location.pathname === to && (
-          <div className="h-2 w-2 rounded-full bg-white"></div>
-        )}
+        {isSelected && <div className="h-2 w-2 rounded-full bg-white"></div>}
       </div>
     </MenuLink>
   )
@@ -127,7 +122,7 @@ function DesktopNav() {
   return (
     <ul className="hidden lg:flex">
       {LINKS.map(link => (
-        <DesktopNavLink key={link.to} to={link.to} className="underlined">
+        <DesktopNavLink key={link.to} to={link.to}>
           {link.name}
         </DesktopNavLink>
       ))}
@@ -140,9 +135,23 @@ function DesktopNavLink({
   children,
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+  const location = useLocation()
+  const isSelected =
+    to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
     <li className="px-5 py-2">
-      <Link prefetch="intent" to={to} {...rest}>
+      <Link
+        prefetch="intent"
+        to={to}
+        className={clsx(
+          'underlined hover:text-team-current focus:text-team-current block whitespace-nowrap text-lg font-medium focus:outline-none',
+          {
+            active: isSelected,
+            'text-secondary': !isSelected,
+          },
+        )}
+        {...rest}
+      >
         {children}
       </Link>
     </li>
@@ -154,9 +163,9 @@ function Logo() {
     <Link
       prefetch="intent"
       to="/"
-      className="block whitespace-nowrap text-xl font-medium transition focus:outline-none"
+      className="underlined block transition focus:outline-none"
     >
-      <h1>ommiputera.com</h1>
+      <h1 className="whitespace-nowrap text-2xl font-medium">ommiputera</h1>
     </Link>
   )
 }
