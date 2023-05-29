@@ -30,7 +30,7 @@ function App() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta
           name="theme-color"
-          content={theme === 'dark' ? '#1F2028' : '#FFF'}
+          content={theme === 'dark' ? '#161513' : '#FFF'}
         />
         <Meta />
         <Links />

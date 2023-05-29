@@ -11,10 +11,10 @@ function HomeHeroSection() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-4">
-        <h1 className="text-center text-3xl font-medium leading-tight lg:w-1/2 lg:text-5xl">
+        <h1 className="text-center text-3xl font-medium leading-tight md:w-2/3 xl:w-1/2 lg:text-5xl">
           Helping people make the world a better place through quality software.
         </h1>
-        <p className="mt-2 text-center font-medium text-gray-300 lg:mt-4 lg:w-1/2">
+        <p className="mt-2 text-center font-medium text-gray-300 lg:mt-3 md:w-2/3 xl:w-1/2">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices. Experience in
           developing projects from concept to launch. Eager to tackle more
