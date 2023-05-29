@@ -32,7 +32,7 @@ function Index() {
 
 function MobileNav() {
   return (
-    <div className="flex items-center justify-center lg:hidde">
+    <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
           {({isExpanded}) => {
