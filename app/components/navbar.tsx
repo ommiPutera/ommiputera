@@ -32,7 +32,7 @@ function Index() {
 
 function MobileNav() {
   return (
-    <div className="flex items-center justify-center lg:hidden">
+    <div className="flex items-center justify-center lg:hidde">
       <div className="block">
         <Menu>
           {({isExpanded}) => {
@@ -78,7 +78,7 @@ function MobileMenuList() {
               scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
-            className="bg-primary flex h-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
+            className="bg-primary flex h-full flex-col overflow-y-scroll pb-12 dark:border-gray-600 fixed w-full"
           >
             <MenuItems className="border-none bg-transparent py-0">
               <h5 className="text border-t border-gray-600 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
