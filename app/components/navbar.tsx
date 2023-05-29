@@ -20,7 +20,7 @@ const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
 
 function Index() {
   return (
-    <div className="px-5vw py-9 lg:py-12">
+    <div className="px-5vw py-9 lg:px-15vw lg:py-12">
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
         <Logo />
         <DesktopNav />

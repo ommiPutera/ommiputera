@@ -17,10 +17,14 @@ export const meta: V2_MetaFunction = ({matches}) => {
 export default function Index() {
   const data = useLoaderData<LoaderData>()
   return (
-    <div className="px-5vw py-9 lg:py-12">
-      {data.jokes.map(joke => (
-        <p key={joke.id}>{joke.name}</p>
-      ))}
+    <div className="border border-red-500 px-5vw lg:px-15vw py-9 lg:py-12">
+      <div className="text-primary mx-auto flex max-w-8xl items-center justify-between">
+        <div>
+          {data.jokes.map(joke => (
+            <p key={joke.id}>{joke.name}</p>
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

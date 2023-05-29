@@ -4,15 +4,15 @@
   --color-blue-100: #e8f2ff;
   --color-blue-500: #4b96ff;
   --color-slate-500: #a9adc1;
-  --color-gray-100: #f7f7f7;
-  --color-gray-200: #e6e9ee;
-  --color-gray-300: #dde0e4;
-  --color-gray-400: #818890;
-  --color-gray-500: #535661;
-  --color-gray-600: #4b4c53;
-  --color-gray-700: #3a3d4a;
-  --color-gray-800: #2e3039;
-  --color-gray-900: #1f2028;
+  --color-gray-100: #cccccc;
+  --color-gray-200: #b3b3b3;
+  --color-gray-300: #999999;
+  --color-gray-400: #808080;
+  --color-gray-500: #666666;
+  --color-gray-600: #4d4d4d;
+  --color-gray-700: #3c3c3c;
+  --color-gray-800: #1e1e1e;
+  --color-gray-900: #161513;
   --color-green-100: #e7f9ed;
   --color-green-500: #30c85e;
   --color-green-600: #68d94a;
@@ -46,10 +46,10 @@
   --color-yellow-500: #ffd644;
   --color-yellow-500-inverted: #a08600;
   --color-team-unknown: var(--color-white);
-  --bg-primary: var(--color-gray-900);
-  --bg-secondary: var(--color-gray-800);
-  --bg-alt: var(--color-gray-700);
-  --border-secondary: var(--color-gray-600);
+  --bg-primary: var(--color-black-900);
+  --bg-secondary: var(--color-black-800);
+  --bg-alt: var(--color-black-700);
+  --border-secondary: var(--color-black-600);
   --text-primary: var(--color-white);
   --text-secondary: var(--color-slate-500);
   color-scheme: dark;
@@ -102,8 +102,8 @@ input:-webkit-autofill:active {
 .dark input:-webkit-autofill:focus,
 .dark input:-webkit-autofill:active {
   -webkit-text-fill-color: white !important;
-  -webkit-box-shadow: 0 0 0 999px var(--color-gray-800) inset !important;
-  box-shadow: 0 0 0 999px var(--color-gray-800) inset !important;
+  -webkit-box-shadow: 0 0 0 999px var(--color-black-800) inset !important;
+  box-shadow: 0 0 0 999px var(--color-black-800) inset !important;
   background-clip: content-box !important;
 }
 
