@@ -78,7 +78,7 @@ function MobileMenuList() {
               scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
-            className="bg-primary flex h-full flex-col overflow-y-scroll pb-12 dark:border-gray-600 fixed w-full"
+            className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
           >
             <MenuItems className="border-none bg-transparent py-0">
               <h5 className="text border-t border-gray-600 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
@@ -106,7 +106,7 @@ function MobileNavLink({
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
     <MenuLink
-      className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-0 text-left text-4xl font-light dark:border-gray-600"
+      className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600"
       as={Link}
       to={to}
     >
