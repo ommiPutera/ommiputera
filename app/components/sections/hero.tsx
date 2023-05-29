@@ -6,10 +6,22 @@ import {Link} from '@remix-run/react'
 
 function HomeHeroSection() {
   return (
-    <div className="text-primary mx-auto grid max-w-8xl gap-5 lg:gap-12">
+    <div className="text-primary relative mx-auto grid max-w-8xl gap-5 lg:gap-12">
+      <FloatingBtn to="/" className="absolute left-28 top-8 hidden lg:block">
+        Server-side rendering
+        <p className="absolute -right-10 -top-6 text-2xl transition-[10] hover:hidden group-hover:-right-12 group-hover:-top-8">
+          🚀
+        </p>
+      </FloatingBtn>
+      <FloatingBtn to="/" className="absolute right-48 top-32 hidden lg:block">
+        Javascript
+        <p className="absolute -left-10 -bottom-6 text-3xl transition-[5] hover:hidden group-hover:-left-12 group-hover:bottom-2">
+          🛸
+        </p>
+      </FloatingBtn>
       <div className="flex flex-col items-center justify-center gap-5">
         <AnimatePresence mode="wait">
-          <Card />
+          <ProfileCard />
         </AnimatePresence>
         <div className="text-center">
           <h3 className="text-xl font-medium lg:text-2xl">Hi👋, I'm Ommi</h3>
@@ -32,7 +44,21 @@ function HomeHeroSection() {
   )
 }
 
-function Card() {
+function FloatingBtn({
+  to,
+  children,
+  ...rest
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+  return (
+    <Link to={to} {...rest}>
+      <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
+        {children}
+      </button>
+    </Link>
+  )
+}
+
+function ProfileCard() {
   const [isFliped, setIsFlip] = useState(false)
   const debouncedHandleMouseEnter = debounce(() => setIsFlip(true), 400)
   const handlOnMouseLeave = () => {
