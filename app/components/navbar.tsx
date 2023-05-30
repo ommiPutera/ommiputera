@@ -1,15 +1,15 @@
-import {Link, useLocation} from '@remix-run/react'
 import {
   Menu,
   MenuButton,
-  MenuLink,
-  useMenuButtonContext,
-  MenuPopover,
   MenuItems,
+  MenuLink,
+  MenuPopover,
+  useMenuButtonContext,
 } from '@reach/menu-button'
-import {BurgerMenu} from '~/utils/icons'
-import {AnimatePresence, useReducedMotion, motion} from 'framer-motion'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {BurgerMenu} from '~/utils/icons'
 
 const LINKS = [
   {name: 'Post', to: '/post'},

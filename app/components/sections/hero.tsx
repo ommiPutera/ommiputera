@@ -1,8 +1,8 @@
-import clsx from 'clsx'
-import {debounce} from 'lodash'
-import {AnimatePresence, motion} from 'framer-motion'
-import {useState} from 'react'
 import {Link} from '@remix-run/react'
+import clsx from 'clsx'
+import {AnimatePresence, motion} from 'framer-motion'
+import {debounce} from 'lodash'
+import {useState} from 'react'
 
 function HomeHeroSection() {
   return (
@@ -15,8 +15,17 @@ function HomeHeroSection() {
       </FloatingBtn>
       <FloatingBtn to="/" className="absolute right-48 top-32 hidden lg:block">
         Javascript
-        <p className="absolute -left-10 -bottom-6 text-3xl transition-[5] hover:hidden group-hover:-left-12 group-hover:bottom-2">
+        <p className="absolute -bottom-6 -left-10 text-3xl transition-[5] hover:hidden group-hover:-left-12 group-hover:bottom-2">
           🛸
+        </p>
+      </FloatingBtn>
+      <FloatingBtn
+        to="/"
+        className="absolute bottom-[10vh] left-[10vw] hidden lg:block"
+      >
+        React.js
+        <p className="absolute -bottom-6 -left-10 text-2xl transition-[15] hover:hidden group-hover:-bottom-28 group-hover:left-12 group-hover:-rotate-12">
+          🛩
         </p>
       </FloatingBtn>
       <div className="flex flex-col items-center justify-center gap-5">
