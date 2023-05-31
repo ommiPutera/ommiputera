@@ -8,14 +8,14 @@ function HomeHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid max-w-8xl gap-5 lg:gap-12">
       <FloatingBtn to="/" className="absolute left-28 top-8 hidden lg:block">
-        Server-side rendering
-        <p className="absolute -right-10 -top-6 text-2xl transition-[10] hover:hidden group-hover:-right-12 group-hover:-top-8">
+        <p>Server-side rendering</p>
+        <p className="absolute -right-10 -top-6 text-2xl transition-[10] pointer-events-none group-hover:-right-12 group-hover:-top-8">
           🚀
         </p>
       </FloatingBtn>
       <FloatingBtn to="/" className="absolute right-48 top-32 hidden lg:block">
-        Javascript
-        <p className="absolute -bottom-6 -left-10 text-3xl transition-[5] hover:hidden group-hover:-left-12 group-hover:bottom-2">
+        <p>Javascript</p>
+        <p className="absolute -bottom-6 -left-10 text-3xl transition-[5] pointer-events-none group-hover:-left-12 group-hover:bottom-2">
           🛸
         </p>
       </FloatingBtn>
@@ -23,8 +23,8 @@ function HomeHeroSection() {
         to="/"
         className="absolute bottom-[10vh] left-[10vw] hidden lg:block"
       >
-        React.js
-        <p className="absolute -bottom-6 -left-10 text-2xl transition-[15] hover:hidden group-hover:-bottom-28 group-hover:left-12 group-hover:-rotate-12">
+        <p>React.js</p>
+        <p className="absolute -bottom-6 -left-10 text-2xl transition-[15] pointer-events-none group-hover:bottom-28 group-hover:left-14 group-hover:-rotate-12">
           🛩
         </p>
       </FloatingBtn>

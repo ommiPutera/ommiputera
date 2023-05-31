@@ -1,4 +1,4 @@
-import {type LinksFunction, type V2_MetaFunction} from '@remix-run/node'
+import { type LinksFunction, type V2_MetaFunction } from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -7,11 +7,11 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import {Navbar} from '~/components/navbar'
+import { Navbar } from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
-import {ThemeProvider, useTheme} from '~/utils/theme-provider'
+import { ThemeProvider, useTheme } from '~/utils/theme-provider'
 
 export default function AppWithProviders() {
   return (
@@ -28,6 +28,8 @@ function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="mobile-web-app-capable" content="yes" />
         <meta
           name="theme-color"
           content={theme === 'dark' ? '#161513' : '#FFF'}
