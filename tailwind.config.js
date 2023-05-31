@@ -66,41 +66,39 @@ module.exports = {
 
         return {
           DEFAULT: {
-            css: [
-              {
-                'h1, h2, h3, h4, h5, h6': {
-                  marginTop: 0,
-                  marginBottom: 0,
-                  fontWeight: theme('fontWeight.normal'),
+            css: {
+              'h1, h2, h3, h4, h5, h6': {
+                marginTop: 0,
+                marginBottom: 0,
+                fontWeight: theme('fontWeight.normal'),
 
-                  [`@media (min-width: ${theme('screens.lg')})`]: {
-                    fontWeight: theme('fontWeight.medium'),
-                  },
+                [`@media (min-width: ${theme('screens.lg')})`]: {
+                  fontWeight: theme('fontWeight.medium'),
                 },
-                'h1, h2': {
+              },
+              'h1, h2': {
+                fontSize: fontSize('2xl'),
+                marginTop: theme('spacing.20'),
+                marginBottom: theme('spacing.10'),
+                [`@media (min-width: ${theme('screens.lg')})`]: {
+                  fontSize: fontSize('3xl'),
+                },
+              },
+              h3: {
+                fontSize: fontSize('xl'),
+                marginTop: theme('spacing.16'),
+                marginBottom: theme('spacing.10'),
+                [`@media (min-width: ${theme('screens.lg')})`]: {
                   fontSize: fontSize('2xl'),
-                  marginTop: theme('spacing.20'),
-                  marginBottom: theme('spacing.10'),
-                  [`@media (min-width: ${theme('screens.lg')})`]: {
-                    fontSize: fontSize('3xl'),
-                  },
                 },
-                h3: {
+              },
+              'h4, h5, h6': {
+                fontSize: fontSize('lg'),
+                [`@media (min-width: ${theme('screens.lg')})`]: {
                   fontSize: fontSize('xl'),
-                  marginTop: theme('spacing.16'),
-                  marginBottom: theme('spacing.10'),
-                  [`@media (min-width: ${theme('screens.lg')})`]: {
-                    fontSize: fontSize('2xl'),
-                  },
                 },
-                'h4, h5, h6': {
-                  fontSize: fontSize('lg'),
-                  [`@media (min-width: ${theme('screens.lg')})`]: {
-                    fontSize: fontSize('xl'),
-                  },
-                },
-              }
-            ]
+              },
+            }
           }
         }
       }

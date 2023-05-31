@@ -76,7 +76,7 @@ export const links: LinksFunction = () => {
       crossOrigin: 'anonymous',
     },
     {rel: 'stylesheet', href: vendorsStyles},
-    {rel: 'stylesheet', href: appStyles},
     {rel: 'stylesheet', href: tailwindStyles},
+    {rel: 'stylesheet', href: appStyles},
   ]
 }

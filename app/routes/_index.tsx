@@ -1,4 +1,5 @@
 import {Link} from '@remix-run/react'
+import clsx from 'clsx'
 import {HomeHeroSection} from '~/components/sections/hero'
 
 export default function Index() {
@@ -23,7 +24,7 @@ export default function Index() {
       </div>
       <div className="px-5vw py-9 lg:px-15vw lg:py-12">
         <div className="mx-auto grid max-w-8xl gap-8 lg:gap-12">
-          <div className="flex flex-col items-start justify-between gap-5 gap-x-48 lg:flex-row">
+          <div className="flex flex-col items-center lg:items-start justify-between gap-5 gap-x-48 lg:flex-row">
             <h1 className="text-center text-3xl font-medium leading-tight lg:text-left lg:text-6xl">
               Helping brands thrive in the digital world
             </h1>
@@ -33,16 +34,22 @@ export default function Index() {
             </p>
           </div>
           <div className="flex flex-col gap-2 lg:gap-6">
-            <div className="flex justify-between border-b border-gray-600 lg:justify-end">
-              <h3 className="py-4 font-medium text-gray-300 lg:hidden lg:text-xl">
-                See all
-              </h3>
+            <div className="flex justify-between border-b border-gray-600">
+              <Link to="/">
+                <h3 className="py-4 font-medium text-gray-300 lg:text-xl">
+                  See all
+                </h3>
+              </Link>
               <h3 className="py-4 text-lg font-medium lg:text-xl">
                 Recent Work
               </h3>
             </div>
-            <Project />
-            <Project />
+            <Project
+              title="Naufal Ghifari Website"
+              detailRoute="/"
+              liveLink="https://www.naufalghfr.com/"
+              desc=" Web Development / Personal Website"
+            />
           </div>
         </div>
       </div>
@@ -50,21 +57,35 @@ export default function Index() {
   )
 }
 
-function Project() {
+function Project({
+  title,
+  detailRoute = '',
+  liveLink = '',
+  desc,
+}: {
+  title: string
+  detailRoute: string
+  liveLink?: string
+  desc: string
+}) {
   return (
-    <div className="flex flex-col items-center justify-between pt-9 lg:py-9 lg:flex-row">
-      <p className="text-md mb-4 font-medium text-gray-300 lg:mb-0">
-        Website Development / Personal Website
-      </p>
-      <div className="flex flex-col items-center gap-6 lg:gap-12 lg:flex-row">
-        <Link to="http://naufalghfr.com/">
-          <h2 className="underlined pb-1 text-3xl font-medium leading-tight lg:text-4xl">
-            Naufal Ghifari Website
+    <div className="flex flex-col items-center justify-between pt-9 lg:flex-row lg:py-9">
+      <p className="text-md mb-4 font-medium text-gray-300 lg:mb-0">{desc}</p>
+      <div className="flex flex-col items-center gap-6 lg:flex-row lg:gap-12">
+        <Link
+          to={liveLink}
+          className={clsx(
+            liveLink && 'underlined',
+            !liveLink && 'pointer-events-none',
+          )}
+        >
+          <h2 className="text-3xl pb-2 font-medium leading-tight lg:text-4xl">
+            {title}
           </h2>
         </Link>
-        <Link to="/">
+        <Link to={detailRoute}>
           <button className="rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
-            Details
+            Detail
           </button>
         </Link>
       </div>
