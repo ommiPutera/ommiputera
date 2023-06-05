@@ -2,7 +2,7 @@ import {AnchorOrLink} from '~/utils/misc'
 
 function Footer() {
   return (
-    <footer className="border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-24 mt-24">
+    <footer className="border-t border-gray-600 px-5vw py-28 lg:px-15vw lg:py-44">
       <div className="grid-rows-max-content relative mx-auto grid max-w-8xl grid-cols-4 gap-x-4 md:grid-cols-8 xl:grid-cols-12 xl:gap-x-6">
         <div className="col-span-full md:col-span-3 xl:row-span-2">
           <AboutSection />
@@ -10,7 +10,7 @@ function Footer() {
         <div className="col-span-2 mt-20 md:col-start-5 md:row-start-1 md:mt-0">
           <ContactSection />
         </div>
-        <div className="col-span-full mt-20 md:col-span-2 md:col-start-7 xl:col-start-5 xl:row-span-2 xl:row-start-1 xl:ml-56 xl:mt-0">
+        <div className="col-span-2 mt-20 md:col-span-2 md:col-start-7 md:mt-0 xl:col-start-5 xl:row-span-2 xl:row-start-1 xl:ml-56">
           <SitemaptSection />
         </div>
       </div>

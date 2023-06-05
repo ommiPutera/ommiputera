@@ -8,13 +8,13 @@ function HomeHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid max-w-8xl gap-5 lg:gap-12">
       <FloatingBtn to="/" className="absolute left-28 top-8 hidden lg:block">
-        <p>Server-side rendering</p>
-        <p className="delay-200 pointer-events-none absolute -right-10 -top-6 text-xl transition-[10] group-hover:-right-24 group-hover:-top-14 group-hover:text-3xl">
+        <p className='font-medium whitespace-nowrap'>Server-side rendering</p>
+        <p className="pointer-events-none absolute -right-10 -top-6 text-xl transition-[10] delay-200 group-hover:-right-24 group-hover:-top-14 group-hover:text-3xl">
           🚀
         </p>
       </FloatingBtn>
       <FloatingBtn to="/" className="absolute right-48 top-32 hidden lg:block">
-        <p>Javascript</p>
+        <p className='font-medium whitespace-nowrap'>Javascript</p>
         <p className="pointer-events-none absolute -bottom-6 -left-10 text-xl transition-[5] delay-200 group-hover:-left-12 group-hover:bottom-2 group-hover:text-2xl">
           🛸
         </p>
@@ -23,7 +23,7 @@ function HomeHeroSection() {
         to="/"
         className="absolute bottom-[10vh] left-[1vw] hidden lg:block"
       >
-        <p>React.js</p>
+        <p className="font-medium whitespace-nowrap">React.js</p>
         <p className="pointer-events-none absolute -bottom-6 -left-10 text-xl transition-[25] delay-200 group-hover:bottom-14 group-hover:left-14 group-hover:-rotate-12 group-hover:text-2xl">
           🏂🏾
         </p>
@@ -38,10 +38,10 @@ function HomeHeroSection() {
         </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-5">
-        <h1 className="text-center text-3xl px-0 lg:px-9 font-medium leading-tight md:w-2/3 lg:text-5xl xl:w-3/5">
+        <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
           Helping people make the world a better place through quality software.
         </h1>
-        <p className="mt-2 text-center px-0 lg:px-9 font-medium text-gray-300 md:w-2/3 lg:mt-0 xl:w-3/5">
+        <p className="mt-2 px-0 text-center font-medium text-gray-300 md:w-2/3 lg:mt-0 lg:px-9 xl:w-3/5">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices. Experience in
           developing projects from concept to launch. Eager to tackle more
