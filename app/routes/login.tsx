@@ -1,4 +1,4 @@
-import {json, type LoaderFunction} from '@remix-run/node'
+import {json, type LoaderFunction, type ActionFunction, redirect} from '@remix-run/node'
 import {type V2_MetaFunction, useLoaderData, Form} from '@remix-run/react'
 import React from 'react'
 import {db} from '~/utils/db.server'
@@ -16,13 +16,22 @@ export const meta: V2_MetaFunction = ({matches}) => {
   return [{title: `Login to`}]
 }
 
+export const action: ActionFunction = async ({request}) => {
+  const formData = await request.formData()
+  const emailAddress = formData.get('email')
+  if (emailAddress === 'omiputraakaruni@gmail.com') return redirect('/admin')
+  return {}
+}
+
 export default function Index() {
-  const data = useLoaderData<LoaderData>()
+  // const data = useLoaderData<LoaderData>()
   const [submitted, setSubmitted] = React.useState(false)
 
   const [formValues, setFormValues] = React.useState({
     email: '',
   })
+
+  const formIsValid = formValues.email.match(/.+@.+/)
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
@@ -50,8 +59,16 @@ export default function Index() {
               <div>
                 <label htmlFor="">Email address</label>
               </div>
-              <input type="text" />
+              <input type="text" name="email" />
             </div>
+            <br />
+            <button
+              type="submit"
+              className="button"
+              disabled={!formIsValid || submitted}
+            >
+              Submit
+            </button>
           </Form>
         </div>
       </div>
