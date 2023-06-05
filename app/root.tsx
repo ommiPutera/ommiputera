@@ -12,6 +12,7 @@ import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
 import { ThemeProvider, useTheme } from '~/utils/theme-provider'
+import Footer from './components/footer'
 
 export default function AppWithProviders() {
   return (
@@ -40,6 +41,7 @@ function App() {
       <body className="bg-white transition duration-500 dark:bg-gray-900">
         <Navbar />
         <Outlet />
+        <Footer />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
