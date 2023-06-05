@@ -2,7 +2,7 @@ import {AnchorOrLink} from '~/utils/misc'
 
 function Footer() {
   return (
-    <footer className="border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-24">
+    <footer className="border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-24 mt-24">
       <div className="grid-rows-max-content relative mx-auto grid max-w-8xl grid-cols-4 gap-x-4 md:grid-cols-8 xl:grid-cols-12 xl:gap-x-6">
         <div className="col-span-full md:col-span-3 xl:row-span-2">
           <AboutSection />
