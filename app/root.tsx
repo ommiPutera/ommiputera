@@ -1,4 +1,9 @@
-import { type LinksFunction, type V2_MetaFunction } from '@remix-run/node'
+import {
+  json,
+  type LinksFunction,
+  type V2_MetaFunction,
+  type DataFunctionArgs,
+} from '@remix-run/node'
 import {
   Links,
   LiveReload,
@@ -7,12 +12,13 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import { Navbar } from '~/components/navbar'
+import {Navbar} from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
-import { ThemeProvider, useTheme } from '~/utils/theme-provider'
+import {ThemeProvider, useTheme} from '~/utils/theme-provider'
 import Footer from './components/footer'
+import {getDomainUrl} from './utils/misc'
 
 export default function AppWithProviders() {
   return (
@@ -21,7 +27,6 @@ export default function AppWithProviders() {
     </ThemeProvider>
   )
 }
-
 function App() {
   const [theme] = useTheme()
   return (
@@ -50,8 +55,21 @@ function App() {
   )
 }
 
-export const meta: V2_MetaFunction = () => {
-  return [{title: 'Ommi Putera - Personal Website'}]
+export async function loader({request}: DataFunctionArgs) {
+  const data = {
+    requestInfo: {
+      origin: getDomainUrl(request),
+    },
+  }
+  const headers: HeadersInit = new Headers()
+  return json(data, {headers})
+}
+
+export const meta: V2_MetaFunction = ({data}) => {
+  return [
+    {title: 'Ommi Putera - Personal Website'},
+    {'og:url': data?.requestInfo?.origin},
+  ]
 }
 
 export const links: LinksFunction = () => {

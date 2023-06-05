@@ -137,8 +137,8 @@ function AboutMe() {
       </div>
       <div className="flex justify-center pt-12">
         <Link to="/about">
-          <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
-            <p className="whitespace-nowrap font-medium">Learn more about me</p>
+          <button className="group relative rounded-full bg-gray-700 px-6 py-2 hover:bg-gray-800">
+            <p className="whitespace-nowrap font-medium text-md">Learn more about me</p>
           </button>
         </Link>
       </div>
