@@ -84,10 +84,10 @@ function Certifed() {
 
 function AboutMe() {
   return (
-    <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-36 px-5vw">
+    <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-36">
       <div className="w-full lg:w-1/2">
         <img
-          src="/ommi_aboutme.jpg"
+          src="/ommi_.jpg"
           alt=""
           className="w-full rounded-xl object-cover lg:h-[45rem]"
         />

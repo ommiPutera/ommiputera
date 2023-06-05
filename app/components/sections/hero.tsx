@@ -8,13 +8,13 @@ function HomeHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid max-w-8xl gap-5 lg:gap-12">
       <FloatingBtn to="/" className="absolute left-28 top-8 hidden lg:block">
-        <p className='font-medium whitespace-nowrap'>Server-side rendering</p>
+        <p className="whitespace-nowrap font-medium">Server-side rendering</p>
         <p className="pointer-events-none absolute -right-10 -top-6 text-xl transition-[10] delay-200 group-hover:-right-24 group-hover:-top-14 group-hover:text-3xl">
           🚀
         </p>
       </FloatingBtn>
       <FloatingBtn to="/" className="absolute right-48 top-32 hidden lg:block">
-        <p className='font-medium whitespace-nowrap'>Javascript</p>
+        <p className="whitespace-nowrap font-medium">Javascript</p>
         <p className="pointer-events-none absolute -bottom-6 -left-10 text-xl transition-[5] delay-200 group-hover:-left-12 group-hover:bottom-2 group-hover:text-2xl">
           🛸
         </p>
@@ -23,7 +23,7 @@ function HomeHeroSection() {
         to="/"
         className="absolute bottom-[10vh] left-[1vw] hidden lg:block"
       >
-        <p className="font-medium whitespace-nowrap">React.js</p>
+        <p className="whitespace-nowrap font-medium">React.js</p>
         <p className="pointer-events-none absolute -bottom-6 -left-10 text-xl transition-[25] delay-200 group-hover:bottom-14 group-hover:left-14 group-hover:-rotate-12 group-hover:text-2xl">
           🏂🏾
         </p>
@@ -33,7 +33,9 @@ function HomeHeroSection() {
           <ProfileCard />
         </AnimatePresence>
         <div className="text-center">
-          <h3 className="text-xl font-medium lg:text-2xl">Hi👋, I'm Ommi</h3>
+          <h3 className="text-xl font-medium lg:text-2xl">
+            Hi 👋, I'm Ommi Putera
+          </h3>
           <p className="mt-1 font-medium text-gray-300">Software Engineer</p>
         </div>
       </div>
@@ -47,6 +49,35 @@ function HomeHeroSection() {
           developing projects from concept to launch. Eager to tackle more
           complex problems, and continues to find ways to maximize user
           efficiency
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function AboutHeroSection() {
+  return (
+    <div className="text-primary relative mx-auto grid max-w-8xl gap-5 lg:gap-12">
+      <div className="flex flex-col items-center justify-center gap-5">
+        <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
+          Hi there 👋, I'm Ommi
+        </h1>
+        <h4 className="mt-2 px-0 text-center text-xl font-medium text-gray-300 md:w-2/3 lg:mt-0 lg:px-9 xl:w-3/5">
+          First of all, thank you for interested in reading about me, On this
+          page, I will tell all about my life and my experiences
+        </h4>
+      </div>
+      <div className="pt-9 lg:pt-12">
+        <img
+          src="pantai_panjang.png"
+          alt=""
+          className="h-[10rem] lg:h-[40rem] w-full rounded-xl object-cover"
+        />
+        <h4 className="mt-2 px-0 text-lg font-medium text-gray-300 lg:mt-4">
+          My home town, Bengkulu
+        </h4>
+        <p className="px-0 text-sm font-medium text-gray-300">
+          src:https://www.duaistanto.com/2022/06/wisata-pantai-panjang-bengkulu-pantai.html
         </p>
       </div>
     </div>
@@ -94,7 +125,7 @@ function ProfileCard() {
         </Link>
       ) : (
         <>
-          <div className="jelly-effects absolute rounded-full h-48 w-48"></div>
+          <div className="jelly-effects absolute h-48 w-48 rounded-full"></div>
           <img src="/profile.png" alt="" className="h-48 w-48" />
         </>
       )}
@@ -102,4 +133,4 @@ function ProfileCard() {
   )
 }
 
-export {HomeHeroSection}
+export {HomeHeroSection, AboutHeroSection}
