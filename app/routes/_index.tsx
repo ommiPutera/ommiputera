@@ -11,7 +11,7 @@ export default function Index() {
         alt=""
         className="lg:h-100 absolute -z-10 h-[100vh] w-[100vw] object-cover opacity-60 lg:opacity-100"
       />
-      <main className="flex flex-col gap-5 lg:gap-16">
+      <main className="flex flex-col gap-5 lg:gap-16 pb-44">
         <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <HomeHeroSection />
         </div>
@@ -84,65 +84,61 @@ function Certifed() {
 
 function AboutMe() {
   return (
-    <>
-      <div className="mx-auto flex max-w-8xl flex-col gap-8 rounded-none bg-gray-800 px-5vw py-16 lg:flex-row lg:gap-x-10 lg:rounded-lg lg:p-10">
-        <div className="h-[15rem] w-full rounded-lg bg-red-500 lg:h-[45rem] lg:w-1/2"></div>
-        <div className="flex w-full flex-col gap-y-16 lg:w-1/2 lg:gap-y-28">
-          <div className="flex flex-col gap-y-4">
-            <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
-              Big extreme sports enthusiast.
-            </h3>
+    <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-36 px-5vw">
+      <div className="w-full lg:w-1/2">
+        <img
+          src="/ommi_aboutme.jpg"
+          alt=""
+          className="w-full rounded-xl object-cover lg:h-[45rem]"
+        />
+      </div>
+      <div className="flex w-full flex-col gap-y-16 lg:w-1/2 lg:gap-y-28">
+        <div className="flex flex-col gap-y-4">
+          <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
+            Big extreme sports enthusiast.
+          </h3>
+          <p className="font-medium text-gray-300">
+            I help companies from all over the world with tailor-made solutions.
+            With each project, I push my work to new horizons, always putting
+            quality first.
+            <br />
+            <br />
+            Always exploring...
+          </p>
+        </div>
+        <div className="flex flex-col gap-y-4">
+          <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
+            I can help you with ..
+          </h3>
+          <div>
             <p className="font-medium text-gray-300">
-              I help companies from all over the world with tailor-made
-              solutions. With each project, I push my work to new horizons,
-              always putting quality first.
-              <br />
-              <br />
-              Always exploring...
+              A complete website from concept to implementation, that's what
+              makes me stand out. My great sense for design and my development
+              skills enable me to create kick-ass projects.
             </p>
           </div>
-          <div className="flex flex-col gap-y-4">
-            <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
-              I can help you with ..
-            </h3>
-            <div>
-              <p className="font-medium text-gray-300">
-                A complete website from concept to implementation, that's what
-                makes me stand out. My great sense for design and my development
-                skills enable me to create kick-ass projects.
-              </p>
-            </div>
-            <div>
-              <h4 className="pb-2 text-left text-xl font-medium leading-tight lg:text-xl">
-                Design
-              </h4>
-              <p className="font-medium text-gray-300">
-                With a solid track record in designing websites and apps, I
-                deliver strong and user-friendly digital designs. Solid company
-                branding is the foundation of any succesful website.
-              </p>
-            </div>
-            <div>
-              <h4 className="pb-2 text-left text-xl font-medium leading-tight lg:text-xl">
-                Development
-              </h4>
-              <p className="font-medium text-gray-300">
-                I build scalable websites from scratch that fit seamlessly with
-                design. My focus is on micro animations, transitions and
-                interaction. For content management I use Kirby CMS.
-              </p>
-            </div>
+          <div>
+            <h4 className="pb-2 text-left text-xl font-medium leading-tight lg:text-xl">
+              Design
+            </h4>
+            <p className="font-medium text-gray-300">
+              With a solid track record in designing websites and apps, I
+              deliver strong and user-friendly digital designs. Solid company
+              branding is the foundation of any succesful website.
+            </p>
+          </div>
+          <div className="flex justify-start pt-12">
+            <Link to="/about">
+              <button className="group relative rounded-full bg-gray-700 px-6 py-2 hover:bg-gray-800">
+                <p className="text-md whitespace-nowrap font-medium">
+                  Learn more about me
+                </p>
+              </button>
+            </Link>
           </div>
         </div>
       </div>
-      <div className="flex justify-center pt-12">
-        <Link to="/about">
-          <button className="group relative rounded-full bg-gray-700 px-6 py-2 hover:bg-gray-800">
-            <p className="whitespace-nowrap font-medium text-md">Learn more about me</p>
-          </button>
-        </Link>
-      </div>
-    </>
+    </div>
   )
 }
 
