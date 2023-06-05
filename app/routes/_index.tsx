@@ -59,6 +59,64 @@ export default function Index() {
       <div className="pb-9 lg:pb-12">
         <GalerySection />
       </div>
+      <div className="px-0 py-9 lg:px-15vw lg:py-12">
+        <AboutMe />
+      </div>
+    </div>
+  )
+}
+
+function AboutMe() {
+  return (
+    <div className="mx-auto flex max-w-8xl flex-col gap-8 rounded-none bg-gray-800 px-5vw py-5vw md:flex-row lg:gap-x-10 lg:rounded-lg lg:p-10">
+      <div className="h-[15rem] w-full rounded-lg bg-red-500 lg:h-[45rem] lg:w-1/2"></div>
+      <div className="flex w-full flex-col gap-y-16 lg:w-1/2 lg:gap-y-28">
+        <div className="flex flex-col gap-y-4">
+          <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
+            Big extreme sports enthusiast.
+          </h3>
+          <p className="font-medium text-gray-300">
+            I help companies from all over the world with tailor-made solutions.
+            With each project, I push my work to new horizons, always putting
+            quality first.
+            <br />
+            <br />
+            Always exploring...
+          </p>
+        </div>
+        <div className="flex flex-col gap-y-4">
+          <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
+            I can help you with ..
+          </h3>
+          <div>
+            <p className="font-medium text-gray-300">
+              A complete website from concept to implementation, that's what
+              makes me stand out. My great sense for design and my development
+              skills enable me to create kick-ass projects.
+            </p>
+          </div>
+          <div>
+            <h4 className="pb-2 text-left text-xl font-medium leading-tight lg:text-xl">
+              Design
+            </h4>
+            <p className="font-medium text-gray-300">
+              With a solid track record in designing websites and apps, I
+              deliver strong and user-friendly digital designs. Solid company
+              branding is the foundation of any succesful website.
+            </p>
+          </div>
+          <div>
+            <h4 className="pb-2 text-left text-xl font-medium leading-tight lg:text-xl">
+              Development
+            </h4>
+            <p className="font-medium text-gray-300">
+              I build scalable websites from scratch that fit seamlessly with
+              design. My focus is on micro animations, transitions and
+              interaction. For content management I use Kirby CMS.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
