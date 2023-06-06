@@ -20,7 +20,6 @@ const LINKS = [
 const MOBILE_LINKS = [{ name: 'Home', to: '/' }, ...LINKS]
 
 function Index() {
-  // const data = useLoaderData()
   return (
     <div className="px-5vw py-9 lg:px-15vw lg:py-12">
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
@@ -133,9 +132,9 @@ function DesktopNav() {
         <form action="/logout" method="post">
           <button
             type="submit"
-            className="block whitespace-nowrap text-lg font-medium"
+            className="block whitespace-nowrap text-lg font-medium text-red-500"
           >
-            Logout
+            Log Out
           </button>
         </form>
       </li>}

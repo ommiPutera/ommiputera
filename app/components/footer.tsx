@@ -69,6 +69,7 @@ function SitemaptSection() {
         <FooterLink name="Blog" href="/blog" />
         <FooterLink name="Discord" href="/blog" />
         <FooterLink name="Owner" href="/login" />
+        <FooterLink name="Admin" href="/admin" />
       </ul>
     </div>
   )

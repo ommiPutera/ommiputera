@@ -81,20 +81,11 @@ export async function createUserSession({
   })
 }
 
-// somewhere you've got a session storage
-const {getSession} = createCookieSessionStorage()
-
 export async function requireUserSession(req: Request) {
-  // get the session
-  const cookie = req.headers.get('cookie')
-  const session = await getSession(cookie)
-
-  // validate the session, `userId` is just an example, use whatever value you
-  // put in the session when the user authenticated
-  if (!session.has('userId')) {
-    // if there is no user session, redirect to login
+  let session = await getUserSession(req)
+  let userId = session.get('userId')
+  if (!userId) {
     throw redirect('/login')
   }
-
   return session
 }
