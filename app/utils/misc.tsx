@@ -67,7 +67,18 @@ function getDomainUrl(request: Request) {
     throw new Error('Could not determine domain URL.')
   }
   const protocol = host.includes('localhost') ? 'http' : 'https'
-  return {domain: `${protocol}://${host}`, host: host, protocol: protocol}
+  return `${protocol}://${host}`
 }
 
-export {AnchorOrLink, getDomainUrl}
+function removeTrailingSlash(s: string) {
+  return s.endsWith('/') ? s.slice(0, -1) : s
+}
+
+function getUrl(requestInfo?: { origin: string; path: string }) {
+  return removeTrailingSlash(
+    `${requestInfo?.origin ?? 'https://ommiputera.com'}${requestInfo?.path ?? ''
+    }`,
+  )
+}
+
+export { AnchorOrLink, getDomainUrl, getUrl }

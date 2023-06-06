@@ -19,8 +19,9 @@ import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
 import { ThemeProvider, useTheme } from '~/utils/theme-provider'
 import Footer from './components/footer'
-import { getDomainUrl } from './utils/misc'
+import { getDomainUrl, getUrl } from './utils/misc'
 import { getUser } from './utils/session.server'
+import { getSocialMetas } from './utils/seo'
 
 export default function AppWithProviders() {
   return (
@@ -78,9 +79,14 @@ export async function loader({ request }: DataFunctionArgs) {
 
 export const meta: V2_MetaFunction = ({ data }) => {
   const requestInfo = data?.requestInfo;
+  const socials = getSocialMetas({
+    keywords: 'Personal Website',
+    url: getUrl(requestInfo),
+  })
+  
   return [
     { title: 'Ommi Putera - Personal Website' },
-    {...requestInfo}
+    ...socials
   ]
 }
 

@@ -35,9 +35,9 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export const meta: V2_MetaFunction = ({ matches }) => {
-  const parentMeta = matches.flatMap((match) => match.meta ?? []).filter((meta) => !("title" in meta))[0];
-  console.log(parentMeta)
-  return [{ title: `Login to ${parentMeta.origin.host}`}]
+  // const domain = new URL(requestInfo.origin).host
+
+  return [{ title: `Login to`}]
 }
 
 export const action: ActionFunction = async ({request}) => {
@@ -78,7 +78,6 @@ export const action: ActionFunction = async ({request}) => {
         where: {username},
       })
       if (userExists) {
-        console.log('userExists')
         return {
           fields,
           formError: `User with username ${username} already exists`,
