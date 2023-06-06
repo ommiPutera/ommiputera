@@ -17,6 +17,7 @@ module.exports = {
       current: 'currentColor',
       white: 'var(--color-white)',
       black: 'var(--color-black)',
+      admin: 'var(--color-admin)',
 
       gray: {
         100: 'var(--color-gray-100)',

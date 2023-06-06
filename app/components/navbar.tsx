@@ -20,8 +20,10 @@ const LINKS = [
 const MOBILE_LINKS = [{ name: 'Home', to: '/' }, ...LINKS]
 
 function Index() {
+  const location = useLocation()
+  const { user } = useRootData()
   return (
-    <div className="px-5vw py-9 lg:px-15vw lg:py-12">
+    <div className={clsx("px-5vw py-9 lg:px-15vw lg:py-12", { "bg-admin border-b border-gray-600": user && location.pathname.startsWith('/admin') })}>
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
         <Logo />
         <DesktopNav />
@@ -120,7 +122,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <ul className="hidden lg:flex">
       {LINKS.map(link => (
