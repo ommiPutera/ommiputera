@@ -1,37 +1,112 @@
-import {json, type LoaderFunction, type ActionFunction, redirect} from '@remix-run/node'
-import {type V2_MetaFunction, useLoaderData, Form} from '@remix-run/react'
+import {
+  json,
+  type LoaderFunction,
+  type ActionFunction,
+  redirect,
+} from '@remix-run/node'
+import {
+  type V2_MetaFunction,
+  useLoaderData,
+  Form,
+  useActionData,
+  useSearchParams,
+} from '@remix-run/react'
 import React from 'react'
 import {db} from '~/utils/db.server'
+import {register, createUserSession, login} from '~/utils/session.server'
 
-type LoaderData = {email: string}
+type LoaderData = {username: string}
 
-// export const loader: LoaderFunction = async ({request}) => {
-//   const user = await getUser(request)
-//   let data: LoaderData = {jokes}
-//    return json(data, {headers})
-// }
+type ActionData = {
+  formError?: string
+  fieldErrors?: {
+    username: string | undefined
+    password: string | undefined
+  }
+  fields?: {
+    loginType: string
+    username: string
+    password: string
+  }
+}
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  // const parentMeta = matches.flatMap(match => match.meta ?? [])
-  return [{title: `Login to`}]
+export const loader: LoaderFunction = async ({request}) => {
+  return {}
+}
+
+export const meta: V2_MetaFunction = () => {
+  return [{title: 'Login to'}]
 }
 
 export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const emailAddress = formData.get('email')
-  if (emailAddress === 'omiputraakaruni@gmail.com') return redirect('/admin')
-  return {}
+  const username = formData.get('username')
+  const password = formData.get('password')
+  const loginType = formData.get('loginType')
+  const redirectTo = formData.get('redirectTo') || '/admin'
+  console.table({
+    password: password,
+    username: username,
+    loginType: loginType,
+    redirectTo: redirectTo,
+  })
+  if (
+    typeof loginType !== 'string' ||
+    typeof username !== 'string' ||
+    typeof password !== 'string' ||
+    typeof redirectTo !== 'string'
+  ) {
+    return {formError: `Form not submitted correctly.`}
+  }
+
+  let fields = {loginType, username, password}
+  switch (loginType) {
+    case 'login': {
+      const user = await login({username, password})
+      if (!user) {
+        return {
+          fields,
+          formError: `Username/Password combination is incorrect`,
+        }
+      }
+      return createUserSession({userId: user.id, redirectUrl: redirectTo})
+    }
+    case 'register': {
+      let userExists = await db.user.findFirst({
+        where: {username},
+      })
+      if (userExists) {
+        console.log('userExists')
+        return {
+          fields,
+          formError: `User with username ${username} already exists`,
+        }
+      }
+      const user = await register({username, password})
+      if (!user) {
+        console.log('Something went wrong')
+        return {
+          fields,
+          formError: `Something went wrong trying to create a new user.`,
+        }
+      }
+      return createUserSession({userId: user.id, redirectUrl: redirectTo})
+    }
+    default: {
+      return {}
+    }
+  }
 }
 
 export default function Index() {
   // const data = useLoaderData<LoaderData>()
+  let actionData = useActionData<ActionData | undefined>()
+  let [searchParams] = useSearchParams()
   const [submitted, setSubmitted] = React.useState(false)
-
   const [formValues, setFormValues] = React.useState({
-    email: '',
+    username: '',
+    password: '',
   })
-
-  const formIsValid = formValues.email.match(/.+@.+/)
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
@@ -50,23 +125,58 @@ export default function Index() {
           <Form
             onChange={e => {
               const form = e.currentTarget
-              setFormValues({email: form.email.value})
+              setFormValues({
+                username: form.username.value,
+                password: form.password.value,
+              })
             }}
             method="POST"
             onSubmit={() => setSubmitted(true)}
           >
+            <input
+              type="hidden"
+              name="redirectTo"
+              value={searchParams.get('redirectTo') ?? undefined}
+            />
+            <fieldset>
+              <legend className="sr-only">Login or Register?</legend>
+              <label>
+                <input
+                  type="radio"
+                  name="loginType"
+                  value="login"
+                  defaultChecked={
+                    !actionData?.fields?.loginType ||
+                    actionData?.fields?.loginType === 'login'
+                  }
+                />{' '}
+                Login
+              </label>
+              <br />
+              <label>
+                <input
+                  type="radio"
+                  name="loginType"
+                  value="register"
+                  defaultChecked={actionData?.fields?.loginType === 'register'}
+                />{' '}
+                Register
+              </label>
+            </fieldset>
             <div>
               <div>
-                <label htmlFor="">Email address</label>
+                <label htmlFor="">username</label>
               </div>
-              <input type="text" name="email" />
+              <input type="text" name="username" />
+            </div>
+            <div>
+              <div>
+                <label htmlFor="">password</label>
+              </div>
+              <input type="password" name="password" />
             </div>
             <br />
-            <button
-              type="submit"
-              className="button"
-              disabled={!formIsValid || submitted}
-            >
+            <button type="submit" className="button">
               Submit
             </button>
           </Form>
