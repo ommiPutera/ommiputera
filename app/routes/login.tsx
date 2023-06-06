@@ -34,8 +34,10 @@ export const loader: LoaderFunction = async ({request}) => {
   return {}
 }
 
-export const meta: V2_MetaFunction = () => {
-  return [{title: 'Login to'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  const parentMeta = matches.flatMap((match) => match.meta ?? []).filter((meta) => !("title" in meta))[0];
+  console.log(parentMeta)
+  return [{ title: `Login to ${parentMeta.origin.host}`}]
 }
 
 export const action: ActionFunction = async ({request}) => {

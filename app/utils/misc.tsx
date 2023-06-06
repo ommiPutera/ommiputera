@@ -67,7 +67,7 @@ function getDomainUrl(request: Request) {
     throw new Error('Could not determine domain URL.')
   }
   const protocol = host.includes('localhost') ? 'http' : 'https'
-  return `${protocol}://${host}`
+  return {domain: `${protocol}://${host}`, host: host, protocol: protocol}
 }
 
 export {AnchorOrLink, getDomainUrl}

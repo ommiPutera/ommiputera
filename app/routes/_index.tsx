@@ -68,7 +68,7 @@ function RecentWork() {
 
 function Certifed() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-14">
       <h3 className="text-center text-lg font-medium lg:text-xl">
         Certified By
       </h3>

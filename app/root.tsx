@@ -3,6 +3,7 @@ import {
   type LinksFunction,
   type V2_MetaFunction,
   type DataFunctionArgs,
+  type SerializeFrom,
 } from '@remix-run/node'
 import {
   Links,
@@ -12,13 +13,14 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import {Navbar} from '~/components/navbar'
+import { Navbar } from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
-import {ThemeProvider, useTheme} from '~/utils/theme-provider'
+import { ThemeProvider, useTheme } from '~/utils/theme-provider'
 import Footer from './components/footer'
-import {getDomainUrl} from './utils/misc'
+import { getDomainUrl } from './utils/misc'
+import { getUser } from './utils/session.server'
 
 export default function AppWithProviders() {
   return (
@@ -27,6 +29,7 @@ export default function AppWithProviders() {
     </ThemeProvider>
   )
 }
+
 function App() {
   const [theme] = useTheme()
   return (
@@ -55,20 +58,29 @@ function App() {
   )
 }
 
-export async function loader({request}: DataFunctionArgs) {
+export type LoaderData = SerializeFrom<typeof loader>
+
+export const handle: { id: string } = {
+  id: 'root',
+}
+
+export async function loader({ request }: DataFunctionArgs) {
+  const user = await getUser(request)
   const data = {
+    user,
     requestInfo: {
       origin: getDomainUrl(request),
     },
   }
   const headers: HeadersInit = new Headers()
-  return json(data, {headers})
+  return json(data, { headers })
 }
 
-export const meta: V2_MetaFunction = ({data}) => {
+export const meta: V2_MetaFunction = ({ data }) => {
+  const requestInfo = data?.requestInfo;
   return [
-    {title: 'Ommi Putera - Personal Website'},
-    {'og:url': data?.requestInfo?.origin},
+    { title: 'Ommi Putera - Personal Website' },
+    {...requestInfo}
   ]
 }
 
@@ -95,8 +107,8 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
-    {rel: 'stylesheet', href: vendorsStyles},
-    {rel: 'stylesheet', href: tailwindStyles},
-    {rel: 'stylesheet', href: appStyles},
+    { rel: 'stylesheet', href: vendorsStyles },
+    { rel: 'stylesheet', href: tailwindStyles },
+    { rel: 'stylesheet', href: appStyles },
   ]
 }

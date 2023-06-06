@@ -1,7 +1,7 @@
 import {type LoaderFunction} from '@remix-run/node'
 import {getUserId} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   let userId = await getUserId(request)
   if (!userId) {
     throw new Response('Unauthorized', {status: 401})

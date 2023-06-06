@@ -1,5 +1,5 @@
 import {createCookieSessionStorage, redirect} from '@remix-run/node'
-import {db} from './db.server'
+import { db } from './db.server'
 import bcrypt from 'bcryptjs'
 
 type LoginType = {
@@ -52,6 +52,12 @@ export async function logout(req: Request) {
   })
 }
 
+export async function getUser(req: Request) {
+  let userId = await getUserId(req)
+  if (!userId) return null
+  return db.user.findUnique({where: {id: userId}})
+}
+
 export async function getUserId(req: Request) {
   let session = await getUserSession(req)
   let userId = session.get('userId')
@@ -73,4 +79,22 @@ export async function createUserSession({
       'Set-Cookie': await storage.commitSession(session),
     },
   })
+}
+
+// somewhere you've got a session storage
+const {getSession} = createCookieSessionStorage()
+
+export async function requireUserSession(req: Request) {
+  // get the session
+  const cookie = req.headers.get('cookie')
+  const session = await getSession(cookie)
+
+  // validate the session, `userId` is just an example, use whatever value you
+  // put in the session when the user authenticated
+  if (!session.has('userId')) {
+    // if there is no user session, redirect to login
+    throw redirect('/login')
+  }
+
+  return session
 }
