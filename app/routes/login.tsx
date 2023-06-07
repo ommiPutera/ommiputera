@@ -12,10 +12,11 @@ import {
   useSearchParams,
 } from '@remix-run/react'
 import React from 'react'
-import {db} from '~/utils/db.server'
-import {register, createUserSession, login} from '~/utils/session.server'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
+import { register, createUserSession, login } from '~/utils/session.server'
 
-type LoaderData = {username: string}
+type LoaderData = { username: string }
 
 type ActionData = {
   formError?: string
@@ -30,17 +31,17 @@ type ActionData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   return {}
 }
 
 export const meta: V2_MetaFunction = ({ matches }) => {
   // const domain = new URL(requestInfo.origin).host
 
-  return [{ title: `Login to`}]
+  return [{ title: `Login to` }]
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
@@ -58,24 +59,24 @@ export const action: ActionFunction = async ({request}) => {
     typeof password !== 'string' ||
     typeof redirectTo !== 'string'
   ) {
-    return {formError: `Form not submitted correctly.`}
+    return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = {loginType, username, password}
+  let fields = { loginType, username, password }
   switch (loginType) {
     case 'login': {
-      const user = await login({username, password})
+      const user = await login({ username, password })
       if (!user) {
         return {
           fields,
           formError: `Username/Password combination is incorrect`,
         }
       }
-      return createUserSession({userId: user.id, redirectUrl: redirectTo})
+      return createUserSession({ userId: user.id, redirectUrl: redirectTo })
     }
     case 'register': {
       let userExists = await db.user.findFirst({
-        where: {username},
+        where: { username },
       })
       if (userExists) {
         return {
@@ -83,7 +84,7 @@ export const action: ActionFunction = async ({request}) => {
           formError: `User with username ${username} already exists`,
         }
       }
-      const user = await register({username, password})
+      const user = await register({ username, password })
       if (!user) {
         console.log('Something went wrong')
         return {
@@ -91,7 +92,7 @@ export const action: ActionFunction = async ({request}) => {
           formError: `Something went wrong trying to create a new user.`,
         }
       }
-      return createUserSession({userId: user.id, redirectUrl: redirectTo})
+      return createUserSession({ userId: user.id, redirectUrl: redirectTo })
     }
     default: {
       return {}
@@ -141,7 +142,7 @@ export default function Index() {
             />
             <fieldset>
               <legend className="sr-only">Login or Register?</legend>
-              <label>
+              <Label>
                 <input
                   type="radio"
                   name="loginType"
@@ -152,7 +153,7 @@ export default function Index() {
                   }
                 />{' '}
                 Login
-              </label>
+              </Label>
               <br />
               <label>
                 <input
@@ -168,13 +169,17 @@ export default function Index() {
               <div>
                 <label htmlFor="">username</label>
               </div>
-              <input type="text" name="username" />
+              <Input type="text" name="username" />
             </div>
-            <div>
-              <div>
-                <label htmlFor="">password</label>
-              </div>
-              <input type="password" name="password" />
+            <div className='flex flex-wrap flex-col'>
+              <label htmlFor="">password</label>
+              <Input
+                type="password"
+                id="password-field"
+                name="password"
+                tabIndex={-1}
+                autoComplete="nope"
+              />
             </div>
             <br />
             <button type="submit" className="button">
