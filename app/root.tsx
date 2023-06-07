@@ -13,6 +13,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
+import { Analytics } from '@vercel/analytics/react'
 import { Navbar } from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
@@ -51,6 +52,7 @@ function App() {
         <Navbar />
         <Outlet />
         <Footer />
+        <Analytics />
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
