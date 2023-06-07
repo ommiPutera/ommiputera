@@ -1,8 +1,8 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion} from 'framer-motion'
-import {debounce} from 'lodash'
-import {useState} from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { debounce } from 'lodash'
+import { useState } from 'react'
 import { getImgProps, images } from '~/images'
 
 function HomeHeroSection() {
@@ -72,16 +72,16 @@ function AboutHeroSection() {
         <img
           id="about-me"
           className="rounded-lg object-cover"
-          {...getImgProps(images.beach, {
+          {...getImgProps(images.bengkuluBeach, {
             widths: [840, 1100, 1300, 2600, 3984],
-            sizes: ['(min-width:1620px) 3984px', '80vw'],
+            sizes: ['(min-width:1620px) 3984px', '100vw'],
           })}
         />
-        <h4 className="mt-2 px-0 text-lg font-medium text-gray-300 lg:mt-4">
-          My home town, Bengkulu
+        <h4 className="mt-2 px-0 text-lg font-medium lg:mt-4">
+          Sungai Suci Beach, Bengkulu
         </h4>
         <p className="px-0 text-sm font-medium text-gray-300">
-          src:https://www.duaistanto.com/2022/06/wisata-pantai-panjang-bengkulu-pantai.html
+          src:https://unsplash.com/@surealis
         </p>
       </div>
     </div>
@@ -92,7 +92,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -113,15 +113,15 @@ function ProfileCard() {
     <motion.div
       onMouseEnter={debouncedHandleMouseEnter}
       onMouseLeave={handlOnMouseLeave}
-      initial={{rotateY: isFliped ? 180 : 0}}
-      animate={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.5}}}
-      exit={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.2}}}
+      initial={{ rotateY: isFliped ? 180 : 0 }}
+      animate={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.5 } }}
+      exit={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.2 } }}
       className={clsx('cursor-pointer')}
     >
       {isFliped ? (
         <Link to="/post" prefetch="intent">
           <div
-            style={{transform: 'scale(-1, 1)'}}
+            style={{ transform: 'scale(-1, 1)' }}
             className="rotate- relative flex h-48 w-48 items-center justify-center rounded-full bg-gray-800"
           >
             <p className="text-xl">About me</p>
@@ -137,4 +137,4 @@ function ProfileCard() {
   )
 }
 
-export {HomeHeroSection, AboutHeroSection}
+export { HomeHeroSection, AboutHeroSection }

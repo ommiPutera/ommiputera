@@ -1,9 +1,9 @@
 import {
   json,
-  type LinksFunction,
-  type V2_MetaFunction,
   type DataFunctionArgs,
+  type LinksFunction,
   type SerializeFrom,
+  type V2_MetaFunction,
 } from '@remix-run/node'
 import {
   Links,
@@ -20,8 +20,8 @@ import vendorsStyles from '~/styles/vendors.css'
 import { ThemeProvider, useTheme } from '~/utils/theme-provider'
 import Footer from './components/footer'
 import { getDomainUrl, getUrl } from './utils/misc'
-import { getUser } from './utils/session.server'
 import { getSocialMetas } from './utils/seo'
+import { getUser } from './utils/session.server'
 
 export default function AppWithProviders() {
   return (

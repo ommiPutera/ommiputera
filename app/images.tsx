@@ -33,9 +33,13 @@ const getImageBuilder = (id: string, alt: string = ""): ImageBuilder => {
 }
 
 const images = createImages({
-  beach: {
-    id: 'omi/beach',
-    alt: `beach`,
+  bengkuluBeach: {
+    id: 'omi/bengkulu_beach',
+    alt: `bengkulu beach`,
+  },
+  ommi: {
+    id: 'omi/ommi__',
+    alt: `ommi__`,
   },
 })
 

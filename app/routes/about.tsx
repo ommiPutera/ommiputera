@@ -1,5 +1,6 @@
 import { Link, type V2_MetaFunction } from '@remix-run/react'
 import { AboutHeroSection } from '~/components/sections/hero'
+import { getImgProps, images } from '~/images'
 
 export const meta: V2_MetaFunction = ({ matches }) => {
   return [{ title: 'About Ommi Putera' }]
@@ -75,9 +76,12 @@ function AboutMe() {
     <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-36">
       <div className="w-full lg:w-1/2">
         <img
-          src="/ommi_.jpg"
-          alt=""
-          className="w-full rounded-xl object-cover lg:h-[45rem]"
+          id="about-me"
+          className="rounded-lg object-cover"
+          {...getImgProps(images.ommi, {
+            widths: [840, 1100, 1300, 2600, 3984],
+            sizes: ['(min-width:1620px) 1090px', '100vw'],
+          })}
         />
       </div>
       <div className="flex w-full flex-col gap-y-16 lg:w-1/2 lg:gap-y-28">
