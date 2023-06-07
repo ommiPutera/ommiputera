@@ -110,6 +110,8 @@ export default function Index() {
     password: '',
   })
 
+  const formIsValid = formValues.username.match(/.+@.+/)
+
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
       <div className="px-5vw py-9 lg:px-15vw lg:py-12">
@@ -124,6 +126,8 @@ export default function Index() {
             complex problems, and continues to find ways to maximize user
             efficiency
           </p>
+        </div>
+        <div className="flex items-center justify-center lg:py-12">
           <Form
             onChange={e => {
               const form = e.currentTarget
@@ -133,13 +137,9 @@ export default function Index() {
               })
             }}
             method="POST"
+            className='w-[22rem]'
             onSubmit={() => setSubmitted(true)}
           >
-            <input
-              type="hidden"
-              name="redirectTo"
-              value={searchParams.get('redirectTo') ?? undefined}
-            />
             <fieldset>
               <legend className="sr-only">Login or Register?</legend>
               <Label>
@@ -165,26 +165,34 @@ export default function Index() {
                 Register
               </label>
             </fieldset>
-            <div>
-              <div>
-                <label htmlFor="">username</label>
+            <div className='flex flex-col gap-2'>
+              <div className='mb-3'>
+                <div className="mb-2 flex flex-wrap items-baseline justify-between">
+                  <Label htmlFor="username-field">username</Label>
+                </div>
+                <Input type="text" name="username" id="username-field" />
               </div>
-              <Input type="text" name="username" />
+              <div className='mb-6'>
+                <div className="mb-2 flex flex-wrap items-baseline justify-between">
+                  <Label htmlFor="password-field">password</Label>
+                </div>
+                <Input
+                  type="password"
+                  id="password-field"
+                  name="password"
+                  autoComplete="nope"
+                />
+              </div>
             </div>
-            <div className='flex flex-wrap flex-col'>
-              <label htmlFor="">password</label>
-              <Input
-                type="password"
-                id="password-field"
-                name="password"
-                tabIndex={-1}
-                autoComplete="nope"
-              />
+            <div className="sr-only" aria-live="polite">
+              {formIsValid
+                ? 'Sign in form is now valid and ready to submit'
+                : 'Sign in form is now invalid.'}
             </div>
-            <br />
             <button type="submit" className="button">
               Submit
             </button>
+            <br />
           </Form>
         </div>
       </div>
