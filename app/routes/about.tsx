@@ -1,8 +1,8 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {AboutHeroSection} from '~/components/sections/hero'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { AboutHeroSection } from '~/components/sections/hero'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'About Ommi Putera'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'About Ommi Putera' }]
 }
 
 export default function Index() {

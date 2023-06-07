@@ -1,22 +1,31 @@
 {
   "name": "ommiputera.com",
   "version": "1.0.0",
-  "sideEffects": false,
   "description": "A remix version of ommiputera.com",
-  "engines": {
-    "node": "18",
-    "npm": "8"
-  },
+  "sideEffects": false,
   "scripts": {
     "build": "prisma generate && remix build",
-    "dev": "remix dev",
     "clean": "rm -rf ./node_modules/ .cache/",
+    "dev": "remix dev",
+    "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
     "postinstall": "prisma generate",
+    "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
     "typecheck": "tsc"
   },
-  "prisma": {
-    "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
-  },
+  "eslintIgnore": [
+    "node_modules",
+    "coverage",
+    "server-build",
+    "build",
+    "other",
+    "public/build",
+    "*.ignored/",
+    "*.ignored.*",
+    "/content/blog/fix-the-not-wrapped-in-act-warning/components.jsx",
+    "/test-results/",
+    "/playwright-report/",
+    "/playwright/.cache/"
+  ],
   "dependencies": {
     "@prisma/client": "^4.14.0",
     "@reach/menu-button": "^0.18.0",
@@ -28,6 +37,7 @@
     "@types/lodash": "^4.14.195",
     "@vercel/node": "^2.6.2",
     "bcryptjs": "^2.4.3",
+    "cloudinary-build-url": "^0.2.4",
     "clsx": "^1.2.1",
     "framer-motion": "^10.12.16",
     "isbot": "^3.6.5",
@@ -37,6 +47,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@cld-apis/types": "^0.1.6",
     "@remix-run/dev": "^1.15.0",
     "@remix-run/eslint-config": "^1.15.0",
     "@remix-run/serve": "^1.15.0",
@@ -55,18 +66,11 @@
     "tsconfig-paths": "^4.2.0",
     "typescript": "^4.8.4"
   },
-  "eslintIgnore": [
-    "node_modules",
-    "coverage",
-    "server-build",
-    "build",
-    "other",
-    "public/build",
-    "*.ignored/",
-    "*.ignored.*",
-    "/content/blog/fix-the-not-wrapped-in-act-warning/components.jsx",
-    "/test-results/",
-    "/playwright-report/",
-    "/playwright/.cache/"
-  ]
+  "engines": {
+    "node": "18",
+    "npm": "8"
+  },
+  "prisma": {
+    "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
+  }
 }

@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import {AnimatePresence, motion} from 'framer-motion'
 import {debounce} from 'lodash'
 import {useState} from 'react'
+import { getImgProps, images } from '~/images'
 
 function HomeHeroSection() {
   return (
@@ -69,9 +70,12 @@ function AboutHeroSection() {
       </div>
       <div className="pt-9 lg:pt-12">
         <img
-          src="pantai_panjang.png"
-          alt=""
-          className="h-[10rem] lg:h-[40rem] w-full rounded-xl object-cover"
+          id="about-me"
+          className="rounded-lg object-cover"
+          {...getImgProps(images.beach, {
+            widths: [840, 1100, 1300, 2600, 3984],
+            sizes: ['(min-width:1620px) 3984px', '80vw'],
+          })}
         />
         <h4 className="mt-2 px-0 text-lg font-medium text-gray-300 lg:mt-4">
           My home town, Bengkulu
