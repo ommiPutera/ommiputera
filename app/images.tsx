@@ -39,7 +39,7 @@ const images = createImages({
   },
   ommi: {
     id: 'omi/ommi__',
-    alt: `ommi__`,
+    alt: `ommi profile`,
   },
 })
 

@@ -17,7 +17,7 @@ function Label({ className, ...labelProps }: JSX.IntrinsicElements['label']) {
   )
 }
 
-export const inputClassName = 'placeholder-gray-500 dark:disabled:text-slate-500 focus-ring px-6 w-full text-black disabled:text-gray-400 pt-3 pb-4 dark:text-white text-lg font-medium bg-gray-100 dark:bg-transparent border-2 border-gray-500 rounded-lg'
+export const inputClassName = 'dark:disabled:text-slate-500 focus-ring px-6 w-full text-black disabled:text-gray-400 pt-3 pb-4 dark:text-white text-lg font-medium bg-gray-100 dark:bg-transparent border-2 border-gray-500 rounded-xl'
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   props,

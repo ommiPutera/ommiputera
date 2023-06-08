@@ -12,6 +12,7 @@ import {
   useSearchParams,
 } from '@remix-run/react'
 import React from 'react'
+import { Button } from '~/components/button'
 import { Input, Label } from '~/components/form-elements'
 import { db } from '~/utils/db.server'
 import { register, createUserSession, login } from '~/utils/session.server'
@@ -137,7 +138,7 @@ export default function Index() {
               })
             }}
             method="POST"
-            className='w-[22rem]'
+            className='w-[24rem]'
             onSubmit={() => setSubmitted(true)}
           >
             <fieldset>
@@ -189,9 +190,7 @@ export default function Index() {
                 ? 'Sign in form is now valid and ready to submit'
                 : 'Sign in form is now invalid.'}
             </div>
-            <button type="submit" className="button">
-              Submit
-            </button>
+            <Button type="submit" className="button">Login</Button>
             <br />
           </Form>
         </div>
