@@ -63,6 +63,7 @@ function MobileNav() {
 function MobileMenuList() {
   const {isExpanded} = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -97,6 +98,20 @@ function MobileMenuList() {
                   {link.name}
                 </MobileNavLink>
               ))}
+              {user && (
+                <MenuLink
+                  className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600 pointers-none"
+                >
+                  <form action="/logout" method="post">
+                    <button
+                      type="submit"
+                      className="block whitespace-nowrap text-lg font-medium text-red-500"
+                    >
+                      Log Out
+                    </button>
+                  </form>
+                </MenuLink>
+              )}
             </MenuItems>
           </motion.div>
         </MenuPopover>

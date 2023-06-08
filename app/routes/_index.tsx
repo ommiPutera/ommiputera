@@ -2,7 +2,6 @@ import {Link} from '@remix-run/react'
 import clsx from 'clsx'
 import {GalerySection} from '~/components/sections/galery'
 import {HomeHeroSection} from '~/components/sections/hero'
-import {getImgProps, images} from '~/images'
 
 export default function Index() {
   return (
@@ -24,9 +23,6 @@ export default function Index() {
         </div>
         <div className="pb-9 lg:pb-12">
           <GalerySection />
-        </div>
-        <div className="px-0 py-9 lg:px-15vw lg:py-12">
-          <AboutMe />
         </div>
       </main>
     </>
@@ -78,69 +74,6 @@ function Certifed() {
         <img src="/udemy-logo.png" alt="" className="w-32 lg:w-36" />
         <img src="/hackerrank-logo.png" alt="" className="w-32 lg:w-44" />
         <img src="/testgorilla-logo.png" alt="" className="w-32 lg:w-44" />
-      </div>
-    </div>
-  )
-}
-
-function AboutMe() {
-  return (
-    <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-36">
-      <div className="w-full lg:w-1/2">
-        <img
-          id="about-me"
-          className="rounded-lg object-cover"
-          {...getImgProps(images.ommi, {
-            widths: [840, 1100, 1300, 2600, 3984],
-            sizes: ['(min-width:1620px) 1090px', '100vw'],
-          })}
-        />
-      </div>
-      <div className="flex w-full flex-col gap-y-16 lg:w-1/2 lg:gap-y-28">
-        <div className="flex flex-col gap-y-4">
-          <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
-            Big extreme sports enthusiast.
-          </h3>
-          <p className="font-medium text-gray-300">
-            I help companies from all over the world with tailor-made solutions.
-            With each project, I push my work to new horizons, always putting
-            quality first.
-            <br />
-            <br />
-            Always exploring...
-          </p>
-        </div>
-        <div className="flex flex-col gap-y-4">
-          <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
-            I can help you with ..
-          </h3>
-          <div>
-            <p className="font-medium text-gray-300">
-              A complete website from concept to implementation, that's what
-              makes me stand out. My great sense for design and my development
-              skills enable me to create kick-ass projects.
-            </p>
-          </div>
-          <div>
-            <h4 className="pb-2 text-left text-xl font-medium leading-tight lg:text-xl">
-              Design
-            </h4>
-            <p className="font-medium text-gray-300">
-              With a solid track record in designing websites and apps, I
-              deliver strong and user-friendly digital designs. Solid company
-              branding is the foundation of any succesful website.
-            </p>
-          </div>
-          <div className="flex justify-start pt-12">
-            <Link to="/about">
-              <button className="group relative rounded-full bg-gray-700 px-6 py-2 hover:bg-gray-800">
-                <p className="text-md whitespace-nowrap font-medium">
-                  Learn more about me
-                </p>
-              </button>
-            </Link>
-          </div>
-        </div>
       </div>
     </div>
   )

@@ -21,7 +21,7 @@ export default function Index() {
         <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
           <LongStory />
         </div>
-        <div className="px-0 py-9 lg:px-15vw lg:py-12">
+        <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <AboutMe />
         </div>
       </main>
@@ -32,20 +32,20 @@ export default function Index() {
 function LongStory() {
   return (
     <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:gap-y-20">
-      <h1 className="flex-1 text-center text-3xl font-medium lg:text-4xl">
+      <h1 className="flex-1 text-center text-xl font-medium lg:text-4xl">
         How I got where we are now.
       </h1>
-      <div className="flex flex-1 flex-col gap-y-8 lg:px-[8rem]">
-        <h1 className="text-3xl font-medium leading-tight lg:text-2xl">
+      <div className="flex flex-1 flex-col gap-y-4 lg:px-[8rem]">
+        <h1 className="text-lg font-medium leading-tight lg:text-2xl">
           I was born in 1998 in Bengkulu, Indonesia.
         </h1>
-        <h4 className="text-3xl font-medium text-gray-300 lg:text-xl">
+        <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
           After graduating High School and serving a 2 year mission in the
           Missouri Independence Mission for The Church of Jesus Christ of
           Latter-day Saints, I went to BYU where I graduated with a Master of
           Science in Information Systems degree in 2014.
         </h4>
-        <h4 className="text-3xl font-medium text-gray-300 lg:text-xl">
+        <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
           Early on in my career I decided I wanted to be an expert in
           JavaScript. So I set my mind on mastering the world's most popular
           programming language. I spent countless hours writing JavaScript for
@@ -56,7 +56,7 @@ function LongStory() {
           JavaScript, but I do need to keep up just like everyone else, which is
           an enjoyable challenge.
         </h4>
-        <h4 className="text-3xl font-medium text-gray-300 lg:text-xl">
+        <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
           I've also always been excited about sharing what I know with others.
           When I was in school, I signed up to be a tutor for my classmates and
           once I even got Firebase to sponsor pizza for me to give an informal
@@ -73,18 +73,18 @@ function LongStory() {
 
 function AboutMe() {
   return (
-    <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-36">
+    <div className="mx-auto relative flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-24 xl:gap-x-36">
       <div className="w-full lg:w-1/2">
         <img
           id="about-me"
           className="rounded-lg object-cover"
           {...getImgProps(images.ommi, {
             widths: [840, 1100, 1300, 2600, 3984],
-            sizes: ['(min-width:1620px) 1090px', '100vw'],
+            sizes: ['(max-width:1620px) 1090px', '60vh'],
           })}
         />
       </div>
-      <div className="flex w-full flex-col gap-y-16 lg:w-1/2 lg:gap-y-28">
+      <div className="flex w-full flex-col gap-y-8 lg:w-1/2 lg:gap-y-28">
         <div className="flex flex-col gap-y-4">
           <h3 className="text-left text-xl font-medium leading-tight lg:text-3xl">
             Big extreme sports enthusiast.
