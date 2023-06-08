@@ -13,16 +13,16 @@ import {
   Scripts,
   ScrollRestoration,
 } from '@remix-run/react'
-import { Analytics } from '@vercel/analytics/react'
-import { Navbar } from '~/components/navbar'
+import {Analytics} from '@vercel/analytics/react'
+import {Navbar} from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
-import { ThemeProvider, useTheme } from '~/utils/theme-provider'
+import {ThemeProvider, useTheme} from '~/utils/theme-provider'
 import Footer from './components/footer'
-import { getDomainUrl, getUrl } from './utils/misc'
-import { getSocialMetas } from './utils/seo'
-import { getUser } from './utils/session.server'
+import {getDomainUrl, getUrl} from './utils/misc'
+import {getSocialMetas} from './utils/seo'
+import {getUser} from './utils/session.server'
 
 export default function AppWithProviders() {
   return (
@@ -63,11 +63,11 @@ function App() {
 
 export type LoaderData = SerializeFrom<typeof loader>
 
-export const handle: { id: string } = {
+export const handle: {id: string} = {
   id: 'root',
 }
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({request}: DataFunctionArgs) {
   const user = await getUser(request)
   const data = {
     user,
@@ -76,20 +76,17 @@ export async function loader({ request }: DataFunctionArgs) {
     },
   }
   const headers: HeadersInit = new Headers()
-  return json(data, { headers })
+  return json(data, {headers})
 }
 
-export const meta: V2_MetaFunction = ({ data }) => {
-  const requestInfo = data?.requestInfo;
+export const meta: V2_MetaFunction = ({data}) => {
+  const requestInfo = data?.requestInfo
   const socials = getSocialMetas({
     keywords: 'Personal Website',
     url: getUrl(requestInfo),
   })
-  
-  return [
-    { title: 'Ommi Putera - Personal Website' },
-    ...socials
-  ]
+
+  return [{title: 'Ommi Putera - Personal Website'}, ...socials]
 }
 
 export const links: LinksFunction = () => {
@@ -115,8 +112,8 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
-    { rel: 'stylesheet', href: vendorsStyles },
-    { rel: 'stylesheet', href: tailwindStyles },
-    { rel: 'stylesheet', href: appStyles },
+    {rel: 'stylesheet', href: vendorsStyles},
+    {rel: 'stylesheet', href: tailwindStyles},
+    {rel: 'stylesheet', href: appStyles},
   ]
 }

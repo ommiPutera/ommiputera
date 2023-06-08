@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import {Link, type LinkProps} from '@remix-run/react'
 
 type AnchorProps = React.DetailedHTMLProps<
@@ -74,11 +74,12 @@ function removeTrailingSlash(s: string) {
   return s.endsWith('/') ? s.slice(0, -1) : s
 }
 
-function getUrl(requestInfo?: { origin: string; path: string }) {
+function getUrl(requestInfo?: {origin: string; path: string}) {
   return removeTrailingSlash(
-    `${requestInfo?.origin ?? 'https://ommiputera.com'}${requestInfo?.path ?? ''
+    `${requestInfo?.origin ?? 'https://ommiputera.com'}${
+      requestInfo?.path ?? ''
     }`,
   )
 }
 
-export { AnchorOrLink, getDomainUrl, getUrl }
+export {AnchorOrLink, getDomainUrl, getUrl}

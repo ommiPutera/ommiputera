@@ -1,5 +1,5 @@
 import {createCookieSessionStorage, redirect} from '@remix-run/node'
-import { db } from './db.server'
+import {db} from './db.server'
 import bcrypt from 'bcryptjs'
 
 type LoginType = {
@@ -24,8 +24,8 @@ let storage = createCookieSessionStorage({
   },
 })
 
-function getUserSession(request: Request) {
-  return storage.getSession(request.headers.get('Cookie'))
+function getUserSession(req: Request) {
+  return storage.getSession(req.headers.get('Cookie'))
 }
 
 export async function register({username, password}: LoginType) {

@@ -6,24 +6,29 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import { Link, useLocation } from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { BurgerMenu } from '~/utils/icons'
-import { useRootData } from '~/utils/use-root-data'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {BurgerMenu} from '~/utils/icons'
+import {useRootData} from '~/utils/use-root-data'
 
 const LINKS = [
-  { name: 'Post', to: '/post' },
-  { name: 'About', to: '/about' },
+  {name: 'Post', to: '/post'},
+  {name: 'About', to: '/about'},
 ]
 
-const MOBILE_LINKS = [{ name: 'Home', to: '/' }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
 
 function Index() {
   const location = useLocation()
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
-    <div className={clsx("px-5vw py-9 lg:px-15vw lg:py-12", { "bg-admin border-b border-gray-600": user && location.pathname.startsWith('/admin') })}>
+    <div
+      className={clsx('px-5vw py-9 lg:px-15vw lg:py-12', {
+        'border-b border-gray-600 bg-admin':
+          user && location.pathname.startsWith('/admin'),
+      })}
+    >
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
         <Logo />
         <DesktopNav />
@@ -38,7 +43,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({ isExpanded }) => {
+          {({isExpanded}) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -56,7 +61,7 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const { isExpanded } = useMenuButtonContext()
+  const {isExpanded} = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
   return (
     <AnimatePresence>
@@ -68,17 +73,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{ display: 'block' }}
+          style={{display: 'block'}}
           className="z-50"
         >
           <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
+            initial={{y: -50, opacity: 0}}
+            animate={{y: 0, opacity: 1}}
+            exit={{y: -50, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+              scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -103,7 +108,7 @@ function MobileMenuList() {
 function MobileNavLink({
   to,
   children,
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -122,7 +127,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <ul className="hidden lg:flex">
       {LINKS.map(link => (
@@ -130,16 +135,18 @@ function DesktopNav() {
           {link.name}
         </DesktopNavLink>
       ))}
-      {user && <li className="px-5 py-2">
-        <form action="/logout" method="post">
-          <button
-            type="submit"
-            className="block whitespace-nowrap text-lg font-medium text-red-500"
-          >
-            Log Out
-          </button>
-        </form>
-      </li>}
+      {user && (
+        <li className="px-5 py-2">
+          <form action="/logout" method="post">
+            <button
+              type="submit"
+              className="block whitespace-nowrap text-lg font-medium text-red-500"
+            >
+              Log Out
+            </button>
+          </form>
+        </li>
+      )}
     </ul>
   )
 }
@@ -148,7 +155,7 @@ function DesktopNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -184,4 +191,4 @@ function Logo() {
   )
 }
 
-export { Index as Navbar }
+export {Index as Navbar}

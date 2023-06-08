@@ -48,7 +48,7 @@ function AboutSection() {
         Ommi Putera Karunia
       </h2>
       <ul className="mt-4">
-        <li className="pb-6 font-medium text-md">
+        <li className="text-md pb-6 font-medium">
           All rights reserved © Ommi Putera 2023
         </li>
         <li className="text-secondary py-1 text-lg">
@@ -86,6 +86,5 @@ function ContactSection() {
     </div>
   )
 }
-
 
 export default Footer

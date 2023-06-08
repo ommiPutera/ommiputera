@@ -99,14 +99,11 @@ module.exports = {
                   fontSize: fontSize('xl'),
                 },
               },
-            }
-          }
+            },
+          },
         }
-      }
+      },
     },
   },
-  plugins: [
-    require('@tailwindcss/typography'),
-  ],
+  plugins: [require('@tailwindcss/typography')],
 }
-

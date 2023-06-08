@@ -11,11 +11,11 @@ export function getSocialMetas({
   keywords?: string
 }) {
   return [
-    { title },
-    { description },
-    { keywords },
-    {'og:url':url },
-    {'og:title':title },
-    {'og:description':description },
+    {title},
+    {description},
+    {keywords},
+    {'og:url': url},
+    {'og:title': title},
+    {'og:description': description},
   ]
 }

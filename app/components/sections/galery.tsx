@@ -4,7 +4,7 @@ import {Link} from '@remix-run/react'
 function GalerySection() {
   return (
     <div className="grid-rows-max-content relative mx-auto grid max-w-[130rem] grid-cols-1 md:grid-cols-2 xl:grid-cols-3">
-      <Video projectName="test" to="/"> 
+      <Video projectName="test" to="/">
         <source
           src="https://cdn.dribbble.com/userupload/7114376/file/original-4e1a54b4176f7137414a4d2d7f8a8a6f.mp4"
           type="video/mp4"
@@ -34,15 +34,25 @@ function GalerySection() {
   )
 }
 
-function Video({children, projectName, to}: {children: React.ReactNode, projectName: string, to: string}) {
+function Video({
+  children,
+  projectName,
+  to,
+}: {
+  children: React.ReactNode
+  projectName: string
+  to: string
+}) {
   return (
-    <div className="relative group">
-      <video width="750" height="750" autoPlay muted className="w-full h-full">
+    <div className="group relative">
+      <video width="750" height="750" autoPlay muted className="h-full w-full">
         {children}
         Sorry, your browser doesn't support videos.
       </video>
       <Link to={to}>
-        <div className="absolute top-0 h-full w-full group-hover:bg-gray-800 transition justify-center items-center cursor-pointer group-hover:opacity-100 flex opacity-0">{projectName}</div>
+        <div className="absolute top-0 flex h-full w-full cursor-pointer items-center justify-center opacity-0 transition group-hover:bg-gray-800 group-hover:opacity-100">
+          {projectName}
+        </div>
       </Link>
     </div>
   )

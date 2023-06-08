@@ -1,5 +1,5 @@
-import clsx from "clsx"
-import React from "react"
+import clsx from 'clsx'
+import React from 'react'
 
 interface IProps {
   size?: 'sm' | 'md' | 'lg'
@@ -8,14 +8,20 @@ interface IProps {
 }
 
 function Button({
-  variant = "primary",
+  variant = 'primary',
   size = 'sm',
   children,
   className,
   ...props
 }: IProps & JSX.IntrinsicElements['button']) {
   return (
-    <button {...props} className={clsx("relative inline-flex font-medium w-full rounded-xl", className)}>
+    <button
+      {...props}
+      className={clsx(
+        'relative inline-flex w-full rounded-xl font-medium',
+        className,
+      )}
+    >
       <Inner variant={variant} size={size}>
         {children}
       </Inner>
@@ -23,17 +29,24 @@ function Button({
   )
 }
 
-function Inner({ children, variant, size }: Pick<IProps, 'children' | 'variant' | 'size'>) {
+function Inner({
+  children,
+  variant,
+  size,
+}: Pick<IProps, 'children' | 'variant' | 'size'>) {
   return (
     <div
-      className={clsx('relative flex focus-ring h-full w-full border-2 rounded-xl py-4 items-center justify-center whitespace-nowrap', {
-        'text-primary border-gray-600': variant === 'primary',
-        'text-xl': size === 'lg'
-      })}
+      className={clsx(
+        'focus-ring relative flex h-full w-full items-center justify-center whitespace-nowrap rounded-xl border-2 py-4',
+        {
+          'text-primary border-gray-600': variant === 'primary',
+          'text-xl': size === 'lg',
+        },
+      )}
     >
       {children}
     </div>
   )
 }
 
-export { Button }
+export {Button}

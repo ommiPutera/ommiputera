@@ -2,7 +2,7 @@ import {Link} from '@remix-run/react'
 import clsx from 'clsx'
 import {GalerySection} from '~/components/sections/galery'
 import {HomeHeroSection} from '~/components/sections/hero'
-import { getImgProps, images } from '~/images'
+import {getImgProps, images} from '~/images'
 
 export default function Index() {
   return (
@@ -12,7 +12,7 @@ export default function Index() {
         alt=""
         className="lg:h-100 absolute -z-10 h-[100vh] w-[100vw] object-cover opacity-60 lg:opacity-100"
       />
-      <main className="flex flex-col gap-5 lg:gap-16 pb-44">
+      <main className="flex flex-col gap-5 pb-44 lg:gap-16">
         <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <HomeHeroSection />
         </div>
