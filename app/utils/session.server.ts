@@ -24,7 +24,7 @@ let storage = createCookieSessionStorage({
   },
 })
 
-function getUserSession(req: Request) {
+export function getUserSession(req: Request) {
   return storage.getSession(req.headers.get('Cookie'))
 }
 

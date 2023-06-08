@@ -12,12 +12,12 @@ import {
   useSearchParams,
 } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
-import {register, createUserSession, login} from '~/utils/session.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
+import { register, createUserSession, login, getUser, requireUserSession } from '~/utils/session.server'
 
-type LoaderData = {username: string}
+type LoaderData = { username: string, error: string }
 
 type ActionData = {
   formError?: string
@@ -32,17 +32,13 @@ type ActionData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  return {}
-}
-
-export const meta: V2_MetaFunction = ({matches}) => {
+export const meta: V2_MetaFunction = ({ matches }) => {
   // const domain = new URL(requestInfo.origin).host
 
-  return [{title: `Login to`}]
+  return [{ title: `Login to` }]
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
@@ -60,24 +56,24 @@ export const action: ActionFunction = async ({request}) => {
     typeof password !== 'string' ||
     typeof redirectTo !== 'string'
   ) {
-    return {formError: `Form not submitted correctly.`}
+    return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = {loginType, username, password}
+  let fields = { loginType, username, password }
   switch (loginType) {
     case 'login': {
-      const user = await login({username, password})
+      const user = await login({ username, password })
       if (!user) {
         return {
           fields,
           formError: `Username/Password combination is incorrect`,
         }
       }
-      return createUserSession({userId: user.id, redirectUrl: redirectTo})
+      return createUserSession({ userId: user.id, redirectUrl: redirectTo })
     }
     case 'register': {
       let userExists = await db.user.findFirst({
-        where: {username},
+        where: { username },
       })
       if (userExists) {
         return {
@@ -85,7 +81,7 @@ export const action: ActionFunction = async ({request}) => {
           formError: `User with username ${username} already exists`,
         }
       }
-      const user = await register({username, password})
+      const user = await register({ username, password })
       if (!user) {
         console.log('Something went wrong')
         return {
@@ -93,16 +89,15 @@ export const action: ActionFunction = async ({request}) => {
           formError: `Something went wrong trying to create a new user.`,
         }
       }
-      return createUserSession({userId: user.id, redirectUrl: redirectTo})
+      return createUserSession({ userId: user.id, redirectUrl: redirectTo })
     }
     default: {
-      return {}
+      return { fields, formError: 'Login type invalid' }
     }
   }
 }
 
 export default function Index() {
-  // const data = useLoaderData<LoaderData>()
   let actionData = useActionData<ActionData | undefined>()
   let [searchParams] = useSearchParams()
   const [submitted, setSubmitted] = React.useState(false)
@@ -111,7 +106,7 @@ export default function Index() {
     password: '',
   })
 
-  const formIsValid = formValues.username.match(/.+@.+/)
+  const formIsValid = formValues.username && formValues.password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/)
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
@@ -139,6 +134,7 @@ export default function Index() {
             }}
             method="POST"
             className="w-[24rem]"
+            aria-describedby={actionData?.formError ? "form-error-message" : undefined}
             onSubmit={() => setSubmitted(true)}
           >
             <fieldset>
@@ -166,34 +162,49 @@ export default function Index() {
                 Register
               </label>
             </fieldset>
-            <div className="flex flex-col gap-2">
-              <div className="mb-3">
-                <div className="mb-2 flex flex-wrap items-baseline justify-between">
-                  <Label htmlFor="username-field">username</Label>
-                </div>
-                <Input type="text" name="username" id="username-field" />
+            <div className="mb-3">
+              <div className="mb-1 flex flex-wrap items-baseline justify-between">
+                <Label htmlFor="username-field">username</Label>
               </div>
-              <div className="mb-6">
-                <div className="mb-2 flex flex-wrap items-baseline justify-between">
-                  <Label htmlFor="password-field">password</Label>
-                </div>
-                <Input
-                  type="password"
-                  id="password-field"
-                  name="password"
-                  autoComplete="nope"
-                />
+              <Input
+                type="text"
+                name="username"
+                placeholder='username'
+                id="username-field"
+                aria-describedby={actionData?.fieldErrors?.username ? "username-error" : undefined}
+              />
+              {actionData?.fieldErrors?.username ? (
+                <p
+                  className="form-validation-error"
+                  role="alert"
+                  id="username-error"
+                >
+                  {actionData?.fieldErrors.username}
+                </p>
+              ) : null}
+            </div>
+            <div className="mb-6">
+              <div className="mb-1 flex flex-wrap items-baseline justify-between">
+                <Label htmlFor="password-field">password</Label>
               </div>
+              <Input
+                type="password"
+                id="password-field"
+                name="password"
+                placeholder='password'
+                autoComplete="nope"
+              />
             </div>
-            <div className="sr-only" aria-live="polite">
-              {formIsValid
-                ? 'Sign in form is now valid and ready to submit'
-                : 'Sign in form is now invalid.'}
+            <div id="form-error-message" className='mb-2'>
+              {actionData?.formError ? (
+                <p className="form-validation-error" role="alert">
+                  {actionData?.formError}
+                </p>
+              ) : null}
             </div>
-            <Button type="submit" className="button">
+            <Button type="submit" className="button" disabled={!formIsValid || submitted}>
               Login
             </Button>
-            <br />
           </Form>
         </div>
       </div>

@@ -1,5 +1,5 @@
 :root {
-  --color-black: #000;
+  --color-black: #11100f;
   --color-white: #fff;
   --color-blue-100: #e8f2ff;
   --color-blue-500: #4b96ff;
@@ -19,7 +19,6 @@
   --color-red-500: #ff4545;
   --color-yellow-500: #ffd644;
 
-  --color-admin: #11100f;
   --color-team-unknown: #818890;
   --color-team-blue: #36a3ff;
   --color-team-red: #ff4545;

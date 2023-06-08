@@ -45,7 +45,7 @@ const getScreen = () =>
   window.matchMedia(mq).matches ? Screen.DESKTOP : Screen.MOBILE
 function Index() {
   const [screen, setScreen] = React.useState(() => {
-    if (typeof window !== 'object') return Screen.MOBILE
+    if (typeof window !== 'object') return Screen.DESKTOP
     return getScreen()
   })
   const location = useLocation()
@@ -67,9 +67,8 @@ function Index() {
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
       <div className="px-5vw py-9 lg:px-15vw lg:py-12">
         <div className="relative mx-auto grid max-w-8xl">
-          <p>screen: {screen}</p>
           <Tabs
-            style={{display: isDesktop && 'grid'}}
+            style={{display: isDesktop ? 'grid' : ''}}
             orientation={
               isDesktop ? TabsOrientation.Vertical : TabsOrientation.Horizontal
             }

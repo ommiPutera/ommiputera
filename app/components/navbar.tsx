@@ -25,7 +25,7 @@ function Index() {
   return (
     <div
       className={clsx('px-5vw py-9 lg:px-15vw lg:py-12', {
-        'border-b border-gray-600 bg-admin':
+        'border-b border-gray-600 bg-black':
           user && location.pathname.startsWith('/admin'),
       })}
     >
