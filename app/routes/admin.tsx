@@ -1,4 +1,4 @@
-import {Link, Outlet, useLocation} from '@remix-run/react'
+import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
 import {type LoaderFunction} from '@remix-run/node'
 import {requireUserSession} from '~/utils/session.server'
 import {
@@ -13,11 +13,27 @@ import clsx from 'clsx'
 import React from 'react'
 
 export const loader: LoaderFunction = async ({request}) => {
+  const userAgent = await request.headers.get('user-agent')
+  const isAndroid = () => Boolean(userAgent?.match(/Android/i))
+  const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
+  const isOpera = () => Boolean(userAgent?.match(/Opera Mini/i))
+  const isWindows = () => Boolean(userAgent?.match(/IEMobile/i))
+  const isSSR = () => Boolean(userAgent?.match(/SSR/i))
+  const isMobile = () =>
+    Boolean(isAndroid() || isIos() || isOpera() || isWindows())
+  const isDesktop = () => Boolean(!isMobile() && !isSSR())
+
   const user = await requireUserSession(request)
   if (!user) {
     throw new Response('Unauthorized', {status: 401})
   }
-  return {}
+  const data = {
+    device: {
+      isDesktop: isDesktop(),
+      isMobile: isMobile(),
+    },
+  }
+  return data
 }
 
 enum Screen {
@@ -40,12 +56,15 @@ const LINKS = [
   {name: 'Index', to: '/admin/10'},
 ]
 
-const mq = 'screen and (min-width: 1366px)'
-const getScreen = () =>
-  window.matchMedia(mq).matches ? Screen.DESKTOP : Screen.MOBILE
+const mq = 'screen and (min-width: 1066px)'
+const getScreen = () => window.matchMedia(mq).matches ? Screen.DESKTOP : Screen.MOBILE
+
 function Index() {
+  const data = useLoaderData()
+  const {isMobile, isDesktop} = data.device
   const [screen, setScreen] = React.useState(() => {
-    if (typeof window !== 'object') return Screen.DESKTOP
+    if (isDesktop) return Screen.DESKTOP
+    if (isMobile || typeof window !== 'object') return Screen.MOBILE
     return getScreen()
   })
   const location = useLocation()
@@ -60,26 +79,28 @@ function Index() {
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
-  const isDesktop = screen === Screen.DESKTOP
-  const isMobile = screen === Screen.MOBILE
+  const isDesktopScreen = screen === Screen.DESKTOP
+  const isMobileScreen = screen === Screen.MOBILE
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
       <div className="px-5vw py-9 lg:px-15vw lg:py-12">
         <div className="relative mx-auto grid max-w-8xl">
           <Tabs
-            style={{display: isDesktop ? 'grid' : ''}}
+            style={{display: isDesktopScreen ? 'grid' : ''}}
             orientation={
-              isDesktop ? TabsOrientation.Vertical : TabsOrientation.Horizontal
+              isMobileScreen
+                ? TabsOrientation.Horizontal
+                : TabsOrientation.Vertical
             }
             className="grid-cols-10 gap-x-8 overflow-x-scroll"
           >
             <TabList
               className={clsx(
-                'col-span-2 flex flex-row gap-y-1 overflow-x-scroll bg-transparent',
+                'col-span-2 flex gap-y-1 overflow-x-scroll bg-transparent',
                 {
-                  'flex-col': isDesktop,
-                  'pb-4': isMobile,
+                  'flex-col': isDesktopScreen,
+                  'flex-row pb-3': isMobileScreen,
                 },
               )}
             >
@@ -87,13 +108,14 @@ function Index() {
                 <Link
                   key={link.to}
                   to={link.to}
+                  prefetch="intent"
                   className={clsx(
                     'rounded-md px-3 pb-2 pt-1 text-left font-medium text-gray-300 hover:bg-gray-800',
                     {
                       active: isSelected(link.to),
                       'bg-gray-800 text-white': isSelected(link.to),
-                      'w-full': isDesktop,
-                      'w-fit': isMobile,
+                      'w-full': isDesktopScreen,
+                      'w-fit': isMobileScreen,
                     },
                   )}
                 >
@@ -103,12 +125,10 @@ function Index() {
                 </Link>
               ))}
             </TabList>
-            <TabPanels className="col-span-8 pt-1">
-              {LINKS.map(link => (
-                <TabPanel key={link.to}>
-                  <Outlet />
-                </TabPanel>
-              ))}
+            <TabPanels className="col-span-8 mt-4 lg:mt-0">
+              <TabPanel key={location.pathname} style={{display: 'block'}}>
+                <Outlet />
+              </TabPanel>
             </TabPanels>
           </Tabs>
         </div>

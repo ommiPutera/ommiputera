@@ -1,23 +1,23 @@
 import {
-  json,
-  type LoaderFunction,
   type ActionFunction,
-  redirect,
 } from '@remix-run/node'
 import {
   type V2_MetaFunction,
-  useLoaderData,
   Form,
   useActionData,
-  useSearchParams,
+  // useSearchParams,
 } from '@remix-run/react'
 import React from 'react'
 import { Button } from '~/components/button'
 import { Input, Label } from '~/components/form-elements'
 import { db } from '~/utils/db.server'
-import { register, createUserSession, login, getUser, requireUserSession } from '~/utils/session.server'
+import {
+  register,
+  createUserSession,
+  login,
+} from '~/utils/session.server'
 
-type LoaderData = { username: string, error: string }
+// type LoaderData = {username: string; error: string}
 
 type ActionData = {
   formError?: string
@@ -99,14 +99,17 @@ export const action: ActionFunction = async ({ request }) => {
 
 export default function Index() {
   let actionData = useActionData<ActionData | undefined>()
-  let [searchParams] = useSearchParams()
+  // let [searchParams] = useSearchParams()
   const [submitted, setSubmitted] = React.useState(false)
   const [formValues, setFormValues] = React.useState({
     username: '',
     password: '',
   })
 
-  const formIsValid = formValues.username && formValues.password.match(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/)
+  const formIsValid = formValues.username
+  // formValues.password.match(
+  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+  // )
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
@@ -127,6 +130,7 @@ export default function Index() {
           <Form
             onChange={e => {
               const form = e.currentTarget
+              setSubmitted(false)
               setFormValues({
                 username: form.username.value,
                 password: form.password.value,
@@ -134,7 +138,9 @@ export default function Index() {
             }}
             method="POST"
             className="w-[24rem]"
-            aria-describedby={actionData?.formError ? "form-error-message" : undefined}
+            aria-describedby={
+              actionData?.formError ? 'form-error-message' : undefined
+            }
             onSubmit={() => setSubmitted(true)}
           >
             <fieldset>
@@ -169,9 +175,13 @@ export default function Index() {
               <Input
                 type="text"
                 name="username"
-                placeholder='username'
+                placeholder="username"
                 id="username-field"
-                aria-describedby={actionData?.fieldErrors?.username ? "username-error" : undefined}
+                aria-describedby={
+                  actionData?.fieldErrors?.username
+                    ? 'username-error'
+                    : undefined
+                }
               />
               {actionData?.fieldErrors?.username ? (
                 <p
@@ -191,18 +201,22 @@ export default function Index() {
                 type="password"
                 id="password-field"
                 name="password"
-                placeholder='password'
+                placeholder="password"
                 autoComplete="nope"
               />
             </div>
-            <div id="form-error-message" className='mb-2'>
+            <div id="form-error-message" className="mb-2">
               {actionData?.formError ? (
                 <p className="form-validation-error" role="alert">
                   {actionData?.formError}
                 </p>
               ) : null}
             </div>
-            <Button type="submit" className="button" disabled={!formIsValid || submitted}>
+            <Button
+              type="submit"
+              className="button"
+              disabled={!formIsValid && !submitted}
+            >
               Login
             </Button>
           </Form>

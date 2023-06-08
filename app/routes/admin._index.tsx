@@ -1,3 +1,7 @@
 export default function Index() {
-  return <h1>Admin Page index</h1>
+  return (
+    <div className="border-blue-500 relative h-full min-h-screen w-full border">
+      <h1>Admin index Page</h1>
+    </div>
+  )
 }

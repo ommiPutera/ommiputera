@@ -73,7 +73,7 @@ function LongStory() {
 
 function AboutMe() {
   return (
-    <div className="mx-auto relative flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-24 xl:gap-x-36">
+    <div className="relative mx-auto flex max-w-8xl flex-col gap-8 lg:flex-row lg:gap-x-24 xl:gap-x-36">
       <div className="w-full lg:w-1/2">
         <img
           id="about-me"
