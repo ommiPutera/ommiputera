@@ -16,12 +16,17 @@
   --color-green-100: #e7f9ed;
   --color-green-500: #30c85e;
   --color-green-600: #68d94a;
-  --color-red-500: #ff4545;
+  --color-red-100: #2a1314;
+  --color-red-200: #3c1618;
+  --color-red-300: #561a1e;
+  --color-red-400: #671e21;
+  --color-red-500: #832126;
+  --color-red-600: #e5484d;
+  --color-red-700: #e5484d;
+  --color-red-800: #d93036;
+  --color-red-900: #ff6166;
   --color-yellow-500: #ffd644;
 
-  --color-team-unknown: #818890;
-  --color-team-blue: #36a3ff;
-  --color-team-red: #ff4545;
   /* yellow in light mode is... hard */
   --color-team-yellow: #a08600;
   --color-yellow-500: #a08600;

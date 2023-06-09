@@ -1,6 +1,4 @@
-import {
-  type ActionFunction,
-} from '@remix-run/node'
+import { type ActionFunction } from '@remix-run/node'
 import {
   type V2_MetaFunction,
   Form,
@@ -11,11 +9,7 @@ import React from 'react'
 import { Button } from '~/components/button'
 import { Input, Label } from '~/components/form-elements'
 import { db } from '~/utils/db.server'
-import {
-  register,
-  createUserSession,
-  login,
-} from '~/utils/session.server'
+import { register, createUserSession, login } from '~/utils/session.server'
 
 // type LoaderData = {username: string; error: string}
 
@@ -66,7 +60,7 @@ export const action: ActionFunction = async ({ request }) => {
       if (!user) {
         return {
           fields,
-          formError: `Username/Password combination is incorrect`,
+          formError: `Username/Password combination is incorrect, Please read this guide for further details`,
         }
       }
       return createUserSession({ userId: user.id, redirectUrl: redirectTo })
@@ -106,7 +100,7 @@ export default function Index() {
     password: '',
   })
 
-  const formIsValid = formValues.username
+  let formIsValid = Boolean(formValues.username)
   // formValues.password.match(
   //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
   // )
@@ -130,14 +124,14 @@ export default function Index() {
           <Form
             onChange={e => {
               const form = e.currentTarget
-              setSubmitted(false)
               setFormValues({
                 username: form.username.value,
                 password: form.password.value,
               })
+              setSubmitted(false)
             }}
             method="POST"
-            className="w-[24rem]"
+            className="w-full lg:w-[22rem]"
             aria-describedby={
               actionData?.formError ? 'form-error-message' : undefined
             }
@@ -193,7 +187,7 @@ export default function Index() {
                 </p>
               ) : null}
             </div>
-            <div className="mb-6">
+            <div className="mb-3">
               <div className="mb-1 flex flex-wrap items-baseline justify-between">
                 <Label htmlFor="password-field">password</Label>
               </div>
@@ -205,17 +199,17 @@ export default function Index() {
                 autoComplete="nope"
               />
             </div>
-            <div id="form-error-message" className="mb-2">
-              {actionData?.formError ? (
-                <p className="form-validation-error" role="alert">
+            {actionData?.formError ? (
+              <div id="form-error-message" className="mt-4 mb-2 rounded-md px-4 pt-2 py-3 bg-red-100 text-red-900 border border-red-200 text-center">
+                <p className="form-validation-error font-medium text-sm" role="alert">
                   {actionData?.formError}
                 </p>
-              ) : null}
-            </div>
+              </div>
+            ) : null}
             <Button
               type="submit"
-              className="button"
-              disabled={!formIsValid && !submitted}
+              className="button mt-4"
+              disabled={!formIsValid || submitted}
             >
               Login
             </Button>
