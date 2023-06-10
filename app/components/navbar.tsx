@@ -184,7 +184,7 @@ function DesktopNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'underlined hover:text-team-current focus:text-team-current block whitespace-nowrap text-lg font-medium focus:outline-none',
+          'underlined block whitespace-nowrap text-lg font-medium focus:outline-none lg:tracking-wide',
           {
             active: isSelected,
             'text-secondary': !isSelected,
@@ -242,7 +242,7 @@ function ProtectedpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'underlined block whitespace-nowrap pb-4 pt-1 text-md font-medium focus:outline-none lg:text-md',
+          'underlined block whitespace-nowrap pb-4 pt-1 text-md font-medium focus:outline-none lg:text-lg lg:tracking-wide',
           {
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,
