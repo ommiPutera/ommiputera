@@ -56,4 +56,12 @@
   .text-secondary {
     @apply text-gray-500 dark:text-gray-500;
   }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+  }
 }

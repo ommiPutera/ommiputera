@@ -214,9 +214,9 @@ function OwnerNav() {
   const { user } = useRootData()
   if (!user) return <></>
   return (
-    <div className='px-5vw lg:px-15vw border-b border-gray-600 bg-black'>
+    <div className='px-5vw lg:px-15vw border-b border-gray-600 bg-black overflow-x-scroll overflow-y-hidden no-scrollbar'>
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
-        <ul className="hidden lg:flex -mx-2 gap-x-2">
+        <ul className="flex -mx-2 gap-x-2">
           {OWNERLINKS.map(link => (
             <OwnerpNavLink key={link.to} to={link.to}>
               {link.name}
@@ -242,7 +242,7 @@ function OwnerpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'block whitespace-nowrap underlined pt-1 pb-1.5 text-sm font-medium focus:outline-none',
+          'block whitespace-nowrap underlined pt-1 pb-1.5 text-md lg:text-sm font-medium focus:outline-none',
           {
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,

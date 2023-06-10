@@ -103,7 +103,7 @@ function Index() {
         </div>
       </div>
       <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
-        <div className="relative mx-auto grid max-w-8xl">
+        <div className="relative mx-auto grid lg:max-w-8xl">
           <Tabs
             style={{ display: isDesktopScreen ? 'grid' : '' }}
             orientation={
@@ -111,11 +111,11 @@ function Index() {
                 ? TabsOrientation.Horizontal
                 : TabsOrientation.Vertical
             }
-            className="grid-cols-10 gap-x-8 overflow-x-scroll lg:overflow-x-hidden"
+            className="grid-cols-10 gap-x-8 w-full overflow-x-auto"
           >
             <TabList
               className={clsx(
-                'col-span-2 flex gap-y-1 overflow-x-scroll bg-transparent lg:overflow-x-hidden',
+                'lg:col-span-2 flex gap-y-1 overflow-x-scroll bg-transparent',
                 {
                   'flex-col': isDesktopScreen,
                   'flex-row pb-3': isMobileScreen,
@@ -133,11 +133,11 @@ function Index() {
                       active: isRouteSelected(link.to),
                       'bg-gray-800 text-white': isRouteSelected(link.to),
                       'w-full': isDesktopScreen,
-                      'w-fit': isMobileScreen,
+                      'w-fit inline': isMobileScreen,
                     },
                   )}
                 >
-                  <Tab className="text-md border-none bg-transparent">
+                  <Tab className="text-md w-max border-none bg-transparent">
                     {link.name}
                   </Tab>
                 </Link>
