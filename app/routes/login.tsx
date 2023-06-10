@@ -8,8 +8,7 @@ import {
 import React from 'react'
 import { Button } from '~/components/button'
 import { Input, Label } from '~/components/form-elements'
-import { db } from '~/utils/db.server'
-import { register, createUserSession, login } from '~/utils/session.server'
+import { createUserSession, login } from '~/utils/session.server'
 
 // type LoaderData = {username: string; error: string}
 
@@ -20,15 +19,13 @@ type ActionData = {
     password: string | undefined
   }
   fields?: {
-    loginType: string
     username: string
     password: string
   }
 }
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  // const domain = new URL(requestInfo.origin).host
 
+export const meta: V2_MetaFunction = () => {
   return [{ title: `Login to` }]
 }
 
@@ -36,16 +33,13 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
-  const loginType = formData.get('loginType')
   const redirectTo = formData.get('redirectTo') || '/admin'
   console.table({
     password: password,
     username: username,
-    loginType: loginType,
     redirectTo: redirectTo,
   })
   if (
-    typeof loginType !== 'string' ||
     typeof username !== 'string' ||
     typeof password !== 'string' ||
     typeof redirectTo !== 'string'
@@ -53,57 +47,28 @@ export const action: ActionFunction = async ({ request }) => {
     return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = { loginType, username, password }
-  switch (loginType) {
-    case 'login': {
-      const user = await login({ username, password })
-      if (!user) {
-        return {
-          fields,
-          formError: `Username/Password combination is incorrect, Please read this guide for further details`,
-        }
-      }
-      return createUserSession({ userId: user.id, redirectUrl: redirectTo })
-    }
-    case 'register': {
-      let userExists = await db.user.findFirst({
-        where: { username },
-      })
-      if (userExists) {
-        return {
-          fields,
-          formError: `User with username ${username} already exists`,
-        }
-      }
-      const user = await register({ username, password })
-      if (!user) {
-        console.log('Something went wrong')
-        return {
-          fields,
-          formError: `Something went wrong trying to create a new user.`,
-        }
-      }
-      return createUserSession({ userId: user.id, redirectUrl: redirectTo })
-    }
-    default: {
-      return { fields, formError: 'Login type invalid' }
+  let fields = { username, password }
+  const user = await login({ username, password })
+  if (!user) {
+    return {
+      fields,
+      formError: `Username/Password combination is incorrect, Please read this guide for further details`,
     }
   }
+  return createUserSession({ userId: user.id, redirectUrl: redirectTo })
 }
 
 export default function Index() {
   let actionData = useActionData<ActionData | undefined>()
-  // let [searchParams] = useSearchParams()
   const [submitted, setSubmitted] = React.useState(false)
   const [formValues, setFormValues] = React.useState({
     username: '',
     password: '',
   })
 
-  let formIsValid = Boolean(formValues.username)
-  // formValues.password.match(
-  //   /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-  // )
+  let formIsValid = Boolean(formValues.username) && formValues.password.match(
+    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+  )
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
@@ -137,34 +102,9 @@ export default function Index() {
             }
             onSubmit={() => setSubmitted(true)}
           >
-            <fieldset>
-              <legend className="sr-only">Login or Register?</legend>
-              <Label>
-                <input
-                  type="radio"
-                  name="loginType"
-                  value="login"
-                  defaultChecked={
-                    !actionData?.fields?.loginType ||
-                    actionData?.fields?.loginType === 'login'
-                  }
-                />{' '}
-                Login
-              </Label>
-              <br />
-              <label>
-                <input
-                  type="radio"
-                  name="loginType"
-                  value="register"
-                  defaultChecked={actionData?.fields?.loginType === 'register'}
-                />{' '}
-                Register
-              </label>
-            </fieldset>
             <div className="mb-3">
-              <div className="mb-1 flex flex-wrap items-baseline justify-between">
-                <Label htmlFor="username-field">username</Label>
+              <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+                <Label htmlFor="username-field">Username</Label>
               </div>
               <Input
                 type="text"
@@ -188,8 +128,8 @@ export default function Index() {
               ) : null}
             </div>
             <div className="mb-3">
-              <div className="mb-1 flex flex-wrap items-baseline justify-between">
-                <Label htmlFor="password-field">password</Label>
+              <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+                <Label htmlFor="password-field">Password</Label>
               </div>
               <Input
                 type="password"

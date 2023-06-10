@@ -1,18 +1,15 @@
-import {useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
 
 function Footer() {
-  const location = useLocation()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <footer
       className={clsx(
         'border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-12',
         {
-          'border-b border-gray-600 bg-black':
-            user && location.pathname.startsWith('/admin'),
+          'border-b border-gray-600 bg-black': user
         },
       )}
     >

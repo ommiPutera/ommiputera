@@ -18,7 +18,7 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full rounded-lg focus:ring-[0.5px] ring-white font-medium focus:border-transparent border-gray-200 border-2 disabled:text-gray-300',
+        'group relative inline-flex w-full rounded-lg focus:ring-[0.5px] ring-white font-medium focus:border-transparent border-gray-500 border-2 disabled:text-gray-300',
         {
           'text-primary': variant === 'primary',
         },
@@ -42,7 +42,7 @@ function Inner({
       className={clsx(
         'relative flex h-full w-full items-center justify-center whitespace-nowrap rounded-lg py-3',
         {
-          'border-gray-200 group-disabled:border-gray-600':
+          'border-gray-200 group-disabled:border-gray-700':
             variant === 'primary',
           'text-xl': size === 'lg',
         },

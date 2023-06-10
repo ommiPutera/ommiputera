@@ -54,6 +54,6 @@
   }
 
   .text-secondary {
-    @apply text-gray-500 dark:text-slate-500;
+    @apply text-gray-500 dark:text-gray-500;
   }
 }

@@ -50,7 +50,7 @@ enum Screen {
 
 const LINKS = [
   { name: 'Index', to: '/admin' },
-  { name: 'Dashboard', to: '/admin/dashboard' },
+  { name: 'Manage Project', to: '/admin/manage-project' },
   { name: 'Index', to: '/admin/1' },
   { name: 'Index', to: '/admin/2' },
   { name: 'Index', to: '/admin/3' },
@@ -93,8 +93,16 @@ function Index() {
   const isRouteSelected = (to: string) => to === location.pathname
 
   return (
-    <main className="flex flex-col gap-5 pb-44 lg:gap-16">
-      <div className="px-5vw py-9 lg:px-15vw lg:py-12">
+    <main className="flex flex-col gap-5 pb-44 lg:gap-9">
+      <div className="px-5vw py-9 lg:px-15vw lg:py-9 border-b border-gray-600">
+        <div className="relative mx-auto text-center grid max-w-8xl">
+          <h1 className="px-0 text-xl font-medium leading-tigh lg:text-2xl">
+            Admin Panel Settings
+          </h1>
+          <p className="text-sm mt-1 text-secondary font-medium">2 years of proven experience in helping.</p>
+        </div>
+      </div>
+      <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
         <div className="relative mx-auto grid max-w-8xl">
           <Tabs
             style={{ display: isDesktopScreen ? 'grid' : '' }}
