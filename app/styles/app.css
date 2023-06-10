@@ -202,43 +202,57 @@ p {
 
 table.styled-table {
   width: 100%;
+  overflow: scroll;
   border-collapse: separate;
   table-layout: fixed;
-  width: max-content;
   scrollbar-width: none;
+  margin: 0;
 }
 table.styled-table > thead tr {
+  @apply w-max block lg:table-row;
   box-sizing: border-box;
 }
 table.styled-table > thead tr th:first-child {
   @apply pl-6;
 }
 table.styled-table > thead tr th:last-child {
-  @apply pr-6;
+  @apply pr-6 text-center;
 }
 table.styled-table > thead tr th {
-  text-align: left;
-  @apply font-bold text-gray-600 px-4 pt-2 pb-4 uppercase text-xs border-b border-gray-600;
+  width: 200px;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+  @apply font-bold text-gray-600 text-left px-4 py-2 uppercase text-xs border-b border-gray-600;
 }
 table.styled-table > tbody tr td:first-child {
   @apply pl-6;
 }
+table.styled-table > tbody tr {
+  @apply w-max block lg:table-row;
+  box-sizing: border-box;
+}
 table.styled-table > tbody tr td {
-  text-align: left;
-  min-width: 210px;
-  max-width: 350px;
-  @apply text-gray-200 px-2 py-2 border-gray-600 bg-transparent text-sm font-light border-b border-r-0 border-l-0;
+  width: 200px;
+  text-overflow: ellipsis;
+  word-break: keep-all;
+  white-space: nowrap;
+  @apply text-gray-200 text-left px-4 py-2 border-gray-600 text-sm font-light border-b border-r-0 border-l-0;
 }
 table.styled-table > tbody tr:last-child td {
-  text-align: left;
   @apply border-b-0;
 }
+table.styled-table > tbody tr td:last-child {
+  @apply pr-6 text-center;
+}
 .wrapper-styled-table {
-  overflow: auto;
   position: relative;
+  overflow-x: scroll;
+  width: 100%;
+  height: 100%;
 }
 .wrapper-styled-table::-webkit-scrollbar {
-  width: 0 !important
+  display: none !important;
 }
 
 .text-animate {

@@ -6,31 +6,31 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import { Link, useLocation } from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { BurgerMenu } from '~/utils/icons'
-import { useRootData } from '~/utils/use-root-data'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {BurgerMenu} from '~/utils/icons'
+import {useRootData} from '~/utils/use-root-data'
 
 const LINKS = [
-  { name: 'Post', to: '/post' },
-  { name: 'About', to: '/about' },
+  {name: 'Post', to: '/post'},
+  {name: 'About', to: '/about'},
 ]
 
 const OWNERLINKS = [
-  { name: 'Dashboard', to: '/dashboard' },
-  { name: 'Admin Panel', to: '/admin' },
+  {name: 'Dashboard', to: '/dashboard'},
+  {name: 'Admin Panel', to: '/admin'},
 ]
 
-const MOBILE_LINKS = [{ name: 'Home', to: '/' }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <>
       <div
         className={clsx('px-5vw py-9 lg:px-15vw lg:py-12', {
-          'bg-black lg:pt-12 lg:pb-6': user
+          'bg-black lg:pb-6 lg:pt-12': user,
         })}
       >
         <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
@@ -49,7 +49,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({ isExpanded }) => {
+          {({isExpanded}) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -67,9 +67,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const { isExpanded } = useMenuButtonContext()
+  const {isExpanded} = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -80,17 +80,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{ display: 'block' }}
+          style={{display: 'block'}}
           className="z-50"
         >
           <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
+            initial={{y: -50, opacity: 0}}
+            animate={{y: 0, opacity: 1}}
+            exit={{y: -50, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+              scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -127,7 +127,7 @@ function MobileMenuList() {
 function MobileNavLink({
   to,
   children,
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -146,7 +146,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <ul className="hidden lg:flex">
       {LINKS.map(link => (
@@ -154,7 +154,7 @@ function DesktopNav() {
           {link.name}
         </DesktopNavLink>
       ))}
-      {user && 
+      {user && (
         <li className="px-5 py-2">
           <form action="/logout" method="post">
             <button
@@ -165,7 +165,7 @@ function DesktopNav() {
             </button>
           </form>
         </li>
-      }
+      )}
     </ul>
   )
 }
@@ -174,7 +174,7 @@ function DesktopNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -211,12 +211,12 @@ function Logo() {
 }
 
 function ProtectedNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   if (!user) return <></>
   return (
-    <div className='px-5vw lg:px-15vw border-b border-gray-600 bg-black overflow-x-scroll overflow-y-hidden no-scrollbar'>
+    <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-15vw">
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
-        <ul className="flex -mx-2 gap-x-2">
+        <ul className="-mx-2 flex gap-x-2">
           {OWNERLINKS.map(link => (
             <ProtectedpNavLink key={link.to} to={link.to}>
               {link.name}
@@ -232,7 +232,7 @@ function ProtectedpNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -242,7 +242,7 @@ function ProtectedpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'block whitespace-nowrap underlined pt-1 pb-4 text-md lg:text-md font-medium focus:outline-none',
+          'underlined block whitespace-nowrap pb-4 pt-1 text-md font-medium focus:outline-none lg:text-md',
           {
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,
@@ -256,5 +256,4 @@ function ProtectedpNavLink({
   )
 }
 
-
-export { Index as Navbar }
+export {Index as Navbar}

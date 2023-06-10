@@ -1,15 +1,15 @@
 import clsx from 'clsx'
-import { AnchorOrLink } from '~/utils/misc'
-import { useRootData } from '~/utils/use-root-data'
+import {AnchorOrLink} from '~/utils/misc'
+import {useRootData} from '~/utils/use-root-data'
 
 function Footer() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <footer
       className={clsx(
         'border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-12',
         {
-          'border-b border-gray-600 bg-black': user
+          'border-b border-gray-600 bg-black': user,
         },
       )}
     >
@@ -58,7 +58,7 @@ function AboutSection() {
         Ommi Putera Karunia
       </h2>
       <ul className="mt-4">
-        <li className="text-md pb-6 font-medium">
+        <li className="pb-6 text-md font-medium">
           All rights reserved © Ommi Putera 2023
         </li>
         <li className="text-secondary py-1 text-lg">

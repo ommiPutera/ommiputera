@@ -92,7 +92,7 @@ function Project({
 }) {
   return (
     <div className="flex flex-col items-center justify-between pt-9 md:flex-row md:py-9">
-      <p className="text-md mb-4 font-medium text-gray-300 md:mb-0">{desc}</p>
+      <p className="mb-4 text-md font-medium text-gray-300 md:mb-0">{desc}</p>
       <div className="flex flex-col items-center gap-6 md:flex-row md:gap-12">
         <Link
           target="_blank"

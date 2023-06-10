@@ -18,7 +18,7 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full rounded-lg focus:ring-[0.5px] ring-white font-medium focus:border-transparent border-gray-500 border-2 disabled:text-gray-300',
+        'group relative inline-flex w-full rounded-lg border-2 border-gray-500 font-medium ring-white focus:border-transparent focus:ring-[0.5px] disabled:text-gray-300',
         {
           'text-primary': variant === 'primary',
         },

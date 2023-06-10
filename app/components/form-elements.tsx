@@ -10,7 +10,7 @@ function Label({className, ...labelProps}: JSX.IntrinsicElements['label']) {
     <label
       {...labelProps}
       className={clsx(
-        'inline-block text-md font-medium whitespace-nowrap text-gray-500 dark:text-white',
+        'inline-block whitespace-nowrap text-md font-medium text-gray-500 dark:text-white',
         className,
       )}
     />

@@ -1,14 +1,10 @@
-import type { LoaderFunction} from '@remix-run/node';
-import { type ActionFunction, redirect } from '@remix-run/node'
-import {
-  type V2_MetaFunction,
-  Form,
-  useActionData,
-} from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {type ActionFunction, redirect} from '@remix-run/node'
+import {type V2_MetaFunction, Form, useActionData} from '@remix-run/react'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
-import { createUserSession, getUser, login } from '~/utils/session.server'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
+import {createUserSession, getUser, login} from '~/utils/session.server'
 
 // type LoaderData = {username: string; error: string}
 
@@ -24,17 +20,17 @@ type ActionData = {
   }
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
   if (user) return redirect('/dashboard')
   return {}
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: `Login to` }]
+  return [{title: `Login to`}]
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
@@ -49,18 +45,18 @@ export const action: ActionFunction = async ({ request }) => {
     typeof password !== 'string' ||
     typeof redirectTo !== 'string'
   ) {
-    return { formError: `Form not submitted correctly.` }
+    return {formError: `Form not submitted correctly.`}
   }
 
-  let fields = { username, password }
-  const user = await login({ username, password })
+  let fields = {username, password}
+  const user = await login({username, password})
   if (!user) {
     return {
       fields,
       formError: `Username/Password combination is incorrect, Please read this guide for further details`,
     }
   }
-  return createUserSession({ userId: user.id, redirectUrl: redirectTo })
+  return createUserSession({userId: user.id, redirectUrl: redirectTo})
 }
 
 export default function Index() {
@@ -71,9 +67,11 @@ export default function Index() {
     password: '',
   })
 
-  let formIsValid = Boolean(formValues.username) && formValues.password.match(
-    /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
-  )
+  let formIsValid =
+    Boolean(formValues.username) &&
+    formValues.password.match(
+      /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/,
+    )
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-16">
@@ -145,8 +143,14 @@ export default function Index() {
               />
             </div>
             {actionData?.formError ? (
-              <div id="form-error-message" className="mt-4 mb-2 rounded-md px-4 pt-2 py-3 bg-red-100 text-red-900 border border-red-200 text-center">
-                <p className="form-validation-error font-medium text-sm" role="alert">
+              <div
+                id="form-error-message"
+                className="mb-2 mt-4 rounded-md border border-red-200 bg-red-100 px-4 py-3 pt-2 text-center text-red-900"
+              >
+                <p
+                  className="form-validation-error text-sm font-medium"
+                  role="alert"
+                >
                   {actionData?.formError}
                 </p>
               </div>
