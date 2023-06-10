@@ -199,3 +199,78 @@ p {
     opacity: 1;
   }
 }
+
+table.styled-table {
+  width: 100%;
+  border-collapse: separate;
+  table-layout: fixed;
+  width: max-content;
+  scrollbar-width: none;
+}
+table.styled-table > thead tr {
+  box-sizing: border-box;
+}
+table.styled-table > thead tr th:first-child {
+  @apply pl-6;
+}
+table.styled-table > thead tr th:last-child {
+  @apply pr-6;
+}
+table.styled-table > thead tr th {
+  text-align: left;
+  @apply font-bold text-gray-600 px-4 pt-2 pb-4 uppercase text-xs border-b border-gray-600;
+}
+table.styled-table > tbody tr td:first-child {
+  @apply pl-6;
+}
+table.styled-table > tbody tr td {
+  text-align: left;
+  min-width: 210px;
+  max-width: 350px;
+  @apply text-gray-200 px-2 py-2 border-gray-600 bg-transparent text-sm font-light border-b border-r-0 border-l-0;
+}
+table.styled-table > tbody tr:last-child td {
+  text-align: left;
+  @apply border-b-0;
+}
+.wrapper-styled-table {
+  overflow: auto;
+  position: relative;
+}
+.wrapper-styled-table::-webkit-scrollbar {
+  width: 0 !important
+}
+
+.text-animate {
+  animation: doNothing 1s, pause-between-iterations 0.4s linear;
+}
+.text-animate-1 {
+  animation: doNothing 1s, pause-between-iterations 0.9s linear;
+}
+.text-animate-2 {
+  animation: doNothing 1s, pause-between-iterations 1.4s linear;
+}
+.text-animate-3 {
+  animation: doNothing 1s, pause-between-iterations 1.9s linear;
+}
+
+@keyframes doNothing {
+}
+
+@keyframes pause-between-iterations {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0;
+  }
+  25.2% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}

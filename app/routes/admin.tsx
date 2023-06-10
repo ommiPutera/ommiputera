@@ -9,6 +9,7 @@ import {
 import { type LoaderFunction } from '@remix-run/node'
 import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
 import { requireUserSession } from '~/utils/session.server'
 
@@ -49,18 +50,8 @@ enum Screen {
 }
 
 const LINKS = [
-  { name: 'Index', to: '/admin' },
+  { name: 'General', to: '/admin' },
   { name: 'Manage Project', to: '/admin/manage-project' },
-  { name: 'Index', to: '/admin/1' },
-  { name: 'Index', to: '/admin/2' },
-  { name: 'Index', to: '/admin/3' },
-  { name: 'Index', to: '/admin/4' },
-  { name: 'Index', to: '/admin/5' },
-  { name: 'Index', to: '/admin/6' },
-  { name: 'Index', to: '/admin/7' },
-  { name: 'Index', to: '/admin/8' },
-  { name: 'Index', to: '/admin/9' },
-  { name: 'Index', to: '/admin/10' },
 ]
 
 const mq = 'screen and (min-width: 1066px)'
@@ -68,6 +59,7 @@ const getScreen = () =>
   window.matchMedia(mq).matches ? Screen.DESKTOP : Screen.MOBILE
 
 function Index() {
+  const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
   const { isMobile, isDesktop } = data.device
@@ -94,9 +86,9 @@ function Index() {
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
-      <div className="px-5vw py-9 lg:px-15vw lg:py-9 border-b border-gray-600">
-        <div className="relative mx-auto text-center grid max-w-8xl">
-          <h1 className="px-0 text-xl font-medium leading-tigh lg:text-2xl">
+      <div className="px-5vw py-9 lg:px-15vw lg:py-12 border-b bg-black border-gray-600">
+        <div className="relative mx-auto text-left grid max-w-8xl">
+          <h1 className="px-0 text-xl font-medium leading-tigh lg:text-3xl">
             Admin Panel Settings
           </h1>
           <p className="text-sm mt-1 text-secondary font-medium">2 years of proven experience in helping.</p>
@@ -105,17 +97,17 @@ function Index() {
       <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
         <div className="relative mx-auto grid lg:max-w-8xl">
           <Tabs
-            style={{ display: isDesktopScreen ? 'grid' : '' }}
+            style={{ display: isDesktopScreen ? 'grid' : '', overflow: 'visible' }}
             orientation={
               isMobileScreen
                 ? TabsOrientation.Horizontal
                 : TabsOrientation.Vertical
             }
-            className="grid-cols-10 gap-x-8 w-full overflow-x-auto"
+            className="grid-cols-12 gap-x-14 w-full overflow-x-auto"
           >
             <TabList
               className={clsx(
-                'lg:col-span-2 flex gap-y-1 overflow-x-scroll bg-transparent',
+                'lg:col-span-3 flex gap-1 overflow-x-scroll bg-transparent',
                 {
                   'flex-col': isDesktopScreen,
                   'flex-row pb-3': isMobileScreen,
@@ -128,11 +120,11 @@ function Index() {
                   to={link.to}
                   prefetch="intent"
                   className={clsx(
-                    'rounded-md px-3 pb-2 pt-1 text-left font-medium text-gray-300 hover:bg-gray-800',
+                    'rounded-md px-2 pb-2 pt-1 text-left font-medium text-gray-300',
                     {
                       active: isRouteSelected(link.to),
                       'bg-gray-800 text-white': isRouteSelected(link.to),
-                      'w-full': isDesktopScreen,
+                      'w-full hover:bg-gray-800': isDesktopScreen,
                       'w-fit inline': isMobileScreen,
                     },
                   )}
@@ -143,9 +135,25 @@ function Index() {
                 </Link>
               ))}
             </TabList>
-            <TabPanels className="col-span-8 mt-4 lg:mt-0">
+            <TabPanels className="lg:col-span-9 mt-4 lg:mt-0">
               <TabPanel key={location.pathname} style={{ display: 'block' }}>
-                <Outlet />
+                <AnimatePresence>
+                  <motion.div
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
+                    transition={{
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
+                      ease: 'linear',
+                    }}
+                  >
+                    <div className="relative h-full min-h-screen w-full">
+                      <div className="border bg-black border-gray-600 w-full xl:-top-20 rounded-md absolute">
+                        <Outlet />
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
               </TabPanel>
             </TabPanels>
           </Tabs>

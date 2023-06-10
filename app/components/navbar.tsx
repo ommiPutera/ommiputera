@@ -39,7 +39,7 @@ function Index() {
           <MobileNav />
         </nav>
       </div>
-      <OwnerNav />
+      <ProtectedNav />
     </>
   )
 }
@@ -210,7 +210,7 @@ function Logo() {
   )
 }
 
-function OwnerNav() {
+function ProtectedNav() {
   const { user } = useRootData()
   if (!user) return <></>
   return (
@@ -218,9 +218,9 @@ function OwnerNav() {
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
         <ul className="flex -mx-2 gap-x-2">
           {OWNERLINKS.map(link => (
-            <OwnerpNavLink key={link.to} to={link.to}>
+            <ProtectedpNavLink key={link.to} to={link.to}>
               {link.name}
-            </OwnerpNavLink>
+            </ProtectedpNavLink>
           ))}
         </ul>
       </nav>
@@ -228,7 +228,7 @@ function OwnerNav() {
   )
 }
 
-function OwnerpNavLink({
+function ProtectedpNavLink({
   to,
   children,
   ...rest
@@ -242,7 +242,7 @@ function OwnerpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'block whitespace-nowrap underlined pt-1 pb-1.5 text-md lg:text-sm font-medium focus:outline-none',
+          'block whitespace-nowrap underlined pt-1 pb-4 text-md lg:text-md font-medium focus:outline-none',
           {
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,

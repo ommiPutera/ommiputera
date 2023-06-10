@@ -13,9 +13,9 @@ export const loader: LoaderFunction = async ({ request }) => {
 export default function Index() {
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
-      <div className="px-5vw py-9 lg:px-15vw lg:py-9 border-b border-gray-600">
+      <div className="px-5vw py-9 lg:px-15vw lg:py-12 border-b border-gray-600 bg-black">
         <div className="relative mx-auto text-center grid max-w-8xl">
-          <h1 className="px-0 text-xl font-medium leading-tigh lg:text-2xl">
+          <h1 className="px-0 text-xl font-medium leading-tigh lg:text-3xl">
             Dashboard
           </h1>
           <p className="text-sm mt-1 text-secondary font-medium">Query and visualize your Vercel usage, traffic, and more with the fields below.</p>

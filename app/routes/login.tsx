@@ -1,14 +1,14 @@
-import { type ActionFunction } from '@remix-run/node'
+import type { LoaderFunction} from '@remix-run/node';
+import { type ActionFunction, redirect } from '@remix-run/node'
 import {
   type V2_MetaFunction,
   Form,
   useActionData,
-  // useSearchParams,
 } from '@remix-run/react'
 import React from 'react'
 import { Button } from '~/components/button'
 import { Input, Label } from '~/components/form-elements'
-import { createUserSession, login } from '~/utils/session.server'
+import { createUserSession, getUser, login } from '~/utils/session.server'
 
 // type LoaderData = {username: string; error: string}
 
@@ -24,6 +24,11 @@ type ActionData = {
   }
 }
 
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  if (user) return redirect('/dashboard')
+  return {}
+}
 
 export const meta: V2_MetaFunction = () => {
   return [{ title: `Login to` }]
@@ -33,7 +38,7 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
-  const redirectTo = formData.get('redirectTo') || '/admin'
+  const redirectTo = formData.get('redirectTo') || '/dashboard'
   console.table({
     password: password,
     username: username,
