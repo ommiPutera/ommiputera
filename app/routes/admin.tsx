@@ -79,28 +79,29 @@ function Index() {
   }, [])
 
   const isDesktopScreen = screen === Screen.DESKTOP
-  const isMobileScreen =
-    
-    screen === Screen.MOBILE
+  const isMobileScreen = screen === Screen.MOBILE
 
   const location = useLocation()
   const isRouteSelected = (to: string) => to === location.pathname
-  const routeName = location.pathname.replace("admin", '').replace(/-/g, " ").replace(/[/]/g, "")
+  const routeName = location.pathname
+    .replace('admin', '')
+    .replace(/-/g, ' ')
+    .replace(/[/]/g, '')
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
-      <div className="border-b border-gray-600 bg-black flex justify-between items-center px-5vw py-9 lg:px-15vw lg:py-12">
+      <div className="flex items-center justify-between border-b border-gray-600 bg-black px-5vw py-9 lg:px-15vw lg:py-12">
         <div className="relative grid max-w-8xl text-left">
-          <h1 className="leading-tigh px-0 text-xl font-medium lg:text-3xl capitalize">
+          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-3xl">
             Admin Panel Settings
           </h1>
           <p className="text-secondary mt-1 text-sm font-medium">
             2 years of proven experience in helping.
           </p>
         </div>
-        <div className='hidden lg:block'>
-          <h1 className="leading-tigh px-0 text-lg font-medium lg:text-lg capitalize">
-            {routeName || "General"}
+        <div className="hidden lg:block">
+          <h1 className="leading-tigh px-0 text-lg font-medium capitalize lg:text-lg">
+            {routeName || 'General'}
           </h1>
         </div>
       </div>
