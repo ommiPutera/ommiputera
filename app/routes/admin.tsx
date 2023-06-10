@@ -44,7 +44,11 @@ export const loader: LoaderFunction = async ({request}) => {
   return data
 }
 
-enum Screen {
+enum Screen
+
+
+
+{
   DESKTOP = 'desktop',
   MOBILE = 'mobile',
 }
@@ -87,6 +91,8 @@ function Index() {
     .replace('admin', '')
     .replace(/-/g, ' ')
     .replace(/[/]/g, '')
+  
+  // TODO: good job
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
