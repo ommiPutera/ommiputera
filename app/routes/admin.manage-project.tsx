@@ -1,6 +1,7 @@
-import type {Joke} from '@prisma/client'
-import {useLoaderData} from '@remix-run/react'
-import {db} from '~/utils/db.server'
+import type { Joke } from '@prisma/client';
+import type { V2_MetaFunction } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
+import { db } from '~/utils/db.server';
 
 type LoaderData = {jokes: Array<Joke>}
 
@@ -10,7 +11,11 @@ export const loader = async () => {
   return data
 }
 
-function Index() {
+export const meta: V2_MetaFunction = () => {
+  return [{ title: 'Admin Panel - Manage Project' }]
+}
+
+export default function Index() {
   return (
     <div className="flex w-full flex-col gap-y-8 py-8 lg:gap-y-3 lg:py-4">
       <div className="px-6">
@@ -68,5 +73,3 @@ function Table() {
     </div>
   )
 }
-
-export default Index

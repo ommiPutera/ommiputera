@@ -1,6 +1,6 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet} from '@remix-run/react'
-import {requireUserSession} from '~/utils/session.server'
+import type { LoaderFunction } from '@remix-run/node';
+import { Outlet } from '@remix-run/react';
+import { requireUserSession } from '~/utils/session.server';
 
 export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
@@ -13,9 +13,22 @@ export const loader: LoaderFunction = async ({request}) => {
 export default function Index() {
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
-      <div className="border-b border-gray-600 bg-black px-5vw py-9 lg:px-15vw lg:py-12">
-        <div className="relative mx-auto grid max-w-8xl text-center">
-          <h1 className="leading-tigh px-0 text-xl font-medium lg:text-3xl">
+      <LayoutTitle />
+      <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
+        <div className="relative h-full min-h-screen w-full">
+          <Outlet />
+        </div>
+      </div>
+    </main>
+  )
+}
+
+function LayoutTitle() {
+  return (
+    <div className="border-b border-gray-600 bg-black px-5vw py-9 lg:px-15vw lg:py-12">
+      <div className="relative mx-auto max-w-8xl">
+        <div className="text-center">
+          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-3xl">
             Dashboard
           </h1>
           <p className="text-secondary mt-1 text-sm font-medium">
@@ -24,11 +37,6 @@ export default function Index() {
           </p>
         </div>
       </div>
-      <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
-        <div className="relative h-full min-h-screen w-full">
-          <Outlet />
-        </div>
-      </div>
-    </main>
+    </div>
   )
 }

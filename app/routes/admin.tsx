@@ -6,12 +6,12 @@ import {
   Tabs,
   TabsOrientation,
 } from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {requireUserSession} from '~/utils/session.server'
+import { requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {
@@ -20,7 +20,7 @@ type LoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const userAgent = await request.headers.get('user-agent')
   const isAndroid = () => Boolean(userAgent?.match(/Android/i))
   const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
@@ -33,7 +33,7 @@ export const loader: LoaderFunction = async ({request}) => {
 
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   const data: LoaderData = {
     device: {
@@ -44,29 +44,25 @@ export const loader: LoaderFunction = async ({request}) => {
   return data
 }
 
-enum Screen
-
-
-
-{
+enum Screen {
   DESKTOP = 'desktop',
   MOBILE = 'mobile',
 }
 
 const LINKS = [
-  {name: 'General', to: '/admin'},
-  {name: 'Manage Project', to: '/admin/manage-project'},
+  { name: 'General', to: '/admin' },
+  { name: 'Manage Project', to: '/admin/manage-project' },
 ]
 
 const mq = 'screen and (min-width: 1066px)'
 const getScreen = () =>
   window.matchMedia(mq).matches ? Screen.DESKTOP : Screen.MOBILE
 
-function Index() {
+export default function Index() {
   const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
-  const {isMobile, isDesktop} = data.device
+  const { isMobile, isDesktop } = data.device
   const [screen, setScreen] = React.useState(() => {
     if (isDesktop) return Screen.DESKTOP
     if (isMobile || typeof window !== 'object') return Screen.MOBILE
@@ -87,30 +83,10 @@ function Index() {
 
   const location = useLocation()
   const isRouteSelected = (to: string) => to === location.pathname
-  const routeName = location.pathname
-    .replace('admin', '')
-    .replace(/-/g, ' ')
-    .replace(/[/]/g, '')
-  
-  // TODO: good job
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
-      <div className="flex items-center justify-between border-b border-gray-600 bg-black px-5vw py-9 lg:px-15vw lg:py-12">
-        <div className="relative grid max-w-8xl text-left">
-          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-3xl">
-            Admin Panel Settings
-          </h1>
-          <p className="text-secondary mt-1 text-sm font-medium">
-            2 years of proven experience in helping.
-          </p>
-        </div>
-        <div className="hidden lg:block">
-          <h1 className="leading-tigh px-0 text-lg font-medium capitalize lg:text-lg">
-            {routeName || 'General'}
-          </h1>
-        </div>
-      </div>
+      <LayoutTitle />
       <div className="pb-9 lg:px-15vw lg:pb-12">
         <div className="relative mx-auto grid lg:max-w-8xl">
           <Tabs
@@ -156,14 +132,14 @@ function Index() {
               ))}
             </TabList>
             <TabPanels className="mt-4 lg:col-span-9 lg:mt-0">
-              <TabPanel key={location.pathname} style={{display: 'block'}}>
+              <TabPanel key={location.pathname} style={{ display: 'block' }}>
                 <AnimatePresence>
                   <motion.div
-                    initial={{y: 220, opacity: 0}}
-                    animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-                    exit={{y: 220, opacity: 0}}
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
                     transition={{
-                      opacity: {duration: shouldReduceMotion ? 0 : 0.1},
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
                       ease: 'linear',
                     }}
                   >
@@ -183,4 +159,30 @@ function Index() {
   )
 }
 
-export default Index
+function LayoutTitle() {
+  const location = useLocation()
+  const routeName = location.pathname
+    .replace('admin', '')
+    .replace(/-/g, ' ')
+    .replace(/[/]/g, '')
+  
+  return (
+    <div className="border-b border-gray-600 bg-black px-5vw py-9 lg:px-15vw lg:py-12">
+      <div className="relative mx-auto max-w-8xl flex items-center justify-between">
+        <div className="text-left">
+          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-3xl">
+            Admin Panel Settings
+          </h1>
+          <p className="text-secondary mt-1 text-sm font-medium">
+            2 years of proven experience in helping.
+          </p>
+        </div>
+        <div className="hidden lg:block">
+          <h1 className="leading-tigh px-0 text-lg font-medium capitalize lg:text-lg">
+            {routeName || 'General'}
+          </h1>
+        </div>
+      </div>
+    </div>
+  )
+}

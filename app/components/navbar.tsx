@@ -109,7 +109,7 @@ function MobileMenuList() {
                   <form action="/logout" method="post">
                     <button
                       type="submit"
-                      className="block whitespace-nowrap text-lg font-medium text-red-500"
+                      className="block whitespace-nowrap text-lg font-medium bg-red-100 text-red-900"
                     >
                       Log Out
                     </button>
@@ -148,7 +148,7 @@ function MobileNavLink({
 function DesktopNav() {
   const {user} = useRootData()
   return (
-    <ul className="hidden lg:flex">
+    <ul className="hidden lg:flex lg:items-center">
       {LINKS.map(link => (
         <DesktopNavLink key={link.to} to={link.to}>
           {link.name}
@@ -159,7 +159,7 @@ function DesktopNav() {
           <form action="/logout" method="post">
             <button
               type="submit"
-              className="block whitespace-nowrap text-lg font-medium text-red-500"
+              className="block whitespace-nowrap text-lg font-medium bg-red-100 text-red-900 px-4 rounded-md pt-1 pb-1.5"
             >
               Log Out
             </button>
