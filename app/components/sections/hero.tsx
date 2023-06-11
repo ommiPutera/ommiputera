@@ -44,7 +44,7 @@ function HomeHeroSection() {
         <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
           Helping people make the world a better place through quality software.
         </h1>
-        <p className="mt-2 px-0 text-center font-medium text-gray-300 md:w-2/3 lg:mt-0 lg:px-9 xl:w-3/5">
+        <p className="mt-2 px-0 text-center text-xl font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 xl:w-3/5">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices. Experience in
           developing projects from concept to launch. Eager to tackle more
@@ -84,6 +84,20 @@ function AboutHeroSection() {
           src:https://unsplash.com/@surealis
         </p>
       </div>
+    </div>
+  )
+}
+
+function ProjectHeroSection() {
+  return (
+    <div className="text-primary relative mx-auto grid w-full max-w-8xl gap-5 lg:gap-16">
+      <h1 className="text-center text-3xl font-medium leading-tight lg:text-8xl">
+        Creating next level <br /> digital products
+      </h1>
+      <h4 className="mt-2 px-0 text-center text-3xl font-medium leading-snug lg:px-10vw">
+        First of all, thank you for interested in reading about me, On this
+        page, I will tell all about my life and my experiences
+      </h4>
     </div>
   )
 }
@@ -137,4 +151,4 @@ function ProfileCard() {
   )
 }
 
-export {HomeHeroSection, AboutHeroSection}
+export {HomeHeroSection, AboutHeroSection, ProjectHeroSection}

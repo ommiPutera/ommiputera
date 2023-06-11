@@ -14,6 +14,7 @@ import {useRootData} from '~/utils/use-root-data'
 
 const LINKS = [
   {name: 'Post', to: '/post'},
+  {name: 'Project', to: '/project'},
   {name: 'About', to: '/about'},
 ]
 

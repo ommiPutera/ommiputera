@@ -7,7 +7,7 @@ function Footer() {
   return (
     <footer
       className={clsx(
-        'border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-12',
+        'z-10 border-t border-gray-600 bg-gray-900 px-5vw py-9 lg:px-15vw lg:py-12',
         {
           'border-b border-gray-600 bg-black': user,
         },
