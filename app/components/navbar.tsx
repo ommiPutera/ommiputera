@@ -109,7 +109,7 @@ function MobileMenuList() {
                   <form action="/logout" method="post">
                     <button
                       type="submit"
-                      className="block whitespace-nowrap text-lg font-medium bg-red-100 text-red-900"
+                      className="block whitespace-nowrap bg-red-100 text-lg font-medium text-red-900"
                     >
                       Log Out
                     </button>
@@ -159,7 +159,7 @@ function DesktopNav() {
           <form action="/logout" method="post">
             <button
               type="submit"
-              className="block whitespace-nowrap text-lg font-medium bg-red-100 text-red-900 px-4 rounded-md pt-1 pb-1.5"
+              className="block whitespace-nowrap rounded-md bg-red-100 px-4 pb-1.5 pt-1 text-lg font-medium text-red-900"
             >
               Log Out
             </button>

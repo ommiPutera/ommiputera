@@ -1,6 +1,6 @@
-import type { LoaderFunction } from '@remix-run/node';
-import { Outlet } from '@remix-run/react';
-import { requireUserSession } from '~/utils/session.server';
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet} from '@remix-run/react'
+import {requireUserSession} from '~/utils/session.server'
 
 export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
