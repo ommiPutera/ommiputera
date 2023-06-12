@@ -1,19 +1,21 @@
-import type { V2_MetaFunction } from '@remix-run/react'
+import type {V2_MetaFunction} from '@remix-run/react'
 import React from 'react'
-import { getImgProps, images } from '~/images'
+import {getImgProps, images} from '~/images'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Ommi Putera - Dashboard' }]
+  return [{title: 'Ommi Putera - Dashboard'}]
 }
 
 export default function Index() {
   return (
-    <div className="relative h-full w-full flex flex-col gap-y-32">
-      <div className=''>
-        <h1 className='text-4xl text-center font-medium leading-tight'>All projects that have <br /> been completed </h1>
+    <div className="relative flex h-full w-full flex-col gap-y-32">
+      <div className="">
+        <h1 className="text-center text-4xl font-medium leading-tight">
+          All projects that have <br /> been completed{' '}
+        </h1>
       </div>
-      <div className='max-w-[120rem] mx-auto'>
-        <NaufalProject/>
+      <div className="mx-auto max-w-[120rem]">
+        <NaufalProject />
       </div>
     </div>
   )
@@ -30,8 +32,8 @@ function NaufalProject() {
           sizes: ['(min-width:1220px) 3984px', '100vw'],
         })}
       />
-      <div className="flex gap-32 px-5vw py-9 items-center lg:px-15vw">
-        <div className='lg:w-1/2'>
+      <div className="flex items-center gap-32 px-5vw py-9 lg:px-15vw">
+        <div className="lg:w-1/2">
           <h1 className="px-0 text-left text-3xl font-medium leading-tight lg:text-5xl">
             Naufal
           </h1>
@@ -43,7 +45,7 @@ function NaufalProject() {
             efficiency
           </h4>
         </div>
-        <div className='lg:w-1/2 flex flex-col justify-center'>
+        <div className="flex flex-col justify-center lg:w-1/2">
           <h1 className="px-0 text-center text-3xl font-medium leading-tight lg:text-4xl">
             Kemampuan memukau <br /> yang terjangkau.
           </h1>

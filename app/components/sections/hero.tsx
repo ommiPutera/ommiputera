@@ -44,7 +44,7 @@ function HomeHeroSection() {
         <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
           Helping people make the world a better place through quality software.
         </h1>
-        <p className="mt-2 px-0 text-center text-lg lg:text-xl font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 xl:w-3/5">
+        <p className="mt-2 px-0 text-center text-lg font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 lg:text-xl xl:w-3/5">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices. Experience in
           developing projects from concept to launch. Eager to tackle more
@@ -90,11 +90,11 @@ function AboutHeroSection() {
 
 function ProjectHeroSection() {
   return (
-    <div className="text-primary relative mx-auto grid w-full max-w-8xl py-4 lg:py-12 gap-5 lg:gap-y-16">
-      <h1 className="text-center text-2xl font-medium leading-tight lg:text-8xl lg:px-[5rem] xl:px-[10rem]">
+    <div className="text-primary relative mx-auto grid w-full max-w-8xl gap-5 py-4 lg:gap-y-16 lg:py-12">
+      <h1 className="text-center text-2xl font-medium leading-tight lg:px-[5rem] lg:text-8xl xl:px-[10rem]">
         Creating next level digital products
       </h1>
-      <h4 className="mt-2 px-0 text-center text-lg text-gray-600 lg:tracking-wider lg:text-white lg:text-xl font-medium leading-snug lg:px-[20rem]">
+      <h4 className="mt-2 px-0 text-center text-lg font-medium leading-snug text-gray-600 lg:px-[20rem] lg:text-xl lg:tracking-wider lg:text-white">
         First of all, thank you for interested in reading about me, On this
         page, I will tell all about my life and my experiences
       </h4>

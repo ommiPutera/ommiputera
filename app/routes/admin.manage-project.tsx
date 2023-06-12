@@ -1,19 +1,19 @@
-import type { Joke } from '@prisma/client'
-import type { V2_MetaFunction } from '@remix-run/react'
-import { useLoaderData } from '@remix-run/react'
-import { tableUtils } from '~/components/table'
-import { db } from '~/utils/db.server'
+import type {Joke} from '@prisma/client'
+import type {V2_MetaFunction} from '@remix-run/react'
+import {useLoaderData} from '@remix-run/react'
+import {tableUtils} from '~/components/table'
+import {db} from '~/utils/db.server'
 
-type LoaderData = { jokes: Array<Joke> }
+type LoaderData = {jokes: Array<Joke>}
 
 export const loader = async () => {
   let jokes = await db.joke.findMany()
-  let data: LoaderData = { jokes }
+  let data: LoaderData = {jokes}
   return data
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Manage Project' }]
+  return [{title: 'Admin Panel - Manage Project'}]
 }
 
 export default function Index() {
@@ -36,7 +36,7 @@ export default function Index() {
 
 function Table() {
   const data = useLoaderData<LoaderData>()
-  const { sliceStr } = tableUtils
+  const {sliceStr} = tableUtils
   return (
     <div className="wrapper-styled-table">
       <table

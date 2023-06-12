@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, type LinkProps } from '@remix-run/react'
+import {Link, type LinkProps} from '@remix-run/react'
 
 type AnchorProps = React.DetailedHTMLProps<
   React.AnchorHTMLAttributes<HTMLAnchorElement>,
@@ -36,8 +36,9 @@ const AnchorOrLink = React.forwardRef<
   }
 
   if (!shouldUserRegularAnchor && typeof to === 'object') {
-    toUrl = `${to.pathname ?? ''}${to.hash ? `#${to.hash}` : ''}${to.search ? `?${to.search}` : ''
-      }`
+    toUrl = `${to.pathname ?? ''}${to.hash ? `#${to.hash}` : ''}${
+      to.search ? `?${to.search}` : ''
+    }`
     shouldUserRegularAnchor = to.pathname?.includes(':')
   }
 
@@ -73,11 +74,12 @@ function removeTrailingSlash(s: string) {
   return s.endsWith('/') ? s.slice(0, -1) : s
 }
 
-function getUrl(requestInfo?: { origin: string; path: string }) {
+function getUrl(requestInfo?: {origin: string; path: string}) {
   return removeTrailingSlash(
-    `${requestInfo?.origin ?? 'https://ommiputera.com'}${requestInfo?.path ?? ''
+    `${requestInfo?.origin ?? 'https://ommiputera.com'}${
+      requestInfo?.path ?? ''
     }`,
   )
 }
 
-export { AnchorOrLink, getDomainUrl, getUrl }
+export {AnchorOrLink, getDomainUrl, getUrl}

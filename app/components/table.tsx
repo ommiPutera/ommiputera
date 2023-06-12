@@ -1,5 +1,3 @@
-
-
 const sliceStr = (str: string, max?: number) => {
   let MAX_CHAR = max ?? 22
   if (str.length > MAX_CHAR) return str.slice(0, MAX_CHAR).trim() + '..'
@@ -7,7 +5,7 @@ const sliceStr = (str: string, max?: number) => {
 }
 
 const tableUtils = {
-  sliceStr
+  sliceStr,
 }
 
-export { tableUtils }
+export {tableUtils}
