@@ -147,7 +147,12 @@ function PageLoadingMessage() {
 
   const action = words[0]
 
-  return <div hidden={!showLoader} className="fixed top-14 bg-red-500 left-0 right-0 w-fit mx-auto px-4 pb-1.5 rounded-full font-medium text-md z-50">{action}</div>
+  return (
+    <div hidden={!showLoader} style={{ display: showLoader ? 'block' : 'none'}} className="fixed flex flex-col justify-center bottom-14 bg-gray-800 border border-gray-700 right-14 w-72 px-8 py-4 rounded-lg z-50">
+      <p className="font-medium text-lg">{action}</p>
+      <p className="font-medium text-md text-gray-400">Path: {pendingPath}</p>
+    </div>
+  )
 }
 
 function App() {
