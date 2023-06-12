@@ -103,7 +103,7 @@ export default function Index() {
           >
             <TabList
               className={clsx(
-                'flex gap-1 overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:px-0',
+                'flex gap-1 overflow-x-scroll lg:overflow-x-hidden bg-transparent px-5vw lg:col-span-3 lg:px-0',
                 {
                   'flex-col': isDesktopScreen,
                   'flex-row lg:pb-3': isMobileScreen,
