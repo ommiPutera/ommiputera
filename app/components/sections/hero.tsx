@@ -90,8 +90,8 @@ function AboutHeroSection() {
 
 function ProjectHeroSection() {
   return (
-    <div className="text-primary relative mx-auto grid w-full max-w-8xl gap-5 lg:gap-y-24">
-      <h1 className="text-center text-2xl font-medium leading-tight lg:text-8xl lg:px-[10rem] xl:px-[15rem]">
+    <div className="text-primary relative mx-auto grid w-full max-w-8xl py-4 lg:py-12 gap-5 lg:gap-y-16">
+      <h1 className="text-center text-2xl font-medium leading-tight lg:text-8xl lg:px-[5rem] xl:px-[10rem]">
         Creating next level digital products
       </h1>
       <h4 className="mt-2 px-0 text-center text-lg text-gray-600 lg:tracking-wider lg:text-white lg:text-xl font-medium leading-snug lg:px-[20rem]">

@@ -7,9 +7,9 @@ export const meta: V2_MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="relative h-full min-h-screen w-full">
+    <div className="relative h-full w-full">
       <div>
-        <h1>Product development index</h1>
+        <h1 className='text-4xl text-cente'>Product Development</h1>
       </div>
     </div>
   )
