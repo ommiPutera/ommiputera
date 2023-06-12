@@ -6,12 +6,12 @@ import {
   Tabs,
   TabsOrientation,
 } from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {requireUserSession} from '~/utils/session.server'
+import { requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {

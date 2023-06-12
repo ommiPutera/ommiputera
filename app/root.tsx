@@ -5,8 +5,6 @@ import {
   type SerializeFrom,
   type V2_MetaFunction,
 } from '@remix-run/node'
-import * as React from 'react'
-import { useSpinDelay } from 'spin-delay'
 import {
   Links,
   LiveReload,
@@ -17,6 +15,8 @@ import {
   useNavigation,
 } from '@remix-run/react'
 import { Analytics } from '@vercel/analytics/react'
+import * as React from 'react'
+import { useSpinDelay } from 'spin-delay'
 import { Navbar } from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
@@ -148,9 +148,9 @@ function PageLoadingMessage() {
   const action = words[0]
 
   return (
-    <div hidden={!showLoader} style={{ display: showLoader ? 'block' : 'none'}} className="fixed flex flex-col justify-center bottom-14 bg-gray-800 border border-gray-700 right-14 w-72 px-8 py-4 rounded-lg z-50">
-      <p className="font-medium text-lg">{action}</p>
-      <p className="font-medium text-md text-gray-400">Path: {pendingPath}</p>
+    <div hidden={!showLoader} style={{ display: showLoader ? 'block' : 'none'}} className="fixed flex flex-col justify-center bottom-14 bg-gray-800 border border-gray-700 lg:right-14 w-11/12 md:w-4/5 mx-auto lg:mx-0 lg:w-72 px-8 py-4 rounded-lg z-50">
+      <p className="font-medium text-md lg:text-lg">{action}</p>
+      <p className="font-medium text-sm lg:text-md text-gray-400">Path: {pendingPath}</p>
     </div>
   )
 }
