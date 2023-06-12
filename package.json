@@ -46,7 +46,8 @@
     "lodash": "^4.17.21",
     "postcss-import": "^15.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "spin-delay": "^1.2.0"
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
