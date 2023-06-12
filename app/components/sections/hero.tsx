@@ -94,7 +94,7 @@ function ProjectHeroSection() {
       <h1 className="text-center text-3xl font-medium leading-tight lg:text-8xl">
         Creating next level <br /> digital products
       </h1>
-      <h4 className="mt-2 px-0 text-center text-3xl font-medium leading-snug lg:px-10vw">
+      <h4 className="mt-2 px-0 text-center text-2xl font-medium leading-snug lg:px-[20rem]">
         First of all, thank you for interested in reading about me, On this
         page, I will tell all about my life and my experiences
       </h4>
