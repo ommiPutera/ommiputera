@@ -1,9 +1,9 @@
-import type {V2_MetaFunction} from '@remix-run/react'
+import type { V2_MetaFunction } from '@remix-run/react'
 import React from 'react'
-import {getImgProps, images} from '~/images'
+import { getImgProps, images } from '~/images'
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Ommi Putera - Dashboard'}]
+  return [{ title: 'Ommi Putera - Dashboard' }]
 }
 
 export default function Index() {
@@ -33,11 +33,11 @@ function NaufalProject() {
         })}
       />
       <div className="flex items-center gap-32 px-5vw py-9 lg:px-15vw">
-        <div className="lg:w-1/2">
+        <div className="flex flex-col gap-y-8 lg:w-1/2">
           <h1 className="px-0 text-left text-3xl font-medium leading-tight lg:text-5xl">
             Naufal
           </h1>
-          <h4 className="mt-4 px-0 text-left text-xl font-medium text-gray-300 lg:mt-0">
+          <h4 className="px-0 text-left text-xl font-medium text-gray-300 lg:mt-0">
             2 years of proven experience in helping to create and maintain a
             better code base for re-usability and best practices. Experience in
             developing projects from concept to launch. Eager to tackle more
