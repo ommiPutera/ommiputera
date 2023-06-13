@@ -1,9 +1,9 @@
-import type { V2_MetaFunction } from '@remix-run/react'
+import type {V2_MetaFunction} from '@remix-run/react'
 import React from 'react'
-import { getImgProps, images } from '~/images'
+import {getImgProps, images} from '~/images'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Ommi Putera - Dashboard' }]
+  return [{title: 'Ommi Putera - Dashboard'}]
 }
 
 export default function Index() {
