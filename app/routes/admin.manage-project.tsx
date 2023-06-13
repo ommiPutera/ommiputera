@@ -1,19 +1,23 @@
-import type {Joke} from '@prisma/client'
-import type {V2_MetaFunction} from '@remix-run/react'
-import {useLoaderData} from '@remix-run/react'
-import {tableUtils} from '~/components/table'
-import {db} from '~/utils/db.server'
+import type { Project } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import type { V2_MetaFunction } from '@remix-run/react'
+import { useLoaderData } from '@remix-run/react'
+import { tableUtils } from '~/components/table'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 
-type LoaderData = {jokes: Array<Joke>}
+type LoaderData = { projects: Array<Project> }
+type ColumnData = { name: string, key: string, className: string }
 
-export const loader = async () => {
-  let jokes = await db.joke.findMany()
-  let data: LoaderData = {jokes}
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  const projects = await db.project.findMany({ where: { userId: user?.id } })
+  let data: LoaderData = { projects }
   return data
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Admin Panel - Manage Project'}]
+  return [{ title: 'Admin Panel - Manage Project' }]
 }
 
 export default function Index() {
@@ -29,6 +33,9 @@ export default function Index() {
           usage, and more across all projects.
         </p>
       </div>
+      <div className='flex justify-end'>
+        <button>Create</button>
+      </div>
       <Table />
     </div>
   )
@@ -36,7 +43,16 @@ export default function Index() {
 
 function Table() {
   const data = useLoaderData<LoaderData>()
-  const {sliceStr} = tableUtils
+  const { sliceStr } = tableUtils
+
+  const columns: ColumnData[] = [
+    { name: 'Name', key: 'name', className: '' },
+    { name: 'Description', key: 'description', className: '' },
+    { name: 'Createdat', key: 'createdat', className: '' },
+    { name: 'Updatedat', key: 'updatedat', className: '' },
+    { name: 'Action', key: 'id', className: 'action' },
+  ]
+
   return (
     <div className="wrapper-styled-table">
       <table
@@ -47,25 +63,33 @@ function Table() {
       >
         <thead>
           <tr>
-            <th>Content</th>
-            <th>Name</th>
-            <th>Createdat</th>
-            <th>Updatedat</th>
-            <th>Action</th>
+            {columns.map(column => (
+              <th key={column.key} className={column.className}>{column.name}</th>
+            ))}
           </tr>
         </thead>
         <tbody>
-          {data.jokes.map(joke => (
-            <tr key={joke.id}>
-              <td>{sliceStr(joke.content)}</td>
-              <td>{sliceStr(joke.name)}</td>
-              <td>{sliceStr(joke.createdAt)}</td>
-              <td>{sliceStr(joke.updatedAt)}</td>
-              <td>Detail</td>
+          {data.projects.map(project => (
+            <tr key={project.id}>
+              {columns.map((column) => (
+                <td key={column.key} className={column.className}>{project['name']}</td>
+              ))}
+              <td>{sliceStr(project.name)}</td>
+              <td>{sliceStr(project.description)}</td>
+              <td>{sliceStr(project.createdAt)}</td>
+              <td>{sliceStr(project.updatedAt)}</td>
+              <td className='action'>Detail</td>
             </tr>
           ))}
         </tbody>
       </table>
+      {
+        !data.projects.length
+        &&
+        <div>
+          <p className='no-data'>No Project Found..</p>
+        </div>
+      }
     </div>
   )
 }

@@ -61,7 +61,7 @@ export async function getUser(req: Request) {
 export async function getUserId(req: Request) {
   let session = await getUserSession(req)
   let userId = session.get('userId')
-  if (typeof userId !== 'string') return null
+  if (typeof userId !== 'string') return 'null'
   return userId
 }
 
