@@ -1,6 +1,10 @@
 import type { Project } from '@prisma/client'
 import { type LoaderFunction } from '@remix-run/node'
-import { useLoaderData, useNavigate, type V2_MetaFunction } from '@remix-run/react'
+import {
+  useLoaderData,
+  useNavigate,
+  type V2_MetaFunction,
+} from '@remix-run/react'
 import React from 'react'
 import { Button } from '~/components/button'
 import { db } from '~/utils/db.server'
