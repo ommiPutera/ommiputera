@@ -1,7 +1,7 @@
-import { Link } from '@remix-run/react'
+import {Link} from '@remix-run/react'
 import clsx from 'clsx'
-import { GalerySection } from '~/components/sections/galery'
-import { HomeHeroSection } from '~/components/sections/hero'
+import {GalerySection} from '~/components/sections/galery'
+import {HomeHeroSection} from '~/components/sections/hero'
 
 export default function Index() {
   return (
