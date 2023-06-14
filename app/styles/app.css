@@ -22,6 +22,15 @@
   --color-green-700: #03925e;
   --color-green-800: #03a56a;
   --color-green-900: #04b976;
+  --color-orange-100: #472900;
+  --color-orange-200: #6b3d00;
+  --color-orange-300: #8e5200;
+  --color-orange-400: #b26700;
+  --color-orange-500: #d67b00;
+  --color-orange-600: #f99000;
+  --color-orange-700: #ffa01e;
+  --color-orange-800: #ffaf42;
+  --color-orange-900: #ffbe66;
   --color-red-100: #2a1314;
   --color-red-200: #3c1618;
   --color-red-300: #561a1e;
@@ -247,7 +256,7 @@ table.styled-table > tbody tr td {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply text-gray-100 text-left py-2 border-gray-600 text-sm font-light border-b border-r-0 border-l-0;
+  @apply text-gray-100 text-left py-3 border-gray-600 text-sm font-light border-b border-r-0 border-l-0;
 }
 table.styled-table > tbody tr:last-child td {
   @apply border-b-0;
