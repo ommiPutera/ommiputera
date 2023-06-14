@@ -1,28 +1,28 @@
-import type {Project} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import type {V2_MetaFunction} from '@remix-run/react'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import type { V2_MetaFunction } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {tableUtils} from '~/components/tableHelper'
-import {getUser} from '~/utils/session.server'
-import {db} from '~/utils/db.server'
-import {Button} from '~/components/button'
+import { tableUtils } from '~/components/tableHelper'
+import { getUser } from '~/utils/session.server'
+import { db } from '~/utils/db.server'
+import { Button } from '~/components/button'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Admin Panel - Create'}]
+  return [{ title: 'Admin Panel - Create' }]
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const projects = await db.project.findMany({where: {userId: user?.id}})
-  let data: LoaderData = {projects}
+  const projects = await db.project.findMany({ where: { userId: user?.id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -40,7 +40,7 @@ export default function Index() {
         </p>
       </div>
       <div className="my-6 flex justify-end px-6">
-        <Link to="/admin/manage-project/create" prefetch="intent">
+        <Link to="/admin/manage-project/create" prefetch="none">
           <Button type="button" size="md">
             Create New Project
           </Button>
@@ -51,7 +51,7 @@ export default function Index() {
   )
 }
 
-const {sliceStr, formatDate} = tableUtils
+const { sliceStr, formatDate } = tableUtils
 const columnHelper = createColumnHelper<Project>()
 const columns = [
   columnHelper.accessor('createdAt', {
@@ -88,7 +88,7 @@ function Table() {
     getCoreRowModel: getCoreRowModel(),
   }
   // @ts-expect-error 🤷‍♂️ no idea why defaultColumn isn't work ing here...
-  const {getHeaderGroups, getRowModel} = useReactTable(options)
+  const { getHeaderGroups, getRowModel } = useReactTable(options)
 
   return (
     <div className="wrapper-styled-table">
