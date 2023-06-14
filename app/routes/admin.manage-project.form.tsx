@@ -1,6 +1,6 @@
-import type { Project } from '@prisma/client'
-import type { ActionFunction } from '@remix-run/node'
-import { type LoaderFunction } from '@remix-run/node'
+import type {Project} from '@prisma/client'
+import type {ActionFunction} from '@remix-run/node'
+import {type LoaderFunction} from '@remix-run/node'
 import {
   Form,
   Link,
@@ -10,13 +10,13 @@ import {
 } from '@remix-run/react'
 import clsx from 'clsx'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
-import { db } from '~/utils/db.server'
-import { createProject, updateProject } from '~/utils/project.session'
-import { getUserId } from '~/utils/session.server'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
+import {db} from '~/utils/db.server'
+import {createProject, updateProject} from '~/utils/project.session'
+import {getUserId} from '~/utils/session.server'
 
-type LoaderData = { project: Project | null }
+type LoaderData = {project: Project | null}
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -34,23 +34,23 @@ type ActionData = {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Form' }]
+  return [{title: 'Admin Panel - Form'}]
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({ where: { id: id ?? '' } })
+  const project = await db.project.findUnique({where: {id: id ?? ''}})
   return project
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const project = await getLoaderData({ request })
-  let data: LoaderData = { project }
+export const loader: LoaderFunction = async ({request}) => {
+  const project = await getLoaderData({request})
+  let data: LoaderData = {project}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const actionType = formData.get('actionType')
   const projectId = formData.get('projectId')
@@ -67,19 +67,26 @@ export const action: ActionFunction = async ({ request }) => {
     typeof projectId !== 'string' ||
     typeof actionType !== 'string'
   ) {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
 
-  let fields = { projectName, description, type, heroId, userId }
+  let fields = {projectName, description, type, heroId, userId}
   switch (actionType) {
     case 'create': {
-      return await createProject({ redirectTo: '/admin/manage-project', ...fields })
+      return await createProject({
+        redirectTo: '/admin/manage-project',
+        ...fields,
+      })
     }
     case 'updateAndRead': {
-      return await updateProject({ projectId: projectId, redirectTo: '/admin/manage-project', ...fields })
+      return await updateProject({
+        projectId: projectId,
+        redirectTo: '/admin/manage-project',
+        ...fields,
+      })
     }
     default: {
-      return { fields, formError: `Login type invalid` }
+      return {fields, formError: `Login type invalid`}
     }
   }
 }
@@ -229,9 +236,13 @@ function FormAction() {
           />
         </div>
       </div>
-      <div className='flex w-full justify-end mt-8 gap-x-4'>
+      <div className="mt-8 flex w-full justify-end gap-x-4">
         <div className="w-min" hidden={isCreate}>
-          <Button type="submit" size="md" className="mt-4 bg-red-100 border-red-300 text-red-800 hover:bg-red-200 active:border-red-300">
+          <Button
+            type="submit"
+            size="md"
+            className="mt-4 border-red-300 bg-red-100 text-red-800 hover:bg-red-200 active:border-red-300"
+          >
             Delete Project
           </Button>
         </div>

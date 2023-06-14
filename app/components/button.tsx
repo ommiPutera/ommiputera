@@ -18,7 +18,7 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full border hover:bg-gray-800 border-gray-500 font-medium ring-white focus:border-transparent focus:ring-[0.5px] disabled:text-gray-300',
+        'group relative inline-flex w-full border border-gray-500 font-medium ring-white hover:bg-gray-800 focus:border-transparent focus:ring-[0.5px] disabled:text-gray-300',
         {
           'text-white': variant === 'primary',
           'rounded-md': size === 'sm',
@@ -58,4 +58,4 @@ function Inner({
   )
 }
 
-export { Button }
+export {Button}
