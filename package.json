@@ -42,6 +42,7 @@
     "bcryptjs": "^2.4.3",
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^1.2.1",
+    "date-fns": "^2.30.0",
     "framer-motion": "^10.12.16",
     "isbot": "^3.6.5",
     "lodash": "^4.17.21",

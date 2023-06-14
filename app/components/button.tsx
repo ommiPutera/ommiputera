@@ -40,11 +40,12 @@ function Inner({
   return (
     <div
       className={clsx(
-        'relative flex h-full w-full items-center justify-center whitespace-nowrap rounded-lg py-3',
+        'relative flex h-full w-full items-center hover:bg-gray-800 justify-center whitespace-nowrap rounded-lg',
         {
           'border-gray-200 group-disabled:border-gray-700':
             variant === 'primary',
-          'text-xl': size === 'lg',
+          'px-4 pb-2 pt-1.5 text-sm': size === 'md',
+          'text-xl py-4 px-8': size === 'lg',
         },
       )}
     >
@@ -53,4 +54,4 @@ function Inner({
   )
 }
 
-export {Button}
+export { Button }

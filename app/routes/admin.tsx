@@ -6,12 +6,12 @@ import {
   Tabs,
   TabsOrientation,
 } from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {requireUserSession} from '~/utils/session.server'
+import { requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {
@@ -20,7 +20,7 @@ type LoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const userAgent = await request.headers.get('user-agent')
   const isAndroid = () => Boolean(userAgent?.match(/Android/i))
   const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
@@ -33,7 +33,7 @@ export const loader: LoaderFunction = async ({request}) => {
 
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   const data: LoaderData = {
     device: {
@@ -50,8 +50,12 @@ enum Screen {
 }
 
 const LINKS = [
-  {name: 'General', to: '/admin'},
-  {name: 'Manage Project', to: '/admin/manage-project'},
+  { name: 'General', to: '/admin/' },
+  {
+    name: 'Manage Project',
+    to: '/admin/manage-project',
+    child: ['/admin/manage-project/create']
+  },
 ]
 
 const mq = 'screen and (min-width: 1066px)'
@@ -62,7 +66,7 @@ export default function Index() {
   const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
-  const {isMobile, isDesktop} = data.device
+  const { isMobile, isDesktop } = data.device
   const [screen, setScreen] = React.useState(() => {
     if (isDesktop) return Screen.DESKTOP
     if (isMobile || typeof window !== 'object') return Screen.MOBILE
@@ -82,7 +86,7 @@ export default function Index() {
   const isMobileScreen = screen === Screen.MOBILE
 
   const location = useLocation()
-  const isRouteSelected = (to: string) => to === location.pathname
+  const isRouteSelected = (to: string, child?: Array<string>) => to === location.pathname || child?.includes(location.pathname)
 
   return (
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
@@ -118,8 +122,8 @@ export default function Index() {
                   className={clsx(
                     'rounded-md px-2 pb-2 pt-1 text-left font-medium text-gray-300',
                     {
-                      active: isRouteSelected(link.to),
-                      'bg-gray-800 text-white': isRouteSelected(link.to),
+                      active: isRouteSelected(link.to, link.child),
+                      'bg-gray-800 text-white': isRouteSelected(link.to, link.child),
                       'w-full hover:bg-gray-800': isDesktopScreen,
                       'inline w-fit': isMobileScreen,
                     },
@@ -132,14 +136,14 @@ export default function Index() {
               ))}
             </TabList>
             <TabPanels className="mt-4 lg:col-span-9 lg:mt-0">
-              <TabPanel key={location.pathname} style={{display: 'block'}}>
+              <TabPanel key={location.pathname} style={{ display: 'block' }}>
                 <AnimatePresence>
                   <motion.div
-                    initial={{y: 220, opacity: 0}}
-                    animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-                    exit={{y: 220, opacity: 0}}
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
                     transition={{
-                      opacity: {duration: shouldReduceMotion ? 0 : 0.1},
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
                       ease: 'linear',
                     }}
                   >
@@ -162,9 +166,9 @@ export default function Index() {
 function LayoutTitle() {
   const location = useLocation()
   const routeName = location.pathname
-    .replace('admin', '')
+    .replace('/admin', '')
     .replace(/-/g, ' ')
-    .replace(/[/]/g, '')
+    .replace(/[/]/g, ' / ')
 
   return (
     <div className="border-b border-gray-600 bg-black px-5vw py-9 lg:px-15vw lg:py-12">
@@ -179,7 +183,7 @@ function LayoutTitle() {
         </div>
         <div className="hidden lg:block">
           <h1 className="leading-tigh px-0 text-lg font-medium capitalize lg:text-lg">
-            {routeName || 'General'}
+            {routeName.trim() !== '/' ? routeName.trim() : routeName.trim() === '/' ? '/ General' : ''}
           </h1>
         </div>
       </div>

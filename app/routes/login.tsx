@@ -1,10 +1,10 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {type ActionFunction, redirect} from '@remix-run/node'
-import {type V2_MetaFunction, Form, useActionData} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { type ActionFunction, redirect } from '@remix-run/node'
+import { type V2_MetaFunction, Form, useActionData } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {createUserSession, getUser, login} from '~/utils/session.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { createUserSession, getUser, login } from '~/utils/session.server'
 
 // type LoaderData = {username: string; error: string}
 
@@ -20,17 +20,17 @@ type ActionData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
   if (user) return redirect('/dashboard')
   return {}
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: `Login to`}]
+  return [{ title: `Login to` }]
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
@@ -45,18 +45,18 @@ export const action: ActionFunction = async ({request}) => {
     typeof password !== 'string' ||
     typeof redirectTo !== 'string'
   ) {
-    return {formError: `Form not submitted correctly.`}
+    return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = {username, password}
-  const user = await login({username, password})
+  let fields = { username, password }
+  const user = await login({ username, password })
   if (!user) {
     return {
       fields,
       formError: `Username/Password combination is incorrect, Please read this guide for further details`,
     }
   }
-  return createUserSession({userId: user.id, redirectUrl: redirectTo})
+  return createUserSession({ userId: user.id, redirectUrl: redirectTo })
 }
 
 export default function Index() {
@@ -157,6 +157,7 @@ export default function Index() {
             ) : null}
             <Button
               type="submit"
+              size='lg'
               className="button mt-4"
               disabled={!formIsValid || submitted}
             >

@@ -227,13 +227,13 @@ table.styled-table > thead tr th {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply font-bold text-gray-400 text-left px-4 py-2 uppercase text-xs border-b border-gray-600;
+  @apply font-bold text-gray-400 text-left py-2 uppercase text-xs border-b border-gray-600;
 }
 table.styled-table > tbody tr td:first-child {
   @apply pl-6;
 }
 table.styled-table > tbody tr {
-  @apply w-max block lg:table-row relative;
+  @apply w-max block lg:table-row;
   box-sizing: border-box;
 }
 table.styled-table > tbody tr td {
@@ -241,7 +241,7 @@ table.styled-table > tbody tr td {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply text-gray-100 text-left px-4 py-2 border-gray-600 text-sm font-light border-b border-r-0 border-l-0;
+  @apply text-gray-100 text-left py-2 border-gray-600 text-sm font-light border-b border-r-0 border-l-0;
 }
 table.styled-table > tbody tr:last-child td {
   @apply border-b-0;
