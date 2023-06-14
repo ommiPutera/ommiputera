@@ -1,30 +1,30 @@
-import type { Project } from '@prisma/client'
-import { type LoaderFunction } from '@remix-run/node'
+import type {Project} from '@prisma/client'
+import {type LoaderFunction} from '@remix-run/node'
 import {
   useLoaderData,
   useNavigate,
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import { Button } from '~/components/button'
-import { db } from '~/utils/db.server'
+import {Button} from '~/components/button'
+import {db} from '~/utils/db.server'
 
-type LoaderData = { project: Project | null }
+type LoaderData = {project: Project | null}
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Form' }]
+  return [{title: 'Admin Panel - Form'}]
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({ where: { id: id ?? '' } })
+  const project = await db.project.findUnique({where: {id: id ?? ''}})
   return project
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const project = await getLoaderData({ request })
-  let data: LoaderData = { project }
+export const loader: LoaderFunction = async ({request}) => {
+  const project = await getLoaderData({request})
+  let data: LoaderData = {project}
   return data
 }
 
