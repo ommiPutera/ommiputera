@@ -1,28 +1,28 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import type { V2_MetaFunction } from '@remix-run/react'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import type {V2_MetaFunction} from '@remix-run/react'
+import {Link, useLoaderData} from '@remix-run/react'
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import { tableUtils } from '~/components/tableHelper'
-import { getUser } from '~/utils/session.server'
-import { db } from '~/utils/db.server'
-import { Button } from '~/components/button'
+import {tableUtils} from '~/components/tableHelper'
+import {getUser} from '~/utils/session.server'
+import {db} from '~/utils/db.server'
+import {Button} from '~/components/button'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Create' }]
+  return [{title: 'Admin Panel - Create'}]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const projects = await db.project.findMany({ where: { userId: user?.id } })
-  let data: LoaderData = { projects }
+  const projects = await db.project.findMany({where: {userId: user?.id}})
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -51,7 +51,7 @@ export default function Index() {
   )
 }
 
-const { sliceStr, formatDate } = tableUtils
+const {sliceStr, formatDate} = tableUtils
 const columnHelper = createColumnHelper<Project>()
 const columns = [
   columnHelper.accessor('createdAt', {
@@ -75,7 +75,7 @@ const columns = [
     header: 'Action',
     meta: {
       thClassName: 'action',
-      tdClassName: 'action'
+      tdClassName: 'action',
     },
   }),
 ]
@@ -88,7 +88,7 @@ function Table() {
     getCoreRowModel: getCoreRowModel(),
   }
   // @ts-expect-error 🤷‍♂️ no idea why defaultColumn isn't work ing here...
-  const { getHeaderGroups, getRowModel } = useReactTable(options)
+  const {getHeaderGroups, getRowModel} = useReactTable(options)
 
   return (
     <div className="wrapper-styled-table">
@@ -102,7 +102,10 @@ function Table() {
           {getHeaderGroups().map(headerGroup => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map(header => (
-                <th key={header.id} className={header.column.columnDef.meta?.tdClassName}>
+                <th
+                  key={header.id}
+                  className={header.column.columnDef.meta?.tdClassName}
+                >
                   {flexRender(
                     header.column.columnDef.header,
                     header.getContext(),
@@ -116,7 +119,10 @@ function Table() {
           {getRowModel().rows.map(row => (
             <tr key={row.id}>
               {row.getVisibleCells().map(cell => (
-                <td key={cell.id} className={cell.column.columnDef.meta?.tdClassName}>
+                <td
+                  key={cell.id}
+                  className={cell.column.columnDef.meta?.tdClassName}
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
