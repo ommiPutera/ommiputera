@@ -1,7 +1,9 @@
+import {redirect} from '@remix-run/node'
 import {db} from './db.server'
 
-type ProjectType = {
+type PropsType = {
   projectId?: string
+  redirectTo?: string
   projectName: string
   type: string
   description: string
@@ -10,13 +12,14 @@ type ProjectType = {
 }
 
 export async function createProject({
+  redirectTo,
   projectName,
   type,
   description,
   heroId,
   userId,
-}: ProjectType) {
-  const project = await db.project.create({
+}: PropsType) {
+  await db.project.create({
     data: {
       name: projectName,
       type: type,
@@ -25,18 +28,19 @@ export async function createProject({
       userId: userId,
     },
   })
-  return project
+  return redirect(redirectTo ?? '')
 }
 
 export async function updateProject({
+  redirectTo,
   projectId,
   projectName,
   type,
   description,
   heroId,
   userId,
-}: ProjectType) {
-  const project = await db.project.update({
+}: PropsType) {
+  await db.project.update({
     where: {
       id: projectId,
     },
@@ -48,5 +52,5 @@ export async function updateProject({
       userId: userId,
     },
   })
-  return project
+  return redirect(redirectTo ?? '')
 }
