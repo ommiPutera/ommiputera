@@ -1,9 +1,9 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {AboutHeroSection} from '~/components/sections/hero'
-import {getImgProps, images} from '~/images'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { AboutHeroSection } from '~/components/sections/hero'
+import { getImgProps, images } from '~/images'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'About Ommi Putera'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'About Ommi Putera' }]
 }
 
 export default function Index() {
@@ -39,7 +39,7 @@ function LongStory() {
         <h1 className="text-lg font-medium leading-tight lg:text-2xl">
           I was born in 1998 in Bengkulu, Indonesia.
         </h1>
-        <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
+        {/* <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
           After graduating High School and serving a 2 year mission in the
           Missouri Independence Mission for The Church of Jesus Christ of
           Latter-day Saints, I went to BYU where I graduated with a Master of
@@ -65,7 +65,7 @@ function LongStory() {
           hundred talks on topics including JavaScript, React, Testing, Careers,
           and more. One of my talks got noticed by egghead and I was invited to
           turn that talk into an egghead course. The rest is history!
-        </h4>
+        </h4> */}
       </div>
     </div>
   )

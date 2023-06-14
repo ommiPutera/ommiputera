@@ -1,7 +1,7 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {GalerySection} from '~/components/sections/galery'
-import {HomeHeroSection} from '~/components/sections/hero'
+import { GalerySection } from '~/components/sections/galery'
+import { HomeHeroSection } from '~/components/sections/hero'
 
 export default function Index() {
   return (
@@ -21,9 +21,9 @@ export default function Index() {
         <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <RecentWork />
         </div>
-        <div className="pb-9 lg:pb-12">
+        {/* <div className="pb-9 lg:pb-12">
           <GalerySection />
-        </div>
+        </div> */}
       </main>
     </>
   )
@@ -36,10 +36,10 @@ function RecentWork() {
         <h1 className="text-center text-3xl font-medium leading-tight lg:text-left lg:text-6xl">
           Helping brands thrive in the digital world
         </h1>
-        <p className="mt-2 text-center font-medium text-gray-300 md:w-1/2 lg:mt-3 lg:text-left">
+        {/* <p className="mt-2 text-center font-medium text-gray-300 md:w-1/2 lg:mt-3 lg:text-left">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices.
-        </p>
+        </p> */}
       </div>
       <div className="flex flex-col gap-2 lg:gap-6">
         <div className="flex items-center justify-between border-b border-gray-600">
