@@ -13,9 +13,15 @@
   --color-gray-700: #3c3c3c;
   --color-gray-800: #1e1e1e;
   --color-gray-900: #161513;
-  --color-green-100: #e7f9ed;
-  --color-green-500: #30c85e;
-  --color-green-600: #68d94a;
+  --color-green-100: #011f14;
+  --color-green-200: #013220;
+  --color-green-300: #01452c;
+  --color-green-400: #025839;
+  --color-green-500: #026c45;
+  --color-green-600: #037f51;
+  --color-green-700: #03925e;
+  --color-green-800: #03a56a;
+  --color-green-900: #04b976;
   --color-red-100: #2a1314;
   --color-red-200: #3c1618;
   --color-red-300: #561a1e;
@@ -223,7 +229,7 @@ table.styled-table > thead tr th.action {
   @apply text-center;
 }
 table.styled-table > thead tr th {
-  width: 200px;
+  width: 150px;
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
@@ -237,7 +243,7 @@ table.styled-table > tbody tr {
   box-sizing: border-box;
 }
 table.styled-table > tbody tr td {
-  width: 200px;
+  width: 150px;
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;

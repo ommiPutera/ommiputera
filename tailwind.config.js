@@ -40,6 +40,17 @@ module.exports = {
         800: 'var(--color-red-800)',
         900: 'var(--color-red-900)',
       },
+      green: {
+        100: 'var(--color-green-100)',
+        200: 'var(--color-green-200)',
+        300: 'var(--color-green-300)',
+        400: 'var(--color-green-400)',
+        500: 'var(--color-green-500)',
+        600: 'var(--color-green-600)',
+        700: 'var(--color-green-700)',
+        800: 'var(--color-green-800)',
+        900: 'var(--color-green-900)',
+      },
       slate: {
         500: 'var(--color-slate-500)',
       },
