@@ -6,27 +6,27 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import { Link, useLocation } from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { BurgerMenu } from '~/utils/icons'
-import { useRootData } from '~/utils/use-root-data'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {BurgerMenu} from '~/utils/icons'
+import {useRootData} from '~/utils/use-root-data'
 
 const LINKS = [
   // {name: 'Post', to: '/post'},
-  { name: 'Project', to: '/project' },
-  { name: 'About', to: '/about' },
+  {name: 'Project', to: '/project'},
+  {name: 'About', to: '/about'},
 ]
 
 const OWNERLINKS = [
-  { name: 'Dashboard', to: '/dashboard' },
-  { name: 'Admin Panel', to: '/admin' },
+  {name: 'Dashboard', to: '/dashboard'},
+  {name: 'Admin Panel', to: '/admin'},
 ]
 
-const MOBILE_LINKS = [{ name: 'Home', to: '/' }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <>
       <div
@@ -50,7 +50,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({ isExpanded }) => {
+          {({isExpanded}) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -68,9 +68,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const { isExpanded } = useMenuButtonContext()
+  const {isExpanded} = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -81,17 +81,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{ display: 'block' }}
+          style={{display: 'block'}}
           className="z-50"
         >
           <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
+            initial={{y: -50, opacity: 0}}
+            animate={{y: 0, opacity: 1}}
+            exit={{y: -50, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+              scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -128,7 +128,7 @@ function MobileMenuList() {
 function MobileNavLink({
   to,
   children,
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -147,7 +147,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <ul className="hidden lg:flex lg:items-center">
       {LINKS.map(link => (
@@ -160,7 +160,7 @@ function DesktopNav() {
           <form action="/logout" method="post">
             <button
               type="submit"
-              className="block whitespace-nowrap rounded-md bg-red-100 px-4 pb-2 border border-red-300 pt-1 text-lg font-medium text-red-900"
+              className="block whitespace-nowrap rounded-md border border-red-300 bg-red-100 px-4 pb-2 pt-1 text-lg font-medium text-red-900"
             >
               Log Out
             </button>
@@ -175,7 +175,7 @@ function DesktopNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -212,7 +212,7 @@ function Logo() {
 }
 
 function ProtectedNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   if (!user) return <></>
   return (
     <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-15vw">
@@ -233,7 +233,7 @@ function ProtectedpNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -257,4 +257,4 @@ function ProtectedpNavLink({
   )
 }
 
-export { Index as Navbar }
+export {Index as Navbar}

@@ -1,8 +1,8 @@
-import { useNavigate, type V2_MetaFunction } from '@remix-run/react'
-import { Button } from '~/components/button'
+import {useNavigate, type V2_MetaFunction} from '@remix-run/react'
+import {Button} from '~/components/button'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Create' }]
+  return [{title: 'Admin Panel - Create'}]
 }
 
 export default function Index() {
@@ -15,7 +15,7 @@ export default function Index() {
             Back
           </Button>
         </div>
-        <div className="rounded-lg bg-green-100 px-4 py-2.5 border border-green-200">
+        <div className="rounded-lg border border-green-200 bg-green-100 px-4 py-2.5">
           <h1 className="text-sm text-green-900">Create New Project</h1>
         </div>
       </div>

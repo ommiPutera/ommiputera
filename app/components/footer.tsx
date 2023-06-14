@@ -1,9 +1,9 @@
 import clsx from 'clsx'
-import { AnchorOrLink } from '~/utils/misc'
-import { useRootData } from '~/utils/use-root-data'
+import {AnchorOrLink} from '~/utils/misc'
+import {useRootData} from '~/utils/use-root-data'
 
 function Footer() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <footer
       className={clsx(

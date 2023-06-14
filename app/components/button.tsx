@@ -44,8 +44,8 @@ function Inner({
         {
           'border-gray-200 group-disabled:border-gray-700':
             variant === 'primary',
-          'px-4 py-2.5 text-sm rounded-lg': size === 'md',
-          'px-8 py-3 text-md rounded-xl': size === 'lg',
+          'rounded-lg px-4 py-2.5 text-sm': size === 'md',
+          'rounded-xl px-8 py-3 text-md': size === 'lg',
         },
       )}
     >
@@ -54,4 +54,4 @@ function Inner({
   )
 }
 
-export { Button }
+export {Button}
