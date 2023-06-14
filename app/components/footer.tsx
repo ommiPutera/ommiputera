@@ -1,13 +1,13 @@
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
 
 function Footer() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <footer
       className={clsx(
-        'z-10 border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-12',
+        'z-[2] border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:py-12',
         {
           'bg-gray-900': !user,
           'bg-black': user,

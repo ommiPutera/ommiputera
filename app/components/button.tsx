@@ -18,7 +18,7 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full rounded-lg border-2 border-gray-500 font-medium ring-white focus:border-transparent focus:ring-[0.5px] disabled:text-gray-300',
+        'group relative inline-flex w-full rounded-lg border border-gray-500 font-medium ring-white focus:border-transparent focus:ring-[0.5px] disabled:text-gray-300',
         {
           'text-primary': variant === 'primary',
         },
@@ -40,12 +40,12 @@ function Inner({
   return (
     <div
       className={clsx(
-        'relative flex h-full w-full items-center justify-center whitespace-nowrap rounded-lg hover:bg-gray-800',
+        'relative flex h-full w-full items-center justify-center whitespace-nowrap hover:bg-gray-800',
         {
           'border-gray-200 group-disabled:border-gray-700':
             variant === 'primary',
-          'px-4 pb-2 pt-1.5 text-sm': size === 'md',
-          'px-8 py-2 text-lg': size === 'lg',
+          'px-4 py-2.5 text-sm rounded-lg': size === 'md',
+          'px-8 py-3 text-md rounded-xl': size === 'lg',
         },
       )}
     >
@@ -54,4 +54,4 @@ function Inner({
   )
 }
 
-export {Button}
+export { Button }
