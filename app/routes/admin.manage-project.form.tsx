@@ -1,7 +1,7 @@
-import type { Project } from '@prisma/client'
-import type { ActionFunction } from '@remix-run/node'
-import { type LoaderFunction } from '@remix-run/node'
-import { DialogOverlay, DialogContent } from '@reach/dialog'
+import type {Project} from '@prisma/client'
+import type {ActionFunction} from '@remix-run/node'
+import {type LoaderFunction} from '@remix-run/node'
+import {DialogOverlay, DialogContent} from '@reach/dialog'
 import {
   Form,
   Link,
@@ -11,17 +11,17 @@ import {
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
-import { db } from '~/utils/db.server'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
+import {db} from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import { getUserId } from '~/utils/session.server'
+import {getUserId} from '~/utils/session.server'
 
-type LoaderData = { project: Project | null }
+type LoaderData = {project: Project | null}
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -41,23 +41,23 @@ type ActionData = {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Manage Project - Form' }]
+  return [{title: 'Manage Project - Form'}]
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({ where: { id: id ?? '' } })
+  const project = await db.project.findUnique({where: {id: id ?? ''}})
   return project
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const project = await getLoaderData({ request })
-  let data: LoaderData = { project }
+export const loader: LoaderFunction = async ({request}) => {
+  const project = await getLoaderData({request})
+  let data: LoaderData = {project}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const _action = formData.get('_action')
   const projectId = formData.get('projectId')
@@ -69,7 +69,7 @@ export const action: ActionFunction = async ({ request }) => {
   const userId = await getUserId(request)
 
   if (typeof projectId !== 'string') {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
   if (_action === 'DELETE') {
     console.log('delete--------------------------------')
@@ -84,9 +84,9 @@ export const action: ActionFunction = async ({ request }) => {
     typeof projectId !== 'string' ||
     typeof liveLink !== 'string'
   ) {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
-  const fields = { projectName, description, type, heroId, userId, liveLink }
+  const fields = {projectName, description, type, heroId, userId, liveLink}
   switch (_action) {
     case 'CREATE': {
       return await createProject({
@@ -102,7 +102,7 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { fields, formError: `Action type invalid` }
+      return {fields, formError: `Action type invalid`}
     }
   }
 }
@@ -155,14 +155,16 @@ function FormAction() {
   })
   let formIsValid =
     (formValues.projectName !== project?.name && formValues.projectName) ||
-    (formValues.description !== project?.description && formValues.description) ||
+    (formValues.description !== project?.description &&
+      formValues.description) ||
     (formValues.type !== project?.type && formValues.type) ||
     (formValues.heroId !== project?.heroId && formValues.heroId) ||
     (formValues.liveLink !== project?.liveLink && formValues.liveLink)
 
   const isCreate = Boolean(!project)
   const getLabelCreateOrUpdate = () => {
-    if (navigation.state === 'loading') return 'Redirecting to /manage-project..'
+    if (navigation.state === 'loading')
+      return 'Redirecting to /manage-project..'
     if (isCreate) {
       if (navigation.state === 'submitting') return 'Creating your project..'
       return 'Create'
@@ -306,7 +308,7 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={showDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
         className="flex w-full items-center"
       >
         <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
