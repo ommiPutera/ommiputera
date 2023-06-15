@@ -1,6 +1,7 @@
-import type {Project} from '@prisma/client'
-import type {ActionFunction} from '@remix-run/node'
-import {type LoaderFunction} from '@remix-run/node'
+import type { Project } from '@prisma/client'
+import type { ActionFunction } from '@remix-run/node'
+import { type LoaderFunction } from '@remix-run/node'
+import { DialogOverlay, DialogContent } from "@reach/dialog";
 import {
   Form,
   Link,
@@ -8,15 +9,14 @@ import {
   useLoaderData,
   type V2_MetaFunction,
 } from '@remix-run/react'
-import clsx from 'clsx'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
-import {createProject, updateProject} from '~/utils/project.session'
-import {getUserId} from '~/utils/session.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
+import { createProject, updateProject } from '~/utils/project.session'
+import { getUserId } from '~/utils/session.server'
 
-type LoaderData = {project: Project | null}
+type LoaderData = { project: Project | null }
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -34,23 +34,23 @@ type ActionData = {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Admin Panel - Form'}]
+  return [{ title: 'Admin Panel - Form' }]
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({where: {id: id ?? ''}})
+  const project = await db.project.findUnique({ where: { id: id ?? '' } })
   return project
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const project = await getLoaderData({request})
-  let data: LoaderData = {project}
+export const loader: LoaderFunction = async ({ request }) => {
+  const project = await getLoaderData({ request })
+  let data: LoaderData = { project }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const actionType = formData.get('actionType')
   const projectId = formData.get('projectId')
@@ -67,26 +67,31 @@ export const action: ActionFunction = async ({request}) => {
     typeof projectId !== 'string' ||
     typeof actionType !== 'string'
   ) {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
 
-  let fields = {projectName, description, type, heroId, userId}
+  console.log("actionType:................... ", actionType)
+  let fields = { projectName, description, type, heroId, userId }
   switch (actionType) {
-    case 'create': {
+    case 'CREATE': {
       return await createProject({
         redirectTo: '/admin/manage-project',
         ...fields,
       })
     }
-    case 'updateAndRead': {
+    case 'UPDATE': {
       return await updateProject({
         projectId: projectId,
         redirectTo: '/admin/manage-project',
         ...fields,
       })
     }
+    case 'DELETE': {
+      console.log('delete--------------------------------')
+      return { fields, formError: `Login type invalid` }
+    }
     default: {
-      return {fields, formError: `Login type invalid`}
+      return { fields, formError: `Login type invalid` }
     }
   }
 }
@@ -95,7 +100,7 @@ export default function Index() {
   const data = useLoaderData<LoaderData>()
   const project = data.project
 
-  const isCreate = Boolean(!project)
+  // const isCreate = Boolean(!project)
   const isUpdateAndRead = Boolean(project)
 
   return (
@@ -109,16 +114,9 @@ export default function Index() {
             </Button>
           </Link>
         </div>
-        <div
-          className={clsx('rounded-lg border px-4 py-2.5', {
-            'border-green-200 bg-green-100 text-green-900': isCreate,
-            'border-orange-300 bg-orange-100 text-orange-800': isUpdateAndRead,
-          })}
-        >
-          <h1 className="text-md">
-            {isUpdateAndRead ? 'Update Existing' : 'Create New'} Project
-          </h1>
-        </div>
+        <h1 className="text-lg">
+          {isUpdateAndRead ? 'Update Existing' : 'Create New'} Project
+        </h1>
       </div>
       <div className="pb-6 pt-12">
         <FormAction />
@@ -131,23 +129,20 @@ function FormAction() {
   const data = useLoaderData<LoaderData>()
   const project = data.project
 
-  let actionData = useActionData<ActionData | undefined>()
+  const [showDeleteModal, setShowDeleteModal] = React.useState(false)
+  const openDeleteModal = () => setShowDeleteModal(true)
+  const closeDeleteModal = () => setShowDeleteModal(false)
+
+  let actionData = useActionData<ActionData>()
   const [submitted, setSubmitted] = React.useState(false)
   const [formValues, setFormValues] = React.useState({
     projectName: '',
     description: '',
     type: '',
     heroId: '',
-    actionType: '',
   })
 
   const isCreate = Boolean(!project)
-  const isUpdateAndRead = Boolean(project)
-  const actionType = () => {
-    if (isCreate) return 'create'
-    if (isUpdateAndRead) return 'updateAndRead'
-    return ''
-  }
 
   return (
     <Form
@@ -158,17 +153,17 @@ function FormAction() {
           description: form.description.value,
           type: form.type.value,
           heroId: form.heroId.value,
-          actionType: actionType(),
         })
         setSubmitted(false)
       }}
       method="POST"
-      className="w-full"
-      onSubmit={() => setSubmitted(true)}
+      className="w-full flex flex-col gap-y-4"
+      onSubmit={() => {
+        setSubmitted(true)
+      }}
     >
-      <input type="hidden" name="actionType" value={actionType()} />
       <input type="hidden" name="projectId" value={project?.id || ''} />
-      <div className="grid grid-cols-3 gap-x-4">
+      <div className="grid grid-cols-3 gap-x-6">
         <div className="col-span-1 mb-3">
           <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
             <Label htmlFor="name-field">Name</Label>
@@ -203,25 +198,6 @@ function FormAction() {
         </div>
         <div className="col-span-1 mb-3">
           <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
-            <Label htmlFor="name-field">Description</Label>
-          </div>
-          <Input
-            type="text"
-            name="description"
-            defaultValue={project?.description}
-            placeholder="description"
-            id="description-field"
-            aria-describedby={
-              actionData?.fieldErrors?.description
-                ? 'description-error'
-                : undefined
-            }
-          />
-        </div>
-      </div>
-      <div className="grid grid-cols-3 gap-x-4">
-        <div className="col-span-1 mb-3">
-          <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
             <Label htmlFor="name-field">heroId</Label>
           </div>
           <Input
@@ -236,22 +212,89 @@ function FormAction() {
           />
         </div>
       </div>
+      <div className="grid grid-cols-3 gap-x-6">
+        <div className="col-span-2 mb-3">
+          <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+            <Label htmlFor="name-field">Description</Label>
+          </div>
+          <Input
+            type="textarea"
+            name="description"
+            defaultValue={project?.description}
+            placeholder="description"
+            id="description-field"
+            aria-describedby={
+              actionData?.fieldErrors?.description
+                ? 'description-error'
+                : undefined
+            }
+          />
+        </div>
+      </div>
       <div className="mt-8 flex w-full justify-end gap-x-4">
         <div className="w-min" hidden={isCreate}>
           <Button
-            type="submit"
+            type="button"
             size="md"
-            className="mt-4 border-red-300 bg-red-100 text-red-800 hover:bg-red-200 active:border-red-300"
+            variant="danger"
+            className="mt-4"
+            onClick={openDeleteModal}
           >
             Delete Project
           </Button>
         </div>
         <div className="w-min">
-          <Button type="submit" size="md" className="mt-4">
+          <Button
+            type="submit"
+            size="md"
+            className="mt-4"
+            name="actionType"
+            value={isCreate ? 'CREATE' : 'UPDATE'}
+          >
             {isCreate ? 'Create' : 'Update'}
           </Button>
         </div>
       </div>
+      <DialogOverlay
+        aria-label="Delete project"
+        isOpen={showDeleteModal}
+        onDismiss={closeDeleteModal}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+        className='flex items-center'
+      >
+        <DialogContent className='max-w-[24vw] p-0 flex flex-col gap-y-6 bg-black border border-gray-700 rounded-md'>
+          <div className='border-b border-gray-700 px-6 py-4 text-center'>
+            <h1 className="text-lg">Are you sure you want to delete?</h1>
+          </div>
+          <div className='py-4 px-6'>
+            <p className="text-secondary mt-4 text-md font-light leading-tight lg:mt-2 lg:leading-relaxed">
+              Monitoring is a powerful query editor that allows you to visualize and
+              gain insight into bandwidth, errors, performance, traffic, Top Paths
+              usage, and more across all projects.
+            </p>
+          </div>
+          <div className='w-full justify-between flex border-t border-gray-700 px-6 py-4'>
+            <Button
+              size="md"
+              type='button'
+              className='w-min'
+              onClick={closeDeleteModal}
+            >
+              Cancel
+            </Button>
+            <Button
+              type="submit"
+              size="md"
+              name="actionType"
+              value="DELETE"
+              className='w-min'
+              variant="danger"
+            >
+              Yes, delete project
+            </Button>
+          </div>
+        </DialogContent>
+      </DialogOverlay>
     </Form>
   )
 }

@@ -215,6 +215,13 @@ p {
   }
 }
 
+.glass {
+  background: rgba(22, 21, 19, 0.7);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(11px);
+  -webkit-backdrop-filter: blur(11px);
+}
+
 table.styled-table {
   width: 100%;
   overflow-x: scroll;

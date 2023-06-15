@@ -3,7 +3,7 @@ import React from 'react'
 
 interface IProps {
   size?: 'sm' | 'md' | 'lg'
-  variant?: 'primary' | 'secondary'
+  variant?: 'primary' | 'secondary' | 'danger'
   children: React.ReactNode | React.ReactNode[]
 }
 
@@ -18,12 +18,12 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full border border-gray-500 font-medium ring-white hover:bg-gray-800 focus:border-transparent focus:ring-[0.5px] disabled:text-gray-300',
+        'group relative inline-flex w-full border font-medium ring-white hover:bg-gray-800 disabled:text-gray-300',
         {
           'text-white': variant === 'primary',
+          'text-red-800 bg-red-100 border-red-300 hover:bg-red-200': variant === 'danger',
           'rounded-md': size === 'sm',
-          'rounded-lg': size === 'md',
-          'rounded-xl': size === 'lg',
+          'rounded-lg': size === 'md' || size === 'lg'
         },
         className,
       )}
@@ -45,11 +45,11 @@ function Inner({
       className={clsx(
         'relative flex h-full w-full items-center justify-center whitespace-nowrap',
         {
-          'border-gray-200 group-disabled:border-gray-700':
-            variant === 'primary',
+          'border-gray-200 group-disabled:border-gray-700': variant === 'primary',
+          'border-red-200 group-disabled:border-red-700': variant === 'danger',
           'rounded-md px-3 py-1 text-sm': size === 'sm',
           'rounded-lg px-4 py-2.5 text-sm': size === 'md',
-          'rounded-xl px-8 py-3 text-md': size === 'lg',
+          'rounded-lg px-8 py-3 text-md': size === 'lg',
         },
       )}
     >
@@ -58,4 +58,4 @@ function Inner({
   )
 }
 
-export {Button}
+export { Button }
