@@ -1,7 +1,7 @@
-import type { Project } from '@prisma/client'
-import type { ActionFunction } from '@remix-run/node'
-import { type LoaderFunction } from '@remix-run/node'
-import { DialogOverlay, DialogContent } from "@reach/dialog";
+import type {Project} from '@prisma/client'
+import type {ActionFunction} from '@remix-run/node'
+import {type LoaderFunction} from '@remix-run/node'
+import {DialogOverlay, DialogContent} from '@reach/dialog'
 import {
   Form,
   Link,
@@ -10,13 +10,13 @@ import {
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
-import { db } from '~/utils/db.server'
-import { createProject, updateProject } from '~/utils/project.session'
-import { getUserId } from '~/utils/session.server'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
+import {db} from '~/utils/db.server'
+import {createProject, updateProject} from '~/utils/project.session'
+import {getUserId} from '~/utils/session.server'
 
-type LoaderData = { project: Project | null }
+type LoaderData = {project: Project | null}
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -34,23 +34,23 @@ type ActionData = {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Form' }]
+  return [{title: 'Admin Panel - Form'}]
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({ where: { id: id ?? '' } })
+  const project = await db.project.findUnique({where: {id: id ?? ''}})
   return project
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const project = await getLoaderData({ request })
-  let data: LoaderData = { project }
+export const loader: LoaderFunction = async ({request}) => {
+  const project = await getLoaderData({request})
+  let data: LoaderData = {project}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const actionType = formData.get('actionType')
   const projectId = formData.get('projectId')
@@ -67,11 +67,11 @@ export const action: ActionFunction = async ({ request }) => {
     typeof projectId !== 'string' ||
     typeof actionType !== 'string'
   ) {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
 
-  console.log("actionType:................... ", actionType)
-  let fields = { projectName, description, type, heroId, userId }
+  console.log('actionType:................... ', actionType)
+  let fields = {projectName, description, type, heroId, userId}
   switch (actionType) {
     case 'CREATE': {
       return await createProject({
@@ -88,10 +88,10 @@ export const action: ActionFunction = async ({ request }) => {
     }
     case 'DELETE': {
       console.log('delete--------------------------------')
-      return { fields, formError: `Login type invalid` }
+      return {fields, formError: `Login type invalid`}
     }
     default: {
-      return { fields, formError: `Login type invalid` }
+      return {fields, formError: `Login type invalid`}
     }
   }
 }
@@ -157,7 +157,7 @@ function FormAction() {
         setSubmitted(false)
       }}
       method="POST"
-      className="w-full flex flex-col gap-y-4"
+      className="flex w-full flex-col gap-y-4"
       onSubmit={() => {
         setSubmitted(true)
       }}
@@ -259,25 +259,25 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={showDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
-        className='flex items-center'
+        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+        className="flex items-center"
       >
-        <DialogContent className='max-w-[24vw] p-0 flex flex-col gap-y-6 bg-black border border-gray-700 rounded-md'>
-          <div className='border-b border-gray-700 px-6 py-4 text-center'>
+        <DialogContent className="flex max-w-[24vw] flex-col gap-y-6 rounded-md border border-gray-700 bg-black p-0">
+          <div className="border-b border-gray-700 px-6 py-4 text-center">
             <h1 className="text-lg">Are you sure you want to delete?</h1>
           </div>
-          <div className='py-4 px-6'>
+          <div className="px-6 py-4">
             <p className="text-secondary mt-4 text-md font-light leading-tight lg:mt-2 lg:leading-relaxed">
-              Monitoring is a powerful query editor that allows you to visualize and
-              gain insight into bandwidth, errors, performance, traffic, Top Paths
-              usage, and more across all projects.
+              Monitoring is a powerful query editor that allows you to visualize
+              and gain insight into bandwidth, errors, performance, traffic, Top
+              Paths usage, and more across all projects.
             </p>
           </div>
-          <div className='w-full justify-between flex border-t border-gray-700 px-6 py-4'>
+          <div className="flex w-full justify-between border-t border-gray-700 px-6 py-4">
             <Button
               size="md"
-              type='button'
-              className='w-min'
+              type="button"
+              className="w-min"
               onClick={closeDeleteModal}
             >
               Cancel
@@ -287,7 +287,7 @@ function FormAction() {
               size="md"
               name="actionType"
               value="DELETE"
-              className='w-min'
+              className="w-min"
               variant="danger"
             >
               Yes, delete project
