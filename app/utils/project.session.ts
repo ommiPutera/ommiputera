@@ -54,3 +54,12 @@ export async function updateProject({
   })
   return redirect(redirectTo ?? '')
 }
+
+export async function deleteProject(projectId: string, redirectTo: string) {
+  await db.project.delete({
+    where: {
+      id: projectId,
+    },
+  })
+  return redirect(redirectTo ?? '')
+}
