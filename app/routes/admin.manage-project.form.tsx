@@ -1,7 +1,7 @@
-import type { Project } from '@prisma/client'
-import type { ActionFunction } from '@remix-run/node'
-import { type LoaderFunction } from '@remix-run/node'
-import { DialogOverlay, DialogContent } from '@reach/dialog'
+import type {Project} from '@prisma/client'
+import type {ActionFunction} from '@remix-run/node'
+import {type LoaderFunction} from '@remix-run/node'
+import {DialogOverlay, DialogContent} from '@reach/dialog'
 import {
   Form,
   Link,
@@ -10,17 +10,17 @@ import {
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
-import { db } from '~/utils/db.server'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
+import {db} from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import { getUserId } from '~/utils/session.server'
+import {getUserId} from '~/utils/session.server'
 
-type LoaderData = { project: Project | null }
+type LoaderData = {project: Project | null}
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -40,23 +40,23 @@ type ActionData = {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Admin Panel - Form' }]
+  return [{title: 'Admin Panel - Form'}]
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({ where: { id: id ?? '' } })
+  const project = await db.project.findUnique({where: {id: id ?? ''}})
   return project
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const project = await getLoaderData({ request })
-  let data: LoaderData = { project }
+export const loader: LoaderFunction = async ({request}) => {
+  const project = await getLoaderData({request})
+  let data: LoaderData = {project}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const _action = formData.get('_action')
   const projectId = formData.get('projectId')
@@ -68,7 +68,7 @@ export const action: ActionFunction = async ({ request }) => {
   const userId = await getUserId(request)
 
   if (typeof projectId !== 'string') {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
   if (_action === 'DELETE') {
     console.log('delete--------------------------------')
@@ -83,9 +83,9 @@ export const action: ActionFunction = async ({ request }) => {
     typeof projectId !== 'string' ||
     typeof liveLink !== 'string'
   ) {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
-  const fields = { projectName, description, type, heroId, userId, liveLink }
+  const fields = {projectName, description, type, heroId, userId, liveLink}
   switch (_action) {
     case 'CREATE': {
       return await createProject({
@@ -101,7 +101,7 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { fields, formError: `Action type invalid` }
+      return {fields, formError: `Action type invalid`}
     }
   }
 }
@@ -149,7 +149,7 @@ function FormAction() {
     description: '',
     type: '',
     heroId: '',
-    liveLink: ''
+    liveLink: '',
   })
 
   const isCreate = Boolean(!project)
@@ -164,7 +164,7 @@ function FormAction() {
             description: form.description.value,
             type: form.type.value,
             heroId: form.heroId.value,
-            liveLink: form.liveLink.value
+            liveLink: form.liveLink.value,
           })
           setSubmitted(false)
         }}
@@ -175,7 +175,7 @@ function FormAction() {
         }}
       >
         <input type="hidden" name="projectId" value={project?.id || ''} />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
+        <div className="grid grid-cols-1 gap-x-6 lg:grid-cols-3">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="name-field">Name</Label>
@@ -224,7 +224,7 @@ function FormAction() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
+        <div className="grid grid-cols-1 gap-x-6 lg:grid-cols-3">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="name-field">lLve URL</Label>
@@ -236,13 +236,11 @@ function FormAction() {
               placeholder="liveLink"
               id="liveLink-field"
               aria-describedby={
-                actionData?.fieldErrors?.liveLink
-                  ? 'liveLink-error'
-                  : undefined
+                actionData?.fieldErrors?.liveLink ? 'liveLink-error' : undefined
               }
             />
           </div>
-          <div className="col-span-2 lg:col-span-2 mb-3">
+          <div className="col-span-2 mb-3 lg:col-span-2">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="name-field">Description</Label>
             </div>
@@ -291,10 +289,10 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={showDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
-        className="flex items-center w-full"
+        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+        className="flex w-full items-center"
       >
-        <DialogContent className="flex w-full mx-4 lg:mx-auto max-w-[100vw] lg:max-w-[24vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0">
+        <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
           <Form method="POST">
             <input type="hidden" name="projectId" value={project?.id || ''} />
             <div className="border-b border-gray-700 px-6 py-4 text-center">

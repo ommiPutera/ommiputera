@@ -1,18 +1,18 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
 // import {GalerySection} from '~/components/sections/galery'
-import { HomeHeroSection } from '~/components/sections/hero'
-import { db } from '~/utils/db.server'
+import {HomeHeroSection} from '~/components/sections/hero'
+import {db} from '~/utils/db.server'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
   console.log(projects)
-  let data: LoaderData = { projects }
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -67,17 +67,17 @@ function RecentWork() {
             Recent Work
           </h3>
         </div>
-        {
-          data.projects.map((project) => (
-            <ProjectSection
-              key={project.id}
-              title={project.name}
-              detailRoute={'/project/' + project.name.toLowerCase().replace(' ', '-')}
-              liveLink={project.liveLink}
-              desc={project.description}
-            />
-          ))
-        }
+        {data.projects.map(project => (
+          <ProjectSection
+            key={project.id}
+            title={project.name}
+            detailRoute={
+              '/project/' + project.name.toLowerCase().replace(' ', '-')
+            }
+            liveLink={project.liveLink}
+            desc={project.description}
+          />
+        ))}
       </div>
     </div>
   )
