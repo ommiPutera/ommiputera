@@ -1,27 +1,26 @@
-import type {Project} from '@prisma/client'
-import type {ActionFunction} from '@remix-run/node'
-import {type LoaderFunction} from '@remix-run/node'
-import {DialogOverlay, DialogContent} from '@reach/dialog'
+import type { Project } from '@prisma/client'
+import type { ActionFunction } from '@remix-run/node'
+import { type LoaderFunction } from '@remix-run/node'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 import {
   Form,
   Link,
   useActionData,
   useLoaderData,
-  useSubmit,
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import {getUserId} from '~/utils/session.server'
+import { getUserId } from '~/utils/session.server'
 
-type LoaderData = {project: Project | null}
+type LoaderData = { project: Project | null }
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -29,33 +28,35 @@ type ActionData = {
     type: string | undefined
     description: string | undefined
     heroId: string | undefined
+    liveLink: string | undefined
   }
   fields?: {
     projectName: string
     type: string
     description: string
     heroId: string
+    liverLink: string
   }
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Admin Panel - Form'}]
+  return [{ title: 'Admin Panel - Form' }]
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({where: {id: id ?? ''}})
+  const project = await db.project.findUnique({ where: { id: id ?? '' } })
   return project
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const project = await getLoaderData({request})
-  let data: LoaderData = {project}
+export const loader: LoaderFunction = async ({ request }) => {
+  const project = await getLoaderData({ request })
+  let data: LoaderData = { project }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const _action = formData.get('_action')
   const projectId = formData.get('projectId')
@@ -63,10 +64,11 @@ export const action: ActionFunction = async ({request}) => {
   const type = formData.get('type')
   const description = formData.get('description')
   const heroId = formData.get('heroId')
+  const liveLink = formData.get('liveLink')
   const userId = await getUserId(request)
 
   if (typeof projectId !== 'string') {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
   if (_action === 'DELETE') {
     console.log('delete--------------------------------')
@@ -78,11 +80,12 @@ export const action: ActionFunction = async ({request}) => {
     typeof type !== 'string' ||
     typeof description !== 'string' ||
     typeof heroId !== 'string' ||
-    typeof projectId !== 'string'
+    typeof projectId !== 'string' ||
+    typeof liveLink !== 'string'
   ) {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
-  const fields = {projectName, description, type, heroId, userId}
+  const fields = { projectName, description, type, heroId, userId, liveLink }
   switch (_action) {
     case 'CREATE': {
       return await createProject({
@@ -98,7 +101,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Action type invalid`}
+      return { fields, formError: `Action type invalid` }
     }
   }
 }
@@ -107,7 +110,6 @@ export default function Index() {
   const data = useLoaderData<LoaderData>()
   const project = data.project
 
-  // const isCreate = Boolean(!project)
   const isUpdateAndRead = Boolean(project)
 
   return (
@@ -121,7 +123,7 @@ export default function Index() {
             </Button>
           </Link>
         </div>
-        <h1 className="text-lg">
+        <h1 className="text-md lg:text-lg">
           {isUpdateAndRead ? 'Update Existing' : 'Create New'} Project
         </h1>
       </div>
@@ -147,6 +149,7 @@ function FormAction() {
     description: '',
     type: '',
     heroId: '',
+    liveLink: ''
   })
 
   const isCreate = Boolean(!project)
@@ -161,6 +164,7 @@ function FormAction() {
             description: form.description.value,
             type: form.type.value,
             heroId: form.heroId.value,
+            liveLink: form.liveLink.value
           })
           setSubmitted(false)
         }}
@@ -171,7 +175,7 @@ function FormAction() {
         }}
       >
         <input type="hidden" name="projectId" value={project?.id || ''} />
-        <div className="grid grid-cols-3 gap-x-6">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="name-field">Name</Label>
@@ -220,13 +224,30 @@ function FormAction() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-3 gap-x-6">
-          <div className="col-span-2 mb-3">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
+          <div className="col-span-1 mb-3">
+            <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+              <Label htmlFor="name-field">lLve URL</Label>
+            </div>
+            <Input
+              type="text"
+              name="liveLink"
+              defaultValue={project?.liveLink}
+              placeholder="liveLink"
+              id="liveLink-field"
+              aria-describedby={
+                actionData?.fieldErrors?.liveLink
+                  ? 'liveLink-error'
+                  : undefined
+              }
+            />
+          </div>
+          <div className="col-span-2 lg:col-span-2 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="name-field">Description</Label>
             </div>
             <Input
-              type="textarea"
+              type="text"
               name="description"
               defaultValue={project?.description}
               placeholder="description"
@@ -247,6 +268,7 @@ function FormAction() {
               variant="danger"
               className="mt-4"
               onClick={openDeleteModal}
+              disabled={submitted}
             >
               Delete Project
             </Button>
@@ -257,6 +279,7 @@ function FormAction() {
               size="md"
               className="mt-4"
               name="_action"
+              disabled={submitted}
               value={isCreate ? 'CREATE' : 'UPDATE'}
             >
               {isCreate ? 'Create' : 'Update'}
@@ -268,10 +291,10 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={showDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
-        className="flex items-center"
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+        className="flex items-center w-full"
       >
-        <DialogContent className="flex max-w-[24vw] flex-col gap-y-6 rounded-md border border-gray-700 bg-black p-0">
+        <DialogContent className="flex w-full mx-4 lg:mx-auto max-w-[100vw] lg:max-w-[24vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0">
           <Form method="POST">
             <input type="hidden" name="projectId" value={project?.id || ''} />
             <div className="border-b border-gray-700 px-6 py-4 text-center">

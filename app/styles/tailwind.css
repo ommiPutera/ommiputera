@@ -54,7 +54,7 @@
   }
 
   .text-secondary {
-    @apply text-gray-500 dark:text-gray-500;
+    @apply text-gray-500 dark:text-gray-400;
   }
   
   .no-scrollbar::-webkit-scrollbar {

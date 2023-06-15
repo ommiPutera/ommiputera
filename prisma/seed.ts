@@ -18,12 +18,7 @@ async function seed() {
               description: 'Web Development / Personal Website',
               type: 'Digital Product',
               heroId: 'naufalHero',
-            },
-            {
-              name: 'Testing',
-              description: 'Web Development / Personal Website',
-              type: 'Digital Product',
-              heroId: 'naufalHero',
+              liveLink: 'http://www.naufalghifari.com',
             },
           ],
         },

@@ -52,6 +52,10 @@ export async function logout(req: Request) {
   })
 }
 
+export async function getOwner() {
+  return db.user.findMany({where: {role: 'OWNER'}})
+}
+
 export async function getUser(req: Request) {
   let userId = await getUserId(req)
   if (!userId) return null

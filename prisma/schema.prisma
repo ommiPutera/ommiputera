@@ -40,5 +40,6 @@ model Project {
   type        String
   heroId      String
   userId      String
-  User        User?    @relation(fields: [userId], references: [id])
+  liveLink    String
+  User        User     @relation(fields: [userId], references: [id])
 }

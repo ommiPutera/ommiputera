@@ -281,7 +281,7 @@ table.styled-table > tbody tr td.action {
   height: 100%;
 }
 .wrapper-styled-table .no-data {
-  @apply h-[15rem] flex items-center justify-center text-sm font-medium text-gray-100;
+  @apply h-[10rem] flex items-center justify-center text-md font-medium text-gray-100;
 }
 .wrapper-styled-table::-webkit-scrollbar {
   display: none !important;
