@@ -10,6 +10,7 @@ type PropsType = {
   heroId: string
   userId: string
   liveLink: string
+  content: string
 }
 
 export async function createProject({
@@ -20,6 +21,7 @@ export async function createProject({
   heroId,
   userId,
   liveLink,
+  content,
 }: PropsType) {
   await db.project.create({
     data: {
@@ -29,6 +31,7 @@ export async function createProject({
       heroId,
       userId,
       liveLink,
+      content,
     },
   })
   return redirect(redirectTo ?? '')
@@ -43,6 +46,7 @@ export async function updateProject({
   heroId,
   userId,
   liveLink,
+  content,
 }: PropsType) {
   await db.project.update({
     where: {
@@ -55,6 +59,7 @@ export async function updateProject({
       heroId,
       userId,
       liveLink,
+      content,
     },
   })
   return redirect(redirectTo ?? '')

@@ -1,10 +1,10 @@
-import {Link, Outlet, useLocation, type V2_MetaFunction} from '@remix-run/react'
+import { Link, Outlet, useLocation, type V2_MetaFunction } from '@remix-run/react'
 import clsx from 'clsx'
 import React from 'react'
-import {ProjectHeroSection} from '~/components/sections/hero'
+import { ProjectHeroSection } from '~/components/sections/hero'
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Ommi Projects'}]
+  return [{ title: 'Ommi Projects' }]
 }
 
 export default function Index() {
@@ -33,10 +33,10 @@ function ProjectNavigation() {
   const location = useLocation()
   const isSelected = (to: string) => to === location.pathname
 
-  const NavLink = ({to, children}: {to: string; children: React.ReactNode}) => {
+  const NavLink = ({ to, children }: { to: string; children: React.ReactNode }) => {
     return (
       <Link
-        prefetch="intent"
+        prefetch="render"
         to={to}
         preventScrollReset={true}
         className={clsx(

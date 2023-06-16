@@ -1,7 +1,7 @@
-import type {Project} from '@prisma/client'
-import type {ActionFunction} from '@remix-run/node'
-import {type LoaderFunction} from '@remix-run/node'
-import {DialogOverlay, DialogContent} from '@reach/dialog'
+import type { Project } from '@prisma/client'
+import type { ActionFunction } from '@remix-run/node'
+import { type LoaderFunction } from '@remix-run/node'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 import {
   Form,
   Link,
@@ -11,17 +11,17 @@ import {
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import {getUserId} from '~/utils/session.server'
+import { getUserId } from '~/utils/session.server'
 
-type LoaderData = {project: Project | null}
+type LoaderData = { project: Project | null }
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -30,6 +30,7 @@ type ActionData = {
     description: string | undefined
     heroId: string | undefined
     liveLink: string | undefined
+    content: string | undefined
   }
   fields?: {
     projectName: string
@@ -37,6 +38,7 @@ type ActionData = {
     description: string
     heroId: string
     liverLink: string
+    content: string
   }
 }
 enum ActionEnums {
@@ -46,30 +48,30 @@ enum ActionEnums {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Manage Project - Form'}]
+  return [{ title: 'Manage Project - Form' }]
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({where: {id: id ?? ''}})
+  const project = await db.project.findUnique({ where: { id: id ?? '' } })
   return project
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const project = await getLoaderData({request})
-  let data: LoaderData = {project}
+export const loader: LoaderFunction = async ({ request }) => {
+  const project = await getLoaderData({ request })
+  let data: LoaderData = { project }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const userId = await getUserId(request)
   const formData = await request.formData()
-  const {_action, projectId, projectName, type, description, heroId, liveLink} =
+  const { _action, projectId, projectName, type, description, heroId, liveLink, content } =
     Object.fromEntries(formData)
 
   if (typeof projectId !== 'string') {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
   if (_action === ActionEnums.DELETE) {
     return await deleteProject(projectId, '/admin/manage-project')
@@ -81,11 +83,12 @@ export const action: ActionFunction = async ({request}) => {
     typeof description !== 'string' ||
     typeof heroId !== 'string' ||
     typeof projectId !== 'string' ||
-    typeof liveLink !== 'string'
+    typeof liveLink !== 'string' ||
+    typeof content !== 'string'
   ) {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
-  const fields = {projectName, description, type, heroId, userId, liveLink}
+  const fields = { projectName, description, type, heroId, userId, liveLink, content }
   switch (_action) {
     case ActionEnums.CREATE: {
       return await createProject({
@@ -101,7 +104,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Action type invalid`}
+      return { fields, formError: `Action type invalid` }
     }
   }
 }
@@ -151,6 +154,7 @@ function FormAction() {
     type: '',
     heroId: '',
     liveLink: '',
+    content: ''
   })
   let formIsValid =
     (formValues.projectName !== project?.name && formValues.projectName) ||
@@ -158,7 +162,8 @@ function FormAction() {
       formValues.description) ||
     (formValues.type !== project?.type && formValues.type) ||
     (formValues.heroId !== project?.heroId && formValues.heroId) ||
-    (formValues.liveLink !== project?.liveLink && formValues.liveLink)
+    (formValues.liveLink !== project?.liveLink && formValues.liveLink) ||
+    (formValues.content !== project?.content && formValues.content)
 
   const isCreate = Boolean(!project)
   const getLabelCreateOrUpdate = () => {
@@ -184,6 +189,7 @@ function FormAction() {
             type: form.type.value,
             heroId: form.heroId.value,
             liveLink: form.liveLink.value,
+            content: form.content.value,
           })
         }}
         method="POST"
@@ -276,6 +282,26 @@ function FormAction() {
             />
           </div>
         </div>
+        <div className="grid grid-cols-1 gap-x-6">
+          <div className="col-span-1 mb-3">
+            <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+              <Label htmlFor="description-field">Content</Label>
+            </div>
+            <Input
+              type="textarea"
+              name="content"
+              rows={15}
+              defaultValue={project?.content}
+              placeholder="content"
+              id="content-field"
+              aria-describedby={
+                actionData?.fieldErrors?.content
+                  ? 'content-error'
+                  : undefined
+              }
+            />
+          </div>
+        </div>
         <div className="mt-8 flex w-full justify-end gap-x-4">
           <div className="w-min" hidden={isCreate}>
             <Button
@@ -307,7 +333,7 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={isShowDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
         className="flex w-full items-center"
       >
         <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">

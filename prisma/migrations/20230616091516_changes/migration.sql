@@ -21,7 +21,9 @@ CREATE TABLE "Project" (
     "description" TEXT NOT NULL,
     "type" TEXT NOT NULL,
     "heroId" TEXT NOT NULL,
-    "userId" TEXT,
+    "userId" TEXT NOT NULL,
+    "liveLink" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
 
     CONSTRAINT "Project_pkey" PRIMARY KEY ("id")
 );
@@ -29,8 +31,5 @@ CREATE TABLE "Project" (
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
--- CreateIndex
-CREATE UNIQUE INDEX "Project_userId_key" ON "Project"("userId");
-
 -- AddForeignKey
-ALTER TABLE "Project" ADD CONSTRAINT "Project_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Project" ADD CONSTRAINT "Project_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

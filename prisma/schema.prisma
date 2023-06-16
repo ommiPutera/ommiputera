@@ -41,5 +41,6 @@ model Project {
   heroId      String
   userId      String
   liveLink    String
+  content     String
   User        User     @relation(fields: [userId], references: [id])
 }

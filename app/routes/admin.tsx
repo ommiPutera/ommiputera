@@ -1,10 +1,10 @@
-import {TabList, TabPanel, TabPanels, Tabs, TabsOrientation} from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { TabList, TabPanel, TabPanels, Tabs, TabsOrientation } from '@reach/tabs'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {requireUserSession} from '~/utils/session.server'
+import { requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {
@@ -13,7 +13,7 @@ type LoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const userAgent = await request.headers.get('user-agent')
   const isAndroid = () => Boolean(userAgent?.match(/Android/i))
   const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
@@ -26,7 +26,7 @@ export const loader: LoaderFunction = async ({request}) => {
 
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   const data: LoaderData = {
     device: {
@@ -43,7 +43,7 @@ enum Screen {
 }
 
 const LINKS = [
-  {name: 'General', to: '/admin'},
+  { name: 'General', to: '/admin' },
   {
     name: 'Manage Project',
     to: '/admin/manage-project',
@@ -59,7 +59,7 @@ export default function Index() {
   const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
-  const {isMobile, isDesktop} = data.device
+  const { isMobile, isDesktop } = data.device
   const [screen, setScreen] = React.useState(() => {
     if (isDesktop) return Screen.DESKTOP
     if (isMobile || typeof window !== 'object') return Screen.MOBILE
@@ -88,7 +88,7 @@ export default function Index() {
       <div className="pb-9 lg:px-15vw lg:pb-12">
         <div className="relative mx-auto grid lg:max-w-8xl">
           <Tabs
-            style={{display: isDesktopScreen ? 'grid' : ''}}
+            style={{ display: isDesktopScreen ? 'grid' : '' }}
             orientation={
               isMobileScreen
                 ? TabsOrientation.Horizontal
@@ -131,16 +131,16 @@ export default function Index() {
               <TabPanel key={location.pathname} className="block">
                 <AnimatePresence>
                   <motion.div
-                    initial={{y: 220, opacity: 0}}
-                    animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-                    exit={{y: 220, opacity: 0}}
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
                     transition={{
-                      opacity: {duration: shouldReduceMotion ? 0 : 0.1},
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
                       ease: 'linear',
                     }}
                   >
-                    <div className="relative h-full min-h-[40vh] w-full">
-                      <div className="w-full border-b border-t border-gray-600 bg-black lg:absolute lg:rounded-md lg:border xl:-top-20">
+                    <div className="relative h-full w-full">
+                      <div className="w-full lg:-mt-16 xl:-mt-20 border-b border-t border-gray-600 bg-black lg:rounded-md lg:border">
                         <Outlet />
                       </div>
                     </div>

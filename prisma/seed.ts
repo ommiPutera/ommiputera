@@ -19,6 +19,7 @@ async function seed() {
               type: 'Digital Product',
               heroId: 'naufalHero',
               liveLink: 'http://www.naufalghifari.com',
+              content: 'none',
             },
           ],
         },
