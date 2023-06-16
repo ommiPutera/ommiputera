@@ -1,23 +1,22 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData, type V2_MetaFunction } from '@remix-run/react'
-import { Button } from '~/components/button'
-import { getImgProps, images } from '~/images'
-import { db } from '~/utils/db.server'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData, type V2_MetaFunction} from '@remix-run/react'
+import {Button} from '~/components/button'
+import {getImgProps, images} from '~/images'
+import {db} from '~/utils/db.server'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Ommi Putera - Dashboard' }]
+  return [{title: 'Ommi Putera - Dashboard'}]
 }
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
-
 
 export default function Index() {
   const data = useLoaderData<LoaderData>()
@@ -30,10 +29,7 @@ export default function Index() {
       </div>
       <div className="mx-auto max-w-[120rem]">
         {data.projects.map(project => (
-          <ProjectSection
-            key={project.id}
-            {...project}
-          />
+          <ProjectSection key={project.id} {...project} />
         ))}
       </div>
     </div>
@@ -46,12 +42,12 @@ function ProjectSection({
   type,
   heroId,
   liveLink,
-  content
+  content,
 }: {
-  name: string,
-  description: string,
-  type: string,
-  heroId: string,
+  name: string
+  description: string
+  type: string
+  heroId: string
   liveLink: string
   content: string
 }) {
@@ -76,21 +72,23 @@ function ProjectSection({
             {description}
           </h4>
         </div>
-        <div className="flex flex-col justify-center w-full gap-y-8 lg:w-1/2">
-          <div className='w-full mx-auto flex justify-center'>
+        <div className="flex w-full flex-col justify-center gap-y-8 lg:w-1/2">
+          <div className="mx-auto flex w-full justify-center">
             <Link target="_blank" to={liveLink}>
-              <h1 className="px-0 text-center w-min text-3xl underlined font-medium leading-tight lg:text-3xl">
+              <h1 className="underlined w-min px-0 text-center text-3xl font-medium leading-tight lg:text-3xl">
                 {liveLink.replace('https://', '').replace('/', '')}
               </h1>
             </Link>
           </div>
-          <div className='mx-auto'>
-            <Button className='w-min' size='lg'>More detail</Button>
+          <div className="mx-auto">
+            <Button className="w-min" size="lg">
+              More detail
+            </Button>
           </div>
         </div>
       </div>
       <div className="flex items-center gap-32 px-5vw lg:px-15vw">
-        <p className='text-xl text-gray-100 font-medium'>{content}</p>
+        <p className="text-xl font-medium text-gray-100">{content}</p>
       </div>
     </div>
   )
