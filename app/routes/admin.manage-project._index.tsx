@@ -1,28 +1,28 @@
-import type {Project} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import type {V2_MetaFunction} from '@remix-run/react'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import type { V2_MetaFunction } from '@remix-run/react'
+import { Link, useLoaderData } from '@remix-run/react'
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import {tableUtils} from '~/components/tableHelper'
-import {getUser} from '~/utils/session.server'
-import {db} from '~/utils/db.server'
-import {Button} from '~/components/button'
+import { tableUtils } from '~/components/tableHelper'
+import { getUser } from '~/utils/session.server'
+import { db } from '~/utils/db.server'
+import { Button } from '~/components/button'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Admin Panel - Manage Project'}]
+  return [{ title: 'Admin Panel - Manage Project' }]
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const projects = await db.project.findMany({where: {userId: user?.id}})
-  let data: LoaderData = {projects}
+  const projects = await db.project.findMany({ where: { userId: user?.id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -31,7 +31,7 @@ export default function Index() {
     <div className="text-left">
       <div className="px-6">
         <h3 className="leading-tigh text-xl font-medium">
-          List Data Recent Project
+          List Data Project
         </h3>
         <p className="text-secondary mt-4 text-md font-light leading-tight lg:mt-2 lg:leading-relaxed">
           Monitoring is a powerful query editor that allows you to visualize and
@@ -40,7 +40,7 @@ export default function Index() {
         </p>
       </div>
       <div className="my-6 flex items-center px-6">
-        <Link to="/admin/manage-project/form" prefetch="none">
+        <Link to="/admin/manage-project/form" prefetch="render">
           <Button type="button" size="md">
             Create New Project
           </Button>
@@ -53,7 +53,7 @@ export default function Index() {
   )
 }
 
-const {sliceStr, formatDate} = tableUtils
+const { sliceStr, formatDate } = tableUtils
 const columnHelper = createColumnHelper<Project>()
 const columns = [
   columnHelper.accessor('createdAt', {
@@ -74,14 +74,14 @@ const columns = [
   }),
   columnHelper.accessor('liveLink', {
     cell: value => value.getValue(),
-    header: 'Live Url',
+    header: 'Live URL',
   }),
   columnHelper.accessor('id', {
     cell: value => (
       <div className="flex w-full justify-center">
         <Link
           to={`/admin/manage-project/form?id=${value.getValue()}`}
-          prefetch="intent"
+          prefetch="render"
         >
           <Button size="sm" className="w-min">
             Detail
@@ -105,7 +105,7 @@ function Table() {
     getCoreRowModel: getCoreRowModel(),
   }
   // @ts-expect-error 🤷‍♂️ no idea why defaultColumn isn't work ing here...
-  const {getHeaderGroups, getRowModel} = useReactTable(options)
+  const { getHeaderGroups, getRowModel } = useReactTable(options)
 
   return (
     <div className="wrapper-styled-table">

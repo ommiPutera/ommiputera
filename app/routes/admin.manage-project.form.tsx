@@ -1,7 +1,7 @@
-import type {Project} from '@prisma/client'
-import type {ActionFunction} from '@remix-run/node'
-import {type LoaderFunction} from '@remix-run/node'
-import {DialogOverlay, DialogContent} from '@reach/dialog'
+import type { Project } from '@prisma/client'
+import type { ActionFunction } from '@remix-run/node'
+import { type LoaderFunction } from '@remix-run/node'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 import {
   Form,
   Link,
@@ -11,17 +11,17 @@ import {
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import {getUserId} from '~/utils/session.server'
+import { getUserId } from '~/utils/session.server'
 
-type LoaderData = {project: Project | null}
+type LoaderData = { project: Project | null }
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -39,40 +39,46 @@ type ActionData = {
     liverLink: string
   }
 }
-
-export const meta: V2_MetaFunction = () => {
-  return [{title: 'Manage Project - Form'}]
+enum ActionEnums {
+  DELETE = 'DELETE',
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE'
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+export const meta: V2_MetaFunction = () => {
+  return [{ title: 'Manage Project - Form' }]
+}
+
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({where: {id: id ?? ''}})
+  const project = await db.project.findUnique({ where: { id: id ?? '' } })
   return project
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const project = await getLoaderData({request})
-  let data: LoaderData = {project}
+export const loader: LoaderFunction = async ({ request }) => {
+  const project = await getLoaderData({ request })
+  let data: LoaderData = { project }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
-  const formData = await request.formData()
-  const _action = formData.get('_action')
-  const projectId = formData.get('projectId')
-  const projectName = formData.get('projectName')
-  const type = formData.get('type')
-  const description = formData.get('description')
-  const heroId = formData.get('heroId')
-  const liveLink = formData.get('liveLink')
+export const action: ActionFunction = async ({ request }) => {
   const userId = await getUserId(request)
+  const formData = await request.formData()
+  const {
+    _action,
+    projectId,
+    projectName,
+    type,
+    description,
+    heroId,
+    liveLink
+  } = Object.fromEntries(formData)
 
   if (typeof projectId !== 'string') {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
-  if (_action === 'DELETE') {
-    console.log('delete--------------------------------')
+  if (_action === ActionEnums.DELETE) {
     return await deleteProject(projectId, '/admin/manage-project')
   }
 
@@ -84,17 +90,17 @@ export const action: ActionFunction = async ({request}) => {
     typeof projectId !== 'string' ||
     typeof liveLink !== 'string'
   ) {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
-  const fields = {projectName, description, type, heroId, userId, liveLink}
+  const fields = { projectName, description, type, heroId, userId, liveLink }
   switch (_action) {
-    case 'CREATE': {
+    case ActionEnums.CREATE: {
       return await createProject({
         redirectTo: '/admin/manage-project',
         ...fields,
       })
     }
-    case 'UPDATE': {
+    case ActionEnums.UPDATE: {
       return await updateProject({
         projectId: projectId,
         redirectTo: '/admin/manage-project',
@@ -102,7 +108,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Action type invalid`}
+      return { fields, formError: `Action type invalid` }
     }
   }
 }
@@ -117,7 +123,7 @@ export default function Index() {
     <div className="px-6 py-2">
       <div className="flex items-center justify-between">
         <div className="w-min">
-          <Link to="/admin/manage-project" prefetch="intent">
+          <Link to="/admin/manage-project" prefetch="render">
             <Button size="md" type="button">
               <span className="mr-2 text-md">↩️</span>
               Back
@@ -140,9 +146,9 @@ function FormAction() {
   const data = useLoaderData<LoaderData>()
   const project = data.project
 
-  const [showDeleteModal, setShowDeleteModal] = React.useState(false)
-  const openDeleteModal = () => setShowDeleteModal(true)
-  const closeDeleteModal = () => setShowDeleteModal(false)
+  const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
+  const openDeleteModal = () => setIsShowDeleteModal(true)
+  const closeDeleteModal = () => setIsShowDeleteModal(false)
 
   let actionData = useActionData<ActionData>()
   const [submitted, setSubmitted] = React.useState(false)
@@ -155,8 +161,7 @@ function FormAction() {
   })
   let formIsValid =
     (formValues.projectName !== project?.name && formValues.projectName) ||
-    (formValues.description !== project?.description &&
-      formValues.description) ||
+    (formValues.description !== project?.description && formValues.description) ||
     (formValues.type !== project?.type && formValues.type) ||
     (formValues.heroId !== project?.heroId && formValues.heroId) ||
     (formValues.liveLink !== project?.liveLink && formValues.liveLink)
@@ -197,7 +202,7 @@ function FormAction() {
         <div className="grid grid-cols-1 gap-x-6 lg:grid-cols-3">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
-              <Label htmlFor="name-field">Name</Label>
+              <Label htmlFor="projectName-field">Project Name</Label>
             </div>
             <Input
               type="text"
@@ -214,7 +219,7 @@ function FormAction() {
           </div>
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
-              <Label htmlFor="name-field">type</Label>
+              <Label htmlFor="type-field">Project Type</Label>
             </div>
             <Input
               type="text"
@@ -229,7 +234,7 @@ function FormAction() {
           </div>
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
-              <Label htmlFor="name-field">heroId</Label>
+              <Label htmlFor="heroId-field">Hero Id</Label>
             </div>
             <Input
               type="text"
@@ -246,7 +251,7 @@ function FormAction() {
         <div className="grid grid-cols-1 gap-x-6 lg:grid-cols-3">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
-              <Label htmlFor="name-field">lLve URL</Label>
+              <Label htmlFor="liveLink-field">Live URL</Label>
             </div>
             <Input
               type="text"
@@ -259,9 +264,9 @@ function FormAction() {
               }
             />
           </div>
-          <div className="col-span-2 mb-3 lg:col-span-2">
+          <div className="col-span-1 mb-3 lg:col-span-2">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
-              <Label htmlFor="name-field">Description</Label>
+              <Label htmlFor="description-field">Description</Label>
             </div>
             <Input
               type="text"
@@ -297,7 +302,7 @@ function FormAction() {
               className="mt-4"
               name="_action"
               disabled={!formIsValid || submitted}
-              value={isCreate ? 'CREATE' : 'UPDATE'}
+              value={isCreate ? ActionEnums.CREATE : ActionEnums.UPDATE}
             >
               {getLabelCreateOrUpdate()}
             </Button>
@@ -306,9 +311,9 @@ function FormAction() {
       </Form>
       <DialogOverlay
         aria-label="Delete project"
-        isOpen={showDeleteModal}
+        isOpen={isShowDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
         className="flex w-full items-center"
       >
         <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
@@ -337,7 +342,7 @@ function FormAction() {
                 type="submit"
                 size="md"
                 name="_action"
-                value="DELETE"
+                value={ActionEnums.DELETE}
                 className="w-min"
                 variant="danger"
               >
