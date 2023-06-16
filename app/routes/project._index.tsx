@@ -1,20 +1,20 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData, type V2_MetaFunction } from '@remix-run/react'
-import { Button } from '~/components/button'
-import { getImgProps, images } from '~/images'
-import { db } from '~/utils/db.server'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData, type V2_MetaFunction} from '@remix-run/react'
+import {Button} from '~/components/button'
+import {getImgProps, images} from '~/images'
+import {db} from '~/utils/db.server'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Ommi Putera - Dashboard' }]
+  return [{title: 'Ommi Putera - Dashboard'}]
 }
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -64,7 +64,7 @@ function ProjectSection({
         })}
       />
       <div className="grid grid-cols-2 items-center gap-32 px-5vw py-9 lg:px-15vw">
-        <div className="flex col-span-1 flex-col gap-y-8">
+        <div className="col-span-1 flex flex-col gap-y-8">
           <h1 className="px-0 text-left text-3xl font-medium leading-tight lg:text-5xl">
             {name}
           </h1>
@@ -72,7 +72,7 @@ function ProjectSection({
             {description}
           </h4>
         </div>
-        <div className="flex col-span-1 ml-auto bg-green-100 py-8 px-14 rounded-xl border border-green-300 w-min flex-col justify-center gap-y-8">
+        <div className="col-span-1 ml-auto flex w-min flex-col justify-center gap-y-8 rounded-xl border border-green-300 bg-green-100 px-14 py-8">
           <div className="flex w-fit justify-center">
             <Link target="_blank" to={liveLink}>
               <h1 className="underlined w-min px-0 text-center text-3xl font-medium leading-tight lg:text-3xl">
@@ -88,7 +88,9 @@ function ProjectSection({
         </div>
       </div>
       <div className="flex items-center gap-32 px-5vw lg:px-15vw">
-        <p className="text-xl leading-relaxed font-light tracking-wide">{content}</p>
+        <p className="text-xl font-light leading-relaxed tracking-wide">
+          {content}
+        </p>
       </div>
     </div>
   )
