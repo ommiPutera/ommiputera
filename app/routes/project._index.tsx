@@ -1,20 +1,20 @@
-import type {Project} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData, type V2_MetaFunction} from '@remix-run/react'
-import {Button} from '~/components/button'
-import {getImgProps, images} from '~/images'
-import {db} from '~/utils/db.server'
+import type { Project } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData, type V2_MetaFunction } from '@remix-run/react'
+import { Button } from '~/components/button'
+import { getImgProps, images } from '~/images'
+import { db } from '~/utils/db.server'
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Ommi Putera - Dashboard'}]
+  return [{ title: 'Ommi Putera - Dashboard' }]
 }
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const owner = await db.user.findMany({where: {role: 'OWNER'}})
-  const projects = await db.project.findMany({where: {userId: owner[0].id}})
-  let data: LoaderData = {projects}
+export const loader: LoaderFunction = async ({ request }) => {
+  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
+  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -23,7 +23,7 @@ export default function Index() {
   return (
     <div className="relative flex h-full w-full flex-col gap-y-32">
       <div className="">
-        <h1 className="text-center text-4xl font-medium leading-tight">
+        <h1 className="text-center text-5xl font-medium leading-tight tracking-tight">
           All projects that have <br /> been completed
         </h1>
       </div>
@@ -63,8 +63,8 @@ function ProjectSection({
           sizes: ['(min-width:1220px) 3984px', '100vw'],
         })}
       />
-      <div className="flex items-center gap-32 px-5vw py-9 lg:px-15vw">
-        <div className="flex flex-col gap-y-8 lg:w-1/2">
+      <div className="grid grid-cols-2 items-center gap-32 px-5vw py-9 lg:px-15vw">
+        <div className="flex col-span-1 flex-col gap-y-8">
           <h1 className="px-0 text-left text-3xl font-medium leading-tight lg:text-5xl">
             {name}
           </h1>
@@ -72,8 +72,8 @@ function ProjectSection({
             {description}
           </h4>
         </div>
-        <div className="flex w-full flex-col justify-center gap-y-8 lg:w-1/2">
-          <div className="mx-auto flex w-full justify-center">
+        <div className="flex col-span-1 ml-auto bg-green-100 py-8 px-14 rounded-xl border border-green-300 w-min flex-col justify-center gap-y-8">
+          <div className="flex w-fit justify-center">
             <Link target="_blank" to={liveLink}>
               <h1 className="underlined w-min px-0 text-center text-3xl font-medium leading-tight lg:text-3xl">
                 {liveLink.replace('https://', '').replace('/', '')}
@@ -81,14 +81,14 @@ function ProjectSection({
             </Link>
           </div>
           <div className="mx-auto">
-            <Button className="w-min" size="lg">
+            <Button className="w-min hover:bg-green-300" size="lg">
               More detail
             </Button>
           </div>
         </div>
       </div>
       <div className="flex items-center gap-32 px-5vw lg:px-15vw">
-        <p className="text-xl font-medium text-gray-100">{content}</p>
+        <p className="text-xl leading-relaxed font-light tracking-wide">{content}</p>
       </div>
     </div>
   )

@@ -1,9 +1,9 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion} from 'framer-motion'
-import {debounce} from 'lodash'
-import {useState} from 'react'
-import {getImgProps, images} from '~/images'
+import { AnimatePresence, motion } from 'framer-motion'
+import { debounce } from 'lodash'
+import { useState } from 'react'
+import { getImgProps, images } from '~/images'
 
 function HomeHeroSection() {
   return (
@@ -94,7 +94,7 @@ function ProjectHeroSection() {
       <h1 className="text-center text-2xl font-medium leading-tight lg:px-[5rem] lg:text-8xl xl:px-[10rem]">
         Creating next level digital products
       </h1>
-      <h4 className="mt-2 px-0 text-center text-lg font-medium leading-snug text-gray-600 lg:px-[20rem] lg:text-xl lg:tracking-wider lg:text-white">
+      <h4 className="mt-2 px-0 text-center text-lg font-medium leading-snug text-gray-400 lg:px-[20rem] lg:text-xl lg:text-gray-200">
         First of all, thank you for interested in reading about me, On this
         page, I will tell all about my life and my experiences
       </h4>
@@ -106,7 +106,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -127,15 +127,15 @@ function ProfileCard() {
     <motion.div
       onMouseEnter={debouncedHandleMouseEnter}
       onMouseLeave={handlOnMouseLeave}
-      initial={{rotateY: isFliped ? 180 : 0}}
-      animate={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.5}}}
-      exit={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.2}}}
+      initial={{ rotateY: isFliped ? 180 : 0 }}
+      animate={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.5 } }}
+      exit={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.2 } }}
       className={clsx('cursor-pointer')}
     >
       {isFliped ? (
         <Link to="/post" prefetch="intent">
           <div
-            style={{transform: 'scale(-1, 1)'}}
+            style={{ transform: 'scale(-1, 1)' }}
             className="rotate- relative flex h-48 w-48 items-center justify-center rounded-full bg-gray-800"
           >
             <p className="text-xl">About me</p>
@@ -151,4 +151,4 @@ function ProfileCard() {
   )
 }
 
-export {HomeHeroSection, AboutHeroSection, ProjectHeroSection}
+export { HomeHeroSection, AboutHeroSection, ProjectHeroSection }
