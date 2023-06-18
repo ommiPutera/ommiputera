@@ -1,9 +1,8 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion} from 'framer-motion'
-import {debounce} from 'lodash'
-import {useState} from 'react'
-import {getImgProps, images} from '~/images'
+import { AnimatePresence, motion } from 'framer-motion'
+import { debounce } from 'lodash'
+import { useState } from 'react'
 
 function HomeHeroSection() {
   return (
@@ -42,9 +41,9 @@ function HomeHeroSection() {
       </div>
       <div className="flex flex-col items-center justify-center gap-5">
         <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
-          Helping people make the world a better place through quality software.
+          Helping brands through quality software.
         </h1>
-        <p className="mt-2 px-0 text-center text-lg font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 lg:text-xl xl:w-3/5">
+        <p className="mt-2 px-0 text-center text-lg lg:leading-relaxed font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 lg:text-xl xl:w-3/5">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices. Experience in
           developing projects from concept to launch. Eager to tackle more
@@ -56,45 +55,13 @@ function HomeHeroSection() {
   )
 }
 
-function AboutHeroSection() {
-  return (
-    <div className="text-primary relative mx-auto grid max-w-8xl gap-5 lg:gap-12">
-      <div className="flex flex-col items-center justify-center gap-5">
-        <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
-          Hi there 👋, I'm Ommi
-        </h1>
-        <h4 className="mt-2 px-0 text-center text-xl font-medium text-gray-300 md:w-2/3 lg:mt-0 lg:px-9 xl:w-3/5">
-          First of all, thank you for interested in reading about me, On this
-          page, I will tell all about my life and my experiences
-        </h4>
-      </div>
-      <div className="pt-9 lg:pt-12">
-        <img
-          id="about-me"
-          className="rounded-lg object-cover"
-          {...getImgProps(images.bengkuluBeach, {
-            widths: [840, 1100, 1300, 2600, 3984],
-            sizes: ['(min-width:1620px) 3984px', '100vw'],
-          })}
-        />
-        <h4 className="mt-2 px-0 text-lg font-medium lg:mt-4">
-          Sungai Suci Beach, Bengkulu
-        </h4>
-        <p className="px-0 text-sm font-medium text-gray-300">
-          src:https://unsplash.com/@surealis
-        </p>
-      </div>
-    </div>
-  )
-}
-
 function ProjectHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid w-full max-w-8xl gap-5 py-4 lg:gap-y-16 lg:py-12">
-      <h1 className="text-center text-2xl font-medium leading-tight lg:px-[5rem] lg:text-8xl xl:px-[10rem]">
-        Creating next level digital products
+      <h1 className="text-center text-2xl font-medium leading-tight lg:px-[5rem] lg:text-7xl xl:px-[10rem]">
+        Creating next <br /> level digital products
       </h1>
-      <h4 className="mt-2 px-0 text-center text-lg font-medium leading-snug text-gray-400 lg:px-[20rem] lg:text-xl lg:text-gray-200">
+      <h4 className="mt-2 px-0 text-center text-md font-medium leading-snug text-gray-400 lg:px-[20rem] lg:text-lg lg:text-gray-200">
         First of all, thank you for interested in reading about me, On this
         page, I will tell all about my life and my experiences
       </h4>
@@ -106,7 +73,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -127,15 +94,15 @@ function ProfileCard() {
     <motion.div
       onMouseEnter={debouncedHandleMouseEnter}
       onMouseLeave={handlOnMouseLeave}
-      initial={{rotateY: isFliped ? 180 : 0}}
-      animate={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.5}}}
-      exit={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.2}}}
+      initial={{ rotateY: isFliped ? 180 : 0 }}
+      animate={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.5 } }}
+      exit={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.2 } }}
       className={clsx('cursor-pointer')}
     >
       {isFliped ? (
         <Link to="/post" prefetch="intent">
           <div
-            style={{transform: 'scale(-1, 1)'}}
+            style={{ transform: 'scale(-1, 1)' }}
             className="rotate- relative flex h-48 w-48 items-center justify-center rounded-full bg-gray-800"
           >
             <p className="text-xl">About me</p>
@@ -151,4 +118,4 @@ function ProfileCard() {
   )
 }
 
-export {HomeHeroSection, AboutHeroSection, ProjectHeroSection}
+export { HomeHeroSection, ProjectHeroSection }

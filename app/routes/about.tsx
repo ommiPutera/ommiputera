@@ -1,73 +1,17 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {AboutHeroSection} from '~/components/sections/hero'
-import {getImgProps, images} from '~/images'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { getImgProps, images } from '~/images'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'About Ommi Putera'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'About Ommi Putera' }]
 }
 
 export default function Index() {
   return (
-    <>
-      <img
-        src="/hero-background.png"
-        alt=""
-        className="lg:h-100 absolute -z-10 h-[100vh] w-[100vw] object-cover opacity-60 lg:opacity-100"
-      />
-      <main className="flex flex-col gap-5 pb-44 lg:gap-16">
-        <div className="px-5vw py-9 lg:px-15vw lg:py-12">
-          <AboutHeroSection />
-        </div>
-        <div className="px-5vw pb-9 lg:px-15vw lg:pb-12">
-          <LongStory />
-        </div>
-        <div className="px-5vw py-9 lg:px-15vw lg:py-12">
-          <AboutMe />
-        </div>
-      </main>
-    </>
-  )
-}
-
-function LongStory() {
-  return (
-    <div className="mx-auto flex max-w-8xl flex-col gap-8 lg:gap-y-20">
-      <h1 className="flex-1 text-center text-xl font-medium lg:text-4xl">
-        How I got where we are now.
-      </h1>
-      <div className="flex flex-1 flex-col gap-y-4 lg:px-[8rem]">
-        <h1 className="text-lg font-medium leading-tight lg:text-2xl">
-          I was born in 1998 in Bengkulu, Indonesia.
-        </h1>
-        {/* <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
-          After graduating High School and serving a 2 year mission in the
-          Missouri Independence Mission for The Church of Jesus Christ of
-          Latter-day Saints, I went to BYU where I graduated with a Master of
-          Science in Information Systems degree in 2014.
-        </h4>
-        <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
-          Early on in my career I decided I wanted to be an expert in
-          JavaScript. So I set my mind on mastering the world's most popular
-          programming language. I spent countless hours writing JavaScript for
-          the companies I worked for as well as in the evenings for open source
-          and other side projects. Eventually I even represented PayPal on the
-          TC-39 (the committee responsible for standardizing the JavaScript
-          language). I feel like I achieved my goal of becoming an expert in
-          JavaScript, but I do need to keep up just like everyone else, which is
-          an enjoyable challenge.
-        </h4>
-        <h4 className="text-lg font-medium text-gray-300 lg:text-xl">
-          I've also always been excited about sharing what I know with others.
-          When I was in school, I signed up to be a tutor for my classmates and
-          once I even got Firebase to sponsor pizza for me to give an informal
-          workshop about Angular.js to my fellow students. I was a speaker at
-          the first meetup I ever attended, and I've now delivered over a
-          hundred talks on topics including JavaScript, React, Testing, Careers,
-          and more. One of my talks got noticed by egghead and I was invited to
-          turn that talk into an egghead course. The rest is history!
-        </h4> */}
+    <main className="flex flex-col gap-5 pb-44 lg:gap-16">
+      <div className="px-5vw py-9 lg:px-15vw lg:py-12">
+        <AboutMe />
       </div>
-    </div>
+    </main>
   )
 }
 
