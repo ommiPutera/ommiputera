@@ -1,8 +1,8 @@
-import { Link, type V2_MetaFunction } from '@remix-run/react'
-import { getImgProps, images } from '~/images'
+import {Link, type V2_MetaFunction} from '@remix-run/react'
+import {getImgProps, images} from '~/images'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'About Ommi Putera' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'About Ommi Putera'}]
 }
 
 export default function Index() {
