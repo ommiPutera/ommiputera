@@ -1,19 +1,19 @@
-import type {Project} from '@prisma/client'
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
-import {Button} from '~/components/button'
-import {GalerySection} from '~/components/sections/galery'
-import {HomeHeroSection} from '~/components/sections/hero'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/button'
+import { GalerySection } from '~/components/sections/galery'
+import { HomeHeroSection } from '~/components/sections/hero'
+import { db } from '~/utils/db.server'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const owner = await db.user.findMany({where: {role: 'OWNER'}})
-  const projects = await db.project.findMany({where: {userId: owner[0].id}})
-  let data: LoaderData = {projects}
+export const loader: LoaderFunction = async ({ request }) => {
+  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
+  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -53,7 +53,7 @@ function Team() {
         <h1 className="col-span-4 text-center text-3xl font-medium leading-tight lg:text-left lg:text-5xl">
           Our Team ready to achive your goal
         </h1>
-        <p className="col-span-3 mt-2 text-center font-medium text-gray-300 lg:mt-3 lg:text-left">
+        <p className="col-span-3 mt-2 text-center text-lg lg:text-xl font-medium text-gray-300 lg:mt-3 lg:text-left">
           I have a talented team that can help me produce high-quality software
           and provide a range of services.
         </p>
@@ -63,7 +63,7 @@ function Team() {
           <Tab className="flex max-w-sm flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="text-4xl">🚀</p>
             <h4 className="text-2xl">Web Development</h4>
-            <p className="text-md font-light leading-snug text-gray-200">
+            <p className="text-md lg:text-lg font-light leading-tight text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
@@ -71,7 +71,7 @@ function Team() {
           <Tab className="flex max-w-sm flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="text-4xl">🚀</p>
             <h4 className="text-2xl">Mobile Development</h4>
-            <p className="text-md font-light leading-snug text-gray-200">
+            <p className="text-md lg:text-lg font-light leading-tight text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
@@ -79,7 +79,7 @@ function Team() {
           <Tab className="flex max-w-sm flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="text-4xl">🚀</p>
             <h4 className="text-2xl">Product Designer</h4>
-            <p className="text-md font-light leading-snug text-gray-200">
+            <p className="text-md lg:text-lg font-light leading-tight text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
@@ -88,7 +88,7 @@ function Team() {
         <TabPanels className="mt-24">
           <TabPanel>
             <h4 className="mb-4 text-4xl">Web Development</h4>
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               We are a web and mobile design and development agency. Making
               websites and apps, creating brand identities, and launching
               startups. Our goal is to help companies build relationships with
@@ -96,7 +96,7 @@ function Team() {
               performance.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               The Dribbble shot depicts a web page design concept for a company
               that specializes in designing and developing apps for other
               businesses. The overall aesthetic of the page is sleek and
@@ -110,7 +110,7 @@ function Team() {
               format.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               The Dribbble shot depicts a web page design concept.
             </p>
             <Link to="/" className="text-2xl text-green-700">
@@ -119,7 +119,7 @@ function Team() {
           </TabPanel>
           <TabPanel>
             <h4 className="mb-4 text-4xl">Mobile Development</h4>
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               We are a web and mobile design and development agency. Making
               websites and apps, creating brand identities, and launching
               startups. Our goal is to help companies build relationships with
@@ -127,7 +127,7 @@ function Team() {
               performance.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               The Dribbble shot depicts a web page design concept for a company
               that specializes in designing and developing apps for other
               businesses. The overall aesthetic of the page is sleek and
@@ -141,7 +141,7 @@ function Team() {
               format.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               The Dribbble shot depicts a web page design concept.
             </p>
             <Link to="/" className="text-2xl text-green-700">
@@ -150,7 +150,7 @@ function Team() {
           </TabPanel>
           <TabPanel>
             <h4 className="mb-4 text-4xl">Product Designer</h4>
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               We are a web and mobile design and development agency. Making
               websites and apps, creating brand identities, and launching
               startups. Our goal is to help companies build relationships with
@@ -158,7 +158,7 @@ function Team() {
               performance.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               The Dribbble shot depicts a web page design concept for a company
               that specializes in designing and developing apps for other
               businesses. The overall aesthetic of the page is sleek and
@@ -172,7 +172,7 @@ function Team() {
               format.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200">
+            <p className="text-lg lg:text-xl font-medium leading-snug text-gray-200">
               The Dribbble shot depicts a web page design concept.
             </p>
             <Link to="/" className="text-2xl text-green-700">
@@ -185,14 +185,14 @@ function Team() {
         <h1 className="text-center text-3xl font-medium leading-tight lg:text-5xl">
           Choose the plan that <br /> fits your needs.
         </h1>
-        <p className="col-span-3 mt-2 text-center font-medium text-gray-300 lg:mt-3">
+        <p className="col-span-3 mt-2 text-center text-lg lg:text-xl font-medium text-gray-300 lg:mt-3">
           I have a talented team that can help me produce high-quality <br />{' '}
           software and provide a range of services.
         </p>
       </div>
       <div className="grid grid-cols-12 gap-x-6 py-4">
         <PricingCard
-          title="Personal Website / Company Profile"
+          title="Personal Website"
           price={18}
           desc="From your imagination to real live."
           directTo="/learn"
@@ -252,18 +252,16 @@ function PricingCard({
 }) {
   return (
     <div className="col-span-4 flex cursor-pointer flex-col rounded-xl border border-gray-600 px-10 py-12 hover:border-red-300 lg:gap-y-10">
-      <h4 className="w-fit rounded-full border border-red-200 bg-red-100 px-5 py-2.5 text-xs font-medium">
+      <h4 className="w-fit rounded-full border border-red-200 bg-red-100 px-5 py-2.5 text-sm font-medium">
         {title}
       </h4>
       <div>
-        <h1 className="text-4xl leading-none">
-          Start from <br /> Rp. {price}jt
-        </h1>
-        <p className="mt-6 text-md font-light text-gray-200">{desc}</p>
+        <h1 className="text-4xl leading-none">Start from <br /> Rp. {price}jt</h1>
+        <p className="mt-6 text-md lg:text-lg font-light text-gray-200">{desc}</p>
       </div>
       <ul className="flex flex-col gap-y-4 text-md font-light text-gray-200">
         {list.map(item => (
-          <li key={item}>{item}</li>
+          <li key={item} className='text-md lg:text-lg'>{item}</li>
         ))}
       </ul>
       <Link to={directTo} prefetch="intent">
@@ -284,7 +282,7 @@ function RecentWork() {
         <h1 className="col-span-4 text-center text-3xl font-medium leading-tight lg:text-left lg:text-5xl">
           I help brands and people with tailor-made solutions
         </h1>
-        <p className="col-span-3 mt-2 text-center font-medium text-gray-300 lg:mt-3 lg:text-left">
+        <p className="col-span-3 mt-2 text-center font-medium text-gray-300 lg:mt-3 text-lg lg:text-xl lg:text-left">
           You can explore my recent work here, or view the complete project
           portfolio at{' '}
           <Link to="/project" prefetch="intent">
@@ -322,7 +320,7 @@ function RecentWork() {
 function Certifed() {
   return (
     <div className="flex flex-col gap-14">
-      <h3 className="text-center text-lg font-medium lg:text-xl">
+      <h3 className="text-center text-lg lg:text-xl font-medium">
         Certified By
       </h3>
       <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-center gap-x-16 gap-y-8 overflow-hidden lg:gap-y-0">
@@ -348,7 +346,7 @@ function ProjectSection({
 }) {
   return (
     <div className="flex flex-col items-center justify-between pt-9 md:flex-row">
-      <p className="mb-4 text-lg font-medium text-gray-300 md:mb-0">{desc}</p>
+      <p className="mb-4 text-lg lg:text-xl font-medium text-gray-300 md:mb-0">{desc}</p>
       <div className="flex flex-col items-center gap-6 md:flex-row md:gap-12">
         <Link
           target="_blank"
