@@ -1,19 +1,19 @@
-import type { Project } from '@prisma/client'
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Project} from '@prisma/client'
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { Button } from '~/components/shadcn/button'
-import { GalerySection } from '~/components/sections/galery'
-import { HomeHeroSection } from '~/components/sections/hero'
-import { db } from '~/utils/db.server'
+import {Button} from '~/components/shadcn/button'
+import {GalerySection} from '~/components/sections/galery'
+import {HomeHeroSection} from '~/components/sections/hero'
+import {db} from '~/utils/db.server'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 
