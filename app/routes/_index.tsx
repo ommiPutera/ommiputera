@@ -1,19 +1,19 @@
-import type { Project } from '@prisma/client'
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Project} from '@prisma/client'
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { Button } from '~/components/shadcn/button'
-import { GalerySection } from '~/components/sections/galery'
-import { HomeHeroSection } from '~/components/sections/hero'
-import { db } from '~/utils/db.server'
+import {Button} from '~/components/shadcn/button'
+import {GalerySection} from '~/components/sections/galery'
+import {HomeHeroSection} from '~/components/sections/hero'
+import {db} from '~/utils/db.server'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -63,24 +63,24 @@ function Team() {
       </div>
       <Tabs className="mt-12">
         <TabList className="flex w-full justify-center gap-x-6">
-          <Tab className="flex max-w flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
-            <p className="text-3xl mb-4 text-green-500">01</p>
+          <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
+            <p className="mb-4 text-3xl text-green-500">01</p>
             <h4 className="text-2xl">Web Development</h4>
             <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </Tab>
-          <Tab className="flex max-w flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
-            <p className="text-3xl mb-4 text-red-500">02</p>
+          <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
+            <p className="mb-4 text-3xl text-red-500">02</p>
             <h4 className="text-2xl">Mobile Development</h4>
             <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </Tab>
-          <Tab className="flex max-w flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
-            <p className="text-3xl mb-4 text-orange-500">03</p>
+          <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
+            <p className="mb-4 text-3xl text-orange-500">03</p>
             <h4 className="text-2xl">Product Designer</h4>
             <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
@@ -89,8 +89,8 @@ function Team() {
           </Tab>
         </TabList>
         <TabPanels className="mt-6">
-          <TabPanel className='grid grid-cols-2 gap-x-14'>
-            <div className='col-span-1'>
+          <TabPanel className="grid grid-cols-2 gap-x-14">
+            <div className="col-span-1">
               <h4 className="mb-4 text-4xl">Web Development</h4>
               <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
                 We are a web and mobile design and development agency. Making
@@ -107,9 +107,7 @@ function Team() {
                 info@shakuro.com
               </Link>
             </div>
-            <div className='col-span-1 p-8 rounded-lg bg-gray-800'>
-              assets
-            </div>
+            <div className="col-span-1 rounded-lg bg-gray-800 p-8">assets</div>
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -269,10 +267,22 @@ function Certifed() {
         Certified By
       </h3>
       <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-center gap-x-16 gap-y-8 overflow-hidden lg:gap-y-0">
-        <img src="/purwadhika-logo.png" alt="" className="w-36 lg:w-52 opacity-50" />
-        <img src="/udemy-logo.png" alt="" className="w-32 lg:w-36 opacity-50" />
-        <img src="/hackerrank-logo.png" alt="" className="w-32 lg:w-44 opacity-50" />
-        <img src="/testgorilla-logo.png" alt="" className="w-32 lg:w-44 opacity-50" />
+        <img
+          src="/purwadhika-logo.png"
+          alt=""
+          className="w-36 opacity-50 lg:w-52"
+        />
+        <img src="/udemy-logo.png" alt="" className="w-32 opacity-50 lg:w-36" />
+        <img
+          src="/hackerrank-logo.png"
+          alt=""
+          className="w-32 opacity-50 lg:w-44"
+        />
+        <img
+          src="/testgorilla-logo.png"
+          alt=""
+          className="w-32 opacity-50 lg:w-44"
+        />
       </div>
     </div>
   )
