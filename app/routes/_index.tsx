@@ -1,19 +1,19 @@
-import type {Project} from '@prisma/client'
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
-import {Button} from '~/components/shadcn/button'
-import {GalerySection} from '~/components/sections/galery'
-import {HomeHeroSection} from '~/components/sections/hero'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/shadcn/button'
+import { GalerySection } from '~/components/sections/galery'
+import { HomeHeroSection } from '~/components/sections/hero'
+import { db } from '~/utils/db.server'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const owner = await db.user.findMany({where: {role: 'OWNER'}})
-  const projects = await db.project.findMany({where: {userId: owner[0].id}})
-  let data: LoaderData = {projects}
+export const loader: LoaderFunction = async ({ request }) => {
+  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
+  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -41,6 +41,9 @@ export default function Index() {
         <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <Team />
         </div>
+        <div className="px-5vw py-9 lg:px-15vw lg:py-12">
+          <Pricing />
+        </div>
       </main>
     </>
   )
@@ -60,127 +63,63 @@ function Team() {
       </div>
       <Tabs className="mt-12">
         <TabList className="flex w-full justify-center gap-x-6">
-          <Tab className="flex max-w-sm flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
-            <p className="text-4xl">🚀</p>
+          <Tab className="flex max-w flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
+            <p className="text-3xl mb-4 text-green-500">01</p>
             <h4 className="text-2xl">Web Development</h4>
-            <p className="text-md font-light leading-tight text-gray-200 lg:text-lg">
+            <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </Tab>
-          <Tab className="flex max-w-sm flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
-            <p className="text-4xl">🚀</p>
+          <Tab className="flex max-w flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
+            <p className="text-3xl mb-4 text-red-500">02</p>
             <h4 className="text-2xl">Mobile Development</h4>
-            <p className="text-md font-light leading-tight text-gray-200 lg:text-lg">
+            <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </Tab>
-          <Tab className="flex max-w-sm flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
-            <p className="text-4xl">🚀</p>
+          <Tab className="flex max-w flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
+            <p className="text-3xl mb-4 text-orange-500">03</p>
             <h4 className="text-2xl">Product Designer</h4>
-            <p className="text-md font-light leading-tight text-gray-200 lg:text-lg">
+            <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </Tab>
         </TabList>
-        <TabPanels className="mt-24">
-          <TabPanel>
-            <h4 className="mb-4 text-4xl">Web Development</h4>
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              We are a web and mobile design and development agency. Making
-              websites and apps, creating brand identities, and launching
-              startups. Our goal is to help companies build relationships with
-              their customers online through great design and technical
-              performance.
-            </p>
-            <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              The Dribbble shot depicts a web page design concept for a company
-              that specializes in designing and developing apps for other
-              businesses. The overall aesthetic of the page is sleek and
-              professional, with a dark grey background and bold white
-              typography that gives the design a high-contrast, modern look.
-              Each case study is presented as a thumbnail with a brief
-              description to showcase them in a clear and concise manner.
-              Overall, this shot shows a well-designed agency page that
-              effectively communicates the company's services, values, and
-              contact information in a visually appealing and easy-to-navigate
-              format.
-            </p>
-            <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              The Dribbble shot depicts a web page design concept.
-            </p>
-            <Link to="/" className="text-2xl text-green-700">
-              info@shakuro.com
-            </Link>
-          </TabPanel>
-          <TabPanel>
-            <h4 className="mb-4 text-4xl">Mobile Development</h4>
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              We are a web and mobile design and development agency. Making
-              websites and apps, creating brand identities, and launching
-              startups. Our goal is to help companies build relationships with
-              their customers online through great design and technical
-              performance.
-            </p>
-            <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              The Dribbble shot depicts a web page design concept for a company
-              that specializes in designing and developing apps for other
-              businesses. The overall aesthetic of the page is sleek and
-              professional, with a dark grey background and bold white
-              typography that gives the design a high-contrast, modern look.
-              Each case study is presented as a thumbnail with a brief
-              description to showcase them in a clear and concise manner.
-              Overall, this shot shows a well-designed agency page that
-              effectively communicates the company's services, values, and
-              contact information in a visually appealing and easy-to-navigate
-              format.
-            </p>
-            <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              The Dribbble shot depicts a web page design concept.
-            </p>
-            <Link to="/" className="text-2xl text-green-700">
-              info@shakuro.com
-            </Link>
-          </TabPanel>
-          <TabPanel>
-            <h4 className="mb-4 text-4xl">Product Designer</h4>
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              We are a web and mobile design and development agency. Making
-              websites and apps, creating brand identities, and launching
-              startups. Our goal is to help companies build relationships with
-              their customers online through great design and technical
-              performance.
-            </p>
-            <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              The Dribbble shot depicts a web page design concept for a company
-              that specializes in designing and developing apps for other
-              businesses. The overall aesthetic of the page is sleek and
-              professional, with a dark grey background and bold white
-              typography that gives the design a high-contrast, modern look.
-              Each case study is presented as a thumbnail with a brief
-              description to showcase them in a clear and concise manner.
-              Overall, this shot shows a well-designed agency page that
-              effectively communicates the company's services, values, and
-              contact information in a visually appealing and easy-to-navigate
-              format.
-            </p>
-            <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
-              The Dribbble shot depicts a web page design concept.
-            </p>
-            <Link to="/" className="text-2xl text-green-700">
-              info@shakuro.com
-            </Link>
+        <TabPanels className="mt-6">
+          <TabPanel className='grid grid-cols-2 gap-x-14'>
+            <div className='col-span-1'>
+              <h4 className="mb-4 text-4xl">Web Development</h4>
+              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
+                We are a web and mobile design and development agency. Making
+                websites and apps, creating brand identities, and launching
+                startups. Our goal is to help companies build relationships with
+                their customers online through great design and technical
+                performance.
+              </p>
+              <br />
+              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
+                The Dribbble shot depicts a web page design concept.
+              </p>
+              <Link to="/" className="text-2xl text-green-700">
+                info@shakuro.com
+              </Link>
+            </div>
+            <div className='col-span-1 p-8 rounded-lg bg-gray-800'>
+              assets
+            </div>
           </TabPanel>
         </TabPanels>
       </Tabs>
+    </div>
+  )
+}
+
+function Pricing() {
+  return (
+    <div className="mx-auto grid max-w-8xl gap-8 lg:gap-y-12">
       <div className="mt-24 flex flex-col items-center justify-between gap-5 lg:gap-x-48">
         <h1 className="text-center text-3xl font-medium leading-tight lg:text-5xl">
           Choose the plan that <br /> fits your needs.
@@ -251,7 +190,7 @@ function PricingCard({
   variant: 'default'
 }) {
   return (
-    <div className="col-span-4 flex cursor-pointer flex-col rounded-xl border border-gray-600 px-10 py-12 hover:border-red-300 lg:gap-y-10">
+    <div className="col-span-4 flex cursor-pointer flex-col rounded-xl border border-gray-600 px-10 py-12 hover:bg-gray-800 lg:gap-y-10">
       <h4 className="w-fit rounded-full border border-red-200 bg-red-100 px-5 py-2.5 text-sm font-medium">
         {title}
       </h4>
@@ -330,10 +269,10 @@ function Certifed() {
         Certified By
       </h3>
       <div className="mx-auto flex max-w-8xl flex-wrap items-center justify-center gap-x-16 gap-y-8 overflow-hidden lg:gap-y-0">
-        <img src="/purwadhika-logo.png" alt="" className="w-36 lg:w-52" />
-        <img src="/udemy-logo.png" alt="" className="w-32 lg:w-36" />
-        <img src="/hackerrank-logo.png" alt="" className="w-32 lg:w-44" />
-        <img src="/testgorilla-logo.png" alt="" className="w-32 lg:w-44" />
+        <img src="/purwadhika-logo.png" alt="" className="w-36 lg:w-52 opacity-50" />
+        <img src="/udemy-logo.png" alt="" className="w-32 lg:w-36 opacity-50" />
+        <img src="/hackerrank-logo.png" alt="" className="w-32 lg:w-44 opacity-50" />
+        <img src="/testgorilla-logo.png" alt="" className="w-32 lg:w-44 opacity-50" />
       </div>
     </div>
   )
