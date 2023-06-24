@@ -3,7 +3,6 @@
   --color-white: #fff;
   --color-blue-100: #e8f2ff;
   --color-blue-500: #4b96ff;
-  --color-slate-500: #a9adc1;
   --color-gray-100: #cccccc;
   --color-gray-200: #b3b3b3;
   --color-gray-300: #999999;
@@ -40,12 +39,6 @@
   --color-red-700: #e5484d;
   --color-red-800: #d93036;
   --color-red-900: #ff6166;
-  --color-yellow-500: #ffd644;
-
-  /* yellow in light mode is... hard */
-  --color-team-yellow: #a08600;
-  --color-yellow-500: #a08600;
-  --color-yellow-500-inverted: #ffd644;
 }
 
 .light,

@@ -29,6 +29,7 @@
   ],
   "dependencies": {
     "@prisma/client": "^4.14.0",
+    "@radix-ui/react-slot": "^1.0.2",
     "@reach/dialog": "^0.18.0",
     "@reach/menu-button": "^0.18.0",
     "@reach/tabs": "^0.18.0",
@@ -41,16 +42,20 @@
     "@vercel/analytics": "^1.0.1",
     "@vercel/node": "^2.6.2",
     "bcryptjs": "^2.4.3",
+    "class-variance-authority": "^0.6.0",
     "cloudinary-build-url": "^0.2.4",
     "clsx": "^1.2.1",
     "date-fns": "^2.30.0",
     "framer-motion": "^10.12.16",
     "isbot": "^3.6.5",
     "lodash": "^4.17.21",
+    "lucide-react": "^0.252.0",
     "postcss-import": "^15.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "spin-delay": "^1.2.0"
+    "spin-delay": "^1.2.0",
+    "tailwind-merge": "^1.13.2",
+    "tailwindcss-animate": "^1.0.6"
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",

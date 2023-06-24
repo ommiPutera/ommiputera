@@ -1,19 +1,19 @@
-import type {Project} from '@prisma/client'
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
-import {Button} from '~/components/button'
-import {GalerySection} from '~/components/sections/galery'
-import {HomeHeroSection} from '~/components/sections/hero'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/shadcn/button'
+import { GalerySection } from '~/components/sections/galery'
+import { HomeHeroSection } from '~/components/sections/hero'
+import { db } from '~/utils/db.server'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const owner = await db.user.findMany({where: {role: 'OWNER'}})
-  const projects = await db.project.findMany({where: {userId: owner[0].id}})
-  let data: LoaderData = {projects}
+export const loader: LoaderFunction = async ({ request }) => {
+  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
+  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -196,7 +196,7 @@ function Team() {
           price={18}
           desc="From your imagination to real live."
           directTo="/learn"
-          variant="danger"
+          variant="default"
           list={[
             '- 6 Month Maintaince',
             '- Your Website including Your Site CMS',
@@ -209,7 +209,7 @@ function Team() {
           price={45}
           desc="From your imagination to real live."
           directTo="/learn"
-          variant="danger"
+          variant="default"
           list={[
             '- 6 Month Maintaince',
             '- Your Website including Your Site CMS',
@@ -222,7 +222,7 @@ function Team() {
           price={35}
           desc="From your imagination to real live."
           directTo="/learn"
-          variant="danger"
+          variant="default"
           list={[
             '- 6 Month Maintaince',
             '- Your Website including Your Site CMS',
@@ -248,7 +248,7 @@ function PricingCard({
   desc: string
   list: Array<string>
   directTo: string
-  variant: 'danger'
+  variant: 'default'
 }) {
   return (
     <div className="col-span-4 flex cursor-pointer flex-col rounded-xl border border-gray-600 px-10 py-12 hover:border-red-300 lg:gap-y-10">
