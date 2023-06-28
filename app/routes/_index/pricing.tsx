@@ -1,5 +1,5 @@
-import { Link } from "@remix-run/react"
-import { UIButton } from "~/components/shadcn/button"
+import {Link} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 
 export default function Pricing() {
   return (

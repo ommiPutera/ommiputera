@@ -1,5 +1,5 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from "@reach/tabs";
-import { Link } from "@remix-run/react";
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import {Link} from '@remix-run/react'
 
 export default function Team() {
   return (
