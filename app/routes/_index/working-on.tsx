@@ -1,4 +1,4 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function WorkinOn() {
   return (
@@ -7,18 +7,53 @@ export default function WorkinOn() {
         <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
           What I'm <b>Working On</b>
         </h1>
-        <div className="col-span-3 mt-2 gap-y-4 lg:mt-3">
-          <p className="text-center text-lg font-medium text-gray-300 lg:text-left lg:text-xl">
+        <p className="col-span-3 mt-2 text-center text-lg font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-xl">
+          I'm building a freelance platform that caters to both small-scale
+          and large-scale projects.
+        </p>
+      </div>
+      <div className='mt-12 grid grid-cols-12 gap-x-12'>
+        <div className='col-span-4 flex flex-col w-fit gap-y-4'>
+          <h3 className='text-center text-3xl font-bold leading-tight lg:text-left lg:text-4xl'>twon.com</h3>
+          <p className="col-span-3 text-center text-lg font-light text-white lg:text-left lg:text-lg">
             I'm building a freelance platform that caters to both small-scale
+            and large-scale projects. I'm building a freelance platform that caters to both small-scale
             and large-scale projects.
           </p>
-          <UIButton
-            className="mt-6 rounded-full"
-            size="lg"
-            hoverChild="McroHub.com"
-          >
-            Get Started
-          </UIButton>
+          <div>
+            <UIButton
+              className="rounded-full"
+              size="md"
+              hoverChild="twon.com"
+            >
+              Explore
+            </UIButton>
+          </div>
+        </div>
+        <div className='col-span-8 border rounded-lg border-gray-700 h-96 -mr-32'>
+          Asset
+        </div>
+      </div>
+      <div className='mt-12 grid grid-cols-12 gap-x-12'>
+        <div className='col-span-4 flex flex-col w-fit gap-y-4'>
+          <h3 className='text-center text-3xl font-bold leading-tight lg:text-left lg:text-4xl'>twon.com</h3>
+          <p className="col-span-3 text-center text-lg font-light text-white lg:text-left lg:text-lg">
+            I'm building a freelance platform that caters to both small-scale
+            and large-scale projects. I'm building a freelance platform that caters to both small-scale
+            and large-scale projects.
+          </p>
+          <div>
+            <UIButton
+              className="rounded-full"
+              size="md"
+              hoverChild="twon.com"
+            >
+              Explore
+            </UIButton>
+          </div>
+        </div>
+        <div className='col-span-8 border rounded-lg border-gray-700 h-96 -mr-32'>
+          Asset
         </div>
       </div>
     </div>

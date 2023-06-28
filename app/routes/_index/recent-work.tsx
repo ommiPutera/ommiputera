@@ -1,8 +1,8 @@
-import type {Project} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
 export default function RecentWork() {
   const data = useLoaderData<LoaderData>()
@@ -22,7 +22,7 @@ export default function RecentWork() {
         </p>
       </div>
       <div className="flex flex-col gap-2 lg:gap-6">
-        <div className="flex items-center justify-between border-b border-gray-600">
+        <div className="flex items-center justify-between">
           <Link to="/project" prefetch="intent">
             <h3 className="py-4 font-medium text-gray-300 lg:text-xl">
               View All Project
@@ -32,17 +32,19 @@ export default function RecentWork() {
             Recent Work
           </h3>
         </div>
-        {data.projects.map(project => (
-          <ProjectSection
-            key={project.id}
-            title={project.name}
-            detailRoute={
-              '/project/' + project.name.toLowerCase().replace(' ', '-')
-            }
-            liveLink={project.liveLink}
-            desc={project.description}
-          />
-        ))}
+        <div className='bg-gray-800 rounded-lg -mx-16 px-16 pt-10 pb-9'>
+          {data.projects.map(project => (
+            <ProjectSection
+              key={project.id}
+              title={project.name}
+              detailRoute={
+                '/project/' + project.name.toLowerCase().replace(' ', '-')
+              }
+              liveLink={project.liveLink}
+              desc={project.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )
@@ -60,7 +62,7 @@ function ProjectSection({
   desc: string
 }) {
   return (
-    <div className="flex flex-col items-center justify-between pt-9 md:flex-row">
+    <div className="flex flex-col items-center border-b border-transparent pb-1 hover:border-gray-600 justify-between md:flex-row">
       <p className="mb-4 text-lg font-medium text-gray-300 md:mb-0 lg:text-xl">
         {desc}
       </p>
