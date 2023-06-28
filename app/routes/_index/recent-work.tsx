@@ -1,8 +1,8 @@
-import type {Project} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
 export default function RecentWork() {
   const data = useLoaderData<LoaderData>()
@@ -32,7 +32,7 @@ export default function RecentWork() {
             Recent Work
           </h3>
         </div>
-        <div className="-mx-16 rounded-lg bg-gray-800 px-16 pb-9 pt-10">
+        <div className="-mx-16 rounded-lg bg-gray-800 px-16 py-10">
           {data.projects.map(project => (
             <ProjectSection
               key={project.id}
@@ -62,7 +62,7 @@ function ProjectSection({
   desc: string
 }) {
   return (
-    <div className="flex flex-col items-center justify-between border-b border-transparent pb-1 hover:border-gray-600 md:flex-row">
+    <div className="flex flex-col items-center justify-between md:flex-row">
       <p className="mb-4 text-lg font-medium text-gray-300 md:mb-0 lg:text-xl">
         {desc}
       </p>
