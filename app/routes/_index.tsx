@@ -1,19 +1,19 @@
-import type {Project} from '@prisma/client'
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
-import {Button} from '~/components/shadcn/button'
-import {GalerySection} from '~/components/sections/galery'
-import {HomeHeroSection} from '~/components/sections/hero'
-import {db} from '~/utils/db.server'
+import { UIButton } from '~/components/shadcn/button'
+import { GalerySection } from '~/components/sections/galery'
+import { HomeHeroSection } from '~/components/sections/hero'
+import { db } from '~/utils/db.server'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const owner = await db.user.findMany({where: {role: 'OWNER'}})
-  const projects = await db.project.findMany({where: {userId: owner[0].id}})
-  let data: LoaderData = {projects}
+export const loader: LoaderFunction = async ({ request }) => {
+  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
+  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -35,8 +35,11 @@ export default function Index() {
         <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <RecentWork />
         </div>
-        <div className="pb-9 lg:pb-12">
+        {/* <div className="pb-9 lg:pb-12">
           <GalerySection />
+        </div> */}
+        <div className="px-5vw py-9 lg:px-15vw lg:py-12">
+          <WhatImWorkingOn />
         </div>
         <div className="px-5vw py-9 lg:px-15vw lg:py-12">
           <Team />
@@ -49,12 +52,36 @@ export default function Index() {
   )
 }
 
+function WhatImWorkingOn() {
+  return (
+    <div className="mx-auto grid max-w-8xl gap-8 lg:gap-y-12">
+      <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start lg:gap-x-48">
+        <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
+          What I'm <b>Working On</b>
+        </h1>
+        <div className="col-span-3 mt-2 lg:mt-3 gap-y-4">
+          <p className='text-center text-lg lg:text-left lg:text-xl font-medium text-gray-300'>
+            I'm building a freelance platform that caters to both small-scale and large-scale projects.
+          </p>
+          <UIButton
+            className='mt-6 rounded-full'
+            size="lg"
+            hoverChild="McroHub.com"
+          >
+            Get Started
+          </UIButton>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function Team() {
   return (
     <div className="mx-auto grid max-w-8xl gap-8 lg:gap-y-12">
       <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start lg:gap-x-48">
-        <h1 className="col-span-4 text-center text-3xl font-medium leading-tight lg:text-left lg:text-5xl">
-          Our Team ready to achive your goal
+        <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
+          Our Team ready to achive your <b>goal</b>
         </h1>
         <p className="col-span-3 mt-2 text-center text-lg font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-xl">
           I have a talented team that can help me produce high-quality software
@@ -65,7 +92,7 @@ function Team() {
         <TabList className="flex w-full justify-center gap-x-6">
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-green-500">01</p>
-            <h4 className="text-2xl">Web Development</h4>
+            <h4 className="text-xl">Web Development</h4>
             <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
@@ -73,7 +100,7 @@ function Team() {
           </Tab>
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-red-500">02</p>
-            <h4 className="text-2xl">Mobile Development</h4>
+            <h4 className="text-xl">Mobile Development</h4>
             <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
@@ -81,18 +108,18 @@ function Team() {
           </Tab>
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-orange-500">03</p>
-            <h4 className="text-2xl">Product Designer</h4>
+            <h4 className="text-xl">Product Designer</h4>
             <p className="text-md font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </Tab>
         </TabList>
-        <TabPanels className="mt-6">
+        <TabPanels className="mt-8">
           <TabPanel className="grid grid-cols-2 gap-x-14">
             <div className="col-span-1">
-              <h4 className="mb-4 text-4xl">Web Development</h4>
-              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
+              <h4 className="mb-4 text-3xl">Web Development</h4>
+              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
                 We are a web and mobile design and development agency. Making
                 websites and apps, creating brand identities, and launching
                 startups. Our goal is to help companies build relationships with
@@ -100,10 +127,10 @@ function Team() {
                 performance.
               </p>
               <br />
-              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-xl">
+              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
                 The Dribbble shot depicts a web page design concept.
               </p>
-              <Link to="/" className="text-2xl text-green-700">
+              <Link to="/" className="text-lg text-green-700">
                 info@shakuro.com
               </Link>
             </div>
@@ -118,7 +145,7 @@ function Team() {
 function Pricing() {
   return (
     <div className="mx-auto grid max-w-8xl gap-8 lg:gap-y-12">
-      <div className="mt-24 flex flex-col items-center justify-between gap-5 lg:gap-x-48">
+      <div className="flex flex-col items-center justify-between gap-5 lg:gap-x-48">
         <h1 className="text-center text-3xl font-medium leading-tight lg:text-5xl">
           Choose the plan that <br /> fits your needs.
         </h1>
@@ -193,7 +220,7 @@ function PricingCard({
         {title}
       </h4>
       <div>
-        <h1 className="text-4xl leading-none">
+        <h1 className="lg:text-2xl xl:text-4xl leading-none">
           Start from <br /> Rp. {price}jt
         </h1>
         <p className="mt-6 text-md font-light text-gray-200 lg:text-lg">
@@ -202,15 +229,15 @@ function PricingCard({
       </div>
       <ul className="flex flex-col gap-y-4 text-md font-light text-gray-200">
         {list.map(item => (
-          <li key={item} className="text-md lg:text-lg">
+          <li key={item} className="text-md lg:text-md">
             {item}
           </li>
         ))}
       </ul>
       <Link to={directTo} prefetch="intent">
-        <Button size="lg" variant={variant}>
+        <UIButton size="md" variant={variant} className='mt-8 rounded-full'>
           Learn More
-        </Button>
+        </UIButton>
       </Link>
     </div>
   )
@@ -222,8 +249,8 @@ function RecentWork() {
   return (
     <div className="mx-auto grid max-w-8xl gap-8 lg:gap-12">
       <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start lg:gap-x-48">
-        <h1 className="col-span-4 text-center text-3xl font-medium leading-tight lg:text-left lg:text-5xl">
-          I help brands and people with tailor-made solutions
+        <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
+          I help brands and people with <b>tailor-made solutions</b>
         </h1>
         <p className="col-span-3 mt-2 text-center text-lg font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-xl">
           You can explore my recent work here, or view the complete project
