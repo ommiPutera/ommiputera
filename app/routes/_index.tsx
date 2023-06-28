@@ -1,19 +1,19 @@
-import type { Project } from '@prisma/client'
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Project} from '@prisma/client'
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { UIButton } from '~/components/shadcn/button'
-import { GalerySection } from '~/components/sections/galery'
-import { HomeHeroSection } from '~/components/sections/hero'
-import { db } from '~/utils/db.server'
+import {UIButton} from '~/components/shadcn/button'
+import {GalerySection} from '~/components/sections/galery'
+import {HomeHeroSection} from '~/components/sections/hero'
+import {db} from '~/utils/db.server'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -59,12 +59,13 @@ function WhatImWorkingOn() {
         <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
           What I'm <b>Working On</b>
         </h1>
-        <div className="col-span-3 mt-2 lg:mt-3 gap-y-4">
-          <p className='text-center text-lg lg:text-left lg:text-xl font-medium text-gray-300'>
-            I'm building a freelance platform that caters to both small-scale and large-scale projects.
+        <div className="col-span-3 mt-2 gap-y-4 lg:mt-3">
+          <p className="text-center text-lg font-medium text-gray-300 lg:text-left lg:text-xl">
+            I'm building a freelance platform that caters to both small-scale
+            and large-scale projects.
           </p>
           <UIButton
-            className='mt-6 rounded-full'
+            className="mt-6 rounded-full"
             size="lg"
             hoverChild="McroHub.com"
           >
@@ -220,7 +221,7 @@ function PricingCard({
         {title}
       </h4>
       <div>
-        <h1 className="lg:text-2xl xl:text-4xl leading-none">
+        <h1 className="leading-none lg:text-2xl xl:text-4xl">
           Start from <br /> Rp. {price}jt
         </h1>
         <p className="mt-6 text-md font-light text-gray-200 lg:text-lg">
@@ -235,7 +236,7 @@ function PricingCard({
         ))}
       </ul>
       <Link to={directTo} prefetch="intent">
-        <UIButton size="md" variant={variant} className='mt-8 rounded-full'>
+        <UIButton size="md" variant={variant} className="mt-8 rounded-full">
           Learn More
         </UIButton>
       </Link>
