@@ -45,7 +45,9 @@ export async function login({username, password}: LoginType) {
 
 export async function logout(req: Request) {
   let session = await getUserSession(req)
-  return redirect('/', {
+  let origin = req.headers.get('origin') || ''
+  const routeName = req.headers.get('referer')?.replace(origin, '') || '/'
+  return redirect(routeName, {
     headers: {
       'Set-Cookie': await storage.destroySession(session),
     },

@@ -1,5 +1,5 @@
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import {Link} from '@remix-run/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import { Link } from '@remix-run/react'
 
 export default function Team() {
   return (
@@ -86,7 +86,7 @@ export default function Team() {
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-green-500">01</p>
             <h4 className="text-xl">Web Development</h4>
-            <p className="text-md font-light text-gray-200">
+            <p className="text-base font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
@@ -94,7 +94,7 @@ export default function Team() {
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-red-500">02</p>
             <h4 className="text-xl">Mobile Development</h4>
-            <p className="text-md font-light text-gray-200">
+            <p className="text-base font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
@@ -102,7 +102,7 @@ export default function Team() {
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-orange-500">03</p>
             <h4 className="text-xl">Product Designer</h4>
-            <p className="text-md font-light text-gray-200">
+            <p className="text-base font-light text-gray-200">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>

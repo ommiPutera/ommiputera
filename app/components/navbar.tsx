@@ -6,32 +6,32 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 
 const LINKS = [
   // {name: 'Post', to: '/post'},
-  {name: 'Project', to: '/project'},
-  {name: 'About', to: '/about'},
+  { name: 'Project', to: '/project' },
+  { name: 'About', to: '/about' },
 ]
 
 const OWNERLINKS = [
-  {name: 'Dashboard', to: '/dashboard'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Dashboard', to: '/dashboard' },
+  { name: 'Admin Panel', to: '/admin' },
 ]
 
-const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/' }, ...LINKS]
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <>
       <div
-        className={clsx('px-5vw py-9 lg:px-15vw lg:py-12', {
+        className={clsx('px-5vw py-9 lg:px-10vw lg:py-12', {
           'bg-black lg:pb-6 lg:pt-12': user,
         })}
       >
@@ -51,7 +51,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -69,9 +69,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -82,17 +82,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -129,7 +129,7 @@ function MobileMenuList() {
 function MobileNavLink({
   to,
   children,
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -148,7 +148,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
       {LINKS.map(link => (
@@ -176,7 +176,7 @@ function DesktopNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -207,16 +207,16 @@ function Logo() {
       to="/"
       className="underlined block transition focus:outline-none"
     >
-      <h1 className="whitespace-nowrap text-2xl font-medium">ommiputera</h1>
+      <h1 className="whitespace-nowrap text-3xl font-medium">ommiputera<span className='text-base ml-[1px] text-gray-100 font-light'>.com</span></h1>
     </Link>
   )
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   if (!user) return <></>
   return (
-    <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-15vw">
+    <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-10vw">
       <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between gap-x-4">
         <ul className="-mx-2 flex gap-x-2">
           {OWNERLINKS.map(link => (
@@ -240,7 +240,7 @@ function ProtectedpNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -250,7 +250,7 @@ function ProtectedpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'underlined block whitespace-nowrap pb-4 pt-1 text-md font-medium focus:outline-none lg:text-lg lg:tracking-wide',
+          'underlined block whitespace-nowrap pb-3 pt-1 text-md font-medium focus:outline-none lg:text-lg lg:tracking-wide',
           {
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,
@@ -264,4 +264,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

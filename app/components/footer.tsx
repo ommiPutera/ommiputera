@@ -1,9 +1,10 @@
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
 
 function Footer() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <footer
       className={clsx(
@@ -55,12 +56,14 @@ function FooterLink({
 function AboutSection() {
   return (
     <div>
-      <h2 className="whitespace-nowrap text-xl font-medium">
-        Ommi Putera Karunia
+      <h2 className="whitespace-nowrap text-2xl font-medium">
+        <Link to="/" prefetch='intent' className='underlined'>
+          Ommi Putera Karunia
+        </Link>
       </h2>
       <ul className="mt-4">
-        <li className="pb-6 text-md font-medium">
-          All rights reserved © Ommi Putera 2023
+        <li className="pb-6 text-lg text-secondary font-medium">
+          All rights reserved © Ommi 2023
         </li>
         <li className="text-secondary py-1 text-lg">
           Helping people make the world a better place through quality software.
