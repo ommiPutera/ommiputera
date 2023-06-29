@@ -1,5 +1,5 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
-import { Link } from '@remix-run/react'
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import {Link} from '@remix-run/react'
 
 export default function Team() {
   return (
@@ -13,11 +13,13 @@ export default function Team() {
           and provide a range of services.
         </p>
       </div>
-      <div className="lg:hidden mt-12 grid gap-y-16">
-        <div className='grid-cols-1 grid lg:grid-cols-12'>
-          <div className="col-span-1 lg:col-span-4 flex w-fit flex-col justify-center lg:justify-start gap-y-4">
-            <div className='relative'>
-              <p className="absolute left-0 -top-1.5 text-3xl text-green-500">01</p>
+      <div className="mt-12 grid gap-y-16 lg:hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-12">
+          <div className="col-span-1 flex w-fit flex-col justify-center gap-y-4 lg:col-span-4 lg:justify-start">
+            <div className="relative">
+              <p className="absolute -top-1.5 left-0 text-3xl text-green-500">
+                01
+              </p>
               <h3 className="text-center text-xl font-medium leading-tight">
                 Web Development
               </h3>
@@ -28,7 +30,7 @@ export default function Team() {
             </p>
           </div>
           <br />
-          <div className="col-span-1 lg:col-span-8 lg:-mr-32 rounded-lg">
+          <div className="col-span-1 rounded-lg lg:col-span-8 lg:-mr-32">
             <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
               We are a web and mobile design and development agency. Making
               websites and apps, creating brand identities, and launching
@@ -45,10 +47,12 @@ export default function Team() {
             </Link>
           </div>
         </div>
-        <div className='grid-cols-1 grid lg:grid-cols-12'>
-          <div className="col-span-1 lg:col-span-4 flex w-fit flex-col justify-center lg:justify-start gap-y-4">
-            <div className='relative'>
-              <p className="absolute left-0 -top-1.5 text-3xl text-red-500">02</p>
+        <div className="grid grid-cols-1 lg:grid-cols-12">
+          <div className="col-span-1 flex w-fit flex-col justify-center gap-y-4 lg:col-span-4 lg:justify-start">
+            <div className="relative">
+              <p className="absolute -top-1.5 left-0 text-3xl text-red-500">
+                02
+              </p>
               <h3 className="text-center text-xl font-medium leading-tight">
                 Mobile Development
               </h3>
@@ -59,7 +63,7 @@ export default function Team() {
             </p>
           </div>
           <br />
-          <div className="col-span-1 lg:col-span-8 lg:-mr-32 rounded-lg">
+          <div className="col-span-1 rounded-lg lg:col-span-8 lg:-mr-32">
             <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
               We are a web and mobile design and development agency. Making
               websites and apps, creating brand identities, and launching
