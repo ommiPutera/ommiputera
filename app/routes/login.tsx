@@ -1,10 +1,10 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {type ActionFunction, redirect} from '@remix-run/node'
-import {type V2_MetaFunction, Form, useActionData} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { type ActionFunction, redirect } from '@remix-run/node'
+import { type V2_MetaFunction, Form, useActionData } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {createUserSession, getUser, login} from '~/utils/session.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { createUserSession, getUser, login } from '~/utils/session.server'
 
 // type LoaderData = {username: string; error: string}
 
@@ -20,17 +20,17 @@ type ActionData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
   if (user) return redirect('/dashboard')
   return {}
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: `Login to`}]
+  return [{ title: `Login to ommiputera.com` }]
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const username = formData.get('username')
   const password = formData.get('password')
@@ -45,18 +45,18 @@ export const action: ActionFunction = async ({request}) => {
     typeof password !== 'string' ||
     typeof redirectTo !== 'string'
   ) {
-    return {formError: `Form not submitted correctly.`}
+    return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = {username, password}
-  const user = await login({username, password})
+  let fields = { username, password }
+  const user = await login({ username, password })
   if (!user) {
     return {
       fields,
       formError: `Username/Password combination is incorrect, Please read this guide for further details`,
     }
   }
-  return createUserSession({userId: user.id, redirectUrl: redirectTo})
+  return createUserSession({ userId: user.id, redirectUrl: redirectTo })
 }
 
 export default function Index() {
@@ -74,21 +74,14 @@ export default function Index() {
     )
 
   return (
-    <main className="flex flex-col gap-5 pb-44 lg:gap-16">
-      <div className="px-5vw py-9 lg:px-15vw lg:py-12">
+    <main className="flex flex-col gap-5 pb-44 pt-8 lg:pt-16 lg:gap-16">
+      <div className="px-10vw py-9 lg:py-12">
         <div className="flex flex-col items-center justify-center gap-5">
-          <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-5xl xl:w-3/5">
-            Log in to your account.
+          <h1 className="px-0 text-center text-3xl lg:text-4xl font-medium leading-tight md:w-2/3 lg:px-9 xl:w-3/5">
+            Log in to <br /> ommiputera.com
           </h1>
-          <p className="mt-2 px-0 text-center font-medium text-gray-300 md:w-2/3 lg:mt-0 lg:px-9 xl:w-3/5">
-            2 years of proven experience in helping to create and maintain a
-            better code base for re-usability and best practices. Experience in
-            developing projects from concept to launch. Eager to tackle more
-            complex problems, and continues to find ways to maximize user
-            efficiency
-          </p>
         </div>
-        <div className="flex items-center justify-center lg:py-12">
+        <div className="flex items-center justify-center pt-8 lg:py-12">
           <Form
             onChange={e => {
               const form = e.currentTarget
@@ -105,8 +98,8 @@ export default function Index() {
             }
             onSubmit={() => setSubmitted(true)}
           >
-            <div className="mb-6">
-              <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+            <div className="mb-3">
+              <div className="lg:mb-1.5 flex flex-wrap items-baseline justify-between">
                 <Label htmlFor="username-field">Username</Label>
               </div>
               <Input
@@ -131,7 +124,7 @@ export default function Index() {
               ) : null}
             </div>
             <div className="mb-3">
-              <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
+              <div className="lg:mb-1.5 flex flex-wrap items-baseline justify-between">
                 <Label htmlFor="password-field">Password</Label>
               </div>
               <Input
@@ -157,8 +150,8 @@ export default function Index() {
             ) : null}
             <Button
               type="submit"
-              size="lg"
-              className="button mt-4"
+              size="md"
+              className="button mt-2"
               disabled={!formIsValid || submitted}
             >
               Login

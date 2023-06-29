@@ -50,7 +50,7 @@ function Inner({
             variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
           'rounded-md px-3 py-1 text-sm': size === 'sm',
-          'rounded-lg px-4 py-2.5 text-sm': size === 'md',
+          'rounded-md px-4 py-[11px] text-sm': size === 'md',
           'rounded-lg px-8 py-3 text-md': size === 'lg',
         },
       )}
@@ -60,4 +60,4 @@ function Inner({
   )
 }
 
-export {Button}
+export { Button }

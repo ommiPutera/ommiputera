@@ -1,5 +1,5 @@
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import {Link} from '@remix-run/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import { Link } from '@remix-run/react'
 
 export default function Team() {
   return (
@@ -13,7 +13,71 @@ export default function Team() {
           and provide a range of services.
         </p>
       </div>
-      <Tabs className="mt-12">
+      <div className="lg:hidden mt-12 grid gap-y-16">
+        <div className='grid-cols-1 grid lg:grid-cols-12'>
+          <div className="col-span-1 lg:col-span-4 flex w-fit flex-col justify-center lg:justify-start gap-y-4">
+            <div className='relative'>
+              <p className="absolute left-0 -top-1.5 text-3xl text-green-500">01</p>
+              <h3 className="text-center text-xl font-medium leading-tight">
+                Web Development
+              </h3>
+            </div>
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              Happy Monday everyone! Let’s look at one of our favourite German
+              Fintechs we’ve got to work on – Denario.
+            </p>
+          </div>
+          <br />
+          <div className="col-span-1 lg:col-span-8 lg:-mr-32 rounded-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              We are a web and mobile design and development agency. Making
+              websites and apps, creating brand identities, and launching
+              startups. Our goal is to help companies build relationships with
+              their customers online through great design and technical
+              performance.
+            </p>
+            <br />
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              The Dribbble shot depicts a web page design concept.
+            </p>
+            <Link to="/" className="text-lg text-green-500">
+              info@shakuro.com
+            </Link>
+          </div>
+        </div>
+        <div className='grid-cols-1 grid lg:grid-cols-12'>
+          <div className="col-span-1 lg:col-span-4 flex w-fit flex-col justify-center lg:justify-start gap-y-4">
+            <div className='relative'>
+              <p className="absolute left-0 -top-1.5 text-3xl text-red-500">02</p>
+              <h3 className="text-center text-xl font-medium leading-tight">
+                Mobile Development
+              </h3>
+            </div>
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              Happy Monday everyone! Let’s look at one of our favourite German
+              Fintechs we’ve got to work on – Denario.
+            </p>
+          </div>
+          <br />
+          <div className="col-span-1 lg:col-span-8 lg:-mr-32 rounded-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              We are a web and mobile design and development agency. Making
+              websites and apps, creating brand identities, and launching
+              startups. Our goal is to help companies build relationships with
+              their customers online through great design and technical
+              performance.
+            </p>
+            <br />
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              The Dribbble shot depicts a web page design concept.
+            </p>
+            <Link to="/" className="text-lg text-red-500">
+              info@shakuro.com
+            </Link>
+          </div>
+        </div>
+      </div>
+      <Tabs className="mt-12 hidden lg:block">
         <TabList className="flex w-full justify-center gap-x-6">
           <Tab className="max-w flex flex-col gap-y-2 rounded-t-xl border-b-2 bg-gray-800 px-8 pb-10 pt-4 text-left">
             <p className="mb-4 text-3xl text-green-500">01</p>
