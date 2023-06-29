@@ -1,10 +1,10 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
-import { Link, type V2_MetaFunction } from '@remix-run/react'
-import { SectionSpacer } from '~/components/spacer'
-import { getImgProps, images } from '~/images'
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import {Link, type V2_MetaFunction} from '@remix-run/react'
+import {SectionSpacer} from '~/components/spacer'
+import {getImgProps, images} from '~/images'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'About Ommi Putera' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'About Ommi Putera'}]
 }
 
 export default function Index() {
@@ -19,7 +19,7 @@ export default function Index() {
 
 function AboutMe() {
   return (
-    <main className="flex flex-col gap-5 pb-44 lg:pt-8 lg:gap-24">
+    <main className="flex flex-col gap-5 pb-44 lg:gap-24 lg:pt-8">
       <div className="px-5vw py-9 lg:px-15vw lg:py-12">
         <img
           id="about-me"
