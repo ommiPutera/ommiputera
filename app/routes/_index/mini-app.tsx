@@ -1,5 +1,4 @@
 export default function MiniApp() {
-
   return (
     <div className="mx-auto grid max-w-8xl gap-8 lg:gap-12">
       <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start lg:gap-x-48">
@@ -11,8 +10,7 @@ export default function MiniApp() {
           portfolio at
         </p>
       </div>
-      <div className="flex flex-col gap-2 lg:gap-6">
-      </div>
+      <div className="flex flex-col gap-2 lg:gap-6"></div>
     </div>
   )
 }
