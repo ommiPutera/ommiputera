@@ -6,28 +6,89 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "~/components/shadcn/navigation-menu"
 
-const LINKS = [
-  // {name: 'Post', to: '/post'},
-  {name: 'Project', to: '/project'},
-  {name: 'About', to: '/about'},
+type TypeLinks = ({
+  name: string;
+  to?: string;
+  asParent: boolean
+  child?: {
+    layout: '1' | '2'
+    component: string | React.ReactNode;
+    to: string;
+  }[];
+})[]
+
+const LinkDropDown = ({ name, desc }: { name: string, desc: string }) => {
+  return (
+    <div className="min-w-[200px] max-w-[250px] px-5 pt-2 pb-3 rounded-lg hover:bg-gray-800">
+      <p className='text-md font-medium whitespace-nowrap'>{name}</p>
+      <p className='text-sm mt-1 font-light text-gray-300 leading-tight'>{desc}</p>
+    </div>
+  )
+}
+
+const LINKS: TypeLinks = [
+  {
+    name: 'App',
+    asParent: true,
+    child: [
+      {
+        layout: '1',
+        component: <LinkDropDown name='Finance App' desc='A collection of links for navigating websites.' />,
+        to: '/about',
+      },
+      {
+        layout: '2',
+        component: <LinkDropDown name='Finance App' desc='A collection of links for navigating websites.' />,
+        to: '/about',
+      },
+    ]
+  },
+  {
+    name: 'App',
+    asParent: true,
+    child: [
+      {
+        layout: '1',
+        component: <LinkDropDown name='Finance Appaaaxxxxxxxxxx' desc='A collection of links for navigating websites.' />,
+        to: '/about',
+      },
+      {
+        layout: '2',
+        component: <LinkDropDown name='Finance App' desc='A collection of links for navigating websites.' />,
+        to: '/about',
+      },
+    ]
+  },
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false }
 ]
 
 const OWNERLINKS = [
-  {name: 'Dashboard', to: '/dashboard'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Dashboard', to: '/dashboard' },
+  { name: 'Admin Panel', to: '/admin' },
 ]
 
-const MOBILE_LINKS = [{name: 'Home', to: '/'}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <>
       <div
@@ -51,7 +112,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -69,9 +130,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -82,17 +143,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -102,7 +163,11 @@ function MobileMenuList() {
                 NAVIGATION
               </h5>
               {MOBILE_LINKS.map(link => (
-                <MobileNavLink key={link.to} to={link.to}>
+                <MobileNavLink
+                  key={link.to}
+                  to={link.to}
+                  asParent={link.asParent}
+                >
                   {link.name}
                 </MobileNavLink>
               ))}
@@ -128,34 +193,48 @@ function MobileMenuList() {
 
 function MobileNavLink({
   to,
+  asParent,
   children,
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to?: string, asParent: boolean }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
-  return (
-    <MenuLink
-      className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600"
-      as={Link}
-      to={to}
-    >
-      <div className="flex items-center justify-between">
-        {children}
-        {isSelected && <div className="h-2 w-2 rounded-full bg-white"></div>}
-      </div>
-    </MenuLink>
-  )
+
+  if (to && asParent) {
+    return (
+      <MenuLink
+        className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600"
+        as={Link}
+        to={to}
+      >
+        <div className="flex items-center justify-between">
+          {children}
+          {isSelected && <div className="h-2 w-2 rounded-full bg-white"></div>}
+        </div>
+      </MenuLink>
+    )
+  }
+  return <></>
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
-      {LINKS.map(link => (
-        <DesktopNavLink key={link.to} to={link.to}>
-          {link.name}
-        </DesktopNavLink>
-      ))}
+      <NavigationMenu>
+        <NavigationMenuList>
+          {LINKS.map(link => (
+            <DesktopNavLink
+              key={link.to}
+              to={link.to}
+              child={link?.child}
+              asParent={link.asParent}
+            >
+              {link.name}
+            </DesktopNavLink>
+          ))}
+        </NavigationMenuList>
+      </NavigationMenu>
       {user && (
         <li className="px-5 py-2">
           <form action="/logout" method="post">
@@ -174,30 +253,70 @@ function DesktopNav() {
 
 function DesktopNavLink({
   to,
+  child,
+  asParent,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to?: string, child?: { layout: '1' | '2', component: string | React.ReactNode, to: string }[], asParent: boolean }) {
   const location = useLocation()
-  const isSelected =
-    to === location.pathname || location.pathname.startsWith(`${to}/`)
-  return (
-    <li className="px-5 py-2">
-      <Link
-        prefetch="intent"
-        to={to}
-        className={clsx(
-          'underlined block whitespace-nowrap text-lg font-medium focus:outline-none lg:tracking-wide',
+  const isSelected = to === location.pathname || location.pathname.startsWith(`${to}/`)
+
+  if (asParent && child?.length) {
+    return (
+      <NavigationMenuItem>
+        <NavigationMenuTrigger
+          className={clsx(
+            'whitespace-nowrap w-full text-lg font-medium focus:outline-none lg:tracking-wide',
+            {
+              active: isSelected,
+              'text-secondary': !isSelected,
+            },
+          )}
+        >
+          {children}
+        </NavigationMenuTrigger>
+        <NavigationMenuContent className='px-3 pt-3 pb-3.5 bg-gray-900'>
           {
-            active: isSelected,
-            'text-secondary': !isSelected,
-          },
-        )}
-        {...rest}
-      >
-        {children}
-      </Link>
-    </li>
-  )
+            child.map(link => (
+              <Link
+                key={link.to}
+                prefetch="intent"
+                to={link.to}
+                className='block'
+              >
+                <NavigationMenuLink asChild>
+                  {link.component}
+                </NavigationMenuLink>
+              </Link>
+            ))
+          }
+        </NavigationMenuContent>
+      </NavigationMenuItem>
+    )
+  }
+  if (to && !asParent) {
+    return (
+      <NavigationMenuItem className="px-5 py-2">
+        <NavigationMenuLink>
+          <Link
+            prefetch="intent"
+            to={to}
+            className={clsx(
+              'underlined block whitespace-nowrap text-lg font-medium focus:outline-none lg:tracking-wide',
+              {
+                active: isSelected,
+                'text-secondary': !isSelected,
+              },
+            )}
+            {...rest}
+          >
+            {children}
+          </Link>
+        </NavigationMenuLink>
+      </NavigationMenuItem>
+    )
+  }
+  return <></>
 }
 
 function Logo() {
@@ -218,7 +337,7 @@ function Logo() {
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   if (!user) return <></>
   return (
     <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-10vw">
@@ -245,7 +364,7 @@ function ProtectedpNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -269,4 +388,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

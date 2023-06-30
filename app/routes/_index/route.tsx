@@ -1,19 +1,20 @@
-import type {Project} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import {HomeHeroSection} from '~/components/sections/hero'
-import {db} from '~/utils/db.server'
+import type { Project } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import { HomeHeroSection } from '~/components/sections/hero'
+import { db } from '~/utils/db.server'
 // import Pricing from './pricing'
 import RecentWork from './recent-work'
 import Team from './team'
 import WorkinOn from './working-on'
-import {SectionSpacer} from '~/components/spacer'
+import { SectionSpacer } from '~/components/spacer'
+import MiniApp from './mini-app'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const owner = await db.user.findMany({where: {role: 'OWNER'}})
-  const projects = await db.project.findMany({where: {userId: owner[0].id}})
-  let data: LoaderData = {projects}
+export const loader: LoaderFunction = async ({ request }) => {
+  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
+  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
+  let data: LoaderData = { projects }
   return data
 }
 
@@ -35,6 +36,10 @@ export default function Index() {
         <SectionSpacer withoutBorder size="xs" />
         <div className="px-5vw lg:px-15vw">
           <RecentWork />
+        </div>
+        <SectionSpacer withoutBorder size="xs" />
+        <div className="px-5vw lg:px-15vw">
+          <MiniApp />
         </div>
         <SectionSpacer />
         <div className="px-5vw lg:px-15vw">
