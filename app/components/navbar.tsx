@@ -6,111 +6,85 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
+  NavigationMenuViewport
 } from '~/components/shadcn/navigation-menu'
+import React from 'react'
 
 type TypeLinks = {
   name: string
   to?: string
   asParent: boolean
   child?: {
-    layout: '1' | '2'
     component: string | React.ReactNode
-    to: string
   }[]
 }[]
 
-const LinkDropDown = ({name, desc}: {name: string; desc: string}) => {
+const RowApp1 = () => {
   return (
-    <div className="min-w-[200px] max-w-[250px] rounded-lg px-5 pb-3 pt-2 hover:bg-gray-800">
-      <p className="whitespace-nowrap text-md font-medium">{name}</p>
-      <p className="mt-1 text-sm font-light leading-tight text-gray-300">
-        {desc}
-      </p>
+    <div className='w-[420px] grid grid-cols-2 gap-x-2'>
+      <Link to="/about" prefetch='intent'>
+        <div className="col-span-1 w-full rounded-lg px-3 pb-2.5 pt-2 hover:bg-gray-800">
+          <p className="text-lg font-medium">Finance App</p>
+          <p className="mt-1 text-md font-light leading-tight text-gray-300">A collection of links for navigating websites.</p>
+        </div>
+      </Link>
+      <Link to="/about" prefetch='intent'>
+        <div className="col-span-1 rounded-lg px-3 pb-2.5 pt-2 hover:bg-gray-800">
+          <p className="text-lg font-medium">Finance Appsss</p>
+          <p className="mt-1 text-md font-light leading-tight text-gray-300">A collection of links for navigating websites.</p>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
+const App2 = () => {
+  return (
+    <div className='w-[320px] grid grid-cols-2 gap-x-2'>
+      <Link to="/about" prefetch='intent'>
+        <div className="col-span-1 w-full rounded-lg px-3 pb-2.5 pt-2 hover:bg-gray-800">
+          <p className="text-lg font-medium">Finance App</p>
+          <p className="mt-1 text-md font-light leading-tight text-gray-300">A collection of links for navigating websites.</p>
+        </div>
+      </Link>
     </div>
   )
 }
 
 const LINKS: TypeLinks = [
   {
-    name: 'App',
+    name: 'Web Applications',
     asParent: true,
     child: [
-      {
-        layout: '1',
-        component: (
-          <LinkDropDown
-            name="Finance App"
-            desc="A collection of links for navigating websites."
-          />
-        ),
-        to: '/about',
-      },
-      {
-        layout: '2',
-        component: (
-          <LinkDropDown
-            name="Finance App"
-            desc="A collection of links for navigating websites."
-          />
-        ),
-        to: '/about',
-      },
+      { component: <RowApp1 /> },
     ],
   },
-  {
-    name: 'App',
-    asParent: true,
-    child: [
-      {
-        layout: '1',
-        component: (
-          <LinkDropDown
-            name="Finance Appaaaxxxxxxxxxx"
-            desc="A collection of links for navigating websites."
-          />
-        ),
-        to: '/about',
-      },
-      {
-        layout: '2',
-        component: (
-          <LinkDropDown
-            name="Finance App"
-            desc="A collection of links for navigating websites."
-          />
-        ),
-        to: '/about',
-      },
-    ],
-  },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
 const OWNERLINKS = [
-  {name: 'Dashboard', to: '/dashboard'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Dashboard', to: '/dashboard' },
+  { name: 'Admin Panel', to: '/admin' },
 ]
 
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <>
       <div
@@ -134,7 +108,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -152,9 +126,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -165,17 +139,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -225,7 +199,7 @@ function MobileNavLink({
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
 
-  if (to && asParent) {
+  if (to && !asParent) {
     return (
       <MenuLink
         className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600"
@@ -243,13 +217,15 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
+  const [value, setValue] = React.useState("");
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
-      <NavigationMenu>
+      <NavigationMenu value={value} onValueChange={setValue}>
         <NavigationMenuList>
           {LINKS.map(link => (
             <DesktopNavLink
+              closeContent={() => setValue('')}
               key={link.to}
               to={link.to}
               child={link?.child}
@@ -259,6 +235,7 @@ function DesktopNav() {
             </DesktopNavLink>
           ))}
         </NavigationMenuList>
+        <NavigationMenuViewport />
       </NavigationMenu>
       {user && (
         <li className="px-5 py-2">
@@ -280,11 +257,13 @@ function DesktopNavLink({
   to,
   child,
   asParent,
+  closeContent,
   children,
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {layout: '1' | '2'; component: string | React.ReactNode; to: string}[]
+  child?: { component: string | React.ReactNode }[]
+  closeContent: () => void
   asParent: boolean
 }) {
   const location = useLocation()
@@ -305,16 +284,11 @@ function DesktopNavLink({
         >
           {children}
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="bg-gray-900 px-3 pb-3.5 pt-3">
-          {child.map(link => (
-            <Link
-              key={link.to}
-              prefetch="intent"
-              to={link.to}
-              className="block"
-            >
-              <NavigationMenuLink asChild>{link.component}</NavigationMenuLink>
-            </Link>
+        <NavigationMenuContent className="bg-gray-900 w-full px-3 pb-3.5 pt-3">
+          {child.map((link, index) => (
+            <div key={index} onClick={closeContent}>
+              <NavigationMenuLink asChild key={index}>{link.component}</NavigationMenuLink>
+            </div>
           ))}
         </NavigationMenuContent>
       </NavigationMenuItem>
@@ -363,7 +337,7 @@ function Logo() {
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   if (!user) return <></>
   return (
     <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-10vw">
@@ -390,7 +364,7 @@ function ProtectedpNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -414,4 +388,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }
