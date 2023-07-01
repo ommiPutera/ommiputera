@@ -1,8 +1,8 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import {type V2_MetaFunction} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export default function Index() {
@@ -17,7 +17,7 @@ export default function Index() {
             First of all, thank you for interested in reading about me, On this
             page, I will tell all about my life and my experiences
           </h4>
-          <div className='mx-auto'>
+          <div className="mx-auto">
             <UIButton size="md">Login first</UIButton>
           </div>
         </div>
