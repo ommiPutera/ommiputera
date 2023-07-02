@@ -1,25 +1,26 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {type ActionFunction, redirect} from '@remix-run/node'
-import {type V2_MetaFunction, Form, useActionData} from '@remix-run/react'
-import {debounce} from 'lodash'
+import type { LoaderFunction } from '@remix-run/node'
+import { type ActionFunction, redirect } from '@remix-run/node'
+import { type V2_MetaFunction, Form, useActionData } from '@remix-run/react'
+import { debounce } from 'lodash'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '~/components/shadcn/tabs'
-import {SectionSpacer} from '~/components/spacer'
-import {Info} from 'lucide-react'
-import {db} from '~/utils/db.server'
+import { SectionSpacer } from '~/components/spacer'
+import { Info } from 'lucide-react'
+import { db } from '~/utils/db.server'
 import {
   createUserSession,
   getUser,
   login,
   register,
 } from '~/utils/session.server'
+import { Logo } from '~/components/navbar'
 
 // type LoaderData = {username: string; error: string}
 
@@ -39,14 +40,14 @@ type ActionData = {
   }
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const paramsTo = searchParams.get('to')
-  return {paramsTo}
+  return { paramsTo }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {paramsTo} = await getLoaderData({request})
+export const loader: LoaderFunction = async ({ request }) => {
+  const { paramsTo } = await getLoaderData({ request })
   const user = await getUser(request)
   if (!user) return null
   if (paramsTo) return redirect(paramsTo)
@@ -57,11 +58,11 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: `Login to ommiputera.com`}]
+  return [{ title: `Login to ommiputera.com` }]
 }
 
-export const action: ActionFunction = async ({request}) => {
-  const {paramsTo} = await getLoaderData({request})
+export const action: ActionFunction = async ({ request }) => {
+  const { paramsTo } = await getLoaderData({ request })
   const formData = await request.formData()
   const loginType = formData.get('loginType')
   const username = formData.get('username')
@@ -71,14 +72,14 @@ export const action: ActionFunction = async ({request}) => {
     username: username,
   })
   if (typeof username !== 'string' || typeof password !== 'string') {
-    return {formError: `Form not submitted correctly.`}
+    return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = {username, password}
+  let fields = { username, password }
 
   switch (loginType) {
     case 'login': {
-      const user = await login({username, password})
+      const user = await login({ username, password })
       let redirect = '/'
       if (!user) {
         return {
@@ -93,11 +94,11 @@ export const action: ActionFunction = async ({request}) => {
       if (user.role === 'CLIENT' || user.role === 'OWNER') {
         redirect = '/dashboard'
       }
-      return createUserSession({userId: user.id, redirectUrl: redirect})
+      return createUserSession({ userId: user.id, redirectUrl: redirect })
     }
     case 'register': {
       let userExists = await db.user.findFirst({
-        where: {username},
+        where: { username },
       })
       if (userExists) {
         return {
@@ -105,7 +106,7 @@ export const action: ActionFunction = async ({request}) => {
           formError: `User with username ${username} already exists`,
         }
       }
-      const user = await register({username, password, role: 'USER'})
+      const user = await register({ username, password, role: 'USER' })
       if (!user) {
         return {
           fields,
@@ -118,7 +119,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Login type invalid`}
+      return { fields, formError: `Login type invalid` }
     }
   }
 }
@@ -153,14 +154,16 @@ export default function Index() {
   }, [actionData?.formError])
 
   return (
-    <main className="flex flex-col gap-5 pb-44 pt-8 lg:h-screen lg:gap-16 lg:pt-16">
-      <div className="px-10vw py-9 lg:py-10">
-        <div className="flex flex-col items-center justify-center gap-5">
-          <h1 className="px-0 text-center text-3xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-4xl xl:w-3/5">
-            Log in
-          </h1>
-        </div>
-        <div className="flex w-full items-center justify-center pt-8 lg:py-9">
+    <main className="flex flex-col gap-5 pb-44 pt-8 lg:min-h-screen lg:gap-16 lg:pt-12">
+      <div className="px-10vw py-9 lg:py-10 mx-auto">
+        <div className="flex flex-col w-[22rem]">
+          <div className="flex w-full flex-col gap-3 mb-16">
+            <Logo withoutUnderlined />
+            <h1 className="text-3xl font-medium leading-10 lg:text-4xl mt-12">
+              Log in to access your account and data
+            </h1>
+            <p className='font-light'>By logging in, you agree to our Terms of Service and Privacy Policy</p>
+          </div>
           <Tabs
             defaultValue="login"
             className="mx-auto w-full lg:w-auto"
@@ -248,8 +251,8 @@ export default function Index() {
                 ) : null}
                 <Button
                   type="submit"
-                  size="sm"
-                  className="mt-3"
+                  size="md"
+                  className="mt-3 py-1"
                   disabled={!loginFormIsValid || submitted}
                 >
                   Login
@@ -405,8 +408,8 @@ export default function Index() {
                 ) : null}
                 <Button
                   type="submit"
-                  size="sm"
-                  className="mt-3"
+                  size="md"
+                  className="mt-3 py-1"
                   disabled={!registerFormIsValid || submitted}
                 >
                   Register
