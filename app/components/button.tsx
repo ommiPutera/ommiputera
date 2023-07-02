@@ -18,9 +18,9 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full border font-medium ring-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:border-gray-400 disabled:text-gray-400 disabled:hover:bg-transparent',
+        'group relative inline-flex w-full border font-medium bg-white ring-white hover:bg-gray-100 disabled:bg-gray-200 disabled:cursor-not-allowed disabled:border-gray-400 disabled:text-gray-700 disabled:hover:bg-gray-200',
         {
-          'text-white': variant === 'primary',
+          'text-black': variant === 'primary',
           'border-red-300 bg-red-100 text-red-800 hover:bg-red-200 disabled:border-red-100':
             variant === 'danger',
           'rounded-md': size === 'sm',
@@ -50,7 +50,7 @@ function Inner({
             variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
           'rounded-md px-3 py-1 text-sm': size === 'sm',
-          'rounded-md px-4 py-[11px] text-sm': size === 'md',
+          'rounded-md px-4 py-2.5 text-md': size === 'md',
           'rounded-lg px-8 py-3 text-md': size === 'lg',
         },
       )}
@@ -60,4 +60,4 @@ function Inner({
   )
 }
 
-export {Button}
+export { Button }

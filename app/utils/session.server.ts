@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 type LoginType = {
   username: string
   password: string
+  role?: string
 }
 
 let sessionSecret = process.env.SESSION_SECRET
@@ -28,9 +29,11 @@ export function getUserSession(req: Request) {
   return storage.getSession(req.headers.get('Cookie'))
 }
 
-export async function register({username, password}: LoginType) {
+export async function register({username, password, role}: LoginType) {
   const passwordHash = await bcrypt.hash(password, 10)
-  const user = await db.user.create({data: {username, passwordHash}})
+  const user = await db.user.create({
+    data: {username, passwordHash, email: '', fullName: '', role},
+  })
   return user
 }
 
@@ -69,6 +72,12 @@ export async function getUserId(req: Request) {
   let userId = session.get('userId')
   if (typeof userId !== 'string') return 'null'
   return userId
+}
+
+export async function getUserRole(req: Request) {
+  let user = await getUser(req)
+  if (!user) return null
+  return user.role
 }
 
 export async function createUserSession({

@@ -1,14 +1,14 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
 
 function Footer() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <footer
       className={clsx(
-        'z-[2] border-t border-gray-600 px-5vw py-9 lg:px-15vw lg:pb-12 lg:pt-24',
+        'z-[2] border-t border-gray-700 px-5vw py-9 lg:px-15vw lg:pb-12 lg:pt-24',
         {
           'bg-gray-900': !user,
           'bg-black': user,
