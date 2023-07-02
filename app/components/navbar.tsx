@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,8 +22,8 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
+import { SectionSpacer } from './spacer'
+import { Badge } from './shadcn/badge'
 
 type TypeLinks = {
   name: string
@@ -75,7 +75,7 @@ const RowProducts1 = () => {
   return (
     <div className="grid h-full w-[620px] grid-cols-2 gap-x-3 px-3 pb-3">
       <div className="col-span-1 flex h-full flex-col justify-end rounded-lg bg-gray-800 p-4">
-        <p className="bottom-2 text-lg text-xl font-bold">twon.com</p>
+        <p className="bottom-2 text-lg font-bold">twon.com</p>
         <p className="mt-2 text-md font-light leading-tight text-gray-300">
           A collection of links for navigating websites. A collection of links
           for navigating websites.
@@ -109,41 +109,41 @@ const LINKS: TypeLinks = [
   {
     name: 'Web Applications',
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{ component: <RowApp1 /> }],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
+      { component: <RowProducts1 /> },
+      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
+      { component: <RowProducts1 /> },
     ],
   },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
-const USER_LINKS = [{name: 'Personal Cash Flow', to: '/cash-flow'}]
+const USER_LINKS = [{ name: 'Personal Cash Flow', to: '/cash-flow' }]
 
 const OWNER_LINKS = [
-  {name: 'Dashboard', to: '/dashboard'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Dashboard', to: '/dashboard' },
+  { name: 'Admin Panel', to: '/admin' },
   ...USER_LINKS,
 ]
 
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <>
       <div
-        className={clsx('px-5vw py-9 lg:px-10vw lg:py-12', {
-          'bg-black lg:pb-6 lg:pt-12': user,
+        className={clsx('px-5vw py-9 lg:px-[4vw] lg:py-8', {
+          'bg-black': user,
         })}
       >
-        <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between">
+        <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between">
           <Logo />
           <DesktopNav />
           <MobileNav />
@@ -159,11 +159,11 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
-                <MenuButton className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
+                <MenuButton className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center border-2 p-1 transition focus:outline-none">
                   <BurgerMenu state={state} />
                 </MenuButton>
                 <MobileMenuList />
@@ -177,9 +177,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -190,17 +190,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-700"
@@ -259,7 +259,7 @@ function MobileNavLink({
       >
         <div className="flex items-center justify-between">
           {children}
-          {isSelected && <div className="h-2 w-2 rounded-full bg-white"></div>}
+          {isSelected && <div className="h-2 w-2 bg-white"></div>}
         </div>
       </MenuLink>
     )
@@ -268,7 +268,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -290,22 +290,22 @@ function DesktopNav() {
         <NavigationMenuViewport className="bg-gray-900" />
       </NavigationMenu>
       {user ? (
-        <li className="px-5 py-2">
+        <li className="px-5 py-2 ml-2">
           <form action="/logout" method="post">
             <button
               type="submit"
-              className="block whitespace-nowrap rounded-lg border-[1.5px] border-red-300 bg-red-100 px-4 pb-2 pt-1 text-lg font-medium text-red-800 hover:border-red-500 hover:bg-red-200 hover:text-red-700"
+              className="block w-[100px] whitespace-nowrap rounded-lg border-[1.5px] border-red-300 bg-red-100 px-4 pb-2 pt-1 text-base font-medium text-red-800 hover:border-red-500 hover:bg-red-200 hover:text-red-700"
             >
               Log out
             </button>
           </form>
         </li>
       ) : (
-        <li className="px-5 py-2">
+        <li className="px-2 py-2 ml-2">
           <Link to="/login" prefetch="intent">
             <button
               type="button"
-              className="text-secondary block whitespace-nowrap rounded-lg border px-5 pb-1.5 pt-1 text-lg font-medium hover:border-white hover:bg-gray-800 hover:text-white"
+              className="text-secondary w-[100px] block whitespace-nowrap rounded-lg border px-5 pb-1.5 pt-1 text-base font-medium hover:border-white hover:bg-gray-800 hover:text-white"
             >
               Log in
             </button>
@@ -326,7 +326,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -338,7 +338,7 @@ function DesktopNavLink({
   if (asParent && child?.length) {
     return (
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="text-secondary w-full whitespace-nowrap text-lg font-medium focus:outline-none data-[state=open]:bg-gray-800 data-[state=open]:text-white lg:tracking-wide">
+        <NavigationMenuTrigger className="text-secondary w-full px-3 pb-3 pt-2.5 whitespace-nowrap text-base font-medium focus:outline-none data-[state=open]:text-white lg:tracking-wide">
           {children}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-full bg-gray-900 pt-3">
@@ -355,13 +355,13 @@ function DesktopNavLink({
   }
   if (to && !asParent) {
     return (
-      <NavigationMenuItem className="px-5 py-2">
+      <NavigationMenuItem>
         <NavigationMenuLink>
           <Link
             prefetch="intent"
             to={to}
             className={clsx(
-              'underlined block whitespace-nowrap text-lg font-medium focus:outline-none lg:tracking-wide',
+              'block hover:text-white px-3 py-1.5 whitespace-nowrap text-base font-medium focus:outline-none lg:tracking-wide',
               {
                 active: isSelected,
                 'text-secondary': !isSelected,
@@ -385,9 +385,9 @@ function Logo() {
       to="/"
       className="underlined block transition focus:outline-none"
     >
-      <h1 className="whitespace-nowrap text-3xl font-medium">
+      <h1 className="whitespace-nowrap text-2xl lg:text-3xl font-medium">
         ommiputera
-        <span className="ml-[1px] text-base font-light text-gray-100">
+        <span className="ml-[1px] text-md font-light text-gray-100">
           .com
         </span>
       </h1>
@@ -396,19 +396,19 @@ function Logo() {
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   if (user.role === 'USER') return <ProtectedNavItems links={USER_LINKS} />
   return <ProtectedNavItems links={OWNER_LINKS} />
 }
 
-function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
-  const {user} = useRootData()
+function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
+  const { user } = useRootData()
   if (!user) return <></>
   return (
-    <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-700 bg-black px-5vw lg:px-10vw">
-      <nav className="text-primary mx-auto flex max-w-8xl items-center justify-between gap-x-4">
+    <div className="no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-700 bg-black px-5vw lg:px-[4vw]">
+      <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between gap-x-4">
         <ul className="-mx-2 flex gap-x-2">
           {links.map(link => (
             <ProtectedpNavLink key={link.to} to={link.to}>
@@ -431,17 +431,17 @@ function ProtectedpNavLink({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
-    <li className="mb-1 px-2">
+    <li className="mb-1 px-1.5">
       <Link
         prefetch="intent"
         to={to}
         className={clsx(
-          'underlined block whitespace-nowrap pb-3 pt-1 text-md font-medium focus:outline-none lg:text-lg lg:tracking-wide',
+          'underlined block whitespace-nowrap pb-2 text-md font-medium focus:outline-none lg:text-base lg:tracking-wide',
           {
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,
@@ -455,4 +455,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

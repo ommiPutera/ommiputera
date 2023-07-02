@@ -74,14 +74,17 @@ module.exports = {
         sans: ['Matter', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
-        md: '0.969rem', // 22px
-        xl: '1.375rem', // 22px
-        '2xl': '1.5625rem', // 25px
-        '3xl': '1.875rem', // 30px
-        '4xl': '2.5rem', // 40px
-        '5xl': '3.125rem', // 50px
-        '6xl': '3.75rem', // 60px
-        '7xl': '4.375rem', // 70px
+        sm: '0.75rem', // 12px
+        md: '0.875rem', // 14px
+        base: '1rem', // 16px
+        lg: '1.125rem', // 18px
+        xl: '1.25rem', // 20px
+        '2xl': '1.5rem', // 24px
+        '3xl': '1.625rem', // 26px
+        '4xl': '2.125rem', // 34px
+        '5xl': '2.875rem', // 46px
+        '6xl': '3.375rem', // 54px
+        '7xl': '4.125rem', // 66px
       },
       spacing: {
         '5vw': '5vw', // pull featured sections and navbar in the margin
@@ -91,12 +94,12 @@ module.exports = {
       },
       keyframes: {
         'accordion-down': {
-          from: {height: 0},
-          to: {height: 'var(--radix-accordion-content-height)'},
+          from: { height: 0 },
+          to: { height: 'var(--radix-accordion-content-height)' },
         },
         'accordion-up': {
-          from: {height: 'var(--radix-accordion-content-height)'},
-          to: {height: 0},
+          from: { height: 'var(--radix-accordion-content-height)' },
+          to: { height: 0 },
         },
       },
       animation: {

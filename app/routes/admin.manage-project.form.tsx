@@ -1,7 +1,7 @@
-import type {Project} from '@prisma/client'
-import type {ActionFunction} from '@remix-run/node'
-import {type LoaderFunction} from '@remix-run/node'
-import {DialogOverlay, DialogContent} from '@reach/dialog'
+import type { Project } from '@prisma/client'
+import type { ActionFunction } from '@remix-run/node'
+import { type LoaderFunction } from '@remix-run/node'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 import {
   Form,
   Link,
@@ -11,17 +11,17 @@ import {
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import {getUserId} from '~/utils/session.server'
+import { getUserId } from '~/utils/session.server'
 
-type LoaderData = {project: Project | null}
+type LoaderData = { project: Project | null }
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -48,23 +48,23 @@ enum ActionEnums {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Manage Project - Form'}]
+  return [{ title: 'Manage Project - Form' }]
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({where: {id: id ?? ''}})
+  const project = await db.project.findUnique({ where: { id: id ?? '' } })
   return project
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const project = await getLoaderData({request})
-  let data: LoaderData = {project}
+export const loader: LoaderFunction = async ({ request }) => {
+  const project = await getLoaderData({ request })
+  let data: LoaderData = { project }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const userId = await getUserId(request)
   const formData = await request.formData()
   const {
@@ -79,7 +79,7 @@ export const action: ActionFunction = async ({request}) => {
   } = Object.fromEntries(formData)
 
   if (typeof projectId !== 'string') {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
   if (_action === ActionEnums.DELETE) {
     return await deleteProject(projectId, '/admin/manage-project')
@@ -94,7 +94,7 @@ export const action: ActionFunction = async ({request}) => {
     typeof liveLink !== 'string' ||
     typeof content !== 'string'
   ) {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
   const fields = {
     projectName,
@@ -120,7 +120,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Action type invalid`}
+      return { fields, formError: `Action type invalid` }
     }
   }
 }
@@ -136,17 +136,17 @@ export default function Index() {
       <div className="flex items-center justify-between">
         <div className="w-min">
           <Link to="/admin/manage-project" prefetch="intent">
-            <Button size="md" type="button">
+            <Button size="sm" type="button">
               <span className="mr-2 text-md">↩️</span>
               Back
             </Button>
           </Link>
         </div>
-        <h1 className="text-md lg:text-lg">
+        <h1 className="text-md lg:text-base">
           {isUpdateAndRead ? 'Update Existing' : 'Create New'} Project
         </h1>
       </div>
-      <div className="pb-6 pt-12">
+      <div className="py-6">
         <FormAction />
       </div>
     </div>
@@ -209,13 +209,13 @@ function FormAction() {
           })
         }}
         method="POST"
-        className="flex w-full flex-col gap-y-4"
+        className="flex w-full flex-col"
         onSubmit={() => {
           setSubmitted(true)
         }}
       >
         <input type="hidden" name="projectId" value={project?.id || ''} />
-        <div className="grid grid-cols-1 gap-x-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-3 lg:grid-cols-3">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="projectName-field">Project Name</Label>
@@ -264,7 +264,7 @@ function FormAction() {
             />
           </div>
         </div>
-        <div className="grid grid-cols-1 gap-x-6 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-x-3 lg:grid-cols-3">
           <div className="col-span-1 mb-3">
             <div className="mb-1.5 flex flex-wrap items-baseline justify-between">
               <Label htmlFor="liveLink-field">Live URL</Label>
@@ -306,7 +306,7 @@ function FormAction() {
             <Input
               type="textarea"
               name="content"
-              rows={15}
+              rows={6}
               defaultValue={project?.content}
               placeholder="content"
               id="content-field"
@@ -316,13 +316,13 @@ function FormAction() {
             />
           </div>
         </div>
-        <div className="mt-8 flex w-full justify-end gap-x-4">
+        <div className="mt-2 flex w-full justify-end gap-x-4">
           <div className="w-min" hidden={isCreate}>
             <Button
               type="button"
               size="md"
               variant="danger"
-              className="mt-4"
+              className=""
               onClick={openDeleteModal}
               disabled={submitted}
             >
@@ -333,7 +333,7 @@ function FormAction() {
             <Button
               type="submit"
               size="md"
-              className="mt-4"
+              className=""
               name="_action"
               disabled={!formIsValid || submitted}
               value={isCreate ? ActionEnums.CREATE : ActionEnums.UPDATE}
@@ -347,7 +347,7 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={isShowDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
         className="flex w-full items-center"
       >
         <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-700 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
@@ -365,7 +365,7 @@ function FormAction() {
             </div>
             <div className="flex w-full justify-between border-t border-gray-700 px-6 py-4">
               <Button
-                size="md"
+                size="sm"
                 type="button"
                 className="w-min"
                 onClick={closeDeleteModal}
@@ -374,7 +374,7 @@ function FormAction() {
               </Button>
               <Button
                 type="submit"
-                size="md"
+                size="sm"
                 name="_action"
                 value={ActionEnums.DELETE}
                 className="w-min"

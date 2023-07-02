@@ -1,10 +1,10 @@
-import {TabList, TabPanel, TabPanels, Tabs, TabsOrientation} from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { TabList, TabPanel, TabPanels, Tabs, TabsOrientation } from '@reach/tabs'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {getUserRole, requireUserSession} from '~/utils/session.server'
+import { getUserRole, requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {
@@ -13,7 +13,7 @@ type LoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const userAgent = await request.headers.get('user-agent')
   const isAndroid = () => Boolean(userAgent?.match(/Android/i))
   const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
@@ -27,10 +27,10 @@ export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   if (role === 'USER') {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   const data: LoaderData = {
     device: {
@@ -47,7 +47,7 @@ enum Screen {
 }
 
 const LINKS = [
-  {name: 'General', to: '/admin'},
+  { name: 'General', to: '/admin' },
   {
     name: 'Manage Project',
     to: '/admin/manage-project',
@@ -63,7 +63,7 @@ export default function Index() {
   const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
-  const {isMobile, isDesktop} = data.device
+  const { isMobile, isDesktop } = data.device
   const [screen, setScreen] = React.useState(() => {
     if (isDesktop) return Screen.DESKTOP
     if (isMobile || typeof window !== 'object') return Screen.MOBILE
@@ -90,19 +90,19 @@ export default function Index() {
     <main className="flex flex-col gap-5 pb-44 lg:gap-9">
       <LayoutTitle />
       <div className="pb-9 lg:px-10vw lg:pb-12">
-        <div className="relative mx-auto grid lg:max-w-8xl">
+        <div className="relative mx-auto grid lg:max-w-7xl">
           <Tabs
-            style={{display: isDesktopScreen ? 'grid' : ''}}
+            style={{ display: isDesktopScreen ? 'grid' : '' }}
             orientation={
               isMobileScreen
                 ? TabsOrientation.Horizontal
                 : TabsOrientation.Vertical
             }
-            className="w-full grid-cols-12 gap-x-14 overflow-visible"
+            className="w-full grid-cols-9 gap-x-8 overflow-visible"
           >
             <TabList
               className={clsx(
-                'z-0 flex gap-1.5 overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0',
+                'z-0 flex gap-1 overflow-x-scroll bg-transparent px-5vw lg:col-span-2 lg:overflow-x-hidden lg:px-0',
                 {
                   'flex-col': isDesktopScreen,
                   'flex-row lg:pb-3': isMobileScreen,
@@ -115,7 +115,7 @@ export default function Index() {
                   to={link.to}
                   prefetch="intent"
                   className={clsx(
-                    'z-10 rounded-md px-4 py-3.5 text-left text-md font-medium text-gray-300 xl:text-lg',
+                    'z-10 rounded-md px-4 pt-2 pb-2.5 text-left text-sm font-medium text-gray-300 lg:text-md',
                     {
                       active: isRouteSelected(link.to, link.child),
                       'bg-gray-800 text-white': isRouteSelected(
@@ -131,20 +131,20 @@ export default function Index() {
                 </Link>
               ))}
             </TabList>
-            <TabPanels className="mt-4 lg:col-span-9 lg:mt-0">
+            <TabPanels className="mt-4 lg:col-span-7 lg:mt-0">
               <TabPanel key={location.pathname} className="block">
                 <AnimatePresence>
                   <motion.div
-                    initial={{y: 220, opacity: 0}}
-                    animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-                    exit={{y: 220, opacity: 0}}
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
                     transition={{
-                      opacity: {duration: shouldReduceMotion ? 0 : 0.1},
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
                       ease: 'linear',
                     }}
                   >
-                    <div className="relative h-full w-full">
-                      <div className="w-full border-b border-t border-gray-700 bg-black lg:-mt-16 lg:rounded-md lg:border xl:-mt-20">
+                    <div className="relative h-full w-full min-h-[50vh]">
+                      <div className="w-full shadow-[1px_10px_47px_0px_#19191987] border-b border-t border-gray-700 bg-black lg:-mt-24 lg:rounded-lg lg:border xl:-mt-36">
                         <Outlet />
                       </div>
                     </div>
@@ -167,8 +167,8 @@ function LayoutTitle() {
     .replace(/[/]/g, ' / ')
 
   return (
-    <div className="border-b border-gray-700 bg-black px-5vw py-9 lg:px-10vw lg:py-12">
-      <div className="relative mx-auto flex max-w-8xl items-center justify-between">
+    <div className="w-full bg-gradient-to-b from-black to-gray-900 px-5vw lg:px-10vw">
+      <div className="relative mx-auto py-9 lg:pb-9 lg:pt-24 border-b border-gray-700 flex max-w-7xl items-center justify-between">
         <div className="text-left">
           <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-3xl">
             Admin Panel Settings
@@ -177,8 +177,8 @@ function LayoutTitle() {
             2 years of proven experience in helping.
           </p>
         </div>
-        <div className="hidden lg:block">
-          <h1 className="leading-tigh text-secondary px-0 text-lg font-medium capitalize">
+        <div className="hidden lg:block -mt-36">
+          <h1 className="leading-tigh text-secondary px-0 text-base font-medium capitalize">
             {routeName.trim() || '/ General'}
           </h1>
         </div>

@@ -1,19 +1,19 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {type ActionFunction, redirect} from '@remix-run/node'
-import {type V2_MetaFunction, Form, useActionData} from '@remix-run/react'
-import {debounce} from 'lodash'
+import type { LoaderFunction } from '@remix-run/node'
+import { type ActionFunction, redirect } from '@remix-run/node'
+import { type V2_MetaFunction, Form, useActionData } from '@remix-run/react'
+import { debounce } from 'lodash'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '~/components/shadcn/tabs'
-import {SectionSpacer} from '~/components/spacer'
-import {Info} from 'lucide-react'
-import {db} from '~/utils/db.server'
+import { SectionSpacer } from '~/components/spacer'
+import { Info } from 'lucide-react'
+import { db } from '~/utils/db.server'
 import {
   createUserSession,
   getUser,
@@ -39,14 +39,14 @@ type ActionData = {
   }
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const paramsTo = searchParams.get('to')
-  return {paramsTo}
+  return { paramsTo }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {paramsTo} = await getLoaderData({request})
+export const loader: LoaderFunction = async ({ request }) => {
+  const { paramsTo } = await getLoaderData({ request })
   const user = await getUser(request)
   if (!user) return null
   if (paramsTo) return redirect(paramsTo)
@@ -57,11 +57,11 @@ export const loader: LoaderFunction = async ({request}) => {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: `Login to ommiputera.com`}]
+  return [{ title: `Login to ommiputera.com` }]
 }
 
-export const action: ActionFunction = async ({request}) => {
-  const {paramsTo} = await getLoaderData({request})
+export const action: ActionFunction = async ({ request }) => {
+  const { paramsTo } = await getLoaderData({ request })
   const formData = await request.formData()
   const loginType = formData.get('loginType')
   const username = formData.get('username')
@@ -71,14 +71,14 @@ export const action: ActionFunction = async ({request}) => {
     username: username,
   })
   if (typeof username !== 'string' || typeof password !== 'string') {
-    return {formError: `Form not submitted correctly.`}
+    return { formError: `Form not submitted correctly.` }
   }
 
-  let fields = {username, password}
+  let fields = { username, password }
 
   switch (loginType) {
     case 'login': {
-      const user = await login({username, password})
+      const user = await login({ username, password })
       let redirect = '/'
       if (!user) {
         return {
@@ -93,11 +93,11 @@ export const action: ActionFunction = async ({request}) => {
       if (user.role === 'CLIENT' || user.role === 'OWNER') {
         redirect = '/dashboard'
       }
-      return createUserSession({userId: user.id, redirectUrl: redirect})
+      return createUserSession({ userId: user.id, redirectUrl: redirect })
     }
     case 'register': {
       let userExists = await db.user.findFirst({
-        where: {username},
+        where: { username },
       })
       if (userExists) {
         return {
@@ -105,7 +105,7 @@ export const action: ActionFunction = async ({request}) => {
           formError: `User with username ${username} already exists`,
         }
       }
-      const user = await register({username, password, role: 'USER'})
+      const user = await register({ username, password, role: 'USER' })
       if (!user) {
         return {
           fields,
@@ -118,7 +118,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Login type invalid`}
+      return { fields, formError: `Login type invalid` }
     }
   }
 }
@@ -248,7 +248,7 @@ export default function Index() {
                 ) : null}
                 <Button
                   type="submit"
-                  size="md"
+                  size="sm"
                   className="mt-3"
                   disabled={!loginFormIsValid || submitted}
                 >
@@ -405,7 +405,7 @@ export default function Index() {
                 ) : null}
                 <Button
                   type="submit"
-                  size="md"
+                  size="sm"
                   className="mt-3"
                   disabled={!registerFormIsValid || submitted}
                 >
