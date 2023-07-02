@@ -1,8 +1,8 @@
-import { Link, type V2_MetaFunction } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import {Link, type V2_MetaFunction} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export default function Index() {
@@ -16,7 +16,7 @@ export default function Index() {
         page, I will tell all about my life and my experiences
       </h4>
       <div className="mx-auto">
-        <Link to="/login?to=/cash-flow" prefetch='intent'>
+        <Link to="/login?to=/cash-flow" prefetch="intent">
           <UIButton size="md">Get started!</UIButton>
         </Link>
       </div>

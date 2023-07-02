@@ -1,19 +1,18 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import type { LoaderFunction } from "@remix-run/node";
-import { requireUserSession } from "~/utils/session.server";
+import {type V2_MetaFunction} from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {requireUserSession} from '~/utils/session.server'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
-
 
 export default function Index() {
   return (
