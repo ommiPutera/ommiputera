@@ -20,7 +20,7 @@ function Button({
       className={clsx(
         'group relative inline-flex w-full border font-medium ring-white hover:bg-gray-100 disabled:cursor-not-allowed disabled:border-gray-400 disabled:bg-gray-200 disabled:text-gray-700 disabled:hover:bg-gray-200',
         {
-          'text-black bg-white': variant === 'primary',
+          'bg-white text-black': variant === 'primary',
           'border-red-300 bg-red-100 text-red-800 hover:bg-red-200 disabled:border-red-100':
             variant === 'danger',
           'rounded-md': size === 'sm',
@@ -49,8 +49,8 @@ function Inner({
           'border-gray-200 group-disabled:border-gray-700':
             variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
-          'rounded-md px-3 pt-1 pb-[5px] text-md': size === 'sm',
-          'rounded-md px-5 pt-1.5 pb-2 text-base': size === 'md',
+          'rounded-md px-3 pb-[5px] pt-1 text-md': size === 'sm',
+          'rounded-md px-5 pb-2 pt-1.5 text-base': size === 'md',
           'rounded-lg px-8 py-3.5 text-lg': size === 'lg',
         },
       )}
@@ -60,4 +60,4 @@ function Inner({
   )
 }
 
-export { Button }
+export {Button}
