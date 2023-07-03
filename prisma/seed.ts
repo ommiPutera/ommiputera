@@ -30,6 +30,7 @@ async function seed() {
         email: 'naufal@gmail.com',
         username: 'Naufal',
         fullName: 'Naufal Ghifari',
+        role: 'CLIENT',
         passwordHash:
           '$2a$10$MXqGNKtKwsjNJsSCSDLoHuI36q.NaK1TKOKm7HdBWB./CfUGlcBOe',
       },
