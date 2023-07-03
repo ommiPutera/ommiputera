@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,8 +22,8 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
+import { SectionSpacer } from './spacer'
+import { Badge } from './shadcn/badge'
 
 type TypeLinks = {
   name: string
@@ -109,40 +109,40 @@ const LINKS: TypeLinks = [
   {
     name: 'Web Applications',
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{ component: <RowApp1 /> }],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
+      { component: <RowProducts1 /> },
+      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
+      { component: <RowProducts1 /> },
     ],
   },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
-const USER_LINKS = [{name: 'Personal Cash Flow', to: '/cash-flow'}]
+const USER_LINKS = [{ name: 'Personal Cash Flow', to: '/cash-flow' }]
 const OWNER_LINKS = [
-  {name: 'Dashboard', to: '/dashboard'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Dashboard', to: '/dashboard' },
+  { name: 'Admin Panel', to: '/admin' },
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login']
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
 
   if (ROUTE_WITHOUT_NAVBAR.includes('ALL')) return <ProtectedNav />
   if (ROUTE_WITHOUT_NAVBAR.includes(location.pathname)) return <></>
   return (
-    <>
+    <div className='relative'>
       <div
-        className={clsx('px-5vw py-9 lg:px-[4vw] lg:py-8', {
+        className={clsx('px-5vw py-9 lg:px-[4vw] lg:pt-8 lg:pb-6', {
           'bg-black': user,
         })}
       >
@@ -153,7 +153,7 @@ function Index() {
         </nav>
       </div>
       <ProtectedNav />
-    </>
+    </div>
   )
 }
 
@@ -162,11 +162,11 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
-                <MenuButton className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center border-2 p-1 transition focus:outline-none">
+                <MenuButton className="focus:border-primary rounded-full hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center border-2 p-1 transition focus:outline-none">
                   <BurgerMenu state={state} />
                 </MenuButton>
                 <MobileMenuList />
@@ -180,9 +180,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -193,23 +193,23 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
-            className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-700"
+            className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-800"
           >
             <MenuItems className="border-none bg-transparent py-0">
-              <h5 className="text border-t border-gray-700 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
+              <h5 className="text border-t border-gray-800 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
                 NAVIGATION
               </h5>
               {MOBILE_LINKS.map(link => (
@@ -222,7 +222,7 @@ function MobileMenuList() {
                 </MobileNavLink>
               ))}
               {user && (
-                <MenuLink className="hover:bg-secondary focus:bg-secondary text-primary pointers-none px-5vw py-2 text-left text-3xl font-medium dark:border-gray-700">
+                <MenuLink className="hover:bg-secondary focus:bg-secondary text-primary pointers-none px-5vw py-2 text-left text-3xl font-medium dark:border-gray-800">
                   <form action="/logout" method="post">
                     <button
                       type="submit"
@@ -256,7 +256,7 @@ function MobileNavLink({
   if (to && !asParent) {
     return (
       <MenuLink
-        className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-700"
+        className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-800"
         as={Link}
         to={to}
       >
@@ -271,7 +271,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -297,7 +297,7 @@ function DesktopNav() {
           <form action="/logout" method="post">
             <button
               type="submit"
-              className="block w-[90px] whitespace-nowrap rounded-lg border-[1.5px] border-red-300 bg-red-100 px-4 pb-2 pt-1 text-base font-medium text-red-800 hover:border-red-500 hover:bg-red-200 hover:text-red-700"
+              className="block w-fit whitespace-nowrap rounded-lg border-[1.5px] border-red-300 bg-red-100 px-3 pb-1.5 pt-1 text-md font-medium text-red-800 hover:border-red-500 hover:bg-red-200 hover:text-red-700"
             >
               Log out
             </button>
@@ -308,7 +308,7 @@ function DesktopNav() {
           <Link to="/login" prefetch="intent">
             <button
               type="button"
-              className="text-secondary block w-[90px] whitespace-nowrap rounded-lg border px-5 pb-1.5 pt-1 text-base font-medium hover:border-white hover:bg-gray-800 hover:text-white"
+              className="text-secondary block w-fit whitespace-nowrap rounded-lg border px-3 pb-1.5 pt-1 text-md font-medium hover:border-white hover:bg-gray-800 hover:text-white"
             >
               Log in
             </button>
@@ -329,7 +329,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -341,7 +341,7 @@ function DesktopNavLink({
   if (asParent && child?.length) {
     return (
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="text-secondary w-full whitespace-nowrap px-3 pb-3 pt-2.5 text-base font-medium focus:outline-none data-[state=open]:text-white lg:tracking-wide">
+        <NavigationMenuTrigger className="text-secondary w-full whitespace-nowrap px-3 pb-3 pt-2.5 text-md font-medium focus:outline-none data-[state=open]:text-white lg:tracking-wide">
           {children}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-full bg-gray-900 pt-3">
@@ -364,7 +364,7 @@ function DesktopNavLink({
             prefetch="intent"
             to={to}
             className={clsx(
-              'block whitespace-nowrap px-3 py-1.5 text-base font-medium hover:text-white focus:outline-none lg:tracking-wide',
+              'block whitespace-nowrap px-3 py-1.5 text-md font-medium hover:text-white focus:outline-none lg:tracking-wide',
               {
                 active: isSelected,
                 'text-secondary': !isSelected,
@@ -381,7 +381,7 @@ function DesktopNavLink({
   return <></>
 }
 
-export function Logo({withoutUnderlined}: {withoutUnderlined?: boolean}) {
+export function Logo({ withoutUnderlined }: { withoutUnderlined?: boolean }) {
   return (
     <Link
       prefetch="intent"
@@ -400,15 +400,15 @@ export function Logo({withoutUnderlined}: {withoutUnderlined?: boolean}) {
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
   return <ProtectedNavItems links={OWNER_LINKS} />
 }
 
-function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
-  const {user} = useRootData()
+function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
+  const { user } = useRootData()
   const location = useLocation()
   const isHideNavbar = ROUTE_WITHOUT_NAVBAR.includes('ALL')
 
@@ -423,40 +423,43 @@ function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
 
   if (!user) return <></>
   return (
-    <div
-      className={clsx(
-        'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-700 bg-black px-5vw lg:px-[4vw]',
-        {'glass sticky top-0 pb-0 pt-3': isHideNavbar},
-      )}
-    >
-      <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between gap-x-4">
-        <ul className="-mx-2 flex gap-x-2">
-          {isHideNavbar && (
-            <li className="-mt-3 px-1.5">
-              <Logo withoutUnderlined />
-            </li>
-          )}
-          {links.map(link => (
-            <ProtectedpNavLink key={link.to} to={link.to}>
-              {link.name}
+    <>
+      {isHideNavbar && <div className='w-screen h-[62px] bg-black absolute'></div>}
+      <div
+        className={clsx(
+          'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b bg-black border-gray-800 px-5vw lg:px-[4vw]',
+          { "glass sticky top-0 pb-0 pt-6": isHideNavbar },
+        )}
+      >
+        <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between gap-x-4">
+          <ul className="-mx-2 flex gap-x-2">
+            {isHideNavbar && (
+              <li className="-mt-4 px-1.5">
+                <Logo withoutUnderlined />
+              </li>
+            )}
+            {links.map(link => (
+              <ProtectedpNavLink key={link.to} to={link.to}>
+                {link.name}
+              </ProtectedpNavLink>
+            ))}
+          </ul>
+          <ul className="flex gap-x-2 lg:-mx-2">
+            <ProtectedpNavLink
+              withoutUnderlined
+              to={location.pathname}
+              onClick={handleMode}
+              className="text-secondary py-0 hover:text-white"
+            >
+              {isHideNavbar ? 'Show Navbar' : 'Hide Navbar'}
             </ProtectedpNavLink>
-          ))}
-        </ul>
-        <ul className="flex gap-x-2 lg:-mx-2">
-          <ProtectedpNavLink
-            withoutUnderlined
-            to={location.pathname}
-            onClick={handleMode}
-            className="text-secondary py-0 hover:text-white"
-          >
-            {isHideNavbar ? 'Show Navbar' : 'Hide Navbar'}
-          </ProtectedpNavLink>
-          <ProtectedpNavLink to="/me">
-            {user.fullName || user.username} - {capitalize(user.role)}
-          </ProtectedpNavLink>
-        </ul>
-      </nav>
-    </div>
+            <ProtectedpNavLink to="/me">
+              {user.fullName || user.username} - {capitalize(user.role)}
+            </ProtectedpNavLink>
+          </ul>
+        </nav>
+      </div>
+    </>
   )
 }
 
@@ -480,7 +483,7 @@ function ProtectedpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'block whitespace-nowrap pb-2 text-md font-medium focus:outline-none lg:text-base lg:tracking-wide',
+          'block whitespace-nowrap pb-3 text-md font-medium hover:text-white focus:outline-none lg:tracking-wide',
           {
             underlined: !withoutUnderlined,
             '': withoutUnderlined,
@@ -497,4 +500,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

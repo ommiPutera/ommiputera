@@ -1,14 +1,14 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
 
 function Footer() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <footer
       className={clsx(
-        'z-[2] border-t border-gray-700 px-5vw py-9 lg:px-15vw lg:pb-12 lg:pt-24',
+        'z-[2] border-t border-gray-800 px-5vw py-9 lg:px-15vw lg:pb-12 lg:pt-24',
         {
           'bg-gray-900': !user,
           'bg-black': user,
@@ -44,7 +44,7 @@ function FooterLink({
       <AnchorOrLink
         prefetch={href.startsWith('http') ? undefined : 'intent'}
         href={href}
-        className="text-secondary underlined hover:text-team-current focus:text-team-current inline-block whitespace-nowrap text-base focus:outline-none"
+        className="text-secondary underlined hover:text-team-current focus:text-team-current inline-block whitespace-nowrap text-md focus:outline-none"
         reload={reload}
       >
         {name}
@@ -62,10 +62,10 @@ function AboutSection() {
         </Link>
       </h2>
       <ul className="mt-4">
-        <li className="text-secondary pb-6 text-base font-medium">
+        <li className="text-secondary pb-6 text-md font-medium">
           All rights reserved © Ommi 2023
         </li>
-        <li className="text-secondary py-1 text-base">
+        <li className="text-secondary py-1 text-md">
           Helping people make the world a better place through quality software.
         </li>
       </ul>
@@ -76,7 +76,7 @@ function AboutSection() {
 function SitemaptSection() {
   return (
     <div>
-      <h5 className="whitespace-nowrap text-base font-medium">Sitemap</h5>
+      <h5 className="whitespace-nowrap text-md font-medium">Sitemap</h5>
       <ul className="mt-4">
         <FooterLink name="Home" href="/" />
         <FooterLink name="About" href="/about" />
@@ -92,7 +92,7 @@ function SitemaptSection() {
 function ContactSection() {
   return (
     <div>
-      <h5 className="whitespace-nowrap text-base font-medium">Contact</h5>
+      <h5 className="whitespace-nowrap text-md font-medium">Contact</h5>
       <ul className="mt-4">
         <FooterLink name="Email" href="/contact" />
         <FooterLink name="WhatsApp" href="/contact" />

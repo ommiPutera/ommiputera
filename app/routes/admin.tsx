@@ -1,10 +1,10 @@
-import {TabList, TabPanel, TabPanels, Tabs, TabsOrientation} from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { TabList, TabPanel, TabPanels, Tabs, TabsOrientation } from '@reach/tabs'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {getUserRole, requireUserSession} from '~/utils/session.server'
+import { getUserRole, requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {
@@ -13,7 +13,7 @@ type LoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const userAgent = await request.headers.get('user-agent')
   const isAndroid = () => Boolean(userAgent?.match(/Android/i))
   const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
@@ -27,10 +27,10 @@ export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   if (role === 'BASIC') {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   const data: LoaderData = {
     device: {
@@ -47,7 +47,7 @@ enum Screen {
 }
 
 const LINKS = [
-  {name: 'General', to: '/admin'},
+  { name: 'General', to: '/admin' },
   {
     name: 'Manage Project',
     to: '/admin/manage-project',
@@ -63,7 +63,7 @@ export default function Index() {
   const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
-  const {isMobile, isDesktop} = data.device
+  const { isMobile, isDesktop } = data.device
   const [screen, setScreen] = React.useState(() => {
     if (isDesktop) return Screen.DESKTOP
     if (isMobile || typeof window !== 'object') return Screen.MOBILE
@@ -87,12 +87,12 @@ export default function Index() {
     to === location.pathname || child?.includes(location.pathname)
 
   return (
-    <main className="flex flex-col gap-5 pb-44 lg:gap-9">
+    <main className="flex flex-col gap-x-5 pb-44 lg:gap-x-9">
       <LayoutTitle />
-      <div className="pb-9 lg:px-10vw lg:pb-12">
+      <div className="pb-9 lg:px-[4vw] xl:px-10vw lg:pb-12">
         <div className="relative mx-auto grid lg:max-w-7xl">
           <Tabs
-            style={{display: isDesktopScreen ? 'grid' : ''}}
+            style={{ display: isDesktopScreen ? 'grid' : '' }}
             orientation={
               isMobileScreen
                 ? TabsOrientation.Horizontal
@@ -102,7 +102,7 @@ export default function Index() {
           >
             <TabList
               className={clsx(
-                'z-0 flex gap-1 overflow-x-scroll bg-transparent px-5vw lg:col-span-2 lg:overflow-x-hidden lg:px-0',
+                'z-0 flex gap-1 overflow-x-scroll bg-transparent mt-4 px-5vw lg:col-span-2 lg:overflow-x-hidden lg:px-0',
                 {
                   'flex-col': isDesktopScreen,
                   'flex-row lg:pb-3': isMobileScreen,
@@ -135,16 +135,16 @@ export default function Index() {
               <TabPanel key={location.pathname} className="block">
                 <AnimatePresence>
                   <motion.div
-                    initial={{y: 220, opacity: 0}}
-                    animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-                    exit={{y: 220, opacity: 0}}
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
                     transition={{
-                      opacity: {duration: shouldReduceMotion ? 0 : 0.1},
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
                       ease: 'linear',
                     }}
                   >
                     <div className="relative h-full min-h-[50vh] w-full">
-                      <div className="w-full border-b border-t border-gray-700 bg-black shadow-[1px_10px_47px_0px_#19191987] lg:-mt-24 lg:rounded-lg lg:border xl:-mt-36">
+                      <div className="w-full border-b border-t border-gray-800 bg-black shadow-[1px_10px_47px_0px_#19191987] lg:-mt-16 lg:rounded-lg lg:border xl:-mt-20">
                         <Outlet />
                       </div>
                     </div>
@@ -160,27 +160,22 @@ export default function Index() {
 }
 
 function LayoutTitle() {
-  const location = useLocation()
-  const routeName = location.pathname
-    .replace('/admin', '')
-    .replace(/-/g, ' ')
-    .replace(/[/]/g, ' / ')
+  // const location = useLocation()
+  // const routeName = location.pathname
+  //   .replace('/admin', '')
+  //   .replace(/-/g, ' ')
+  //   .replace(/[/]/g, ' / ')
 
   return (
-    <div className="w-full bg-gradient-to-b from-black to-gray-900 px-5vw lg:px-10vw">
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between border-b border-gray-700 py-9 lg:pb-9 lg:pt-24">
+    <div className="w-full bg-gradient-to-b from-black to-gray-900 px-[4vw] xl:px-10vw">
+      <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-4 lg:pt-14">
         <div className="text-left">
-          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-3xl">
+          <h1 className="leading-tigh px-0 text-xl md:text-lg lg:text-xl font-medium capitalize xl:text-3xl">
             Admin Panel Settings
           </h1>
           <p className="text-secondary mt-1 text-sm font-medium">
             2 years of proven experience in helping.
           </p>
-        </div>
-        <div className="-mt-36 hidden lg:block">
-          <h1 className="leading-tigh text-secondary px-0 text-base font-medium capitalize">
-            {routeName.trim() || '/ General'}
-          </h1>
         </div>
       </div>
     </div>

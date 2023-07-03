@@ -1,5 +1,5 @@
 :root {
-  --color-black: #11100f;
+  --color-black: #12110f;
   --color-white: #fff;
   --color-blue-100: #e8f2ff;
   --color-blue-500: #4b96ff;
@@ -189,7 +189,6 @@ p {
   position: absolute;
 }
 
-.underlined:hover:after,
 .underlined:focus:after,
 .active.underlined:after {
   background-color: currentColor;
@@ -210,9 +209,9 @@ p {
 }
 
 .glass {
-  background: rgba(22, 21, 19, 0.6);
-  backdrop-filter: blur(22px);
-  -webkit-backdrop-filter: blur(22px);
+  background: rgb(18, 17, 15, 0.7);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 table.styled-table {
@@ -242,7 +241,7 @@ table.styled-table > thead tr th {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply font-bold text-gray-400 text-left py-2 uppercase text-xs border-b border-gray-700;
+  @apply font-bold text-gray-400 text-left py-2 uppercase text-xs border-b border-gray-800;
 }
 table.styled-table > tbody tr td:first-child {
   @apply pl-6;
@@ -256,7 +255,7 @@ table.styled-table > tbody tr td {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply text-gray-100 text-left py-3 border-gray-700 text-sm font-light border-b border-r-0 border-l-0;
+  @apply text-gray-100 text-left py-3 border-gray-800 text-sm font-light border-b border-r-0 border-l-0;
 }
 table.styled-table > tbody tr:last-child td {
   @apply border-b-0;
