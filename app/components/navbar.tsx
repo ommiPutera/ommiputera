@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import { Link, useLocation } from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { capitalize } from 'lodash'
-import { BurgerMenu } from '~/utils/icons'
-import { useRootData } from '~/utils/use-root-data'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {capitalize} from 'lodash'
+import {BurgerMenu} from '~/utils/icons'
+import {useRootData} from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,8 +22,8 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import { SectionSpacer } from './spacer'
-import { Badge } from './shadcn/badge'
+import {SectionSpacer} from './spacer'
+import {Badge} from './shadcn/badge'
 
 type TypeLinks = {
   name: string
@@ -109,32 +109,32 @@ const LINKS: TypeLinks = [
   {
     name: 'Web Applications',
     asParent: true,
-    child: [{ component: <RowApp1 /> }],
+    child: [{component: <RowApp1 />}],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      { component: <RowProducts1 /> },
-      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
-      { component: <RowProducts1 /> },
+      {component: <RowProducts1 />},
+      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
+      {component: <RowProducts1 />},
     ],
   },
-  { name: 'Project', to: '/project', asParent: false },
-  { name: 'About', to: '/about', asParent: false },
+  {name: 'Project', to: '/project', asParent: false},
+  {name: 'About', to: '/about', asParent: false},
 ]
 
-const USER_LINKS = [{ name: 'Personal Cash Flow', to: '/cash-flow' }]
+const USER_LINKS = [{name: 'Personal Cash Flow', to: '/cash-flow'}]
 const OWNER_LINKS = [
-  { name: 'Dashboard', to: '/dashboard' },
-  { name: 'Admin Panel', to: '/admin' },
+  {name: 'Dashboard', to: '/dashboard'},
+  {name: 'Admin Panel', to: '/admin'},
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login']
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
 
   if (ROUTE_WITHOUT_NAVBAR.includes('ALL')) return <ProtectedNav />
@@ -162,7 +162,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({ isExpanded }) => {
+          {({isExpanded}) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -180,9 +180,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const { isExpanded } = useMenuButtonContext()
+  const {isExpanded} = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -193,17 +193,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{ display: 'block' }}
+          style={{display: 'block'}}
           className="z-50"
         >
           <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
+            initial={{y: -50, opacity: 0}}
+            animate={{y: 0, opacity: 1}}
+            exit={{y: -50, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+              scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-700"
@@ -271,7 +271,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -329,7 +329,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: { component: string | React.ReactNode }[]
+  child?: {component: string | React.ReactNode}[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -381,7 +381,7 @@ function DesktopNavLink({
   return <></>
 }
 
-export function Logo({ withoutUnderlined }: { withoutUnderlined?: boolean }) {
+export function Logo({withoutUnderlined}: {withoutUnderlined?: boolean}) {
   return (
     <Link
       prefetch="intent"
@@ -400,15 +400,15 @@ export function Logo({ withoutUnderlined }: { withoutUnderlined?: boolean }) {
 }
 
 function ProtectedNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
   return <ProtectedNavItems links={OWNER_LINKS} />
 }
 
-function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
-  const { user } = useRootData()
+function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
+  const {user} = useRootData()
   const location = useLocation()
   const isHideNavbar = ROUTE_WITHOUT_NAVBAR.includes('ALL')
 
@@ -423,18 +423,32 @@ function ProtectedNavItems({ links }: { links: { name: string; to: string }[] })
 
   if (!user) return <></>
   return (
-    <div className={clsx("no-scrollbar overflow-y-hidden overflow-x-scroll border-b border-gray-700 bg-black px-5vw lg:px-[4vw] z-10", { 'sticky top-0 pt-3 pb-0 glass': isHideNavbar })}>
+    <div
+      className={clsx(
+        'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-700 bg-black px-5vw lg:px-[4vw]',
+        {'glass sticky top-0 pb-0 pt-3': isHideNavbar},
+      )}
+    >
       <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between gap-x-4">
         <ul className="-mx-2 flex gap-x-2">
-          {isHideNavbar && <li className="px-1.5 -mt-3"><Logo withoutUnderlined /></li>}
+          {isHideNavbar && (
+            <li className="-mt-3 px-1.5">
+              <Logo withoutUnderlined />
+            </li>
+          )}
           {links.map(link => (
             <ProtectedpNavLink key={link.to} to={link.to}>
               {link.name}
             </ProtectedpNavLink>
           ))}
         </ul>
-        <ul className="lg:-mx-2 flex gap-x-2">
-          <ProtectedpNavLink withoutUnderlined to={location.pathname} onClick={handleMode} className='text-secondary py-0 hover:text-white'>
+        <ul className="flex gap-x-2 lg:-mx-2">
+          <ProtectedpNavLink
+            withoutUnderlined
+            to={location.pathname}
+            onClick={handleMode}
+            className="text-secondary py-0 hover:text-white"
+          >
             {isHideNavbar ? 'Show Navbar' : 'Hide Navbar'}
           </ProtectedpNavLink>
           <ProtectedpNavLink to="/me">
@@ -452,7 +466,11 @@ function ProtectedpNavLink({
   withoutUnderlined,
   className,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string, withoutUnderlined?: boolean, className?: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {
+  to: string
+  withoutUnderlined?: boolean
+  className?: string
+}) {
   const location = useLocation()
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -464,7 +482,7 @@ function ProtectedpNavLink({
         className={clsx(
           'block whitespace-nowrap pb-2 text-md font-medium focus:outline-none lg:text-base lg:tracking-wide',
           {
-            'underlined': !withoutUnderlined,
+            underlined: !withoutUnderlined,
             '': withoutUnderlined,
             active: isSelected,
             'text-secondary hover:after:h-0': !isSelected,
@@ -479,4 +497,4 @@ function ProtectedpNavLink({
   )
 }
 
-export { Index as Navbar }
+export {Index as Navbar}
