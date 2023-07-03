@@ -6,12 +6,16 @@
   "scripts": {
     "build": "prisma generate && remix build",
     "clean": "rm -rf ./node_modules/ .cache/",
-    "dev": "remix dev",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
     "postinstall": "prisma generate",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
     "prepare": "husky install || true",
-    "typecheck": "tsc"
+    "typecheck": "tsc",
+    "dev": "run-s tab:dev tab:pscale-dev-server",
+    "remix-dev": "remix dev",
+    "pscale-dev-server": "pscale connect ommiputera initial-setup --port 3306",
+    "tab:dev": "ttab -t 'Localhost' npm run remix-dev",
+    "tab:pscale-dev-server": "ttab -t 'Pscale Server' npm run pscale-dev-server"
   },
   "eslintIgnore": [
     "node_modules",
@@ -70,6 +74,7 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.27.0",
     "husky": "^8.0.3",
+    "npm-run-all": "^4.1.5",
     "postcss": "^8.4.23",
     "postcss-cli": "^10.1.0",
     "prettier": "^2.8.8",
@@ -78,6 +83,7 @@
     "tailwindcss": "^3.3.2",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
+    "ttab": "^0.8.0",
     "typescript": "^4.8.4"
   },
   "engines": {
