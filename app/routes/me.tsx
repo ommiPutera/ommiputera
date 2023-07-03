@@ -1,12 +1,12 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet } from '@remix-run/react'
-import { requireUserSession } from '~/utils/session.server'
-import { useRootData } from '~/utils/use-root-data'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet} from '@remix-run/react'
+import {requireUserSession} from '~/utils/session.server'
+import {useRootData} from '~/utils/use-root-data'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -27,7 +27,7 @@ export default function Index() {
 }
 
 function LayoutTitle() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="w-full bg-gradient-to-b from-black to-gray-900 px-5vw lg:px-10vw">
       <div className="relative mx-auto flex max-w-7xl items-center justify-between border-b border-gray-800 py-9 lg:pb-9 lg:pt-24">

@@ -1,5 +1,5 @@
-import { cva } from 'class-variance-authority'
-import { cn } from '~/lib/utils'
+import {cva} from 'class-variance-authority'
+import {cn} from '~/lib/utils'
 
 interface ISectionSpacer {
   withoutBorder?: boolean
@@ -26,13 +26,13 @@ const sectionSpacerVariants = cva('my-16', {
   },
 })
 
-function SectionSpacer({ withoutBorder, size, className }: ISectionSpacer) {
+function SectionSpacer({withoutBorder, size, className}: ISectionSpacer) {
   const variant = withoutBorder ? 'withoutBorder' : 'default'
   return (
     <div
-      className={cn(sectionSpacerVariants({ variant, size, className }))}
+      className={cn(sectionSpacerVariants({variant, size, className}))}
     ></div>
   )
 }
 
-export { SectionSpacer }
+export {SectionSpacer}

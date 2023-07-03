@@ -1,15 +1,15 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import type { LoaderFunction } from '@remix-run/node'
-import { requireUserSession } from '~/utils/session.server'
+import {type V2_MetaFunction} from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {requireUserSession} from '~/utils/session.server'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -18,7 +18,7 @@ export default function Index() {
   return (
     <>
       <LayoutTitle />
-      <div className="pb-9 px-[4vw] xl:px-10vw lg:pb-12">
+      <div className="px-[4vw] pb-9 lg:pb-12 xl:px-10vw">
         <div className="relative mx-auto max-w-7xl">
           <h1 className="text-animate-2 font-bold leading-loose lg:text-4xl">
             Personal Cashflow Index
