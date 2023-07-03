@@ -18,7 +18,7 @@ async function seed() {
               description: 'Web Development / Personal Website',
               type: 'Digital Product',
               heroId: 'naufalHero',
-              liveLink: 'http://www.naufalghifari.com',
+              liveLink: 'http://www.naufalghfr.com',
               content: 'none',
             },
           ],

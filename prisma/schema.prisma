@@ -24,7 +24,7 @@ model User {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
   username     String    @unique
-  role         String    @default("CLIENT")
+  role         Role      @default(BASIC)
   email        String
   fullName     String
   passwordHash String
@@ -41,6 +41,12 @@ model Project {
   heroId      String
   userId      String
   liveLink    String
-  content     String
-  User        User     @relation(fields: [userId], references: [id])
+  content     String?
+  owner       User     @relation(fields: [userId], references: [id])
+}
+
+enum Role {
+  OWNER
+  CLIENT
+  BASIC
 }

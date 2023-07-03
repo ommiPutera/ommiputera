@@ -210,9 +210,9 @@ p {
 }
 
 .glass {
-  background: rgba(22, 21, 19, 0.2);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  background: rgba(22, 21, 19, 0.6);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
 }
 
 table.styled-table {

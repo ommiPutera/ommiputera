@@ -1,15 +1,15 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet} from '@remix-run/react'
-import {getUserRole, requireUserSession} from '~/utils/session.server'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet } from '@remix-run/react'
+import { getUserRole, requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
-  if (role === 'USER') {
-    throw new Response('Unauthorized', {status: 401})
+  if (role === 'BASIC') {
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
