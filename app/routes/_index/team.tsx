@@ -1,5 +1,5 @@
-import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
-import { Link } from '@remix-run/react'
+import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
+import {Link} from '@remix-run/react'
 
 export default function Team() {
   return (
@@ -32,11 +32,11 @@ export default function Team() {
           <br />
           <div className="col-span-1 rounded-lg lg:col-span-8 lg:-mr-32">
             <p className="text-lg font-medium leading-relaxed text-gray-200 lg:text-base">
-              We are a web and mobile design and development agency. Makingasadasd
-              websites and apps, creating brand identities, and launching
-              startups. Our goal is to help companies build relationships with
-              their customers online through great design and technical
-              performance.
+              We are a web and mobile design and development agency.
+              Makingasadasd websites and apps, creating brand identities, and
+              launching startups. Our goal is to help companies build
+              relationships with their customers online through great design and
+              technical performance.
             </p>
             <br />
             <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
