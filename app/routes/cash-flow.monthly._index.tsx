@@ -1,13 +1,12 @@
-import clsx from "clsx"
-import { Plus, FolderClosed, FolderOpen, Info } from "lucide-react"
-import { UIButton } from "~/components/shadcn/button"
+import clsx from 'clsx'
+import {Plus, FolderClosed, FolderOpen, Info} from 'lucide-react'
+import {UIButton} from '~/components/shadcn/button'
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "~/components/shadcn/tooltip"
-
+} from '~/components/shadcn/tooltip'
 
 type data = {
   name: string
@@ -54,13 +53,13 @@ const dataJSON: data[] = [
   {
     name: 'November 2022 last',
     isClosed: false,
-  }
+  },
 ]
 
 export default function Monthly() {
   return (
     <div className="">
-      <div className="py-4 flex justify-between items-center">
+      <div className="flex items-center justify-between py-4">
         <div className="text-left">
           <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-lg">
             Monthly Expense
@@ -71,15 +70,15 @@ export default function Monthly() {
         </div>
         <NewMonth />
       </div>
-      <div className="pb-4 md:hidden block border border-gray-800 rounded-md">
+      <div className="block rounded-md border border-gray-800 pb-4 md:hidden">
         tools
       </div>
-      <div className="py-4 grid grid-cols-12 gap-x-5 md:gap-x-7">
+      <div className="grid grid-cols-12 gap-x-5 py-4 md:gap-x-7">
         <div className="col-span-6 md:col-span-9">
-          <div className="mb-3 py-4 hidden md:block border border-gray-800 rounded-md">
+          <div className="mb-3 hidden rounded-md border border-gray-800 py-4 md:block">
             tools
           </div>
-          <div className="md:py-4 grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-3">
+          <div className="grid grid-cols-1 gap-3 md:grid-cols-6 md:py-4 lg:grid-cols-12">
             {dataJSON.map(month => (
               <div className="col-span-3" key={month.name}>
                 <Month {...month} />
@@ -89,15 +88,19 @@ export default function Monthly() {
         </div>
         <div className="col-span-6 md:col-span-3">
           <div className="grid grid-cols-2 gap-3">
-            <div className="col-span-1 gap-2 text-center border border-gray-800 rounded-md px-3 py-6 flex flex-col text-secondary justify-center items-center">
+            <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-800 px-3 py-6 text-center">
               <img src="/vectors/budget.png" alt="" className="h-8 w-8" />
-              <h3 className="text-lg text-green-900 font-medium">100%</h3>
-              <h5 className="text-sm leading-snug font-light">Kesehatan Financial</h5>
+              <h3 className="text-lg font-medium text-green-900">100%</h3>
+              <h5 className="text-sm font-light leading-snug">
+                Kesehatan Financial
+              </h5>
             </div>
-            <div className="col-span-1 gap-2 text-center border border-gray-800 rounded-md px-3 py-6 flex flex-col text-secondary justify-center items-center">
+            <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-800 px-3 py-6 text-center">
               <img src="/vectors/budget.png" alt="" className="h-8 w-8" />
-              <h3 className="text-lg text-green-900 font-medium">100%</h3>
-              <h5 className="text-sm leading-snug font-light">Kesehatan Financial</h5>
+              <h3 className="text-lg font-medium text-green-900">100%</h3>
+              <h5 className="text-sm font-light leading-snug">
+                Kesehatan Financial
+              </h5>
             </div>
           </div>
         </div>
@@ -109,32 +112,41 @@ export default function Monthly() {
 function NewMonth() {
   return (
     <UIButton size="sm">
-      <Plus className="h-3.5 w-3.5 p-0 m-0 mt-[1px] mr-1.5" />
+      <Plus className="m-0 mr-1.5 mt-[1px] h-3.5 w-3.5 p-0" />
       Create Data
     </UIButton>
   )
 }
 
-function Month({ name, isClosed }: data) {
+function Month({name, isClosed}: data) {
   return (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger className="w-full">
-          <div className={clsx("flex items-center gap-x-3 border border-gray-800 cursor-pointer hover:border-gray-800 rounded-lg px-4 py-2.5", {
-            'bg-orange-100 border-orange-200 hover:border-orange-300': !isClosed
-          })}>
-            {!isClosed && <FolderOpen className="h-5 w-5 p-0 m-0" />}
-            {isClosed && <FolderClosed className="h-5 w-5 p-0 m-0" />}
-            <p className="text-md mt-0.5">{name}</p>
+          <div
+            className={clsx(
+              'flex cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-800',
+              {
+                'border-orange-200 bg-orange-100 hover:border-orange-300':
+                  !isClosed,
+              },
+            )}
+          >
+            {!isClosed && <FolderOpen className="m-0 h-5 w-5 p-0" />}
+            {isClosed && <FolderClosed className="m-0 h-5 w-5 p-0" />}
+            <p className="mt-0.5 text-md">{name}</p>
           </div>
         </TooltipTrigger>
         <TooltipContent className="flex items-center gap-x-2">
-          <Info className="h-4 w-4 -mt-1" />
-          {!isClosed && <p className="font-light text-sm">Folder Open Query and visualize your Vercel usage.</p>}
-          {isClosed && <p className="font-light text-sm">Folder Closed</p>}
+          <Info className="-mt-1 h-4 w-4" />
+          {!isClosed && (
+            <p className="text-sm font-light">
+              Folder Open Query and visualize your Vercel usage.
+            </p>
+          )}
+          {isClosed && <p className="text-sm font-light">Folder Closed</p>}
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>
-
   )
 }

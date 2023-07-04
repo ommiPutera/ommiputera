@@ -1,15 +1,15 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet } from '@remix-run/react'
-import { getUserRole, requireUserSession } from '~/utils/session.server'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet} from '@remix-run/react'
+import {getUserRole, requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   if (role === 'BASIC') {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -32,7 +32,7 @@ export default function Index() {
 function LayoutTitle() {
   return (
     <>
-      <div className='bg-red-900 w-screen h-[50vh] bg-gradient-to-b from-black to-gray-900 absolute -z-10'></div>
+      <div className="absolute -z-10 h-[50vh] w-screen bg-red-900 bg-gradient-to-b from-black to-gray-900"></div>
       <div className="w-full px-[4vw] xl:px-10vw">
         <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-9 lg:pt-14">
           <div className="text-left">
