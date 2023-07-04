@@ -1,4 +1,4 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function WorkinOn() {
   return (
@@ -7,7 +7,7 @@ export default function WorkinOn() {
         <h1 className="col-span-1 text-center text-3xl font-light leading-tight lg:col-span-4 lg:text-left lg:text-5xl">
           What I'm <b>Working On</b>
         </h1>
-        <p className="col-span-3 mt-2 text-center text-base font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-lg">
+        <p className="col-span-3 mt-2 text-center text-base font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-base">
           I'm building a freelance platform that caters to both small-scale and
           large-scale projects.
         </p>
@@ -17,7 +17,7 @@ export default function WorkinOn() {
           <h3 className="text-center text-3xl font-bold leading-tight lg:text-left lg:text-4xl">
             twon.com
           </h3>
-          <p className="col-span-3 text-center text-md font-light text-white lg:text-left lg:text-lg">
+          <p className="col-span-3 text-center text-md font-light text-white lg:text-left lg:text-base">
             I'm building a freelance platform that caters to both small-scale
             and large-scale projects. I'm building a freelance platform that
             caters to both small-scale and large-scale projects.

@@ -1,8 +1,8 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion} from 'framer-motion'
-import {debounce} from 'lodash'
-import {useState} from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
+import { debounce } from 'lodash'
+import { useState } from 'react'
 
 function HomeHeroSection() {
   return (
@@ -36,14 +36,14 @@ function HomeHeroSection() {
           <h3 className="text-lg font-medium lg:text-2xl">
             Hi 👋, I'm Ommi Putera
           </h3>
-          <p className="font-medium text-gray-300 lg:mt-1">Software Engineer</p>
+          <p className="font-medium text-base text-gray-300 lg:mt-1">Software Engineer</p>
         </div>
       </div>
       <div className="flex flex-col items-center justify-center gap-5">
         <h1 className="2xl:w-3/5 px-0 text-center text-4xl font-medium leading-tight md:w-2/3 lg:px-9 lg:text-6xl">
           Helping brands through quality software.
         </h1>
-        <p className="mt-2 px-0 text-center text-lg font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 lg:text-lg lg:leading-relaxed xl:w-3/5">
+        <p className="mt-2 px-0 text-center text-lg font-medium text-gray-300 md:w-2/3 lg:mt-4 lg:px-9 lg:text-base lg:leading-relaxed xl:w-3/5">
           2 years of proven experience in helping to create and maintain a
           better code base for re-usability and best practices. Experience in
           developing projects from concept to launch. Eager to tackle more
@@ -73,7 +73,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -94,28 +94,28 @@ function ProfileCard() {
     <motion.div
       onMouseEnter={debouncedHandleMouseEnter}
       onMouseLeave={handlOnMouseLeave}
-      initial={{rotateY: isFliped ? 180 : 0}}
-      animate={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.5}}}
-      exit={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.2}}}
+      initial={{ rotateY: isFliped ? 180 : 0 }}
+      animate={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.5 } }}
+      exit={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.2 } }}
       className={clsx('cursor-pointer')}
     >
       {isFliped ? (
         <Link to="/post" prefetch="intent">
           <div
-            style={{transform: 'scale(-1, 1)'}}
-            className="rotate- relative flex h-48 w-48 items-center justify-center rounded-full bg-gray-800"
+            style={{ transform: 'scale(-1, 1)' }}
+            className="rotate- relative flex h-40 w-40 items-center justify-center rounded-full bg-gray-800"
           >
-            <p className="text-xl">About me</p>
+            <p className="text-lg">About me</p>
           </div>
         </Link>
       ) : (
         <>
-          <div className="jelly-effects absolute h-48 w-48 rounded-full"></div>
-          <img src="/profile.png" alt="" className="h-48 w-48" />
+          <div className="jelly-effects absolute h-40 w-40 rounded-full"></div>
+          <img src="/profile.png" alt="" className="h-40 w-40" />
         </>
       )}
     </motion.div>
   )
 }
 
-export {HomeHeroSection, ProjectHeroSection}
+export { HomeHeroSection, ProjectHeroSection }

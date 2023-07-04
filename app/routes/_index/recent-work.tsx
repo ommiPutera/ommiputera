@@ -1,8 +1,8 @@
-import type {Project} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
 export default function RecentWork() {
   const data = useLoaderData<LoaderData>()
@@ -13,7 +13,7 @@ export default function RecentWork() {
         <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
           I help brands and people with <b>tailor-made solutions</b>
         </h1>
-        <p className="col-span-3 mt-2 text-center text-base font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-lg">
+        <p className="col-span-3 mt-2 text-center text-base font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-base">
           You can explore my recent work here, or view the complete project
           portfolio at{' '}
           <Link to="/project" prefetch="intent">

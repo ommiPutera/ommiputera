@@ -1,5 +1,5 @@
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import {Link} from '@remix-run/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import { Link } from '@remix-run/react'
 
 export default function Team() {
   return (
@@ -8,7 +8,7 @@ export default function Team() {
         <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
           Our Team ready to achive your <b>goal</b>
         </h1>
-        <p className="col-span-3 mt-2 text-center text-base font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-lg">
+        <p className="col-span-3 mt-2 text-center text-base font-medium text-gray-300 lg:mt-3 lg:text-left lg:text-base">
           I have a talented team that can help me produce high-quality software
           and provide a range of services.
         </p>
@@ -24,22 +24,22 @@ export default function Team() {
                 Web Development
               </h3>
             </div>
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </div>
           <br />
           <div className="col-span-1 rounded-lg lg:col-span-8 lg:-mr-32">
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
-              We are a web and mobile design and development agency. Making
+            <p className="text-lg font-medium leading-relaxed text-gray-200 lg:text-base">
+              We are a web and mobile design and development agency. Makingasadasd
               websites and apps, creating brand identities, and launching
               startups. Our goal is to help companies build relationships with
               their customers online through great design and technical
               performance.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
               The Dribbble shot depicts a web page design concept.
             </p>
             <Link to="/" className="text-lg text-green-500">
@@ -57,14 +57,14 @@ export default function Team() {
                 Mobile Development
               </h3>
             </div>
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
               Happy Monday everyone! Let’s look at one of our favourite German
               Fintechs we’ve got to work on – Denario.
             </p>
           </div>
           <br />
           <div className="col-span-1 rounded-lg lg:col-span-8 lg:-mr-32">
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
               We are a web and mobile design and development agency. Making
               websites and apps, creating brand identities, and launching
               startups. Our goal is to help companies build relationships with
@@ -72,7 +72,7 @@ export default function Team() {
               performance.
             </p>
             <br />
-            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+            <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
               The Dribbble shot depicts a web page design concept.
             </p>
             <Link to="/" className="text-lg text-red-500">
@@ -112,7 +112,7 @@ export default function Team() {
           <TabPanel className="grid grid-cols-2 gap-x-14">
             <div className="col-span-1">
               <h4 className="mb-4 text-3xl">Web Development</h4>
-              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              <p className="text-lg font-medium leading-relaxed text-gray-200 lg:text-base">
                 We are a web and mobile design and development agency. Making
                 websites and apps, creating brand identities, and launching
                 startups. Our goal is to help companies build relationships with
@@ -120,7 +120,7 @@ export default function Team() {
                 performance.
               </p>
               <br />
-              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-lg">
+              <p className="text-lg font-medium leading-snug text-gray-200 lg:text-base">
                 The Dribbble shot depicts a web page design concept.
               </p>
               <Link to="/" className="text-lg text-green-700">
