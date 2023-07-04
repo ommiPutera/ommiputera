@@ -1,11 +1,11 @@
-import type { V2_MetaFunction } from '@remix-run/react'
-import { Outlet } from '@remix-run/react'
-import { MoveLeftIcon } from 'lucide-react'
-import { useNavigate } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import type {V2_MetaFunction} from '@remix-run/react'
+import {Outlet} from '@remix-run/react'
+import {MoveLeftIcon} from 'lucide-react'
+import {useNavigate} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Cashflow' }]
+  return [{title: 'Cashflow'}]
 }
 
 export default function Index() {
@@ -17,9 +17,9 @@ export default function Index() {
           <UIButton
             onClick={() => navigate(-1)}
             variant="subtle"
-            className='text-md text-orange-500'
+            className="text-md text-orange-500"
           >
-            <MoveLeftIcon className='mr-2.5' size="20" />
+            <MoveLeftIcon className="mr-2.5" size="20" />
             <p> Back to cashflow</p>
           </UIButton>
           <Outlet />
