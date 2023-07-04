@@ -1,27 +1,29 @@
-import type {Project} from '@prisma/client'
-import type {ActionFunction} from '@remix-run/node'
-import {type LoaderFunction} from '@remix-run/node'
-import {DialogOverlay, DialogContent} from '@reach/dialog'
+import type { Project } from '@prisma/client'
+import type { ActionFunction } from '@remix-run/node'
+import { type LoaderFunction } from '@remix-run/node'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 import {
   Form,
-  Link,
   useActionData,
   useLoaderData,
+  useNavigate,
   useNavigation,
   type V2_MetaFunction,
 } from '@remix-run/react'
 import React from 'react'
-import {Button} from '~/components/button'
-import {Input, Label} from '~/components/form-elements'
-import {db} from '~/utils/db.server'
+import { Button } from '~/components/button'
+import { Input, Label } from '~/components/form-elements'
+import { db } from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import {getUserId} from '~/utils/session.server'
+import { getUserId } from '~/utils/session.server'
+import { UIButton } from '~/components/shadcn/button'
+import { MoveLeftIcon } from 'lucide-react'
 
-type LoaderData = {project: Project | null}
+type LoaderData = { project: Project | null }
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -48,23 +50,23 @@ enum ActionEnums {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{title: 'Manage Project - Form'}]
+  return [{ title: 'Manage Project - Form' }]
 }
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({where: {id: id ?? ''}})
+  const project = await db.project.findUnique({ where: { id: id ?? '' } })
   return project
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const project = await getLoaderData({request})
-  let data: LoaderData = {project}
+export const loader: LoaderFunction = async ({ request }) => {
+  const project = await getLoaderData({ request })
+  let data: LoaderData = { project }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const userId = await getUserId(request)
   const formData = await request.formData()
   const {
@@ -79,7 +81,7 @@ export const action: ActionFunction = async ({request}) => {
   } = Object.fromEntries(formData)
 
   if (typeof projectId !== 'string') {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
   if (_action === ActionEnums.DELETE) {
     return await deleteProject(projectId, '/admin/manage-project')
@@ -94,7 +96,7 @@ export const action: ActionFunction = async ({request}) => {
     typeof liveLink !== 'string' ||
     typeof content !== 'string'
   ) {
-    return {formError: 'Form not submitted correctly'}
+    return { formError: 'Form not submitted correctly' }
   }
   const fields = {
     projectName,
@@ -120,7 +122,7 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {fields, formError: `Action type invalid`}
+      return { fields, formError: `Action type invalid` }
     }
   }
 }
@@ -128,21 +130,24 @@ export const action: ActionFunction = async ({request}) => {
 export default function Index() {
   const data = useLoaderData<LoaderData>()
   const project = data.project
+  const navigate = useNavigate()
 
   const isUpdateAndRead = Boolean(project)
 
   return (
-    <div className="px-6 py-2">
+    <div className="px-6">
       <div className="flex items-center justify-between">
-        <div className="w-min">
-          <Link to="/admin/manage-project" prefetch="intent">
-            <Button size="sm" type="button">
-              <span className="mr-2 text-md">↩️</span>
-              Back
-            </Button>
-          </Link>
+        <div className="w-full">
+          <UIButton
+            onClick={() => navigate(-1)}
+            variant="subtle"
+            className="text-md text-orange-500"
+          >
+            <MoveLeftIcon className="mr-2.5" size="20" />
+            <p> Back to list Projects</p>
+          </UIButton>
         </div>
-        <h1 className="text-md lg:text-base">
+        <h1 className="text-md whitespace-nowrap">
           {isUpdateAndRead ? 'Update Existing' : 'Create New'} Project
         </h1>
       </div>
@@ -347,7 +352,7 @@ function FormAction() {
         aria-label="Delete project"
         isOpen={isShowDeleteModal}
         onDismiss={closeDeleteModal}
-        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
         className="flex w-full items-center"
       >
         <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
@@ -364,14 +369,14 @@ function FormAction() {
               </p>
             </div>
             <div className="flex w-full justify-between border-t border-gray-800 px-6 py-4">
-              <Button
+              <UIButton
                 size="sm"
                 type="button"
                 className="w-min"
                 onClick={closeDeleteModal}
               >
                 Cancel
-              </Button>
+              </UIButton>
               <Button
                 type="submit"
                 size="sm"

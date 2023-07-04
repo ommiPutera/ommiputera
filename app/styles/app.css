@@ -312,3 +312,15 @@ table.styled-table > tbody tr td.action {
     opacity: 1;
   }
 }
+
+.picture {
+  grid-area: picture;
+}
+
+.ad {
+  grid-area: ad;
+}
+
+.article {
+  grid-area: article;
+}

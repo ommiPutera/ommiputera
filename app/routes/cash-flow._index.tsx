@@ -1,15 +1,17 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import type {LoaderFunction} from '@remix-run/node'
-import {requireUserSession} from '~/utils/session.server'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { requireUserSession } from '~/utils/session.server'
+import { UIButton } from '~/components/shadcn/button'
+import { Settings } from 'lucide-react'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -19,8 +21,11 @@ export default function Index() {
     <>
       <LayoutTitle />
       <div className="px-[4vw] pb-9 lg:pb-12 xl:px-10vw">
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-3 lg:gap-x-8">
-          <div className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black p-6 pb-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-3 lg:gap-x-5">
+          <div className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700">
+            <MonthlyCashflow />
+          </div>
+          <div className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700">
             <MonthlyCashflow />
           </div>
         </div>
@@ -31,19 +36,28 @@ export default function Index() {
 
 function LayoutTitle() {
   return (
-    <div className="w-full bg-gradient-to-b from-black to-gray-900 px-[4vw] xl:px-10vw">
-      <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-9 lg:pt-14">
-        <div className="text-left">
-          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-xl">
-            Personal Cashflow Managament
-          </h1>
-          <p className="text-secondary mt-1 text-md font-light">
-            Query and visualize your Vercel usage, traffic, and more with the
-            fields below.
-          </p>
+    <>
+      <div className='bg-red-900 w-screen h-[50vh] bg-gradient-to-b from-black to-gray-900 absolute -z-10'></div>
+      <div className="w-full px-[4vw] xl:px-10vw">
+        <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-9 lg:pt-14">
+          <div className="text-left">
+            <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-xl">
+              Personal Cashflow Managament
+            </h1>
+            <p className="text-secondary mt-1 text-md font-light">
+              Query and visualize your Vercel usage, traffic, and more with the
+              fields below.
+            </p>
+          </div>
+          <div>
+            <UIButton size="sm">
+              <Settings className="h-4 w-4 p-0 m-0 mt-[1px] mr-2" />
+              Settings
+            </UIButton>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
