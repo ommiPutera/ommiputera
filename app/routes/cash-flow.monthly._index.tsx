@@ -1,12 +1,8 @@
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import clsx from 'clsx'
-import {Plus, FolderClosed, FolderOpen, Info} from 'lucide-react'
-import {UIButton} from '~/components/shadcn/button'
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from '~/components/shadcn/tooltip'
+import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
+import React from 'react'
+import { UIButton } from '~/components/shadcn/button'
 
 type data = {
   name: string
@@ -15,43 +11,43 @@ type data = {
 
 const dataJSON: data[] = [
   {
-    name: 'October 2022 first',
+    name: 'January 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'Februari 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'Maret 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'April 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'Mei 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'Juni 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'Juli 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'Agustus 2022',
     isClosed: true,
   },
   {
-    name: 'October 2022',
+    name: 'September 2022',
     isClosed: true,
   },
   {
-    name: 'November 2022 last',
+    name: 'Oktober 2022',
     isClosed: false,
   },
 ]
@@ -89,14 +85,14 @@ export default function Monthly() {
         <div className="col-span-6 md:col-span-3">
           <div className="grid grid-cols-2 gap-3">
             <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-800 px-3 py-6 text-center">
-              <img src="/vectors/budget.png" alt="" className="h-8 w-8" />
+              <img src="/vectors/expenses-vector.png" alt="" className="h-10 w-10" />
               <h3 className="text-lg font-medium text-green-900">100%</h3>
               <h5 className="text-sm font-light leading-snug">
                 Kesehatan Financial
               </h5>
             </div>
             <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-800 px-3 py-6 text-center">
-              <img src="/vectors/budget.png" alt="" className="h-8 w-8" />
+              <img src="/vectors/expenses-vector.png" alt="" className="h-10 w-10" />
               <h3 className="text-lg font-medium text-green-900">100%</h3>
               <h5 className="text-sm font-light leading-snug">
                 Kesehatan Financial
@@ -118,35 +114,58 @@ function NewMonth() {
   )
 }
 
-function Month({name, isClosed}: data) {
+function Month({ name, isClosed }: data) {
+  const [isShow, setIsShow] = React.useState(false)
   return (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger className="w-full">
-          <div
-            className={clsx(
-              'flex cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-800',
-              {
-                'border-orange-200 bg-orange-100 hover:border-orange-300':
-                  !isClosed,
-              },
-            )}
-          >
-            {!isClosed && <FolderOpen className="m-0 h-5 w-5 p-0" />}
-            {isClosed && <FolderClosed className="m-0 h-5 w-5 p-0" />}
-            <p className="mt-0.5 text-md">{name}</p>
-          </div>
-        </TooltipTrigger>
-        <TooltipContent className="flex items-center gap-x-2">
-          <Info className="-mt-1 h-4 w-4" />
-          {!isClosed && (
-            <p className="text-sm font-light">
-              Folder Open Query and visualize your Vercel usage.
-            </p>
-          )}
-          {isClosed && <p className="text-sm font-light">Folder Closed</p>}
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
+    <>
+      <button
+        onClick={() => setIsShow(true)}
+        className={clsx(
+          'w-full flex cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-700',
+          {
+            'border-orange-200 bg-orange-100 hover:border-orange-300':
+              !isClosed,
+          },
+        )}
+      >
+        {!isClosed && <FolderOpen className="m-0 h-5 w-5 p-0" />}
+        {isClosed && <FolderClosed className="m-0 h-5 w-5 p-0" />}
+        <p className="mt-0.5 text-md">{name}</p>
+      </button>
+      <Editor isShow={isShow} setIsShow={setIsShow} />
+    </>
+  )
+}
+
+function Editor({ isShow, setIsShow }: { isShow: boolean, setIsShow: React.Dispatch<React.SetStateAction<boolean>> }) {
+
+
+  const Header = () => (
+    <div className='px-4 pt-2 pb-1 border-b border-gray-600'>
+      <UIButton
+        onClick={() => setIsShow(false)}
+        variant="subtle"
+        className="text-md text-orange-500 h-fit p-0"
+      >
+        <MoveLeftIcon className="mr-2.5" size="18" />
+        <p> Back</p>
+      </UIButton>
+    </div>
+  )
+
+  return (
+    <DialogOverlay
+      aria-label="Delete project"
+      isOpen={isShow}
+      onDismiss={() => setIsShow(false)}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      className="flex w-full items-center z-50"
+    >
+      <DialogContent className="mx-4 flex max-w-[100vw] flex-col gap-y-6 rounded-md border border-gray-600 bg-gray-900 p-0 lg:mx-auto w-[90vw] lg:w-[50vw] lg:h-[90vh] fixed left-0 right-0">
+        <div>
+          <Header />
+        </div>
+      </DialogContent>
+    </DialogOverlay>
   )
 }

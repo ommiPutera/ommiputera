@@ -1,11 +1,12 @@
 import {createCookieSessionStorage, redirect} from '@remix-run/node'
 import {db} from './db.server'
 import bcrypt from 'bcryptjs'
+import type {Role} from '@prisma/client'
 
 type LoginType = {
   username: string
   password: string
-  role?: string
+  role?: Role
 }
 
 let sessionSecret = process.env.SESSION_SECRET
@@ -48,9 +49,8 @@ export async function login({username, password}: LoginType) {
 
 export async function logout(req: Request) {
   let session = await getUserSession(req)
-  let origin = req.headers.get('origin') || ''
-  const routeName = req.headers.get('referer')?.replace(origin, '') || '/'
-  return redirect(routeName, {
+  const pathname = new URL(req.url).pathname
+  return redirect(pathname, {
     headers: {
       'Set-Cookie': await storage.destroySession(session),
     },
@@ -96,9 +96,17 @@ export async function createUserSession({
   })
 }
 
-export async function requireUserSession(req: Request) {
+export async function requireUserSession(
+  req: Request,
+  exepctionRoute: Array<string>,
+) {
   let session = await getUserSession(req)
   let userId = session.get('userId')
+  const pathname = new URL(req.url).pathname
+
+  if (exepctionRoute?.includes(pathname)) {
+    return '__SKIP_THIS_SESSION__'
+  }
   if (!userId) {
     throw redirect('/login')
   }

@@ -1,19 +1,9 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import type {LoaderFunction} from '@remix-run/node'
-import {requireUserSession} from '~/utils/session.server'
-import {UIButton} from '~/components/shadcn/button'
-import {Settings} from 'lucide-react'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
+import { Settings } from 'lucide-react'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
-}
-
-export const loader: LoaderFunction = async ({request}) => {
-  const user = await requireUserSession(request)
-  if (!user) {
-    throw new Response('Unauthorized', {status: 401})
-  }
-  return {}
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export default function Index() {
@@ -66,7 +56,7 @@ function MonthlyCashflow() {
     <Link to="/cash-flow/monthly" prefetch="intent">
       <div className="flex flex-col">
         <div className="flex items-center gap-x-5">
-          <img src="/vectors/expanses.png" alt="" className="h-10 w-10" />
+          <img src="/vectors/spreadsheet.png" alt="" className="h-10 w-10" />
           <div>
             <h4 className="text-base font-light">Monthly Expense</h4>
             <p className="text-secondary mt-1 text-md font-light leading-tight">
