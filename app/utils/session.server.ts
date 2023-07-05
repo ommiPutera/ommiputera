@@ -9,6 +9,13 @@ type LoginType = {
   role?: Role
 }
 
+type RegisterType = {
+  username: string
+  password: string
+  email: string
+  role?: Role
+}
+
 let sessionSecret = process.env.SESSION_SECRET
 if (!sessionSecret) {
   throw new Error('Must enviornment variable SESSION_SECRET')
@@ -30,10 +37,15 @@ export function getUserSession(req: Request) {
   return storage.getSession(req.headers.get('Cookie'))
 }
 
-export async function register({username, password, role}: LoginType) {
+export async function register({
+  username,
+  password,
+  email,
+  role,
+}: RegisterType) {
   const passwordHash = await bcrypt.hash(password, 10)
   const user = await db.user.create({
-    data: {username, passwordHash, email: '', fullName: '', role},
+    data: {username, passwordHash, email, fullName: '', role},
   })
   return user
 }

@@ -1,9 +1,9 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
-import {Settings} from 'lucide-react'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
+import { Settings } from 'lucide-react'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export default function Index() {
@@ -12,9 +12,6 @@ export default function Index() {
       <LayoutTitle />
       <div className="px-[4vw] pb-9 lg:pb-12 xl:px-10vw">
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-3 lg:gap-x-5">
-          <div className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700">
-            <MonthlyCashflow />
-          </div>
           <div className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700">
             <MonthlyCashflow />
           </div>

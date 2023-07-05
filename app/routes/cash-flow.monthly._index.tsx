@@ -1,8 +1,9 @@
-import {DialogContent, DialogOverlay} from '@reach/dialog'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import clsx from 'clsx'
-import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
+import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
 import React from 'react'
-import {UIButton} from '~/components/shadcn/button'
+import Editor from '~/components/editor'
+import { UIButton } from '~/components/shadcn/button'
 
 type data = {
   name: string
@@ -10,34 +11,6 @@ type data = {
 }
 
 const dataJSON: data[] = [
-  {
-    name: 'January 2022',
-    isClosed: true,
-  },
-  {
-    name: 'Februari 2022',
-    isClosed: true,
-  },
-  {
-    name: 'Maret 2022',
-    isClosed: true,
-  },
-  {
-    name: 'April 2022',
-    isClosed: true,
-  },
-  {
-    name: 'Mei 2022',
-    isClosed: true,
-  },
-  {
-    name: 'Juni 2022',
-    isClosed: true,
-  },
-  {
-    name: 'Juli 2022',
-    isClosed: true,
-  },
   {
     name: 'Agustus 2022',
     isClosed: true,
@@ -122,7 +95,7 @@ function NewMonth() {
   )
 }
 
-function Month({name, isClosed}: data) {
+function Month({ name, isClosed }: data) {
   const [isShow, setIsShow] = React.useState(false)
   return (
     <>
@@ -140,18 +113,20 @@ function Month({name, isClosed}: data) {
         {isClosed && <FolderClosed className="m-0 h-5 w-5 p-0" />}
         <p className="mt-0.5 text-md">{name}</p>
       </button>
-      <Editor isShow={isShow} setIsShow={setIsShow} />
+      <EditData isShow={isShow} setIsShow={setIsShow} />
     </>
   )
 }
 
-function Editor({
+function EditData({
   isShow,
   setIsShow,
 }: {
   isShow: boolean
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+  const [data, setData] = React.useState();
+
   const Header = () => (
     <div className="border-b border-gray-600 px-4 pb-1 pt-2">
       <UIButton
@@ -170,13 +145,16 @@ function Editor({
       aria-label="Delete project"
       isOpen={isShow}
       onDismiss={() => setIsShow(false)}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="fixed left-0 right-0 mx-4 flex w-[90vw] max-w-[100vw] flex-col gap-y-6 rounded-md border border-gray-600 bg-gray-900 p-0 lg:mx-auto lg:h-[90vh] lg:w-[50vw]">
-        <div>
+        <header>
           <Header />
-        </div>
+        </header>
+        <main>
+          <Editor />
+        </main>
       </DialogContent>
     </DialogOverlay>
   )
