@@ -1,0 +1,97 @@
+.dark .ce-block--selected .ce-block__content,
+.dark .ce-inline-toolbar,
+.dark .codex-editor--narrow .ce-toolbox,
+.dark .ce-conversion-toolbar,
+.dark .ce-settings,
+.dark .ce-settings__button,
+.dark .ce-toolbar__settings-btn,
+.dark .cdx-button,
+.dark .ce-popover,
+.dark .ce-toolbar__plus:hover {
+  background: var(--color-gray-900);
+  color: inherit;
+	border-color: var(--color-gray-600);
+}
+
+.ce-popover-item {
+  color: var(--color-white);
+}
+.ce-popover-item:hover {
+  color: var(--colorgray-700);
+}
+.ce-popover-item__icon {
+  color: var(--color-gray-800);
+}
+
+.dark .ce-inline-tool,
+.dark .ce-conversion-toolbar__label,
+.dark .ce-toolbox__button,
+.dark .cdx-settings-button,
+.dark .ce-toolbar__plus {
+  color:  var(--color-white);
+}
+
+.dark .ce-popover__item-icon,
+.dark .ce-conversion-tool__icon {
+	background-color: var(--color-gray-800);
+	box-shadow: none;
+}
+
+.dark .cdx-search-field {
+	border-color: var(--color-gray-800);
+	background: var(--color-gray-800);
+	color: inherit;
+}
+
+.dark ::selection {
+  background: var(--color-gray-800);
+}
+
+.dark .cdx-settings-button:hover,
+.dark .ce-settings__button:hover,
+.dark .ce-toolbox__button--active,
+.dark .ce-toolbox__button:hover,
+.dark .cdx-button:hover,
+.dark .ce-inline-toolbar__dropdown:hover,
+.dark .ce-inline-tool:hover,
+.dark .ce-popover__item:hover,
+.dark .ce-conversion-tool:hover,
+.dark .ce-toolbar__settings-btn:hover {
+  background-color:var(--color-gray-800);
+  color: var(--color-white);
+}
+
+.dark .cdx-notify--error {
+  background: var(--color-gray-800) !important;
+}
+
+.dark .cdx-notify__cross::after,
+.dark .cdx-notify__cross::before {
+  background: white;
+}
+
+.wrapperEditor {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+}
+.ce-block__content {
+  max-width: 600px;
+}
+.ce-toolbar__content {
+  max-width: 610px;
+}
+.cdx-block {
+  padding: 5px 0;
+  white-space: pre-wrap;
+  /* border: 1px solid red; */
+}
+
+.ce-paragraph {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.codex-editor__redactor {
+  /* border: 1px solid red; */
+}

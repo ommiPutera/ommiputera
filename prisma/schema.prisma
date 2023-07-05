@@ -28,6 +28,21 @@ model User {
   fullName     String
   passwordHash String
   projects     Project[]
+  posts        Post[]
+}
+
+model Post {
+  id        String   @id @default(cuid())
+  title     String
+  content   Json?
+  published Boolean  @default(false)
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  updatedAt DateTime @default(now()) @map(name: "updated_at")
+  authorId  String
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+
+  @@index([userId])
 }
 
 model Project {

@@ -1,9 +1,11 @@
-import {DialogContent, DialogOverlay} from '@reach/dialog'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import clsx from 'clsx'
-import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
+import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
 import React from 'react'
-import Editor from '~/components/editor'
-import {UIButton} from '~/components/shadcn/button'
+import loadable from '@loadable/component'
+import { UIButton } from '~/components/shadcn/button'
+
+const EditorJs = loadable(() => import('~/components/editor'))
 
 type data = {
   name: string
@@ -95,7 +97,7 @@ function NewMonth() {
   )
 }
 
-function Month({name, isClosed}: data) {
+function Month({ name, isClosed }: data) {
   const [isShow, setIsShow] = React.useState(false)
   return (
     <>
@@ -125,7 +127,7 @@ function EditData({
   isShow: boolean
   setIsShow: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const [data, setData] = React.useState()
+  // const [data, setData] = React.useState()
 
   const Header = () => (
     <div className="border-b border-gray-600 px-4 pb-1 pt-2">
@@ -145,16 +147,22 @@ function EditData({
       aria-label="Delete project"
       isOpen={isShow}
       onDismiss={() => setIsShow(false)}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
-      className="z-50 flex w-full items-center"
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      className="z-50 flex w-full items-center whitespace-nowrap"
     >
-      <DialogContent className="fixed left-0 right-0 mx-4 flex w-[90vw] max-w-[100vw] flex-col gap-y-6 rounded-md border border-gray-600 bg-gray-900 p-0 lg:mx-auto lg:h-[90vh] lg:w-[50vw]">
+      <DialogContent className="absolute w-[90vw] left-0 right-0 flex flex-col gap-y-2 md:gap-y-3 lg:gap-y-6 rounded-md border border-gray-600 bg-gray-900 p-0 mx-auto lg:h-[90vh] lg:w-fit">
         <header>
           <Header />
         </header>
-        <main>
-          <Editor />
-        </main>
+        <EditorJs
+          fallback={<></>}
+          post={{
+            id: 'tesssst',
+            title: 'unttiled',
+            content: [],
+            published: false,
+          }}
+        />
       </DialogContent>
     </DialogOverlay>
   )

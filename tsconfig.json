@@ -1,13 +1,14 @@
 {
   "include": ["types", "**/*.ts", "**/*.tsx"],
   "compilerOptions": {
-    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "lib": ["DOM", "DOM.Iterable", "es2020"],
     "isolatedModules": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "target": "ES2019",
+    "target": "es2020",
+    "module": "es2020",
     "strict": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
