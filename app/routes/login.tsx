@@ -1,26 +1,26 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { type ActionFunction, redirect } from '@remix-run/node'
-import { type V2_MetaFunction, Form, useActionData } from '@remix-run/react'
-import { debounce } from 'lodash'
+import type {LoaderFunction} from '@remix-run/node'
+import {type ActionFunction, redirect} from '@remix-run/node'
+import {type V2_MetaFunction, Form, useActionData} from '@remix-run/react'
+import {debounce} from 'lodash'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
 } from '~/components/shadcn/tabs'
-import { SectionSpacer } from '~/components/spacer'
-import { Info } from 'lucide-react'
-import { db } from '~/utils/db.server'
+import {SectionSpacer} from '~/components/spacer'
+import {Info} from 'lucide-react'
+import {db} from '~/utils/db.server'
 import {
   createUserSession,
   getUser,
   login,
   register,
 } from '~/utils/session.server'
-import { Logo } from '~/components/navbar'
+import {Logo} from '~/components/navbar'
 
 // type LoaderData = {username: string; error: string}
 
@@ -40,14 +40,14 @@ type ActionData = {
   }
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const paramsTo = searchParams.get('to')
-  return { paramsTo }
+  return {paramsTo}
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { paramsTo } = await getLoaderData({ request })
+export const loader: LoaderFunction = async ({request}) => {
+  const {paramsTo} = await getLoaderData({request})
   const user = await getUser(request)
   if (!user) return null
   if (paramsTo) return redirect(paramsTo)
@@ -58,11 +58,11 @@ export const loader: LoaderFunction = async ({ request }) => {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: `Login to ommiputera.com` }]
+  return [{title: `Login to ommiputera.com`}]
 }
 
-export const action: ActionFunction = async ({ request }) => {
-  const { paramsTo } = await getLoaderData({ request })
+export const action: ActionFunction = async ({request}) => {
+  const {paramsTo} = await getLoaderData({request})
   const formData = await request.formData()
   const loginType = formData.get('loginType')
   const email = formData.get('email')
@@ -75,18 +75,15 @@ export const action: ActionFunction = async ({ request }) => {
     paramsTo: paramsTo,
   })
 
-  let fields = { username, password }
+  let fields = {username, password}
 
   switch (loginType) {
     case 'login': {
-      if (
-        typeof username !== 'string' ||
-        typeof password !== 'string'
-      ) {
-        return { formError: `Form not submitted correctly.` }
+      if (typeof username !== 'string' || typeof password !== 'string') {
+        return {formError: `Form not submitted correctly.`}
       }
 
-      const user = await login({ username, password })
+      const user = await login({username, password})
       let redirect = '/'
       if (!user) {
         return {
@@ -101,7 +98,7 @@ export const action: ActionFunction = async ({ request }) => {
       if (user.role === 'CLIENT' || user.role === 'OWNER') {
         redirect = '/dashboard'
       }
-      return createUserSession({ userId: user.id, redirectUrl: redirect })
+      return createUserSession({userId: user.id, redirectUrl: redirect})
     }
     case 'register': {
       if (
@@ -109,11 +106,11 @@ export const action: ActionFunction = async ({ request }) => {
         typeof password !== 'string' ||
         typeof email !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
 
       let userExists = await db.user.findFirst({
-        where: { username },
+        where: {username},
       })
       if (userExists) {
         return {
@@ -121,7 +118,7 @@ export const action: ActionFunction = async ({ request }) => {
           formError: `User with username ${username} already exists`,
         }
       }
-      const user = await register({ username, password, email, role: 'BASIC' })
+      const user = await register({username, password, email, role: 'BASIC'})
       let redirect = '/cash-flow'
       if (!user) {
         return {
@@ -132,10 +129,10 @@ export const action: ActionFunction = async ({ request }) => {
       if (typeof paramsTo === 'string') {
         redirect = paramsTo
       }
-      return createUserSession({ userId: user.id, redirectUrl: redirect })
+      return createUserSession({userId: user.id, redirectUrl: redirect})
     }
     default: {
-      return { fields, formError: `Login type invalid` }
+      return {fields, formError: `Login type invalid`}
     }
   }
 }
