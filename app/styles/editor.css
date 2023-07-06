@@ -71,15 +71,13 @@
 }
 
 .wrapperEditor {
-    max-width: 600px;
-    width: 100%;
-    margin: 0 auto;
+  @apply lg:max-w-[460px] lg:w-full lg:mx-auto;
 }
 .ce-block__content {
-  max-width: 600px;
+  @apply mx-6 lg:mx-auto lg:max-w-[460px];
 }
 .ce-toolbar__content {
-  max-width: 610px;
+  @apply mx-6 lg:mx-auto lg:max-w-[470px];
 }
 .cdx-block {
   padding: 5px 0;

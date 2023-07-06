@@ -3,8 +3,8 @@ import Header from '@editorjs/header'
 import List from '@editorjs/list'
 // @ts-ignore
 import Delimiter from '@editorjs/delimiter'
-import {createReactEditorJS} from 'react-editor-js'
-import type {Post} from '@prisma/client'
+import { createReactEditorJS } from 'react-editor-js'
+import type { Post } from '@prisma/client'
 import TextareaAutosize from 'react-textarea-autosize'
 
 const EDITOR_JS_TOOLS = {
@@ -17,12 +17,12 @@ interface EditorProps {
   post: Pick<Post, 'id' | 'title' | 'content' | 'published'>
 }
 
-export default function Editor({post}: EditorProps) {
+export default function Editor({ post }: EditorProps) {
   const ReactEditorJS = createReactEditorJS()
 
   return (
-    <form className="overflow-scroll">
-      <div className="wrapperEditor px-4 md:px-0">
+    <form className="overflow-scroll py-4 lg:py-14">
+      <div className="wrapperEditor px-6 md:px-0">
         <TextareaAutosize
           autoFocus
           id="title"
@@ -34,7 +34,7 @@ export default function Editor({post}: EditorProps) {
       <ReactEditorJS holder="custom" tools={EDITOR_JS_TOOLS}>
         <div
           id="custom"
-          className="my-2 min-h-[500px] w-[760px] overflow-scroll"
+          className="my-2 min-h-[500px] lg:w-[680px] overflow-scroll"
         />
       </ReactEditorJS>
     </form>

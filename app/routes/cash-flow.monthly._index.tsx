@@ -1,9 +1,9 @@
-import {DialogContent, DialogOverlay} from '@reach/dialog'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import clsx from 'clsx'
-import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
+import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
 import React from 'react'
 import loadable from '@loadable/component'
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -97,12 +97,13 @@ function NewMonth() {
   )
 }
 
-function Month({name, isClosed}: data) {
+function Month({ name, isClosed }: data) {
   const [isShow, setIsShow] = React.useState(false)
   return (
     <>
       <button
         onClick={() => setIsShow(true)}
+        onMouseOver={() => EditorJs.preload()}
         className={clsx(
           'flex w-full cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-700',
           {
@@ -130,7 +131,7 @@ function EditData({
   // const [data, setData] = React.useState()
 
   const Header = () => (
-    <div className="border-b border-gray-600 px-4 pb-1 pt-2">
+    <div className="border-b border-gray-800 px-4 pb-1 pt-2">
       <UIButton
         onClick={() => setIsShow(false)}
         variant="subtle"
@@ -147,15 +148,12 @@ function EditData({
       aria-label="Delete project"
       isOpen={isShow}
       onDismiss={() => setIsShow(false)}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
-      <DialogContent className="absolute left-0 right-0 mx-auto flex w-[90vw] flex-col gap-y-2 rounded-md border border-gray-600 bg-gray-900 p-0 md:gap-y-3 lg:h-[90vh] lg:w-fit lg:gap-y-6">
-        <header>
-          <Header />
-        </header>
+      <DialogContent className="absolute left-0 h-screen w-screen right-0 mx-auto flex flex-col lg:rounded-md lg:border lg:border-gray-800 bg-gray-900 p-0 lg:h-[88vh] lg:w-fit">
+        <Header />
         <EditorJs
-          fallback={<></>}
           post={{
             id: 'tesssst',
             title: 'unttiled',
