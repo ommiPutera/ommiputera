@@ -1,23 +1,12 @@
-import Header from '@editorjs/header'
-// @ts-ignore
-import List from '@editorjs/list'
-// @ts-ignore
-import Delimiter from '@editorjs/delimiter'
-import {createReactEditorJS} from 'react-editor-js'
-import type {Post} from '@prisma/client'
+import { createReactEditorJS } from 'react-editor-js'
+import type { Post } from '@prisma/client'
 import TextareaAutosize from 'react-textarea-autosize'
-
-const EDITOR_JS_TOOLS = {
-  header: Header,
-  list: List,
-  delimiter: Delimiter,
-}
-
+import { EDITOR_JS_TOOLS } from './tools'
 interface EditorProps {
   post: Pick<Post, 'id' | 'title' | 'content' | 'published'>
 }
 
-export default function Editor({post}: EditorProps) {
+export default function Editor({ post }: EditorProps) {
   const ReactEditorJS = createReactEditorJS()
 
   return (
