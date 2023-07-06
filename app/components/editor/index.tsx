@@ -1,12 +1,12 @@
-import { createReactEditorJS } from 'react-editor-js'
-import type { Post } from '@prisma/client'
+import {createReactEditorJS} from 'react-editor-js'
+import type {Post} from '@prisma/client'
 import TextareaAutosize from 'react-textarea-autosize'
-import { EDITOR_JS_TOOLS } from './tools'
+import {EDITOR_JS_TOOLS} from './tools'
 interface EditorProps {
   post: Pick<Post, 'id' | 'title' | 'content' | 'published'>
 }
 
-export default function Editor({ post }: EditorProps) {
+export default function Editor({post}: EditorProps) {
   const ReactEditorJS = createReactEditorJS()
 
   return (
