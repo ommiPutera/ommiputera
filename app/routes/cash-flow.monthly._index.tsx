@@ -1,9 +1,14 @@
-import {DialogContent, DialogOverlay} from '@reach/dialog'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import clsx from 'clsx'
-import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
-import React from 'react'
+import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
 import loadable from '@loadable/component'
-import {UIButton} from '~/components/shadcn/button'
+import TextareaAutosize from 'react-textarea-autosize'
+import { UIButton } from '~/components/shadcn/button'
+import { Form, useActionData, useSubmit } from '@remix-run/react'
+// import type { Post } from '@prisma/client'
+import { create } from 'zustand'
+import React from 'react'
+import type { ActionFunction } from '@remix-run/node'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -11,6 +16,24 @@ type data = {
   name: string
   isClosed: boolean
 }
+
+type ActionData = {
+  formError?: string
+  fieldErrors?: {
+    title: string | undefined
+  }
+  fields?: {
+    title: string
+  }
+}
+
+interface MonthlyState {
+  isShowEditor: boolean
+  setShowEditor: (isShow: boolean) => void
+}
+// interface EditorProps {
+//   post: Pick<Post, 'id' | 'title' | 'content' | 'published'>
+// }
 
 const dataJSON: data[] = [
   {
@@ -26,6 +49,23 @@ const dataJSON: data[] = [
     isClosed: false,
   },
 ]
+
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData()
+  const title = formData.get('title')
+  console.table({
+    title: title,
+  })
+
+  // let fields = { username, password }
+  return 'erroe'
+}
+
+const useMonthlyState = create<MonthlyState>((set) => ({
+  isShowEditor: false,
+  setShowEditor: (isShow) => set(() => ({ isShowEditor: isShow })),
+}))
 
 export default function Monthly() {
   return (
@@ -97,13 +137,21 @@ function NewMonth() {
   )
 }
 
-function Month({name, isClosed}: data) {
-  const [isShow, setIsShow] = React.useState(false)
+function Month({ name, isClosed }: data) {
+  const { setShowEditor } = useMonthlyState()
+
+  // Need for rerender Editor
+  const [isEditorReady, setEditorReady] = React.useState(false)
+
   return (
-    <>
+    <div>
       <button
-        onClick={() => setIsShow(true)}
+        onClick={() => {
+          setShowEditor(true)
+          setEditorReady(true)
+        }}
         onMouseOver={() => EditorJs.preload()}
+        onMouseLeave={() => EditorJs.preload()}
         className={clsx(
           'flex w-full cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-700',
           {
@@ -116,24 +164,42 @@ function Month({name, isClosed}: data) {
         {isClosed && <FolderClosed className="m-0 h-5 w-5 p-0" />}
         <p className="mt-0.5 text-md">{name}</p>
       </button>
-      <EditData isShow={isShow} setIsShow={setIsShow} />
-    </>
+      {isEditorReady && <EditData setEditorReady={setEditorReady} />}
+    </div>
   )
 }
 
-function EditData({
-  isShow,
-  setIsShow,
-}: {
-  isShow: boolean
-  setIsShow: React.Dispatch<React.SetStateAction<boolean>>
-}) {
-  // const [data, setData] = React.useState()
+function EditData({ setEditorReady }: { setEditorReady: React.Dispatch<React.SetStateAction<boolean>> }) {
+  const { isShowEditor, setShowEditor } = useMonthlyState()
 
-  const Header = () => (
+  React.useEffect(() => {
+    if (!isShowEditor) {
+      setEditorReady(false)
+    }
+  }, [isShowEditor, setEditorReady])
+
+  return (
+    <DialogOverlay
+      aria-label=""
+      isOpen={isShowEditor}
+      onDismiss={() => setShowEditor(false)}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      className="z-50 flex w-full items-center whitespace-nowrap"
+    >
+      <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
+        <HeaderEditor />
+        <EditorForm />
+      </DialogContent>
+    </DialogOverlay>
+  )
+}
+
+function HeaderEditor() {
+  const { setShowEditor } = useMonthlyState()
+  return (
     <div className="flex items-center justify-between border-b border-gray-800 px-6 py-3">
       <UIButton
-        onClick={() => setIsShow(false)}
+        onClick={() => setShowEditor(false)}
         variant="subtle"
         className="h-fit p-0 text-md text-orange-500"
       >
@@ -141,7 +207,7 @@ function EditData({
         <p> Back</p>
       </UIButton>
       <UIButton
-        onClick={() => setIsShow(false)}
+        form="editor-form"
         variant="subtle"
         className="h-fit p-0 text-md text-white"
       >
@@ -149,26 +215,80 @@ function EditData({
       </UIButton>
     </div>
   )
+}
+
+function EditorForm() {
+  const formRef = React.useRef(null);
+  let actionData = useActionData<ActionData | undefined>()
+  const [draf, setDraf] = React.useState([])
+  const [submitted, setSubmitted] = React.useState(false)
+  const [formValues, setFormValues] = React.useState({
+    title: '',
+  })
+
+  const editorCore = React.useRef(null)
+  const post = {
+    id: 'tesssst',
+    title: 'unttiled',
+    content: [],
+    published: false,
+  }
+
+  const handleInitialize = React.useCallback((instance: null) => {
+    editorCore.current = instance
+  }, [])
+
+  const handleSave = React.useCallback(async () => {
+    // retrieve data inserted
+    if (!editorCore.current) return 'some thing went wrong'
+    // @ts-ignore
+    const savedData = await editorCore.current.save();
+
+    // save data
+    setDraf(savedData)
+    if (formRef.current) {
+      // @ts-ignore
+      // formRef.current.submit();
+    }
+  }, []);
+
 
   return (
-    <DialogOverlay
-      aria-label="Delete project"
-      isOpen={isShow}
-      onDismiss={() => setIsShow(false)}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
-      className="z-50 flex w-full items-center whitespace-nowrap"
+    <Form
+      ref={formRef}
+      id="editor-form"
+      method='POST'
+      className="overflow-scroll py-4 lg:py-14"
+      onChange={e => {
+        const form = e.currentTarget
+        setFormValues({
+          title: form.title,
+        })
+      }}
+      aria-describedby={
+        actionData?.formError ? 'form-error-message' : undefined
+      }
+      onSubmit={(e) => {
+        setSubmitted(true)
+      }}
     >
-      <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:absolute lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
-        <Header />
-        <EditorJs
-          post={{
-            id: 'tesssst',
-            title: 'unttiled',
-            content: [],
-            published: false,
-          }}
+      <div className="wrapperEditor px-6 md:px-0">
+        <TextareaAutosize
+          autoFocus
+          id="title-field"
+          name='title'
+          defaultValue={post.title}
+          placeholder="Post title"
+          className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none md:text-4xl"
         />
-      </DialogContent>
-    </DialogOverlay>
+      </div>
+      <EditorJs
+        defaultValue={draf}
+        holder={post.title}
+        onInitialize={handleInitialize}
+        handleSave={handleSave}
+      />
+      <button type="submit" value="simpan">simpan</button>
+    </Form>
   )
 }

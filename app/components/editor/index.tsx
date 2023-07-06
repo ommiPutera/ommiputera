@@ -1,31 +1,30 @@
-import {createReactEditorJS} from 'react-editor-js'
-import type {Post} from '@prisma/client'
-import TextareaAutosize from 'react-textarea-autosize'
-import {EDITOR_JS_TOOLS} from './tools'
-interface EditorProps {
-  post: Pick<Post, 'id' | 'title' | 'content' | 'published'>
-}
+import { createReactEditorJS } from 'react-editor-js'
+import { EDITOR_JS_TOOLS } from './tools'
 
-export default function Editor({post}: EditorProps) {
+export default function Editor({
+  defaultValue,
+  holder,
+  onInitialize,
+  handleSave
+}: {
+  holder: string,
+  handleSave: any
+  defaultValue: any,
+  onInitialize: (instance: any) => void
+}) {
   const ReactEditorJS = createReactEditorJS()
 
   return (
-    <form className="overflow-scroll py-4 lg:py-14">
-      <div className="wrapperEditor px-6 md:px-0">
-        <TextareaAutosize
-          autoFocus
-          id="title"
-          defaultValue={post.title}
-          placeholder="Post title"
-          className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none md:text-4xl"
-        />
-      </div>
-      <ReactEditorJS holder="custom" tools={EDITOR_JS_TOOLS}>
-        <div
-          id="custom"
-          className="my-2 min-h-[500px] overflow-scroll lg:w-[680px]"
-        />
-      </ReactEditorJS>
-    </form>
+    <ReactEditorJS
+      onInitialize={onInitialize}
+      defaultValue={defaultValue}
+      holder={holder}
+      onChange={handleSave}
+      tools={EDITOR_JS_TOOLS}>
+      <div
+        id={holder}
+        className="my-2 min-h-[500px] overflow-scroll lg:w-[680px]"
+      />
+    </ReactEditorJS>
   )
 }
