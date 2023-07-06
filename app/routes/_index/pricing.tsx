@@ -1,5 +1,5 @@
-import { Link } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import {Link} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 
 export default function Pricing() {
   return (
@@ -8,7 +8,7 @@ export default function Pricing() {
         <h1 className="text-center text-3xl font-medium leading-tight lg:text-5xl">
           Choose the plan that <br /> fits your needs.
         </h1>
-        <p className="col-span-3 mt-2 text-center text-lg ffont-light text-gray-200 lg:mt-3 lg:text-xl">
+        <p className="ffont-light col-span-3 mt-2 text-center text-lg text-gray-200 lg:mt-3 lg:text-xl">
           I have a talented team that can help me produce high-quality <br />{' '}
           software and provide a range of services.
         </p>
