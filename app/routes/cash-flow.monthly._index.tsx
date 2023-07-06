@@ -1,14 +1,14 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
 import clsx from 'clsx'
-import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
+import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
 import loadable from '@loadable/component'
 import TextareaAutosize from 'react-textarea-autosize'
-import { UIButton } from '~/components/shadcn/button'
-import { Form, useActionData, useSubmit } from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
+import {Form, useActionData, useSubmit} from '@remix-run/react'
 // import type { Post } from '@prisma/client'
-import { create } from 'zustand'
+import {create} from 'zustand'
 import React from 'react'
-import type { ActionFunction } from '@remix-run/node'
+import type {ActionFunction} from '@remix-run/node'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -50,8 +50,7 @@ const dataJSON: data[] = [
   },
 ]
 
-
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const title = formData.get('title')
   console.table({
@@ -62,9 +61,9 @@ export const action: ActionFunction = async ({ request }) => {
   return 'erroe'
 }
 
-const useMonthlyState = create<MonthlyState>((set) => ({
+const useMonthlyState = create<MonthlyState>(set => ({
   isShowEditor: false,
-  setShowEditor: (isShow) => set(() => ({ isShowEditor: isShow })),
+  setShowEditor: isShow => set(() => ({isShowEditor: isShow})),
 }))
 
 export default function Monthly() {
@@ -137,8 +136,8 @@ function NewMonth() {
   )
 }
 
-function Month({ name, isClosed }: data) {
-  const { setShowEditor } = useMonthlyState()
+function Month({name, isClosed}: data) {
+  const {setShowEditor} = useMonthlyState()
 
   // Need for rerender Editor
   const [isEditorReady, setEditorReady] = React.useState(false)
@@ -169,8 +168,12 @@ function Month({ name, isClosed }: data) {
   )
 }
 
-function EditData({ setEditorReady }: { setEditorReady: React.Dispatch<React.SetStateAction<boolean>> }) {
-  const { isShowEditor, setShowEditor } = useMonthlyState()
+function EditData({
+  setEditorReady,
+}: {
+  setEditorReady: React.Dispatch<React.SetStateAction<boolean>>
+}) {
+  const {isShowEditor, setShowEditor} = useMonthlyState()
 
   React.useEffect(() => {
     if (!isShowEditor) {
@@ -183,7 +186,7 @@ function EditData({ setEditorReady }: { setEditorReady: React.Dispatch<React.Set
       aria-label=""
       isOpen={isShowEditor}
       onDismiss={() => setShowEditor(false)}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
       <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
@@ -195,7 +198,7 @@ function EditData({ setEditorReady }: { setEditorReady: React.Dispatch<React.Set
 }
 
 function HeaderEditor() {
-  const { setShowEditor } = useMonthlyState()
+  const {setShowEditor} = useMonthlyState()
   return (
     <div className="flex items-center justify-between border-b border-gray-800 px-6 py-3">
       <UIButton
@@ -218,7 +221,7 @@ function HeaderEditor() {
 }
 
 function EditorForm() {
-  const formRef = React.useRef(null);
+  const formRef = React.useRef(null)
   let actionData = useActionData<ActionData | undefined>()
   const [draf, setDraf] = React.useState([])
   const [submitted, setSubmitted] = React.useState(false)
@@ -242,7 +245,7 @@ function EditorForm() {
     // retrieve data inserted
     if (!editorCore.current) return 'some thing went wrong'
     // @ts-ignore
-    const savedData = await editorCore.current.save();
+    const savedData = await editorCore.current.save()
 
     // save data
     setDraf(savedData)
@@ -250,14 +253,13 @@ function EditorForm() {
       // @ts-ignore
       // formRef.current.submit();
     }
-  }, []);
-
+  }, [])
 
   return (
     <Form
       ref={formRef}
       id="editor-form"
-      method='POST'
+      method="POST"
       className="overflow-scroll py-4 lg:py-14"
       onChange={e => {
         const form = e.currentTarget
@@ -268,7 +270,7 @@ function EditorForm() {
       aria-describedby={
         actionData?.formError ? 'form-error-message' : undefined
       }
-      onSubmit={(e) => {
+      onSubmit={e => {
         setSubmitted(true)
       }}
     >
@@ -276,7 +278,7 @@ function EditorForm() {
         <TextareaAutosize
           autoFocus
           id="title-field"
-          name='title'
+          name="title"
           defaultValue={post.title}
           placeholder="Post title"
           className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none md:text-4xl"
@@ -288,7 +290,9 @@ function EditorForm() {
         onInitialize={handleInitialize}
         handleSave={handleSave}
       />
-      <button type="submit" value="simpan">simpan</button>
+      <button type="submit" value="simpan">
+        simpan
+      </button>
     </Form>
   )
 }
