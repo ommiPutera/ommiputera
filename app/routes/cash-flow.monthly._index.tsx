@@ -1,21 +1,26 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
 import clsx from 'clsx'
-import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
+import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
 import loadable from '@loadable/component'
 import TextareaAutosize from 'react-textarea-autosize'
-import { UIButton } from '~/components/shadcn/button'
-import { Form, useActionData, useLoaderData, useSearchParams } from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
+import {
+  Form,
+  useActionData,
+  useLoaderData,
+  useSearchParams,
+} from '@remix-run/react'
 // import type { Post } from '@prisma/client'
-import { create } from 'zustand'
+import {create} from 'zustand'
 import React from 'react'
-import type { ActionFunction, LoaderFunction } from '@remix-run/node'
-import { useRootData } from '~/utils/use-root-data'
-import type { Post } from '@prisma/client'
-import { db } from '~/utils/db.server'
+import type {ActionFunction, LoaderFunction} from '@remix-run/node'
+import {useRootData} from '~/utils/use-root-data'
+import type {Post} from '@prisma/client'
+import {db} from '~/utils/db.server'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
-type LoaderData = { post: Post | null }
+type LoaderData = {post: Post | null}
 
 type data = {
   name: string
@@ -57,20 +62,20 @@ const dataJSON: data[] = [
   },
 ]
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const post = await db.post.findUnique({ where: { id: id ?? '' } })
+  const post = await db.post.findUnique({where: {id: id ?? ''}})
   return post
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const post = await getLoaderData({ request })
-  let data: LoaderData = { post }
+export const loader: LoaderFunction = async ({request}) => {
+  const post = await getLoaderData({request})
+  let data: LoaderData = {post}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const actionType = formData.get('actionType')
   const title = formData.get('title')
@@ -79,7 +84,7 @@ export const action: ActionFunction = async ({ request }) => {
   const postJSON = formData.get('postJSON')
   console.table({
     title: title,
-    postJSON: postJSON
+    postJSON: postJSON,
   })
 
   if (
@@ -89,9 +94,9 @@ export const action: ActionFunction = async ({ request }) => {
     typeof published !== 'boolean' ||
     typeof actionType !== 'boolean'
   ) {
-    return { formError: `Form not submitted correctly.` }
+    return {formError: `Form not submitted correctly.`}
   }
-  let fields = { title, authorId, postJSON, published }
+  let fields = {title, authorId, postJSON, published}
 
   switch (actionType) {
     case 'create': {
@@ -101,16 +106,16 @@ export const action: ActionFunction = async ({ request }) => {
       console.log('update')
     }
     default: {
-      return { fields, formError: `Action type invalid` }
+      return {fields, formError: `Action type invalid`}
     }
   }
 }
 
 const useMonthlyState = create<MonthlyState>(set => ({
   isSubmitted: false,
-  setSubmitted: isSubmit => set(() => ({ isSubmitted: isSubmit })),
+  setSubmitted: isSubmit => set(() => ({isSubmitted: isSubmit})),
   isShowEditor: false,
-  setShowEditor: isShow => set(() => ({ isShowEditor: isShow })),
+  setShowEditor: isShow => set(() => ({isShowEditor: isShow})),
 }))
 
 export default function Monthly() {
@@ -183,9 +188,9 @@ function NewMonth() {
   )
 }
 
-function Month({ name, isClosed }: data) {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { setShowEditor, setSubmitted } = useMonthlyState()
+function Month({name, isClosed}: data) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const {setShowEditor, setSubmitted} = useMonthlyState()
 
   // Need for rerender Editor
   const [isEditorReady, setEditorReady] = React.useState(false)
@@ -201,7 +206,7 @@ function Month({ name, isClosed }: data) {
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== 'cljraht7y0000orrxmcyy8b18') {
-            setSearchParams({ id: 'cljraht7y0000orrxmcyy8b18' })
+            setSearchParams({id: 'cljraht7y0000orrxmcyy8b18'})
           }
         }}
         className={clsx(
@@ -226,7 +231,7 @@ function EditData({
 }: {
   setEditorReady: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const { isShowEditor, setShowEditor, setSubmitted } = useMonthlyState()
+  const {isShowEditor, setShowEditor, setSubmitted} = useMonthlyState()
 
   React.useEffect(() => {
     if (!isShowEditor) {
@@ -242,7 +247,7 @@ function EditData({
         setSubmitted(true)
         setShowEditor(false)
       }}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
       <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
@@ -254,7 +259,7 @@ function EditData({
 }
 
 function HeaderEditor() {
-  const { setShowEditor, setSubmitted } = useMonthlyState()
+  const {setShowEditor, setSubmitted} = useMonthlyState()
   return (
     <div className="flex items-center justify-between border-b border-gray-800 px-6 py-3">
       <UIButton
@@ -283,8 +288,8 @@ function EditorForm() {
   const data = useLoaderData<LoaderData>()
   const post = data.post
 
-  const { user } = useRootData()
-  const { isSubmitted } = useMonthlyState()
+  const {user} = useRootData()
+  const {isSubmitted} = useMonthlyState()
   const [content] = React.useState(post?.content)
   const submitRef = React.useRef(null)
   const postJSONRef = React.useRef(null)
@@ -292,7 +297,7 @@ function EditorForm() {
   let actionData = useActionData<ActionData | undefined>()
   const [, setFormValues] = React.useState({
     title: '',
-    postJSON: ''
+    postJSON: '',
   })
 
   const editorCore = React.useRef(null)
@@ -329,7 +334,7 @@ function EditorForm() {
         const form = e.currentTarget
         setFormValues({
           title: form.title,
-          postJSON: form.postJSON
+          postJSON: form.postJSON,
         })
       }}
       aria-describedby={
@@ -352,29 +357,10 @@ function EditorForm() {
         onInitialize={handleInitialize}
         handleSave={handleSave}
       />
-      <input
-        type='text'
-        className='hidden'
-        name='authorId'
-        value={user?.id}
-      />
-      <input
-        type='text'
-        className='hidden'
-        name='actionType'
-        value="update"
-      />
-      <input
-        ref={postJSONRef}
-        type='text'
-        className='hidden'
-        name='postJSON'
-      />
-      <input
-        className='hidden'
-        ref={submitRef}
-        type="submit"
-      />
+      <input type="text" className="hidden" name="authorId" value={user?.id} />
+      <input type="text" className="hidden" name="actionType" value="update" />
+      <input ref={postJSONRef} type="text" className="hidden" name="postJSON" />
+      <input className="hidden" ref={submitRef} type="submit" />
     </Form>
   )
 }
