@@ -1,10 +1,10 @@
-import type { V2_MetaFunction } from '@remix-run/react'
-import { Link, Outlet } from '@remix-run/react'
-import { MoveLeftIcon } from 'lucide-react'
-import { UIButton } from '~/components/shadcn/button'
+import type {V2_MetaFunction} from '@remix-run/react'
+import {Link, Outlet} from '@remix-run/react'
+import {MoveLeftIcon} from 'lucide-react'
+import {UIButton} from '~/components/shadcn/button'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Cashflow' }]
+  return [{title: 'Cashflow'}]
 }
 
 export default function Index() {
@@ -14,11 +14,8 @@ export default function Index() {
       <div className="w-full px-[4vw] xl:px-10vw">
         <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-12 lg:pt-12">
           <div className="w-full">
-            <Link to="/cash-flow" prefetch='intent'>
-              <UIButton
-                variant="subtle"
-                className="text-md text-orange-500"
-              >
+            <Link to="/cash-flow" prefetch="intent">
+              <UIButton variant="subtle" className="text-md text-orange-500">
                 <MoveLeftIcon className="mr-2.5" size="20" />
                 <p> Back to cashflow</p>
               </UIButton>
