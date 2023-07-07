@@ -12,3 +12,24 @@ export async function createPost({title, content, authorId, published}: Post) {
   })
   return null
 }
+
+export async function updatePost({
+  id,
+  title,
+  content,
+  authorId,
+  published,
+}: Post) {
+  await db.post.update({
+    where: {
+      id: id,
+    },
+    data: {
+      title,
+      published,
+      authorId,
+      content,
+    },
+  })
+  return null
+}
