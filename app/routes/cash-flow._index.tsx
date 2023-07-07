@@ -1,9 +1,9 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
-import {Settings} from 'lucide-react'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
+import { Settings } from 'lucide-react'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export default function Index() {
@@ -50,7 +50,7 @@ function LayoutTitle() {
 
 function MonthlyCashflow() {
   return (
-    <Link to="/cash-flow/monthly/form" prefetch="intent">
+    <Link to="/cash-flow/monthly" prefetch="intent">
       <div className="flex flex-col">
         <div className="flex items-center gap-x-5">
           <img src="/vectors/spreadsheet.png" alt="" className="h-10 w-10" />
