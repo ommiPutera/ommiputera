@@ -1,5 +1,5 @@
-import {createReactEditorJS} from 'react-editor-js'
-import {EDITOR_JS_TOOLS} from './tools'
+import { createReactEditorJS } from 'react-editor-js'
+import { EDITOR_JS_TOOLS } from './tools'
 import clsx from 'clsx'
 
 export default function Editor({
@@ -12,7 +12,7 @@ export default function Editor({
 }: {
   className?: string
   onReady?: any
-  holder: string
+  holder?: string
   handleSave: any
   defaultValue: any
   onInitialize: (instance: any) => void
@@ -23,13 +23,13 @@ export default function Editor({
     <ReactEditorJS
       onInitialize={onInitialize}
       defaultValue={defaultValue}
-      holder={holder}
+      holder={holder || 'custom'}
       onChange={handleSave}
       tools={EDITOR_JS_TOOLS}
       onReady={onReady}
     >
       <div
-        id={holder}
+        id={holder || 'custom'}
         className={clsx(
           'my-2 block min-h-[500px] overflow-scroll lg:w-[680px]',
           className,

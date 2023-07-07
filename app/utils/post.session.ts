@@ -1,5 +1,6 @@
 import type {Post} from '@prisma/client'
 import {db} from './db.server'
+import {redirect} from '@remix-run/node'
 
 type UpdateType = {
   id: string
@@ -9,16 +10,35 @@ type UpdateType = {
   published: boolean
 }
 
-export async function createPost({title, content, authorId, published}: Post) {
-  await db.post.create({
+type CreateType = {
+  title: string
+  content?: string
+  authorId: string
+  published: boolean
+}
+
+export async function getPostByAuthor({authorId}: {authorId: string}) {
+  return await db.post.findMany({where: {authorId: authorId}})
+}
+
+export async function getPost({id}: {id: string}) {
+  return await db.post.findUnique({where: {id: id}})
+}
+
+export async function createPost({
+  title,
+  content,
+  authorId,
+  published,
+}: CreateType) {
+  return await db.post.create({
     data: {
       title,
       published,
       authorId,
-      content: JSON.stringify(content),
+      content: content,
     },
   })
-  return null
 }
 
 export async function updatePost({
@@ -28,7 +48,7 @@ export async function updatePost({
   authorId,
   published,
 }: UpdateType) {
-  await db.post.update({
+  return await db.post.update({
     where: {
       id: id,
     },
@@ -39,5 +59,4 @@ export async function updatePost({
       content,
     },
   })
-  return null
 }
