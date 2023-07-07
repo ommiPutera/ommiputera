@@ -1,5 +1,5 @@
-import { createReactEditorJS } from 'react-editor-js'
-import { EDITOR_JS_TOOLS } from './tools'
+import {createReactEditorJS} from 'react-editor-js'
+import {EDITOR_JS_TOOLS} from './tools'
 import clsx from 'clsx'
 
 export default function Editor({

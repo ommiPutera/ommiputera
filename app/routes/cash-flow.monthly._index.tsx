@@ -1,9 +1,9 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
 import clsx from 'clsx'
-import { Plus, FolderClosed, FolderOpen, MoveLeftIcon } from 'lucide-react'
+import {Plus, FolderClosed, FolderOpen, MoveLeftIcon} from 'lucide-react'
 import loadable from '@loadable/component'
 import TextareaAutosize from 'react-textarea-autosize'
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import {
   Form,
   useActionData,
@@ -11,17 +11,22 @@ import {
   useSearchParams,
 } from '@remix-run/react'
 // import type { Post } from '@prisma/client'
-import { create } from 'zustand'
+import {create} from 'zustand'
 import React from 'react'
-import type { ActionFunction, LoaderFunction } from '@remix-run/node'
-import { useRootData } from '~/utils/use-root-data'
-import type { Post } from '@prisma/client'
-import { createPost, getPost, getPostByAuthor, updatePost } from '~/utils/post.session'
-import { getUserId } from '~/utils/session.server'
+import type {ActionFunction, LoaderFunction} from '@remix-run/node'
+import {useRootData} from '~/utils/use-root-data'
+import type {Post} from '@prisma/client'
+import {
+  createPost,
+  getPost,
+  getPostByAuthor,
+  updatePost,
+} from '~/utils/post.session'
+import {getUserId} from '~/utils/session.server'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
-type LoaderData = { post: Post | null, posts: Post[] | null }
+type LoaderData = {post: Post | null; posts: Post[] | null}
 
 type ActionData = {
   formError?: string
@@ -46,22 +51,22 @@ interface MonthlyState {
 //   post: Pick<Post, 'id' | 'title' | 'content' | 'published'>
 // }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
-  const post = await getPost({ id: id ?? "" })
-  const posts = await getPostByAuthor({ authorId: userId })
-  return { post, posts }
+  const post = await getPost({id: id ?? ''})
+  const posts = await getPostByAuthor({authorId: userId})
+  return {post, posts}
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { post, posts } = await getLoaderData({ request })
-  const data: LoaderData = { post, posts }
+export const loader: LoaderFunction = async ({request}) => {
+  const {post, posts} = await getLoaderData({request})
+  const data: LoaderData = {post, posts}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const actionType = formData.get('actionType')
   const postId = formData.get('postId')
@@ -78,7 +83,7 @@ export const action: ActionFunction = async ({ request }) => {
         typeof postJSON !== 'string' ||
         typeof newPostId !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       console.log('--------------newPostId--------------: ', newPostId)
       const post = await createPost({
@@ -87,7 +92,7 @@ export const action: ActionFunction = async ({ request }) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return { newPostId: post.id }
+      return {newPostId: post.id}
     }
     case 'update': {
       if (
@@ -96,7 +101,7 @@ export const action: ActionFunction = async ({ request }) => {
         typeof postId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       return await updatePost({
         id: postId,
@@ -107,22 +112,22 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
 
 const useMonthlyState = create<MonthlyState>(set => ({
   isSubmitted: false,
-  setSubmitted: isSubmit => set(() => ({ isSubmitted: isSubmit })),
+  setSubmitted: isSubmit => set(() => ({isSubmitted: isSubmit})),
   isShowEditorCreate: false,
-  setShowEditorCreate: isShow => set(() => ({ isShowEditorCreate: isShow })),
+  setShowEditorCreate: isShow => set(() => ({isShowEditorCreate: isShow})),
   isShowEditorUpdate: false,
-  setShowEditorUpdate: isShow => set(() => ({ isShowEditorUpdate: isShow })),
+  setShowEditorUpdate: isShow => set(() => ({isShowEditorUpdate: isShow})),
 }))
 
 export default function Index() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
 
   return (
     <div className="">
@@ -146,15 +151,15 @@ export default function Index() {
             tools
           </div>
           <div className="grid grid-cols-1 gap-3 md:grid-cols-6 md:py-4 lg:grid-cols-12">
-            {
-              posts?.length ?
-                posts.map(post => (
-                  <div className="col-span-3" key={post.id}>
-                    <Month {...JSON.parse(JSON.stringify(post))} />
-                  </div>
-                ))
-                : <div className='col-span-12'>No Data</div>
-            }
+            {posts?.length ? (
+              posts.map(post => (
+                <div className="col-span-3" key={post.id}>
+                  <Month {...JSON.parse(JSON.stringify(post))} />
+                </div>
+              ))
+            ) : (
+              <div className="col-span-12">No Data</div>
+            )}
           </div>
         </div>
         <div className="col-span-6 md:col-span-3">
@@ -190,14 +195,14 @@ export default function Index() {
 
 function NewMonth() {
   const [, setSearchParams] = useSearchParams()
-  const { setShowEditorCreate, setSubmitted } = useMonthlyState()
+  const {setShowEditorCreate, setSubmitted} = useMonthlyState()
   // Need for rerender Editor
   const [isEditorReady, setEditorReady] = React.useState(false)
 
   return (
     <div>
       <UIButton
-        type='button'
+        type="button"
         size="sm"
         onClick={() => {
           setShowEditorCreate(true)
@@ -217,9 +222,9 @@ function NewMonth() {
   )
 }
 
-function Month({ id, title }: Post) {
+function Month({id, title}: Post) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { setShowEditorUpdate, setSubmitted } = useMonthlyState()
+  const {setShowEditorUpdate, setSubmitted} = useMonthlyState()
 
   // Need for rerender Editor
   const [isEditorReady, setEditorReady] = React.useState(false)
@@ -227,7 +232,7 @@ function Month({ id, title }: Post) {
   return (
     <>
       <button
-        type='button'
+        type="button"
         onClick={() => {
           setShowEditorUpdate(true)
           setEditorReady(true)
@@ -236,14 +241,13 @@ function Month({ id, title }: Post) {
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({ id: id })
+            setSearchParams({id: id})
           }
         }}
         className={clsx(
           'flex w-full cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-700',
           {
-            'border-orange-200 bg-orange-100 hover:border-orange-300':
-              !title,
+            'border-orange-200 bg-orange-100 hover:border-orange-300': !title,
           },
         )}
       >
@@ -262,7 +266,8 @@ function CreateData({
   setEditorReady: React.Dispatch<React.SetStateAction<boolean>>
 }) {
   const actionData = useActionData<ActionData | undefined>()
-  const { isShowEditorCreate, setShowEditorCreate, setSubmitted } = useMonthlyState()
+  const {isShowEditorCreate, setShowEditorCreate, setSubmitted} =
+    useMonthlyState()
   const [isUpadte, setIsUpdate] = React.useState(false)
   React.useEffect(() => {
     if (!isShowEditorCreate) {
@@ -281,7 +286,7 @@ function CreateData({
         setSubmitted(true)
         setShowEditorCreate(false)
       }}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
       <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
@@ -297,7 +302,8 @@ function EditData({
 }: {
   setEditorReady: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const { isShowEditorUpdate, setShowEditorUpdate, setSubmitted } = useMonthlyState()
+  const {isShowEditorUpdate, setShowEditorUpdate, setSubmitted} =
+    useMonthlyState()
 
   React.useEffect(() => {
     if (!isShowEditorUpdate) {
@@ -313,7 +319,7 @@ function EditData({
         setSubmitted(true)
         setShowEditorUpdate(false)
       }}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
       <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
@@ -324,8 +330,9 @@ function EditData({
   )
 }
 
-function HeaderEditor({ type }: { type: 'update' | 'create' }) {
-  const { setShowEditorUpdate, setShowEditorCreate, setSubmitted } = useMonthlyState()
+function HeaderEditor({type}: {type: 'update' | 'create'}) {
+  const {setShowEditorUpdate, setShowEditorCreate, setSubmitted} =
+    useMonthlyState()
   return (
     <div className="flex items-center justify-between border-b border-gray-800 px-6 py-3">
       <UIButton
@@ -355,10 +362,10 @@ function HeaderEditor({ type }: { type: 'update' | 'create' }) {
   )
 }
 
-function EditorForm({ type }: { type: 'update' | 'create' }) {
-  const { post } = useLoaderData<LoaderData>()
-  const { user } = useRootData()
-  const { setSubmitted } = useMonthlyState()
+function EditorForm({type}: {type: 'update' | 'create'}) {
+  const {post} = useLoaderData<LoaderData>()
+  const {user} = useRootData()
+  const {setSubmitted} = useMonthlyState()
   const submitRef = React.useRef<HTMLInputElement>(null)
   const postJSONRef = React.useRef<HTMLInputElement>(null)
 
@@ -388,7 +395,7 @@ function EditorForm({ type }: { type: 'update' | 'create' }) {
 
     // submit JSON
     if (submitRef.current) {
-      submitRef.current.click();
+      submitRef.current.click()
     }
   }, [])
 
@@ -427,9 +434,16 @@ function EditorForm({ type }: { type: 'update' | 'create' }) {
       <input type="text" className="hidden" name="authorId" value={user?.id} />
       <input type="text" className="hidden" name="actionType" value={type} />
       <input ref={postJSONRef} type="text" className="hidden" name="postJSON" />
-      <input type="text" className="hidden" name="newPostId" value={actionData?.newPostId} />
+      <input
+        type="text"
+        className="hidden"
+        name="newPostId"
+        value={actionData?.newPostId}
+      />
       <input className="hidden" ref={submitRef} type="submit" />
-      {post?.id && <input type="text" className="hidden" name="postId" value={post.id} />}
+      {post?.id && (
+        <input type="text" className="hidden" name="postId" value={post.id} />
+      )}
     </Form>
   )
 }
