@@ -1,6 +1,14 @@
 import type {Post} from '@prisma/client'
 import {db} from './db.server'
 
+type UpdateType = {
+  id: string
+  title: string
+  content?: string
+  authorId: string
+  published: boolean
+}
+
 export async function createPost({title, content, authorId, published}: Post) {
   await db.post.create({
     data: {
@@ -19,7 +27,7 @@ export async function updatePost({
   content,
   authorId,
   published,
-}: Post) {
+}: UpdateType) {
   await db.post.update({
     where: {
       id: id,
