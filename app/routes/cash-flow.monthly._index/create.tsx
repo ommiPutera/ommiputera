@@ -9,14 +9,18 @@ import EditorForm from './form'
 
 export default function CreateData() {
   const [, setSearchParams] = useSearchParams()
-  const { setShowEditorCreate } = useMonthlyState()
+  const { setShowEditorCreate, setIsSubmited, setIsRequestForDismis } = useMonthlyState()
 
   return (
     <div>
       <UIButton
         type="button"
         size="sm"
-        onClick={() => setShowEditorCreate(true)}
+        onClick={() => {
+          setShowEditorCreate(true)
+          setIsSubmited(false)
+          setIsRequestForDismis(false)
+        }}
         onMouseOver={() => {
           EditorJs.preload()
           setSearchParams({})
@@ -32,14 +36,19 @@ export default function CreateData() {
 
 function EditorCreateData() {
   const actionData = useActionData<ActionData | undefined>()
-  const { isShowEditorCreate, setShowEditorCreate } = useMonthlyState()
+  const { isSubmited, setIsRequestForDismis, isShowEditorCreate, setShowEditorCreate } = useMonthlyState()
   const isCreated = Boolean(actionData?.newPostId)
 
   return (
     <DialogOverlay
       aria-label=""
-      isOpen={isShowEditorCreate}
-      onDismiss={() => setShowEditorCreate(false)}
+      isOpen={isShowEditorCreate && !isSubmited}
+      onDismiss={() => {
+        if (isSubmited) {
+          setShowEditorCreate(false)
+        }
+        setIsRequestForDismis(true)
+      }}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >

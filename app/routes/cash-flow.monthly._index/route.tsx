@@ -42,6 +42,9 @@ export type ActionData = {
 }
 
 interface MonthlyState {
+  isSubmited: boolean
+  setIsSubmited: (isSubmited: boolean) => void
+
   isRequestForDismis: boolean
   setIsRequestForDismis: (isRequest: boolean) => void
 
@@ -53,6 +56,9 @@ interface MonthlyState {
 }
 
 export const useMonthlyState = create<MonthlyState>(set => ({
+  isSubmited: false,
+  setIsSubmited: isSubmited => set(() => ({ isSubmited: isSubmited })),
+
   isRequestForDismis: false,
   setIsRequestForDismis: isRequest => set(() => ({ isRequestForDismis: isRequest })),
 

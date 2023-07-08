@@ -1,4 +1,4 @@
-import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 import {
@@ -6,16 +6,19 @@ import {
   type FormType,
   type ActionData,
   EditorJs,
+  useMonthlyState,
 } from './route'
-import {useRootData} from '~/utils/use-root-data'
+import { useRootData } from '~/utils/use-root-data'
 
-export default function EditorForm({type}: {type: FormType}) {
-  const {post} = useLoaderData<LoaderData>()
-  const {user} = useRootData()
+export default function EditorForm({ type }: { type: FormType }) {
+  const { post } = useLoaderData<LoaderData>()
+  const { user } = useRootData()
+  const { isSubmited, setIsSubmited, isRequestForDismis } = useMonthlyState()
   const submitRef = React.useRef<HTMLInputElement>(null)
   const postJSONRef = React.useRef<HTMLInputElement>(null)
 
   const actionData = useActionData<ActionData | undefined>()
+  const [isContentChange, setIsContentChange] = React.useState(false)
   const [, setFormValues] = React.useState({
     title: '',
     postJSON: '',
@@ -38,11 +41,25 @@ export default function EditorForm({type}: {type: FormType}) {
       postJSONRef.current.value = JSON.stringify(savedData)
     }
 
-    // submit JSON
-    if (submitRef.current) {
-      submitRef.current.click()
+    if (savedData) {
+      setIsContentChange(true)
     }
   }, [])
+
+  React.useEffect(() => {
+    if (submitRef.current && isRequestForDismis && !isSubmited) {
+      // Dismis
+      console.log('dismis')
+      setIsSubmited(true)
+    }
+    // submit JSON
+    if (submitRef.current && isRequestForDismis && !isSubmited && isContentChange) {
+      console.log('submit', type)
+      setIsSubmited(true)
+      // @ts-ignore
+      // submitRef.current.save()
+    }
+  }, [isContentChange, isRequestForDismis, isSubmited, setIsSubmited, type])
 
   return (
     <Form
@@ -55,6 +72,7 @@ export default function EditorForm({type}: {type: FormType}) {
           postJSON: form.postJSON,
         })
       }}
+      onSubmit={() => setIsSubmited(true)}
     >
       <div className="wrapperEditor px-6 md:px-0">
         <TextareaAutosize

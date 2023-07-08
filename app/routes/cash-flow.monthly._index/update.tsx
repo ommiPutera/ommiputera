@@ -9,13 +9,17 @@ import EditorForm from './form'
 
 export default function UpdateData({ id, title }: Post) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { setShowEditorUpdate } = useMonthlyState()
+  const { setShowEditorUpdate, setIsSubmited, setIsRequestForDismis } = useMonthlyState()
 
   return (
     <>
       <button
         type="button"
-        onClick={() => setShowEditorUpdate(true)}
+        onClick={() => {
+          setShowEditorUpdate(true)
+          setIsSubmited(false)
+          setIsRequestForDismis(false)
+        }}
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
@@ -39,13 +43,18 @@ export default function UpdateData({ id, title }: Post) {
 }
 
 function EditorUpdateData() {
-  const { isShowEditorUpdate, setShowEditorUpdate } = useMonthlyState()
+  const { isSubmited, setIsRequestForDismis, isShowEditorUpdate, setShowEditorUpdate } = useMonthlyState()
 
   return (
     <DialogOverlay
       aria-label=""
-      isOpen={isShowEditorUpdate}
-      onDismiss={() => setShowEditorUpdate(false)}
+      isOpen={isShowEditorUpdate && !isSubmited}
+      onDismiss={() => {
+        if (isSubmited) {
+          setShowEditorUpdate(false)
+        }
+        setIsRequestForDismis(true)
+      }}
       style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
