@@ -1,6 +1,4 @@
-import type {Post} from '@prisma/client'
 import {db} from './db.server'
-import {redirect} from '@remix-run/node'
 
 type UpdateType = {
   id: string
@@ -23,6 +21,10 @@ export async function getPostByAuthor({authorId}: {authorId: string}) {
 
 export async function getPost({id}: {id: string}) {
   return await db.post.findUnique({where: {id: id}})
+}
+
+export async function deletePost({id}: {id: string}) {
+  return await db.post.delete({where: {id: id}})
 }
 
 export async function createPost({
