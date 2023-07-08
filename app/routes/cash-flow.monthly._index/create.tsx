@@ -8,8 +8,9 @@ import { DialogContent, DialogOverlay } from '@reach/dialog'
 import EditorForm from './form'
 
 export default function CreateData() {
-  const [, setSearchParams] = useSearchParams()
-  const { setShowEditorCreate, setIsSubmited, setIsRequestForDismis } = useMonthlyState()
+  const [searchParams, setSearchParams] = useSearchParams()
+  const { setShowEditorCreate, setIsSubmited, setIsRequestForDismis } =
+    useMonthlyState()
 
   return (
     <div>
@@ -29,14 +30,19 @@ export default function CreateData() {
         <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
         Create Data
       </UIButton>
-      <EditorCreateData />
+      {searchParams.get("id") === null && <EditorCreateData />}
     </div>
   )
 }
 
 function EditorCreateData() {
   const actionData = useActionData<ActionData | undefined>()
-  const { isSubmited, setIsRequestForDismis, isShowEditorCreate, setShowEditorCreate } = useMonthlyState()
+  const {
+    isSubmited,
+    setIsRequestForDismis,
+    isShowEditorCreate,
+    setShowEditorCreate,
+  } = useMonthlyState()
   const isCreated = Boolean(actionData?.newPostId)
 
   return (

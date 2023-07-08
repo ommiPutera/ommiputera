@@ -53,11 +53,16 @@ export default function EditorForm({ type }: { type: FormType }) {
       setIsSubmited(true)
     }
     // submit JSON
-    if (submitRef.current && isRequestForDismis && !isSubmited && isContentChange) {
+    if (
+      submitRef.current &&
+      isRequestForDismis &&
+      !isSubmited &&
+      isContentChange
+    ) {
       console.log('submit', type)
       setIsSubmited(true)
       // @ts-ignore
-      // submitRef.current.save()
+      submitRef.current.click()
     }
   }, [isContentChange, isRequestForDismis, isSubmited, setIsSubmited, type])
 
