@@ -1,7 +1,7 @@
-import { createReactEditorJS } from 'react-editor-js'
-import { EDITOR_JS_TOOLS } from './tools'
+import {createReactEditorJS} from 'react-editor-js'
+import {EDITOR_JS_TOOLS} from './tools'
 import clsx from 'clsx'
-import type { OutputData } from '@editorjs/editorjs'
+import type {OutputData} from '@editorjs/editorjs'
 
 export interface EditorCore {
   destroy(): Promise<void>
@@ -25,7 +25,7 @@ export default function Editor({
   handleSave: any
   defaultValue: any
   placeholder?: string
-  onInitialize?: ((core: EditorCore) => void)
+  onInitialize?: (core: EditorCore) => void
 }) {
   const ReactEditorJS = createReactEditorJS()
 
