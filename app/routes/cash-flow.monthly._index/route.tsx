@@ -1,11 +1,11 @@
 import loadable from '@loadable/component'
-import {Form, useLoaderData} from '@remix-run/react'
-import {MoveLeftIcon} from 'lucide-react'
-import {UIButton} from '~/components/shadcn/button'
-import type {Post} from '@prisma/client'
-import type {ActionFunction, LoaderFunction} from '@remix-run/node'
+import { Form, useLoaderData } from '@remix-run/react'
+import { MoveLeftIcon } from 'lucide-react'
+import { UIButton } from '~/components/shadcn/button'
+import type { Post } from '@prisma/client'
+import type { ActionFunction, LoaderFunction } from '@remix-run/node'
 import React from 'react'
-import {create} from 'zustand'
+import { create } from 'zustand'
 import {
   createPost,
   deletePost,
@@ -13,7 +13,7 @@ import {
   getPostByAuthor,
   updatePost,
 } from '~/utils/post.session'
-import {getUserId} from '~/utils/session.server'
+import { getUserId } from '~/utils/session.server'
 import CreateData from './create'
 import UpdateData from './update'
 
@@ -54,43 +54,42 @@ interface MonthlyState {
 
 export const useMonthlyState = create<MonthlyState>(set => ({
   isRequestForDismis: false,
-  setIsRequestForDismis: isRequest =>
-    set(() => ({isRequestForDismis: isRequest})),
+  setIsRequestForDismis: isRequest => set(() => ({ isRequestForDismis: isRequest })),
 
   isShowEditorCreate: false,
-  setShowEditorCreate: isShow => set(() => ({isShowEditorCreate: isShow})),
+  setShowEditorCreate: isShow => set(() => ({ isShowEditorCreate: isShow })),
 
   isShowEditorUpdate: false,
-  setShowEditorUpdate: isShow => set(() => ({isShowEditorUpdate: isShow})),
+  setShowEditorUpdate: isShow => set(() => ({ isShowEditorUpdate: isShow })),
 }))
 
-async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
 
-  const post = await getPost({id: id ?? ''})
-  const posts = await getPostByAuthor({authorId: userId})
-  return {post, posts}
+  const post = await getPost({ id: id ?? '' })
+  const posts = await getPostByAuthor({ authorId: userId })
+  return { post, posts }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {post, posts} = await getLoaderData({request})
-  const data: LoaderData = {post, posts}
+export const loader: LoaderFunction = async ({ request }) => {
+  const { post, posts } = await getLoaderData({ request })
+  const data: LoaderData = { post, posts }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON, newPostId} =
+  const { _action, postId, title, authorId, postJSON, newPostId } =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      const post = await deletePost({id: postId})
+      const post = await deletePost({ id: postId })
       return post
     }
     case FormType.CREATE: {
@@ -100,7 +99,7 @@ export const action: ActionFunction = async ({request}) => {
         typeof postJSON !== 'string' ||
         typeof newPostId !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await createPost({
         title,
@@ -108,7 +107,7 @@ export const action: ActionFunction = async ({request}) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return {newPostId: post.id}
+      return { newPostId: post.id }
     }
     case FormType.UPDATE: {
       if (
@@ -117,7 +116,7 @@ export const action: ActionFunction = async ({request}) => {
         typeof postId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await updatePost({
         id: postId,
@@ -129,13 +128,13 @@ export const action: ActionFunction = async ({request}) => {
       return post
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
 
   return (
     <div className="">
@@ -201,9 +200,9 @@ export default function Index() {
   )
 }
 
-export function HeaderEditor({type}: {type: FormType}) {
-  const {setShowEditorUpdate, setShowEditorCreate} = useMonthlyState()
-  const {post} = useLoaderData<LoaderData>()
+export function HeaderEditor({ type }: { type: FormType }) {
+  const { setShowEditorUpdate, setShowEditorCreate } = useMonthlyState()
+  const { post } = useLoaderData<LoaderData>()
   return (
     <div className="flex items-center justify-between border-b border-gray-800 px-6 py-3">
       <UIButton
