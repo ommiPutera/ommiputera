@@ -1,6 +1,14 @@
-import {createReactEditorJS} from 'react-editor-js'
-import {EDITOR_JS_TOOLS} from './tools'
+import { createReactEditorJS } from 'react-editor-js'
+import { EDITOR_JS_TOOLS } from './tools'
 import clsx from 'clsx'
+import type { OutputData } from '@editorjs/editorjs'
+
+export interface EditorCore {
+  destroy(): Promise<void>
+  clear(): Promise<void>
+  save(): Promise<OutputData>
+  render(data: OutputData): Promise<void>
+}
 
 export default function Editor({
   defaultValue,
@@ -8,6 +16,7 @@ export default function Editor({
   onInitialize,
   handleSave,
   onReady,
+  placeholder,
   className,
 }: {
   className?: string
@@ -15,7 +24,8 @@ export default function Editor({
   holder?: string
   handleSave: any
   defaultValue: any
-  onInitialize: (instance: any) => void
+  placeholder?: string
+  onInitialize?: ((core: EditorCore) => void)
 }) {
   const ReactEditorJS = createReactEditorJS()
 
@@ -23,7 +33,9 @@ export default function Editor({
     <ReactEditorJS
       onInitialize={onInitialize}
       defaultValue={defaultValue}
+      inlineToolbar={true}
       holder={holder || 'custom'}
+      placeholder={placeholder}
       onChange={handleSave}
       tools={EDITOR_JS_TOOLS}
       onReady={onReady}

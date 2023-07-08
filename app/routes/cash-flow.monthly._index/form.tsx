@@ -9,11 +9,12 @@ import {
   useMonthlyState,
 } from './route'
 import { useRootData } from '~/utils/use-root-data'
+import type { EditorCore } from '~/components/editor'
 
 export default function EditorForm({ type }: { type: FormType }) {
   const { post } = useLoaderData<LoaderData>()
   const { user } = useRootData()
-  const { isSubmited, setIsSubmited, isRequestForDismis } = useMonthlyState()
+  const { isSubmited, setIsSubmited, isRequestForDismis, setIsEditorReady } = useMonthlyState()
   const submitRef = React.useRef<HTMLInputElement>(null)
   const postJSONRef = React.useRef<HTMLInputElement>(null)
 
@@ -24,16 +25,15 @@ export default function EditorForm({ type }: { type: FormType }) {
     postJSON: '',
   })
 
-  const editorCore = React.useRef<null>(null)
-
-  const handleInitialize = React.useCallback((instance: null) => {
+  const editorCore = React.useRef<EditorCore>(null)
+  const handleInitialize = React.useCallback((instance: EditorCore) => {
+    // @ts-ignore
     editorCore.current = instance
   }, [])
 
   const handleSave = React.useCallback(async () => {
     // retrieve data inserted
     if (!editorCore.current) return 'some thing went wrong!'
-    // @ts-ignore
     const savedData = await editorCore.current.save()
 
     // save data
@@ -44,7 +44,11 @@ export default function EditorForm({ type }: { type: FormType }) {
     if (savedData) {
       setIsContentChange(true)
     }
-  }, [])
+  }, [editorCore])
+
+  const handleEditorReady = React.useCallback(() => {
+    setIsEditorReady(true)
+  }, [setIsEditorReady])
 
   React.useEffect(() => {
     if (submitRef.current && isRequestForDismis && !isSubmited) {
@@ -90,10 +94,12 @@ export default function EditorForm({ type }: { type: FormType }) {
         />
       </div>
       <EditorJs
+        placeholder="Type here to write your post..."
         defaultValue={post?.content}
         holder={post?.title}
         onInitialize={handleInitialize}
         handleSave={handleSave}
+        onReady={handleEditorReady}
       />
       <input type="text" className="hidden" name="_action" value={type} />
       <input type="text" className="hidden" name="authorId" value={user?.id} />
