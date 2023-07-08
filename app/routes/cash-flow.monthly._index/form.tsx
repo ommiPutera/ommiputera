@@ -1,12 +1,17 @@
-import { Form, useActionData, useLoaderData } from "@remix-run/react"
-import React from "react"
+import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { type LoaderData, type FormType, type ActionData, EditorJs } from "./route"
-import { useRootData } from "~/utils/use-root-data"
+import {
+  type LoaderData,
+  type FormType,
+  type ActionData,
+  EditorJs,
+} from './route'
+import {useRootData} from '~/utils/use-root-data'
 
-export default function EditorForm({ type }: { type: FormType }) {
-  const { post } = useLoaderData<LoaderData>()
-  const { user } = useRootData()
+export default function EditorForm({type}: {type: FormType}) {
+  const {post} = useLoaderData<LoaderData>()
+  const {user} = useRootData()
   const submitRef = React.useRef<HTMLInputElement>(null)
   const postJSONRef = React.useRef<HTMLInputElement>(null)
 

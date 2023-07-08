@@ -1,15 +1,15 @@
-import { useSearchParams } from "@remix-run/react"
-import { EditorJs, FormType, HeaderEditor, useMonthlyState } from "./route"
-import React from "react"
-import type { Post } from '@prisma/client'
-import { FolderClosed, FolderOpen } from "lucide-react"
-import { DialogContent, DialogOverlay } from "@reach/dialog"
-import clsx from "clsx";
-import EditorForm from "./form"
+import {useSearchParams} from '@remix-run/react'
+import {EditorJs, FormType, HeaderEditor, useMonthlyState} from './route'
+import React from 'react'
+import type {Post} from '@prisma/client'
+import {FolderClosed, FolderOpen} from 'lucide-react'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import clsx from 'clsx'
+import EditorForm from './form'
 
-export default function UpdateData({ id, title }: Post) {
+export default function UpdateData({id, title}: Post) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { setShowEditorUpdate } = useMonthlyState()
+  const {setShowEditorUpdate} = useMonthlyState()
 
   // Need for rerender Editor
   const [isEditorReady, setEditorReady] = React.useState(false)
@@ -25,7 +25,7 @@ export default function UpdateData({ id, title }: Post) {
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({ id: id })
+            setSearchParams({id: id})
           }
         }}
         className={clsx(
@@ -49,7 +49,7 @@ function EditorUpdateData({
 }: {
   setEditorReady: React.Dispatch<React.SetStateAction<boolean>>
 }) {
-  const { isShowEditorUpdate, setShowEditorUpdate } = useMonthlyState()
+  const {isShowEditorUpdate, setShowEditorUpdate} = useMonthlyState()
 
   React.useEffect(() => {
     if (!isShowEditorUpdate) {
@@ -64,7 +64,7 @@ function EditorUpdateData({
       onDismiss={() => {
         setShowEditorUpdate(false)
       }}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center whitespace-nowrap"
     >
       <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
