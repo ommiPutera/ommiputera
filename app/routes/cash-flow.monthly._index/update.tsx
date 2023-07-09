@@ -1,15 +1,15 @@
-import { useSearchParams } from '@remix-run/react'
-import { EditorJs, FormType, HeaderEditor, useMonthlyState } from './route'
+import {useSearchParams} from '@remix-run/react'
+import {EditorJs, FormType, HeaderEditor, useMonthlyState} from './route'
 import React from 'react'
-import type { Post } from '@prisma/client'
-import { FolderClosed, FolderOpen } from 'lucide-react'
-import { DialogContent, DialogOverlay } from '@reach/dialog'
+import type {Post} from '@prisma/client'
+import {FolderClosed, FolderOpen} from 'lucide-react'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
 import clsx from 'clsx'
 import EditorForm from './form'
 
-export default function UpdateData({ id, title }: Post) {
+export default function UpdateData({id, title}: Post) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const { setShowEditorUpdate, setIsSubmited, setIsRequestForDismis } =
+  const {setShowEditorUpdate, setIsSubmited, setIsRequestForDismis} =
     useMonthlyState()
   const [isCallEditor, setIsCallEditor] = React.useState(false)
 
@@ -26,13 +26,13 @@ export default function UpdateData({ id, title }: Post) {
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({ id: id })
+            setSearchParams({id: id})
           }
         }}
         onFocus={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({ id: id })
+            setSearchParams({id: id})
           }
         }}
         className={clsx(
@@ -53,7 +53,11 @@ export default function UpdateData({ id, title }: Post) {
   )
 }
 
-function EditorUpdateData({ setIsCallEditor }: { setIsCallEditor: React.Dispatch<React.SetStateAction<boolean>> }) {
+function EditorUpdateData({
+  setIsCallEditor,
+}: {
+  setIsCallEditor: React.Dispatch<React.SetStateAction<boolean>>
+}) {
   const {
     isSubmited,
     setIsRequestForDismis,
@@ -75,7 +79,7 @@ function EditorUpdateData({ setIsCallEditor }: { setIsCallEditor: React.Dispatch
         setIsEditorReady(false)
         setIsRequestForDismis(true)
       }}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className={clsx('z-50 w-full items-center whitespace-nowrap', {
         hidden: !isEditorReady,
         flex: isEditorReady,
