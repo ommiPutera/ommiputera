@@ -1,15 +1,15 @@
-import {useSearchParams} from '@remix-run/react'
-import {EditorJs, FormType, HeaderEditor, useMonthlyState} from './route'
+import { useSearchParams } from '@remix-run/react'
+import { EditorJs, FormType, HeaderEditor, useMonthlyState } from './route'
 import React from 'react'
-import type {Post} from '@prisma/client'
-import {FolderClosed, FolderOpen} from 'lucide-react'
-import {DialogContent, DialogOverlay} from '@reach/dialog'
+import type { Post } from '@prisma/client'
+import { FolderClosed, FolderOpen } from 'lucide-react'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
 import clsx from 'clsx'
 import EditorForm from './form'
 
-export default function UpdateData({id, title}: Post) {
+export default function UpdateData({ id, title }: Post) {
   const [searchParams, setSearchParams] = useSearchParams()
-  const {setShowEditorUpdate, setIsSubmited, setIsRequestForDismis} =
+  const { setShowEditorUpdate, setIsSubmited, setIsRequestForDismis } =
     useMonthlyState()
   const [isCallEditor, setIsCallEditor] = React.useState(false)
 
@@ -26,13 +26,13 @@ export default function UpdateData({id, title}: Post) {
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({id: id})
+            setSearchParams({ id: id })
           }
         }}
         onFocus={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({id: id})
+            setSearchParams({ id: id })
           }
         }}
         className={clsx(
@@ -47,13 +47,13 @@ export default function UpdateData({id, title}: Post) {
         <p className="mt-0.5 text-md">{title}</p>
       </button>
       {searchParams.get('id') === id && isCallEditor ? (
-        <EditorUpdateData />
+        <EditorUpdateData setIsCallEditor={setIsCallEditor} />
       ) : null}
     </>
   )
 }
 
-function EditorUpdateData() {
+function EditorUpdateData({ setIsCallEditor }: { setIsCallEditor: React.Dispatch<React.SetStateAction<boolean>> }) {
   const {
     isSubmited,
     setIsRequestForDismis,
@@ -71,16 +71,17 @@ function EditorUpdateData() {
         if (isSubmited) {
           setShowEditorUpdate(false)
         }
+        setIsCallEditor(false)
         setIsEditorReady(false)
         setIsRequestForDismis(true)
       }}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className={clsx('z-50 w-full items-center whitespace-nowrap', {
         hidden: !isEditorReady,
         flex: isEditorReady,
       })}
     >
-      <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-gray-900 p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
+      <DialogContent className="fixed left-0 right-0 mx-auto flex h-screen w-screen flex-col bg-black p-0 lg:h-[88vh] lg:w-fit lg:rounded-md lg:border lg:border-gray-800">
         <HeaderEditor type={FormType.UPDATE} />
         <EditorForm type={FormType.UPDATE} />
       </DialogContent>

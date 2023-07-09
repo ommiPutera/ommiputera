@@ -21,6 +21,6 @@ export const EDITOR_JS_TOOLS = {
   list: List,
   delimiter: Delimiter,
   linkTool: LinkTool,
-  // image: Image,
-  // table: Table,
+  image: Image,
+  table: Table,
 }
