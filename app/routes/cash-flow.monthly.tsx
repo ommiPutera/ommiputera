@@ -12,10 +12,6 @@ export default function Index() {
       <div className="w-full px-[4vw] xl:px-10vw">
         <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-12 lg:pt-12">
           <div className="w-full">
-            {/* <UIButton variant="subtle" className="text-md text-orange-500" onClick={() => navigate(-1)}>
-              <MoveLeftIcon className="mr-2.5" size="20" />
-              <p> Back</p>
-            </UIButton> */}
             <Outlet />
           </div>
         </div>

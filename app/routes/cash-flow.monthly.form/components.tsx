@@ -1,18 +1,18 @@
-import { UIButton } from "~/components/shadcn/button";
-import { FormType } from "../cash-flow.monthly._index/route";
-import React from "react";
-import { DialogContent, DialogOverlay } from "@reach/dialog";
-import { Button } from "~/components/button";
+import {UIButton} from '~/components/shadcn/button'
+import {FormType} from '../cash-flow.monthly._index/route'
+import React from 'react'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import {Button} from '~/components/button'
 
 export function Header({
   type,
   submit,
   handleSave,
-  handleDelete
+  handleDelete,
 }: {
-  type: FormType,
-  submit: () => void,
-  handleSave: () => void,
+  type: FormType
+  submit: () => void
+  handleSave: () => void
   handleDelete: () => void
 }) {
   const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
@@ -25,14 +25,20 @@ export function Header({
   if (type === FormType.CREATE) {
     return (
       <>
-        <UIButton size="sm" onClick={handleSave}>Save</UIButton>
+        <UIButton size="sm" onClick={handleSave}>
+          Save
+        </UIButton>
       </>
     )
   }
   return (
     <div className="flex gap-x-2">
-      <UIButton size="sm" onClick={handleDeletePost}>Delete</UIButton>
-      <UIButton size="sm" onClick={handleSave}>Save</UIButton>
+      <UIButton size="sm" onClick={handleDeletePost}>
+        Delete
+      </UIButton>
+      <UIButton size="sm" onClick={handleSave}>
+        Save
+      </UIButton>
 
       {/* Dialog */}
       <DeleteDialog
@@ -40,7 +46,6 @@ export function Header({
         isShowDeleteModal={isShowDeleteModal}
         setIsShowDeleteModal={setIsShowDeleteModal}
       />
-
     </div>
   )
 }
@@ -48,10 +53,10 @@ export function Header({
 const DeleteDialog = ({
   submit,
   isShowDeleteModal,
-  setIsShowDeleteModal
+  setIsShowDeleteModal,
 }: {
-  submit: () => void,
-  isShowDeleteModal: boolean,
+  submit: () => void
+  isShowDeleteModal: boolean
   setIsShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
   const closeDeleteModal = () => setIsShowDeleteModal(false)
@@ -66,8 +71,8 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
-      className="flex w-full items-center z-50"
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+      className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
         <div className="border-b border-gray-800 px-6 py-4 text-center">
@@ -75,9 +80,9 @@ const DeleteDialog = ({
         </div>
         <div className="px-6 py-4">
           <p className="text-secondary mt-4 text-md font-light leading-tight lg:mt-2 lg:leading-relaxed">
-            Monitoring is a powerful query editor that allows you to
-            visualize and gain insight into bandwidth, errors, performance,
-            traffic, Top Paths usage, and more across all projects.
+            Monitoring is a powerful query editor that allows you to visualize
+            and gain insight into bandwidth, errors, performance, traffic, Top
+            Paths usage, and more across all projects.
           </p>
         </div>
         <div className="flex w-full justify-between border-t border-gray-800 px-6 py-4">

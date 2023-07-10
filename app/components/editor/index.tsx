@@ -1,7 +1,7 @@
-import { createReactEditorJS } from 'react-editor-js'
-import { EDITOR_JS_TOOLS } from './tools'
+import {createReactEditorJS} from 'react-editor-js'
+import {EDITOR_JS_TOOLS} from './tools'
 import clsx from 'clsx'
-import type { OutputData } from '@editorjs/editorjs'
+import type {OutputData} from '@editorjs/editorjs'
 
 export interface EditorCore {
   destroy(): Promise<void>
@@ -43,7 +43,7 @@ export default function Editor({
       <div
         id={holder || 'custom'}
         className={clsx(
-          'my-2 block min-h-[500px] overflow-visible md:px-12 md:-mx-12 lg:w-full',
+          'my-2 block min-h-[500px] overflow-visible md:-mx-12 md:px-12 lg:w-full',
           className,
         )}
       />
