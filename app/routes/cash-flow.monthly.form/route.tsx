@@ -7,14 +7,14 @@ import {
 } from '@remix-run/react'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { EditorJs, FormType } from '../cash-flow.monthly._index/route'
-import type { Post } from '@prisma/client'
+import {EditorJs, FormType} from '../cash-flow.monthly._index/route'
+import type {Post} from '@prisma/client'
 import {
   redirect,
   type ActionFunction,
   type LoaderFunction,
 } from '@remix-run/node'
-import { getUserId } from '~/utils/session.server'
+import {getUserId} from '~/utils/session.server'
 import {
   createPost,
   deletePost,
@@ -22,12 +22,12 @@ import {
   getPostByAuthor,
   updatePost,
 } from '~/utils/post.session'
-import type { EditorCore } from '~/components/editor'
-import { useRootData } from '~/utils/use-root-data'
-import { UIButton } from '~/components/shadcn/button'
-import { MoveLeftIcon } from 'lucide-react'
-import { Header } from './components'
-import { useToast } from '~/components/shadcn/use-toast'
+import type {EditorCore} from '~/components/editor'
+import {useRootData} from '~/utils/use-root-data'
+import {UIButton} from '~/components/shadcn/button'
+import {MoveLeftIcon} from 'lucide-react'
+import {Header} from './components'
+import {useToast} from '~/components/shadcn/use-toast'
 
 type LoaderData = {
   posts: Post[] | null
@@ -46,33 +46,33 @@ type ActionData = {
   }
 }
 
-export async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+export async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
 
-  const post = await getPost({ id: id ?? '' })
-  const posts = await getPostByAuthor({ authorId: userId })
-  return { post, posts }
+  const post = await getPost({id: id ?? ''})
+  const posts = await getPostByAuthor({authorId: userId})
+  return {post, posts}
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { post, posts } = await getLoaderData({ request })
-  const data: LoaderData = { post, posts }
+export const loader: LoaderFunction = async ({request}) => {
+  const {post, posts} = await getLoaderData({request})
+  const data: LoaderData = {post, posts}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const { _action, postId, title, authorId, postJSON } =
+  const {_action, postId, title, authorId, postJSON} =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      await deletePost({ id: postId })
+      await deletePost({id: postId})
       return redirect('/cash-flow/monthly', {})
     }
     case FormType.CREATE: {
@@ -81,7 +81,7 @@ export const action: ActionFunction = async ({ request }) => {
         typeof authorId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await createPost({
         title,
@@ -89,7 +89,7 @@ export const action: ActionFunction = async ({ request }) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return { post }
+      return {post}
     }
     case FormType.UPDATE: {
       if (
@@ -98,7 +98,7 @@ export const action: ActionFunction = async ({ request }) => {
         typeof postId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await updatePost({
         id: postId,
@@ -107,10 +107,10 @@ export const action: ActionFunction = async ({ request }) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return { post }
+      return {post}
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
@@ -123,14 +123,14 @@ export default function Index() {
   const [type, setType] = React.useState<FormType>(
     postId ? FormType.UPDATE : FormType.CREATE,
   )
-  const { toast } = useToast()
+  const {toast} = useToast()
 
   const submit = () => {
     if (submitRef.current) {
       submitRef.current.click()
       toast({
         title: 'Saved!',
-        description: "Data berhasil disimpan",
+        description: 'Data berhasil disimpan',
       })
     }
   }
@@ -140,7 +140,7 @@ export default function Index() {
     submit()
     // SET POST ID
     if (postId && !searchParams.get('id')) {
-      setSearchParams({ id: postId })
+      setSearchParams({id: postId})
     }
   }
 
@@ -194,8 +194,8 @@ function FormEditor({
   submitRef: React.RefObject<HTMLInputElement>
   type: FormType
 }) {
-  const { post } = useLoaderData<LoaderData>()
-  const { user } = useRootData()
+  const {post} = useLoaderData<LoaderData>()
+  const {user} = useRootData()
   const [searchParams] = useSearchParams()
   const actionData = useActionData<ActionData | undefined>()
   const postId = searchParams.get('id') || actionData?.post?.id
