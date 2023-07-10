@@ -1,8 +1,8 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { Button } from '~/components/button'
-import { FormType } from './route'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import {Button} from '~/components/button'
+import {FormType} from './route'
 
 export function Header({
   type,
@@ -71,7 +71,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">

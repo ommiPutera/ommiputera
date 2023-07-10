@@ -1,15 +1,12 @@
 import loadable from '@loadable/component'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData, useSearchParams } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData, useSearchParams} from '@remix-run/react'
 import clsx from 'clsx'
-import { FolderClosed, FolderOpen, Plus } from 'lucide-react'
-import { UIButton } from '~/components/shadcn/button'
-import {
-  getPost,
-  getPostByAuthor,
-} from '~/utils/post.session'
-import { getUserId } from '~/utils/session.server'
+import {FolderClosed, FolderOpen, Plus} from 'lucide-react'
+import {UIButton} from '~/components/shadcn/button'
+import {getPost, getPostByAuthor} from '~/utils/post.session'
+import {getUserId} from '~/utils/session.server'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -18,24 +15,24 @@ type LoaderData = {
   post: Post | null
 }
 
-export async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+export async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
 
-  const post = await getPost({ id: id ?? '' })
-  const posts = await getPostByAuthor({ authorId: userId })
-  return { post, posts }
+  const post = await getPost({id: id ?? ''})
+  const posts = await getPostByAuthor({authorId: userId})
+  return {post, posts}
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { post, posts } = await getLoaderData({ request })
-  const data: LoaderData = { post, posts }
+export const loader: LoaderFunction = async ({request}) => {
+  const {post, posts} = await getLoaderData({request})
+  const data: LoaderData = {post, posts}
   return data
 }
 
 export default function Index() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
@@ -127,7 +124,7 @@ function CreateData() {
   )
 }
 
-function UpdateData({ id, title }: Post) {
+function UpdateData({id, title}: Post) {
   const [searchParams, setSearchParams] = useSearchParams()
   return (
     <Link to={`/cash-flow/monthly/form?id=${id}`} prefetch="intent">
@@ -136,13 +133,13 @@ function UpdateData({ id, title }: Post) {
         onMouseOver={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({ id: id })
+            setSearchParams({id: id})
           }
         }}
         onFocus={() => {
           EditorJs.preload()
           if (searchParams.get('id') !== id) {
-            setSearchParams({ id: id })
+            setSearchParams({id: id})
           }
         }}
         className={clsx(
@@ -161,7 +158,7 @@ function UpdateData({ id, title }: Post) {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
