@@ -1,11 +1,11 @@
 import loadable from '@loadable/component'
-import {Form, useLoaderData} from '@remix-run/react'
-import {MoveLeftIcon} from 'lucide-react'
-import {UIButton} from '~/components/shadcn/button'
-import type {Post} from '@prisma/client'
-import type {ActionFunction, LoaderFunction} from '@remix-run/node'
-import React from 'react'
-import {create} from 'zustand'
+import {
+  Link, useLoaderData, useSearchParams
+} from '@remix-run/react'
+import { FolderClosed, FolderOpen, Plus } from 'lucide-react'
+import { UIButton } from '~/components/shadcn/button'
+import type { Post } from '@prisma/client'
+import type { ActionFunction, LoaderFunction } from '@remix-run/node'
 import {
   createPost,
   deletePost,
@@ -13,9 +13,8 @@ import {
   getPostByAuthor,
   updatePost,
 } from '~/utils/post.session'
-import {getUserId} from '~/utils/session.server'
-import CreateData from './create'
-import UpdateData from './update'
+import { getUserId } from '~/utils/session.server'
+import clsx from 'clsx'
 
 export const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -30,81 +29,34 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export type ActionData = {
-  formError?: string
-  fieldErrors?: {
-    title: string | undefined
-  }
-  newPostId?: string
-  deletedPostId?: string
-  fields?: {
-    title: string
-  }
-}
-
-interface MonthlyState {
-  isEditorReady: boolean
-  setIsEditorReady: (isInitialize: boolean) => void
-
-  isSubmited: boolean
-  setIsSubmited: (isSubmited: boolean) => void
-
-  isRequestForDismis: boolean
-  setIsRequestForDismis: (isRequest: boolean) => void
-
-  isShowEditorCreate: boolean
-  setShowEditorCreate: (isShow: boolean) => void
-
-  isShowEditorUpdate: boolean
-  setShowEditorUpdate: (isShow: boolean) => void
-}
-
-export const useMonthlyState = create<MonthlyState>(set => ({
-  isEditorReady: false,
-  setIsEditorReady: isReady => set(() => ({isEditorReady: isReady})),
-
-  isSubmited: false,
-  setIsSubmited: isSubmited => set(() => ({isSubmited: isSubmited})),
-
-  isRequestForDismis: false,
-  setIsRequestForDismis: isRequest =>
-    set(() => ({isRequestForDismis: isRequest})),
-
-  isShowEditorCreate: false,
-  setShowEditorCreate: isShow => set(() => ({isShowEditorCreate: isShow})),
-
-  isShowEditorUpdate: false,
-  setShowEditorUpdate: isShow => set(() => ({isShowEditorUpdate: isShow})),
-}))
-
-export async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+export async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
 
-  const post = await getPost({id: id ?? ''})
-  const posts = await getPostByAuthor({authorId: userId})
-  return {post, posts}
+  const post = await getPost({ id: id ?? '' })
+  const posts = await getPostByAuthor({ authorId: userId })
+  return { post, posts }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {post, posts} = await getLoaderData({request})
-  const data: LoaderData = {post, posts}
+export const loader: LoaderFunction = async ({ request }) => {
+  const { post, posts } = await getLoaderData({ request })
+  const data: LoaderData = { post, posts }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON, newPostId} =
+  const { _action, postId, title, authorId, postJSON, newPostId } =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      const post = await deletePost({id: postId})
-      return {deletedPostId: post.id}
+      const post = await deletePost({ id: postId })
+      return { deletedPostId: post.id }
     }
     case FormType.CREATE: {
       if (
@@ -113,7 +65,7 @@ export const action: ActionFunction = async ({request}) => {
         typeof postJSON !== 'string' ||
         typeof newPostId !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       console.log('hereeeeeee')
       const post = await createPost({
@@ -122,7 +74,7 @@ export const action: ActionFunction = async ({request}) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return {newPostId: post.id}
+      return { newPostId: post.id }
     }
     case FormType.UPDATE: {
       if (
@@ -131,7 +83,7 @@ export const action: ActionFunction = async ({request}) => {
         typeof postId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await updatePost({
         id: postId,
@@ -143,13 +95,13 @@ export const action: ActionFunction = async ({request}) => {
       return post
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
@@ -216,8 +168,66 @@ export default function Index() {
   )
 }
 
+function CreateData() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  return (
+    <Link to="/cash-flow/monthly/form" prefetch='intent'>
+      <UIButton
+        type="button"
+        size="sm"
+        onMouseOver={() => {
+          EditorJs.preload()
+          setSearchParams({})
+        }}
+        onFocus={() => {
+          EditorJs.preload()
+          if (searchParams.get('id')) {
+            setSearchParams({})
+          }
+        }}
+      >
+        <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
+        Create Data
+      </UIButton>
+    </Link>
+  )
+}
+
+function UpdateData({ id, title }: Post) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  return (
+    <Link to={`/cash-flow/monthly/form?id=${id}`} prefetch='intent'>
+      <button
+        type="button"
+        onMouseOver={() => {
+          EditorJs.preload()
+          if (searchParams.get('id') !== id) {
+            setSearchParams({ id: id })
+          }
+        }}
+        onFocus={() => {
+          EditorJs.preload()
+          if (searchParams.get('id') !== id) {
+            setSearchParams({ id: id })
+          }
+        }}
+        className={clsx(
+          'flex w-full cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-700',
+          {
+            'border-orange-200 bg-orange-100 hover:border-orange-300': !title,
+          },
+        )}
+      >
+        {!title && <FolderOpen className="m-0 h-5 w-5 p-0" />}
+        {title && <FolderClosed className="m-0 h-5 w-5 p-0" />}
+        <p className="mt-0.5 text-md">{title}</p>
+      </button>
+    </Link>
+  )
+}
+
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -243,49 +253,6 @@ function NoData() {
       <div>
         <CreateData />
       </div>
-    </div>
-  )
-}
-
-export function HeaderEditor({type}: {type: FormType}) {
-  const {setShowEditorUpdate, setShowEditorCreate} = useMonthlyState()
-  const {post} = useLoaderData<LoaderData>()
-  return (
-    <div className="flex items-center justify-between border-b border-gray-800 px-6 py-3">
-      <UIButton
-        onClick={() => {
-          if (type === FormType.CREATE) {
-            setShowEditorCreate(false)
-          }
-          if (type === FormType.UPDATE) {
-            setShowEditorUpdate(false)
-          }
-        }}
-        variant="subtle"
-        className="h-fit p-0 text-md text-orange-500"
-      >
-        <MoveLeftIcon className="mr-2.5" size="18" />
-        <p>Back</p>
-      </UIButton>
-      {type === FormType.UPDATE && (
-        <Form method="POST">
-          <UIButton
-            type="submit"
-            name="_action"
-            value={FormType.DELETE}
-            variant="subtle"
-            className="h-fit p-0 text-md text-red-900"
-          >
-            Delete
-          </UIButton>
-          <input
-            type="text"
-            className="hidden"
-            name="postId"
-            value={post?.id}
-          />
-        </Form>
-      )}
     </div>
   )
 }
