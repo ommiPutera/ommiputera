@@ -1,8 +1,8 @@
-import {UIButton} from '~/components/shadcn/button'
-import {FormType} from '../cash-flow.monthly._index/route'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {DialogContent, DialogOverlay} from '@reach/dialog'
-import {Button} from '~/components/button'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { Button } from '~/components/button'
+import { FormType } from './route'
 
 export function Header({
   type,
@@ -32,8 +32,8 @@ export function Header({
     )
   }
   return (
-    <div className="flex gap-x-2">
-      <UIButton size="sm" onClick={handleDeletePost}>
+    <div className="flex gap-x-4">
+      <UIButton size="sm" variant="danger" onClick={handleDeletePost}>
         Delete
       </UIButton>
       <UIButton size="sm" onClick={handleSave}>
@@ -71,7 +71,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
@@ -100,7 +100,7 @@ const DeleteDialog = ({
             className="w-min"
             variant="danger"
           >
-            Yes, delete project
+            Yes, delete.
           </Button>
         </div>
       </DialogContent>

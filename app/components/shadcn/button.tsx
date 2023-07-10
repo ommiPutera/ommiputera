@@ -1,9 +1,9 @@
 import * as React from 'react'
-import {Slot} from '@radix-ui/react-slot'
-import {cva, type VariantProps} from 'class-variance-authority'
+import { Slot } from '@radix-ui/react-slot'
+import { cva, type VariantProps } from 'class-variance-authority'
 
-import {cn} from '~/lib/utils'
-import {debounce} from 'lodash'
+import { cn } from '~/lib/utils'
+import { debounce } from 'lodash'
 
 const buttonVariants = cva(
   'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
@@ -12,6 +12,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-white text-gray-600 hover:bg-gray-100',
         subtle: 'bg-transparent',
+        danger: 'text-red-800 bg-red-100 border border-red-200',
       },
       size: {
         default: 'h-10',
@@ -30,13 +31,13 @@ const buttonVariants = cva(
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
+  VariantProps<typeof buttonVariants> {
   asChild?: boolean
   hoverChild?: React.ReactNode
 }
 
 const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({className, variant, size, hoverChild, asChild = false, ...props}, ref) => {
+  ({ className, variant, size, hoverChild, asChild = false, ...props }, ref) => {
     const [childrenComp, setChildrenComp] = React.useState(props.children)
     const Comp = asChild ? Slot : 'button'
     const handleHoverEnter = debounce(
@@ -50,7 +51,7 @@ const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     return (
       <Comp
-        className={cn(buttonVariants({variant, size, className}))}
+        className={cn(buttonVariants({ variant, size, className }))}
         ref={ref}
         onMouseEnter={handleHoverEnter}
         onMouseLeave={handleHoverLeave}
@@ -63,4 +64,4 @@ const UIButton = React.forwardRef<HTMLButtonElement, ButtonProps>(
 )
 UIButton.displayName = 'Button'
 
-export {UIButton, buttonVariants}
+export { UIButton, buttonVariants }

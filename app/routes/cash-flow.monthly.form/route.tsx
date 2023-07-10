@@ -1,20 +1,23 @@
 import {
   Form,
-  Link,
   useActionData,
   useLoaderData,
+  useNavigate,
   useSearchParams,
 } from '@remix-run/react'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import {EditorJs, FormType} from '../cash-flow.monthly._index/route'
-import type {Post} from '@prisma/client'
+import loadable from '@loadable/component'
+import type { Post } from '@prisma/client'
 import {
   redirect,
   type ActionFunction,
   type LoaderFunction,
 } from '@remix-run/node'
-import {getUserId} from '~/utils/session.server'
+import { MoveLeftIcon } from 'lucide-react'
+import type { EditorCore } from '~/components/editor'
+import { UIButton } from '~/components/shadcn/button'
+import { useToast } from '~/components/shadcn/use-toast'
 import {
   createPost,
   deletePost,
@@ -22,12 +25,17 @@ import {
   getPostByAuthor,
   updatePost,
 } from '~/utils/post.session'
-import type {EditorCore} from '~/components/editor'
-import {useRootData} from '~/utils/use-root-data'
-import {UIButton} from '~/components/shadcn/button'
-import {MoveLeftIcon} from 'lucide-react'
-import {Header} from './components'
-import {useToast} from '~/components/shadcn/use-toast'
+import { getUserId } from '~/utils/session.server'
+import { useRootData } from '~/utils/use-root-data'
+import { Header } from './components'
+
+const EditorJs = loadable(() => import('~/components/editor'))
+
+export enum FormType {
+  CREATE = 'CREATE',
+  UPDATE = 'UPDATE',
+  DELETE = 'DELETE',
+}
 
 type LoaderData = {
   posts: Post[] | null
@@ -46,33 +54,33 @@ type ActionData = {
   }
 }
 
-export async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+export async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
 
-  const post = await getPost({id: id ?? ''})
-  const posts = await getPostByAuthor({authorId: userId})
-  return {post, posts}
+  const post = await getPost({ id: id ?? '' })
+  const posts = await getPostByAuthor({ authorId: userId })
+  return { post, posts }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {post, posts} = await getLoaderData({request})
-  const data: LoaderData = {post, posts}
+export const loader: LoaderFunction = async ({ request }) => {
+  const { post, posts } = await getLoaderData({ request })
+  const data: LoaderData = { post, posts }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON} =
+  const { _action, postId, title, authorId, postJSON } =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      await deletePost({id: postId})
+      await deletePost({ id: postId })
       return redirect('/cash-flow/monthly', {})
     }
     case FormType.CREATE: {
@@ -81,7 +89,7 @@ export const action: ActionFunction = async ({request}) => {
         typeof authorId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await createPost({
         title,
@@ -89,7 +97,7 @@ export const action: ActionFunction = async ({request}) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return {post}
+      return { post }
     }
     case FormType.UPDATE: {
       if (
@@ -98,32 +106,32 @@ export const action: ActionFunction = async ({request}) => {
         typeof postId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      const post = await updatePost({
+      await updatePost({
         id: postId,
         title,
         authorId,
         published: true,
         content: JSON.parse(postJSON),
       })
-      return {post}
+      return redirect('/cash-flow/monthly', {})
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
+  const { toast } = useToast()
+  const submitRef = React.useRef<HTMLInputElement>(null)
   const actionData = useActionData<ActionData | undefined>()
   const [searchParams, setSearchParams] = useSearchParams()
   const postId = searchParams.get('id') || actionData?.post?.id
-  const submitRef = React.useRef<HTMLInputElement>(null)
   const [type, setType] = React.useState<FormType>(
     postId ? FormType.UPDATE : FormType.CREATE,
   )
-  const {toast} = useToast()
 
   const submit = () => {
     if (submitRef.current) {
@@ -140,7 +148,7 @@ export default function Index() {
     submit()
     // SET POST ID
     if (postId && !searchParams.get('id')) {
-      setSearchParams({id: postId})
+      setSearchParams({ id: postId })
     }
   }
 
@@ -148,18 +156,22 @@ export default function Index() {
     setType(FormType.DELETE)
   }
 
+  React.useEffect(() => {
+    window.onpopstate = () => {
+      handleSave()
+    }
+
+    window.addEventListener('beforeunload', handleSave);
+    return () => {
+      window.removeEventListener('beforeunload', handleSave);
+    };
+  })
+
   return (
     <div className="">
       <BackButton />
       <div className="flex items-center justify-between py-4">
-        <div className="text-left">
-          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-lg">
-            {type.toLowerCase()} Data Monthly Expense
-          </h1>
-          <p className="text-secondary mt-1 text-md font-light">
-            Query and visualize your Vercel usage.
-          </p>
-        </div>
+        <Title type={type} />
         <Header
           type={type}
           handleSave={handleSave}
@@ -172,18 +184,31 @@ export default function Index() {
   )
 }
 
-function BackButton() {
+function Title({ type }: { type: string }) {
   return (
-    <Link to="/cash-flow/monthly" prefetch="intent">
-      <UIButton
-        type="button"
-        variant="subtle"
-        className="text-md text-orange-500"
-      >
-        <MoveLeftIcon className="mr-2.5" size="20" />
-        <p>Back to monthly expense</p>
-      </UIButton>
-    </Link>
+    <div className="text-left">
+      <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-lg">
+        {type.toLowerCase()} Data Monthly Expense
+      </h1>
+      <p className="text-secondary mt-1 text-md font-light">
+        Query and visualize your Vercel usage.
+      </p>
+    </div>
+  )
+}
+
+function BackButton() {
+  const navigate = useNavigate()
+  return (
+    <UIButton
+      onClick={() => navigate(-1)}
+      type="submit"
+      variant="subtle"
+      className="text-md text-orange-500"
+    >
+      <MoveLeftIcon className="mr-2.5" size="20" />
+      <p>Back to monthly expense</p>
+    </UIButton>
   )
 }
 
@@ -194,8 +219,8 @@ function FormEditor({
   submitRef: React.RefObject<HTMLInputElement>
   type: FormType
 }) {
-  const {post} = useLoaderData<LoaderData>()
-  const {user} = useRootData()
+  const { post } = useLoaderData<LoaderData>()
+  const { user } = useRootData()
   const [searchParams] = useSearchParams()
   const actionData = useActionData<ActionData | undefined>()
   const postId = searchParams.get('id') || actionData?.post?.id
@@ -220,7 +245,6 @@ function FormEditor({
 
     // save data
     if (postJSONRef.current) {
-      console.log('JSON.stringify(savedData): ', JSON.stringify(savedData))
       postJSONRef.current.value = JSON.stringify(savedData)
     }
   }, [editorCore])
