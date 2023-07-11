@@ -14,7 +14,7 @@ import {
   type ActionFunction,
   type LoaderFunction,
 } from '@remix-run/node'
-import { MoveLeftIcon } from 'lucide-react'
+import { MoveLeftIcon, RocketIcon } from 'lucide-react'
 import type { EditorCore } from '~/components/editor'
 import { UIButton } from '~/components/shadcn/button'
 import {
@@ -28,6 +28,8 @@ import { getUserId } from '~/utils/session.server'
 import { useRootData } from '~/utils/use-root-data'
 import { Header } from './misc'
 import { create } from 'zustand'
+import { Alert, AlertDescription, AlertTitle } from '~/components/shadcn/alert'
+import type { OutputData } from '@editorjs/editorjs'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -49,24 +51,30 @@ type ActionData = {
   }
   post?: Post
   fields?: {
-    title: string
-    postJSON: string
-  }
+    title?: string
+    postJSON?: string
+  },
   formMessage?: string
 }
 
 interface FormValues {
-  formValues: {
-    title: string
-  },
-  setFormValues: ({ title }: { title: string }) => void
+  title: string
+  setTitle: (value: string) => void
+
+  postJSON: OutputData
+  setPostJSON: (value: OutputData) => void
 }
 
-export const useFormFields = create<FormValues>((set) => ({
-  formValues: {
-    title: '',
+export const useFormFields = create<FormValues>(set => ({
+  title: '',
+  setTitle: (value: string) => set((state) => ({ title: value })),
+
+  postJSON: {
+    version: '',
+    time: 0,
+    blocks: []
   },
-  setFormValues: ({ title }) => set((state) => ({ formValues: { title } }))
+  setPostJSON: (value: OutputData) => set(() => ({ postJSON: value }))
 }))
 
 export async function getLoaderData({ request }: { request: Request }) {
@@ -89,6 +97,14 @@ export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
   const { _action, postId, title, authorId, postJSON } =
     Object.fromEntries(formData)
+
+  console.table({
+    _action,
+    postId,
+    title,
+    authorId,
+    postJSON
+  })
 
   switch (_action) {
     case FormType.DELETE: {
@@ -113,7 +129,10 @@ export const action: ActionFunction = async ({ request }) => {
         published: true,
         content: JSON.parse(postJSON),
       })
-      return { post, formMessage: 'Data telah di publish' }
+      return {
+        post,
+        formMessage: 'Data telah di publish'
+      }
     }
     case FormType.UPDATE: {
       if (
@@ -143,12 +162,11 @@ export default function Index() {
   const submitRef = React.useRef<HTMLInputElement>(null)
   const actionData = useActionData<ActionData | undefined>()
   const [searchParams, setSearchParams] = useSearchParams()
-  const postId = searchParams.get('id') || actionData?.post?.id
-  const [type, setType] = React.useState<FormType>(
-    postId ? FormType.UPDATE : FormType.CREATE,
-  )
+  const postId = actionData?.post?.id || searchParams.get('id')
+  const [type, setType] = React.useState<FormType>(postId ? FormType.UPDATE : FormType.CREATE)
 
-  const { formValues } = useFormFields()
+  const { title, postJSON } = useFormFields()
+  const isValidPublish = title && postJSON?.blocks?.length
 
   const submit = () => {
     if (submitRef.current) {
@@ -179,7 +197,8 @@ export default function Index() {
     return () => {
       window.removeEventListener('beforeunload', handleSave)
     }
-  }, [formValues, handleSave])
+  }, [handleSave, postJSON.blocks.length, title])
+
 
   return (
     <div className="">
@@ -191,6 +210,7 @@ export default function Index() {
           handleSave={handleSave}
           handleDelete={handleDelete}
           submit={submit}
+          isValidPublish={!isValidPublish}
         />
       </div>
       <FormEditor submitRef={submitRef} type={type} />
@@ -233,11 +253,10 @@ function FormEditor({
   submitRef: React.RefObject<HTMLInputElement>
   type: FormType
 }) {
-
   const { post } = useLoaderData<LoaderData>()
   const { user } = useRootData()
   const [searchParams] = useSearchParams()
-  const { setFormValues } = useFormFields()
+  const { setTitle, setPostJSON } = useFormFields()
   const actionData = useActionData<ActionData | undefined>()
   const postId = searchParams.get('id') || actionData?.post?.id
 
@@ -253,55 +272,65 @@ function FormEditor({
     // retrieve data inserted
     if (!editorCore.current) return 'some thing went wrong!'
     const savedData = await editorCore.current.save()
-
     // save data
     if (postJSONRef.current) {
       postJSONRef.current.value = JSON.stringify(savedData)
+      setPostJSON(savedData)
     }
-  }, [editorCore])
+  }, [setPostJSON])
 
   return (
-    <Form
-      method="POST"
-      className="py-4 lg:py-14"
-      noValidate
-      replace
-      onChange={event => {
-        const target = event.currentTarget;
-        // @ts-ignore
-        setFormValues({ title: target.title.value })
-      }}
-    >
-      <div>
-        {actionData?.formMessage}
-      </div>
-      <div className="px-6 md:px-0">
-        <TextareaAutosize
-          autoFocus
-          id="title-field"
-          name="title"
-          defaultValue={post?.title}
-          placeholder="Post title"
-          className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none md:text-5xl"
+    <div className="py-4">
+      {
+        actionData?.formMessage
+        &&
+        <Alert className="mb-6">
+          <RocketIcon className="h-5 w-5" />
+          <AlertTitle>Heads up!</AlertTitle>
+          <AlertDescription>
+            {actionData?.formMessage}
+          </AlertDescription>
+        </Alert>
+      }
+      <Form
+        method="POST"
+        noValidate
+        replace
+        onChange={e => {
+          const target = e.currentTarget
+          // @ts-ignore
+          setTitle(target.title.value)
+        }}
+      >
+        <div className="px-6 md:px-0">
+          <TextareaAutosize
+            autoFocus
+            id="title-field"
+            name="title"
+            defaultValue={post?.title}
+            placeholder="Post title"
+            className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none md:text-5xl"
+          />
+        </div>
+        <EditorJs
+          placeholder="Use `TAB` to open the command menu."
+          defaultValue={post?.content}
+          holder={post?.title}
+          onInitialize={handleInitialize}
+          handleSave={handleSave}
         />
-      </div>
-      <EditorJs
-        placeholder="Use `TAB` to open the command menu."
-        defaultValue={post?.content}
-        holder={post?.title}
-        onInitialize={handleInitialize}
-        handleSave={handleSave}
-      />
-      <input type="hidden" readOnly name="_action" value={type} />
-      <input type="hidden" readOnly name="authorId" value={user?.id} />
-      <input
-        ref={postJSONRef}
-        defaultValue={post?.content ? JSON.stringify(post?.content) : undefined}
-        type="hidden"
-        name="postJSON"
-      />
-      <input readOnly type="hidden" name="postId" value={postId} />
-      <input ref={submitRef} type="submit" readOnly className="hidden" />
-    </Form>
+        <input type="hidden" readOnly name="_action" value={type} />
+        <input type="hidden" readOnly name="authorId" value={user?.id} />
+        <input
+          readOnly
+          ref={postJSONRef}
+          defaultValue={JSON.stringify(post?.content)}
+          type="hidden"
+          name="postJSON"
+        />
+        <input readOnly type="hidden" name="postId" value={postId} />
+        <input ref={submitRef} type="submit" readOnly className="hidden" />
+      </Form>
+    </div>
   )
 }

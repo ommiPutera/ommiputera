@@ -1,6 +1,6 @@
 const path = require('path')
 const defaultTheme = require('tailwindcss/defaultTheme')
-const fromRoot = p => path.join(__dirname, p)
+const fromRoot = (p: string) => path.join(__dirname, p)
 
 module.exports = {
   mode: 'jit',
@@ -106,8 +106,8 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
-      typography: theme => {
-        const fontSize = size => {
+      typography: (theme: any) => {
+        const fontSize = (size: string) => {
           const result = theme(`fontSize.${size}`)
           return Array.isArray(result) ? result[0] : result
         }
