@@ -8,16 +8,15 @@ import {
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
 import loadable from '@loadable/component'
-import type {Post} from '@prisma/client'
+import type { Post } from '@prisma/client'
 import {
   redirect,
   type ActionFunction,
   type LoaderFunction,
 } from '@remix-run/node'
-import {MoveLeftIcon} from 'lucide-react'
-import type {EditorCore} from '~/components/editor'
-import {UIButton} from '~/components/shadcn/button'
-import {useToast} from '~/components/shadcn/use-toast'
+import { MoveLeftIcon } from 'lucide-react'
+import type { EditorCore } from '~/components/editor'
+import { UIButton } from '~/components/shadcn/button'
 import {
   createPost,
   deletePost,
@@ -25,9 +24,10 @@ import {
   getPostByAuthor,
   updatePost,
 } from '~/utils/post.session'
-import {getUserId} from '~/utils/session.server'
-import {useRootData} from '~/utils/use-root-data'
-import {Header} from './components'
+import { getUserId } from '~/utils/session.server'
+import { useRootData } from '~/utils/use-root-data'
+import { Header } from './misc'
+import { create } from 'zustand'
 
 const EditorJs = loadable(() => import('~/components/editor'))
 
@@ -52,35 +52,50 @@ type ActionData = {
     title: string
     postJSON: string
   }
+  formMessage?: string
 }
 
-export async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
+interface FormValues {
+  formValues: {
+    title: string
+  },
+  setFormValues: ({ title }: { title: string }) => void
+}
+
+export const useFormFields = create<FormValues>((set) => ({
+  formValues: {
+    title: '',
+  },
+  setFormValues: ({ title }) => set((state) => ({ formValues: { title } }))
+}))
+
+export async function getLoaderData({ request }: { request: Request }) {
+  const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
   const userId = await getUserId(request)
 
-  const post = await getPost({id: id ?? ''})
-  const posts = await getPostByAuthor({authorId: userId})
-  return {post, posts}
+  const post = await getPost({ id: id ?? '' })
+  const posts = await getPostByAuthor({ authorId: userId })
+  return { post, posts }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {post, posts} = await getLoaderData({request})
-  const data: LoaderData = {post, posts}
+export const loader: LoaderFunction = async ({ request }) => {
+  const { post, posts } = await getLoaderData({ request })
+  const data: LoaderData = { post, posts }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON} =
+  const { _action, postId, title, authorId, postJSON } =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      await deletePost({id: postId})
+      await deletePost({ id: postId })
       return redirect('/cash-flow/monthly', {})
     }
     case FormType.CREATE: {
@@ -89,15 +104,16 @@ export const action: ActionFunction = async ({request}) => {
         typeof authorId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
+      if (!postJSON || !title) return { formError: 'No data at all to save.' }
       const post = await createPost({
         title,
         authorId,
         published: true,
         content: JSON.parse(postJSON),
       })
-      return {post}
+      return { post, formMessage: 'Data telah di publish' }
     }
     case FormType.UPDATE: {
       if (
@@ -106,7 +122,7 @@ export const action: ActionFunction = async ({request}) => {
         typeof postId !== 'string' ||
         typeof postJSON !== 'string'
       ) {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       await updatePost({
         id: postId,
@@ -118,13 +134,12 @@ export const action: ActionFunction = async ({request}) => {
       return redirect('/cash-flow/monthly', {})
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
-  const {toast} = useToast()
   const submitRef = React.useRef<HTMLInputElement>(null)
   const actionData = useActionData<ActionData | undefined>()
   const [searchParams, setSearchParams] = useSearchParams()
@@ -133,39 +148,38 @@ export default function Index() {
     postId ? FormType.UPDATE : FormType.CREATE,
   )
 
+  const { formValues } = useFormFields()
+
   const submit = () => {
     if (submitRef.current) {
       submitRef.current.click()
-      toast({
-        title: 'Saved!',
-        description: 'Data berhasil disimpan',
-      })
+      // toast({
+      //   title: 'Saved!',
+      //   description: 'Data berhasil disimpan',
+      // })
     }
   }
 
-  const handleSave = () => {
+  const handleSave = React.useCallback(() => {
     // SUBMIT TRIGER
     submit()
     // SET POST ID
     if (postId && !searchParams.get('id')) {
-      setSearchParams({id: postId})
+      setSearchParams({ id: postId })
     }
-  }
+  }, [postId, searchParams, setSearchParams])
 
   const handleDelete = () => {
     setType(FormType.DELETE)
   }
 
   React.useEffect(() => {
-    window.onpopstate = () => {
-      handleSave()
-    }
-
+    window.onpopstate = () => handleSave()
     window.addEventListener('beforeunload', handleSave)
     return () => {
       window.removeEventListener('beforeunload', handleSave)
     }
-  })
+  }, [formValues, handleSave])
 
   return (
     <div className="">
@@ -184,7 +198,7 @@ export default function Index() {
   )
 }
 
-function Title({type}: {type: string}) {
+function Title({ type }: { type: string }) {
   return (
     <div className="text-left">
       <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-lg">
@@ -201,7 +215,7 @@ function BackButton() {
   const navigate = useNavigate()
   return (
     <UIButton
-      onClick={() => navigate(-1)}
+      onClick={() => navigate('/cash-flow/monthly', { replace: true })}
       type="submit"
       variant="subtle"
       className="text-md text-orange-500"
@@ -219,16 +233,13 @@ function FormEditor({
   submitRef: React.RefObject<HTMLInputElement>
   type: FormType
 }) {
-  const {post} = useLoaderData<LoaderData>()
-  const {user} = useRootData()
+
+  const { post } = useLoaderData<LoaderData>()
+  const { user } = useRootData()
   const [searchParams] = useSearchParams()
+  const { setFormValues } = useFormFields()
   const actionData = useActionData<ActionData | undefined>()
   const postId = searchParams.get('id') || actionData?.post?.id
-
-  const [, setFormValues] = React.useState({
-    title: '',
-    postJSON: '',
-  })
 
   const postJSONRef = React.useRef<HTMLInputElement>(null)
   const editorCore = React.useRef<EditorCore>(null)
@@ -253,14 +264,17 @@ function FormEditor({
     <Form
       method="POST"
       className="py-4 lg:py-14"
-      onChange={e => {
-        const form = e.currentTarget
-        setFormValues({
-          title: form.title,
-          postJSON: form.postJSON,
-        })
+      noValidate
+      replace
+      onChange={event => {
+        const target = event.currentTarget;
+        // @ts-ignore
+        setFormValues({ title: target.title.value })
       }}
     >
+      <div>
+        {actionData?.formMessage}
+      </div>
       <div className="px-6 md:px-0">
         <TextareaAutosize
           autoFocus
@@ -282,7 +296,7 @@ function FormEditor({
       <input type="hidden" readOnly name="authorId" value={user?.id} />
       <input
         ref={postJSONRef}
-        defaultValue={JSON.stringify(post?.content)}
+        defaultValue={post?.content ? JSON.stringify(post?.content) : undefined}
         type="hidden"
         name="postJSON"
       />
