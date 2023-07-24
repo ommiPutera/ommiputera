@@ -1,42 +1,31 @@
-import loadable from '@loadable/component'
-import type {Post} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
-import {FolderClosed, FolderOpen, Plus} from 'lucide-react'
-import {UIButton} from '~/components/shadcn/button'
-import {getPost, getPostByAuthor} from '~/utils/post.session'
-import {getUserId} from '~/utils/session.server'
-
-const EditorJs = loadable(() => import('~/components/editor'))
+import { FolderClosed, FolderOpen, MoveLeftIcon, Plus } from 'lucide-react'
+import React from 'react'
+import { UIButton } from '~/components/shadcn/button'
+import { getPostByAuthor } from '~/utils/post.session'
+import { getUserId } from '~/utils/session.server'
 
 type LoaderData = {
   posts: Post[] | null
-  post: Post | null
 }
 
-export async function getLoaderData({request}: {request: Request}) {
-  const {searchParams} = new URL(request.url)
-  const id = searchParams.get('id')
+export const loader: LoaderFunction = async ({ request }) => {
   const userId = await getUserId(request)
-
-  const post = await getPost({id: id ?? ''})
-  const posts = await getPostByAuthor({authorId: userId})
-  return {post, posts}
-}
-
-export const loader: LoaderFunction = async ({request}) => {
-  const {post, posts} = await getLoaderData({request})
-  const data: LoaderData = {post, posts}
+  const posts = await getPostByAuthor({ authorId: userId })
+  const data: LoaderData = { posts }
   return data
 }
 
 export default function Index() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
     <div className="">
+      <BackButton />
       <div className="flex items-center justify-between py-4">
         <div className="text-left">
           <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-lg">
@@ -57,7 +46,7 @@ export default function Index() {
           <div className="grid grid-cols-1 gap-3 md:grid-cols-6 lg:grid-cols-12">
             {isPostsExist ? (
               posts?.map(post => (
-                <div className="col-span-3" key={post.id}>
+                <div className="col-span-4" key={post.id}>
                   <UpdateData {...JSON.parse(JSON.stringify(post))} />
                 </div>
               ))
@@ -100,22 +89,11 @@ export default function Index() {
 }
 
 function CreateData() {
-  const [searchParams, setSearchParams] = useSearchParams()
   return (
     <Link to="/cash-flow/monthly/form" prefetch="intent">
       <UIButton
         type="button"
         size="sm"
-        onMouseOver={() => {
-          EditorJs.preload()
-          setSearchParams({})
-        }}
-        onFocus={() => {
-          EditorJs.preload()
-          if (searchParams.get('id')) {
-            setSearchParams({})
-          }
-        }}
       >
         <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
         Create Data
@@ -124,24 +102,11 @@ function CreateData() {
   )
 }
 
-function UpdateData({id, title}: Post) {
-  const [searchParams, setSearchParams] = useSearchParams()
+function UpdateData({ id, title }: Post) {
   return (
     <Link to={`/cash-flow/monthly/form?id=${id}`} prefetch="intent">
       <button
         type="button"
-        onMouseOver={() => {
-          EditorJs.preload()
-          if (searchParams.get('id') !== id) {
-            setSearchParams({id: id})
-          }
-        }}
-        onFocus={() => {
-          EditorJs.preload()
-          if (searchParams.get('id') !== id) {
-            setSearchParams({id: id})
-          }
-        }}
         className={clsx(
           'flex w-full cursor-pointer items-center gap-x-3 rounded-lg border border-gray-800 px-4 py-2.5 hover:border-gray-700',
           {
@@ -158,7 +123,7 @@ function UpdateData({id, title}: Post) {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -185,5 +150,19 @@ function NoData() {
         <CreateData />
       </div>
     </div>
+  )
+}
+
+function BackButton() {
+  return (
+    <Link to="/cash-flow" prefetch="intent">
+      <UIButton
+        variant="subtle"
+        className="text-md text-orange-500"
+      >
+        <MoveLeftIcon className="mr-2.5" size="20" />
+        <p>Back to cashflow</p>
+      </UIButton>
+    </Link>
   )
 }

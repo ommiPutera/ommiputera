@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,8 +22,8 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
+import { SectionSpacer } from './spacer'
+import { Badge } from './shadcn/badge'
 
 type TypeLinks = {
   name: string
@@ -107,36 +107,36 @@ const RowProducts1 = () => {
 
 const LINKS: TypeLinks = [
   {
-    name: 'Web Applications',
+    name: 'Free Products',
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{ component: <RowApp1 /> }],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
+      { component: <RowProducts1 /> },
+      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
+      { component: <RowProducts1 /> },
     ],
   },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
-const USER_LINKS = [{name: 'Personal Cash Flow', to: '/cash-flow'}]
+const USER_LINKS = [{ name: 'Personal Cashflow', to: '/cash-flow' }]
 const OWNER_LINKS = [
-  {name: 'Overview', to: '/overview'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Overview', to: '/overview' },
+  { name: 'Admin Panel', to: '/admin' },
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 
 // Default is no navbar
-const ROUTE_WITHOUT_NAVBAR = ['/login', 'ALL']
+const ROUTE_WITHOUT_NAVBAR = ['/login', 'ALL', '/cash-flow/monthly/form']
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
 
   if (ROUTE_WITHOUT_NAVBAR.includes(location.pathname)) return <></>
@@ -147,7 +147,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="relative">
       <div
@@ -155,7 +155,7 @@ function PublicRoute() {
           'bg-black': user,
         })}
       >
-        <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between">
+        <nav className="text-primary mx-auto flex max-w-7xl items-center justify-between">
           <Logo />
           <DesktopNav />
           <MobileNav />
@@ -171,7 +171,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -189,9 +189,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -202,17 +202,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-800"
@@ -280,7 +280,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -338,7 +338,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -350,7 +350,7 @@ function DesktopNavLink({
   if (asParent && child?.length) {
     return (
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="text-secondary w-full whitespace-nowrap px-3 pb-3 pt-2.5 text-md font-medium focus:outline-none data-[state=open]:text-white lg:tracking-wide">
+        <NavigationMenuTrigger className="text-gray-200 w-full whitespace-nowrap px-4 pb-3 pt-2.5 text-md font-normal focus:outline-none data-[state=open]:text-white lg:tracking-wide">
           {children}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-full bg-gray-900 pt-3">
@@ -373,10 +373,10 @@ function DesktopNavLink({
             prefetch="intent"
             to={to}
             className={clsx(
-              'block whitespace-nowrap px-3 py-1.5 text-md font-medium hover:text-white focus:outline-none lg:tracking-wide',
+              'block whitespace-nowrap px-4 py-1.5 text-md font-normal hover:text-white focus:outline-none lg:tracking-wide',
               {
                 active: isSelected,
-                'text-secondary': !isSelected,
+                'text-gray-200': !isSelected,
               },
             )}
             {...rest}
@@ -409,7 +409,7 @@ export function Logo({
       <h1
         className={clsx('whitespace-nowrap font-medium', {
           'text-2xl lg:text-3xl': size === 'lg',
-          'text-lg lg:text-xl': size === 'md',
+          'text-lg lg:text-2xl': size === 'md',
         })}
       >
         ommiputera
@@ -420,15 +420,15 @@ export function Logo({
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
   return <ProtectedNavItems links={OWNER_LINKS} />
 }
 
-function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
-  const {user} = useRootData()
+function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
+  const { user } = useRootData()
   const location = useLocation()
   const isHideNavbar = ROUTE_WITHOUT_NAVBAR.includes('ALL')
 
@@ -450,11 +450,17 @@ function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
       <div
         className={clsx(
           'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-800 bg-black px-5vw lg:px-[2vw]',
-          {'glass sticky top-0 py-3': isHideNavbar},
+          { 'glass sticky top-0 py-3': isHideNavbar },
         )}
       >
-        <nav className="text-primary mx-auto flex max-w-[1636px] items-center justify-between gap-x-4 py-4">
-          <ul className="-mx-2 flex gap-x-3">
+        <nav className={clsx(
+          "text-primary mx-auto flex max-w-7xl items-center justify-between gap-x-4",
+          {
+            'py-4': isHideNavbar,
+            'pb-9': !isHideNavbar
+          },
+        )}>
+          <ul className="-mx-2 flex items-center gap-x-3">
             {isHideNavbar && (
               <li className="-mt-2 px-1.5">
                 <Logo withoutUnderlined size="md" />
@@ -471,7 +477,7 @@ function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
               withoutUnderlined
               to={location.pathname}
               onClick={handleMode}
-              className="text-secondary py-0 hover:text-white"
+              className="text-gray-200 py-0 hover:text-white"
             >
               {isHideNavbar ? 'Show Navbar' : 'Hide Navbar'}
             </ProtectedpNavLink>
@@ -505,12 +511,12 @@ function ProtectedpNavLink({
         prefetch="intent"
         to={to}
         className={clsx(
-          'block whitespace-nowrap text-md font-medium hover:text-white focus:outline-none lg:tracking-wide',
+          'block whitespace-nowrap text-md font-normal hover:text-white focus:outline-none lg:tracking-wide',
           {
             underlined: !withoutUnderlined,
             '': withoutUnderlined,
             active: isSelected,
-            'text-secondary hover:after:h-0': !isSelected,
+            'text-gray-200 hover:after:h-0': !isSelected,
           },
           className,
         )}
@@ -522,4 +528,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

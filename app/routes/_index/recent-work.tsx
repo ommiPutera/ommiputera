@@ -1,15 +1,15 @@
-import type {Project} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
+import type { Project } from '@prisma/client'
+import { Link, useLoaderData } from '@remix-run/react'
 import clsx from 'clsx'
 
-type LoaderData = {projects: Array<Project>}
+type LoaderData = { projects: Array<Project> }
 
 export default function RecentWork() {
   const data = useLoaderData<LoaderData>()
 
   return (
     <div className="mx-auto grid max-w-7xl gap-8 lg:gap-12">
-      <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start lg:gap-x-48">
+      <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start xl:gap-x-48">
         <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
           I help brands and people with <b>tailor-made solutions</b>
         </h1>

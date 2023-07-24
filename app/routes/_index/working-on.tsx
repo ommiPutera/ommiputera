@@ -1,9 +1,9 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function WorkinOn() {
   return (
     <div className="mx-auto grid max-w-7xl gap-8 lg:gap-y-12">
-      <div className="flex grid-cols-1 flex-col items-center justify-between gap-5 lg:grid lg:grid-cols-7 lg:flex-row lg:items-start lg:gap-x-48">
+      <div className="flex grid-cols-1 flex-col items-center justify-between gap-5 lg:grid lg:grid-cols-7 lg:flex-row lg:items-start xl:gap-x-48">
         <h1 className="col-span-1 text-center text-3xl font-light leading-tight lg:col-span-4 lg:text-left lg:text-5xl">
           What I'm <b>Working On</b>
         </h1>

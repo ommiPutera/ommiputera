@@ -1,10 +1,10 @@
-import {Tab, TabList, TabPanel, TabPanels, Tabs} from '@reach/tabs'
-import {Link} from '@remix-run/react'
+import { Tab, TabList, TabPanel, TabPanels, Tabs } from '@reach/tabs'
+import { Link } from '@remix-run/react'
 
 export default function Team() {
   return (
     <div className="mx-auto grid max-w-7xl gap-8 lg:gap-y-12">
-      <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start lg:gap-x-48">
+      <div className="flex grid-cols-7 flex-col items-center justify-between gap-5 lg:grid lg:flex-row lg:items-start xl:gap-x-48">
         <h1 className="col-span-4 text-center text-3xl font-light leading-tight lg:text-left lg:text-5xl">
           Our Team ready to achive your <b>goal</b>
         </h1>

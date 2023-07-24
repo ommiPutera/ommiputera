@@ -21,7 +21,7 @@ if (!sessionSecret) {
   throw new Error('Must enviornment variable SESSION_SECRET')
 }
 
-let storage = createCookieSessionStorage({
+export let storage = createCookieSessionStorage({
   cookie: {
     name: 'RJ_session',
     secure: true,

@@ -1,9 +1,9 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
-import {Settings} from 'lucide-react'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
+import { Settings } from 'lucide-react'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export default function Index() {
