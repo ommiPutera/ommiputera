@@ -1,4 +1,4 @@
-export default function FontSerif({ className }: { className?: string }) {
+export default function FontSerif({className}: {className?: string}) {
   return (
     <svg
       width="31"
@@ -17,5 +17,5 @@ export default function FontSerif({ className }: { className?: string }) {
         fill="currentColor"
       />
     </svg>
-  );
+  )
 }

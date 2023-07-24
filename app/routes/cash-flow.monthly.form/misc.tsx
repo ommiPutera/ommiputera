@@ -1,12 +1,12 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { Button } from '~/components/button'
-import type { SaveStatus } from './route';
-import { FormType } from './route'
-import { Link } from '@remix-run/react'
-import { MoveLeftIcon } from 'lucide-react'
-import clsx from 'clsx';
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import {Button} from '~/components/button'
+import type {SaveStatus} from './route'
+import {FormType} from './route'
+import {Link} from '@remix-run/react'
+import {MoveLeftIcon} from 'lucide-react'
+import clsx from 'clsx'
 // import {useToast} from '~/components/shadcn/use-toast'
 // import {ToastAction} from '~/components/shadcn/toast'
 
@@ -15,12 +15,12 @@ export function Header({
   submit,
   handleDelete,
   title,
-  saveStatus
+  saveStatus,
 }: {
   type: FormType
   submit: () => void
-  handleDelete: () => void,
-  title?: string,
+  handleDelete: () => void
+  title?: string
   saveStatus: SaveStatus
 }) {
   const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
@@ -31,30 +31,31 @@ export function Header({
   }
 
   return (
-    <div className="left-0 top-0 bg-black z-50 py-2 border-b border-gray-800 glass fixed w-full flex justify-center">
-      <div className="grid grid-cols-12 gap-x-4 w-full justify-start items-center max-w-7xl">
-        <div className='col-span-4'>
+    <div className="glass fixed left-0 top-0 z-50 flex w-full justify-center border-b border-gray-800 bg-black py-2">
+      <div className="grid w-full max-w-7xl grid-cols-12 items-center justify-start gap-x-4">
+        <div className="col-span-4">
           <BackButton />
         </div>
-        <div className='col-span-4 text-md font-normal flex gap-x-2 justify-center items-center'>
+        <div className="col-span-4 flex items-center justify-center gap-x-2 text-md font-normal">
           <p>{title}</p>
           <p>/</p>
-          <p className='flex items-center gap-2'>
-            <span className={clsx(
-              "w-2 h-2 rounded-full mt-0.5 block", {
-              "bg-green-900": saveStatus === 'Saved',
-              "bg-red-900": saveStatus === 'Unsaved',
-              "bg-orange-900": saveStatus === 'Saving..',
-            }
-            )}></span>
+          <p className="flex items-center gap-2">
+            <span
+              className={clsx('mt-0.5 block h-2 w-2 rounded-full', {
+                'bg-green-900': saveStatus === 'Saved',
+                'bg-red-900': saveStatus === 'Unsaved',
+                'bg-orange-900': saveStatus === 'Saving..',
+              })}
+            ></span>
             {saveStatus}
           </p>
         </div>
-        <div className='col-span-4 flex justify-end items-center'>
-          {type !== FormType.CREATE &&
+        <div className="col-span-4 flex items-center justify-end">
+          {type !== FormType.CREATE && (
             <UIButton size="sm" variant="danger" onClick={handleDeletePost}>
               Delete
-            </UIButton>}
+            </UIButton>
+          )}
         </div>
         <DeleteDialog
           submit={submit}
@@ -66,14 +67,10 @@ export function Header({
   )
 }
 
-
 function BackButton() {
   return (
-    <Link to="/cash-flow/monthly" prefetch='intent'>
-      <UIButton
-        variant="subtle"
-        className="text-md text-orange-500"
-      >
+    <Link to="/cash-flow/monthly" prefetch="intent">
+      <UIButton variant="subtle" className="text-md text-orange-500">
         <MoveLeftIcon className="mr-2.5" size="20" />
         <p>Back</p>
       </UIButton>
@@ -108,7 +105,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">

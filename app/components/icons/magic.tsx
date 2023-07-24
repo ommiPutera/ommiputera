@@ -1,4 +1,4 @@
-export default function Magic({ className }: { className: string }) {
+export default function Magic({className}: {className: string}) {
   return (
     <svg
       width="469"
@@ -26,5 +26,5 @@ export default function Magic({ className }: { className: string }) {
         fill="currentColor"
       />
     </svg>
-  );
+  )
 }

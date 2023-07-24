@@ -1,4 +1,4 @@
-export default function FontDefault({ className }: { className?: string }) {
+export default function FontDefault({className}: {className?: string}) {
   return (
     <svg
       width="27"
@@ -16,5 +16,5 @@ export default function FontDefault({ className }: { className?: string }) {
         fill="currentColor"
       />
     </svg>
-  );
+  )
 }

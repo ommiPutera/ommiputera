@@ -1,26 +1,26 @@
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { FolderClosed, FolderOpen, MoveLeftIcon, Plus } from 'lucide-react'
+import {FolderClosed, FolderOpen, MoveLeftIcon, Plus} from 'lucide-react'
 import React from 'react'
-import { UIButton } from '~/components/shadcn/button'
-import { getPostByAuthor } from '~/utils/post.session'
-import { getUserId } from '~/utils/session.server'
+import {UIButton} from '~/components/shadcn/button'
+import {getPostByAuthor} from '~/utils/post.session'
+import {getUserId} from '~/utils/session.server'
 
 type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const userId = await getUserId(request)
-  const posts = await getPostByAuthor({ authorId: userId })
-  const data: LoaderData = { posts }
+  const posts = await getPostByAuthor({authorId: userId})
+  const data: LoaderData = {posts}
   return data
 }
 
 export default function Index() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
@@ -91,10 +91,7 @@ export default function Index() {
 function CreateData() {
   return (
     <Link to="/cash-flow/monthly/form" prefetch="intent">
-      <UIButton
-        type="button"
-        size="sm"
-      >
+      <UIButton type="button" size="sm">
         <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
         Create Data
       </UIButton>
@@ -102,7 +99,7 @@ function CreateData() {
   )
 }
 
-function UpdateData({ id, title }: Post) {
+function UpdateData({id, title}: Post) {
   return (
     <Link to={`/cash-flow/monthly/form?id=${id}`} prefetch="intent">
       <button
@@ -123,7 +120,7 @@ function UpdateData({ id, title }: Post) {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -156,10 +153,7 @@ function NoData() {
 function BackButton() {
   return (
     <Link to="/cash-flow" prefetch="intent">
-      <UIButton
-        variant="subtle"
-        className="text-md text-orange-500"
-      >
+      <UIButton variant="subtle" className="text-md text-orange-500">
         <MoveLeftIcon className="mr-2.5" size="20" />
         <p>Back to cashflow</p>
       </UIButton>

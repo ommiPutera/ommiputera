@@ -1,8 +1,8 @@
-import type { Project } from '@prisma/client'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Project} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
 export default function RecentWork() {
   const data = useLoaderData<LoaderData>()

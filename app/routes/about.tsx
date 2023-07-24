@@ -1,12 +1,12 @@
-import { Link, type V2_MetaFunction } from '@remix-run/react'
-import { getImgProps, images } from '~/images'
-import { AnimatePresence, motion } from 'framer-motion'
+import {Link, type V2_MetaFunction} from '@remix-run/react'
+import {getImgProps, images} from '~/images'
+import {AnimatePresence, motion} from 'framer-motion'
 import clsx from 'clsx'
 import React from 'react'
-import { debounce } from 'lodash'
+import {debounce} from 'lodash'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'About Ommi Putera' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'About Ommi Putera'}]
 }
 
 export default function Index() {
@@ -52,15 +52,15 @@ function ProfileCard() {
     <motion.div
       onMouseEnter={debouncedHandleMouseEnter}
       onMouseLeave={handlOnMouseLeave}
-      initial={{ rotateY: isFliped ? 180 : 0 }}
-      animate={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.5 } }}
-      exit={{ rotateY: isFliped ? 170 : 0, transition: { duration: 0.2 } }}
+      initial={{rotateY: isFliped ? 180 : 0}}
+      animate={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.5}}}
+      exit={{rotateY: isFliped ? 170 : 0, transition: {duration: 0.2}}}
       className={clsx('cursor-pointer')}
     >
       {isFliped ? (
         <Link to="/post" prefetch="intent">
           <div
-            style={{ transform: 'scale(-1, 1)' }}
+            style={{transform: 'scale(-1, 1)'}}
             className="rotate- relative flex h-44 w-44 items-center justify-center rounded-full bg-gray-800"
           >
             <p className="text-lg">About me</p>

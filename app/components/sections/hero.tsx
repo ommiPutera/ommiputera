@@ -1,15 +1,21 @@
-import { Link } from '@remix-run/react'
+import {Link} from '@remix-run/react'
 
 function HomeHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid max-w-7xl gap-8 lg:gap-12">
-      <FloatingBtn to="/" className="absolute left-28 -bottom-28 hidden lg:block">
+      <FloatingBtn
+        to="/"
+        className="absolute -bottom-28 left-28 hidden lg:block"
+      >
         <p className="whitespace-nowrap font-medium">Server-side rendering</p>
         <p className="pointer-events-none absolute -right-10 -top-6 text-xl transition-[10] delay-200 group-hover:-right-24 group-hover:-top-14 group-hover:text-3xl">
           🚀
         </p>
       </FloatingBtn>
-      <FloatingBtn to="/" className="absolute right-0 -bottom-6 hidden lg:block">
+      <FloatingBtn
+        to="/"
+        className="absolute -bottom-6 right-0 hidden lg:block"
+      >
         <p className="whitespace-nowrap font-medium">Javascript</p>
         <p className="pointer-events-none absolute -bottom-6 -left-10 text-xl transition-[5] delay-200 group-hover:-left-12 group-hover:bottom-2 group-hover:text-2xl">
           🛸
@@ -25,8 +31,8 @@ function HomeHeroSection() {
         </p>
       </FloatingBtn>
       <div className="flex flex-col items-center justify-center gap-5">
-        <div className='bg-gray-800 px-6 py-3 rounded-full'>
-          <p className='font-medium'>Open Source Project</p>
+        <div className="rounded-full bg-gray-800 px-6 py-3">
+          <p className="font-medium">Open Source Project</p>
         </div>
         <h1 className="2xl:w-3/5 px-0 text-center text-4xl font-medium leading-tight md:w-2/3 lg:w-3/4 lg:text-7xl lg:leading-[4.2rem]">
           Helping brands and peoples through quality software.
@@ -59,7 +65,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -69,4 +75,4 @@ function FloatingBtn({
   )
 }
 
-export { HomeHeroSection, ProjectHeroSection }
+export {HomeHeroSection, ProjectHeroSection}

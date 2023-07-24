@@ -1,4 +1,4 @@
-export default function FontMono({ className }: { className?: string }) {
+export default function FontMono({className}: {className?: string}) {
   return (
     <svg
       width="28"
@@ -17,5 +17,5 @@ export default function FontMono({ className }: { className?: string }) {
         fill="currentColor"
       />
     </svg>
-  );
+  )
 }
