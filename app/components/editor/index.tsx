@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
-import { TiptapEditorProps } from './props'
-import { TiptapExtensions } from './extensions'
-import { useDebouncedCallback } from 'use-debounce'
-import { useCompletion } from 'ai/react'
-import { toast } from 'sonner'
+import {useEffect, useRef, useState} from 'react'
+import {useEditor, EditorContent} from '@tiptap/react'
+import {TiptapEditorProps} from './props'
+import {TiptapExtensions} from './extensions'
+import {useDebouncedCallback} from 'use-debounce'
+import {useCompletion} from 'ai/react'
+import {toast} from 'sonner'
 import va from '@vercel/analytics'
-import { EditorBubbleMenu } from './components'
-import { getPrevText } from '~/lib/editor'
+import {EditorBubbleMenu} from './components'
+import {getPrevText} from '~/lib/editor'
 
 export default function Editor({
   submit,
@@ -26,7 +26,7 @@ export default function Editor({
 }) {
   const [hydrated, setHydrated] = useState(false)
 
-  const debouncedUpdates = useDebouncedCallback(async ({ editor }) => {
+  const debouncedUpdates = useDebouncedCallback(async ({editor}) => {
     const json = editor.getJSON()
     setSaveStatus('Saving..')
     setContent(json)
@@ -66,7 +66,7 @@ export default function Editor({
     autofocus: 'end',
   })
 
-  const { complete, completion, isLoading, stop } = useCompletion({
+  const {complete, completion, isLoading, stop} = useCompletion({
     id: 'novel',
     api: '/api/generate',
     onFinish: (_prompt, completion) => {

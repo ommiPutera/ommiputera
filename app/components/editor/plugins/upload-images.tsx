@@ -1,9 +1,9 @@
-import type { BlobResult } from '@vercel/blob'
-import { toast } from 'sonner'
-import type { EditorState } from '@tiptap/pm/state'
-import { Plugin, PluginKey } from '@tiptap/pm/state'
-import type { EditorView } from '@tiptap/pm/view'
-import { Decoration, DecorationSet } from '@tiptap/pm/view'
+import type {BlobResult} from '@vercel/blob'
+import {toast} from 'sonner'
+import type {EditorState} from '@tiptap/pm/state'
+import {Plugin, PluginKey} from '@tiptap/pm/state'
+import type {EditorView} from '@tiptap/pm/view'
+import {Decoration, DecorationSet} from '@tiptap/pm/view'
 
 const uploadKey = new PluginKey('upload-image')
 
@@ -19,7 +19,7 @@ const UploadImagesPlugin = () =>
         // See if the transaction adds or removes any placeholders
         const action = tr.getMeta(this)
         if (action && action.add) {
-          const { id, pos, src } = action.add
+          const {id, pos, src} = action.add
 
           const placeholder = document.createElement('div')
           placeholder.setAttribute('class', 'img-placeholder')
@@ -90,7 +90,7 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
   }
 
   handleImageUpload(file).then(src => {
-    const { schema } = view.state
+    const {schema} = view.state
 
     let pos = findPlaceholder(view.state, id)
     // If the content around the placeholder has been deleted, drop
@@ -104,10 +104,10 @@ export function startImageUpload(file: File, view: EditorView, pos: number) {
     // the image locally
     const imageSrc = typeof src === 'object' ? reader.result : src
 
-    const node = schema.nodes.image.create({ src: imageSrc })
+    const node = schema.nodes.image.create({src: imageSrc})
     const transaction = view.state.tr
       .replaceWith(pos, pos, node)
-      .setMeta(uploadKey, { remove: { id } })
+      .setMeta(uploadKey, {remove: {id}})
     view.dispatch(transaction)
   })
 }
@@ -126,7 +126,7 @@ export const handleImageUpload = (file: File) => {
       }).then(async res => {
         // Successfully uploaded image
         if (res.status === 200) {
-          const { url } = (await res.json()) as BlobResult
+          const {url} = (await res.json()) as BlobResult
           // preload the image
           let image = new Image()
           image.src = url

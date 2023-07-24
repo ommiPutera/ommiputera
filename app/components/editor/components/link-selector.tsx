@@ -1,8 +1,8 @@
-import { cn } from '~/lib/utils'
-import type { Editor } from '@tiptap/core'
-import { Check, Trash } from 'lucide-react'
-import type { Dispatch, FC, SetStateAction } from 'react'
-import { useEffect, useRef } from 'react'
+import {cn} from '~/lib/utils'
+import type {Editor} from '@tiptap/core'
+import {Check, Trash} from 'lucide-react'
+import type {Dispatch, FC, SetStateAction} from 'react'
+import {useEffect, useRef} from 'react'
 
 interface LinkSelectorProps {
   editor: Editor
@@ -25,14 +25,14 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
   return (
     <div className="relative">
       <button
-        className="text-gray-600 hover:bg-gray-100 active:bg-gray-200 flex h-full items-center space-x-2 px-3 py-1.5 text-sm font-medium"
+        className="flex h-full items-center space-x-2 px-3 py-1.5 text-sm font-medium text-gray-600 hover:bg-gray-100 active:bg-gray-200"
         onClick={() => {
           setIsOpen(!isOpen)
         }}
       >
         <p className="text-base">↗</p>
         <p
-          className={cn('decoration-gray-400 underline underline-offset-4', {
+          className={cn('underline decoration-gray-400 underline-offset-4', {
             'text-blue-500': editor.isActive('link'),
           })}
         >
@@ -44,10 +44,10 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
           onSubmit={e => {
             e.preventDefault()
             const input = e.target[0] as HTMLInputElement
-            editor.chain().focus().setLink({ href: input.value }).run()
+            editor.chain().focus().setLink({href: input.value}).run()
             setIsOpen(false)
           }}
-          className="border-gray-200 fixed top-full z-[99999] mt-1 flex w-60 overflow-hidden rounded border p-1 shadow-xl animate-in fade-in slide-in-from-top-1"
+          className="fixed top-full z-[99999] mt-1 flex w-60 overflow-hidden rounded border border-gray-200 p-1 shadow-xl animate-in fade-in slide-in-from-top-1"
         >
           <input
             ref={inputRef}
@@ -67,7 +67,7 @@ export const LinkSelector: FC<LinkSelectorProps> = ({
               <Trash className="h-4 w-4" />
             </button>
           ) : (
-            <button className="text-gray-600 hover:bg-gray-100 flex items-center rounded-sm p-1 transition-all">
+            <button className="flex items-center rounded-sm p-1 text-gray-600 transition-all hover:bg-gray-100">
               <Check className="h-4 w-4" />
             </button>
           )}
