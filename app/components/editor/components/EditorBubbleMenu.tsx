@@ -1,7 +1,7 @@
-import type {BubbleMenuProps} from '@tiptap/react'
-import {BubbleMenu} from '@tiptap/react'
-import type {FC} from 'react'
-import {useState} from 'react'
+import type { BubbleMenuProps } from '@tiptap/react'
+import { BubbleMenu } from '@tiptap/react'
+import type { FC } from 'react'
+import { useState } from 'react'
 import {
   BoldIcon,
   ItalicIcon,
@@ -10,10 +10,10 @@ import {
   CodeIcon,
 } from 'lucide-react'
 
-import {NodeSelector} from './node-selector'
-import {ColorSelector} from './color-selector'
-import {LinkSelector} from './link-selector'
-import {cn} from '~/lib/utils'
+import { NodeSelector } from './node-selector'
+import { ColorSelector } from './color-selector'
+import { LinkSelector } from './link-selector'
+import { cn } from '~/lib/utils'
 
 export interface BubbleMenuItem {
   name: string
@@ -60,7 +60,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = props => {
 
   const bubbleMenuProps: EditorBubbleMenuProps = {
     ...props,
-    shouldShow: ({editor}) => {
+    shouldShow: ({ editor }) => {
       // don't show if image is selected
       if (editor.isActive('image')) {
         return false
@@ -84,7 +84,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = props => {
   return (
     <BubbleMenu
       {...bubbleMenuProps}
-      className="divide-stone-200 border-stone-200 flex w-fit divide-x rounded border bg-gray-900 shadow-xl"
+      className="divide-gray-200 border-gray-200 flex w-fit divide-x rounded border bg-gray-900 shadow-xl"
     >
       <NodeSelector
         editor={props.editor}
@@ -109,7 +109,7 @@ export const EditorBubbleMenu: FC<EditorBubbleMenuProps> = props => {
           <button
             key={index}
             onClick={item.command}
-            className="text-stone-600 p-2"
+            className="text-gray-600 p-2"
           >
             <item.icon
               className={cn('h-4 w-4', {

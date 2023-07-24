@@ -5,18 +5,19 @@ import TiptapImage from '@tiptap/extension-image'
 import Placeholder from '@tiptap/extension-placeholder'
 import TiptapUnderline from '@tiptap/extension-underline'
 import TextStyle from '@tiptap/extension-text-style'
-import {Color} from '@tiptap/extension-color'
+import { Color } from '@tiptap/extension-color'
 import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
-import {Markdown} from 'tiptap-markdown'
+import { Markdown } from 'tiptap-markdown'
 import Highlight from '@tiptap/extension-highlight'
 
 import SlashCommand from './slash-command'
-import {InputRule} from '@tiptap/core'
+import { InputRule } from '@tiptap/core'
 import UploadImagesPlugin from '../plugins/upload-images'
 
 const CustomImage = TiptapImage.extend({
   addProseMirrorPlugins() {
+    console.log('here ')
     return [UploadImagesPlugin()]
   },
 })
@@ -40,19 +41,19 @@ export const TiptapExtensions = [
     },
     blockquote: {
       HTMLAttributes: {
-        class: 'border-l-4 border-stone-700',
+        class: 'border-l-4 border-gray-700',
       },
     },
     codeBlock: {
       HTMLAttributes: {
         class:
-          'rounded-sm bg-stone-100 p-5 font-mono font-medium text-stone-800',
+          'rounded-sm bg-gray-100 p-5 font-mono font-medium text-gray-100',
       },
     },
     code: {
       HTMLAttributes: {
         class:
-          'rounded-md bg-stone-200 px-1.5 py-1 font-mono font-medium text-stone-900',
+          'rounded-md bg-gray-200 px-1.5 py-1 font-mono font-medium text-gray-900',
         spellcheck: 'false',
       },
     },
@@ -69,10 +70,10 @@ export const TiptapExtensions = [
       return [
         new InputRule({
           find: /^(?:---|—-|___\s|\*\*\*\s)$/,
-          handler: ({state, range}) => {
+          handler: ({ state, range }) => {
             const attributes = {}
 
-            const {tr} = state
+            const { tr } = state
             const start = range.from
             let end = range.to
 
@@ -86,23 +87,23 @@ export const TiptapExtensions = [
     },
   }).configure({
     HTMLAttributes: {
-      class: 'mt-4 mb-6 border-t border-stone-300',
+      class: 'mt-4 mb-6 border-t border-gray-300',
     },
   }),
   TiptapLink.configure({
     HTMLAttributes: {
       class:
-        'text-stone-400 underline underline-offset-[3px] hover:text-stone-600 transition-colors cursor-pointer',
+        'text-gray-400 underline underline-offset-[3px] hover:text-gray-600 transition-colors cursor-pointer',
     },
   }),
   CustomImage.configure({
     allowBase64: true,
     HTMLAttributes: {
-      class: 'rounded-lg border border-stone-200',
+      class: 'rounded-lg border border-gray-200',
     },
   }),
   Placeholder.configure({
-    placeholder: ({node}) => {
+    placeholder: ({ node }) => {
       if (node.type.name === 'heading') {
         return `Heading ${node.attrs.level}`
       }

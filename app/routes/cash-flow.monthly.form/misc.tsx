@@ -1,11 +1,11 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {DialogContent, DialogOverlay} from '@reach/dialog'
-import {Button} from '~/components/button'
-import type {SaveStatus} from './route'
-import {FormType} from './route'
-import {Link} from '@remix-run/react'
-import {MoveLeftIcon} from 'lucide-react'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { Button } from '~/components/button'
+import type { SaveStatus } from './route'
+import { FormType } from './route'
+import { Link } from '@remix-run/react'
+import { MoveLeftIcon } from 'lucide-react'
 import clsx from 'clsx'
 // import {useToast} from '~/components/shadcn/use-toast'
 // import {ToastAction} from '~/components/shadcn/toast'
@@ -37,7 +37,7 @@ export function Header({
           <BackButton />
         </div>
         <div className="col-span-4 flex items-center justify-center gap-x-2 text-md font-normal">
-          <p>{title}</p>
+          <p>{title ?? '- Untitled'}</p>
           <p>/</p>
           <p className="flex items-center gap-2">
             <span
@@ -105,7 +105,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">

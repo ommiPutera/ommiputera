@@ -1,4 +1,4 @@
-import type {Editor} from '@tiptap/core'
+import type { Editor } from '@tiptap/core'
 import {
   Check,
   ChevronDown,
@@ -11,9 +11,9 @@ import {
   Code,
   CheckSquare,
 } from 'lucide-react'
-import type {Dispatch, FC, SetStateAction} from 'react'
+import type { Dispatch, FC, SetStateAction } from 'react'
 
-import type {BubbleMenuItem} from './EditorBubbleMenu'
+import type { BubbleMenuItem } from './EditorBubbleMenu'
 
 interface NodeSelectorProps {
   editor: Editor
@@ -41,20 +41,20 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
     {
       name: 'Heading 1',
       icon: Heading1,
-      command: () => editor.chain().focus().toggleHeading({level: 1}).run(),
-      isActive: () => editor.isActive('heading', {level: 1}),
+      command: () => editor.chain().focus().toggleHeading({ level: 1 }).run(),
+      isActive: () => editor.isActive('heading', { level: 1 }),
     },
     {
       name: 'Heading 2',
       icon: Heading2,
-      command: () => editor.chain().focus().toggleHeading({level: 2}).run(),
-      isActive: () => editor.isActive('heading', {level: 2}),
+      command: () => editor.chain().focus().toggleHeading({ level: 2 }).run(),
+      isActive: () => editor.isActive('heading', { level: 2 }),
     },
     {
       name: 'Heading 3',
       icon: Heading3,
-      command: () => editor.chain().focus().toggleHeading({level: 3}).run(),
-      isActive: () => editor.isActive('heading', {level: 3}),
+      command: () => editor.chain().focus().toggleHeading({ level: 3 }).run(),
+      isActive: () => editor.isActive('heading', { level: 3 }),
     },
     {
       name: 'To-do List',
@@ -101,7 +101,7 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
   return (
     <div className="relative h-full">
       <button
-        className="text-stone-600 hover:bg-stone-100 active:bg-stone-200 flex h-full items-center gap-1 whitespace-nowrap p-2 text-sm font-medium"
+        className="text-gray-600 hover:bg-gray-100 active:bg-gray-200 flex h-full items-center gap-1 whitespace-nowrap p-2 text-sm font-medium"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span>{activeItem?.name}</span>
@@ -109,7 +109,7 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
       </button>
 
       {isOpen && (
-        <section className="border-stone-200 fixed top-full z-[99999] mt-1 flex w-48 flex-col overflow-hidden rounded border p-1 shadow-xl animate-in fade-in slide-in-from-top-1">
+        <section className="border-gray-200 fixed top-full z-[99999] mt-1 flex w-48 flex-col overflow-hidden rounded border p-1 shadow-xl animate-in fade-in slide-in-from-top-1">
           {items.map((item, index) => (
             <button
               key={index}
@@ -117,10 +117,10 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
                 item.command()
                 setIsOpen(false)
               }}
-              className="text-stone-600 hover:bg-stone-100 flex items-center justify-between rounded-sm px-2 py-1 text-sm"
+              className="text-gray-600 hover:bg-gray-100 flex items-center justify-between rounded-sm px-2 py-1 text-sm"
             >
               <div className="flex items-center space-x-2">
-                <div className="border-stone-200 rounded-sm border p-1">
+                <div className="border-gray-200 rounded-sm border p-1">
                   <item.icon className="h-3 w-3" />
                 </div>
                 <span>{item.name}</span>
