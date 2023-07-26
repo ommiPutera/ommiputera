@@ -1,19 +1,12 @@
+import {redirect} from '@remix-run/node'
 import {db} from './db.server'
-import {storage} from './session.server'
-
-type UpdateType = {
-  id: string
-  title: string
-  content?: string
-  authorId: string
-  published: boolean
-}
 
 type CreateType = {
   title: string
   content?: string
   authorId: string
   published: boolean
+  redirectTo?: string
 }
 
 export async function getPostByAuthor({authorId}: {authorId: string}) {
@@ -33,8 +26,9 @@ export async function createPost({
   content,
   authorId,
   published,
+  redirectTo,
 }: CreateType) {
-  return await db.post.create({
+  const post = await db.post.create({
     data: {
       title,
       published,
@@ -42,23 +36,32 @@ export async function createPost({
       content: content,
     },
   })
+  return redirect(redirectTo + post.id ?? '')
 }
 
-export async function updatePost({
-  id,
-  title,
-  content,
-  authorId,
-  published,
-}: UpdateType) {
+export async function updateTitle({id, title}: {id: string; title: string}) {
   return await db.post.update({
     where: {
       id: id,
     },
     data: {
       title,
-      published,
-      authorId,
+    },
+  })
+}
+
+export async function updateContent({
+  id,
+  content,
+}: {
+  id: string
+  content: string
+}) {
+  return await db.post.update({
+    where: {
+      id: id,
+    },
+    data: {
       content,
     },
   })
