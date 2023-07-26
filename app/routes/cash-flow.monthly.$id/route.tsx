@@ -1,12 +1,13 @@
-import type { Post } from '@prisma/client'
-import type {
-  ActionFunction,
-} from '@remix-run/node';
+import type {Post} from '@prisma/client'
+import type {ActionFunction} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
 import {
-  redirect,
-} from '@remix-run/node'
-import { createPost, deletePost, updateContent, updateTitle } from '~/utils/post.session'
-import FormEditor from './form';
+  createPost,
+  deletePost,
+  updateContent,
+  updateTitle,
+} from '~/utils/post.session'
+import FormEditor from './form'
 
 export type SaveStatus = 'Saved' | 'Unsaved' | 'Saving..'
 export type ActionData = {
@@ -29,32 +30,29 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const { _action, postId, title, authorId, postJSON } =
-    Object.fromEntries(formData);
+  const {_action, postId, title, authorId, postJSON} =
+    Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      await deletePost({ id: postId })
+      await deletePost({id: postId})
       return redirect('/cash-flow/monthly', {})
     }
     case FormType.CREATE: {
-      if (
-        typeof authorId !== 'string' ||
-        typeof postJSON !== 'string'
-      ) {
-        return { formError: `Form not submitted correctly.` }
+      if (typeof authorId !== 'string' || typeof postJSON !== 'string') {
+        return {formError: `Form not submitted correctly.`}
       }
 
       let content
       if (postJSON) {
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
+        content = JSON.parse(JSON.stringify({blocks: ['none']}))
       }
 
       return await createPost({
@@ -62,43 +60,37 @@ export const action: ActionFunction = async ({ request }) => {
         authorId,
         published: true,
         content,
-        redirectTo: '/cash-flow/monthly/'
+        redirectTo: '/cash-flow/monthly/',
       })
     }
     case FormType.UPDATE_TITLE: {
-      if (
-        typeof title !== 'string' ||
-        typeof postId !== 'string'
-      ) {
-        return { formError: `Form not submitted correctly.` }
+      if (typeof title !== 'string' || typeof postId !== 'string') {
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await updateTitle({
         id: postId,
-        title
+        title,
       })
-      return { post };
+      return {post}
     }
     case FormType.UPDATE_CONTENT: {
-      if (
-        typeof postId !== 'string' ||
-        typeof postJSON !== 'string'
-      ) {
-        return { formError: `Form not submitted correctly.` }
+      if (typeof postId !== 'string' || typeof postJSON !== 'string') {
+        return {formError: `Form not submitted correctly.`}
       }
       let content
       if (postJSON) {
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
+        content = JSON.parse(JSON.stringify({blocks: ['none']}))
       }
       const post = await updateContent({
         id: postId,
         content,
       })
-      return { post }
+      return {post}
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }

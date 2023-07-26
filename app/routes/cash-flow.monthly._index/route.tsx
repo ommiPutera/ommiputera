@@ -1,25 +1,25 @@
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { FolderClosed, FolderOpen, MoveLeftIcon, Plus } from 'lucide-react'
-import { UIButton } from '~/components/shadcn/button'
-import { getPostByAuthor } from '~/utils/post.session'
-import { storage } from '~/utils/session.server'
+import {FolderClosed, FolderOpen, MoveLeftIcon, Plus} from 'lucide-react'
+import {UIButton} from '~/components/shadcn/button'
+import {getPostByAuthor} from '~/utils/post.session'
+import {storage} from '~/utils/session.server'
 
 type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   let session = await storage.getSession()
-  const posts = await getPostByAuthor({ authorId: session.get('userId') })
-  const data: LoaderData = { posts }
+  const posts = await getPostByAuthor({authorId: session.get('userId')})
+  const data: LoaderData = {posts}
   return data
 }
 
 export default function Index() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
@@ -98,7 +98,7 @@ function CreateData() {
   )
 }
 
-function UpdateData({ id, title }: Post) {
+function UpdateData({id, title}: Post) {
   return (
     <Link to={`/cash-flow/monthly/${id}`}>
       <button
@@ -119,7 +119,7 @@ function UpdateData({ id, title }: Post) {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>

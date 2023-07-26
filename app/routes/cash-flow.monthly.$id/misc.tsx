@@ -1,14 +1,14 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { Button } from '~/components/button'
-import type { SaveStatus } from './route'
-import { FormType } from './route'
-import { Form, Link, useLoaderData } from '@remix-run/react'
-import { MoveLeftIcon } from 'lucide-react'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import {Button} from '~/components/button'
+import type {SaveStatus} from './route'
+import {FormType} from './route'
+import {Form, Link, useLoaderData} from '@remix-run/react'
+import {MoveLeftIcon} from 'lucide-react'
 import clsx from 'clsx'
-import type { LoaderArgs } from '@remix-run/node';
-import { redirect } from '@remix-run/node'
+import type {LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
 // import {useToast} from '~/components/shadcn/use-toast'
 // import {ToastAction} from '~/components/shadcn/toast'
 
@@ -16,10 +16,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params;
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
   if (!id) return redirect('/cash-flow/monthly')
-  const data: LoaderData = { postId: id }
+  const data: LoaderData = {postId: id}
   return data
 }
 
@@ -27,11 +27,11 @@ export function Header({
   type,
   title,
   saveStatus,
-  submitContent
+  submitContent,
 }: {
   type: FormType
   title?: string
-  saveStatus: SaveStatus,
+  saveStatus: SaveStatus
   submitContent: () => void
 }) {
   const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
@@ -44,10 +44,7 @@ export function Header({
     <div className="glass fixed left-0 top-0 z-50 flex w-full justify-center border-b border-gray-800 bg-black py-2">
       <div className="grid w-full max-w-7xl grid-cols-12 items-center justify-start gap-x-4">
         <div className="col-span-4">
-          <BackButton
-            saveStatus={saveStatus}
-            submitContent={submitContent}
-          />
+          <BackButton saveStatus={saveStatus} submitContent={submitContent} />
         </div>
         <div className="col-span-4 flex items-center justify-center gap-x-2 text-md font-normal">
           <p>{title ?? '- Untitled'}</p>
@@ -68,7 +65,7 @@ export function Header({
             <UIButton
               size="sm"
               variant="danger"
-              type='button'
+              type="button"
               onClick={handleDeletePost}
             >
               Delete
@@ -84,13 +81,22 @@ export function Header({
   )
 }
 
-function BackButton({ saveStatus, submitContent }: { saveStatus: SaveStatus, submitContent: () => void }) {
-  const alertUser = React.useCallback((event: any) => {
-    event.preventDefault()
-    if (saveStatus === 'Unsaved') {
-      event.returnValue = ''
-    }
-  }, [saveStatus])
+function BackButton({
+  saveStatus,
+  submitContent,
+}: {
+  saveStatus: SaveStatus
+  submitContent: () => void
+}) {
+  const alertUser = React.useCallback(
+    (event: any) => {
+      event.preventDefault()
+      if (saveStatus === 'Unsaved') {
+        event.returnValue = ''
+      }
+    },
+    [saveStatus],
+  )
 
   React.useEffect(() => {
     window.addEventListener('beforeunload', alertUser)
@@ -127,7 +133,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
@@ -150,20 +156,12 @@ const DeleteDialog = ({
           >
             Cancel
           </UIButton>
-          <Form method="POST" className='w-min'>
-            <Button
-              size="sm"
-              variant="danger"
-              type='submit'
-            >
+          <Form method="POST" className="w-min">
+            <Button size="sm" variant="danger" type="submit">
               Yes, delete.
             </Button>
             <input type="hidden" name="_action" value={FormType.DELETE} />
-            <input
-              type="hidden"
-              name="postId"
-              value={data?.postId}
-            />
+            <input type="hidden" name="postId" value={data?.postId} />
           </Form>
         </div>
       </DialogContent>
