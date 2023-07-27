@@ -1,15 +1,19 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { Button } from '~/components/button'
-import type { SaveStatus } from './route'
-import { FormType } from './route'
-import { Form, Link, useLoaderData } from '@remix-run/react'
-import { FilePlus, MoreHorizontal, MoveLeftIcon, Trash2 } from 'lucide-react'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import {Button} from '~/components/button'
+import type {SaveStatus} from './route'
+import {FormType} from './route'
+import {Form, Link, useLoaderData} from '@remix-run/react'
+import {FilePlus, MoreHorizontal, MoveLeftIcon, Trash2} from 'lucide-react'
 import clsx from 'clsx'
-import type { LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
-import { Popover, PopoverContent, PopoverTrigger } from '~/components/shadcn/popover'
+import type {LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '~/components/shadcn/popover'
 // import {useToast} from '~/components/shadcn/use-toast'
 // import {ToastAction} from '~/components/shadcn/toast'
 
@@ -17,10 +21,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
   if (!id) return redirect('/cash-flow')
-  const data: LoaderData = { postId: id }
+  const data: LoaderData = {postId: id}
   return data
 }
 
@@ -42,12 +46,12 @@ export function Header({
   }
 
   return (
-    <div className="sticky left-0 top-0 z-50 flex w-full max-w-6xl mx-auto justify-center py-4 bg-gray-900">
+    <div className="sticky left-0 top-0 z-50 mx-auto flex w-full max-w-6xl justify-center bg-gray-900 py-4">
       <div className="grid w-full grid-cols-12 items-center justify-start gap-x-4">
         <div className="col-span-4 flex items-center gap-x-2 text-md font-normal">
           <BackButton saveStatus={saveStatus} submitContent={submitContent} />
-          <p className='ml-1.5 font-semibold'>{title ?? '- Untitled'}</p>
-          <div className="flex items-center gap-2 bg-gray-600 px-3 py-1 rounded-md ml-2.5">
+          <p className="ml-1.5 font-semibold">{title ?? '- Untitled'}</p>
+          <div className="ml-2.5 flex items-center gap-2 rounded-md bg-gray-600 px-3 py-1">
             <span
               className={clsx('block h-2 w-2 rounded-full', {
                 'bg-green-900': saveStatus === 'Saved',
@@ -58,15 +62,12 @@ export function Header({
             <p>{saveStatus}</p>
           </div>
         </div>
-        <div className="col-span-8 flex items-center gap-x-4 justify-end">
+        <div className="col-span-8 flex items-center justify-end gap-x-4">
           <Popover>
-            <PopoverTrigger className="flex items-center hover:bg-gray-600 rounded-md px-1.5 py-1">
+            <PopoverTrigger className="flex items-center rounded-md px-1.5 py-1 hover:bg-gray-600">
               <MoreHorizontal size={20} />
             </PopoverTrigger>
-            <MoreMenus
-              type={type}
-              handleDeletePost={handleDeletePost}
-            />
+            <MoreMenus type={type} handleDeletePost={handleDeletePost} />
           </Popover>
         </div>
         <DeleteDialog
@@ -80,7 +81,7 @@ export function Header({
 
 function MoreMenus({
   type,
-  handleDeletePost
+  handleDeletePost,
 }: {
   type: FormType
   handleDeletePost: () => void
@@ -101,7 +102,10 @@ function MoreMenus({
         </div>
       </MoreMenuWrapper>
       {type !== FormType.CREATE && (
-        <MoreMenuWrapper className="hover:bg-red-200" onClick={handleDeletePost}>
+        <MoreMenuWrapper
+          className="hover:bg-red-200"
+          onClick={handleDeletePost}
+        >
           <div className="flex items-center gap-x-2">
             <Trash2 size={18} className="text-red-800" />
             <p className="text-red-800">Delete Page</p>
@@ -123,7 +127,7 @@ function MoreMenuWrapper({
   return (
     <button
       className={clsx(
-        'flex w-full justify-between gap-x-18 rounded-md px-3 py-2',
+        'gap-x-18 flex w-full justify-between rounded-md px-3 py-2',
         className,
       )}
       {...props}
@@ -190,12 +194,14 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-600 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">
         <div className="border-b border-gray-600 px-6 py-4 text-center">
-          <h1 className="text-lg font-semibold">Are you sure you want to delete?</h1>
+          <h1 className="text-lg font-semibold">
+            Are you sure you want to delete?
+          </h1>
         </div>
         <div className="px-6 py-4">
           <p className="text-secondary mt-4 text-md font-light leading-tight lg:mt-2 lg:leading-relaxed">

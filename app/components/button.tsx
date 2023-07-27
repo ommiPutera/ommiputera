@@ -60,4 +60,4 @@ function Inner({
   )
 }
 
-export { Button }
+export {Button}

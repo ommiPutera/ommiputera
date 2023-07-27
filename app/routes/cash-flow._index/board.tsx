@@ -1,11 +1,11 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
-import { Plus } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import type { LoaderData } from './route'
+import {Link, useLoaderData} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
+import {Plus} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderData} from './route'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col gap-y-6 pb-9 lg:pb-12">
@@ -33,7 +33,7 @@ export default function Board() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -49,7 +49,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
@@ -72,7 +72,7 @@ function UpdatePage({ id, title }: Post) {
 
 function NoData() {
   return (
-    <div className="grid gap-y-4 rounded-lg w-full border border-gray-600 py-36 text-center">
+    <div className="grid w-full gap-y-4 rounded-lg border border-gray-600 py-36 text-center">
       <div className="mx-auto w-fit rounded-full bg-gray-800 p-5">
         <img src="/vectors/checklist.png" alt="" className="h-10 w-10" />
       </div>
