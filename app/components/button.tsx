@@ -46,7 +46,7 @@ function Inner({
       className={clsx(
         'relative flex h-full w-full items-center justify-center whitespace-nowrap',
         {
-          'border-gray-200 group-disabled:border-gray-800':
+          'border-gray-200 group-disabled:border-gray-600':
             variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
           'rounded-md px-3 pb-[5px] pt-1 text-md': size === 'sm',
@@ -60,4 +60,4 @@ function Inner({
   )
 }
 
-export {Button}
+export { Button }

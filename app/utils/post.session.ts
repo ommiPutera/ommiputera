@@ -10,10 +10,6 @@ type CreateType = {
   redirectTo?: string
 }
 
-export async function getPostByAuthor({authorId}: {authorId: string}) {
-  return await db.post.findMany({where: {authorId: authorId}})
-}
-
 export async function getPost({id}: {id: string}) {
   return await db.post.findUnique({where: {id: id}})
 }

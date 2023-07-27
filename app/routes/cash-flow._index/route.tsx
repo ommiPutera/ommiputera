@@ -1,5 +1,5 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
 import {
   ActivitySquare,
   Trello,
@@ -9,11 +9,10 @@ import {
   ChevronRight,
   LogOut,
 } from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {storage} from '~/utils/session.server'
-import {getPostByAuthor} from '~/utils/post.session'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import type { Post } from '@prisma/client'
+import type { TabProps } from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -25,7 +24,7 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import {Logo} from '~/components/navbar'
+import { Logo } from '~/components/navbar'
 import Analytics from './analytics'
 import {
   Popover,
@@ -33,19 +32,20 @@ import {
   PopoverTrigger,
 } from '~/components/shadcn/popover'
 import React from 'react'
+import { db } from '~/utils/db.server'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
-  let session = await storage.getSession()
-  const posts = await getPostByAuthor({authorId: session.get('userId')})
-  const data: LoaderData = {posts}
+export const loader: LoaderFunction = async ({ request }) => {
+  const user = await getUser(request)
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -58,7 +58,7 @@ export default function Index() {
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
           orientation={TabsOrientation.Horizontal}
         >
-          <TabList className="z-0 flex gap-1 overflow-x-scroll border-b border-b-gray-800 bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
+          <TabList className="z-0 flex gap-1 overflow-x-scroll border-b border-b-gray-600 bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
             <Tab index={0} className="flex items-center gap-x-2">
               <Trello size={20} />
               <div>Board</div>
@@ -85,10 +85,10 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <ReachTab
-      className={clsx('border-b-2 border-b-transparent p-0 px-1')}
+      className={clsx('border-b-2 border-b-transparent py-1.5 px-1')}
       {...props}
     >
       <div
@@ -108,7 +108,7 @@ function Tab({
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <TabPanels className="mt-8">
       <TabPanel hidden={selectedIndex !== 0}>
@@ -138,25 +138,25 @@ function LayoutTitle() {
               Powerd by Ommi
             </p>
           </div>
-          <div className="col-span-4 flex items-center justify-end">
+          <div className="col-span-4 flex gap-x-2 items-center justify-end">
             <Link to="/cash-flow" prefetch="intent">
               <UIButton
                 type="button"
                 variant="subtle"
                 size="sm"
-                className="flex items-center gap-x-2"
+                className="flex items-center gap-x-2 hover:bg-gray-600"
               >
                 <FilePlus size={18} />
-                Template
+                <p>Template</p>
               </UIButton>
             </Link>
             <UIButton
               size="sm"
               variant="subtle"
-              className="flex items-center gap-x-2"
+              className="flex items-center gap-x-2 hover:bg-gray-600"
             >
               <Settings size={18} />
-              Settings
+              <p>Settings</p>
             </UIButton>
             <MoreAction />
           </div>
@@ -169,7 +169,7 @@ function LayoutTitle() {
 function MoreAction() {
   return (
     <Popover>
-      <PopoverTrigger className="flex items-center px-2">
+      <PopoverTrigger className="flex items-center hover:bg-gray-600 rounded-md px-1.5 py-1">
         <MoreHorizontal size={20} />
       </PopoverTrigger>
       <MoreMenus />
