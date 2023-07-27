@@ -1,10 +1,10 @@
-import type {Post} from '@prisma/client'
-import type {LoaderArgs, ActionFunction} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
-import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import type { LoaderArgs, ActionFunction } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import {useDebouncedCallback} from 'use-debounce'
+import { useDebouncedCallback } from 'use-debounce'
 import Editor from '~/components/editor'
 import {
   createPost,
@@ -13,10 +13,11 @@ import {
   updateContent,
   updateTitle,
 } from '~/utils/post.session'
-import {useUser} from '~/utils/use-root-data'
-import {Header} from './misc'
-import type {JSONContent} from '@tiptap/core'
-import {ChevronDownSquare, Clock10} from 'lucide-react'
+import { useUser } from '~/utils/use-root-data'
+import { Header } from './misc'
+import type { JSONContent } from '@tiptap/core'
+import { ChevronDownSquare, Clock10 } from 'lucide-react'
+import { SectionSpacer } from '~/components/spacer'
 
 export type SaveStatus = 'Saved' | 'Unsaved' | 'Saving..'
 type LoaderData = {
@@ -44,39 +45,39 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
-  const post = await getPost({id: id ?? ''})
-  if (id === 'new') return {postId: id, isNewPage: true}
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
+  const post = await getPost({ id: id ?? '' })
+  if (id === 'new') return { postId: id, isNewPage: true }
 
   if (!id || !post) return redirect('/cash-flow')
-  const data: LoaderData = {post, postId: id, isNewPage: false}
+  const data: LoaderData = { post, postId: id, isNewPage: false }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON} =
+  const { _action, postId, title, authorId, postJSON } =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      await deletePost({id: postId})
+      await deletePost({ id: postId })
       return redirect('/cash-flow', {})
     }
     case FormType.CREATE: {
       if (typeof authorId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       let content
       if (postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({blocks: ['none']}))
+        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
       }
       return await createPost({
         title: title ? String(title) : 'Untitled Page...',
@@ -88,17 +89,17 @@ export const action: ActionFunction = async ({request}) => {
     }
     case FormType.UPDATE_TITLE: {
       if (typeof title !== 'string' || typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await updateTitle({
         id: postId,
         title,
       })
-      return {post}
+      return { post }
     }
     case FormType.UPDATE_CONTENT: {
       if (typeof postId !== 'string' || typeof postJSON !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       return await updateContent({
         id: postId,
@@ -106,13 +107,13 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
-  const {post, postId} = useLoaderData<LoaderData>()
+  const { post, postId } = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>('Saved')
@@ -175,7 +176,7 @@ export default function Index() {
         submitContent={submitContent}
       />
       <div className="mx-auto my-0 mt-12 grid w-full max-w-6xl grid-cols-12 justify-between gap-x-6">
-        <div className="relative col-span-8 h-auto w-full rounded-lg border border-gray-600 bg-black p-10">
+        <div className="relative col-span-8 h-auto w-full">
           <Form method="POST" className="w-full" action=".">
             <div className="px-6 md:px-0">
               <TextareaAutosize
@@ -234,35 +235,43 @@ export default function Index() {
             />
           </Form>
         </div>
-        <div className="col-span-4 h-full">
-          <SidePage title={pageTitle} />
+        <div className="col-span-4">
+          <div className='flex flex-col gap-y-4 h-full'>
+            <SidePage title={pageTitle} />
+          </div>
         </div>
       </div>
     </>
   )
 }
 
-function SidePage({title}: {title?: string}) {
+function SidePage({ title }: { title?: string }) {
   return (
-    <div className="sticky top-20 flex flex-col gap-y-4 rounded-lg border border-gray-600 bg-black p-4">
-      <h1 className="pb-2 text-lg font-semibold">Data of {title ?? ''} Page</h1>
-      <div className="flex items-center">
-        <div className="flex items-center gap-x-2">
-          <ChevronDownSquare size={16} className="text-secondary" />
-          <p className="text-secondary min-w-[120px] text-md font-normal">
-            Status
-          </p>
+    <div className="sticky top-20 rounded-lg border border-gray-800 bg-gray-900 p-4">
+      <div className='flex flex-col gap-y-4'>
+        <h1 className="text-lg font-semibold">Data of {title ?? ''} Page</h1>
+        <div className="flex items-center">
+          <div className="flex items-center gap-x-2">
+            <ChevronDownSquare size={16} className="text-secondary" />
+            <p className="text-secondary min-w-[120px] text-md font-normal">
+              Status
+            </p>
+          </div>
+          <p className="text-md">Not Completed</p>
         </div>
-        <p className="text-md">Not Completed</p>
+        <div className="flex items-center">
+          <div className="flex items-center gap-x-2">
+            <Clock10 size={16} className="text-secondary" />
+            <p className="text-secondary min-w-[120px] text-md font-normal">
+              Created Date
+            </p>
+          </div>
+          <p className="text-md">July 24, 2023 9:58 AM</p>
+        </div>
       </div>
-      <div className="flex items-center">
-        <div className="flex items-center gap-x-2">
-          <Clock10 size={16} className="text-secondary" />
-          <p className="text-secondary min-w-[120px] text-md font-normal">
-            Created Date
-          </p>
-        </div>
-        <p className="text-md">July 24, 2023 9:58 AM</p>
+      <SectionSpacer size='sm' />
+      <div>
+        <h1 className="text-lg font-semibold">Calculation</h1>
       </div>
     </div>
   )

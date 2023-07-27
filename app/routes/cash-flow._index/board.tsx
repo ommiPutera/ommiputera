@@ -1,11 +1,11 @@
-import {Link, useLoaderData} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
-import {Plus} from 'lucide-react'
-import type {Post} from '@prisma/client'
-import type {LoaderData} from './route'
+import { Link, useLoaderData } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
+import { Plus } from 'lucide-react'
+import type { Post } from '@prisma/client'
+import type { LoaderData } from './route'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col gap-y-6 pb-9 lg:pb-12">
@@ -17,7 +17,7 @@ export default function Board() {
           posts?.map(post => (
             <div
               key={post.id}
-              className="col-span-1 cursor-pointer rounded-lg border border-gray-600 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-500"
+              className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 hover:border-gray-700"
             >
               <UpdatePage {...JSON.parse(JSON.stringify(post))} />
             </div>
@@ -33,7 +33,7 @@ export default function Board() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -49,7 +49,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>

@@ -1,5 +1,5 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
 import {
   ActivitySquare,
   Trello,
@@ -9,10 +9,10 @@ import {
   ChevronRight,
   LogOut,
 } from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import type { Post } from '@prisma/client'
+import type { TabProps } from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -24,7 +24,7 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import {Logo} from '~/components/navbar'
+import { Logo } from '~/components/navbar'
 import Analytics from './analytics'
 import {
   Popover,
@@ -32,20 +32,20 @@ import {
   PopoverTrigger,
 } from '~/components/shadcn/popover'
 import React from 'react'
-import {db} from '~/utils/db.server'
+import { db } from '~/utils/db.server'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -58,7 +58,7 @@ export default function Index() {
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
           orientation={TabsOrientation.Horizontal}
         >
-          <TabList className="z-0 flex gap-1 overflow-x-scroll border-b border-b-gray-600 bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
+          <TabList className="z-0 flex gap-1 overflow-x-scroll border-b border-b-gray-800 bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
             <Tab index={0} className="flex items-center gap-x-2">
               <Trello size={20} />
               <div>Board</div>
@@ -85,7 +85,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <ReachTab
       className={clsx('border-b-2 border-b-transparent px-1 py-1.5')}
@@ -108,7 +108,7 @@ function Tab({
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <TabPanels className="mt-8">
       <TabPanel hidden={selectedIndex !== 0}>
