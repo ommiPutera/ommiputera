@@ -1,9 +1,10 @@
 import {redirect} from '@remix-run/node'
 import {db} from './db.server'
+import type {JSONContent} from '@tiptap/core'
 
 type CreateType = {
   title: string
-  content?: string
+  content?: JSONContent
   authorId: string
   published: boolean
   redirectTo?: string

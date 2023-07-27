@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize, includes, some} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { capitalize, includes, some } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,8 +22,8 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
+import { SectionSpacer } from './spacer'
+import { Badge } from './shadcn/badge'
 
 type TypeLinks = {
   name: string
@@ -35,14 +35,11 @@ type TypeLinks = {
 }[]
 
 const RowApp1 = () => {
-  const isSelected =
-    '/cash-flow/intro' === location.pathname ||
-    location.pathname.startsWith(`/cash-flow`)
-
+  const isSelected = '/intro/cashflow' === location.pathname || location.pathname.startsWith(`/cash-flow`)
   return (
     <div className="grid w-[420px] grid-cols-1 gap-x-2 px-3 pb-3.5">
       <Link
-        to="/cash-flow/intro"
+        to="/intro/cashflow"
         prefetch="intent"
         className={clsx(
           'col-span-1 flex w-full items-center rounded-lg pr-3 hover:bg-gray-800',
@@ -109,38 +106,38 @@ const LINKS: TypeLinks = [
   {
     name: 'Free Products',
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{ component: <RowApp1 /> }],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
+      { component: <RowProducts1 /> },
+      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
+      { component: <RowProducts1 /> },
     ],
   },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
-const USER_LINKS = [{name: 'Personal Cashflow', to: '/cash-flow'}]
+const USER_LINKS = [{ name: 'Cashflow', to: '/cash-flow' }]
 const OWNER_LINKS = [
-  {name: 'Overview', to: '/overview'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Overview', to: '/overview' },
+  { name: 'Admin Panel', to: '/admin' },
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 
 // Default is no navbar
-const ROUTE_WITHOUT_NAVBAR = ['/login', 'ALL', '/cash-flow/monthly']
+const ROUTE_WITHOUT_NAVBAR = ['/login', 'ALL', '/cash-flow']
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
+  const isShowNavbar = some(ROUTE_WITHOUT_NAVBAR, el => includes(location.pathname, el));
 
-  if (some(ROUTE_WITHOUT_NAVBAR, el => includes(location.pathname, el)))
-    return <></>
+  if (isShowNavbar) return <></>
   if (!user) return <PublicRoute />
 
   if (ROUTE_WITHOUT_NAVBAR.includes('ALL')) return <ProtectedNav />
@@ -148,7 +145,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="relative">
       <div
@@ -172,7 +169,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -190,9 +187,9 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -203,17 +200,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-800"
@@ -281,7 +278,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -339,7 +336,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -421,15 +418,15 @@ export function Logo({
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
   return <ProtectedNavItems links={OWNER_LINKS} />
 }
 
-function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
-  const {user} = useRootData()
+function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
+  const { user } = useRootData()
   const location = useLocation()
   const isHideNavbar = ROUTE_WITHOUT_NAVBAR.includes('ALL')
 
@@ -451,7 +448,7 @@ function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
       <div
         className={clsx(
           'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-800 bg-black px-5vw lg:px-[2vw]',
-          {'glass sticky top-0 py-3': isHideNavbar},
+          { 'glass sticky top-0 py-3': isHideNavbar },
         )}
       >
         <nav
@@ -531,4 +528,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

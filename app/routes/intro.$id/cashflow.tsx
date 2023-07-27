@@ -1,11 +1,11 @@
-import {Link, type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
+import { Link, type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
-export default function Index() {
+export default function Cashflow() {
   return (
     <div className="text-primary relative mx-auto grid w-full max-w-7xl gap-5 py-4 lg:gap-y-16 lg:py-12">
       <h1 className="text-center text-2xl font-medium leading-tight lg:px-[5rem] lg:text-7xl xl:px-[10rem]">

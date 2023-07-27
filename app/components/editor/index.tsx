@@ -1,26 +1,24 @@
-import {useEffect, useRef, useState} from 'react'
-import {useEditor, EditorContent} from '@tiptap/react'
-import {TiptapEditorProps} from './props'
-import {TiptapExtensions} from './extensions'
-import {useDebouncedCallback} from 'use-debounce'
-import {useCompletion} from 'ai/react'
-import {toast} from 'sonner'
+import { useEffect, useRef, useState } from 'react'
+import { useEditor, EditorContent } from '@tiptap/react'
+import { TiptapEditorProps } from './props'
+import { TiptapExtensions } from './extensions'
+import { useDebouncedCallback } from 'use-debounce'
+import { useCompletion } from 'ai/react'
+import { toast } from 'sonner'
 import va from '@vercel/analytics'
-import {EditorBubbleMenu} from './components'
-import {getPrevText} from '~/lib/editor'
-import type {Editor as EditorType, JSONContent} from '@tiptap/core'
+import { EditorBubbleMenu } from './components'
+import { getPrevText } from '~/lib/editor'
+import type { Editor as EditorType, JSONContent } from '@tiptap/core'
 
 export default function Editor({
   submit,
   content,
   setContent,
-  saveStatus,
   setSaveStatus,
 }: {
   submit: () => void
   content: JSONContent | null
   setContent: React.Dispatch<React.SetStateAction<JSONContent>>
-  saveStatus: 'Saved' | 'Unsaved' | 'Saving..'
   setSaveStatus: React.Dispatch<
     React.SetStateAction<'Saved' | 'Unsaved' | 'Saving..'>
   >
@@ -28,7 +26,7 @@ export default function Editor({
   const [hydrated, setHydrated] = useState(false)
 
   const debouncedUpdates = useDebouncedCallback(
-    async ({editor}: {editor: EditorType}) => {
+    async ({ editor }: { editor: EditorType }) => {
       const json = editor.getJSON()
       setSaveStatus('Saving..')
       setContent(json)
@@ -37,7 +35,7 @@ export default function Editor({
       setTimeout(() => {
         setSaveStatus('Saved')
         submit()
-      }, 450)
+      }, 750)
     },
     750,
   )
@@ -70,7 +68,7 @@ export default function Editor({
     autofocus: 'end',
   })
 
-  const {complete, completion, isLoading, stop} = useCompletion({
+  const { complete, completion, isLoading, stop } = useCompletion({
     id: 'novel',
     api: '/api/generate',
     onFinish: (_prompt, completion) => {
