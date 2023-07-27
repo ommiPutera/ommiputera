@@ -1,20 +1,20 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { HomeHeroSection } from '~/components/sections/hero'
-import { db } from '~/utils/db.server'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {HomeHeroSection} from '~/components/sections/hero'
+import {db} from '~/utils/db.server'
 // import Pricing from './pricing'
 import RecentWork from './recent-work'
 // import Team from './team'
 import WorkinOn from './working-on'
-import { SectionSpacer } from '~/components/spacer'
+import {SectionSpacer} from '~/components/spacer'
 import MiniApp from './mini-app'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -53,30 +53,20 @@ export default function Index() {
 function Certifed() {
   return (
     <div className="flex flex-col">
-      <p className="text-lg text-center text-secondary font-medium">I am certified</p>
+      <p className="text-secondary text-center text-lg font-medium">
+        I am certified
+      </p>
       <h3 className="text-center text-lg font-medium lg:text-5xl">
         Professional and Constantly Learning.
       </h3>
       <p className="px-0 text-center text-lg font-normal text-gray-200 lg:mt-2 lg:px-9 lg:text-xl lg:leading-normal">
         I am curious. I spend 30 minutes a day on my personal learning.
       </p>
-      <div className="mt-24 mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-14 gap-y-8 overflow-hidden lg:gap-y-0">
-        <img
-          src="/purwadhika-logo.png"
-          alt=""
-          className="w-56 opacity-60"
-        />
+      <div className="mx-auto mt-24 flex max-w-7xl flex-wrap items-center justify-center gap-x-14 gap-y-8 overflow-hidden lg:gap-y-0">
+        <img src="/purwadhika-logo.png" alt="" className="w-56 opacity-60" />
         <img src="/udemy-logo.png" alt="" className="w-44 opacity-60" />
-        <img
-          src="/hackerrank-logo.png"
-          alt=""
-          className="w-48 opacity-60"
-        />
-        <img
-          src="/testgorilla-logo.png"
-          alt=""
-          className="w-44 opacity-60"
-        />
+        <img src="/hackerrank-logo.png" alt="" className="w-48 opacity-60" />
+        <img src="/testgorilla-logo.png" alt="" className="w-44 opacity-60" />
       </div>
     </div>
   )

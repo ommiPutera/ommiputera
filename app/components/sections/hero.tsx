@@ -1,4 +1,4 @@
-import { Link } from '@remix-run/react'
+import {Link} from '@remix-run/react'
 
 function HomeHeroSection() {
   return (
@@ -23,7 +23,7 @@ function HomeHeroSection() {
       </FloatingBtn>
       <FloatingBtn
         to="/"
-        className="absolute top-[3vh] left-[1vw] hidden lg:block"
+        className="absolute left-[1vw] top-[3vh] hidden lg:block"
       >
         <p className="whitespace-nowrap font-medium">React.js</p>
         <p className="pointer-events-none absolute -bottom-6 -left-10 text-xl transition-[25] delay-200 group-hover:bottom-14 group-hover:left-14 group-hover:-rotate-12 group-hover:text-2xl">
@@ -65,7 +65,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -75,4 +75,4 @@ function FloatingBtn({
   )
 }
 
-export { HomeHeroSection, ProjectHeroSection }
+export {HomeHeroSection, ProjectHeroSection}
