@@ -115,8 +115,10 @@ export default function Index() {
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>('Saved')
-  // @ts-ignore
-  const [content, setContent] = React.useState<JSONContent | null>(post?.content)
+  const [content, setContent] = React.useState<JSONContent | null>(
+    // @ts-ignore
+    post?.content,
+  )
   const [pageTitle, setPageTitle] = React.useState(post?.title)
 
   const actionData = useActionData<ActionData>()
@@ -171,7 +173,7 @@ export default function Index() {
         saveStatus={saveStatus}
         submitContent={submitContent}
       />
-      <div className="mx-auto my-0 mt-12 lg:mt-32 flex w-full max-w-3xl flex-col items-center justify-between gap-y-6 py-4">
+      <div className="mx-auto my-0 mt-12 flex w-full max-w-3xl flex-col items-center justify-between gap-y-6 py-4 lg:mt-32">
         <Form method="POST" className="w-full" action=".">
           <div className="px-6 md:px-0">
             <TextareaAutosize

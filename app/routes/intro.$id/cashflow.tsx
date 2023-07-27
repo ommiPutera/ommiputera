@@ -1,8 +1,8 @@
-import { Link, type V2_MetaFunction } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import {Link, type V2_MetaFunction} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export default function Cashflow() {

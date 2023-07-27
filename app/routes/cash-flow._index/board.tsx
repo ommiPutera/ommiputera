@@ -1,21 +1,24 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
-import { Plus } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import type { LoaderData } from './route'
+import {Link, useLoaderData} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
+import {Plus} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderData} from './route'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
-    <div className="pb-9 lg:pb-12 flex flex-col gap-y-6">
+    <div className="flex flex-col gap-y-6 pb-9 lg:pb-12">
       <div className="relative mx-auto w-full max-w-7xl">
         <Tools />
       </div>
       <div className="relative mx-auto grid max-w-7xl grid-cols-1 md:grid-cols-4 lg:gap-x-2">
         {isPostsExist ? (
           posts?.map(post => (
-            <div key={post.id} className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700">
+            <div
+              key={post.id}
+              className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black px-5 py-5 shadow-[1px_10px_47px_0px_#19191987] hover:border-gray-700"
+            >
               <UpdatePage {...JSON.parse(JSON.stringify(post))} />
             </div>
           ))
@@ -30,12 +33,12 @@ export default function Board() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
-    <div className="rounded-md border border-gray-800 py-4 px-4">
+    <div className="rounded-md border border-gray-800 px-4 py-4">
       <Link to="/cash-flow/new" prefetch="intent">
         <UIButton type="button" size="sm">
           <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
@@ -46,7 +49,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
