@@ -1,5 +1,5 @@
-import { Link, type V2_MetaFunction } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import {Link, type V2_MetaFunction} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 import {
   ActivitySquare,
   Trello,
@@ -7,13 +7,13 @@ import {
   Settings,
   MoreHorizontal,
   ChevronRight,
-  LogOut
+  LogOut,
 } from 'lucide-react'
-import type { LoaderFunction } from '@remix-run/node'
-import { storage } from '~/utils/session.server'
-import { getPostByAuthor } from '~/utils/post.session'
-import type { Post } from '@prisma/client'
-import type { TabProps } from '@reach/tabs'
+import type {LoaderFunction} from '@remix-run/node'
+import {storage} from '~/utils/session.server'
+import {getPostByAuthor} from '~/utils/post.session'
+import type {Post} from '@prisma/client'
+import type {TabProps} from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -25,7 +25,7 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import { Logo } from '~/components/navbar'
+import {Logo} from '~/components/navbar'
 import Analytics from './analytics'
 import {
   Popover,
@@ -34,18 +34,18 @@ import {
 } from '~/components/shadcn/popover'
 import React from 'react'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   let session = await storage.getSession()
-  const posts = await getPostByAuthor({ authorId: session.get('userId') })
-  const data: LoaderData = { posts }
+  const posts = await getPostByAuthor({authorId: session.get('userId')})
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -85,7 +85,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <ReachTab
       className={clsx('border-b-2 border-b-transparent p-0 px-1')}
@@ -108,7 +108,7 @@ function Tab({
 }
 
 function Contents() {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <TabPanels className="mt-8">
       <TabPanel hidden={selectedIndex !== 0}>
@@ -181,7 +181,7 @@ function MoreMenus() {
   return (
     <PopoverContent className="mt-4 w-auto px-2 py-2">
       <p className="mb-3 mt-2 px-3 font-semibold">View Options</p>
-      <MoreMenuWrapper className='hover:bg-gray-800'>
+      <MoreMenuWrapper className="hover:bg-gray-800">
         <div className="flex items-center gap-x-2">
           <FilePlus size={18} />
           <p>Settings</p>
@@ -191,7 +191,7 @@ function MoreMenus() {
           <ChevronRight size={16} />
         </div>
       </MoreMenuWrapper>
-      <MoreMenuWrapper className='hover:bg-gray-800'>
+      <MoreMenuWrapper className="hover:bg-gray-800">
         <div className="flex items-center gap-x-2">
           <FilePlus size={18} />
           <p>Test</p>
@@ -202,10 +202,10 @@ function MoreMenus() {
         </div>
       </MoreMenuWrapper>
       <form action="/logout" method="post">
-        <MoreMenuWrapper type="submit" className='hover:bg-red-100'>
+        <MoreMenuWrapper type="submit" className="hover:bg-red-100">
           <div className="flex items-center gap-x-2">
-            <LogOut size={18} className='text-red-900' />
-            <p className='text-red-900'>Log Out</p>
+            <LogOut size={18} className="text-red-900" />
+            <p className="text-red-900">Log Out</p>
           </div>
         </MoreMenuWrapper>
       </form>
@@ -223,7 +223,10 @@ function MoreMenuWrapper({
 } & JSX.IntrinsicElements['button']) {
   return (
     <button
-      className={clsx('flex w-full justify-between gap-x-24 rounded-md px-3 py-2', className)}
+      className={clsx(
+        'flex w-full justify-between gap-x-24 rounded-md px-3 py-2',
+        className,
+      )}
       {...props}
     >
       {children}
