@@ -1,11 +1,11 @@
-import {Link, useLoaderData} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
-import {Plus} from 'lucide-react'
-import type {Post} from '@prisma/client'
-import type {LoaderData} from './route'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Plus } from 'lucide-react'
+import type { Post } from '@prisma/client'
+import type { LoaderData } from './route'
+import { ButtonLink } from '~/components/button'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col gap-y-6 pb-9 lg:pb-12">
@@ -33,23 +33,26 @@ export default function Board() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
     <div className="py-4">
-      <Link to="/cash-flow/new" prefetch="intent">
-        <UIButton type="button" size="sm">
-          <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
-          New Plan
-        </UIButton>
-      </Link>
+      <ButtonLink
+        type="button"
+        size="sm"
+        to="/cash-flow/new"
+        className="flex items-center gap-x-2"
+      >
+        <Plus size={16} />
+        <p>New Plan</p>
+      </ButtonLink>
     </div>
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
@@ -85,12 +88,15 @@ function NoData() {
         </p>
       </div>
       <div>
-        <Link to="/cash-flow/new" prefetch="intent">
-          <UIButton type="button" size="sm">
-            <Plus className="m-0 mr-1 h-3.5 w-3.5 p-0" />
-            Plan
-          </UIButton>
-        </Link>
+        <ButtonLink
+          type="button"
+          size="sm"
+          to="/cash-flow/new"
+          className="flex items-center gap-x-2"
+        >
+          <Plus size={16} />
+          <p>New Plan</p>
+        </ButtonLink>
       </div>
     </div>
   )

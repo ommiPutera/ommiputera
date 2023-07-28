@@ -1,19 +1,23 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {DialogContent, DialogOverlay} from '@reach/dialog'
-import {Button} from '~/components/button'
-import type {SaveStatus} from './route'
-import {FormType} from './route'
-import {Form, Link, useLoaderData} from '@remix-run/react'
-import {FilePlus, MoreHorizontal, MoveLeftIcon, Trash2} from 'lucide-react'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { Button } from '~/components/button'
+import type { SaveStatus } from './route'
+import { FormType } from './route'
+import { Form, Link, useLoaderData } from '@remix-run/react'
+import { ChevronRight, FilePlus, MoreHorizontal, MoveLeftIcon, Trash2 } from 'lucide-react'
 import clsx from 'clsx'
-import type {LoaderArgs} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
+import type { LoaderArgs } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '~/components/shadcn/popover'
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '~/components/shadcn/dropdown-menu'
 // import {useToast} from '~/components/shadcn/use-toast'
 // import {ToastAction} from '~/components/shadcn/toast'
 
@@ -21,10 +25,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
   if (!id) return redirect('/cash-flow')
-  const data: LoaderData = {postId: id}
+  const data: LoaderData = { postId: id }
   return data
 }
 
@@ -46,7 +50,7 @@ export function Header({
   }
 
   return (
-    <div className="sticky left-0 top-0 z-50 mx-auto flex w-full max-w-6xl justify-center bg-gray-900 py-4">
+    <div className="sticky left-0 top-0 z-50 mx-auto flex w-full max-w-5xl justify-center bg-gray-900 py-4">
       <div className="grid w-full grid-cols-12 items-center justify-start gap-x-4">
         <div className="col-span-4 flex items-center gap-x-2 text-md font-normal">
           <BackButton saveStatus={saveStatus} submitContent={submitContent} />
@@ -63,12 +67,19 @@ export function Header({
           </div>
         </div>
         <div className="col-span-8 flex items-center justify-end gap-x-4">
-          <Popover>
-            <PopoverTrigger className="flex items-center rounded-md px-1.5 py-1 hover:bg-gray-600">
-              <MoreHorizontal size={20} />
-            </PopoverTrigger>
-            <MoreMenus type={type} handleDeletePost={handleDeletePost} />
-          </Popover>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <UIButton size="sm" variant="subtle" className="flex items-center rounded-md px-2 hover:bg-gray-600">
+                <MoreHorizontal size={18} />
+              </UIButton>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="">
+              <MoreMenus
+                type={type}
+                handleDeletePost={handleDeletePost}
+              />
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
         <DeleteDialog
           isShowDeleteModal={isShowDeleteModal}
@@ -87,53 +98,40 @@ function MoreMenus({
   handleDeletePost: () => void
 }) {
   return (
-    <PopoverContent className="mt-4 w-auto px-2 py-2">
-      <p className="mb-3 mt-2 px-3 font-semibold">View Options</p>
-      <MoreMenuWrapper className="hover:bg-gray-800">
-        <div className="flex items-center gap-x-2">
-          <FilePlus size={18} />
-          <p>Settings</p>
-        </div>
-      </MoreMenuWrapper>
-      <MoreMenuWrapper className="hover:bg-gray-800">
-        <div className="flex items-center gap-x-2">
-          <FilePlus size={18} />
-          <p>Test</p>
-        </div>
-      </MoreMenuWrapper>
-      {type !== FormType.CREATE && (
-        <MoreMenuWrapper
-          className="hover:bg-red-200"
-          onClick={handleDeletePost}
-        >
+    <>
+      <DropdownMenuLabel className='px-2'>
+        <p className="font-semibold">View Options</p>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup className='p-1'>
+        <DropdownMenuItem className="border border-transparent rounded-md flex items-center gap-x-12 hover:bg-gray-800 hover:border-gray-700 px-2">
           <div className="flex items-center gap-x-2">
-            <Trash2 size={18} className="text-red-800" />
-            <p className="text-red-800">Delete Page</p>
+            <FilePlus size={18} />
+            <p>Settings</p>
           </div>
-        </MoreMenuWrapper>
-      )}
-    </PopoverContent>
-  )
-}
+          <div className="text-secondary flex items-center gap-x-1">
+            <p className="">Pengaturan</p>
+            <ChevronRight size={16} />
+          </div>
+        </DropdownMenuItem>
+        {type !== FormType.CREATE && (
 
-function MoreMenuWrapper({
-  children,
-  className,
-  ...props
-}: {
-  className?: string
-  children: JSX.Element | React.ReactNode[]
-} & JSX.IntrinsicElements['button']) {
-  return (
-    <button
-      className={clsx(
-        'gap-x-18 flex w-full justify-between rounded-md px-3 py-2',
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </button>
+          <DropdownMenuItem className="border border-transparent rounded-md hover:bg-red-200 hover:border-red-300 px-2">
+            <UIButton
+              onClick={handleDeletePost}
+              variant="subtle"
+              type="button"
+              className='h-auto cursor-default'
+            >
+              <div className="flex items-center gap-x-2">
+                <Trash2 size={18} className="text-red-800" />
+                <p className="text-red-800">Delete Page</p>
+              </div>
+            </UIButton>
+          </DropdownMenuItem>
+        )}
+      </DropdownMenuGroup>
+    </>
   )
 }
 
@@ -194,7 +192,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-600 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">
