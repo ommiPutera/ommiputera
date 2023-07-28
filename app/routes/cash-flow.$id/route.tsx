@@ -1,10 +1,10 @@
-import type { Post } from '@prisma/client'
-import type { LoaderArgs, ActionFunction } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
-import { Form, useActionData, useLoaderData } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import type {LoaderArgs, ActionFunction} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
+import {Form, useActionData, useLoaderData} from '@remix-run/react'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useDebouncedCallback } from 'use-debounce'
+import {useDebouncedCallback} from 'use-debounce'
 import Editor from '~/components/editor'
 import {
   createPost,
@@ -13,12 +13,12 @@ import {
   updateContent,
   updateTitle,
 } from '~/utils/post.session'
-import { useUser } from '~/utils/use-root-data'
-import { Header } from './misc'
-import type { JSONContent } from '@tiptap/core'
-import { ChevronDownSquare, Clock10 } from 'lucide-react'
-import { SectionSpacer } from '~/components/spacer'
-import { Logo } from '~/components/navbar'
+import {useUser} from '~/utils/use-root-data'
+import {Header} from './misc'
+import type {JSONContent} from '@tiptap/core'
+import {ChevronDownSquare, Clock10} from 'lucide-react'
+import {SectionSpacer} from '~/components/spacer'
+import {Logo} from '~/components/navbar'
 
 export type SaveStatus = 'Saved' | 'Unsaved' | 'Saving..'
 type LoaderData = {
@@ -46,39 +46,39 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
-  const post = await getPost({ id: id ?? '' })
-  if (id === 'new') return { postId: id, isNewPage: true }
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
+  const post = await getPost({id: id ?? ''})
+  if (id === 'new') return {postId: id, isNewPage: true}
 
   if (!id || !post) return redirect('/cash-flow')
-  const data: LoaderData = { post, postId: id, isNewPage: false }
+  const data: LoaderData = {post, postId: id, isNewPage: false}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const { _action, postId, title, authorId, postJSON } =
+  const {_action, postId, title, authorId, postJSON} =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      await deletePost({ id: postId })
+      await deletePost({id: postId})
       return redirect('/cash-flow', {})
     }
     case FormType.CREATE: {
       if (typeof authorId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       let content
       if (postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
+        content = JSON.parse(JSON.stringify({blocks: ['none']}))
       }
       return await createPost({
         title: title ? String(title) : 'Untitled Page...',
@@ -90,17 +90,17 @@ export const action: ActionFunction = async ({ request }) => {
     }
     case FormType.UPDATE_TITLE: {
       if (typeof title !== 'string' || typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await updateTitle({
         id: postId,
         title,
       })
-      return { post }
+      return {post}
     }
     case FormType.UPDATE_CONTENT: {
       if (typeof postId !== 'string' || typeof postJSON !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       return await updateContent({
         id: postId,
@@ -108,13 +108,13 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
 
 export default function Index() {
-  const { post, postId } = useLoaderData<LoaderData>()
+  const {post, postId} = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
   const [saveStatus, setSaveStatus] = React.useState<SaveStatus>('Saved')
@@ -246,13 +246,15 @@ export default function Index() {
   )
 }
 
-function SidePage({ title }: { title?: string }) {
+function SidePage({title}: {title?: string}) {
   return (
-    <div className='h-full flex flex-col gap-y-4'>
+    <div className="flex h-full flex-col gap-y-4">
       <div className="rounded-lg border border-gray-800 bg-gray-900 px-3 py-3">
         <div className="flex flex-col gap-y-2">
-          <h1 className="text-base font-semibold">Data of {title ?? ''} Page</h1>
-          <div className="flex items-center mt-2">
+          <h1 className="text-base font-semibold">
+            Data of {title ?? ''} Page
+          </h1>
+          <div className="mt-2 flex items-center">
             <div className="flex items-center gap-x-1">
               <ChevronDownSquare size={14} className="text-secondary" />
               <p className="text-secondary w-max min-w-[100px] max-w-[130px] text-sm font-normal">
@@ -276,15 +278,15 @@ function SidePage({ title }: { title?: string }) {
           <h1 className="text-base font-semibold">Template</h1>
         </div>
       </div>
-      <div className='sticky top-16'>
-        <div className='rounded-lg z-50 border border-gray-800 bg-gray-900 px-3 py-3'>
+      <div className="sticky top-16">
+        <div className="z-50 rounded-lg border border-gray-800 bg-gray-900 px-3 py-3">
           <div className="flex flex-col gap-y-4">
             <h1 className="text-base font-semibold">Calculation</h1>
           </div>
         </div>
-        <div className='flex mt-4 items-center gap-1.5 justify-center'>
-          <Logo size='xs' className='w-min z-0' />
-          <p className='text-sm pt-1 font-normal'>powerd by Ommi © 2023</p>
+        <div className="mt-4 flex items-center justify-center gap-1.5">
+          <Logo size="xs" className="z-0 w-min" />
+          <p className="pt-1 text-sm font-normal">powerd by Ommi © 2023</p>
         </div>
       </div>
     </div>

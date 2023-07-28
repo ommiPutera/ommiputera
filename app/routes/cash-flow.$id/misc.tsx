@@ -1,14 +1,20 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { Button } from '~/components/button'
-import type { SaveStatus } from './route'
-import { FormType } from './route'
-import { Form, Link, useLoaderData } from '@remix-run/react'
-import { ChevronRight, FilePlus, MoreHorizontal, MoveLeftIcon, Trash2 } from 'lucide-react'
+import {DialogContent, DialogOverlay} from '@reach/dialog'
+import {Button} from '~/components/button'
+import type {SaveStatus} from './route'
+import {FormType} from './route'
+import {Form, Link, useLoaderData} from '@remix-run/react'
+import {
+  ChevronRight,
+  FilePlus,
+  MoreHorizontal,
+  MoveLeftIcon,
+  Trash2,
+} from 'lucide-react'
 import clsx from 'clsx'
-import type { LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+import type {LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -16,7 +22,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger
+  DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
 // import {useToast} from '~/components/shadcn/use-toast'
 // import {ToastAction} from '~/components/shadcn/toast'
@@ -25,10 +31,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
   if (!id) return redirect('/cash-flow')
-  const data: LoaderData = { postId: id }
+  const data: LoaderData = {postId: id}
   return data
 }
 
@@ -69,15 +75,16 @@ export function Header({
         <div className="col-span-8 flex items-center justify-end gap-x-4">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <UIButton size="sm" variant="subtle" className="flex items-center rounded-md px-2 hover:bg-gray-600">
+              <UIButton
+                size="sm"
+                variant="subtle"
+                className="flex items-center rounded-md px-2 hover:bg-gray-600"
+              >
                 <MoreHorizontal size={18} />
               </UIButton>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="">
-              <MoreMenus
-                type={type}
-                handleDeletePost={handleDeletePost}
-              />
+              <MoreMenus type={type} handleDeletePost={handleDeletePost} />
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
@@ -99,12 +106,12 @@ function MoreMenus({
 }) {
   return (
     <>
-      <DropdownMenuLabel className='px-2'>
+      <DropdownMenuLabel className="px-2">
         <p className="font-semibold">View Options</p>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
-      <DropdownMenuGroup className='p-1'>
-        <DropdownMenuItem className="border border-transparent rounded-md flex items-center gap-x-12 hover:bg-gray-800 hover:border-gray-700 px-2">
+      <DropdownMenuGroup className="p-1">
+        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-700 hover:bg-gray-800">
           <div className="flex items-center gap-x-2">
             <FilePlus size={18} />
             <p>Settings</p>
@@ -115,13 +122,12 @@ function MoreMenus({
           </div>
         </DropdownMenuItem>
         {type !== FormType.CREATE && (
-
-          <DropdownMenuItem className="border border-transparent rounded-md hover:bg-red-200 hover:border-red-300 px-2">
+          <DropdownMenuItem className="rounded-md border border-transparent px-2 hover:border-red-300 hover:bg-red-200">
             <UIButton
               onClick={handleDeletePost}
               variant="subtle"
               type="button"
-              className='h-auto cursor-default'
+              className="h-auto cursor-default"
             >
               <div className="flex items-center gap-x-2">
                 <Trash2 size={18} className="text-red-800" />
@@ -192,7 +198,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-600 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">

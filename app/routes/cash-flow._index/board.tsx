@@ -1,11 +1,11 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { Plus } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import type { LoaderData } from './route'
-import { ButtonLink } from '~/components/button'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Plus} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderData} from './route'
+import {ButtonLink} from '~/components/button'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col gap-y-6 pb-9 lg:pb-12">
@@ -33,7 +33,7 @@ export default function Board() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -52,7 +52,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
