@@ -1,5 +1,5 @@
-import {type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
+import { type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
 import {
   ActivitySquare,
   Trello,
@@ -10,10 +10,10 @@ import {
   ChevronRight,
   BookOpenCheck,
 } from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import type { Post } from '@prisma/client'
+import type { TabProps } from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -25,10 +25,10 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import {Logo} from '~/components/navbar'
+import { Logo } from '~/components/navbar'
 import Analytics from './analytics'
 import React from 'react'
-import {db} from '~/utils/db.server'
+import { db } from '~/utils/db.server'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,18 +39,18 @@ import {
   DropdownMenuItem,
 } from '~/components/shadcn/dropdown-menu'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -90,7 +90,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -121,7 +121,7 @@ function Tab({
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <TabPanels className="-mx-4 mt-4 rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>
@@ -137,7 +137,7 @@ function Contents() {
 function LayoutTitle() {
   return (
     <>
-      <div className="absolute -z-10 h-[50vh] w-screen bg-red-900 bg-gradient-to-b from-black to-gray-900"></div>
+      <div className="absolute -z-10 h-[50vh] w-screen"></div>
       <div className="w-full px-[4vw] xl:px-10vw">
         <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center py-9 lg:py-12">
           <div className="col-span-4 text-left">

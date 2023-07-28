@@ -9,6 +9,7 @@
   content: attr(data-placeholder);
   float: left;
   color: var(--color-gray-300);
+  font-weight: 400;
   pointer-events: none;
   height: 0;
 }
@@ -115,4 +116,14 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 
 .tippy-box {
   max-width: 400px !important;
+}
+
+/* Heading */
+/* H1 */
+.prose-lg :where(h1):not(:where([class~="not-prose"] *)){
+  font-size: 28px;
+}
+/* H2 */
+.prose-lg :where(h2):not(:where([class~="not-prose"] *)) {
+  font-size: 24px;
 }
