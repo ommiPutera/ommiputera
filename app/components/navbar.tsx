@@ -377,11 +377,9 @@ function DesktopNavLink({
 }
 
 export function Logo({
-  withoutUnderlined,
   size = 'lg',
   className,
 }: {
-  withoutUnderlined?: boolean
   size?: 'md' | 'lg' | 'xs'
   className?: string
 }) {
@@ -391,15 +389,11 @@ export function Logo({
       to="/"
       className={clsx(
         'block transition focus:outline-none',
-        {
-          '': withoutUnderlined,
-          underlined: !withoutUnderlined,
-        },
         className,
       )}
     >
-      <h1
-        className={clsx('whitespace-nowrap font-medium', {
+      <p
+        className={clsx('whitespace-nowrap font-medium leading-none', {
           'text-2xl lg:text-3xl': size === 'lg',
           'text-lg lg:text-2xl': size === 'md',
           'text-md': size === 'xs',
@@ -415,7 +409,7 @@ export function Logo({
         >
           .com
         </span>
-      </h1>
+      </p>
     </Link>
   )
 }
@@ -436,15 +430,17 @@ function ProtectedNavItems({ links }: { links: { name: string; to: string }[] })
     <>
       <div
         className={clsx(
-          'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-[2vw] sticky top-0',
+          'no-scrollbar sticky top-0 z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-[2vw]',
         )}
       >
         <nav
-          className={clsx('text-primary mx-auto flex items-center justify-between gap-x-4 py-4')}
+          className={clsx(
+            'text-primary mx-auto flex items-center justify-between gap-x-4 py-4',
+          )}
         >
           <ul className="-mx-2 flex items-center gap-x-3">
             <li className="-mt-2 px-1.5">
-              <Logo withoutUnderlined size="md" />
+              <Logo size="md" />
             </li>
             {links.map(link => (
               <ProtectedpNavLink key={link.to} withoutUnderlined to={link.to}>

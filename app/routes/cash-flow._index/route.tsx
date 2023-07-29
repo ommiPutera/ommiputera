@@ -9,6 +9,7 @@ import {
   LogOut,
   ChevronRight,
   BookOpenCheck,
+  ChevronsUpDown,
 } from 'lucide-react'
 import type { LoaderFunction } from '@remix-run/node'
 import { getUser } from '~/utils/session.server'
@@ -38,6 +39,8 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
 } from '~/components/shadcn/dropdown-menu'
+import { useRootData } from '~/utils/use-root-data'
+import { Avatar, AvatarFallback, AvatarImage } from '~/components/shadcn/avatar'
 
 export const meta: V2_MetaFunction = ({ matches }) => {
   return [{ title: 'Cash Flow Managament' }]
@@ -56,27 +59,27 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Index() {
   return (
-    <>
+    <div className='bg-gray-900'>
       <LayoutTitle />
-      <div className="relative mx-auto grid lg:max-w-7xl py-9">
+      <div className="relative mx-auto grid py-9 lg:max-w-7xl">
         <Tabs
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
           orientation={TabsOrientation.Horizontal}
         >
-          <TabList className="z-0 flex overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
+          <TabList className="z-0 flex overflow-x-scroll bg-transparent gap-2 px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
             <Tab index={0} className="flex items-center gap-x-2">
               <Trello size={18} />
-              <p className='text-md'>Board</p>
+              <p className="text-md">Board</p>
             </Tab>
             <Tab index={1} className="flex items-center gap-x-2">
               <ActivitySquare size={18} />
-              <p className='text-md'>Analytics</p>
+              <p className="text-md">Analytics</p>
             </Tab>
           </TabList>
           <Contents />
         </Tabs>
       </div>
-    </>
+    </div>
   )
 }
 
@@ -94,13 +97,13 @@ function Tab({
   return (
     <ReachTab
       className={clsx(
-        'relative my-2 rounded-md border-b-0 border-b-transparent px-1 outline-gray-500',
+        'relative my-2 rounded-md border-b-0 border-b-transparent px-0 outline-gray-500',
       )}
       {...props}
     >
       <div
         className={clsx(
-          'px-2 py-0.5 font-medium',
+          'px-1 font-medium',
           {
             'text-white': selectedIndex === index,
             'text-gray-200': selectedIndex !== index,
@@ -111,7 +114,7 @@ function Tab({
         {children}
       </div>
       <div
-        className={clsx('absolute -bottom-2 left-0 h-0.5 w-full', {
+        className={clsx('absolute -bottom-1 left-0 h-0.5 w-full', {
           'bg-white': selectedIndex === index,
           'bg-transparent': selectedIndex !== index,
         })}
@@ -123,7 +126,7 @@ function Tab({
 function Contents() {
   const { selectedIndex } = useTabsContext()
   return (
-    <TabPanels className="-mx-4 mt-4 rounded-md px-4 outline-gray-400">
+    <TabPanels className="-mx-4 mt-5 rounded-md px-4 outline-gray-400 min-h-screen">
       <TabPanel hidden={selectedIndex !== 0}>
         <Board />
       </TabPanel>
@@ -135,21 +138,20 @@ function Contents() {
 }
 
 function LayoutTitle() {
+  const { user } = useRootData()
   return (
     <>
       <div className="absolute -z-10 h-[50vh] w-screen"></div>
-      <div className="w-full px-[4vw] xl:px-10vw bg-black border border-gray-600 py-4">
+      <div className="w-full border-b border-b-gray-600 bg-black px-[4vw] py-3 xl:px-10vw">
         <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
-          <div className="col-span-4 text-left">
-            <Logo size="lg" className="w-min" />
+          <div className="col-span-4 flex items-center gap-x-4 text-left">
+            <Logo size="md" />
           </div>
           <div className="col-span-4 text-center">
             <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-base">
               Cashflow Managament
             </h1>
-            <p className="text-secondary text-md font-light">
-              Powerd by Ommi
-            </p>
+            <p className="text-secondary text-sm font-light">Powerd by Ommi</p>
           </div>
           <div className="col-span-4 flex items-center justify-end gap-x-2">
             <UIButton
@@ -169,6 +171,14 @@ function LayoutTitle() {
               <Settings size={18} />
               <p>Settings</p>
             </UIButton>
+            <div className='flex items-center gap-x-2 bg-gray-800 rounded-md px-3 py-1.5'>
+              <Avatar className='w-5 h-5 relative'>
+                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <p className='text-xs font-light -mb-0.5'>{user?.username}</p>
+              <ChevronsUpDown size={14} />
+            </div>
             <MoreAction />
           </div>
         </div>

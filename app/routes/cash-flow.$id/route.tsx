@@ -16,8 +16,7 @@ import {
 import { useUser } from '~/utils/use-root-data'
 import { Header } from './misc'
 import type { JSONContent } from '@tiptap/core'
-import { ChevronDownSquare, Clock10 } from 'lucide-react'
-import { Logo } from '~/components/navbar'
+import SidePage from './sidepage'
 
 export type SaveStatus = 'Saved' | 'Unsaved' | 'Saving..'
 type LoaderData = {
@@ -130,7 +129,7 @@ export default function Index() {
 
   const submitTitleDebounce = useDebouncedCallback(() => {
     if (submitTitleRef.current) {
-      submitTitleRef.current.click()
+      // submitTitleRef.current.click() 
     }
   }, 750)
 
@@ -140,7 +139,7 @@ export default function Index() {
 
   const submitContent = React.useCallback(() => {
     if (submitContentRef.current) {
-      submitContentRef.current.click()
+      // submitContentRef.current.click()
     }
   }, [])
 
@@ -170,7 +169,7 @@ export default function Index() {
   }, [alertUser, submitContent, submitTitleDebounce])
 
   return (
-    <div className='bg-black py-24'>
+    <div className="black py-24">
       <Header
         type={postId === 'new' ? FormType.CREATE : FormType.UPDATE_CONTENT}
         title={pageTitle}
@@ -251,51 +250,8 @@ export default function Index() {
         </div>
         <div className="col-span-4">
           <div className="flex h-full flex-col gap-y-4">
-            <SidePage title={pageTitle} />
+            <SidePage title={pageTitle} content={content} />
           </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function SidePage({ title }: { title?: string }) {
-  return (
-    <div className="flex h-full flex-col gap-y-4">
-      <div className="rounded-lg border border-gray-800 bg-black px-3 py-3">
-        <div className="flex flex-col gap-y-2">
-          <h1 className="text-base font-semibold">
-            Data of {title ?? ''} Page
-          </h1>
-          <div className="mt-2 flex items-center">
-            <div className="flex items-center gap-x-2">
-              <ChevronDownSquare size={16} className="text-secondary" />
-              <p className="text-secondary w-max min-w-[120px] max-w-[140px] text-md font-normal">
-                Status
-              </p>
-            </div>
-            <p className="text-md">Not Completed</p>
-          </div>
-          <div className="flex items-center">
-            <div className="flex items-center gap-x-2">
-              <Clock10 size={16} className="text-secondary" />
-              <p className="text-secondary w-max min-w-[120px] max-w-[140px] text-md font-normal">
-                Created Date
-              </p>
-            </div>
-            <p className="text-md">July 24, 2023 9:58 AM</p>
-          </div>
-        </div>
-      </div>
-      <div className="sticky top-16">
-        <div className="z-50 rounded-lg border border-gray-800 bg-black px-3 py-3">
-          <div className="flex flex-col gap-y-4">
-            <h1 className="text-base font-semibold">Calculation</h1>
-          </div>
-        </div>
-        <div className="mt-4 flex items-center justify-center gap-1.5">
-          <Logo size="xs" className="z-0 w-min" />
-          <p className="pt-1 text-sm font-normal">powerd by Ommi © 2023</p>
         </div>
       </div>
     </div>
