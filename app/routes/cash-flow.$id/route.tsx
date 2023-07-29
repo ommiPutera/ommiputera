@@ -170,7 +170,7 @@ export default function Index() {
   }, [alertUser, submitContent, submitTitleDebounce])
 
   return (
-    <div>
+    <div className='bg-black py-24'>
       <Header
         type={postId === 'new' ? FormType.CREATE : FormType.UPDATE_CONTENT}
         title={pageTitle}
@@ -190,7 +190,7 @@ export default function Index() {
                   submitTitleDebounce()
                   setPageTitle(e.target.value)
                 }}
-                onKeyDown={(e) => {
+                onKeyDown={e => {
                   if (e.key === 'Enter' || e.key === 'ArrowDown') {
                     e.preventDefault()
                     setIsEditorFocus(true)
@@ -262,7 +262,7 @@ export default function Index() {
 function SidePage({ title }: { title?: string }) {
   return (
     <div className="flex h-full flex-col gap-y-4">
-      <div className="rounded-lg border border-gray-800 bg-gray-900 px-3 py-3">
+      <div className="rounded-lg border border-gray-800 bg-black px-3 py-3">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-base font-semibold">
             Data of {title ?? ''} Page
@@ -288,7 +288,7 @@ function SidePage({ title }: { title?: string }) {
         </div>
       </div>
       <div className="sticky top-16">
-        <div className="z-50 rounded-lg border border-gray-800 bg-gray-900 px-3 py-3">
+        <div className="z-50 rounded-lg border border-gray-800 bg-black px-3 py-3">
           <div className="flex flex-col gap-y-4">
             <h1 className="text-base font-semibold">Calculation</h1>
           </div>

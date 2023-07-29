@@ -1,10 +1,10 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {DialogContent, DialogOverlay} from '@reach/dialog'
-import {Button} from '~/components/button'
-import type {SaveStatus} from './route'
-import {FormType} from './route'
-import {Form, Link, useLoaderData} from '@remix-run/react'
+import { DialogContent, DialogOverlay } from '@reach/dialog'
+import { Button } from '~/components/button'
+import type { SaveStatus } from './route'
+import { FormType } from './route'
+import { Form, Link, useLoaderData } from '@remix-run/react'
 import {
   ChevronRight,
   FilePlus,
@@ -13,8 +13,8 @@ import {
   Trash2,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type {LoaderArgs} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
+import type { LoaderArgs } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,10 +31,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
   if (!id) return redirect('/cash-flow')
-  const data: LoaderData = {postId: id}
+  const data: LoaderData = { postId: id }
   return data
 }
 
@@ -56,7 +56,7 @@ export function Header({
   }
 
   return (
-    <div className="sticky left-0 top-0 z-50 mx-auto flex w-full max-w-5xl justify-center bg-gray-900 py-4">
+    <div className="sticky left-0 top-0 z-50 mx-auto flex w-full max-w-5xl justify-center bg-black py-4">
       <div className="grid w-full grid-cols-12 items-center justify-start gap-x-4">
         <div className="col-span-4 flex items-center gap-x-2 text-md font-normal">
           <BackButton saveStatus={saveStatus} submitContent={submitContent} />
@@ -198,7 +198,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       isOpen={isShowDeleteModal}
       onDismiss={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
       className="z-50 flex w-full items-center"
     >
       <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-600 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">

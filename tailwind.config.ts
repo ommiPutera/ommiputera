@@ -74,7 +74,7 @@ module.exports = {
         sans: ['Matter', ...defaultTheme.fontFamily.sans],
       },
       fontSize: {
-        sm: '0.75rem', // 12px
+        sm: '0.85rem', // 12px
         md: '0.925rem', // 14px
         base: '1rem', // 16px
         lg: '1.125rem', // 18px

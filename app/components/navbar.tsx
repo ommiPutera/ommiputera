@@ -130,8 +130,6 @@ const OWNER_LINKS = [
   ...USER_LINKS,
 ]
 const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
-
-// Default is no navbar
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
 
 function Index() {
@@ -144,8 +142,8 @@ function Index() {
   if (isShowNavbar) return <></>
   if (!user) return <PublicRoute />
 
-  if (ROUTE_WITHOUT_NAVBAR.includes('ALL')) return <ProtectedNav />
-  return <PublicRoute />
+  // if (ROUTE_WITHOUT_NAVBAR.includes('ALL')) return <ProtectedNav />
+  return <ProtectedNav />
 }
 
 function PublicRoute() {
@@ -163,7 +161,6 @@ function PublicRoute() {
           <MobileNav />
         </nav>
       </div>
-      <ProtectedNav />
     </div>
   )
 }
@@ -193,7 +190,6 @@ function MobileNav() {
 function MobileMenuList() {
   const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
-  const { user } = useRootData()
   return (
     <AnimatePresence>
       {isExpanded ? (
@@ -232,18 +228,6 @@ function MobileMenuList() {
                   {link.name}
                 </MobileNavLink>
               ))}
-              {user && (
-                <MenuLink className="hover:bg-secondary focus:bg-secondary text-primary pointers-none px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600">
-                  <form action="/logout" method="post">
-                    <button
-                      type="submit"
-                      className="block whitespace-nowrap bg-red-100 text-lg font-medium text-red-800"
-                    >
-                      Log Out
-                    </button>
-                  </form>
-                </MenuLink>
-              )}
             </MenuItems>
           </motion.div>
         </MenuPopover>
@@ -446,45 +430,22 @@ function ProtectedNav() {
 
 function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
   const { user } = useRootData()
-  const location = useLocation()
-  const isHideNavbar = ROUTE_WITHOUT_NAVBAR.includes('ALL')
-
-  const handleMode = () => {
-    const indexOfALL = ROUTE_WITHOUT_NAVBAR.indexOf('ALL')
-    if (!isHideNavbar) {
-      ROUTE_WITHOUT_NAVBAR.push('ALL')
-    } else {
-      ROUTE_WITHOUT_NAVBAR.splice(indexOfALL, 1)
-    }
-  }
 
   if (!user) return <></>
   return (
     <>
-      {isHideNavbar && (
-        <div className="absolute h-[78.55px] w-screen bg-black"></div>
-      )}
       <div
         className={clsx(
-          'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-[2vw]',
-          { 'glass sticky top-0 py-3': isHideNavbar },
+          'no-scrollbar z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-[2vw] sticky top-0',
         )}
       >
         <nav
-          className={clsx(
-            'text-primary mx-auto flex max-w-7xl items-center justify-between gap-x-4',
-            {
-              'py-4': isHideNavbar,
-              'pb-9': !isHideNavbar,
-            },
-          )}
+          className={clsx('text-primary mx-auto flex items-center justify-between gap-x-4 py-4')}
         >
           <ul className="-mx-2 flex items-center gap-x-3">
-            {isHideNavbar && (
-              <li className="-mt-2 px-1.5">
-                <Logo withoutUnderlined size="md" />
-              </li>
-            )}
+            <li className="-mt-2 px-1.5">
+              <Logo withoutUnderlined size="md" />
+            </li>
             {links.map(link => (
               <ProtectedpNavLink key={link.to} withoutUnderlined to={link.to}>
                 {link.name}
@@ -492,17 +453,19 @@ function ProtectedNavItems({ links }: { links: { name: string; to: string }[] })
             ))}
           </ul>
           <ul className="flex gap-x-3 lg:-mx-2">
-            <ProtectedpNavLink
-              withoutUnderlined
-              to={location.pathname}
-              onClick={handleMode}
-              className="py-0 text-gray-200 hover:text-white"
-            >
-              {isHideNavbar ? 'Show Navbar' : 'Hide Navbar'}
-            </ProtectedpNavLink>
             <ProtectedpNavLink to="/me">
               {user.fullName || user.username} - {capitalize(user.role)}
             </ProtectedpNavLink>
+            <li className="px-1">
+              <form action="/logout" method="post">
+                <button
+                  type="submit"
+                  className="block whitespace-nowrap text-md font-medium text-red-800"
+                >
+                  Log Out
+                </button>
+              </form>
+            </li>
           </ul>
         </nav>
       </div>
@@ -525,7 +488,7 @@ function ProtectedpNavLink({
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
-    <li className="px-1.5">
+    <li className="px-1">
       <Link
         prefetch="intent"
         to={to}

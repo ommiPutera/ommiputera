@@ -58,19 +58,19 @@ export default function Index() {
   return (
     <>
       <LayoutTitle />
-      <div className="relative mx-auto grid lg:max-w-7xl">
+      <div className="relative mx-auto grid lg:max-w-7xl py-9">
         <Tabs
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
           orientation={TabsOrientation.Horizontal}
         >
-          <TabList className="z-0 flex overflow-x-scroll border-b border-b-gray-800 bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
+          <TabList className="z-0 flex overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
             <Tab index={0} className="flex items-center gap-x-2">
-              <Trello size={20} />
-              <div>Board</div>
+              <Trello size={18} />
+              <p className='text-md'>Board</p>
             </Tab>
             <Tab index={1} className="flex items-center gap-x-2">
-              <ActivitySquare size={20} />
-              <div>Analytics</div>
+              <ActivitySquare size={18} />
+              <p className='text-md'>Analytics</p>
             </Tab>
           </TabList>
           <Contents />
@@ -138,16 +138,16 @@ function LayoutTitle() {
   return (
     <>
       <div className="absolute -z-10 h-[50vh] w-screen"></div>
-      <div className="w-full px-[4vw] xl:px-10vw">
-        <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center py-9 lg:py-12">
+      <div className="w-full px-[4vw] xl:px-10vw bg-black border border-gray-600 py-4">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
           <div className="col-span-4 text-left">
             <Logo size="lg" className="w-min" />
           </div>
           <div className="col-span-4 text-center">
-            <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-lg">
+            <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-base">
               Cashflow Managament
             </h1>
-            <p className="text-secondary mt-1 text-md font-light">
+            <p className="text-secondary text-md font-light">
               Powerd by Ommi
             </p>
           </div>
