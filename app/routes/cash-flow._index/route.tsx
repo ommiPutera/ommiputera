@@ -1,5 +1,5 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import { UIButton } from '~/components/shadcn/button'
+import {type V2_MetaFunction} from '@remix-run/react'
+import {UIButton} from '~/components/shadcn/button'
 import {
   ActivitySquare,
   Trello,
@@ -11,10 +11,10 @@ import {
   BookOpenCheck,
   ChevronsUpDown,
 } from 'lucide-react'
-import type { LoaderFunction } from '@remix-run/node'
-import { getUser } from '~/utils/session.server'
-import type { Post } from '@prisma/client'
-import type { TabProps } from '@reach/tabs'
+import type {LoaderFunction} from '@remix-run/node'
+import {getUser} from '~/utils/session.server'
+import type {Post} from '@prisma/client'
+import type {TabProps} from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -26,10 +26,10 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import { Logo } from '~/components/navbar'
+import {Logo} from '~/components/navbar'
 import Analytics from './analytics'
 import React from 'react'
-import { db } from '~/utils/db.server'
+import {db} from '~/utils/db.server'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,34 +39,34 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
 } from '~/components/shadcn/dropdown-menu'
-import { useRootData } from '~/utils/use-root-data'
-import { Avatar, AvatarFallback, AvatarImage } from '~/components/shadcn/avatar'
+import {useRootData} from '~/utils/use-root-data'
+import {Avatar, AvatarFallback, AvatarImage} from '~/components/shadcn/avatar'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
 export default function Index() {
   return (
-    <div className='bg-gray-900'>
+    <div className="bg-gray-900">
       <LayoutTitle />
       <div className="relative mx-auto grid py-9 lg:max-w-7xl">
         <Tabs
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
           orientation={TabsOrientation.Horizontal}
         >
-          <TabList className="z-0 flex overflow-x-scroll bg-transparent gap-2 px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
+          <TabList className="z-0 flex gap-2 overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
             <Tab index={0} className="flex items-center gap-x-2">
               <Trello size={18} />
               <p className="text-md">Board</p>
@@ -93,7 +93,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -124,9 +124,9 @@ function Tab({
 }
 
 function Contents() {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
-    <TabPanels className="-mx-4 mt-5 rounded-md px-4 outline-gray-400 min-h-screen">
+    <TabPanels className="-mx-4 mt-5 min-h-screen rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>
         <Board />
       </TabPanel>
@@ -138,7 +138,7 @@ function Contents() {
 }
 
 function LayoutTitle() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <>
       <div className="absolute -z-10 h-[50vh] w-screen"></div>
@@ -171,12 +171,15 @@ function LayoutTitle() {
               <Settings size={18} />
               <p>Settings</p>
             </UIButton>
-            <div className='flex items-center gap-x-2 bg-gray-800 rounded-md px-3 py-1.5'>
-              <Avatar className='w-5 h-5 relative'>
-                <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            <div className="flex items-center gap-x-2 rounded-md bg-gray-800 px-3 py-1.5">
+              <Avatar className="relative h-5 w-5">
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
-              <p className='text-xs font-light -mb-0.5'>{user?.username}</p>
+              <p className="-mb-0.5 text-xs font-light">{user?.username}</p>
               <ChevronsUpDown size={14} />
             </div>
             <MoreAction />

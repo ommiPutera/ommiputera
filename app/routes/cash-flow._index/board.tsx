@@ -1,13 +1,13 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { Plus, X } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import type { LoaderData } from './route'
-import { ButtonLink } from '~/components/button'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Plus, X} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderData} from './route'
+import {ButtonLink} from '~/components/button'
 import React from 'react'
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col">
@@ -18,7 +18,7 @@ export default function Board() {
           posts?.map(post => (
             <div
               key={post.id}
-              className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black hover:border-gray-700 p-4"
+              className="col-span-1 cursor-pointer rounded-lg border border-gray-800 bg-black p-4 hover:border-gray-700"
             >
               <UpdatePage {...JSON.parse(JSON.stringify(post))} />
             </div>
@@ -38,12 +38,15 @@ function Guides() {
 
   if (!show) return <></>
   return (
-    <div className='bg-black py-6 px-8 mb-4 rounded-lg border border-gray-600 flex items-center justify-between'>
+    <div className="mb-4 flex items-center justify-between rounded-lg border border-gray-600 bg-black px-8 py-6">
       <div>
-        <h4 className='text-lg font-medium'>Read Guides</h4>
-        <p className='text-secondary'>Panda is a styling engine that generates styling primitives to author atomic CSS and recipes in a type-safe and readable manner.</p>
+        <h4 className="text-lg font-medium">Read Guides</h4>
+        <p className="text-secondary">
+          Panda is a styling engine that generates styling primitives to author
+          atomic CSS and recipes in a type-safe and readable manner.
+        </p>
       </div>
-      <div className='flex items-center gap-x-4'>
+      <div className="flex items-center gap-x-4">
         <ButtonLink
           type="button"
           size="sm"
@@ -53,11 +56,7 @@ function Guides() {
         >
           <p>General Guides</p>
         </ButtonLink>
-        <UIButton
-          variant="subtle"
-          onClick={() => setShow(false)}
-          className=''
-        >
+        <UIButton variant="subtle" onClick={() => setShow(false)} className="">
           <X size={16} />
         </UIButton>
       </div>
@@ -66,12 +65,12 @@ function Guides() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
-    <div className="relative mx-auto w-full max-w-7xl mb-4">
+    <div className="relative mx-auto mb-4 w-full max-w-7xl">
       <div className="">
         <ButtonLink
           type="button"
@@ -88,7 +87,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>

@@ -1,41 +1,49 @@
-import type { JSONContent } from "@tiptap/core";
-import { filter, map } from "lodash";
-import { ChevronDownSquare, Clock10 } from "lucide-react";
-import React from "react";
-import { Logo } from "~/components/navbar";
-import { UIButton } from "~/components/shadcn/button";
+import type {JSONContent} from '@tiptap/core'
+import {filter, map} from 'lodash'
+import {ChevronDownSquare, Clock10} from 'lucide-react'
+import React from 'react'
+import {Logo} from '~/components/navbar'
+import {UIButton} from '~/components/shadcn/button'
 
 type TResult = {
   name: string
 }
 
-export default function SidePage({ title, content }: { title?: string, content: JSONContent | null }) {
+export default function SidePage({
+  title,
+  content,
+}: {
+  title?: string
+  content: JSONContent | null
+}) {
   const [marks, setMarks] = React.useState<TResult[]>([])
-  const json = content?.content;
-  const lastJsonLength = json ? json?.length - 1 : 0;
+  const json = content?.content
+  const lastJsonLength = json ? json?.length - 1 : 0
 
   const getJsonAbouve = (fromIndex: number, toindex?: number) => {
-    return json?.filter((_, index) => index > fromIndex && index <= (toindex ?? lastJsonLength))
+    return json?.filter(
+      (_, index) => index > fromIndex && index <= (toindex ?? lastJsonLength),
+    )
   }
 
   const calculate = () => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return { json: item, index: index }
-      });
+        return {json: item, index: index}
+      })
 
       const marksFiltering = filter(jsonIndexing, item => {
         return item.json.type === 'heading' && item.json.attrs?.level === 3
-      });
+      })
 
-      console.log("marksFiltering: ", marksFiltering)
+      console.log('marksFiltering: ', marksFiltering)
       const result = map(marksFiltering, (item, index) => {
         const nextIndex = marksFiltering?.[index + 1]?.index
         return {
           name: item.json.content?.[0].text || '~',
-          cals: getJsonAbouve(item.index, nextIndex)
+          cals: getJsonAbouve(item.index, nextIndex),
         }
-      });
+      })
       setMarks(result)
       console.log('result: ', result)
     }
@@ -75,11 +83,7 @@ export default function SidePage({ title, content }: { title?: string, content: 
             {marks.map(mark => (
               <p key={mark.name}>{mark.name}</p>
             ))}
-            <UIButton
-              size="sm"
-              className=""
-              onClick={calculate}
-            >
+            <UIButton size="sm" className="" onClick={calculate}>
               Hitung Ini
             </UIButton>
           </div>
