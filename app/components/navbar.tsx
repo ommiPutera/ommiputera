@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {capitalize, includes, some} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { includes, some } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,8 +22,12 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
+import { SectionSpacer } from './spacer'
+import { Badge } from './shadcn/badge'
+import { Avatar, AvatarFallback, AvatarImage } from './shadcn/avatar'
+import { ChevronsUpDown, LogOut, MoreHorizontal } from 'lucide-react'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from './shadcn/dropdown-menu'
+import { UIButton } from './shadcn/button'
 
 type TypeLinks = {
   name: string
@@ -108,32 +112,32 @@ const LINKS: TypeLinks = [
   {
     name: 'Free Products',
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{ component: <RowApp1 /> }],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
+      { component: <RowProducts1 /> },
+      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
+      { component: <RowProducts1 /> },
     ],
   },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
-const USER_LINKS = [{name: 'Cashflow', to: '/cash-flow'}]
+const USER_LINKS = [{ name: 'Cashflow', to: '/cash-flow' }]
 const OWNER_LINKS = [
-  {name: 'Overview', to: '/overview'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Overview', to: '/overview' },
+  { name: 'Admin Panel', to: '/admin' },
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
   const isShowNavbar = some(ROUTE_WITHOUT_NAVBAR, el =>
     includes(location.pathname, el),
@@ -147,7 +151,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="relative">
       <div
@@ -170,7 +174,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -188,7 +192,7 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
   return (
     <AnimatePresence>
@@ -200,17 +204,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
@@ -266,7 +270,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -324,7 +328,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -412,57 +416,89 @@ export function Logo({
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
   return <ProtectedNavItems links={OWNER_LINKS} />
 }
 
-function ProtectedNavItems({links}: {links: {name: string; to: string}[]}) {
-  const {user} = useRootData()
+function ProtectedNavItems({ links }: { links: { name: string; to: string }[] }) {
+  const { user } = useRootData()
 
   if (!user) return <></>
   return (
-    <>
-      <div
-        className={clsx(
-          'no-scrollbar sticky top-0 z-10 overflow-y-hidden overflow-x-scroll border-b border-gray-600 bg-black px-5vw lg:px-[2vw]',
-        )}
-      >
-        <nav
-          className={clsx(
-            'text-primary mx-auto flex items-center justify-between gap-x-4 py-4',
-          )}
-        >
-          <ul className="-mx-2 flex items-center gap-x-3">
-            <li className="-mt-2 px-1.5">
-              <Logo size="md" />
-            </li>
-            {links.map(link => (
-              <ProtectedpNavLink key={link.to} withoutUnderlined to={link.to}>
-                {link.name}
-              </ProtectedpNavLink>
-            ))}
-          </ul>
-          <ul className="flex gap-x-3 lg:-mx-2">
-            <ProtectedpNavLink to="/me">
-              {user.fullName || user.username} - {capitalize(user.role)}
+    <div className="w-full border-b sticky top-0 z-50 border-b-gray-600 bg-black px-[4vw] py-[19px] xl:px-10vw">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
+        <div className="col-span-4 flex items-center gap-x-4 text-left">
+          <Logo size="md" />
+        </div>
+        <div className="col-span-8 flex items-center justify-end gap-x-2">
+          {links.map(link => (
+            <ProtectedpNavLink key={link.to} withoutUnderlined to={link.to}>
+              {link.name}
             </ProtectedpNavLink>
-            <li className="px-1">
-              <form action="/logout" method="post">
-                <button
-                  type="submit"
-                  className="block whitespace-nowrap text-md font-medium text-red-800"
-                >
-                  Log Out
-                </button>
-              </form>
-            </li>
-          </ul>
-        </nav>
+          ))}
+          <div className="flex items-center gap-x-2 rounded-md bg-gray-800 px-3 py-1.5">
+            <Avatar className="relative h-5 w-5">
+              <AvatarImage
+                src="https://github.com/shadcn.png"
+                alt="@shadcn"
+              />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <p className="-mb-0.5 text-xs font-light">{user?.username}</p>
+            <ChevronsUpDown size={14} />
+          </div>
+          <MoreAction />
+        </div>
       </div>
-    </>
+    </div>
+  )
+}
+
+function MoreAction() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <UIButton
+          size="sm"
+          variant="subtle"
+          className="flex items-center rounded-md px-2 hover:bg-gray-600"
+        >
+          <MoreHorizontal size={18} />
+        </UIButton>
+      </DropdownMenuTrigger>
+      <MoreMenus />
+    </DropdownMenu>
+  )
+}
+
+
+function MoreMenus() {
+  return (
+    <DropdownMenuContent className="">
+      <DropdownMenuLabel className="px-2">
+        <p className="font-semibold">View Options</p>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup className="p-1">
+        <form action="/logout" method="post">
+          <UIButton
+            variant="subtle"
+            type="submit"
+            className="w-full cursor-default"
+          >
+            <DropdownMenuItem className="w-full rounded-md border border-transparent px-2 hover:border-red-300 hover:bg-red-200">
+              <div className="flex items-center gap-x-2">
+                <LogOut size={18} className="text-red-800" />
+                <p className="text-red-800">Log Out</p>
+              </div>
+            </DropdownMenuItem>
+          </UIButton>
+        </form>
+      </DropdownMenuGroup>
+    </DropdownMenuContent>
   )
 }
 
@@ -481,7 +517,7 @@ function ProtectedpNavLink({
   const isSelected =
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
-    <li className="px-1">
+    <div className="px-2">
       <Link
         prefetch="intent"
         to={to}
@@ -499,8 +535,8 @@ function ProtectedpNavLink({
       >
         {children}
       </Link>
-    </li>
+    </div>
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

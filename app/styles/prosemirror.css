@@ -67,29 +67,27 @@ ul[data-type="taskList"] li > label {
   }
 }
 
+ul[data-type="taskList"] li > label input[type="checkbox"]:checked {
+  background-color: var(--color-blue-500);
+  border-color: var(--color-blue-500);
+}
+
 ul[data-type="taskList"] li > label input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  background-color: var(--novel-white);
+  border-radius: 2px;
+  background-color: transparent;
   margin: 0;
   cursor: pointer;
-  width: 1.2em;
-  height: 1.2em;
+  width: 1em;
+  height: 1em;
   position: relative;
   top: 5px;
-  border: 2px solid var(--color-gray-300);
-  margin-right: 0.3rem;
+  border: 1.5px solid #fff;
+  margin-right: 0.4rem;
   display: grid;
   place-content: center;
-
-  &:hover {
-    background-color: var(--color-gray-300);
-  }
-
-  &:active {
-    background-color: var(--color-gray-100);
-  }
-
+  
   &::before {
     content: "";
     width: 0.65em;
@@ -106,10 +104,12 @@ ul[data-type="taskList"] li > label input[type="checkbox"] {
   }
 }
 
+ul[data-type="taskList"] li > div > p {
+  font-weight: 400;
+}
 ul[data-type="taskList"] li[data-checked="true"] > div > p {
-  color: var(--color-gray-400);
-  text-decoration: line-through;
-  text-decoration-thickness: 2px;
+  color: var(--color-gray-200);
+  text-decoration-thickness: 1px;
 }
 
 /* Overwrite tippy-box original max-width */
@@ -121,9 +121,21 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 /* Heading */
 /* H1 */
 .prose-lg :where(h1):not(:where([class~="not-prose"] *)){
-  font-size: 28px;
+  font-size: 34px;
 }
 /* H2 */
 .prose-lg :where(h2):not(:where([class~="not-prose"] *)) {
-  font-size: 24px;
+  font-size: 28px;
+  margin-bottom: 0.4em;
+}
+/* H3 */
+.prose-lg :where(h3):not(:where([class~="not-prose"] *)) {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+:where(ul):not(:where([class~="not-prose"] *)) {
+  margin-bottom:  0.8em !important;
+  /* border: 1px solid red; */
 }

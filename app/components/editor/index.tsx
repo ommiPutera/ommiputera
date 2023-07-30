@@ -1,14 +1,14 @@
 import React from 'react'
-import {useEditor, EditorContent} from '@tiptap/react'
-import {TiptapEditorProps} from './props'
-import {TiptapExtensions} from './extensions'
-import {useDebouncedCallback} from 'use-debounce'
-import {useCompletion} from 'ai/react'
-import {toast} from 'sonner'
+import { useEditor, EditorContent } from '@tiptap/react'
+import { TiptapEditorProps } from './props'
+import { TiptapExtensions } from './extensions'
+import { useDebouncedCallback } from 'use-debounce'
+import { useCompletion } from 'ai/react'
+import { toast } from 'sonner'
 import va from '@vercel/analytics'
-import {EditorBubbleMenu} from './components'
-import {getPrevText} from '~/lib/editor'
-import type {Editor as EditorType, JSONContent} from '@tiptap/core'
+import { EditorBubbleMenu } from './components'
+import { getPrevText } from '~/lib/editor'
+import type { Editor as EditorType, JSONContent } from '@tiptap/core'
 
 type EditorProps = {
   submit: () => void
@@ -22,13 +22,13 @@ type EditorProps = {
 }
 
 const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
-  {submit, content, setContent, setSaveStatus, focus = false, titletEl},
+  { submit, content, setContent, setSaveStatus, focus = false, titletEl },
   ref,
 ) {
   const [hydrated, setHydrated] = React.useState(false)
 
   const debouncedUpdates = useDebouncedCallback(
-    async ({editor}: {editor: EditorType}) => {
+    async ({ editor }: { editor: EditorType }) => {
       const json = editor.getJSON()
       setSaveStatus('Saving..')
       setContent(json)
@@ -71,10 +71,10 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
         debouncedUpdates(e)
       }
     },
-    autofocus: focus,
+    autofocus: false,
   })
 
-  const {complete, completion, isLoading, stop} = useCompletion({
+  const { complete, completion, isLoading, stop } = useCompletion({
     id: 'novel',
     api: '/api/generate',
     onFinish: (_prompt, completion) => {

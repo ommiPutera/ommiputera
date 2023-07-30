@@ -1,13 +1,13 @@
-import {Link, useLoaderData} from '@remix-run/react'
-import {Plus, X} from 'lucide-react'
-import type {Post} from '@prisma/client'
-import type {LoaderData} from './route'
-import {ButtonLink} from '~/components/button'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Plus, X } from 'lucide-react'
+import type { Post } from '@prisma/client'
+import type { LoaderData } from './route'
+import { ButtonLink } from '~/components/button'
 import React from 'react'
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col">
@@ -38,7 +38,7 @@ function Guides() {
 
   if (!show) return <></>
   return (
-    <div className="mb-4 flex items-center justify-between rounded-lg border border-gray-600 bg-black px-8 py-6">
+    <div className="mb-4 flex items-center justify-between rounded-lg border border-gray-800 bg-black px-8 py-6">
       <div>
         <h4 className="text-lg font-medium">Read Guides</h4>
         <p className="text-secondary">
@@ -65,7 +65,7 @@ function Guides() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -87,20 +87,23 @@ function Tools() {
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
         <div className="flex items-center gap-x-5">
           <img src="/vectors/spreadsheet.png" alt="" className="h-10 w-10" />
           <div>
-            <h4 className="text-base font-normal">{title}</h4>
-            <p className="text-secondary mt-1 text-md font-light leading-tight">
-              Vercel usage, traffic, and more with the fields below.
-            </p>
+            <h4 className="text-lg font-semibold">{title}</h4>
+            <div className='mt-2 flex flex-wrap gap-2'>
+              <p className='bg-red-300 text-xs px-1.5 rounded-sm'>Not Completed</p>
+              <p className='bg-gray-800 text-xs px-1.5 rounded-sm'>Rupiah</p>
+              <p className='bg-orange-300 text-xs px-1.5 rounded-sm'>July 24, 2023 9:58 AM</p>
+              <p className='bg-gray-800 text-xs px-1.5 rounded-sm'>Template:Monthly-Expanse</p>
+            </div>
           </div>
         </div>
-        <p className="text-secondary mt-6 text-left text-md font-light">
+        <p className="text-secondary mt-6 text-left text-sm font-light">
           Updated 13h ago..
         </p>
       </Link>

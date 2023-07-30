@@ -1,10 +1,10 @@
-import type {Post} from '@prisma/client'
-import type {LoaderArgs, ActionFunction} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
-import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import type { LoaderArgs, ActionFunction } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import {useDebouncedCallback} from 'use-debounce'
+import { useDebouncedCallback } from 'use-debounce'
 import Editor from '~/components/editor'
 import {
   createPost,
@@ -13,9 +13,9 @@ import {
   updateContent,
   updateTitle,
 } from '~/utils/post.session'
-import {useUser} from '~/utils/use-root-data'
-import {Header} from './misc'
-import type {JSONContent} from '@tiptap/core'
+import { useUser } from '~/utils/use-root-data'
+import { Header } from './misc'
+import type { JSONContent } from '@tiptap/core'
 import SidePage from './sidepage'
 
 export type SaveStatus = 'Saved' | 'Unsaved' | 'Saving..'
@@ -44,39 +44,39 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
-  const post = await getPost({id: id ?? ''})
-  if (id === 'new') return {postId: id, isNewPage: true}
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
+  const post = await getPost({ id: id ?? '' })
+  if (id === 'new') return { postId: id, isNewPage: true }
 
   if (!id || !post) return redirect('/cash-flow')
-  const data: LoaderData = {post, postId: id, isNewPage: false}
+  const data: LoaderData = { post, postId: id, isNewPage: false }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON} =
+  const { _action, postId, title, authorId, postJSON } =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      await deletePost({id: postId})
+      await deletePost({ id: postId })
       return redirect('/cash-flow', {})
     }
     case FormType.CREATE: {
       if (typeof authorId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       let content
       if (postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({blocks: ['none']}))
+        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
       }
       return await createPost({
         title: title ? String(title) : 'Untitled Page...',
@@ -88,17 +88,17 @@ export const action: ActionFunction = async ({request}) => {
     }
     case FormType.UPDATE_TITLE: {
       if (typeof title !== 'string' || typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await updateTitle({
         id: postId,
         title,
       })
-      return {post}
+      return { post }
     }
     case FormType.UPDATE_CONTENT: {
       if (typeof postId !== 'string' || typeof postJSON !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
       return await updateContent({
         id: postId,
@@ -106,13 +106,13 @@ export const action: ActionFunction = async ({request}) => {
       })
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
-  const {post, postId} = useLoaderData<LoaderData>()
+  const { post, postId } = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const titletRef = React.useRef<HTMLTextAreaElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
@@ -169,7 +169,7 @@ export default function Index() {
   }, [alertUser, submitContent, submitTitleDebounce])
 
   return (
-    <div className="black py-24">
+    <div className="black py-24 min-h-screen">
       <Header
         type={postId === 'new' ? FormType.CREATE : FormType.UPDATE_CONTENT}
         title={pageTitle}
@@ -217,7 +217,7 @@ export default function Index() {
             />
           </Form>
           <Form method="POST" className="w-full">
-            <div className="">
+            <div className="pt-9">
               <Editor
                 titletEl={titletRef}
                 focus={isEditorFocus}
