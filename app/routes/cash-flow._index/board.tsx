@@ -1,13 +1,13 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { Plus, X } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import type { LoaderData } from './route'
-import { ButtonLink } from '~/components/button'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Plus, X} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderData} from './route'
+import {ButtonLink} from '~/components/button'
 import React from 'react'
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col">
@@ -65,7 +65,7 @@ function Guides() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -87,7 +87,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
@@ -95,11 +95,17 @@ function UpdatePage({ id, title }: Post) {
           <img src="/vectors/spreadsheet.png" alt="" className="h-10 w-10" />
           <div>
             <h4 className="text-lg font-semibold">{title}</h4>
-            <div className='mt-2 flex flex-wrap gap-2'>
-              <p className='bg-red-300 text-xs px-1.5 rounded-sm'>Not Completed</p>
-              <p className='bg-gray-800 text-xs px-1.5 rounded-sm'>Rupiah</p>
-              <p className='bg-orange-300 text-xs px-1.5 rounded-sm'>July 24, 2023 9:58 AM</p>
-              <p className='bg-gray-800 text-xs px-1.5 rounded-sm'>Template:Monthly-Expanse</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              <p className="rounded-sm bg-red-300 px-1.5 text-xs">
+                Not Completed
+              </p>
+              <p className="rounded-sm bg-gray-800 px-1.5 text-xs">Rupiah</p>
+              <p className="rounded-sm bg-orange-300 px-1.5 text-xs">
+                July 24, 2023 9:58 AM
+              </p>
+              <p className="rounded-sm bg-gray-800 px-1.5 text-xs">
+                Template:Monthly-Expanse
+              </p>
             </div>
           </div>
         </div>

@@ -1,9 +1,14 @@
-import type { JSONContent } from '@tiptap/core'
-import { filter, map, sum } from 'lodash'
-import { ChevronDownSquare, Clock10, Currency } from 'lucide-react'
+import type {JSONContent} from '@tiptap/core'
+import {filter, map, sum} from 'lodash'
+import {ChevronDownSquare, Clock10, Currency} from 'lucide-react'
 import React from 'react'
-import { Logo } from '~/components/navbar'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '~/components/shadcn/accordion'
+import {Logo} from '~/components/navbar'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/shadcn/accordion'
 
 type TResult = {
   name: string
@@ -22,16 +27,19 @@ export default function SidePage({
   const json = content?.content
   const lastJsonLength = json ? json?.length - 1 : 0
 
-  const getJsonAbouve = React.useCallback((fromIndex: number, toindex?: number) => {
-    return json?.filter(
-      (_, index) => index > fromIndex && index <= (toindex ?? lastJsonLength),
-    )
-  }, [json, lastJsonLength])
+  const getJsonAbouve = React.useCallback(
+    (fromIndex: number, toindex?: number) => {
+      return json?.filter(
+        (_, index) => index > fromIndex && index <= (toindex ?? lastJsonLength),
+      )
+    },
+    [json, lastJsonLength],
+  )
 
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return { json: item, index: index }
+        return {json: item, index: index}
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -43,14 +51,26 @@ export default function SidePage({
 
       const result = map(marksFilteringHeading3, (item, index) => {
         const nextIndex = marksFilteringHeading3?.[index + 1]?.index
-        const jsonAbouveList = getJsonAbouve(item.index, nextIndex)?.filter(item => item.type === 'taskList')
-        const taskItems = filter(jsonAbouveList?.[0]?.content, item => item.attrs?.checked === true && !item.content?.[0].content?.[0].text?.includes('Expect: '))
+        const jsonAbouveList = getJsonAbouve(item.index, nextIndex)?.filter(
+          item => item.type === 'taskList',
+        )
+        const taskItems = filter(
+          jsonAbouveList?.[0]?.content,
+          item =>
+            item.attrs?.checked === true &&
+            !item.content?.[0].content?.[0].text?.includes('Expect: '),
+        )
         // console.log(taskItems)
         const taskItem = map(taskItems, item => {
           return item.content?.[0]?.content?.[0].text
         })
         const calculate = map(taskItem, item => {
-          return Number(item?.replace(new RegExp("Rp.", "g"), '').replace(new RegExp(",", "g"), '').replace(new RegExp(" ", "g"), ''))
+          return Number(
+            item
+              ?.replace(new RegExp('Rp.', 'g'), '')
+              .replace(new RegExp(',', 'g'), '')
+              .replace(new RegExp(' ', 'g'), ''),
+          )
         })
         // console.log(sum(calculate))
 
@@ -58,12 +78,17 @@ export default function SidePage({
           name: item.json.content?.[0].text || '~',
           cals: jsonAbouveList,
           index: item.index,
-          total: sum(calculate)
+          total: sum(calculate),
         }
       })
       const finalResut = map(marksFilteringHeading2, item => {
         const nextIndex = marksFilteringHeading2?.[item.index + 1]?.index
-        const cals = filter(result, resItem => resItem.index > item.index && resItem.index <= (nextIndex ?? lastJsonLength))
+        const cals = filter(
+          result,
+          resItem =>
+            resItem.index > item.index &&
+            resItem.index <= (nextIndex ?? lastJsonLength),
+        )
         const calculate = map(cals, (item, index) => {
           return item.total
         })
@@ -73,7 +98,7 @@ export default function SidePage({
           index: item.index,
           nextIndex: nextIndex,
           cals: cals,
-          total: sum(calculate)
+          total: sum(calculate),
         }
       })
       // console.log('finalResut: ', finalResut)
@@ -92,7 +117,7 @@ export default function SidePage({
     <div className="flex h-screen flex-col gap-y-4">
       <div className="rounded-lg border border-gray-800 bg-black px-3 py-3">
         <div className="flex flex-col gap-y-2">
-          <h1 className="text-lg font-semibold text-secondary">
+          <h1 className="text-secondary text-lg font-semibold">
             Data of {title ?? ''} Page
           </h1>
           <div className="mt-2 flex items-center">
@@ -127,8 +152,12 @@ export default function SidePage({
       <div className="sticky top-16">
         <div className="z-50 rounded-lg border border-gray-800 bg-black px-3 py-3">
           <div className="flex flex-col gap-y-4">
-            <h1 className="text-lg font-semibold text-secondary">Data Summary</h1>
-            {marks.map(mark => <CalcItem key={mark.name} mark={mark} />)}
+            <h1 className="text-secondary text-lg font-semibold">
+              Data Summary
+            </h1>
+            {marks.map(mark => (
+              <CalcItem key={mark.name} mark={mark} />
+            ))}
           </div>
         </div>
         <div className="mt-4 flex items-center justify-center gap-1.5">
@@ -149,22 +178,28 @@ const toIDR = (arrayNumb: number) => {
   })
 }
 
-function CalcItem({ mark }: { mark: TResult }) {
+function CalcItem({mark}: {mark: TResult}) {
   return (
     <div>
       <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="item-1" className='border-none'>
-          <AccordionTrigger className='py-0 text-base font-medium'>{mark.name}</AccordionTrigger>
-          <AccordionContent className='border rounded-md border-gray-600 py-2 px-2 my-2'>
+        <AccordionItem value="item-1" className="border-none">
+          <AccordionTrigger className="py-0 text-base font-medium">
+            {mark.name}
+          </AccordionTrigger>
+          <AccordionContent className="my-2 rounded-md border border-gray-600 px-2 py-2">
             {mark?.cals?.map(item => (
               <div key={item.name}>
-                <p>{item.name}: {toIDR(item.total)}</p>
+                <p>
+                  {item.name}: {toIDR(item.total)}
+                </p>
               </div>
             ))}
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <h4 className='text-secondary text-md font-medium'>Total: {toIDR(mark.total)}</h4>
+      <h4 className="text-secondary text-md font-medium">
+        Total: {toIDR(mark.total)}
+      </h4>
     </div>
   )
 }
