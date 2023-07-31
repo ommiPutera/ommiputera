@@ -1,5 +1,5 @@
-import type {JSONContent} from '@tiptap/core'
-import {filter, map, sum} from 'lodash'
+import type { JSONContent } from '@tiptap/core'
+import { filter, map, sum } from 'lodash'
 import {
   ArrowRightFromLine,
   ArrowRightToLine,
@@ -9,7 +9,7 @@ import {
   DollarSign,
 } from 'lucide-react'
 import React from 'react'
-import {Logo} from '~/components/navbar'
+import { Logo } from '~/components/navbar'
 import {
   Accordion,
   AccordionContent,
@@ -46,7 +46,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return {json: item, index: index}
+        return { json: item, index: index }
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -61,25 +61,9 @@ export default function SidePage({
         const jsonAbouveList = getJsonAbouve(item.index, nextIndex)?.filter(
           item => item.type === 'taskList',
         )
-        const taskItems = filter(
-          jsonAbouveList?.[0]?.content,
-          item =>
-            item.attrs?.checked === true &&
-            !item.content?.[0].content?.[0].text?.includes('Expect: '),
-        )
-        // console.log(taskItems)
-        const taskItem = map(taskItems, item => {
-          return item.content?.[0]?.content?.[0].text
-        })
-        const calculate = map(taskItem, item => {
-          return Number(
-            item
-              ?.replace(new RegExp('Rp.', 'g'), '')
-              .replace(new RegExp(',', 'g'), '')
-              .replace(new RegExp(' ', 'g'), ''),
-          )
-        })
-        // console.log(sum(calculate))
+        const taskItems = filter(jsonAbouveList?.[0]?.content, item => item.attrs?.checked === true)
+        const taskItem = map(taskItems, item => item.content?.[0]?.content?.[0].text)
+        const calculate = map(taskItem, item => Number(item?.replace(/\D/g, "")))
 
         return {
           name: item.json.content?.[0].text || '~',
@@ -108,7 +92,6 @@ export default function SidePage({
           total: sum(calculate),
         }
       })
-      // console.log('finalResut: ', finalResut)
       // @ts-ignore
       setMarks(finalResut)
     }
@@ -121,7 +104,7 @@ export default function SidePage({
   }, [calculate, content])
 
   return (
-    <div className="flex h-screen flex-col gap-y-4">
+    <div className="flex h-full flex-col gap-y-4">
       <div className="rounded-lg border border-gray-800 bg-black px-3 py-3">
         <div className="flex flex-col gap-y-2">
           <h1 className="text-secondary text-lg font-semibold">
@@ -223,7 +206,7 @@ const getMarkName = (name: MarkName | string) => {
   }
 }
 
-function CalcItem({mark}: {mark: TResult}) {
+function CalcItem({ mark }: { mark: TResult }) {
   return (
     <div className="rounded-md bg-gray-900 px-4 py-2">
       <Accordion type="single" collapsible className="w-full">
@@ -247,7 +230,7 @@ function CalcItem({mark}: {mark: TResult}) {
   )
 }
 
-function FreeCash({marks}: {marks: TResult[]}) {
+function FreeCash({ marks }: { marks: TResult[] }) {
   const income = marks.find(mark => mark.name === 'Income')
   const expense = marks.find(mark => mark.name === 'Expense')
   const free =

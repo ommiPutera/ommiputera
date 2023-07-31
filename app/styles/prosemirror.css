@@ -132,10 +132,19 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
 .prose-lg :where(h3):not(:where([class~="not-prose"] *)) {
   font-size: 20px;
   margin-top: 0;
-  margin-bottom: 0;
+  margin-bottom: 0.33em;
 }
 
 :where(ul):not(:where([class~="not-prose"] *)) {
   margin-bottom:  0.8em !important;
   /* border: 1px solid red; */
+}
+
+.prose-lg :where(ul):not(:where([class~="not-prose"] *)) {
+  margin: 0;
+}
+
+.prose-lg :where(p):not(:where([class~="not-prose"] *)) {
+  margin-top: 0;
+  margin-bottom: 0;
 }

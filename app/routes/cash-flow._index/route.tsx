@@ -1,5 +1,5 @@
-import {type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
+import { type V2_MetaFunction } from '@remix-run/react'
+import { UIButton } from '~/components/shadcn/button'
 import {
   ActivitySquare,
   Trello,
@@ -11,10 +11,10 @@ import {
   BookOpenCheck,
   ChevronsUpDown,
 } from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import type { Post } from '@prisma/client'
+import type { TabProps } from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -26,10 +26,10 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import {Logo} from '~/components/navbar'
+import { Logo } from '~/components/navbar'
 import Analytics from './analytics'
 import React from 'react'
-import {db} from '~/utils/db.server'
+import { db } from '~/utils/db.server'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -39,21 +39,21 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
 } from '~/components/shadcn/dropdown-menu'
-import {useRootData} from '~/utils/use-root-data'
-import {Avatar, AvatarImage} from '~/components/shadcn/avatar'
+import { useRootData } from '~/utils/use-root-data'
+import { Avatar, AvatarImage } from '~/components/shadcn/avatar'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -93,7 +93,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -124,7 +124,7 @@ function Tab({
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <TabPanels className="-mx-4 mt-5 min-h-screen rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>
@@ -138,7 +138,7 @@ function Contents() {
 }
 
 function LayoutTitle() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="sticky top-0 z-50 w-full border-b border-b-gray-600 bg-black px-[4vw] py-3 xl:px-10vw">
       <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
@@ -156,7 +156,7 @@ function LayoutTitle() {
             type="button"
             variant="subtle"
             size="sm"
-            className="flex items-center gap-x-2 hover:bg-gray-600"
+            className="flex items-center gap-x-2 hover:bg-gray-600 hover:text-white text-secondary"
           >
             <FilePlus size={18} />
             <p>Template</p>
@@ -164,12 +164,12 @@ function LayoutTitle() {
           <UIButton
             size="sm"
             variant="subtle"
-            className="flex items-center gap-x-2 hover:bg-gray-600"
+            className="flex items-center gap-x-2 hover:bg-gray-600 hover:text-white text-secondary"
           >
             <Settings size={18} />
             <p>Settings</p>
           </UIButton>
-          <div className="flex items-center gap-x-2 rounded-md bg-gray-800 px-3 py-1.5">
+          <div className="flex items-center gap-x-2 rounded-md bg-gray-800 px-3 py-1.5 ml-2">
             <Avatar className="relative h-5 w-5">
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             </Avatar>
