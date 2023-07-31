@@ -1,8 +1,15 @@
-import type { JSONContent } from '@tiptap/core'
-import { filter, map, sum } from 'lodash'
-import { ArrowRightFromLine, ArrowRightToLine, ChevronDownSquare, Clock10, Currency, DollarSign } from 'lucide-react'
+import type {JSONContent} from '@tiptap/core'
+import {filter, map, sum} from 'lodash'
+import {
+  ArrowRightFromLine,
+  ArrowRightToLine,
+  ChevronDownSquare,
+  Clock10,
+  Currency,
+  DollarSign,
+} from 'lucide-react'
 import React from 'react'
-import { Logo } from '~/components/navbar'
+import {Logo} from '~/components/navbar'
 import {
   Accordion,
   AccordionContent,
@@ -39,7 +46,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return { json: item, index: index }
+        return {json: item, index: index}
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -189,39 +196,36 @@ const getMarkName = (name: MarkName | string) => {
   switch (name) {
     case MarkName.INCOME: {
       return (
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           <ArrowRightToLine size={18} />
-          <p className='text-lg font-medium'>{name}</p>
+          <p className="text-lg font-medium">{name}</p>
         </div>
       )
     }
     case MarkName.EXPENSE: {
       return (
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           <ArrowRightFromLine size={18} />
-          <p className='text-lg font-medium'>{name}</p>
+          <p className="text-lg font-medium">{name}</p>
         </div>
       )
     }
     case MarkName.FREE_CASH: {
       return (
-        <div className='flex items-center gap-2'>
+        <div className="flex items-center gap-2">
           <DollarSign size={18} />
-          <p className='text-lg font-medium'>{name}</p>
+          <p className="text-lg font-medium">{name}</p>
         </div>
       )
     }
-    default: return (
-      <div>
-        {name}
-      </div>
-    )
+    default:
+      return <div>{name}</div>
   }
 }
 
-function CalcItem({ mark }: { mark: TResult }) {
+function CalcItem({mark}: {mark: TResult}) {
   return (
-    <div className='bg-gray-900 rounded-md py-2 px-4'>
+    <div className="rounded-md bg-gray-900 px-4 py-2">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1" className="border-none">
           <AccordionTrigger className="py-0">
@@ -238,25 +242,21 @@ function CalcItem({ mark }: { mark: TResult }) {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <h4 className="text-lg font-normal">
-        {toIDR(mark.total)}
-      </h4>
+      <h4 className="text-lg font-normal">{toIDR(mark.total)}</h4>
     </div>
   )
 }
 
-
-function FreeCash({ marks }: { marks: TResult[] }) {
-  const income = marks.find(mark => mark.name === 'Income');
-  const expense = marks.find(mark => mark.name === 'Expense');
-  const free = income?.total && expense?.total ? income?.total - expense?.total : 0
+function FreeCash({marks}: {marks: TResult[]}) {
+  const income = marks.find(mark => mark.name === 'Income')
+  const expense = marks.find(mark => mark.name === 'Expense')
+  const free =
+    income?.total && expense?.total ? income?.total - expense?.total : 0
   if (!income?.name || !expense?.name) return <></>
   return (
-    <div className='bg-gray-900 rounded-md py-2 px-4'>
+    <div className="rounded-md bg-gray-900 px-4 py-2">
       {getMarkName(MarkName.FREE_CASH)}
-      <h4 className="text-lg font-normal">
-        {toIDR(free)}
-      </h4>
+      <h4 className="text-lg font-normal">{toIDR(free)}</h4>
     </div>
   )
 }
