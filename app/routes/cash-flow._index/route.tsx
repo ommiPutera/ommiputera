@@ -1,9 +1,10 @@
-import {type V2_MetaFunction} from '@remix-run/react'
-import {ActivitySquare, Trello} from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
+import { type V2_MetaFunction } from '@remix-run/react'
+import { ActivitySquare, Trello } from 'lucide-react'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import type { Post } from '@prisma/client'
+import type { TabProps } from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -17,45 +18,63 @@ import Board from './board'
 import clsx from 'clsx'
 import Analytics from './analytics'
 import React from 'react'
-import {db} from '~/utils/db.server'
-import {LayoutTitle} from './misc'
+import { db } from '~/utils/db.server'
+import { LayoutTitle } from './misc'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
 export default function Index() {
+  const shouldReduceMotion = useReducedMotion()
   return (
-    <div className="bg-gradient-to-b from-black to-gray-900">
-      <LayoutTitle title="Cashflow Managament" />
-      <div className="relative mx-auto grid py-9 lg:max-w-7xl">
-        <Tabs
-          className="w-full grid-cols-12 gap-x-8 overflow-visible"
-          orientation={TabsOrientation.Horizontal}
-        >
-          <TabList className="z-0 flex gap-2 overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
-            <Tab index={0} className="flex items-center gap-x-2">
-              <Trello size={18} />
-              <p className="text-md">Board</p>
-            </Tab>
-            <Tab index={1} className="flex items-center gap-x-2">
-              <ActivitySquare size={18} />
-              <p className="text-md">Analytics</p>
-            </Tab>
-          </TabList>
-          <Contents />
-        </Tabs>
+    <div className="bg-gradient-to-b from-black to-gray-900 pb-24">
+      <LayoutTitle
+        title="Cashflow Managament"
+        float
+        subTitle='atomic CSS and recipes in a type-safe and readable manner.'
+      />
+      <div className='mx-auto relative lg:max-w-7xl'>
+        <AnimatePresence>
+          <motion.div
+            className="rounded-lg border border-gray-600 -mt-32 -mx-4 py-3 px-6 bg-black"
+            initial={{ y: 140, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+            exit={{ y: 220, opacity: 0 }}
+            transition={{
+              opacity: { duration: shouldReduceMotion ? 0 : 0.5 },
+              ease: 'linear',
+            }}
+          >
+            <Tabs
+              className="w-full grid-cols-12 gap-x-8 overflow-visible"
+              orientation={TabsOrientation.Horizontal}
+            >
+              <TabList className="z-0 flex gap-2 overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0">
+                <Tab index={0} className="flex items-center gap-x-2">
+                  <Trello size={18} />
+                  <p className="text-md">Board</p>
+                </Tab>
+                <Tab index={1} className="flex items-center gap-x-2">
+                  <ActivitySquare size={18} />
+                  <p className="text-md">Analytics</p>
+                </Tab>
+              </TabList>
+              <Contents />
+            </Tabs>
+          </motion.div>
+        </AnimatePresence>
       </div>
     </div>
   )
@@ -71,7 +90,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -102,7 +121,7 @@ function Tab({
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <TabPanels className="-mx-4 mt-5 min-h-screen rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>

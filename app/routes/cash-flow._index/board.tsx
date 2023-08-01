@@ -1,13 +1,13 @@
-import {Link, useLoaderData} from '@remix-run/react'
-import {Filter, Plus, X} from 'lucide-react'
-import type {Post} from '@prisma/client'
-import type {LoaderData} from './route'
-import {ButtonLink} from '~/components/button'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus, X, BookOpenCheck } from 'lucide-react'
+import type { Post } from '@prisma/client'
+import type { LoaderData } from './route'
+import { ButtonLink } from '~/components/button'
 import React from 'react'
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col">
@@ -51,10 +51,11 @@ function Guides() {
           type="button"
           size="sm"
           variant="subtle"
-          to="/cash-flow/new"
+          to="/cash-flow/guides"
           className="flex items-center gap-x-2 border border-gray-600 bg-black"
         >
-          <p>General Guides</p>
+          <BookOpenCheck size={18} />
+          <p>Guides</p>
         </ButtonLink>
         <UIButton variant="subtle" onClick={() => setShow(false)} className="">
           <X size={16} />
@@ -65,7 +66,7 @@ function Guides() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -99,7 +100,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
