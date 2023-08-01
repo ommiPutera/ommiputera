@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {includes, some} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { includes, some } from 'lodash'
+import { BurgerMenu } from '~/utils/icons'
+import { useRootData } from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,9 +22,9 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
-import {LogOut, MoreHorizontal, Wallet2} from 'lucide-react'
+import { SectionSpacer } from './spacer'
+import { Badge } from './shadcn/badge'
+import { LogOut, MoreHorizontal, Wallet2 } from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,9 +34,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import {UIButton} from './shadcn/button'
-import {ButtonLink} from './button'
-import {Profile} from './me'
+import { UIButton } from './shadcn/button'
+import { ButtonLink } from './button'
+import { Profile } from './me'
 
 type TypeLinks = {
   name: string
@@ -121,34 +121,34 @@ const LINKS: TypeLinks = [
   {
     name: 'Free Products',
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{ component: <RowApp1 /> }],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
+      { component: <RowProducts1 /> },
+      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
+      { component: <RowProducts1 /> },
     ],
   },
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
 ]
 
 const USER_LINKS = [
-  {name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} />},
+  { name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} /> },
 ]
 const OWNER_LINKS = [
-  {name: 'Overview', to: '/overview'},
-  {name: 'Admin Panel', to: '/admin'},
+  { name: 'Overview', to: '/overview' },
+  { name: 'Admin Panel', to: '/admin' },
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
   const isShowNavbar = some(ROUTE_WITHOUT_NAVBAR, el =>
     includes(location.pathname, el),
@@ -162,7 +162,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="relative">
       <div
@@ -185,7 +185,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({isExpanded}) => {
+          {({ isExpanded }) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -203,7 +203,7 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const {isExpanded} = useMenuButtonContext()
+  const { isExpanded } = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
   return (
     <AnimatePresence>
@@ -215,23 +215,23 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{display: 'block'}}
+          style={{ display: 'block' }}
           className="z-50"
         >
           <motion.div
-            initial={{y: -50, opacity: 0}}
-            animate={{y: 0, opacity: 1}}
-            exit={{y: -50, opacity: 0}}
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: -50, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-              scale: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
-            className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-600"
+            className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-800"
           >
             <MenuItems className="border-none bg-transparent py-0">
-              <h5 className="text border-t border-gray-600 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
+              <h5 className="text border-t border-gray-800 px-5vw pb-4 pt-12 text-xs font-medium tracking-wider md:pb-6">
                 NAVIGATION
               </h5>
               {MOBILE_LINKS.map(link => (
@@ -266,7 +266,7 @@ function MobileNavLink({
   if (to && !asParent) {
     return (
       <MenuLink
-        className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-600"
+        className="hover:bg-secondary focus:bg-secondary text-primary px-5vw py-2 text-left text-3xl font-medium dark:border-gray-800"
         as={Link}
         to={to}
       >
@@ -281,7 +281,7 @@ function MobileNavLink({
 }
 
 function DesktopNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [open, setOpen] = React.useState('')
   return (
     <ul className="-mr-5 hidden lg:flex lg:items-center">
@@ -318,7 +318,7 @@ function DesktopNav() {
           <Link to="/login" prefetch="intent">
             <button
               type="button"
-              className="text-secondary block w-fit whitespace-nowrap rounded-lg border border-gray-600 px-3 pb-1.5 pt-1 text-md font-medium hover:border-white hover:bg-gray-800 hover:text-white"
+              className="text-secondary block w-fit whitespace-nowrap rounded-lg border border-gray-800 px-3 pb-1.5 pt-1 text-md font-medium hover:border-white hover:bg-gray-800 hover:text-white"
             >
               Log in
             </button>
@@ -339,7 +339,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -427,7 +427,7 @@ export function Logo({
 }
 
 function ProtectedNav() {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
@@ -437,13 +437,13 @@ function ProtectedNav() {
 function ProtectedNavItems({
   links,
 }: {
-  links: {name: string; to: string; Icon?: JSX.Element | React.ReactNode}[]
+  links: { name: string; to: string; Icon?: JSX.Element | React.ReactNode }[]
 }) {
-  const {user} = useRootData()
+  const { user } = useRootData()
 
   if (!user) return <></>
   return (
-    <div className="sticky top-0 z-50 w-full border-b border-b-gray-600 bg-black px-[4vw] py-5 xl:px-10vw">
+    <div className="sticky top-0 z-50 w-full border-b border-b-gray-800 bg-black px-[4vw] py-5 xl:px-10vw">
       <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
         <div className="col-span-4 flex items-center gap-x-4 text-left">
           <Logo size="md" />
@@ -542,4 +542,4 @@ function ProtectedpNavLink({
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar }

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import {AnchorOrLink} from '~/utils/misc'
+import { AnchorOrLink } from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
@@ -50,7 +50,7 @@ function Inner({
         'relative flex h-full w-full items-center justify-center whitespace-nowrap',
         {
           '': variant === 'subtle',
-          'border-gray-200 group-disabled:border-gray-600':
+          'border-gray-200 group-disabled:border-gray-800':
             variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
           'rounded-md px-3 pb-[5px] pt-1 text-md': size === 'sm',
@@ -69,7 +69,7 @@ const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> & ButtonProps
 >(function ButtonLink(
-  {variant = 'primary', size = 'sm', children, className, ...props},
+  { variant = 'primary', size = 'sm', children, className, ...props },
   ref,
 ) {
   return (
@@ -95,4 +95,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export {Button, ButtonLink}
+export { Button, ButtonLink }

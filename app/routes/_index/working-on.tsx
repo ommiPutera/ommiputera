@@ -1,4 +1,4 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function WorkinOn() {
   return (
@@ -28,7 +28,7 @@ export default function WorkinOn() {
             </UIButton>
           </div>
         </div>
-        <div className="col-span-1 h-96 rounded-lg border border-gray-600 lg:col-span-8 lg:-mr-32">
+        <div className="col-span-1 h-96 rounded-lg border border-gray-800 lg:col-span-8 lg:-mr-32">
           Asset
         </div>
       </div>
