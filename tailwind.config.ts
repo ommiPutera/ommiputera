@@ -17,7 +17,10 @@ module.exports = {
       current: 'currentColor',
       white: 'var(--color-white)',
       black: 'var(--color-black)',
-
+      blue: {
+        100: 'var(--color-blue-100)',
+        500: 'var(--color-blue-500)',
+      },
       gray: {
         100: 'var(--color-gray-100)',
         200: 'var(--color-gray-200)',

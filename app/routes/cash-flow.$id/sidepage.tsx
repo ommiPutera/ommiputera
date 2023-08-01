@@ -1,5 +1,5 @@
-import type {JSONContent} from '@tiptap/core'
-import {filter, map, sum} from 'lodash'
+import type { JSONContent } from '@tiptap/core'
+import { filter, map, sum } from 'lodash'
 import {
   ArrowRightFromLine,
   ArrowRightToLine,
@@ -9,7 +9,7 @@ import {
   DollarSign,
 } from 'lucide-react'
 import React from 'react'
-import {Logo} from '~/components/navbar'
+import { Logo } from '~/components/navbar'
 import {
   Accordion,
   AccordionContent,
@@ -46,7 +46,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return {json: item, index: index}
+        return { json: item, index: index }
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -61,13 +61,25 @@ export default function SidePage({
         const jsonAbouveList = getJsonAbouve(item.index, nextIndex)?.filter(
           item => item.type === 'taskList',
         )
-        const taskItems = filter(
-          jsonAbouveList?.[0]?.content,
-          item => item.attrs?.checked === true,
-        )
+
+        function getContents() {
+          if (!jsonAbouveList) return []
+          if (jsonAbouveList?.length > 1) {
+            const merges = []
+            for (const item of jsonAbouveList) {
+              merges.push(item.content?.[0])
+            }
+            return merges
+          } else {
+            return jsonAbouveList?.[0]?.content
+          }
+        }
+        const json = getContents()
+
+        const taskItems = filter(json, item => item?.attrs?.checked === true)
         const taskItem = map(
           taskItems,
-          item => item.content?.[0]?.content?.[0].text,
+          item => item?.content?.[0]?.content?.[0].text,
         )
         const calculate = map(taskItem, item =>
           Number(item?.replace(/\D/g, '')),
@@ -189,7 +201,7 @@ const getMarkName = (name: MarkName | string) => {
       return (
         <div className="flex items-center gap-2">
           <ArrowRightToLine size={18} />
-          <p className="text-lg font-medium">{name}</p>
+          <h4 className="text-base font-medium">{name}</h4>
         </div>
       )
     }
@@ -197,7 +209,7 @@ const getMarkName = (name: MarkName | string) => {
       return (
         <div className="flex items-center gap-2">
           <ArrowRightFromLine size={18} />
-          <p className="text-lg font-medium">{name}</p>
+          <h4 className="text-base font-medium">{name}</h4>
         </div>
       )
     }
@@ -205,7 +217,7 @@ const getMarkName = (name: MarkName | string) => {
       return (
         <div className="flex items-center gap-2">
           <DollarSign size={18} />
-          <p className="text-lg font-medium">{name}</p>
+          <h4 className="text-base font-medium">{name}</h4>
         </div>
       )
     }
@@ -214,9 +226,9 @@ const getMarkName = (name: MarkName | string) => {
   }
 }
 
-function CalcItem({mark}: {mark: TResult}) {
+function CalcItem({ mark }: { mark: TResult }) {
   return (
-    <div className="rounded-md bg-gray-900 px-4 py-2">
+    <div className="rounded-md bg-gray-600 px-4 py-2">
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="item-1" className="border-none">
           <AccordionTrigger className="py-0">
@@ -233,21 +245,21 @@ function CalcItem({mark}: {mark: TResult}) {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <h4 className="text-lg font-normal">{toIDR(mark.total)}</h4>
+      <h4 className="text-md font-normal">{toIDR(mark.total)}</h4>
     </div>
   )
 }
 
-function FreeCash({marks}: {marks: TResult[]}) {
+function FreeCash({ marks }: { marks: TResult[] }) {
   const income = marks.find(mark => mark.name === 'Income')
   const expense = marks.find(mark => mark.name === 'Expense')
   const free =
     income?.total && expense?.total ? income?.total - expense?.total : 0
   if (!income?.name || !expense?.name) return <></>
   return (
-    <div className="rounded-md bg-gray-900 px-4 py-2">
-      {getMarkName(MarkName.FREE_CASH)}
-      <h4 className="text-lg font-normal">{toIDR(free)}</h4>
+    <div className="rounded-md bg-gray-600 px-4 py-2">
+      <h3 className='text-base font-medium'>{getMarkName(MarkName.FREE_CASH)}</h3>
+      <h4 className="text-md font-medium">{toIDR(free)}</h4>
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 
 function HomeHeroSection() {
   return (
@@ -65,7 +65,7 @@ function FloatingBtn({
   to,
   children,
   ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {to: string}) {
+}: Omit<Parameters<typeof Link>['0'], 'to'> & { to: string }) {
   return (
     <Link to={to} {...rest}>
       <button className="group relative rounded-full bg-gray-700 px-4 py-2 hover:bg-gray-800">
@@ -75,4 +75,4 @@ function FloatingBtn({
   )
 }
 
-export {HomeHeroSection, ProjectHeroSection}
+export { HomeHeroSection, ProjectHeroSection }

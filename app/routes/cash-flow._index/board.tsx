@@ -1,13 +1,13 @@
-import {Link, useLoaderData} from '@remix-run/react'
-import {Plus, X} from 'lucide-react'
-import type {Post} from '@prisma/client'
-import type {LoaderData} from './route'
-import {ButtonLink} from '~/components/button'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus, X } from 'lucide-react'
+import type { Post } from '@prisma/client'
+import type { LoaderData } from './route'
+import { ButtonLink } from '~/components/button'
 import React from 'react'
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col">
@@ -65,12 +65,12 @@ function Guides() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
-    <div className="relative mx-auto mb-4 w-full max-w-7xl">
+    <div className="flex justify-between relative mx-auto mb-4 w-full max-w-7xl">
       <div className="">
         <ButtonLink
           type="button"
@@ -83,11 +83,23 @@ function Tools() {
           <p>New Plan</p>
         </ButtonLink>
       </div>
+      <div className="">
+        <ButtonLink
+          type="button"
+          size="sm"
+          variant="subtle"
+          to="/cash-flow/new"
+          className="flex items-center gap-x-2 bg-black text-blue-500"
+        >
+          <Filter size={16} />
+          <p>Filter</p>
+        </ButtonLink>
+      </div>
     </div>
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>

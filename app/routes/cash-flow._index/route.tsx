@@ -1,20 +1,12 @@
-import {type V2_MetaFunction} from '@remix-run/react'
-import {UIButton} from '~/components/shadcn/button'
+import { type V2_MetaFunction } from '@remix-run/react'
 import {
   ActivitySquare,
   Trello,
-  FilePlus,
-  Settings,
-  MoreHorizontal,
-  LogOut,
-  ChevronRight,
-  BookOpenCheck,
-  ChevronsUpDown,
 } from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import type { Post } from '@prisma/client'
+import type { TabProps } from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -26,41 +18,30 @@ import {
 } from '@reach/tabs'
 import Board from './board'
 import clsx from 'clsx'
-import {Logo} from '~/components/navbar'
 import Analytics from './analytics'
 import React from 'react'
-import {db} from '~/utils/db.server'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-} from '~/components/shadcn/dropdown-menu'
-import {useRootData} from '~/utils/use-root-data'
-import {Avatar, AvatarImage} from '~/components/shadcn/avatar'
+import { db } from '~/utils/db.server'
+import { LayoutTitle } from './misc'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
 export default function Index() {
   return (
     <div className="bg-gradient-to-b from-black to-gray-900">
-      <LayoutTitle />
+      <LayoutTitle title="Cashflow Managament" />
       <div className="relative mx-auto grid py-9 lg:max-w-7xl">
         <Tabs
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
@@ -93,7 +74,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -124,7 +105,7 @@ function Tab({
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
+  const { selectedIndex } = useTabsContext()
   return (
     <TabPanels className="-mx-4 mt-5 min-h-screen rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>
@@ -134,105 +115,5 @@ function Contents() {
         <Analytics />
       </TabPanel>
     </TabPanels>
-  )
-}
-
-function LayoutTitle() {
-  const {user} = useRootData()
-  return (
-    <div className="sticky top-0 z-50 w-full border-b border-b-gray-600 bg-black px-[4vw] py-3 xl:px-10vw">
-      <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
-        <div className="col-span-4 flex items-center gap-x-4 text-left">
-          <Logo size="md" />
-        </div>
-        <div className="col-span-4 text-center">
-          <h1 className="leading-tigh px-0 text-xl font-medium capitalize lg:text-base">
-            Cashflow Managament
-          </h1>
-          <p className="text-secondary text-sm font-light">Powerd by Ommi</p>
-        </div>
-        <div className="col-span-4 flex items-center justify-end gap-x-2">
-          <UIButton
-            type="button"
-            variant="subtle"
-            size="sm"
-            className="text-secondary flex items-center gap-x-2 hover:bg-gray-600 hover:text-white"
-          >
-            <FilePlus size={18} />
-            <p>Template</p>
-          </UIButton>
-          <UIButton
-            size="sm"
-            variant="subtle"
-            className="text-secondary flex items-center gap-x-2 hover:bg-gray-600 hover:text-white"
-          >
-            <Settings size={18} />
-            <p>Settings</p>
-          </UIButton>
-          <div className="ml-2 flex items-center gap-x-2 rounded-md bg-gray-800 px-3 py-1.5">
-            <Avatar className="relative h-5 w-5">
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-            </Avatar>
-            <p className="-mb-0.5 text-xs font-light">{user?.username}</p>
-            <ChevronsUpDown size={14} />
-          </div>
-          <MoreAction />
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function MoreAction() {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <UIButton
-          size="sm"
-          variant="subtle"
-          className="flex items-center rounded-md px-2 hover:bg-gray-600"
-        >
-          <MoreHorizontal size={18} />
-        </UIButton>
-      </DropdownMenuTrigger>
-      <MoreMenus />
-    </DropdownMenu>
-  )
-}
-
-function MoreMenus() {
-  return (
-    <DropdownMenuContent className="">
-      <DropdownMenuLabel className="px-2">
-        <p className="font-semibold">View Options</p>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup className="p-1">
-        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-700 hover:bg-gray-800">
-          <div className="flex items-center gap-x-2">
-            <BookOpenCheck size={18} />
-            <p>Guide</p>
-          </div>
-          <div className="text-secondary flex items-center gap-x-1">
-            <p className="">Pengaturan</p>
-            <ChevronRight size={16} />
-          </div>
-        </DropdownMenuItem>
-        <form action="/logout" method="post">
-          <UIButton
-            variant="subtle"
-            type="submit"
-            className="w-full cursor-default"
-          >
-            <DropdownMenuItem className="w-full rounded-md border border-transparent px-2 hover:border-red-300 hover:bg-red-200">
-              <div className="flex items-center gap-x-2">
-                <LogOut size={18} className="text-red-800" />
-                <p className="text-red-800">Log Out</p>
-              </div>
-            </DropdownMenuItem>
-          </UIButton>
-        </form>
-      </DropdownMenuGroup>
-    </DropdownMenuContent>
   )
 }
