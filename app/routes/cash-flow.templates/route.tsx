@@ -1,11 +1,15 @@
-import { ButtonLink } from '~/components/button'
-import { LayoutTitle } from '../cash-flow._index/misc'
-import { MoveLeftIcon } from 'lucide-react'
+import {ButtonLink} from '~/components/button'
+import {LayoutTitle} from '../cash-flow._index/misc'
+import {MoveLeftIcon} from 'lucide-react'
 
 export default function Index() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900">
-      <LayoutTitle title="Templates" subTitle='atomic CSS and recipes in a type-safe and readable manner.' float={false} />
+      <LayoutTitle
+        title="Templates"
+        subTitle="atomic CSS and recipes in a type-safe and readable manner."
+        float={false}
+      />
       <div className="relative mx-auto grid py-9 lg:max-w-7xl">
         <Back />
         content
