@@ -1,17 +1,34 @@
-import { useLocation } from "@remix-run/react"
-import clsx from "clsx"
-import { BookOpenCheck, ChevronRight, ChevronsUpDown, FilePlus, LogOut, MoreHorizontal, Settings } from "lucide-react"
-import { ButtonLink } from "~/components/button"
-import { Logo } from "~/components/navbar"
-import { Avatar, AvatarImage } from "~/components/shadcn/avatar"
-import { UIButton } from "~/components/shadcn/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "~/components/shadcn/dropdown-menu"
-import { useRootData } from "~/utils/use-root-data"
+import {useLocation} from '@remix-run/react'
+import clsx from 'clsx'
+import {
+  BookOpenCheck,
+  ChevronRight,
+  ChevronsUpDown,
+  FilePlus,
+  LogOut,
+  MoreHorizontal,
+  Settings,
+} from 'lucide-react'
+import {ButtonLink} from '~/components/button'
+import {Logo} from '~/components/navbar'
+import {Avatar, AvatarImage} from '~/components/shadcn/avatar'
+import {UIButton} from '~/components/shadcn/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '~/components/shadcn/dropdown-menu'
+import {useRootData} from '~/utils/use-root-data'
 
-function LayoutTitle({ title }: { title: string }) {
-  const { user } = useRootData()
+function LayoutTitle({title}: {title: string}) {
+  const {user} = useRootData()
   const location = useLocation()
-  const isSelected = (to: string) => to === location.pathname || location.pathname.startsWith(`${to}/`)
+  const isSelected = (to: string) =>
+    to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
     <div className="sticky top-0 z-50 w-full border-b border-b-gray-600 bg-black px-[4vw] py-3 xl:px-10vw">
       <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
@@ -29,12 +46,15 @@ function LayoutTitle({ title }: { title: string }) {
             type="button"
             size="sm"
             variant="subtle"
-            prefetch='intent'
+            prefetch="intent"
             to="/cash-flow/templates"
-            className={clsx('flex items-center gap-x-2 hover:bg-gray-600 hover:text-white', {
-              'text-secondary': !isSelected('/cash-flow/templates'),
-              'text-white': isSelected('/cash-flow/templates'),
-            })}
+            className={clsx(
+              'flex items-center gap-x-2 hover:bg-gray-600 hover:text-white',
+              {
+                'text-secondary': !isSelected('/cash-flow/templates'),
+                'text-white': isSelected('/cash-flow/templates'),
+              },
+            )}
           >
             <FilePlus size={18} />
             <p>Template</p>
@@ -115,4 +135,4 @@ function MoreMenus() {
   )
 }
 
-export { LayoutTitle }
+export {LayoutTitle}

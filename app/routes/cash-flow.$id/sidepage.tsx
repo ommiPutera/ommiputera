@@ -1,5 +1,5 @@
-import type { JSONContent } from '@tiptap/core'
-import { filter, map, sum } from 'lodash'
+import type {JSONContent} from '@tiptap/core'
+import {filter, map, sum} from 'lodash'
 import {
   ArrowRightFromLine,
   ArrowRightToLine,
@@ -9,7 +9,7 @@ import {
   DollarSign,
 } from 'lucide-react'
 import React from 'react'
-import { Logo } from '~/components/navbar'
+import {Logo} from '~/components/navbar'
 import {
   Accordion,
   AccordionContent,
@@ -46,7 +46,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return { json: item, index: index }
+        return {json: item, index: index}
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -226,7 +226,7 @@ const getMarkName = (name: MarkName | string) => {
   }
 }
 
-function CalcItem({ mark }: { mark: TResult }) {
+function CalcItem({mark}: {mark: TResult}) {
   return (
     <div className="rounded-md bg-gray-600 px-4 py-2">
       <Accordion type="single" collapsible className="w-full">
@@ -250,7 +250,7 @@ function CalcItem({ mark }: { mark: TResult }) {
   )
 }
 
-function FreeCash({ marks }: { marks: TResult[] }) {
+function FreeCash({marks}: {marks: TResult[]}) {
   const income = marks.find(mark => mark.name === 'Income')
   const expense = marks.find(mark => mark.name === 'Expense')
   const free =
@@ -258,7 +258,9 @@ function FreeCash({ marks }: { marks: TResult[] }) {
   if (!income?.name || !expense?.name) return <></>
   return (
     <div className="rounded-md bg-gray-600 px-4 py-2">
-      <h3 className='text-base font-medium'>{getMarkName(MarkName.FREE_CASH)}</h3>
+      <h3 className="text-base font-medium">
+        {getMarkName(MarkName.FREE_CASH)}
+      </h3>
       <h4 className="text-md font-medium">{toIDR(free)}</h4>
     </div>
   )

@@ -1,12 +1,9 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import {
-  ActivitySquare,
-  Trello,
-} from 'lucide-react'
-import type { LoaderFunction } from '@remix-run/node'
-import { getUser } from '~/utils/session.server'
-import type { Post } from '@prisma/client'
-import type { TabProps } from '@reach/tabs'
+import {type V2_MetaFunction} from '@remix-run/react'
+import {ActivitySquare, Trello} from 'lucide-react'
+import type {LoaderFunction} from '@remix-run/node'
+import {getUser} from '~/utils/session.server'
+import type {Post} from '@prisma/client'
+import type {TabProps} from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -20,21 +17,21 @@ import Board from './board'
 import clsx from 'clsx'
 import Analytics from './analytics'
 import React from 'react'
-import { db } from '~/utils/db.server'
-import { LayoutTitle } from './misc'
+import {db} from '~/utils/db.server'
+import {LayoutTitle} from './misc'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -74,7 +71,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -105,7 +102,7 @@ function Tab({
 }
 
 function Contents() {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <TabPanels className="-mx-4 mt-5 min-h-screen rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>
