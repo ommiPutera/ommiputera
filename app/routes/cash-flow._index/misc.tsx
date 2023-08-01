@@ -1,4 +1,4 @@
-import { Link, useLocation } from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 import {
   BookOpenCheck,
@@ -8,10 +8,10 @@ import {
   MoreHorizontal,
   Settings,
 } from 'lucide-react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { Logo } from '~/components/navbar'
-import { UIButton } from '~/components/shadcn/button'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {Logo} from '~/components/navbar'
+import {UIButton} from '~/components/shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,7 +22,15 @@ import {
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
 
-function LayoutTitle({ title, subTitle, float = false }: { title: string, subTitle?: string, float: boolean }) {
+function LayoutTitle({
+  title,
+  subTitle,
+  float = false,
+}: {
+  title: string
+  subTitle?: string
+  float: boolean
+}) {
   const location = useLocation()
   const isSelected = (to: string) =>
     to === location.pathname || location.pathname.startsWith(`${to}/`)
@@ -73,10 +81,19 @@ function LayoutTitle({ title, subTitle, float = false }: { title: string, subTit
           </div>
         </div>
       </div>
-      <div className={clsx("w-full border-b border-b-gray-600 bg-gray-900 px-[4vw] xl:px-10vw", { "pt-10 pb-44": float, "py-10": !float })}>
+      <div
+        className={clsx(
+          'w-full border-b border-b-gray-600 bg-gray-900 px-[4vw] xl:px-10vw',
+          {'pb-44 pt-10': float, 'py-10': !float},
+        )}
+      >
         <div className="relative mx-auto w-full max-w-7xl items-center">
-          <h3 className='whitespace-nowrap text-lg text-center font-medium'>{title}</h3>
-          <p className='text-md text-secondary text-center font-normal'>{subTitle}</p>
+          <h3 className="whitespace-nowrap text-center text-lg font-medium">
+            {title}
+          </h3>
+          <p className="text-secondary text-center text-md font-normal">
+            {subTitle}
+          </p>
         </div>
       </div>
     </>
@@ -139,4 +156,4 @@ function MoreMenus() {
   )
 }
 
-export { LayoutTitle }
+export {LayoutTitle}

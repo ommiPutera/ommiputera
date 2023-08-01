@@ -1,10 +1,10 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import { ActivitySquare, Trello } from 'lucide-react'
-import type { LoaderFunction } from '@remix-run/node'
-import { getUser } from '~/utils/session.server'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import type { Post } from '@prisma/client'
-import type { TabProps } from '@reach/tabs'
+import {type V2_MetaFunction} from '@remix-run/react'
+import {ActivitySquare, Trello} from 'lucide-react'
+import type {LoaderFunction} from '@remix-run/node'
+import {getUser} from '~/utils/session.server'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import type {Post} from '@prisma/client'
+import type {TabProps} from '@reach/tabs'
 import {
   Tab as ReachTab,
   TabList,
@@ -18,21 +18,21 @@ import Board from './board'
 import clsx from 'clsx'
 import Analytics from './analytics'
 import React from 'react'
-import { db } from '~/utils/db.server'
-import { LayoutTitle } from './misc'
+import {db} from '~/utils/db.server'
+import {LayoutTitle} from './misc'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -43,17 +43,17 @@ export default function Index() {
       <LayoutTitle
         title="Cashflow Managament"
         float
-        subTitle='atomic CSS and recipes in a type-safe and readable manner.'
+        subTitle="atomic CSS and recipes in a type-safe and readable manner."
       />
-      <div className='mx-auto relative lg:max-w-7xl'>
+      <div className="relative mx-auto lg:max-w-7xl">
         <AnimatePresence>
           <motion.div
-            className="rounded-lg border border-gray-600 -mt-32 -mx-4 py-3 px-6 bg-black"
-            initial={{ y: 140, opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
-            exit={{ y: 220, opacity: 0 }}
+            className="-mx-4 -mt-32 rounded-lg border border-gray-600 bg-black px-6 py-3"
+            initial={{y: 140, opacity: 0}}
+            animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
+            exit={{y: 220, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
           >
@@ -90,7 +90,7 @@ function Tab({
   index: 0 | 1
   className?: string
 } & TabProps) {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <ReachTab
       className={clsx(
@@ -121,7 +121,7 @@ function Tab({
 }
 
 function Contents() {
-  const { selectedIndex } = useTabsContext()
+  const {selectedIndex} = useTabsContext()
   return (
     <TabPanels className="-mx-4 mt-5 min-h-screen rounded-md px-4 outline-gray-400">
       <TabPanel hidden={selectedIndex !== 0}>
