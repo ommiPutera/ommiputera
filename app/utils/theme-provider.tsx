@@ -1,4 +1,4 @@
-import { useFetcher } from '@remix-run/react'
+import {useFetcher} from '@remix-run/react'
 import * as React from 'react'
 
 enum Theme {
@@ -14,7 +14,6 @@ type ThemeContextType = [
 const ThemeContext = React.createContext<ThemeContextType | undefined>(
   undefined,
 )
-
 
 function isTheme(value: unknown): value is Theme {
   return typeof value === 'string' && themes.includes(value as Theme)
@@ -33,7 +32,6 @@ function useTheme() {
 const prefersLightMQ = '(prefers-color-scheme: light)'
 const getPreferredTheme = () =>
   window.matchMedia(prefersLightMQ).matches ? Theme.LIGHT : Theme.DARK
-
 
 function ThemeProvider({
   children,
@@ -118,4 +116,4 @@ function Themed({
   }
 }
 
-export { useTheme, ThemeProvider, Theme, isTheme, Themed }
+export {useTheme, ThemeProvider, Theme, isTheme, Themed}

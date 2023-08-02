@@ -6,12 +6,12 @@ import {
   MenuPopover,
   useMenuButtonContext,
 } from '@reach/menu-button'
-import { Link, useLocation } from '@remix-run/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { includes, some } from 'lodash'
-import { BurgerMenu } from '~/utils/icons'
-import { useRootData } from '~/utils/use-root-data'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {includes, some} from 'lodash'
+import {BurgerMenu} from '~/utils/icons'
+import {useRootData} from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -22,9 +22,9 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import { SectionSpacer } from './spacer'
-import { Badge } from './shadcn/badge'
-import { LogOut, MoonIcon, MoreHorizontal, SunIcon, Wallet2 } from 'lucide-react'
+import {SectionSpacer} from './spacer'
+import {Badge} from './shadcn/badge'
+import {LogOut, MoonIcon, MoreHorizontal, SunIcon, Wallet2} from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -34,10 +34,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import { UIButton } from './shadcn/button'
-import { ButtonLink } from './button'
-import { Profile } from './me'
-import { Theme, Themed, useTheme } from '~/utils/theme-provider'
+import {UIButton} from './shadcn/button'
+import {ButtonLink} from './button'
+import {Profile} from './me'
+import {Theme, Themed, useTheme} from '~/utils/theme-provider'
 
 type TypeLinks = {
   name: string
@@ -122,34 +122,34 @@ const LINKS: TypeLinks = [
   {
     name: 'Free Products',
     asParent: true,
-    child: [{ component: <RowApp1 /> }],
+    child: [{component: <RowApp1 />}],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      { component: <RowProducts1 /> },
-      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
-      { component: <RowProducts1 /> },
+      {component: <RowProducts1 />},
+      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
+      {component: <RowProducts1 />},
     ],
   },
-  { name: 'Project', to: '/project', asParent: false },
-  { name: 'About', to: '/about', asParent: false },
+  {name: 'Project', to: '/project', asParent: false},
+  {name: 'About', to: '/about', asParent: false},
 ]
 
 const USER_LINKS = [
-  { name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} /> },
+  {name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} />},
 ]
 const OWNER_LINKS = [
-  { name: 'Overview', to: '/overview' },
-  { name: 'Admin Panel', to: '/admin' },
+  {name: 'Overview', to: '/overview'},
+  {name: 'Admin Panel', to: '/admin'},
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isShowNavbar = some(ROUTE_WITHOUT_NAVBAR, el =>
     includes(location.pathname, el),
@@ -163,7 +163,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="relative">
       <div
@@ -186,7 +186,7 @@ function MobileNav() {
     <div className="flex items-center justify-center lg:hidden">
       <div className="block">
         <Menu>
-          {({ isExpanded }) => {
+          {({isExpanded}) => {
             const state = isExpanded ? 'open' : 'closed'
             return (
               <>
@@ -204,7 +204,7 @@ function MobileNav() {
 }
 
 function MobileMenuList() {
-  const { isExpanded } = useMenuButtonContext()
+  const {isExpanded} = useMenuButtonContext()
   const shouldReduceMotion = useReducedMotion()
   return (
     <AnimatePresence>
@@ -216,17 +216,17 @@ function MobileMenuList() {
             bottom: 0,
             right: 0,
           })}
-          style={{ display: 'block' }}
+          style={{display: 'block'}}
           className="z-50"
         >
           <motion.div
-            initial={{ y: -50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: -50, opacity: 0 }}
+            initial={{y: -50, opacity: 0}}
+            animate={{y: 0, opacity: 1}}
+            exit={{y: -50, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-              rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-              scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+              rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+              scale: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
             className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-800"
@@ -286,7 +286,7 @@ function DesktopNav() {
   return (
     <ul className="hidden lg:flex lg:items-center">
       <NavigationMenu value={open} onValueChange={setOpen}>
-        <NavigationMenuList className=''>
+        <NavigationMenuList className="">
           {LINKS.map(link => (
             <DesktopNavLink
               isOpen={Boolean(open)}
@@ -306,7 +306,7 @@ function DesktopNav() {
         <Link to="/login" prefetch="intent">
           <button
             type="button"
-            className="text-secondary h-10 w-full rounded-full block whitespace-nowrap border-2 dark:border-gray-500 border-gray-100 px-6 pb-1.5 pt-1 text-md font-medium hover:border-gray-800 hover:bg-gray-800 hover:text-white"
+            className="text-secondary block h-10 w-full whitespace-nowrap rounded-full border-2 border-gray-100 px-6 pb-1.5 pt-1 text-md font-medium hover:border-gray-800 hover:bg-gray-800 hover:text-white dark:border-gray-500"
           >
             Log in
           </button>
@@ -329,7 +329,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: { component: string | React.ReactNode }[]
+  child?: {component: string | React.ReactNode}[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -341,7 +341,7 @@ function DesktopNavLink({
   if (asParent && child?.length) {
     return (
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="w-full whitespace-nowrap px-4 pb-3 pt-2.5 text-md font-medium hover:text-black hover:dark:text-white dark:text-gray-300 text-gray-200 focus:outline-none data-[state=open]:text-white lg:tracking-wide">
+        <NavigationMenuTrigger className="w-full whitespace-nowrap px-4 pb-3 pt-2.5 text-md font-medium text-gray-200 hover:text-black focus:outline-none data-[state=open]:text-white dark:text-gray-300 hover:dark:text-white lg:tracking-wide">
           {children}
         </NavigationMenuTrigger>
         <NavigationMenuContent className="w-full bg-gray-900 pt-3">
@@ -364,7 +364,7 @@ function DesktopNavLink({
             prefetch="intent"
             to={to}
             className={clsx(
-              'block whitespace-nowrap px-4 py-1.5 text-md dark:text-gray-300 hover:text-black text-gray-200 font-medium hover:dark:text-white focus:outline-none lg:tracking-wide',
+              'block whitespace-nowrap px-4 py-1.5 text-md font-medium text-gray-200 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
               {
                 active: isSelected,
                 'text-black': !isSelected,
@@ -417,7 +417,7 @@ export function Logo({
 }
 
 function ProtectedNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
@@ -427,9 +427,9 @@ function ProtectedNav() {
 function ProtectedNavItems({
   links,
 }: {
-  links: { name: string; to: string; Icon?: JSX.Element | React.ReactNode }[]
+  links: {name: string; to: string; Icon?: JSX.Element | React.ReactNode}[]
 }) {
-  const { user } = useRootData()
+  const {user} = useRootData()
 
   if (!user) return <></>
   return (
@@ -532,8 +532,8 @@ function ProtectedpNavLink({
   )
 }
 
-const iconTransformOrigin = { transformOrigin: '50% 100px' }
-function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' }) {
+const iconTransformOrigin = {transformOrigin: '50% 100px'}
+function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
   const [, setTheme] = useTheme()
   return (
     <button
@@ -553,13 +553,13 @@ function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' })
       {/* note that the duration is longer then the one on body, controlling the bg-color */}
       <div className="relative h-5 w-5">
         <span
-          className="absolute flex items-center justify-center inset-0 rotate-90 transform text-black transition duration-1000 motion-reduce:duration-[0s] dark:rotate-0 dark:text-white"
+          className="motion-reduce:duration-[0s] absolute inset-0 flex rotate-90 transform items-center justify-center text-black transition duration-1000 dark:rotate-0 dark:text-white"
           style={iconTransformOrigin}
         >
           <MoonIcon />
         </span>
         <span
-          className="absolute flex items-center justify-center inset-0 rotate-0 transform text-black transition duration-1000 motion-reduce:duration-[0s] dark:-rotate-90 dark:text-white"
+          className="motion-reduce:duration-[0s] absolute inset-0 flex rotate-0 transform items-center justify-center text-black transition duration-1000 dark:-rotate-90 dark:text-white"
           style={iconTransformOrigin}
         >
           <SunIcon />
@@ -576,4 +576,4 @@ function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' })
   )
 }
 
-export { Index as Navbar }
+export {Index as Navbar}

@@ -1,6 +1,6 @@
-import { createCookieSessionStorage } from '@remix-run/node'
-import { getRequiredServerEnvVar } from './misc.js'
-import { Theme, isTheme } from './theme-provider.js'
+import {createCookieSessionStorage} from '@remix-run/node'
+import {getRequiredServerEnvVar} from './misc.js'
+import {Theme, isTheme} from './theme-provider.js'
 
 const themeStorage = createCookieSessionStorage({
   cookie: {
@@ -23,8 +23,8 @@ async function getThemeSession(request: Request) {
     setTheme: (theme: Theme) => session.set('theme', theme),
     commit: () =>
       // no theme for you on my 100th birthday! 😂
-      themeStorage.commitSession(session, { expires: new Date('2088-10-18') }),
+      themeStorage.commitSession(session, {expires: new Date('2088-10-18')}),
   }
 }
 
-export { getThemeSession }
+export {getThemeSession}
