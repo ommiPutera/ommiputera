@@ -14,49 +14,62 @@ import {
   ScrollRestoration,
   useNavigation,
 } from '@remix-run/react'
-import {Analytics} from '@vercel/analytics/react'
+import { Analytics } from '@vercel/analytics/react'
 import * as React from 'react'
-import {useSpinDelay} from 'spin-delay'
-import {Navbar} from '~/components/navbar'
+import { useSpinDelay } from 'spin-delay'
+import { Navbar } from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
 import prosemirrorStyles from '~/styles/prosemirror.css'
-import {ThemeProvider, useTheme} from '~/utils/theme-provider'
+import { Theme, ThemeProvider, useTheme } from '~/utils/theme-provider'
 import Footer from './components/footer'
-import {getDomainUrl, getUrl} from './utils/misc'
-import {getSocialMetas} from './utils/seo'
-import {getUser} from './utils/session.server'
-import {Toaster} from './components/shadcn/toaster'
+import { getDomainUrl, getUrl } from './utils/misc'
+import { getSocialMetas } from './utils/seo'
+import { Toaster } from './components/shadcn/toaster'
 import clsx from 'clsx'
-import {useRootData} from './utils/use-root-data'
+import { useRootData } from './utils/use-root-data'
+import { getThemeSession } from './utils/theme.server'
+import { getUser } from './utils/session.server'
 
 export type LoaderData = SerializeFrom<typeof loader>
 
-export const handle: {id: string} = {
+export const handle: { id: string } = {
   id: 'root',
 }
 
-export async function loader({request}: DataFunctionArgs) {
+export async function loader({ request }: DataFunctionArgs) {
   const user = await getUser(request)
+  const [
+    themeSession,
+  ] = await Promise.all([
+    getThemeSession(request)
+  ])
   const data = {
     user,
     requestInfo: {
       origin: getDomainUrl(request),
+      session: {
+        theme: themeSession.getTheme(),
+      },
     },
   }
   const headers: HeadersInit = new Headers()
-  return json(data, {headers})
+  return json(data, { headers })
 }
 
-export const meta: V2_MetaFunction = ({data}) => {
+export const meta: V2_MetaFunction = ({ data }) => {
   const requestInfo = data?.requestInfo
-  const socials = getSocialMetas({
-    keywords: 'Personal Website',
-    url: getUrl(requestInfo),
-  })
-
-  return [{title: 'ommiputera.com | A Personal Website'}, ...socials]
+  return [
+    { viewport: 'width=device-width,initial-scale=1,viewport-fit=cover' },
+    { 'theme-color': requestInfo?.session?.theme === 'dark' ? '#1F2028' : '#FFF' },
+    ...getSocialMetas({
+      keywords:
+        'Learn React, React Workshops, Testing JavaScript Training, React Training, Learn JavaScript, Learn TypeScript',
+      url: getUrl(requestInfo),
+      title: 'ommiputera.com | A Personal Website',
+    }),
+  ]
 }
 
 export const links: LinksFunction = () => {
@@ -82,16 +95,16 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
-    {rel: 'stylesheet', href: vendorsStyles},
-    {rel: 'stylesheet', href: tailwindStyles},
-    {rel: 'stylesheet', href: prosemirrorStyles},
-    {rel: 'stylesheet', href: appStyles},
+    { rel: 'stylesheet', href: vendorsStyles },
+    { rel: 'stylesheet', href: tailwindStyles },
+    { rel: 'stylesheet', href: prosemirrorStyles },
+    { rel: 'stylesheet', href: appStyles },
   ]
 }
 
 export default function AppWithProviders() {
   return (
-    <ThemeProvider>
+    <ThemeProvider specifiedTheme={Theme.DARK}>
       <App />
     </ThemeProvider>
   )
@@ -164,7 +177,7 @@ function PageLoadingMessage() {
 }
 
 function App() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const [theme] = useTheme()
   return (
     <html lang="en" className={`${theme}`}>

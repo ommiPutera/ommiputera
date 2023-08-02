@@ -135,7 +135,7 @@ ul[data-type="taskList"] li[data-checked="true"] > div > p {
   margin-bottom: 0.33em;
 }
 
-:where(ul):not(:where([class~="not-prose"] *)) {
+.prose-lg :where(ul):not(:where([class~="not-prose"] *)) {
   margin-bottom:  0.8em !important;
   /* border: 1px solid red; */
 }
