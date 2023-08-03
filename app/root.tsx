@@ -185,6 +185,7 @@ function App() {
           name="theme-color"
           content={theme === 'dark' ? '#161513' : '#FFF'}
         />
+        <meta name="google-site-verification" content="cLgj0DVOABnnZ7qcxQbVVb6CqATgdTd0AvS3_gvSVpg" />
         <Meta />
         <Links />
       </head>
