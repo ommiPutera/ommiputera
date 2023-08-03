@@ -1,38 +1,29 @@
-import {type V2_MetaFunction} from '@remix-run/react'
-import {ActivitySquare, Trello} from 'lucide-react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import type {Post} from '@prisma/client'
-import type {TabProps} from '@reach/tabs'
-import {
-  Tab as ReachTab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  TabsOrientation,
-  useTabsContext,
-} from '@reach/tabs'
+import { type V2_MetaFunction } from '@remix-run/react'
+import { ActivitySquare, Trello } from 'lucide-react'
+import type { LoaderFunction } from '@remix-run/node'
+import { getUser } from '~/utils/session.server'
+import { Tab } from '@headlessui/react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import type { Post } from '@prisma/client'
 import Board from './board'
 import clsx from 'clsx'
 import Analytics from './analytics'
 import React from 'react'
-import {db} from '~/utils/db.server'
-import {LayoutTitle} from './misc'
+import { db } from '~/utils/db.server'
+import { LayoutTitle } from './misc'
 
-export const meta: V2_MetaFunction = ({matches}) => {
-  return [{title: 'Cash Flow Managament'}]
+export const meta: V2_MetaFunction = ({ matches }) => {
+  return [{ title: 'Cash Flow Managament' }]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -49,30 +40,30 @@ export default function Index() {
         <AnimatePresence>
           <motion.div
             className="-mt-36 rounded-lg border border-gray-800 bg-black"
-            initial={{y: 140, opacity: 0}}
-            animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-            exit={{y: 220, opacity: 0}}
+            initial={{ y: 140, opacity: 0 }}
+            animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+            exit={{ y: 220, opacity: 0 }}
             transition={{
-              opacity: {duration: shouldReduceMotion ? 0 : 0.5},
+              opacity: { duration: shouldReduceMotion ? 0 : 0.5 },
               ease: 'linear',
             }}
           >
-            <Tabs
+            <Tab.Group
+              as="div"
               className="w-full grid-cols-12 gap-x-8 overflow-visible"
-              orientation={TabsOrientation.Horizontal}
             >
-              <TabList className="z-0 flex overflow-x-scroll border-b border-b-gray-800 bg-transparent px-0 lg:col-span-3 lg:overflow-x-hidden">
-                <Tab index={0} className="flex items-center gap-x-2">
+              <Tab.List className="z-0 flex overflow-x-scroll border-b border-b-gray-800 bg-transparent px-0 lg:col-span-3 lg:overflow-x-hidden">
+                <TabComponent index={0} className="flex items-center gap-x-2">
                   <Trello size={18} />
                   <p className="text-md">Board</p>
-                </Tab>
-                <Tab index={1} className="flex items-center gap-x-2">
+                </TabComponent>
+                <TabComponent index={1} className="flex items-center gap-x-2">
                   <ActivitySquare size={18} />
                   <p className="text-md">Analytics</p>
-                </Tab>
-              </TabList>
+                </TabComponent>
+              </Tab.List>
               <Contents />
-            </Tabs>
+            </Tab.Group>
           </motion.div>
         </AnimatePresence>
       </div>
@@ -80,7 +71,7 @@ export default function Index() {
   )
 }
 
-function Tab({
+function TabComponent({
   children,
   index,
   className,
@@ -89,47 +80,53 @@ function Tab({
   children: JSX.Element | React.ReactNode
   index: 0 | 1
   className?: string
-} & TabProps) {
-  const {selectedIndex} = useTabsContext()
+}) {
   return (
-    <ReachTab
+    <Tab
       className={clsx(
-        'relative my-1 rounded-md border-b-0 border-b-transparent px-2 py-1 outline-gray-500',
+        'relative my-1 rounded-md border-b-0 border-b-transparent px-2 py-1 focus:outline-none',
       )}
       {...props}
     >
-      <div
-        className={clsx(
-          'font-medium',
-          {
-            'text-white': selectedIndex === index,
-            'text-gray-200': selectedIndex !== index,
-          },
-          className,
-        )}
-      >
-        {children}
-      </div>
-      <div
-        className={clsx('absolute -bottom-1 left-0 h-0.5 w-full', {
-          'bg-white': selectedIndex === index,
-          'bg-transparent': selectedIndex !== index,
-        })}
-      ></div>
-    </ReachTab>
+      {({ selected }) => (
+        <>
+          <div
+            className={clsx(
+              'font-medium',
+              {
+                'text-white': selected,
+                'text-gray-200': !selected,
+              },
+              className,
+            )}
+          >
+            {children}
+          </div>
+          <div
+            className={clsx('absolute -bottom-1 left-0 h-0.5 w-full', {
+              'bg-white': selected,
+              'bg-transparent': !selected,
+            })}
+          ></div>
+        </>
+      )}
+    </Tab>
   )
 }
 
 function Contents() {
-  const {selectedIndex} = useTabsContext()
   return (
-    <TabPanels className="min-h-screen rounded-md p-6 outline-gray-400">
-      <TabPanel hidden={selectedIndex !== 0}>
-        <Board />
-      </TabPanel>
-      <TabPanel hidden={selectedIndex !== 1}>
-        <Analytics />
-      </TabPanel>
-    </TabPanels>
+    <Tab.Panels className="min-h-screen rounded-md p-6 outline-gray-400">
+      {({ selectedIndex }) => (
+        <>
+          <Tab.Panel hidden={selectedIndex !== 0}>
+            <Board />
+          </Tab.Panel>
+          <Tab.Panel hidden={selectedIndex !== 1}>
+            <Analytics />
+          </Tab.Panel>
+        </>
+      )}
+    </Tab.Panels>
   )
 }

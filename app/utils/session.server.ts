@@ -110,7 +110,7 @@ export async function createUserSession({
 
 export async function requireUserSession(
   req: Request,
-  exepctionRoute: Array<string>,
+  exepctionRoute?: Array<string>,
 ) {
   let session = await getUserSession(req)
   let userId = session.get('userId')

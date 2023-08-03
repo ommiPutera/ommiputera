@@ -1,10 +1,10 @@
-import {TabList, TabPanel, TabPanels, Tabs, TabsOrientation} from '@reach/tabs'
-import {type LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLoaderData, useLocation} from '@remix-run/react'
+import { Tab } from '@headlessui/react'
+import { type LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLoaderData, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import React from 'react'
-import {getUserRole, requireUserSession} from '~/utils/session.server'
+import { getUserRole, requireUserSession } from '~/utils/session.server'
 
 type LoaderData = {
   device: {
@@ -13,7 +13,7 @@ type LoaderData = {
   }
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const userAgent = await request.headers.get('user-agent')
   const isAndroid = () => Boolean(userAgent?.match(/Android/i))
   const isIos = () => Boolean(userAgent?.match(/iPhone|iPad|iPod/i))
@@ -27,10 +27,10 @@ export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   if (role === 'BASIC') {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   const data: LoaderData = {
     device: {
@@ -47,7 +47,7 @@ enum Screen {
 }
 
 const LINKS = [
-  {name: 'General', to: '/admin'},
+  { name: 'General', to: '/admin' },
   {
     name: 'Manage Project',
     to: '/admin/manage-project',
@@ -63,7 +63,7 @@ export default function Index() {
   const shouldReduceMotion = useReducedMotion()
   const data = useLoaderData<LoaderData>()
 
-  const {isMobile, isDesktop} = data.device
+  const { isMobile, isDesktop } = data.device
   const [screen, setScreen] = React.useState(() => {
     if (isDesktop) return Screen.DESKTOP
     if (isMobile || typeof window !== 'object') return Screen.MOBILE
@@ -91,16 +91,12 @@ export default function Index() {
       <LayoutTitle />
       <div className="pb-9 lg:px-[4vw] lg:pb-12 xl:px-10vw">
         <div className="relative mx-auto grid lg:max-w-7xl">
-          <Tabs
-            style={{display: isDesktopScreen ? 'grid' : ''}}
-            orientation={
-              isMobileScreen
-                ? TabsOrientation.Horizontal
-                : TabsOrientation.Vertical
-            }
-            className="w-full grid-cols-12 gap-x-8 overflow-visible"
+          <Tab.Group
+            as="div"
+            vertical={isMobileScreen ? false : true}
+            className={clsx("w-full grid-cols-12 gap-x-8 overflow-visible", { 'grid': isDesktopScreen })}
           >
-            <TabList
+            <Tab.List
               className={clsx(
                 'z-0 mt-4 flex gap-1 overflow-x-scroll bg-transparent px-5vw lg:col-span-3 lg:overflow-x-hidden lg:px-0',
                 {
@@ -130,16 +126,16 @@ export default function Index() {
                   {link.name}
                 </Link>
               ))}
-            </TabList>
-            <TabPanels className="mt-4 lg:col-span-9 lg:mt-0">
-              <TabPanel key={location.pathname} className="block">
+            </Tab.List>
+            <Tab.Panels className="mt-4 lg:col-span-9 lg:mt-0">
+              <Tab.Panel key={location.pathname} className="block">
                 <AnimatePresence>
                   <motion.div
-                    initial={{y: 220, opacity: 0}}
-                    animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-                    exit={{y: 220, opacity: 0}}
+                    initial={{ y: 220, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+                    exit={{ y: 220, opacity: 0 }}
                     transition={{
-                      opacity: {duration: shouldReduceMotion ? 0 : 0.1},
+                      opacity: { duration: shouldReduceMotion ? 0 : 0.1 },
                       ease: 'linear',
                     }}
                   >
@@ -150,9 +146,9 @@ export default function Index() {
                     </div>
                   </motion.div>
                 </AnimatePresence>
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
+              </Tab.Panel>
+            </Tab.Panels>
+          </Tab.Group>
         </div>
       </div>
     </main>
