@@ -57,7 +57,6 @@ export async function loader({ request }: DataFunctionArgs) {
 export const meta: V2_MetaFunction = ({ data }) => {
   const requestInfo = data?.requestInfo
   return [
-    { name: 'robots', content: 'noindex' },
     ...getSocialMetas({
       keywords:
         'Learn React, React Workshops, Testing JavaScript Training, React Training, Learn JavaScript, Learn TypeScript',
@@ -178,13 +177,14 @@ function App() {
     <html lang="en" className={`${theme}`}>
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta
           name="theme-color"
           content={theme === 'dark' ? '#161513' : '#FFF'}
         />
+        <meta name="robots" content="noindex, nofollow" />
         <meta name="google-site-verification" content="cLgj0DVOABnnZ7qcxQbVVb6CqATgdTd0AvS3_gvSVpg" />
         <Meta />
         <Links />
