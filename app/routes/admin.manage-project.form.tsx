@@ -1,6 +1,6 @@
-import type { Project } from '@prisma/client'
-import { Dialog } from '@headlessui/react'
-import type { ActionFunction, LoaderFunction } from '@remix-run/node'
+import type {Project} from '@prisma/client'
+import {Dialog} from '@headlessui/react'
+import type {ActionFunction, LoaderFunction} from '@remix-run/node'
 import {
   Form,
   useActionData,
@@ -9,20 +9,20 @@ import {
   useNavigation,
   type V2_MetaFunction,
 } from '@remix-run/react'
-import { MoveLeftIcon } from 'lucide-react'
+import {MoveLeftIcon} from 'lucide-react'
 import React from 'react'
-import { Button } from '~/components/button'
-import { Input, Label } from '~/components/form-elements'
-import { UIButton } from '~/components/shadcn/button'
-import { db } from '~/utils/db.server'
+import {Button} from '~/components/button'
+import {Input, Label} from '~/components/form-elements'
+import {UIButton} from '~/components/shadcn/button'
+import {db} from '~/utils/db.server'
 import {
   createProject,
   deleteProject,
   updateProject,
 } from '~/utils/project.session'
-import { getUserId } from '~/utils/session.server'
+import {getUserId} from '~/utils/session.server'
 
-type LoaderData = { project: Project | null }
+type LoaderData = {project: Project | null}
 type ActionData = {
   formError?: string
   fieldErrors?: {
@@ -49,23 +49,23 @@ enum ActionEnums {
 }
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Manage Project - Form' }]
+  return [{title: 'Manage Project - Form'}]
 }
 
-async function getLoaderData({ request }: { request: Request }) {
-  const { searchParams } = new URL(request.url)
+async function getLoaderData({request}: {request: Request}) {
+  const {searchParams} = new URL(request.url)
   const id = searchParams.get('id')
-  const project = await db.project.findUnique({ where: { id: id ?? '' } })
+  const project = await db.project.findUnique({where: {id: id ?? ''}})
   return project
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const project = await getLoaderData({ request })
-  const data: LoaderData = { project }
+export const loader: LoaderFunction = async ({request}) => {
+  const project = await getLoaderData({request})
+  const data: LoaderData = {project}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const userId = await getUserId(request)
   const formData = await request.formData()
   const {
@@ -80,7 +80,7 @@ export const action: ActionFunction = async ({ request }) => {
   } = Object.fromEntries(formData)
 
   if (typeof projectId !== 'string') {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
   if (_action === ActionEnums.DELETE) {
     return await deleteProject(projectId, '/admin/manage-project')
@@ -95,7 +95,7 @@ export const action: ActionFunction = async ({ request }) => {
     typeof liveLink !== 'string' ||
     typeof content !== 'string'
   ) {
-    return { formError: 'Form not submitted correctly' }
+    return {formError: 'Form not submitted correctly'}
   }
   const fields = {
     projectName,
@@ -121,7 +121,7 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { fields, formError: `Action type invalid` }
+      return {fields, formError: `Action type invalid`}
     }
   }
 }
@@ -351,7 +351,7 @@ function FormAction() {
         aria-label="Delete project"
         open={isShowDeleteModal}
         onClose={closeDeleteModal}
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.682)' }}
+        style={{backgroundColor: 'rgba(0, 0, 0, 0.682)'}}
         className="flex w-full items-center"
       >
         <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[24vw]">
