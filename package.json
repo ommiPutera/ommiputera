@@ -30,6 +30,7 @@
     "/playwright/.cache/"
   ],
   "dependencies": {
+    "@headlessui/react": "^1.7.16",
     "@prisma/client": "^4.14.0",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-avatar": "^1.0.3",
@@ -40,7 +41,6 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-toast": "^1.1.4",
     "@radix-ui/react-tooltip": "^1.0.6",
-    "@reach/dialog": "^0.18.0",
     "@reach/menu-button": "^0.18.0",
     "@reach/tabs": "^0.18.0",
     "@remix-run/node": "^1.17.1",

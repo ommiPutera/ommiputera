@@ -1,10 +1,10 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {DialogContent, DialogOverlay} from '@reach/dialog'
-import {Button} from '~/components/button'
-import type {SaveStatus} from './route'
-import {FormType} from './route'
-import {Form, Link, useLoaderData} from '@remix-run/react'
+import { Dialog } from '@headlessui/react'
+import { Button } from '~/components/button'
+import type { SaveStatus } from './route'
+import { FormType } from './route'
+import { Form, Link, useLoaderData } from '@remix-run/react'
 import {
   ChevronRight,
   FilePlus,
@@ -13,8 +13,8 @@ import {
   Trash2,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type {LoaderArgs} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
+import type { LoaderArgs } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,10 +31,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
   if (!id) return redirect('/cash-flow')
-  const data: LoaderData = {postId: id}
+  const data: LoaderData = { postId: id }
   return data
 }
 
@@ -194,14 +194,14 @@ const DeleteDialog = ({
   const closeDeleteModal = () => setIsShowDeleteModal(false)
 
   return (
-    <DialogOverlay
+    <Dialog
       aria-label="Delete project"
-      isOpen={isShowDeleteModal}
-      onDismiss={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
+      open={isShowDeleteModal}
+      onClose={closeDeleteModal}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
       className="z-50 flex w-full items-center"
     >
-      <DialogContent className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">
+      <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">
         <div className="border-b border-gray-800 px-6 py-4 text-center">
           <h1 className="text-lg font-semibold">
             Are you sure you want to delete?
@@ -231,7 +231,7 @@ const DeleteDialog = ({
             <input type="hidden" name="postId" value={data?.postId} />
           </Form>
         </div>
-      </DialogContent>
-    </DialogOverlay>
+      </Dialog.Panel>
+    </Dialog>
   )
 }
