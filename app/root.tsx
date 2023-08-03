@@ -58,7 +58,7 @@ export const meta: V2_MetaFunction = ({ data }) => {
   const requestInfo = data?.requestInfo
   return [
     { viewport: 'width=device-width,initial-scale=1,viewport-fit=cover' },
-    { robots: 'content=noindex,nofollow' },
+    { robots: 'noindex,nofollow' },
     {
       'theme-color':
         requestInfo?.session?.theme === 'dark' ? '#1F2028' : '#FFF',
