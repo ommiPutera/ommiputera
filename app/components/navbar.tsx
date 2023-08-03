@@ -1,10 +1,10 @@
-import { Menu } from '@headlessui/react'
-import { Link, useLocation } from '@remix-run/react'
+import {Menu} from '@headlessui/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { includes, some } from 'lodash'
-import { BurgerMenu } from '~/utils/icons'
-import { useRootData } from '~/utils/use-root-data'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {includes, some} from 'lodash'
+import {BurgerMenu} from '~/utils/icons'
+import {useRootData} from '~/utils/use-root-data'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -15,9 +15,9 @@ import {
   NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
 import React from 'react'
-import { SectionSpacer } from './spacer'
-import { Badge } from './shadcn/badge'
-import { LogOut, MoonIcon, MoreHorizontal, SunIcon, Wallet2 } from 'lucide-react'
+import {SectionSpacer} from './spacer'
+import {Badge} from './shadcn/badge'
+import {LogOut, MoonIcon, MoreHorizontal, SunIcon, Wallet2} from 'lucide-react'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,10 +27,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import { UIButton } from './shadcn/button'
-import { ButtonLink } from './button'
-import { Profile } from './me'
-import { Theme, Themed, useTheme } from '~/utils/theme-provider'
+import {UIButton} from './shadcn/button'
+import {ButtonLink} from './button'
+import {Profile} from './me'
+import {Theme, Themed, useTheme} from '~/utils/theme-provider'
 
 type TypeLinks = {
   name: string
@@ -115,34 +115,34 @@ const LINKS: TypeLinks = [
   {
     name: 'Free Products',
     asParent: true,
-    child: [{ component: <RowApp1 /> }],
+    child: [{component: <RowApp1 />}],
   },
   {
     name: 'Products',
     asParent: true,
     child: [
-      { component: <RowProducts1 /> },
-      { component: <SectionSpacer size="xs" className="mx-3 mt-1" /> },
-      { component: <RowProducts1 /> },
+      {component: <RowProducts1 />},
+      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
+      {component: <RowProducts1 />},
     ],
   },
-  { name: 'Project', to: '/project', asParent: false },
-  { name: 'About', to: '/about', asParent: false },
+  {name: 'Project', to: '/project', asParent: false},
+  {name: 'About', to: '/about', asParent: false},
 ]
 
 const USER_LINKS = [
-  { name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} /> },
+  {name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} />},
 ]
 const OWNER_LINKS = [
-  { name: 'Overview', to: '/overview' },
-  { name: 'Admin Panel', to: '/admin' },
+  {name: 'Overview', to: '/overview'},
+  {name: 'Admin Panel', to: '/admin'},
   ...USER_LINKS,
 ]
-const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isShowNavbar = some(ROUTE_WITHOUT_NAVBAR, el =>
     includes(location.pathname, el),
@@ -156,7 +156,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="relative">
       <div
@@ -181,8 +181,8 @@ function MobileNav() {
       <div className="block">
         <Menu>
           <Menu.Button className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-            {({ open }) => {
-              const state = open ? 'open' : 'closed';
+            {({open}) => {
+              const state = open ? 'open' : 'closed'
               setIsOpen(open)
               return <BurgerMenu state={state} />
             }}
@@ -194,7 +194,7 @@ function MobileNav() {
   )
 }
 
-function MobileMenuList({ isOpen }: { isOpen: boolean }) {
+function MobileMenuList({isOpen}: {isOpen: boolean}) {
   const shouldReduceMotion = useReducedMotion()
   React.useEffect(() => {
     if (isOpen) {
@@ -213,24 +213,24 @@ function MobileMenuList({ isOpen }: { isOpen: boolean }) {
   return (
     <AnimatePresence>
       <Menu.Items
-        className="absolute z-[9999] w-full right-0 mt-8 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+        className="absolute right-0 z-[9999] mt-8 w-full origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
         as="div"
       >
-        {({ open }) => {
-          const state = open ? 'open' : 'closed';
+        {({open}) => {
+          const state = open ? 'open' : 'closed'
           if (state === 'closed') return <></>
           return (
             <motion.div
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
+              initial={{y: -10, opacity: 0}}
+              animate={{y: 0, opacity: 1}}
+              exit={{y: -10, opacity: 0}}
               transition={{
-                opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-                rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-                scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+                opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+                rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+                scale: {duration: shouldReduceMotion ? 0 : 0.5},
                 ease: 'linear',
               }}
-              className="bg-primary border fixed flex h-full w-full flex-col overflow-y-scroll pb-12 dark:border-gray-800"
+              className="bg-primary fixed flex h-full w-full flex-col overflow-y-scroll border pb-12 dark:border-gray-800"
             >
               <div className="border-none bg-transparent">
                 {MOBILE_LINKS.map(link => (
@@ -260,15 +260,14 @@ function MobileNavLink({
   asParent: boolean
 }) {
   const location = useLocation()
-  const isSelected = Boolean(to === location.pathname || location.pathname.startsWith(`${to}/`))
+  const isSelected = Boolean(
+    to === location.pathname || location.pathname.startsWith(`${to}/`),
+  )
 
   if (to && !asParent) {
     return (
-      <Menu.Item
-        as={Link}
-        to={to}
-      >
-        <div className="flex items-center justify-between text-md border-t border-b border-gray-600 m-0 px-5vw py-10">
+      <Menu.Item as={Link} to={to}>
+        <div className="m-0 flex items-center justify-between border-b border-t border-gray-600 px-5vw py-10 text-md">
           {children}
           {isSelected && <div className="h-2 w-2 rounded-full bg-white"></div>}
         </div>
@@ -303,7 +302,7 @@ function DesktopNav() {
         <Link to="/login" prefetch="intent">
           <button
             type="button"
-            className="text-gray-400 dark:text-gray-300 block h-10 w-full whitespace-nowrap rounded-full border-2 border-gray-300 px-6 pb-1.5 pt-1 text-md font-medium hover:dark:border-gray-300 hover:dark:bg-gray-800 hover:bg-gray-400 hover:text-white dark:border-gray-500"
+            className="block h-10 w-full whitespace-nowrap rounded-full border-2 border-gray-300 px-6 pb-1.5 pt-1 text-md font-medium text-gray-400 hover:bg-gray-400 hover:text-white dark:border-gray-500 dark:text-gray-300 hover:dark:border-gray-300 hover:dark:bg-gray-800"
           >
             Log in
           </button>
@@ -326,7 +325,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: { component: string | React.ReactNode }[]
+  child?: {component: string | React.ReactNode}[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -361,7 +360,7 @@ function DesktopNavLink({
             prefetch="intent"
             to={to}
             className={clsx(
-              'block whitespace-nowrap px-4 py-1.5 text-md font-medium hover:text-black focus:outline-none text-gray-400 dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
+              'block whitespace-nowrap px-4 py-1.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
               {
                 active: isSelected,
                 'text-black': !isSelected,
@@ -400,11 +399,14 @@ export function Logo({
       >
         ommiputera
         <span
-          className={clsx('ml-[1px] font-light text-gray-700 dark:text-gray-100', {
-            'text-md': size === 'lg',
-            'text-sm': size === 'md',
-            'text-[10px]': size === 'xs',
-          })}
+          className={clsx(
+            'ml-[1px] font-light text-gray-700 dark:text-gray-100',
+            {
+              'text-md': size === 'lg',
+              'text-sm': size === 'md',
+              'text-[10px]': size === 'xs',
+            },
+          )}
         >
           .com
         </span>
@@ -414,7 +416,7 @@ export function Logo({
 }
 
 function ProtectedNav() {
-  const { user } = useRootData()
+  const {user} = useRootData()
 
   if (!user) return <></>
   if (user.role === 'BASIC') return <ProtectedNavItems links={USER_LINKS} />
@@ -424,9 +426,9 @@ function ProtectedNav() {
 function ProtectedNavItems({
   links,
 }: {
-  links: { name: string; to: string; Icon?: JSX.Element | React.ReactNode }[]
+  links: {name: string; to: string; Icon?: JSX.Element | React.ReactNode}[]
 }) {
-  const { user } = useRootData()
+  const {user} = useRootData()
 
   if (!user) return <></>
   return (
@@ -529,8 +531,8 @@ function ProtectedpNavLink({
   )
 }
 
-const iconTransformOrigin = { transformOrigin: '50% 100px' }
-function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' }) {
+const iconTransformOrigin = {transformOrigin: '50% 100px'}
+function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
   const [, setTheme] = useTheme()
   return (
     <button
@@ -573,4 +575,4 @@ function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' })
   )
 }
 
-export { Index as Navbar }
+export {Index as Navbar}

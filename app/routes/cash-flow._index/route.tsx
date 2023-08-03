@@ -1,29 +1,29 @@
-import { type V2_MetaFunction } from '@remix-run/react'
-import { ActivitySquare, Trello } from 'lucide-react'
-import type { LoaderFunction } from '@remix-run/node'
-import { getUser } from '~/utils/session.server'
-import { Tab } from '@headlessui/react'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import type { Post } from '@prisma/client'
+import {type V2_MetaFunction} from '@remix-run/react'
+import {ActivitySquare, Trello} from 'lucide-react'
+import type {LoaderFunction} from '@remix-run/node'
+import {getUser} from '~/utils/session.server'
+import {Tab} from '@headlessui/react'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import type {Post} from '@prisma/client'
 import Board from './board'
 import clsx from 'clsx'
 import Analytics from './analytics'
 import React from 'react'
-import { db } from '~/utils/db.server'
-import { LayoutTitle } from './misc'
+import {db} from '~/utils/db.server'
+import {LayoutTitle} from './misc'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Cash Flow Managament' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Cash Flow Managament'}]
 }
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -40,11 +40,11 @@ export default function Index() {
         <AnimatePresence>
           <motion.div
             className="-mt-36 rounded-lg border border-gray-800 bg-black"
-            initial={{ y: 140, opacity: 0 }}
-            animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
-            exit={{ y: 220, opacity: 0 }}
+            initial={{y: 140, opacity: 0}}
+            animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
+            exit={{y: 220, opacity: 0}}
             transition={{
-              opacity: { duration: shouldReduceMotion ? 0 : 0.5 },
+              opacity: {duration: shouldReduceMotion ? 0 : 0.5},
               ease: 'linear',
             }}
           >
@@ -88,7 +88,7 @@ function TabComponent({
       )}
       {...props}
     >
-      {({ selected }) => (
+      {({selected}) => (
         <>
           <div
             className={clsx(
@@ -117,7 +117,7 @@ function TabComponent({
 function Contents() {
   return (
     <Tab.Panels className="min-h-screen rounded-md p-6 outline-gray-400">
-      {({ selectedIndex }) => (
+      {({selectedIndex}) => (
         <>
           <Tab.Panel hidden={selectedIndex !== 0}>
             <Board />
