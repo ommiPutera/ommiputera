@@ -7,7 +7,7 @@ export const meta: V2_MetaFunction = ({matches}) => {
 
 export default function Cashflow() {
   return (
-    <div className="text-primary relative mx-auto grid w-full max-w-7xl gap-5 py-4 lg:gap-y-16 lg:py-12">
+    <div className="text-primary relative mx-auto grid w-full max-w-5xl gap-5 py-4 lg:gap-y-16 lg:py-12">
       <h1 className="text-center text-2xl font-medium leading-tight lg:px-[5rem] lg:text-7xl xl:px-[10rem]">
         Manage and tracking <br /> your personal cashflow
       </h1>

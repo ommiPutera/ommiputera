@@ -65,7 +65,7 @@ export default function Index() {
 //       <p className="px-0 text-center text-lg font-normal text-gray-200 lg:mt-2 lg:px-9 lg:text-xl lg:leading-normal">
 //         I am curious. I spend 30 minutes a day on my personal learning.
 //       </p>
-//       <div className="mx-auto mt-24 flex max-w-7xl flex-wrap items-center justify-center gap-x-14 gap-y-8 overflow-hidden lg:gap-y-0">
+//       <div className="mx-auto mt-24 flex max-w-5xl flex-wrap items-center justify-center gap-x-14 gap-y-8 overflow-hidden lg:gap-y-0">
 //         <img src="/purwadhika-logo.png" alt="" className="w-56 opacity-60" />
 //         <img src="/udemy-logo.png" alt="" className="w-44 opacity-60" />
 //         <img src="/hackerrank-logo.png" alt="" className="w-48 opacity-60" />

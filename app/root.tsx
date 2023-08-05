@@ -194,9 +194,9 @@ function App() {
         <Links />
       </head>
       <body
-        className={clsx('bg-white transition duration-500', {
-          'dark:bg-black': user,
-          'dark:bg-gray-900': !user,
+        className={clsx('transition duration-500', {
+          'bg-gray-100 dark:bg-black': user,
+          'bg-white dark:bg-gray-900': !user,
         })}
       >
         <PageLoadingMessage />

@@ -23,7 +23,7 @@ function Footer() {
           user,
       })}
     >
-      <div className="grid-rows-max-content relative mx-auto grid max-w-7xl grid-cols-4 gap-x-4 md:grid-cols-8 xl:grid-cols-12 xl:gap-x-6">
+      <div className="grid-rows-max-content relative mx-auto grid max-w-5xl grid-cols-4 gap-x-4 md:grid-cols-8 xl:grid-cols-12 xl:gap-x-6">
         <div className="col-span-full md:col-span-3 xl:row-span-2">
           <AboutSection />
         </div>

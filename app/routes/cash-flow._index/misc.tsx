@@ -37,7 +37,7 @@ function LayoutTitle({
   return (
     <>
       <div className="sticky top-0 z-50 w-full border-b border-b-gray-800 bg-black px-[4vw] py-5 xl:px-10vw">
-        <div className="relative mx-auto grid max-w-7xl grid-cols-12 items-center">
+        <div className="relative mx-auto grid max-w-5xl grid-cols-12 items-center">
           <div className="col-span-4 flex items-center gap-x-4 text-left">
             <Logo size="md" />
           </div>
@@ -87,7 +87,7 @@ function LayoutTitle({
           {'pb-44 pt-10': float, 'py-10': !float},
         )}
       >
-        <div className="relative mx-auto w-full max-w-7xl items-center">
+        <div className="relative mx-auto w-full max-w-5xl items-center">
           <h3 className="whitespace-nowrap text-center text-lg font-medium">
             {title}
           </h3>

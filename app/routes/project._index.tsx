@@ -59,7 +59,7 @@ function ProjectSection({
   const image = images[heroId as keyof typeof images] || images.placeholder
 
   return (
-    <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-5 py-4 lg:gap-y-16 lg:py-12">
+    <div className="relative mx-auto flex w-full max-w-5xl flex-col gap-5 py-4 lg:gap-y-16 lg:py-12">
       <img
         className="rounded-lg border border-gray-100 object-cover dark:border-gray-800 lg:mx-5vw"
         {...getImgProps(image, {

@@ -36,7 +36,7 @@ export default function Index() {
         float
         subTitle="atomic CSS and recipes in a type-safe and readable manner."
       />
-      <div className="relative mx-auto lg:max-w-7xl">
+      <div className="relative mx-auto lg:max-w-5xl">
         <AnimatePresence>
           <motion.div
             className="-mt-36 rounded-lg border border-gray-100 bg-black dark:border-gray-800"

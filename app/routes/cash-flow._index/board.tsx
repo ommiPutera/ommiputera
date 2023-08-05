@@ -13,7 +13,7 @@ export default function Board() {
     <div className="flex flex-col">
       <Guides />
       <Tools />
-      <div className="relative grid max-w-7xl grid-cols-1 md:grid-cols-4 lg:gap-x-4">
+      <div className="relative grid max-w-5xl grid-cols-1 md:grid-cols-4 lg:gap-x-4">
         {isPostsExist ? (
           posts?.map(post => (
             <div
@@ -71,7 +71,7 @@ function Tools() {
 
   if (!isPostsExist) return <></>
   return (
-    <div className="relative mx-auto mb-4 flex w-full max-w-7xl justify-between">
+    <div className="relative mx-auto mb-4 flex w-full max-w-5xl justify-between">
       <div className="">
         <ButtonLink
           type="button"

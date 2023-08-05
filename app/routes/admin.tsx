@@ -90,7 +90,7 @@ export default function Index() {
     <main className="flex flex-col gap-x-5 pb-44 lg:gap-x-9">
       <LayoutTitle />
       <div className="pb-9 lg:px-[4vw] lg:pb-12 xl:px-10vw">
-        <div className="relative mx-auto grid lg:max-w-7xl">
+        <div className="relative mx-auto grid lg:max-w-5xl">
           <Tab.Group
             as="div"
             vertical={isMobileScreen ? false : true}
@@ -168,7 +168,7 @@ function LayoutTitle() {
     <>
       <div className="absolute -z-10 h-[50vh] w-screen bg-red-900 bg-gradient-to-b from-black to-gray-900"></div>
       <div className="w-full px-[4vw] xl:px-10vw">
-        <div className="relative mx-auto flex max-w-7xl items-center justify-between py-9 lg:pb-4 lg:pt-14">
+        <div className="relative mx-auto flex max-w-5xl items-center justify-between py-9 lg:pb-4 lg:pt-14">
           <div className="text-left">
             <h1 className="leading-tigh px-0 text-xl font-medium capitalize md:text-lg lg:text-xl xl:text-3xl">
               Admin Panel Settings

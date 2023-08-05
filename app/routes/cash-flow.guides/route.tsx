@@ -10,7 +10,7 @@ export default function Index() {
         subTitle="atomic CSS and recipes in a type-safe and readable manner."
         float={false}
       />
-      <div className="relative mx-auto grid py-9 lg:max-w-7xl">
+      <div className="relative mx-auto grid py-9 lg:max-w-5xl">
         <Back />
         guides
       </div>

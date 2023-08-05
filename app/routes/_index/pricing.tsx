@@ -3,7 +3,7 @@ import {UIButton} from '~/components/shadcn/button'
 
 export default function Pricing() {
   return (
-    <div className="mx-auto grid max-w-7xl gap-8 lg:gap-y-12">
+    <div className="mx-auto grid max-w-5xl gap-8 lg:gap-y-12">
       <div className="flex flex-col items-center justify-between gap-5 lg:gap-x-48">
         <h1 className="text-center text-3xl font-medium leading-tight lg:text-5xl">
           Choose the plan that <br /> fits your needs.

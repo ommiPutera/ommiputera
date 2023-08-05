@@ -3,8 +3,8 @@ import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
 import {includes, some} from 'lodash'
-import {BurgerMenu} from '~/utils/icons'
-import {useRootData} from '~/utils/use-root-data'
+import {LogOut, MoonIcon, MoreHorizontal, SunIcon} from 'lucide-react'
+import React from 'react'
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,12 +12,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
-  NavigationMenuViewport,
 } from '~/components/shadcn/navigation-menu'
-import React from 'react'
-import {SectionSpacer} from './spacer'
-import {Badge} from './shadcn/badge'
-import {LogOut, MoonIcon, MoreHorizontal, SunIcon, Wallet2} from 'lucide-react'
+import {BurgerMenu} from '~/utils/icons'
+import {Theme, Themed, useTheme} from '~/utils/theme-provider'
+import {useRootData} from '~/utils/use-root-data'
+import {ButtonLink} from './button'
+import {Profile} from './me'
+import {UIButton} from './shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,13 +28,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import {UIButton} from './shadcn/button'
-import {ButtonLink} from './button'
-import {Profile} from './me'
-import {Theme, Themed, useTheme} from '~/utils/theme-provider'
+import {RowAdmin, RowSoftwares} from './menu-elements'
+import {Badge} from './shadcn/badge'
 
 type TypeLinks = {
-  name: string
+  name: string | JSX.Element
   to?: string
   asParent: boolean
   child?: {
@@ -41,104 +40,29 @@ type TypeLinks = {
   }[]
 }[]
 
-const RowApp1 = () => {
-  const isSelected =
-    '/intro/cashflow' === location.pathname ||
-    location.pathname.startsWith(`/cash-flow`)
-  return (
-    <div className="grid w-[420px] grid-cols-1 gap-x-2 px-3 pb-3.5">
-      <Link
-        to="/intro/cashflow"
-        prefetch="intent"
-        className={clsx(
-          'col-span-1 flex w-full items-center rounded-lg pr-3 hover:bg-gray-800',
-          {
-            'bg-gray-800': isSelected,
-          },
-        )}
-      >
-        <div className="mr-5 h-full w-[120px] rounded-l-md border border-orange-200 bg-gradient-to-br from-orange-100 to-orange-300 px-2 pb-2 pt-4">
-          <p className="text-2xl">🎷</p>
-          <h4 className="text-md font-bold leading-tight">
-            Lean <br /> Cashflow
-          </h4>
-        </div>
-        <div className="mb-2 pb-2.5 pt-2">
-          <div className="flex items-center gap-x-2.5">
-            <p className="text-md font-medium">Personal Cash Flow</p>
-            <Badge variant="success">Free</Badge>
-          </div>
-          <p className="mt-1 text-md font-light leading-tight text-gray-300">
-            A collection of links for navigating websites.
-          </p>
-        </div>
-      </Link>
-    </div>
-  )
-}
-
-const RowProducts1 = () => {
-  return (
-    <div className="grid h-full w-[620px] grid-cols-2 gap-x-3 px-3 pb-3">
-      <div className="col-span-1 flex h-full flex-col justify-end rounded-lg bg-gray-800 p-4">
-        <p className="bottom-2 text-lg font-bold">twon.com</p>
-        <p className="mt-2 text-md font-light leading-tight text-gray-300">
-          A collection of links for navigating websites. A collection of links
-          for navigating websites.
-        </p>
-      </div>
-      <div className="col-span-1">
-        <Link to="/about" prefetch="intent">
-          <div className="w-full rounded-lg px-3 pb-2.5 pt-2 hover:bg-gray-800">
-            <p className="text-lg font-medium">Finance App</p>
-            <p className="mt-1 text-md font-light leading-tight text-gray-300">
-              A collection of links for navigating websites. A collection of
-              links for navigating websites.
-            </p>
-          </div>
-        </Link>
-        <Link to="/about" prefetch="intent">
-          <div className="w-full rounded-lg px-3 pb-2.5 pt-2 hover:bg-gray-800">
-            <p className="text-lg font-medium">Finance App</p>
-            <p className="mt-1 text-md font-light leading-tight text-gray-300">
-              A collection of links for navigating websites. A collection of
-              links for navigating websites.
-            </p>
-          </div>
-        </Link>
-      </div>
-    </div>
-  )
-}
-
 const LINKS: TypeLinks = [
+  {name: 'Blog', to: '/blog', asParent: false},
+  {name: 'Project', to: '/project', asParent: false},
+  {name: 'About', to: '/about', asParent: false},
   {
-    name: 'Free Products',
+    name: (
+      <div className="flex gap-x-2">
+        <div>Softwares</div>
+        <Badge variant="success" size="xs">
+          Free
+        </Badge>
+      </div>
+    ),
     asParent: true,
-    child: [{component: <RowApp1 />}],
+    child: [{component: <RowSoftwares />}],
   },
   {
     name: 'Products',
     asParent: true,
-    child: [
-      {component: <RowProducts1 />},
-      {component: <SectionSpacer size="xs" className="mx-3 mt-1" />},
-      {component: <RowProducts1 />},
-    ],
+    child: [{component: <RowSoftwares />}],
   },
-  {name: 'Blog', to: '/blog', asParent: false},
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
 ]
 
-const USER_LINKS = [
-  {name: 'Personal Finance', to: '/cash-flow', Icon: <Wallet2 size={18} />},
-]
-const OWNER_LINKS = [
-  {name: 'Overview', to: '/overview'},
-  {name: 'Admin Panel', to: '/admin'},
-  ...USER_LINKS,
-]
 const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
 
@@ -164,7 +88,7 @@ function PublicRoute() {
           'bg-black': user,
         })}
       >
-        <nav className="text-primary mx-auto flex max-w-7xl items-center justify-between">
+        <nav className="text-primary mx-auto flex max-w-5xl items-center justify-between">
           <Logo />
           <DesktopNav />
           <MobileNav />
@@ -176,9 +100,9 @@ function PublicRoute() {
 
 function ProtectedRoute() {
   const {user} = useRootData()
-  const [links] = React.useState<
-    {name: string; to: string; Icon?: JSX.Element | React.ReactNode}[]
-  >(user?.role === 'BASIC' ? USER_LINKS : OWNER_LINKS)
+  const location = useLocation()
+  const isSelected = (to: string) => location.pathname === to
+  const isOwner = user?.role == 'OWNER'
   return (
     <div className="relative">
       <div
@@ -187,14 +111,58 @@ function ProtectedRoute() {
           'bg-gray-100 dark:bg-black': user,
         })}
       >
-        <nav className="text-primary mx-auto my-0 flex max-w-7xl items-center justify-between md:my-[11.5px]">
-          <Logo />
-          <div className="hidden items-center justify-end md:block lg:flex">
-            {links.map(link => (
-              <ProtectedpNavLink key={link.to} to={link.to} Icon={link?.Icon}>
-                {link.name}
-              </ProtectedpNavLink>
-            ))}
+        <nav className="text-primary mx-auto my-0 flex max-w-5xl items-center justify-between md:my-[11.5px]">
+          <div className="relative hidden items-center justify-end md:block lg:flex">
+            <div className="mr-3">
+              <Logo />
+            </div>
+            {isOwner && (
+              <div className="px-2">
+                <ButtonLink
+                  type="button"
+                  size="sm"
+                  variant="subtle"
+                  to="/overview"
+                  prefetch="intent"
+                  className={clsx(
+                    'flex items-center gap-x-2 hover:text-black hover:dark:text-white',
+                    {
+                      'text-gray-400 dark:text-gray-300':
+                        !isSelected('/overview'),
+                      'text-black dark:text-white': isSelected('/overview'),
+                    },
+                  )}
+                >
+                  <p className="text-md">Overview</p>
+                </ButtonLink>
+              </div>
+            )}
+            <div>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  {isOwner && (
+                    <NavigationMenuItem>
+                      <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+                        Admin
+                      </NavigationMenuTrigger>
+                      <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
+                        <RowAdmin />
+                      </NavigationMenuContent>
+                    </NavigationMenuItem>
+                  )}
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+                      Softwares
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
+                      <RowSoftwares />
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+          </div>
+          <div className="flex items-center justify-center gap-x-2">
             <DarkModeToggle />
             <Profile />
             <MoreAction />
@@ -314,15 +282,18 @@ function MobileNavLink({
 
 function DesktopNav() {
   const [open, setOpen] = React.useState('')
+  const location = useLocation()
+  const isSelected = (to?: string) =>
+    to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
     <ul className="hidden lg:flex lg:items-center">
       <NavigationMenu value={open} onValueChange={setOpen}>
-        <NavigationMenuList className="">
+        <NavigationMenuList>
           {LINKS.map(link => (
             <DesktopNavLink
               isOpen={Boolean(open)}
               closeContent={() => setOpen('')}
-              key={link.name}
+              key={link.to}
               to={link.to}
               child={link?.child}
               asParent={link.asParent}
@@ -331,8 +302,26 @@ function DesktopNav() {
             </DesktopNavLink>
           ))}
         </NavigationMenuList>
-        <NavigationMenuViewport className="bg-gray-900" />
       </NavigationMenu>
+      {LINKS.map(link => {
+        if (link.asParent && link.child?.length) return <></>
+        return (
+          <Link
+            key={link.to}
+            prefetch="intent"
+            to={link.to ?? ''}
+            className={clsx(
+              'block whitespace-nowrap px-4 py-1.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
+              {
+                active: isSelected(link.to),
+                'text-black': !isSelected(link?.to),
+              },
+            )}
+          >
+            {link.name}
+          </Link>
+        )
+      })}
       <li className="px-2 py-2">
         <Link to="/login" prefetch="intent">
           <button
@@ -365,17 +354,13 @@ function DesktopNavLink({
   isOpen: boolean
   asParent: boolean
 }) {
-  const location = useLocation()
-  const isSelected =
-    to === location.pathname || location.pathname.startsWith(`${to}/`)
-
   if (asParent && child?.length) {
     return (
       <NavigationMenuItem>
-        <NavigationMenuTrigger className="w-full whitespace-nowrap px-4 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+        <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
           {children}
         </NavigationMenuTrigger>
-        <NavigationMenuContent className="w-full bg-gray-900 pt-3">
+        <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
           {child.map((link, index) => (
             <li key={index} onClick={closeContent}>
               <NavigationMenuLink asChild key={index}>
@@ -384,28 +369,6 @@ function DesktopNavLink({
             </li>
           ))}
         </NavigationMenuContent>
-      </NavigationMenuItem>
-    )
-  }
-  if (to && !asParent) {
-    return (
-      <NavigationMenuItem>
-        <NavigationMenuLink>
-          <Link
-            prefetch="intent"
-            to={to}
-            className={clsx(
-              'block whitespace-nowrap px-4 py-1.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
-              {
-                active: isSelected,
-                'text-black': !isSelected,
-              },
-            )}
-            {...rest}
-          >
-            {children}
-          </Link>
-        </NavigationMenuLink>
       </NavigationMenuItem>
     )
   }
@@ -423,13 +386,16 @@ export function Logo({
     <Link
       prefetch="intent"
       to="/"
-      className={clsx('block transition focus:outline-none', className)}
+      className={clsx(
+        'block pb-[10px] transition focus:outline-none',
+        className,
+      )}
     >
       <p
         className={clsx(
           'whitespace-nowrap font-medium leading-none text-black dark:text-white',
           {
-            'text-2xl lg:text-3xl': size === 'lg',
+            'text-3xl': size === 'lg',
             'text-lg lg:text-2xl': size === 'md',
             'text-md': size === 'xs',
           },
@@ -460,7 +426,7 @@ function MoreAction() {
         <UIButton
           size="sm"
           variant="subtle"
-          className="flex items-center rounded-md px-2 hover:bg-gray-600"
+          className="flex items-center rounded-full px-2 hover:bg-gray-200 hover:dark:bg-gray-800"
         >
           <MoreHorizontal size={18} />
         </UIButton>
@@ -497,42 +463,6 @@ function MoreMenus() {
   )
 }
 
-function ProtectedpNavLink({
-  to,
-  children,
-  className,
-  Icon,
-  ...rest
-}: Omit<Parameters<typeof Link>['0'], 'to'> & {
-  to: string
-  className?: string
-  Icon?: JSX.Element | React.ReactNode
-}) {
-  const location = useLocation()
-  const isSelected =
-    to === location.pathname || location.pathname.startsWith(`${to}/`)
-  return (
-    <ButtonLink
-      type="button"
-      size="sm"
-      variant="subtle"
-      to={to}
-      prefetch="intent"
-      className={clsx(
-        'flex items-center gap-x-2 hover:bg-gray-800 hover:text-white',
-        {
-          'text-secondary': !isSelected,
-          'text-white': isSelected,
-        },
-      )}
-      {...rest}
-    >
-      {Icon}
-      <p>{children}</p>
-    </ButtonLink>
-  )
-}
-
 const iconTransformOrigin = {transformOrigin: '50% 100px'}
 function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
   const [, setTheme] = useTheme()
@@ -553,7 +483,7 @@ function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
         handleTransition()
       }}
       className={clsx(
-        'focus:border-secondary inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full p-1 transition focus:outline-none',
+        'focus:border-secondary inline-flex h-10 w-10 items-center justify-center overflow-hidden rounded-full p-1 transition hover:bg-gray-200 focus:outline-none hover:dark:bg-gray-800',
         {
           '': variant === 'icon',
           'px-8': variant === 'labelled',

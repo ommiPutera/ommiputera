@@ -35,14 +35,14 @@ function MoreMenus() {
   return (
     <DropdownMenuContent className="">
       <DropdownMenuLabel className="px-2">
-        <p className="text-secondary px-2 py-1 text-sm font-normal">
+        <p className="text-secondary px-1 py-1 text-sm font-normal">
           {user?.email}
         </p>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup className="p-1">
         <Link to="/me">
-          <DropdownMenuItem className="flex w-full items-center justify-between gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
+          <DropdownMenuItem className="flex w-full items-center justify-between gap-x-12 rounded-md border-transparent px-2 hover:bg-gray-800">
             <div className="flex items-center gap-x-2">
               <BookOpenCheck size={18} />
               <p>Profile</p>
