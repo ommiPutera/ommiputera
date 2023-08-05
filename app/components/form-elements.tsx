@@ -2,10 +2,10 @@ import clsx from 'clsx'
 import React from 'react'
 
 type InputProps =
-  | ({type: 'textarea'} & JSX.IntrinsicElements['textarea'])
+  | ({ type: 'textarea' } & JSX.IntrinsicElements['textarea'])
   | JSX.IntrinsicElements['input']
 
-function Label({className, ...labelProps}: JSX.IntrinsicElements['label']) {
+function Label({ className, ...labelProps }: JSX.IntrinsicElements['label']) {
   return (
     <label
       {...labelProps}
@@ -18,7 +18,7 @@ function Label({className, ...labelProps}: JSX.IntrinsicElements['label']) {
 }
 
 export const inputClassName =
-  'dark:disabled:text-slate-500 px-5 font-light tracking-wide w-full text-black disabled:text-gray-400 py-2.5 placeholder:text-md dark:text-white text-md bg-gray-100 dark:bg-transparent focus:border-transparent border border-gray-800 rounded-lg'
+  'dark:disabled:text-slate-500 px-5 font-light tracking-wide w-full text-black disabled:text-gray-400 py-2.5 placeholder:text-md dark:text-white text-md bg-gray-100 dark:bg-transparent focus:border-transparent border border-gray-100 dark:border-gray-800 rounded-lg'
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   props,
@@ -44,4 +44,4 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(function Input(
   )
 })
 
-export {Label, Input}
+export { Label, Input }

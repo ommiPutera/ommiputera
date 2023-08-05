@@ -1,17 +1,27 @@
-import {Link} from '@remix-run/react'
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
+import { Logo } from './navbar'
+import { useLocation } from '@remix-run/react'
+import { includes, some } from 'lodash'
+
+const ROUTE_WITHOUT_FOOTER = ['/login', '/cash-flow']
 
 function Footer() {
-  const {user} = useRootData()
+  const { user } = useRootData()
+  const location = useLocation()
+  const isShowFooter = some(ROUTE_WITHOUT_FOOTER, el =>
+    includes(location.pathname, el),
+  )
+
+  if (isShowFooter) return <></>
   return (
     <footer
       className={clsx(
-        'z-[2] border-t border-gray-800 px-5vw py-9 lg:px-15vw lg:pb-12 lg:pt-24',
+        'z-[2] px-5vw py-9 lg:px-10vw lg:pb-12 lg:pt-24',
         {
-          'bg-gray-900': !user,
-          'bg-black': user,
+          'dark:bg-gray-900': !user,
+          'bg-gradient-to-t from-gray-100 to-white dark:from-black dark:to-gray-900': user,
         },
       )}
     >
@@ -40,11 +50,11 @@ function FooterLink({
   reload?: boolean
 }) {
   return (
-    <li className="py-1">
+    <li className="py-2">
       <AnchorOrLink
         prefetch={href.startsWith('http') ? undefined : 'intent'}
         href={href}
-        className="text-secondary underlined hover:text-team-current focus:text-team-current inline-block whitespace-nowrap text-md focus:outline-none"
+        className="text-gray-400 dark:text-gray-300 hover:dark:text-white hover:text-black font-medium underlined inline-block whitespace-nowrap text-base"
         reload={reload}
       >
         {name}
@@ -56,16 +66,12 @@ function FooterLink({
 function AboutSection() {
   return (
     <div>
-      <h2 className="whitespace-nowrap text-2xl font-medium">
-        <Link to="/" prefetch="intent" className="underlined">
-          Ommi Putera Karunia
-        </Link>
-      </h2>
+      <Logo />
       <ul className="mt-4">
-        <li className="text-secondary pb-6 text-md font-medium">
-          All rights reserved © Ommi 2023
+        <li className="text-gray-400 dark:text-gray-300 pb-4 text-base font-medium">
+          All rights reserved © Ommi Putera 2023
         </li>
-        <li className="text-secondary py-1 text-md">
+        <li className="text-gray-400 dark:text-gray-300 py-1 text-base font-medium">
           Helping people make the world a better place through quality software.
         </li>
       </ul>

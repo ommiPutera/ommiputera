@@ -12,6 +12,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
   useNavigation,
 } from '@remix-run/react'
 import { Analytics } from '@vercel/analytics/react'
@@ -22,7 +23,7 @@ import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
 import prosemirrorStyles from '~/styles/prosemirror.css'
-import { Theme, ThemeProvider, useTheme } from '~/utils/theme-provider'
+import { ThemeProvider, useTheme } from '~/utils/theme-provider'
 import Footer from './components/footer'
 import { getDomainUrl, getUrl } from './utils/misc'
 import { getSocialMetas } from './utils/seo'
@@ -97,8 +98,9 @@ export const links: LinksFunction = () => {
 }
 
 export default function AppWithProviders() {
+  const data = useLoaderData<LoaderData>()
   return (
-    <ThemeProvider specifiedTheme={Theme.DARK}>
+    <ThemeProvider specifiedTheme={data.requestInfo.session.theme}>
       <App />
     </ThemeProvider>
   )
@@ -161,7 +163,7 @@ function PageLoadingMessage() {
 
   if (!showLoader) return <></>
   return (
-    <div className="fixed bottom-4 z-50 mx-4 flex w-11/12 flex-col justify-center rounded-lg border border-gray-800 bg-gray-800 px-8 py-4 md:w-4/5 lg:bottom-14 lg:right-14 lg:mx-0 lg:w-72">
+    <div className="fixed bottom-4 z-50 mx-4 flex w-11/12 flex-col justify-center rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-800 px-8 py-4 md:w-4/5 lg:bottom-14 lg:right-14 lg:mx-0 lg:w-72">
       <p className="text-md font-medium lg:text-lg">{action}</p>
       <p className="text-sm font-medium text-gray-400 lg:text-md">
         Path: {pendingPath}
@@ -185,7 +187,6 @@ function App() {
           content={theme === 'dark' ? '#161513' : '#FFF'}
         />
         <meta name="robots" content="noindex, nofollow" />
-        <meta name="google-site-verification" content="cLgj0DVOABnnZ7qcxQbVVb6CqATgdTd0AvS3_gvSVpg" />
         <Meta />
         <Links />
       </head>

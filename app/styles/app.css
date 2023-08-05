@@ -3,9 +3,9 @@
   --color-white: #fff;
   --color-blue-100: #e8f2ff;
   --color-blue-500: #4b96ff;
-  --color-gray-100: #bdbdbd;
-  --color-gray-200: #989898;
-  --color-gray-300: #757575;
+  --color-gray-100: #e8e8e8;
+  --color-gray-200: #b6b6b6;
+  --color-gray-300: #858585;
   --color-gray-400: #696969;
   --color-gray-500: #454545;
   --color-gray-600: #333333;
@@ -98,6 +98,10 @@ body {
 
 * {
   -webkit-tap-highlight-color: transparent;
+}
+
+.transition-none {
+  transition: none !important;
 }
 
 input:-webkit-autofill,
@@ -258,7 +262,7 @@ table.styled-table > thead tr th {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply font-bold text-gray-400 text-left py-2 uppercase text-xs border-b border-gray-800;
+  @apply font-bold text-gray-400 text-left py-2 uppercase text-xs border-b border-gray-100 dark:border-gray-800;
 }
 table.styled-table > tbody tr td:first-child {
   @apply pl-6;
@@ -272,7 +276,7 @@ table.styled-table > tbody tr td {
   text-overflow: ellipsis;
   word-break: keep-all;
   white-space: nowrap;
-  @apply text-gray-100 text-left py-3 border-gray-800 text-sm font-light border-b border-r-0 border-l-0;
+  @apply text-gray-100 text-left py-3 border-gray-100 dark:border-gray-800 text-sm font-light border-b border-r-0 border-l-0;
 }
 table.styled-table > tbody tr:last-child td {
   @apply border-b-0;
@@ -340,4 +344,8 @@ table.styled-table > tbody tr td.action {
 
 .article {
   grid-area: article;
+}
+
+.bg-gradient {
+  @apply bg-gradient-to-b from-gray-100 to-white dark:from-black dark:to-gray-900;
 }

@@ -1,4 +1,4 @@
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 import {
   BookOpenCheck,
@@ -8,10 +8,10 @@ import {
   MoreHorizontal,
   Settings,
 } from 'lucide-react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {Logo} from '~/components/navbar'
-import {UIButton} from '~/components/shadcn/button'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { Logo } from '~/components/navbar'
+import { UIButton } from '~/components/shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -84,7 +84,7 @@ function LayoutTitle({
       <div
         className={clsx(
           'w-full border-b border-b-gray-800 bg-black px-[4vw] xl:px-10vw',
-          {'pb-44 pt-10': float, 'py-10': !float},
+          { 'pb-44 pt-10': float, 'py-10': !float },
         )}
       >
         <div className="relative mx-auto w-full max-w-7xl items-center">
@@ -126,7 +126,7 @@ function MoreMenus() {
       <DropdownMenuSeparator />
       <DropdownMenuGroup className="p-1">
         <Link to="/cash-flow/guides">
-          <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-800 hover:bg-gray-800">
+          <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 dark:border-gray-800 hover:bg-gray-800">
             <div className="flex items-center gap-x-2">
               <BookOpenCheck size={18} />
               <p>Guides</p>
@@ -156,4 +156,4 @@ function MoreMenus() {
   )
 }
 
-export {LayoutTitle}
+export { LayoutTitle }
