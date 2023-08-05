@@ -1,4 +1,4 @@
-import { useFetcher } from '@remix-run/react'
+import {useFetcher} from '@remix-run/react'
 import * as React from 'react'
 
 enum Theme {
@@ -78,8 +78,8 @@ function ThemeProvider({
       const newTheme = typeof cb === 'function' ? cb(theme) : cb
       if (newTheme) {
         persistThemeRef.current.submit(
-          { theme: newTheme },
-          { action: 'action/set-theme', method: 'POST' },
+          {theme: newTheme},
+          {action: 'action/set-theme', method: 'POST'},
         )
       }
       setThemeState(newTheme)
@@ -122,4 +122,4 @@ function Themed({
   }
 }
 
-export { useTheme, ThemeProvider, Theme, isTheme, Themed }
+export {useTheme, ThemeProvider, Theme, isTheme, Themed}

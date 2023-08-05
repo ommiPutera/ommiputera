@@ -1,6 +1,6 @@
-import { BookOpenCheck, ChevronRight, ChevronsUpDown } from 'lucide-react'
-import { Avatar, AvatarImage } from './shadcn/avatar'
-import { useRootData } from '~/utils/use-root-data'
+import {BookOpenCheck, ChevronRight, ChevronsUpDown} from 'lucide-react'
+import {Avatar, AvatarImage} from './shadcn/avatar'
+import {useRootData} from '~/utils/use-root-data'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,14 +10,14 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import { Link } from '@remix-run/react'
+import {Link} from '@remix-run/react'
 
 function Profile() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <div className="ml-1 flex items-center gap-x-2 rounded-full bg-gray-100 border-2 border-gray-200 hover:border-black dark:border-gray-600 dark:hover:border-gray-200 dark:bg-gray-800 px-4 py-1.5">
+        <div className="ml-1 flex items-center gap-x-2 rounded-full border-2 border-gray-200 bg-gray-100 px-4 py-1.5 hover:border-black dark:border-gray-600 dark:bg-gray-800 dark:hover:border-gray-200">
           <Avatar className="relative h-5 w-5">
             <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
           </Avatar>
@@ -31,7 +31,7 @@ function Profile() {
 }
 
 function MoreMenus() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <DropdownMenuContent className="">
       <DropdownMenuLabel className="px-2">
@@ -42,7 +42,7 @@ function MoreMenus() {
       <DropdownMenuSeparator />
       <DropdownMenuGroup className="p-1">
         <Link to="/me">
-          <DropdownMenuItem className="flex w-full items-center justify-between gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 dark:border-gray-800 hover:bg-gray-800">
+          <DropdownMenuItem className="flex w-full items-center justify-between gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
             <div className="flex items-center gap-x-2">
               <BookOpenCheck size={18} />
               <p>Profile</p>
@@ -58,4 +58,4 @@ function MoreMenus() {
   )
 }
 
-export { Profile }
+export {Profile}

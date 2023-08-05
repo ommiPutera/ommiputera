@@ -2,7 +2,7 @@ export default function Analytics() {
   return (
     <div className="col-span-6 md:col-span-3">
       <div className="grid grid-cols-2 gap-3">
-        <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-100 dark:border-gray-800 px-3 py-6 text-center">
+        <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-100 px-3 py-6 text-center dark:border-gray-800">
           <img
             src="/vectors/expenses-vector.png"
             alt=""
@@ -13,7 +13,7 @@ export default function Analytics() {
             Kesehatan Financial
           </h5>
         </div>
-        <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-100 dark:border-gray-800 px-3 py-6 text-center">
+        <div className="text-secondary col-span-1 flex flex-col items-center justify-center gap-2 rounded-md border border-gray-100 px-3 py-6 text-center dark:border-gray-800">
           <img
             src="/vectors/expenses-vector.png"
             alt=""

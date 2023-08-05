@@ -1,13 +1,13 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus, X, BookOpenCheck } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import type { LoaderData } from './route'
-import { ButtonLink } from '~/components/button'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, X, BookOpenCheck} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderData} from './route'
+import {ButtonLink} from '~/components/button'
 import React from 'react'
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <div className="flex flex-col">
@@ -18,7 +18,7 @@ export default function Board() {
           posts?.map(post => (
             <div
               key={post.id}
-              className="col-span-1 cursor-pointer rounded-lg border border-gray-100 dark:border-gray-800 bg-black p-4 hover:border-gray-100 dark:border-gray-800"
+              className="col-span-1 cursor-pointer rounded-lg border border-gray-100 bg-black p-4 hover:border-gray-100 dark:border-gray-800 dark:border-gray-800"
             >
               <UpdatePage {...JSON.parse(JSON.stringify(post))} />
             </div>
@@ -38,7 +38,7 @@ function Guides() {
 
   if (!show) return <></>
   return (
-    <div className="mb-4 flex items-center justify-between rounded-lg border border-gray-100 dark:border-gray-800 bg-black px-8 py-6">
+    <div className="mb-4 flex items-center justify-between rounded-lg border border-gray-100 bg-black px-8 py-6 dark:border-gray-800">
       <div>
         <h4 className="text-lg font-medium">Read Guides</h4>
         <p className="text-secondary">
@@ -52,7 +52,7 @@ function Guides() {
           size="sm"
           variant="subtle"
           to="/cash-flow/guides"
-          className="flex items-center gap-x-2 border border-gray-100 dark:border-gray-800 bg-black"
+          className="flex items-center gap-x-2 border border-gray-100 bg-black dark:border-gray-800"
         >
           <BookOpenCheck size={18} />
           <p>Guides</p>
@@ -66,7 +66,7 @@ function Guides() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -78,7 +78,7 @@ function Tools() {
           size="sm"
           variant="subtle"
           to="/cash-flow/new"
-          className="flex items-center gap-x-2 border border-gray-100 dark:border-gray-800 bg-white text-black"
+          className="flex items-center gap-x-2 border border-gray-100 bg-white text-black dark:border-gray-800"
         >
           <Plus size={16} />
           <p>New Plan</p>
@@ -100,7 +100,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
@@ -132,7 +132,7 @@ function UpdatePage({ id, title }: Post) {
 
 function NoData() {
   return (
-    <div className="grid w-full gap-y-4 rounded-lg border border-gray-100 dark:border-gray-800 bg-black py-44 text-center">
+    <div className="grid w-full gap-y-4 rounded-lg border border-gray-100 bg-black py-44 text-center dark:border-gray-800">
       <div className="mx-auto w-fit rounded-full bg-gray-800 p-5">
         <img src="/vectors/checklist.png" alt="" className="h-10 w-10" />
       </div>

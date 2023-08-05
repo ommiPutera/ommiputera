@@ -15,31 +15,31 @@ import {
   useLoaderData,
   useNavigation,
 } from '@remix-run/react'
-import { Analytics } from '@vercel/analytics/react'
+import {Analytics} from '@vercel/analytics/react'
 import * as React from 'react'
-import { useSpinDelay } from 'spin-delay'
-import { Navbar } from '~/components/navbar'
+import {useSpinDelay} from 'spin-delay'
+import {Navbar} from '~/components/navbar'
 import appStyles from '~/styles/app.css'
 import tailwindStyles from '~/styles/tailwind.css'
 import vendorsStyles from '~/styles/vendors.css'
 import prosemirrorStyles from '~/styles/prosemirror.css'
-import { ThemeProvider, useTheme } from '~/utils/theme-provider'
+import {ThemeProvider, useTheme} from '~/utils/theme-provider'
 import Footer from './components/footer'
-import { getDomainUrl, getUrl } from './utils/misc'
-import { getSocialMetas } from './utils/seo'
-import { Toaster } from './components/shadcn/toaster'
+import {getDomainUrl, getUrl} from './utils/misc'
+import {getSocialMetas} from './utils/seo'
+import {Toaster} from './components/shadcn/toaster'
 import clsx from 'clsx'
-import { useRootData } from './utils/use-root-data'
-import { getThemeSession } from './utils/theme.server'
-import { getUser } from './utils/session.server'
+import {useRootData} from './utils/use-root-data'
+import {getThemeSession} from './utils/theme.server'
+import {getUser} from './utils/session.server'
 
 export type LoaderData = SerializeFrom<typeof loader>
 
-export const handle: { id: string } = {
+export const handle: {id: string} = {
   id: 'root',
 }
 
-export async function loader({ request }: DataFunctionArgs) {
+export async function loader({request}: DataFunctionArgs) {
   const user = await getUser(request)
   const [themeSession] = await Promise.all([getThemeSession(request)])
   const data = {
@@ -52,10 +52,10 @@ export async function loader({ request }: DataFunctionArgs) {
     },
   }
   const headers: HeadersInit = new Headers()
-  return json(data, { headers })
+  return json(data, {headers})
 }
 
-export const meta: V2_MetaFunction = ({ data }) => {
+export const meta: V2_MetaFunction = ({data}) => {
   const requestInfo = data?.requestInfo
   return [
     ...getSocialMetas({
@@ -90,10 +90,10 @@ export const links: LinksFunction = () => {
       type: 'font/woff2',
       crossOrigin: 'anonymous',
     },
-    { rel: 'stylesheet', href: vendorsStyles },
-    { rel: 'stylesheet', href: tailwindStyles },
-    { rel: 'stylesheet', href: prosemirrorStyles },
-    { rel: 'stylesheet', href: appStyles },
+    {rel: 'stylesheet', href: vendorsStyles},
+    {rel: 'stylesheet', href: tailwindStyles},
+    {rel: 'stylesheet', href: prosemirrorStyles},
+    {rel: 'stylesheet', href: appStyles},
   ]
 }
 
@@ -163,7 +163,7 @@ function PageLoadingMessage() {
 
   if (!showLoader) return <></>
   return (
-    <div className="fixed bottom-4 z-50 mx-4 flex w-11/12 flex-col justify-center rounded-lg border border-gray-100 dark:border-gray-800 bg-gray-800 px-8 py-4 md:w-4/5 lg:bottom-14 lg:right-14 lg:mx-0 lg:w-72">
+    <div className="fixed bottom-4 z-50 mx-4 flex w-11/12 flex-col justify-center rounded-lg border border-gray-100 bg-gray-800 px-8 py-4 dark:border-gray-800 md:w-4/5 lg:bottom-14 lg:right-14 lg:mx-0 lg:w-72">
       <p className="text-md font-medium lg:text-lg">{action}</p>
       <p className="text-sm font-medium text-gray-400 lg:text-md">
         Path: {pendingPath}
@@ -173,13 +173,16 @@ function PageLoadingMessage() {
 }
 
 function App() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const [theme] = useTheme()
   return (
     <html lang="en" className={`${theme}`}>
       <head>
         <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,viewport-fit=cover"
+        />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta

@@ -1,14 +1,14 @@
 import clsx from 'clsx'
-import { AnchorOrLink } from '~/utils/misc'
-import { useRootData } from '~/utils/use-root-data'
-import { Logo } from './navbar'
-import { useLocation } from '@remix-run/react'
-import { includes, some } from 'lodash'
+import {AnchorOrLink} from '~/utils/misc'
+import {useRootData} from '~/utils/use-root-data'
+import {Logo} from './navbar'
+import {useLocation} from '@remix-run/react'
+import {includes, some} from 'lodash'
 
 const ROUTE_WITHOUT_FOOTER = ['/login', '/cash-flow']
 
 function Footer() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isShowFooter = some(ROUTE_WITHOUT_FOOTER, el =>
     includes(location.pathname, el),
@@ -17,13 +17,11 @@ function Footer() {
   if (isShowFooter) return <></>
   return (
     <footer
-      className={clsx(
-        'z-[2] px-5vw py-9 lg:px-10vw lg:pb-12 lg:pt-24',
-        {
-          'dark:bg-gray-900': !user,
-          'bg-gradient-to-t from-gray-100 to-white dark:from-black dark:to-gray-900': user,
-        },
-      )}
+      className={clsx('z-[2] px-5vw py-9 lg:px-10vw lg:pb-12 lg:pt-24', {
+        'dark:bg-gray-900': !user,
+        'bg-gradient-to-t from-gray-100 to-white dark:from-black dark:to-gray-900':
+          user,
+      })}
     >
       <div className="grid-rows-max-content relative mx-auto grid max-w-7xl grid-cols-4 gap-x-4 md:grid-cols-8 xl:grid-cols-12 xl:gap-x-6">
         <div className="col-span-full md:col-span-3 xl:row-span-2">
@@ -54,7 +52,7 @@ function FooterLink({
       <AnchorOrLink
         prefetch={href.startsWith('http') ? undefined : 'intent'}
         href={href}
-        className="text-gray-400 dark:text-gray-300 hover:dark:text-white hover:text-black font-medium underlined inline-block whitespace-nowrap text-base"
+        className="underlined inline-block whitespace-nowrap text-base font-medium text-gray-400 hover:text-black dark:text-gray-300 hover:dark:text-white"
         reload={reload}
       >
         {name}
@@ -68,10 +66,10 @@ function AboutSection() {
     <div>
       <Logo />
       <ul className="mt-4">
-        <li className="text-gray-400 dark:text-gray-300 pb-4 text-base font-medium">
+        <li className="pb-4 text-base font-medium text-gray-400 dark:text-gray-300">
           All rights reserved © Ommi Putera 2023
         </li>
-        <li className="text-gray-400 dark:text-gray-300 py-1 text-base font-medium">
+        <li className="py-1 text-base font-medium text-gray-400 dark:text-gray-300">
           Helping people make the world a better place through quality software.
         </li>
       </ul>

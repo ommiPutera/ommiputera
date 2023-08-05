@@ -1,20 +1,20 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData, type V2_MetaFunction } from '@remix-run/react'
-import { Button } from '~/components/button'
-import { getImgProps, images } from '~/images'
-import { db } from '~/utils/db.server'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData, type V2_MetaFunction} from '@remix-run/react'
+import {Button} from '~/components/button'
+import {getImgProps, images} from '~/images'
+import {db} from '~/utils/db.server'
 
 export const meta: V2_MetaFunction = () => {
-  return [{ title: 'Ommi Putera - Dashboard' }]
+  return [{title: 'Ommi Putera - Dashboard'}]
 }
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 
@@ -61,7 +61,7 @@ function ProjectSection({
   return (
     <div className="relative mx-auto flex w-full max-w-7xl flex-col gap-5 py-4 lg:gap-y-16 lg:py-12">
       <img
-        className="rounded-lg border border-gray-100 dark:border-gray-800 object-cover lg:mx-5vw"
+        className="rounded-lg border border-gray-100 object-cover dark:border-gray-800 lg:mx-5vw"
         {...getImgProps(image, {
           widths: [840, 1100, 1300, 2600, 3984],
           sizes: ['(min-width:1220px) 3984px', '100vw'],

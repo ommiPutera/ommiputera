@@ -1,10 +1,10 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { Dialog } from '@headlessui/react'
-import { Button } from '~/components/button'
-import type { SaveStatus } from './route'
-import { FormType } from './route'
-import { Form, Link, useLoaderData } from '@remix-run/react'
+import {Dialog} from '@headlessui/react'
+import {Button} from '~/components/button'
+import type {SaveStatus} from './route'
+import {FormType} from './route'
+import {Form, Link, useLoaderData} from '@remix-run/react'
 import {
   ChevronRight,
   FilePlus,
@@ -13,8 +13,8 @@ import {
   Trash2,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type { LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+import type {LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,10 +31,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
   if (!id) return redirect('/cash-flow')
-  const data: LoaderData = { postId: id }
+  const data: LoaderData = {postId: id}
   return data
 }
 
@@ -111,7 +111,7 @@ function MoreMenus({
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup className="p-1">
-        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 dark:border-gray-800 hover:bg-gray-800">
+        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
           <div className="flex items-center gap-x-2">
             <FilePlus size={18} />
             <p>Settings</p>
@@ -198,11 +198,11 @@ const DeleteDialog = ({
       aria-label="Delete project"
       open={isShowDeleteModal}
       onClose={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
       className="z-50 flex w-full items-center"
     >
-      <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-100 dark:border-gray-800 bg-black p-0 lg:mx-auto lg:max-w-[20vw]">
-        <div className="border-b border-gray-100 dark:border-gray-800 px-6 py-4 text-center">
+      <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-100 bg-black p-0 dark:border-gray-800 lg:mx-auto lg:max-w-[20vw]">
+        <div className="border-b border-gray-100 px-6 py-4 text-center dark:border-gray-800">
           <h1 className="text-lg font-semibold">
             Are you sure you want to delete?
           </h1>
@@ -214,7 +214,7 @@ const DeleteDialog = ({
             Paths usage, and more across all projects.
           </p>
         </div>
-        <div className="flex w-full justify-between border-t border-gray-100 dark:border-gray-800 px-6 py-4">
+        <div className="flex w-full justify-between border-t border-gray-100 px-6 py-4 dark:border-gray-800">
           <UIButton
             size="sm"
             type="button"
