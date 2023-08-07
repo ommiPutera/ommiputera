@@ -1,25 +1,25 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet} from '@remix-run/react'
-import {getUserRole, requireUserSession} from '~/utils/session.server'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet } from '@remix-run/react'
+import { getUserRole, requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   if (role === 'BASIC') {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
 
 export default function Index() {
   return (
-    <main className="flex flex-col pb-44">
+    <main className="flex flex-col pb-44 bg-gradient">
       <LayoutTitle />
       <div className="px-[4vw] pb-9 lg:pb-12 xl:px-10vw">
-        <div className="relative h-full min-h-screen w-full">
+        <div className="relative h-full w-full">
           <div className="relative mx-auto grid lg:max-w-5xl">
             <Outlet />
           </div>
@@ -32,7 +32,7 @@ export default function Index() {
 function LayoutTitle() {
   return (
     <>
-      <div className="absolute -z-10 h-[50vh] w-screen bg-red-900 bg-gradient-to-b from-black to-gray-900"></div>
+      <div className="absolute -z-10 h-[50vh] w-screen"></div>
       <div className="w-full px-[4vw] xl:px-10vw">
         <div className="relative mx-auto flex max-w-5xl items-center justify-between py-9 lg:pb-9 lg:pt-14">
           <div className="text-left">

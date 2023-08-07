@@ -1,9 +1,8 @@
-import {Menu} from '@headlessui/react'
-import {Link, useLocation} from '@remix-run/react'
+import { Menu } from '@headlessui/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {includes, some} from 'lodash'
-import {LogOut, MoonIcon, MoreHorizontal, SunIcon} from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { LogOut, MoonIcon, MoreHorizontal, SunIcon } from 'lucide-react'
 import React from 'react'
 import {
   NavigationMenu,
@@ -13,12 +12,12 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '~/components/shadcn/navigation-menu'
-import {BurgerMenu} from '~/utils/icons'
-import {Theme, Themed, useTheme} from '~/utils/theme-provider'
-import {useRootData} from '~/utils/use-root-data'
-import {ButtonLink} from './button'
-import {Profile} from './me'
-import {UIButton} from './shadcn/button'
+import { BurgerMenu } from '~/utils/icons'
+import { Theme, Themed, useTheme } from '~/utils/theme-provider'
+import { useRootData } from '~/utils/use-root-data'
+import { ButtonLink } from './button'
+import { Profile } from './me'
+import { UIButton } from './shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,8 +27,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import {RowAdmin, RowSoftwares} from './menu-elements'
-import {Badge} from './shadcn/badge'
+import { RowAdmin, RowProducts, RowSoftwares } from './menu-elements'
+import { Badge } from './shadcn/badge'
 
 type TypeLinks = {
   name: string | JSX.Element
@@ -41,37 +40,38 @@ type TypeLinks = {
 }[]
 
 const LINKS: TypeLinks = [
-  {name: 'Blog', to: '/blog', asParent: false},
-  {name: 'Project', to: '/project', asParent: false},
-  {name: 'About', to: '/about', asParent: false},
+  { name: 'Blog', to: '/blog', asParent: false },
+  { name: 'Project', to: '/project', asParent: false },
+  { name: 'About', to: '/about', asParent: false },
   {
     name: (
       <div className="flex gap-x-2">
         <div>Softwares</div>
-        <Badge variant="success" size="xs">
-          Free
-        </Badge>
+        <Badge variant="success" size="xs">Free</Badge>
       </div>
     ),
     asParent: true,
-    child: [{component: <RowSoftwares />}],
+    child: [{ component: <RowSoftwares /> }],
   },
   {
     name: 'Products',
     asParent: true,
-    child: [{component: <RowSoftwares />}],
+    child: [{ component: <RowProducts /> }],
   },
 ]
 
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
-const ROUTE_WITHOUT_NAVBAR = ['/login', '/cash-flow']
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
+const ROUTE_WITHOUT_NAVBAR = [
+  '/login',
+  '/cash-flow',
+  '/personal-finance',
+  '/personal-finance/analytics'
+]
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
-  const isShowNavbar = some(ROUTE_WITHOUT_NAVBAR, el =>
-    includes(location.pathname, el),
-  )
+  const isShowNavbar = ROUTE_WITHOUT_NAVBAR.includes(location.pathname)
 
   if (isShowNavbar) return <></>
   if (!user) return <PublicRoute />
@@ -79,7 +79,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="relative">
       <div
@@ -98,8 +98,8 @@ function PublicRoute() {
   )
 }
 
-function ProtectedRoute() {
-  const {user} = useRootData()
+function ProtectedRoute({ children }: { children?: JSX.Element | React.ReactNode }) {
+  const { user } = useRootData()
   const location = useLocation()
   const isSelected = (to: string) => location.pathname === to
   const isOwner = user?.role == 'OWNER'
@@ -116,51 +116,58 @@ function ProtectedRoute() {
             <div className="mr-3">
               <Logo />
             </div>
-            {isOwner && (
-              <div className="px-2">
-                <ButtonLink
-                  type="button"
-                  size="sm"
-                  variant="subtle"
-                  to="/overview"
-                  prefetch="intent"
-                  className={clsx(
-                    'flex items-center gap-x-2 hover:text-black hover:dark:text-white',
-                    {
-                      'text-gray-400 dark:text-gray-300':
-                        !isSelected('/overview'),
-                      'text-black dark:text-white': isSelected('/overview'),
-                    },
-                  )}
-                >
-                  <p className="text-md">Overview</p>
-                </ButtonLink>
-              </div>
-            )}
-            <div>
-              <NavigationMenu>
-                <NavigationMenuList>
+            {
+              children ?
+                children
+                :
+                <>
                   {isOwner && (
-                    <NavigationMenuItem>
-                      <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
-                        Admin
-                      </NavigationMenuTrigger>
-                      <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
-                        <RowAdmin />
-                      </NavigationMenuContent>
-                    </NavigationMenuItem>
+                    <div className="px-2">
+                      <ButtonLink
+                        type="button"
+                        size="sm"
+                        variant="subtle"
+                        to="/overview"
+                        prefetch="intent"
+                        className={clsx(
+                          'flex items-center gap-x-2 hover:text-black hover:dark:text-white',
+                          {
+                            'text-gray-400 dark:text-gray-300':
+                              !isSelected('/overview'),
+                            'text-black dark:text-white': isSelected('/overview'),
+                          },
+                        )}
+                      >
+                        <p className="text-md">Overview</p>
+                      </ButtonLink>
+                    </div>
                   )}
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
-                      Softwares
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
-                      <RowSoftwares />
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-              </NavigationMenu>
-            </div>
+                  <div>
+                    <NavigationMenu>
+                      <NavigationMenuList>
+                        {isOwner && (
+                          <NavigationMenuItem>
+                            <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+                              Admin
+                            </NavigationMenuTrigger>
+                            <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
+                              <RowAdmin />
+                            </NavigationMenuContent>
+                          </NavigationMenuItem>
+                        )}
+                        <NavigationMenuItem>
+                          <NavigationMenuTrigger className="w-full whitespace-nowrap px-2 pb-3 pt-2.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+                            Softwares
+                          </NavigationMenuTrigger>
+                          <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
+                            <RowSoftwares />
+                          </NavigationMenuContent>
+                        </NavigationMenuItem>
+                      </NavigationMenuList>
+                    </NavigationMenu>
+                  </div>
+                </>
+            }
           </div>
           <div className="flex items-center justify-center gap-x-2">
             <DarkModeToggle />
@@ -184,7 +191,7 @@ function MobileNav() {
         </div>
         <Menu>
           <Menu.Button className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-            {({open}) => {
+            {({ open }) => {
               const state = open ? 'open' : 'closed'
               setIsOpen(open)
               return <BurgerMenu state={state} />
@@ -197,14 +204,12 @@ function MobileNav() {
   )
 }
 
-function MobileMenuList({isOpen}: {isOpen: boolean}) {
+function MobileMenuList({ isOpen }: { isOpen: boolean }) {
   const shouldReduceMotion = useReducedMotion()
   React.useEffect(() => {
     if (isOpen) {
-      // don't use overflow-hidden, as that toggles the scrollbar and causes layout shift
       document.body.classList.add('fixed')
       document.body.classList.add('overflow-y-scroll')
-      // alternatively, get bounding box of the menu, and set body height to that.
       document.body.style.height = '100vh'
     } else {
       document.body.classList.remove('fixed')
@@ -212,25 +217,24 @@ function MobileMenuList({isOpen}: {isOpen: boolean}) {
       document.body.style.removeProperty('height')
     }
   }, [isOpen])
-
   return (
     <AnimatePresence>
       <Menu.Items
         className="absolute left-0 right-0 z-[9999] mt-8 w-full origin-top-right rounded-md bg-white shadow-lg focus:outline-none"
         as="div"
       >
-        {({open}) => {
+        {({ open }) => {
           const state = open ? 'open' : 'closed'
           if (state === 'closed') return <></>
           return (
             <motion.div
-              initial={{y: -10, opacity: 0}}
-              animate={{y: 0, opacity: 1}}
-              exit={{y: -10, opacity: 0}}
+              initial={{ y: -10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
               transition={{
-                opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-                rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-                scale: {duration: shouldReduceMotion ? 0 : 0.5},
+                opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+                rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+                scale: { duration: shouldReduceMotion ? 0 : 0.5 },
                 ease: 'linear',
               }}
               className="fixed mt-12 flex h-full w-full flex-col overflow-y-scroll bg-white pb-12 dark:border-gray-100 dark:bg-gray-900"
@@ -349,7 +353,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -438,9 +442,11 @@ function MoreAction() {
 
 function MoreMenus() {
   return (
-    <DropdownMenuContent className="">
+    <DropdownMenuContent>
       <DropdownMenuLabel className="px-2">
-        <p className="font-semibold">View Options</p>
+        <p className="text-secondary px-1 py-1 text-sm font-normal">
+          More Options
+        </p>
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup className="p-1">
@@ -450,10 +456,10 @@ function MoreMenus() {
             type="submit"
             className="w-full cursor-default"
           >
-            <DropdownMenuItem className="w-full rounded-md border border-transparent px-2 hover:border-red-300 hover:bg-red-200">
+            <DropdownMenuItem className="w-full rounded-md border border-transparent px-2 hover:border-red-800 hover:dark:border-red-300 hover:bg-transparent hover:dark:bg-red-200">
               <div className="flex items-center gap-x-2">
-                <LogOut size={18} className="text-red-800" />
-                <p className="text-red-800">Log Out</p>
+                <LogOut size={18} className="text-red-700 dark:text-red-800" />
+                <p className="text-red-700 dark:text-red-800">Log Out</p>
               </div>
             </DropdownMenuItem>
           </UIButton>
@@ -463,8 +469,8 @@ function MoreMenus() {
   )
 }
 
-const iconTransformOrigin = {transformOrigin: '50% 100px'}
-function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
+const iconTransformOrigin = { transformOrigin: '50% 100px' }
+function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' }) {
   const [, setTheme] = useTheme()
   const handleTransition = () => {
     document.body.classList.add('transition-none')
@@ -515,4 +521,4 @@ function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
   )
 }
 
-export {Index as Navbar}
+export { Index as Navbar, ProtectedRoute }

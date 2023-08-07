@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import {AnchorOrLink} from '~/utils/misc'
+import { AnchorOrLink } from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
@@ -47,15 +47,15 @@ function Inner({
   return (
     <div
       className={clsx(
-        'relative flex h-full w-full items-center justify-center whitespace-nowrap',
+        'rounded-full relative flex h-full w-full items-center justify-center whitespace-nowrap',
         {
           '': variant === 'subtle',
           'border-gray-200 group-disabled:border-gray-100 dark:border-gray-800':
             variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
-          'rounded-full px-4 pb-[5px] pt-1 text-md': size === 'sm',
-          'rounded-md px-5 pb-2 pt-1.5 text-base': size === 'md',
-          'rounded-lg px-8 py-3.5 text-lg': size === 'lg',
+          'px-2 pb-[5px] pt-1 text-md': size === 'sm',
+          'px-5 pb-2 pt-1.5 text-base': size === 'md',
+          'px-8 py-3.5 text-lg': size === 'lg',
         },
         className,
       )}
@@ -69,21 +69,19 @@ const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> & ButtonProps
 >(function ButtonLink(
-  {variant = 'primary', size = 'sm', children, className, ...props},
+  { variant = 'primary', size = 'sm', children, className, ...props },
   ref,
 ) {
   return (
     <AnchorOrLink
       ref={ref}
       className={clsx(
-        'group relative inline-flex w-min font-medium ring-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-700',
+        'group rounded-full relative inline-flex w-min font-medium ring-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-700',
         {
           '': variant === 'subtle',
-          'bg-white text-black': variant === 'primary',
+          'bg-gray-900 text-white dark:bg-white dark:text-black': variant === 'primary',
           'border-red-300 bg-red-100 text-red-800 hover:bg-red-200 disabled:border-red-100':
             variant === 'danger',
-          'rounded-full': size === 'sm',
-          'rounded-lg': size === 'md' || size === 'lg',
         },
       )}
       {...props}
@@ -95,4 +93,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export {Button, ButtonLink}
+export { Button, ButtonLink }
