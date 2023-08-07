@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { AnchorOrLink } from '~/utils/misc'
+import {AnchorOrLink} from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
@@ -47,7 +47,7 @@ function Inner({
   return (
     <div
       className={clsx(
-        'rounded-full relative flex h-full w-full items-center justify-center whitespace-nowrap',
+        'relative flex h-full w-full items-center justify-center whitespace-nowrap rounded-full',
         {
           '': variant === 'subtle',
           'border-gray-200 group-disabled:border-gray-100 dark:border-gray-800':
@@ -69,17 +69,18 @@ const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> & ButtonProps
 >(function ButtonLink(
-  { variant = 'primary', size = 'sm', children, className, ...props },
+  {variant = 'primary', size = 'sm', children, className, ...props},
   ref,
 ) {
   return (
     <AnchorOrLink
       ref={ref}
       className={clsx(
-        'group rounded-full relative inline-flex w-min font-medium ring-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-700',
+        'group relative inline-flex w-min rounded-full font-medium ring-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-700',
         {
           '': variant === 'subtle',
-          'bg-gray-900 text-white dark:bg-white dark:text-black': variant === 'primary',
+          'bg-gray-900 text-white dark:bg-white dark:text-black':
+            variant === 'primary',
           'border-red-300 bg-red-100 text-red-800 hover:bg-red-200 disabled:border-red-100':
             variant === 'danger',
         },
@@ -93,4 +94,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export { Button, ButtonLink }
+export {Button, ButtonLink}
