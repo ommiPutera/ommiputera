@@ -1,11 +1,11 @@
-import { Link, useLoaderData } from '@remix-run/react'
+import {Link, useLoaderData} from '@remix-run/react'
 // import { Filter, Plus } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import { ButtonLink } from '~/components/button'
+import type {Post} from '@prisma/client'
+import {ButtonLink} from '~/components/button'
 import React from 'react'
-import type { LoaderFunction } from '@remix-run/node'
-import { getUser } from '~/utils/session.server'
-import { db } from '~/utils/db.server'
+import type {LoaderFunction} from '@remix-run/node'
+import {getUser} from '~/utils/session.server'
+import {db} from '~/utils/db.server'
 // import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 // import {
 //   DndContext,
@@ -35,15 +35,15 @@ export type Task = {
   content: JSX.Element | React.ReactNode | string
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   // const defaultCols: Column[] = [
@@ -315,7 +315,7 @@ export default function Board() {
 //   )
 // }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
