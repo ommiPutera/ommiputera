@@ -1,9 +1,9 @@
-import {SortableContext, useSortable} from '@dnd-kit/sortable'
-import {CSS} from '@dnd-kit/utilities'
-import {useMemo, useState} from 'react'
+import { SortableContext, useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { useMemo, useState } from 'react'
 import TaskCard from './task-card'
-import type {Column, Id, Task} from '~/routes/personal-finance+'
-import {TrashIcon} from 'lucide-react'
+import type { Column, Id, Task } from '~/routes/personal-finance+'
+import { TrashIcon } from 'lucide-react'
 
 interface Props {
   column: Column
@@ -30,7 +30,7 @@ function ColumnContainer({
     return tasks.map(task => task.id)
   }, [tasks])
 
-  const {setNodeRef, attributes, listeners, transform, transition, isDragging} =
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
     useSortable({
       id: column.id,
       data: {
@@ -50,18 +50,7 @@ function ColumnContainer({
       <div
         ref={setNodeRef}
         style={style}
-        className="
-      bg-columnBackgroundColor
-      border-pink-500
-      flex
-      h-[500px]
-      max-h-[500px]
-      w-[350px]
-      flex-col
-      rounded-md
-      border-2
-      opacity-40
-      "
+        className="border-pink-500 flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-2 opacity-40"
       ></div>
     )
   }
@@ -70,10 +59,7 @@ function ColumnContainer({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex w-[350px]
-  flex-col
-  rounded-md
-  "
+      className="flex w-[350px] flex-col rounded-md"
     >
       {/* Column title */}
       <div
@@ -106,14 +92,7 @@ function ColumnContainer({
           onClick={() => {
             deleteColumn(column.id)
           }}
-          className="
-        hover:bg-columnBackgroundColor
-        rounded
-        stroke-gray-500
-        px-1
-        py-2
-        hover:stroke-white
-        "
+          className="rounded stroke-gray-500 px-1 py-2 hover:stroke-white"
         >
           <TrashIcon />
         </button>
