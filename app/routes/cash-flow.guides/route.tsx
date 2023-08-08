@@ -1,6 +1,6 @@
-import {ButtonLink} from '~/components/button'
-import {LayoutTitle} from '../cash-flow._index/misc'
-import {MoveLeftIcon} from 'lucide-react'
+import { ButtonLink } from '~/components/button'
+import { LayoutTitle } from '../cash-flow.index/misc'
+import { MoveLeftIcon } from 'lucide-react'
 
 export default function Index() {
   return (
