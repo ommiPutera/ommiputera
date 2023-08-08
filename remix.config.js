@@ -1,4 +1,4 @@
-const {flatRoutes} = require('remix-flat-routes')
+const { flatRoutes } = require('remix-flat-routes')
 
 /**
  * @type {import("@remix-run/dev").AppConfig}
@@ -24,13 +24,6 @@ module.exports = {
     v2_headers: true,
   },
   routes: async defineRoutes => {
-    return flatRoutes('routes', defineRoutes, {
-      ignoredRouteFiles: [
-        '.*',
-        '**/*.css',
-        '**/*.test.{js,jsx,ts,tsx}',
-        '**/__*.*',
-      ],
-    })
+    return flatRoutes('routes', defineRoutes)
   },
 }
