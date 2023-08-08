@@ -1,12 +1,12 @@
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus } from 'lucide-react'
-import type { Post } from '@prisma/client'
-import { ButtonLink } from '~/components/button'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus} from 'lucide-react'
+import type {Post} from '@prisma/client'
+import {ButtonLink} from '~/components/button'
 import React from 'react'
-import type { LoaderFunction } from '@remix-run/node'
-import { getUser } from '~/utils/session.server'
-import { db } from '~/utils/db.server'
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
+import type {LoaderFunction} from '@remix-run/node'
+import {getUser} from '~/utils/session.server'
+import {db} from '~/utils/db.server'
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -14,7 +14,7 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
-import { SortableContext, arrayMove } from '@dnd-kit/sortable'
+import {SortableContext, arrayMove} from '@dnd-kit/sortable'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
 
@@ -35,17 +35,16 @@ export type Task = {
   content: JSX.Element | React.ReactNode | string
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-
 
   const defaultCols: Column[] = [
     {
@@ -58,7 +57,7 @@ export default function Board() {
     },
   ]
 
-  const postTest: Task[] | undefined = posts?.map((post) => {
+  const postTest: Task[] | undefined = posts?.map(post => {
     return {
       id: post.id,
       columnId: 'todo',
@@ -80,10 +79,7 @@ export default function Board() {
       <div className="relative">
         {isPostsExist ? (
           <div className="w-full">
-            <Kanban
-              defaultCols={defaultCols}
-              defaultTasks={postTest ?? []}
-            />
+            <Kanban defaultCols={defaultCols} defaultTasks={postTest ?? []} />
           </div>
         ) : (
           <div className="w-full">
@@ -95,7 +91,13 @@ export default function Board() {
   )
 }
 
-function Kanban({ defaultCols, defaultTasks }: { defaultCols: Column[], defaultTasks: Task[] }) {
+function Kanban({
+  defaultCols,
+  defaultTasks,
+}: {
+  defaultCols: Column[]
+  defaultTasks: Task[]
+}) {
   const [columns, setColumns] = React.useState<Column[]>(defaultCols)
   const columnsId = React.useMemo(() => columns.map(col => col.id), [columns])
   const [tasks, setTasks] = React.useState<Task[]>(defaultTasks)
@@ -111,7 +113,7 @@ function Kanban({ defaultCols, defaultTasks }: { defaultCols: Column[], defaultT
   )
 
   return (
-    <div className="m-auto flex h-full w-full items-center p-2 border">
+    <div className="m-auto flex h-full w-full items-center border p-2">
       <DndContext
         sensors={sensors}
         onDragStart={onDragStart}
@@ -176,7 +178,7 @@ function Kanban({ defaultCols, defaultTasks }: { defaultCols: Column[], defaultT
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return { ...task, content }
+      return {...task, content}
     })
 
     setTasks(newTasks)
@@ -193,7 +195,7 @@ function Kanban({ defaultCols, defaultTasks }: { defaultCols: Column[], defaultT
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return { ...col, title }
+      return {...col, title}
     })
 
     setColumns(newColumns)
@@ -215,7 +217,7 @@ function Kanban({ defaultCols, defaultTasks }: { defaultCols: Column[], defaultT
     setActiveColumn(null)
     setActiveTask(null)
 
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id
@@ -233,7 +235,7 @@ function Kanban({ defaultCols, defaultTasks }: { defaultCols: Column[], defaultT
   }
 
   function onDragOver(event: DragOverEvent) {
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id
@@ -279,7 +281,7 @@ function generateId() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -313,7 +315,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
