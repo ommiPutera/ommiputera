@@ -1,9 +1,9 @@
-import { SortableContext, useSortable } from '@dnd-kit/sortable'
-import { CSS } from '@dnd-kit/utilities'
-import { useMemo, useState } from 'react'
+import {SortableContext, useSortable} from '@dnd-kit/sortable'
+import {CSS} from '@dnd-kit/utilities'
+import {useMemo, useState} from 'react'
 import TaskCard from './task-card'
-import type { Column, Id, Task } from '~/routes/personal-finance+/_index'
-import { TrashIcon } from 'lucide-react'
+import type {Column, Id, Task} from '~/routes/personal-finance+/_index'
+import {TrashIcon} from 'lucide-react'
 
 interface Props {
   column: Column
@@ -30,7 +30,7 @@ function ColumnContainer({
     return tasks.map(task => task.id)
   }, [tasks])
 
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
+  const {setNodeRef, attributes, listeners, transform, transition, isDragging} =
     useSortable({
       id: column.id,
       data: {
