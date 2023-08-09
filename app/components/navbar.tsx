@@ -1,8 +1,8 @@
-import { Menu } from '@headlessui/react'
-import { Link, useLocation } from '@remix-run/react'
+import {Menu} from '@headlessui/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { LogOut, MoreHorizontal } from 'lucide-react'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {LogOut, MoreHorizontal} from 'lucide-react'
 import React from 'react'
 import {
   NavigationMenu,
@@ -12,14 +12,14 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '~/components/shadcn/navigation-menu'
-import { BurgerMenu } from '~/utils/icons'
-import { Theme, Themed, useTheme } from '~/utils/theme-provider'
-import { useRootData } from '~/utils/use-root-data'
-import { ButtonLink } from './button'
-import { Profile } from './me'
-import { RowAdmin, RowProducts, RowSoftwares } from './menu-elements'
-import { Badge } from './shadcn/badge'
-import { UIButton } from './shadcn/button'
+import {BurgerMenu} from '~/utils/icons'
+import {Theme, Themed, useTheme} from '~/utils/theme-provider'
+import {useRootData} from '~/utils/use-root-data'
+import {ButtonLink} from './button'
+import {Profile} from './me'
+import {RowAdmin, RowProducts, RowSoftwares} from './menu-elements'
+import {Badge} from './shadcn/badge'
+import {UIButton} from './shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,9 +40,9 @@ type TypeLinks = {
 }[]
 
 const LINKS: TypeLinks = [
-  { name: 'Blog', to: '/blog', asParent: false },
-  { name: 'Project', to: '/project', asParent: false },
-  { name: 'About', to: '/about', asParent: false },
+  {name: 'Blog', to: '/blog', asParent: false},
+  {name: 'Project', to: '/project', asParent: false},
+  {name: 'About', to: '/about', asParent: false},
   {
     name: (
       <div className="flex gap-x-2">
@@ -53,16 +53,16 @@ const LINKS: TypeLinks = [
       </div>
     ),
     asParent: true,
-    child: [{ component: <RowSoftwares /> }],
+    child: [{component: <RowSoftwares />}],
   },
   {
     name: 'Products',
     asParent: true,
-    child: [{ component: <RowProducts /> }],
+    child: [{component: <RowProducts />}],
   },
 ]
 
-const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = [
   '/login',
   '/cash-flow',
@@ -71,7 +71,7 @@ const ROUTE_WITHOUT_NAVBAR = [
 ]
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isShowNavbar = ROUTE_WITHOUT_NAVBAR.includes(location.pathname)
 
@@ -81,7 +81,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="relative">
       <div
@@ -105,7 +105,7 @@ function ProtectedRoute({
 }: {
   children?: JSX.Element | React.ReactNode
 }) {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isSelected = (to: string) => location.pathname === to
   const isOwner = user?.role == 'OWNER'
@@ -196,7 +196,7 @@ function MobileNav() {
         </div>
         <Menu>
           <Menu.Button className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-            {({ open }) => {
+            {({open}) => {
               const state = open ? 'open' : 'closed'
               setIsOpen(open)
               return <BurgerMenu state={state} />
@@ -209,7 +209,7 @@ function MobileNav() {
   )
 }
 
-function MobileMenuList({ isOpen }: { isOpen: boolean }) {
+function MobileMenuList({isOpen}: {isOpen: boolean}) {
   const shouldReduceMotion = useReducedMotion()
   React.useEffect(() => {
     if (isOpen) {
@@ -228,18 +228,18 @@ function MobileMenuList({ isOpen }: { isOpen: boolean }) {
         className="absolute left-0 right-0 z-[9999] mt-8 w-full origin-top-right rounded-md bg-white shadow-lg focus:outline-none"
         as="div"
       >
-        {({ open }) => {
+        {({open}) => {
           const state = open ? 'open' : 'closed'
           if (state === 'closed') return <></>
           return (
             <motion.div
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
+              initial={{y: -10, opacity: 0}}
+              animate={{y: 0, opacity: 1}}
+              exit={{y: -10, opacity: 0}}
               transition={{
-                opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-                rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-                scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+                opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+                rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+                scale: {duration: shouldReduceMotion ? 0 : 0.5},
                 ease: 'linear',
               }}
               className="fixed mt-12 flex h-full w-full flex-col overflow-y-scroll bg-white pb-12 dark:border-gray-100 dark:bg-gray-900"
@@ -358,7 +358,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: { component: string | React.ReactNode }[]
+  child?: {component: string | React.ReactNode}[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -474,7 +474,7 @@ function MoreMenus() {
   )
 }
 
-function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' }) {
+function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
   const [, setTheme] = useTheme()
   const handleTransition = () => {
     document.body.classList.add('transition-none')
@@ -498,23 +498,153 @@ function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' })
       )}
       title="Toggle between light and dark mode"
     >
-      <svg className="icon light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentcolor" viewBox="0 0 256 256">
+      <svg
+        className="icon light"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        fill="currentcolor"
+        viewBox="0 0 256 256"
+      >
         <rect width="256" height="256" fill="none"></rect>
-        <line x1="43" y1="108.8" x2="24.5" y2="101.1" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="92.8" y1="59" x2="85.1" y2="40.5" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="163.2" y1="59" x2="170.9" y2="40.5" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="213" y1="108.8" x2="231.5" y2="101.1" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="240" y1="160" x2="16" y2="160" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="208" y1="200" x2="48" y2="200" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <path d="M70.2,160a60,60,0,1,1,115.6,0" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path>
+        <line
+          x1="43"
+          y1="108.8"
+          x2="24.5"
+          y2="101.1"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="92.8"
+          y1="59"
+          x2="85.1"
+          y2="40.5"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="163.2"
+          y1="59"
+          x2="170.9"
+          y2="40.5"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="213"
+          y1="108.8"
+          x2="231.5"
+          y2="101.1"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="240"
+          y1="160"
+          x2="16"
+          y2="160"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="208"
+          y1="200"
+          x2="48"
+          y2="200"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <path
+          d="M70.2,160a60,60,0,1,1,115.6,0"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></path>
       </svg>
-      <svg className="icon dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentcolor" viewBox="0 0 256 256">
+      <svg
+        className="icon dark"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="22"
+        height="22"
+        fill="currentcolor"
+        viewBox="0 0 256 256"
+      >
         <rect width="256" height="256" fill="none"></rect>
-        <line x1="168" y1="24" x2="168" y2="56" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="184" y1="40" x2="152" y2="40" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="216" y1="112" x2="216" y2="64" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <line x1="240" y1="88" x2="192" y2="88" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></line>
-        <path d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0A92,92,0,1,0,216.7,152.6Z" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="22"></path>
+        <line
+          x1="168"
+          y1="24"
+          x2="168"
+          y2="56"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="184"
+          y1="40"
+          x2="152"
+          y2="40"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="216"
+          y1="112"
+          x2="216"
+          y2="64"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <line
+          x1="240"
+          y1="88"
+          x2="192"
+          y2="88"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></line>
+        <path
+          d="M216.7,152.6A91.9,91.9,0,0,1,103.4,39.3h0A92,92,0,1,0,216.7,152.6Z"
+          fill="none"
+          stroke="currentcolor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="22"
+        ></path>
       </svg>
       <span
         className={clsx('ml-4 text-black dark:text-white', {
@@ -527,4 +657,4 @@ function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' })
   )
 }
 
-export { Index as Navbar, ProtectedRoute }
+export {Index as Navbar, ProtectedRoute}

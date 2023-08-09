@@ -1,4 +1,4 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -6,17 +6,17 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
-import { SortableContext, arrayMove } from '@dnd-kit/sortable'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus } from 'lucide-react'
+import {SortableContext, arrayMove} from '@dnd-kit/sortable'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
 
 export type LoaderData = {
   posts: Post[] | null
@@ -35,15 +35,15 @@ export type Task = {
   content: JSX.Element | React.ReactNode | string
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
 function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   const defaultCols: Column[] = [
@@ -89,7 +89,7 @@ function Board() {
       <Tools />
       <div className="relative">
         {isPostsExist ? (
-          <div className='w-screen'>
+          <div className="w-screen">
             <div className="full-bleed-kanban">
               <Kanban defaultCols={defaultCols} defaultTasks={postTest ?? []} />
             </div>
@@ -136,7 +136,7 @@ function Kanban({
       <SortableContext items={columnsId}>
         <div className="wrapper-full-bleed-kanban">
           {columns.map(col => (
-            <div key={col.id} className='item-full-bleed-kanban'>
+            <div key={col.id} className="item-full-bleed-kanban">
               <ColumnContainer
                 column={col}
                 deleteColumn={deleteColumn}
@@ -191,7 +191,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return { ...task, content }
+      return {...task, content}
     })
 
     setTasks(newTasks)
@@ -208,7 +208,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return { ...col, title }
+      return {...col, title}
     })
 
     setColumns(newColumns)
@@ -230,7 +230,7 @@ function Kanban({
     setActiveColumn(null)
     setActiveTask(null)
 
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id
@@ -248,7 +248,7 @@ function Kanban({
   }
 
   function onDragOver(event: DragOverEvent) {
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id
@@ -294,7 +294,7 @@ function generateId() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -328,7 +328,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>

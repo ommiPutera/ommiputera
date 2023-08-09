@@ -1,5 +1,5 @@
-import { ArrowRight } from 'lucide-react'
-import { Badge } from '../shadcn/badge'
+import {ArrowRight} from 'lucide-react'
+import {Badge} from '../shadcn/badge'
 
 function HomeHeroSection() {
   return (
@@ -58,4 +58,4 @@ function ProjectHeroSection() {
   )
 }
 
-export { HomeHeroSection, PersonalFinanceHeroSection, ProjectHeroSection }
+export {HomeHeroSection, PersonalFinanceHeroSection, ProjectHeroSection}
