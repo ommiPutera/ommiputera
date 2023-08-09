@@ -1,8 +1,8 @@
-import {Tab} from '@headlessui/react'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLocation} from '@remix-run/react'
+import { Tab } from '@headlessui/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import {
   PieChart,
   BookOpenCheck,
@@ -13,19 +13,19 @@ import {
   X,
 } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {ProtectedRoute} from '~/components/navbar'
-import {UIButton} from '~/components/shadcn/button'
-import {getUserRole, requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { ProtectedRoute } from '~/components/navbar'
+import { UIButton } from '~/components/shadcn/button'
+import { getUserRole, requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   if (role === 'BASIC') {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -100,12 +100,12 @@ export default function Index() {
           </div>
           <AnimatePresence>
             <motion.div
-              className="mx-auto mb-44 w-full max-w-7xl"
-              initial={{y: 140, opacity: 0}}
-              animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
-              exit={{y: 220, opacity: 0}}
+              className="mx-auto mb-44"
+              initial={{ y: 140, opacity: 0 }}
+              animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
+              exit={{ y: 220, opacity: 0 }}
               transition={{
-                opacity: {duration: shouldReduceMotion ? 0 : 0.5},
+                opacity: { duration: shouldReduceMotion ? 0 : 0.5 },
                 ease: 'linear',
               }}
             >

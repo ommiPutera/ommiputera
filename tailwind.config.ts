@@ -65,9 +65,6 @@ module.exports = {
         800: 'var(--color-orange-800)',
         900: 'var(--color-orange-900)',
       },
-      slate: {
-        500: 'var(--color-slate-500)',
-      },
     },
     extend: {
       maxWidth: {

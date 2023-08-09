@@ -1,11 +1,11 @@
-import {ArrowRight} from 'lucide-react'
-import {Badge} from '../shadcn/badge'
+import { ArrowRight } from 'lucide-react'
+import { Badge } from '../shadcn/badge'
 
 function HomeHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid max-w-5xl gap-8 lg:gap-12">
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
-        <button className="flex items-center gap-x-2 rounded-full border-2 border-gray-200 bg-gray-100 px-6 py-2 hover:border-black dark:border-gray-600 dark:bg-gray-800 dark:hover:border-gray-200">
+        <button className="flex items-center gap-x-2 rounded-full border-2 border-gray-200 bg-gray-100 px-3 py-2 hover:border-black dark:border-gray-600 dark:bg-gray-800 dark:hover:border-gray-200">
           <Badge variant="orange" size="xs">
             New
           </Badge>
@@ -58,4 +58,4 @@ function ProjectHeroSection() {
   )
 }
 
-export {HomeHeroSection, PersonalFinanceHeroSection, ProjectHeroSection}
+export { HomeHeroSection, PersonalFinanceHeroSection, ProjectHeroSection }

@@ -1,12 +1,4 @@
-import {Link, useLoaderData} from '@remix-run/react'
-import {Filter, Plus} from 'lucide-react'
-import type {Post} from '@prisma/client'
-import {ButtonLink} from '~/components/button'
-import React from 'react'
-import type {LoaderFunction} from '@remix-run/node'
-import {getUser} from '~/utils/session.server'
-import {db} from '~/utils/db.server'
-import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
+import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -14,9 +6,17 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
-import {SortableContext, arrayMove} from '@dnd-kit/sortable'
+import { SortableContext, arrayMove } from '@dnd-kit/sortable'
+import type { Post } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus } from 'lucide-react'
+import React from 'react'
+import { ButtonLink } from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 
 export type LoaderData = {
   posts: Post[] | null
@@ -35,15 +35,15 @@ export type Task = {
   content: JSX.Element | React.ReactNode | string
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
 function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   const defaultCols: Column[] = [
@@ -55,6 +55,18 @@ function Board() {
       id: 'doing',
       title: 'Doing',
     },
+    {
+      id: 'doing1',
+      title: 'Doing 1',
+    },
+    {
+      id: 'doing2',
+      title: 'Doing 2',
+    },
+    {
+      id: 'doing3',
+      title: 'Doing 3',
+    },
   ]
 
   const postTest: Task[] | undefined = posts?.map(post => {
@@ -64,7 +76,7 @@ function Board() {
       content: (
         <div
           key={post.id}
-          className="col-span-1 cursor-pointer rounded-lg border border-white bg-gray-100 p-4 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-900"
+          className="col-span-1 cursor-pointer rounded-lg border border-white bg-white p-4 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-900"
         >
           <UpdatePage {...JSON.parse(JSON.stringify(post))} />
         </div>
@@ -75,11 +87,12 @@ function Board() {
   return (
     <div className="flex flex-col">
       <Tools />
-
       <div className="relative">
         {isPostsExist ? (
-          <div className="w-full">
-            <Kanban defaultCols={defaultCols} defaultTasks={postTest ?? []} />
+          <div className='w-screen'>
+            <div className="full-bleed-kanban">
+              <Kanban defaultCols={defaultCols} defaultTasks={postTest ?? []} />
+            </div>
           </div>
         ) : (
           <div className="w-full">
@@ -100,6 +113,7 @@ function Kanban({
 }) {
   const [columns, setColumns] = React.useState<Column[]>(defaultCols)
   const columnsId = React.useMemo(() => columns.map(col => col.id), [columns])
+
   const [tasks, setTasks] = React.useState<Task[]>(defaultTasks)
   const [activeColumn, setActiveColumn] = React.useState<Column | null>(null)
   const [activeTask, setActiveTask] = React.useState<Task | null>(null)
@@ -113,18 +127,17 @@ function Kanban({
   )
 
   return (
-    <div className="m-auto flex h-full w-full items-center border p-2">
-      <DndContext
-        sensors={sensors}
-        onDragStart={onDragStart}
-        onDragEnd={onDragEnd}
-        onDragOver={onDragOver}
-      >
-        <div className="flex gap-1">
-          <SortableContext items={columnsId}>
-            {columns.map(col => (
+    <DndContext
+      sensors={sensors}
+      onDragStart={onDragStart}
+      onDragEnd={onDragEnd}
+      onDragOver={onDragOver}
+    >
+      <SortableContext items={columnsId}>
+        <div className="wrapper-full-bleed-kanban">
+          {columns.map(col => (
+            <div key={col.id} className='item-full-bleed-kanban'>
               <ColumnContainer
-                key={col.id}
                 column={col}
                 deleteColumn={deleteColumn}
                 updateColumn={updateColumn}
@@ -133,31 +146,31 @@ function Kanban({
                 updateTask={updateTask}
                 tasks={tasks.filter(task => task.columnId === col.id)}
               />
-            ))}
-          </SortableContext>
+            </div>
+          ))}
         </div>
-        <DragOverlay>
-          {activeColumn && (
-            <ColumnContainer
-              column={activeColumn}
-              deleteColumn={deleteColumn}
-              updateColumn={updateColumn}
-              createTask={createTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-              tasks={tasks.filter(task => task.columnId === activeColumn.id)}
-            />
-          )}
-          {activeTask && (
-            <TaskCard
-              task={activeTask}
-              deleteTask={deleteTask}
-              updateTask={updateTask}
-            />
-          )}
-        </DragOverlay>
-      </DndContext>
-    </div>
+      </SortableContext>
+      <DragOverlay>
+        {activeColumn && (
+          <ColumnContainer
+            column={activeColumn}
+            deleteColumn={deleteColumn}
+            updateColumn={updateColumn}
+            createTask={createTask}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+            tasks={tasks.filter(task => task.columnId === activeColumn.id)}
+          />
+        )}
+        {activeTask && (
+          <TaskCard
+            task={activeTask}
+            deleteTask={deleteTask}
+            updateTask={updateTask}
+          />
+        )}
+      </DragOverlay>
+    </DndContext>
   )
 
   function createTask(columnId: Id) {
@@ -178,7 +191,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return {...task, content}
+      return { ...task, content }
     })
 
     setTasks(newTasks)
@@ -195,7 +208,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return {...col, title}
+      return { ...col, title }
     })
 
     setColumns(newColumns)
@@ -217,7 +230,7 @@ function Kanban({
     setActiveColumn(null)
     setActiveTask(null)
 
-    const {active, over} = event
+    const { active, over } = event
     if (!over) return
 
     const activeId = active.id
@@ -235,7 +248,7 @@ function Kanban({
   }
 
   function onDragOver(event: DragOverEvent) {
-    const {active, over} = event
+    const { active, over } = event
     if (!over) return
 
     const activeId = active.id
@@ -281,12 +294,12 @@ function generateId() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
-    <div className="relative mx-auto mb-7 flex w-full max-w-5xl justify-between">
+    <div className="relative mx-auto flex w-full max-w-5xl justify-between">
       <div className="">
         <ButtonLink
           type="button"
@@ -315,7 +328,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>

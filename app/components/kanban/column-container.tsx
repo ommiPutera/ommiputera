@@ -1,9 +1,9 @@
-import {SortableContext, useSortable} from '@dnd-kit/sortable'
-import {CSS} from '@dnd-kit/utilities'
-import {useMemo, useState} from 'react'
+import { SortableContext, useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import { useMemo, useState } from 'react'
 import TaskCard from './task-card'
-import type {Column, Id, Task} from '~/routes/personal-finance+/_index'
-import {TrashIcon} from 'lucide-react'
+import type { Column, Id, Task } from '~/routes/personal-finance+/_index'
+import { TrashIcon } from 'lucide-react'
 
 interface Props {
   column: Column
@@ -30,7 +30,7 @@ function ColumnContainer({
     return tasks.map(task => task.id)
   }, [tasks])
 
-  const {setNodeRef, attributes, listeners, transform, transition, isDragging} =
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
     useSortable({
       id: column.id,
       data: {
@@ -50,7 +50,7 @@ function ColumnContainer({
       <div
         ref={setNodeRef}
         style={style}
-        className="border-pink-500 flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md border-2 opacity-40"
+        className="flex h-[500px] max-h-[500px] w-[350px] flex-col rounded-md opacity-40"
       ></div>
     )
   }
@@ -59,7 +59,7 @@ function ColumnContainer({
     <div
       ref={setNodeRef}
       style={style}
-      className="flex w-[350px] flex-col rounded-md"
+      className="flex w-[350px] flex-col rounded-lg"
     >
       {/* Column title */}
       <div
@@ -68,13 +68,13 @@ function ColumnContainer({
         onClick={() => {
           setEditMode(true)
         }}
-        className="flex cursor-grab items-center justify-between rounded-md border text-md font-bold"
+        className="flex cursor-grab items-center rounded-t-lg justify-between px-2 text-md font-bold"
       >
-        <div className="flex gap-2 border">
+        <div className="flex gap-2">
           {!editMode && column.title}
           {editMode && (
             <input
-              className="focus:border-rose-500 bg-black px-2 outline-none"
+              className="bg-black px-2 outline-none"
               value={column.title}
               onChange={e => updateColumn(column.id, e.target.value)}
               autoFocus
@@ -92,12 +92,12 @@ function ColumnContainer({
           onClick={() => {
             deleteColumn(column.id)
           }}
-          className="rounded stroke-gray-500 px-1 py-2 hover:stroke-white"
+          className="px-1 py-2 hover:stroke-white"
         >
           <TrashIcon />
         </button>
       </div>
-      <div className="flex flex-grow flex-col gap-1 overflow-y-auto overflow-x-hidden p-2">
+      <div className="flex flex-grow flex-col gap-2 overflow-y-auto overflow-x-hidden p-2">
         <SortableContext items={tasksIds}>
           {tasks.map(task => (
             <TaskCard
