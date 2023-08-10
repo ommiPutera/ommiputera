@@ -1,82 +1,75 @@
-import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
+import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
   PointerSensor,
+  closestCenter,
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
-import {SortableContext, arrayMove} from '@dnd-kit/sortable'
-import type {Post} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
-import {Filter, Plus} from 'lucide-react'
+import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
+import type { Post } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
+import { ButtonLink } from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
+import type { Column, Id, Task } from '~/components/kanban/types'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export type Id = string | number
-
-export type Column = {
-  id: Id
-  title: string
-}
-
-export type Task = {
-  id: Id
-  columnId: Id
-  content: JSX.Element | React.ReactNode | string
-}
-
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
 function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   const defaultCols: Column[] = [
     {
       id: 'todo',
-      title: 'Todo',
+      title: 'Todo ---- 1',
     },
     {
       id: 'doing',
-      title: 'Doing',
-    },
-    {
-      id: 'doing1',
-      title: 'Doing 1',
-    },
-    {
-      id: 'doing2',
-      title: 'Doing 2',
+      title: 'Doing ---- 2',
     },
     {
       id: 'doing3',
-      title: 'Doing 3',
+      title: 'Doing ---- 3',
+    },
+    {
+      id: 'doing4',
+      title: 'Doing ---- 4',
+    },
+    {
+      id: 'doing5',
+      title: 'Doing ---- 5',
+    },
+    {
+      id: 'doing6',
+      title: 'Doing ---- 6',
     },
   ]
 
-  const postTest: Task[] | undefined = posts?.map(post => {
+  const postTest: Task[] | undefined = posts?.map((post, index) => {
     return {
       id: post.id,
-      columnId: 'todo',
+      columnId: index % 2 === 0 ? 'todo' : 'doing',
       content: (
         <div
           key={post.id}
-          className="col-span-1 cursor-pointer rounded-lg border border-white bg-white p-4 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-900"
+          className="col-span-1 cursor-pointer rounded-md border border-white bg-white p-4 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-900"
         >
           <UpdatePage {...JSON.parse(JSON.stringify(post))} />
         </div>
@@ -87,17 +80,13 @@ function Board() {
   return (
     <div className="flex flex-col">
       <Tools />
-      <div className="relative">
+      <div className="relative w-screen">
         {isPostsExist ? (
-          <div className="w-screen">
-            <div className="full-bleed-kanban">
-              <Kanban defaultCols={defaultCols} defaultTasks={postTest ?? []} />
-            </div>
+          <div className="full-bleed-kanban">
+            <Kanban defaultCols={defaultCols} defaultTasks={postTest ?? []} />
           </div>
         ) : (
-          <div className="w-full">
-            <NoData />
-          </div>
+          <NoData />
         )}
       </div>
     </div>
@@ -112,55 +101,60 @@ function Kanban({
   defaultTasks: Task[]
 }) {
   const [columns, setColumns] = React.useState<Column[]>(defaultCols)
-  const columnsId = React.useMemo(() => columns.map(col => col.id), [columns])
 
   const [tasks, setTasks] = React.useState<Task[]>(defaultTasks)
   const [activeColumn, setActiveColumn] = React.useState<Column | null>(null)
   const [activeTask, setActiveTask] = React.useState<Task | null>(null)
 
+
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
-        distance: 10,
+        distance: 30,
       },
-    }),
-  )
+    })
+  );
+
+  const tasksIds = React.useMemo(() => {
+    return tasks.map(task => task.id)
+  }, [tasks])
 
   return (
     <DndContext
       sensors={sensors}
+      collisionDetection={closestCenter}
       onDragStart={onDragStart}
       onDragEnd={onDragEnd}
       onDragOver={onDragOver}
     >
-      <SortableContext items={columnsId}>
-        <div className="wrapper-full-bleed-kanban">
-          {columns.map(col => (
-            <div key={col.id} className="item-full-bleed-kanban">
-              <ColumnContainer
-                column={col}
-                deleteColumn={deleteColumn}
-                updateColumn={updateColumn}
-                createTask={createTask}
-                deleteTask={deleteTask}
-                updateTask={updateTask}
-                tasks={tasks.filter(task => task.columnId === col.id)}
-              />
-            </div>
-          ))}
-        </div>
-      </SortableContext>
+      <div className="wrapper-full-bleed-kanban">
+        {columns.map(col => (
+          <SortableContext key={col.id} items={tasksIds} strategy={verticalListSortingStrategy}>
+            <ColumnContainer
+              column={col}
+              deleteColumn={deleteColumn}
+              updateColumn={updateColumn}
+              createTask={createTask}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+              tasks={tasks.filter((task) => task.columnId === col.id)}
+            />
+          </SortableContext>
+        ))}
+      </div>
       <DragOverlay>
         {activeColumn && (
-          <ColumnContainer
-            column={activeColumn}
-            deleteColumn={deleteColumn}
-            updateColumn={updateColumn}
-            createTask={createTask}
-            deleteTask={deleteTask}
-            updateTask={updateTask}
-            tasks={tasks.filter(task => task.columnId === activeColumn.id)}
-          />
+          <SortableContext items={tasksIds} strategy={verticalListSortingStrategy}>
+            <ColumnContainer
+              column={activeColumn}
+              deleteColumn={deleteColumn}
+              updateColumn={updateColumn}
+              createTask={createTask}
+              deleteTask={deleteTask}
+              updateTask={updateTask}
+              tasks={tasks.filter(task => task.columnId === activeColumn.id)}
+            />
+          </SortableContext>
         )}
         {activeTask && (
           <TaskCard
@@ -191,7 +185,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return {...task, content}
+      return { ...task, content }
     })
 
     setTasks(newTasks)
@@ -208,7 +202,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return {...col, title}
+      return { ...col, title }
     })
 
     setColumns(newColumns)
@@ -227,28 +221,29 @@ function Kanban({
   }
 
   function onDragEnd(event: DragEndEvent) {
-    setActiveColumn(null)
-    setActiveTask(null)
+    const { active, over } = event
+    console.log("active: ", active)
+    console.log("over: ", over)
+    const isActiveATask = active.data.current?.type === 'Task'
+    const isOverATask = over?.data.current?.type === 'Task'
+    if (active.id !== over?.id && isActiveATask === isOverATask) {
+      setColumns(columns => {
+        const activeColumnIndex = columns.findIndex(col => col.id === active.id)
+        const overColumnIndex = columns.findIndex(col => col.id === over?.id)
+        // console.log("active.id: ", active.id)
+        // console.log("over?.id: ", over?.id)
+        // console.log("columns: ", columns)
+        // console.log("activeColumnIndex: ", activeColumnIndex)
+        // console.log("overColumnIndex: ", overColumnIndex)
+        // console.log(arrayMove(columns, activeColumnIndex, overColumnIndex))
+        return arrayMove(columns, activeColumnIndex, overColumnIndex)
+      })
+    }
 
-    const {active, over} = event
-    if (!over) return
-
-    const activeId = active.id
-    const overId = over.id
-
-    if (activeId === overId) return
-
-    setColumns(columns => {
-      const activeColumnIndex = columns.findIndex(col => col.id === activeId)
-
-      const overColumnIndex = columns.findIndex(col => col.id === overId)
-
-      return arrayMove(columns, activeColumnIndex, overColumnIndex)
-    })
   }
 
   function onDragOver(event: DragOverEvent) {
-    const {active, over} = event
+    const { active, over } = event
     if (!over) return
 
     const activeId = active.id
@@ -258,7 +253,6 @@ function Kanban({
 
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over.data.current?.type === 'Task'
-
     if (!isActiveATask) return
 
     // Im dropping a Task over another Task
@@ -274,12 +268,13 @@ function Kanban({
     }
 
     const isOverAColumn = over.data.current?.type === 'Column'
-
     // Im dropping a Task over a column
     if (isActiveATask && isOverAColumn) {
+      console.log('here 2')
       setTasks(tasks => {
         const activeIndex = tasks.findIndex(t => t.id === activeId)
-
+        console.log('tasks[activeIndex].columnId: ', tasks[activeIndex].columnId)
+        console.log('overId: ', overId)
         tasks[activeIndex].columnId = overId
 
         return arrayMove(tasks, activeIndex, activeIndex)
@@ -294,7 +289,7 @@ function generateId() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -328,26 +323,12 @@ function Tools() {
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
       <Link to={`/cash-flow/${id}`}>
         <div className="flex items-center gap-x-5">
           <h4 className="text-lg font-semibold">{title}</h4>
-          <div className="mt-2 flex flex-wrap gap-2">
-            <p className="rounded-sm bg-red-800 px-1.5 text-xs text-white">
-              Not Completed
-            </p>
-            <p className="rounded-sm bg-gray-800 px-1.5 text-xs text-white">
-              Rupiah
-            </p>
-            <p className="rounded-sm bg-orange-300 px-1.5 text-xs text-white">
-              July 24, 2023 9:58 AM
-            </p>
-            <p className="rounded-sm bg-gray-800 px-1.5 text-xs text-white">
-              Template:Monthly-Expanse
-            </p>
-          </div>
         </div>
         <p className="text-secondary mt-6 text-left text-sm font-light">
           Updated 13h ago..
@@ -359,7 +340,7 @@ function UpdatePage({id, title}: Post) {
 
 function NoData() {
   return (
-    <div className="grid w-full gap-y-4 rounded-lg border border-white bg-gray-100 py-32 text-center dark:border-gray-800 dark:bg-gray-900">
+    <div className="max-w-5xl mx-auto grid gap-y-4 rounded-lg border border-white bg-gray-100 py-32 text-center dark:border-gray-800 dark:bg-gray-900">
       <div className="mx-auto w-fit rounded-full bg-gray-800 p-5">
         <img src="/vectors/checklist.png" alt="" className="h-10 w-10" />
       </div>

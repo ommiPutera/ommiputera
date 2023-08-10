@@ -1,6 +1,6 @@
-import type {Id, Task} from '~/routes/personal-finance+/_index'
-import {useSortable} from '@dnd-kit/sortable'
-import {CSS} from '@dnd-kit/utilities'
+import { useSortable } from '@dnd-kit/sortable'
+import { CSS } from '@dnd-kit/utilities'
+import type { Id, Task } from './types'
 
 interface Props {
   task: Task
@@ -8,8 +8,8 @@ interface Props {
   updateTask: (id: Id, content: string) => void
 }
 
-function TaskCard({task, deleteTask, updateTask}: Props) {
-  const {setNodeRef, attributes, listeners, transform, transition, isDragging} =
+function TaskCard({ task, deleteTask, updateTask }: Props) {
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
     useSortable({
       id: task.id,
       data: {
@@ -28,7 +28,7 @@ function TaskCard({task, deleteTask, updateTask}: Props) {
       <div
         ref={setNodeRef}
         style={style}
-        className="relative flex h-[100px] min-h-[100px] cursor-grab items-center rounded-xl border-2 p-2.5 text-left opacity-30"
+        className="relative flex h-[100px] min-h-[100px] cursor-grab items-center rounded-md border-2 p-2.5 text-left opacity-30"
       />
     )
   }

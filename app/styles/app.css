@@ -254,9 +254,6 @@ p {
   grid-template-columns: inherit;
   padding-block: calc(1rem * 2);
   overflow-x: scroll;
-  overscroll-behavior-x: contain;
-  scroll-snap-type: x proximity;
-  scrollbar-width: none;
 }
 .full-bleed-kanban::-webkit-scrollbar {
   inline-size: 0 !important;
@@ -277,7 +274,7 @@ p {
 .full-bleed-kanban .wrapper-full-bleed-kanban::after {
   content: "";
   align-self: stretch;
-  padding-inline-end: calc((100vw - 1024px) / 2);
+  padding-inline-end: calc((100vw - 1050px) / 2);
   margin-right: -1rem;
 }
 .full-bleed-kanban .item-full-bleed-kanban {
@@ -285,7 +282,7 @@ p {
   display: flex;
   align-items: center;
   justify-content: center;
-  scroll-snap-align: center;
+  border: 1px solid red;
   @apply bg-gray-100 dark:bg-gray-900 rounded-lg border border-white dark:border-black;
   overflow: hidden;
 }
