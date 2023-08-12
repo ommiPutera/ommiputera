@@ -124,7 +124,7 @@ export const ColorSelector: FC<ColorSelectorProps> = ({
       </button>
 
       {isOpen && (
-        <section className="fixed top-full z-[99999] mt-1 flex w-48 flex-col overflow-hidden rounded border border-gray-200 bg-gray-900 bg-white p-1 shadow-xl animate-in fade-in slide-in-from-top-1">
+        <section className="rounded fixed top-full z-[99999] mt-1 flex w-48 flex-col overflow-hidden border border-gray-200 bg-gray-900 bg-white p-1 shadow-xl animate-in fade-in slide-in-from-top-1">
           <div className="my-1 px-2 text-sm text-gray-500">Color</div>
           {TEXT_COLORS.map(({name, color}, index) => (
             <button

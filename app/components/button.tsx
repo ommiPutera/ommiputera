@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { AnchorOrLink } from '~/utils/misc'
+import {AnchorOrLink} from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
@@ -33,11 +33,7 @@ function Button({
         className,
       )}
     >
-      <Inner
-        variant={variant}
-        size={size}
-        rounded={rounded}
-      >
+      <Inner variant={variant} size={size} rounded={rounded}>
         {children}
       </Inner>
     </button>
@@ -50,27 +46,31 @@ function Inner({
   size,
   rounded,
   className,
-}: Pick<ButtonProps, 'children' | 'variant' | 'size' | 'rounded' | 'className'>) {
+}: Pick<
+  ButtonProps,
+  'children' | 'variant' | 'size' | 'rounded' | 'className'
+>) {
   return (
     <div
       className={clsx(
-        'relative flex h-fit w-fit items-center font-medium justify-center whitespace-nowrap',
+        'relative flex h-fit w-fit items-center justify-center whitespace-nowrap font-medium',
         {
           // Variant
           '': variant === 'subtle',
-          'bg-black dark:bg-white text-white dark:text-black': variant === 'primary',
+          'bg-black text-white dark:bg-white dark:text-black':
+            variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
 
           // Size
-          'text-sm px-2.5 py-0.5': size === 'sm',
-          'text-md px-3.5 py-1': size === 'md',
+          'px-2.5 py-0.5 text-sm': size === 'sm',
+          'px-3.5 py-1 text-md': size === 'md',
           'text-lg': size === 'lg',
 
           // Rounded
           'rounded-[4px]': rounded === 'sm',
           'rounded-md': rounded === 'md',
           'rounded-lg': rounded === 'lg',
-          'rounded-full': rounded === 'full'
+          'rounded-full': rounded === 'full',
         },
         className,
       )}
@@ -104,8 +104,8 @@ const ButtonLink = React.forwardRef<
       >
         {children}
       </Inner>
-    </AnchorOrLink >
+    </AnchorOrLink>
   )
 })
 
-export { Button, ButtonLink }
+export {Button, ButtonLink}

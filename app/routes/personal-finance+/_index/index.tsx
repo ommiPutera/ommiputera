@@ -1,4 +1,4 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -7,33 +7,37 @@ import {
   useSensor,
   useSensors,
 } from '@dnd-kit/core'
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, PlusCircle } from 'lucide-react'
+import {
+  SortableContext,
+  arrayMove,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, PlusCircle} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
-import type { Column, Id, Task } from '~/components/kanban/types'
-import { Badge } from '~/components/shadcn/badge'
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
+import type {Column, Id, Task} from '~/components/kanban/types'
+import {Badge} from '~/components/shadcn/badge'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
 function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   const defaultCols: Column[] = [
@@ -66,7 +70,7 @@ function Board() {
       content: (
         <div
           key={post.id}
-          className="col-span-1 cursor-pointer rounded-md border border-white bg-gray-100 dark:bg-gray-800 px-3 py-2 hover:border-gray-100 dark:border-gray-800"
+          className="col-span-1 cursor-pointer rounded-md border border-white bg-gray-100 px-3 py-2 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-800"
         >
           <UpdatePage {...JSON.parse(JSON.stringify(post))} />
         </div>
@@ -103,14 +107,13 @@ function Kanban({
   const [activeColumn, setActiveColumn] = React.useState<Column | null>(null)
   const [activeTask, setActiveTask] = React.useState<Task | null>(null)
 
-
   const sensors = useSensors(
     useSensor(PointerSensor, {
       activationConstraint: {
         distance: 30,
       },
-    })
-  );
+    }),
+  )
 
   const tasksIds = React.useMemo(() => {
     return tasks.map(task => task.id)
@@ -126,7 +129,11 @@ function Kanban({
     >
       <div className="wrapper-full-bleed-kanban">
         {columns.map(col => (
-          <SortableContext key={col.id} items={tasksIds} strategy={verticalListSortingStrategy}>
+          <SortableContext
+            key={col.id}
+            items={tasksIds}
+            strategy={verticalListSortingStrategy}
+          >
             <ColumnContainer
               column={col}
               deleteColumn={deleteColumn}
@@ -134,14 +141,17 @@ function Kanban({
               createTask={createTask}
               deleteTask={deleteTask}
               updateTask={updateTask}
-              tasks={tasks.filter((task) => task.columnId === col.id)}
+              tasks={tasks.filter(task => task.columnId === col.id)}
             />
           </SortableContext>
         ))}
       </div>
       <DragOverlay>
         {activeColumn && (
-          <SortableContext items={tasksIds} strategy={verticalListSortingStrategy}>
+          <SortableContext
+            items={tasksIds}
+            strategy={verticalListSortingStrategy}
+          >
             <ColumnContainer
               column={activeColumn}
               deleteColumn={deleteColumn}
@@ -182,7 +192,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return { ...task, content }
+      return {...task, content}
     })
 
     setTasks(newTasks)
@@ -199,7 +209,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return { ...col, title }
+      return {...col, title}
     })
 
     setColumns(newColumns)
@@ -218,7 +228,7 @@ function Kanban({
   }
 
   function onDragEnd(event: DragEndEvent) {
-    const { active, over } = event
+    const {active, over} = event
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over?.data.current?.type === 'Task'
     if (active.id !== over?.id && isActiveATask === isOverATask) {
@@ -228,11 +238,10 @@ function Kanban({
         return arrayMove(columns, activeColumnIndex, overColumnIndex)
       })
     }
-
   }
 
   function onDragOver(event: DragOverEvent) {
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id
@@ -275,7 +284,7 @@ function generateId() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -284,10 +293,10 @@ function Tools() {
       <ButtonLink
         type="button"
         to="/cash-flow/new"
-        className='flex items-center gap-x-2'
+        className="flex items-center gap-x-2"
       >
         <PlusCircle size={16} />
-        <p className='text-sm'>New Plan</p>
+        <p className="text-sm">New Plan</p>
       </ButtonLink>
       <div className="">
         <ButtonLink
@@ -305,11 +314,13 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="flex flex-col">
-      <div className='mb-2'>
-        <Badge variant="orange" size="xs">Monthly</Badge>
+      <div className="mb-2">
+        <Badge variant="orange" size="xs">
+          Monthly
+        </Badge>
       </div>
       <Link to={`/cash-flow/${id}`}>
         <div className="flex items-center gap-x-5">
@@ -325,7 +336,7 @@ function UpdatePage({ id, title }: Post) {
 
 function NoData() {
   return (
-    <div className="max-w-5xl mx-auto grid gap-y-4 rounded-lg border border-white bg-gray-100 py-32 text-center dark:border-gray-800 dark:bg-gray-900">
+    <div className="mx-auto grid max-w-5xl gap-y-4 rounded-lg border border-white bg-gray-100 py-32 text-center dark:border-gray-800 dark:bg-gray-900">
       <div className="mx-auto w-fit rounded-full bg-gray-800 p-5">
         <img src="/vectors/checklist.png" alt="" className="h-10 w-10" />
       </div>

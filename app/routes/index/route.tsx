@@ -1,32 +1,31 @@
-import type { Project } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { HomeHeroSection } from '~/components/sections/hero'
-import { db } from '~/utils/db.server'
+import type {Project} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {HomeHeroSection} from '~/components/sections/hero'
+import {db} from '~/utils/db.server'
 // import Pricing from './pricing'
 // import RecentWork from './recent-work'
 // import WorkinOn from './working-on'
 // import { SectionSpacer } from '~/components/spacer'
 // import MiniApp from './mini-app'
 import clsx from 'clsx'
-import { useRootData } from '~/utils/use-root-data'
+import {useRootData} from '~/utils/use-root-data'
 
-type LoaderData = { projects: Array<Project> }
+type LoaderData = {projects: Array<Project>}
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const owner = await db.user.findMany({ where: { role: 'OWNER' } })
-  const projects = await db.project.findMany({ where: { userId: owner[0].id } })
-  let data: LoaderData = { projects }
+export const loader: LoaderFunction = async ({request}) => {
+  const owner = await db.user.findMany({where: {role: 'OWNER'}})
+  const projects = await db.project.findMany({where: {userId: owner[0].id}})
+  let data: LoaderData = {projects}
   return data
 }
 // bg-gradient-to-b from-black to-gray-900
 export default function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <main
-      className={clsx(
-        'flex flex-col gap-5 lg:gap-32 ',
-        { 'bg-gradient dark:border-gray-800': user },
-      )}
+      className={clsx('flex flex-col gap-5 lg:gap-32 ', {
+        'bg-gradient dark:border-gray-800': user,
+      })}
     >
       <div className="px-5vw py-9 lg:px-15vw lg:py-12">
         <HomeHeroSection />

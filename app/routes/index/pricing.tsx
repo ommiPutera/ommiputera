@@ -74,7 +74,7 @@ function PricingCard({
   variant: 'default'
 }) {
   return (
-    <div className="col-span-4 flex cursor-pointer flex-col rounded-xl border border-gray-100 px-10 py-12 hover:bg-gray-800 dark:border-gray-800 lg:gap-y-10">
+    <div className="rounded-xl col-span-4 flex cursor-pointer flex-col border border-gray-100 px-10 py-12 hover:bg-gray-800 dark:border-gray-800 lg:gap-y-10">
       <h4 className="w-fit rounded-full border border-red-200 bg-red-100 px-5 py-2.5 text-sm font-medium">
         {title}
       </h4>

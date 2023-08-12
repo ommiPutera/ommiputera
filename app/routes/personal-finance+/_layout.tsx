@@ -1,8 +1,8 @@
-import { Tab } from '@headlessui/react'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
+import {Tab} from '@headlessui/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
 import {
   PieChart,
   BookOpenCheck,
@@ -12,19 +12,19 @@ import {
   X,
 } from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { ProtectedRoute } from '~/components/navbar'
-import { UIButton } from '~/components/shadcn/button'
-import { getUserRole, requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {ProtectedRoute} from '~/components/navbar'
+import {UIButton} from '~/components/shadcn/button'
+import {getUserRole, requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   const role = await getUserRole(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   if (role === 'BASIC') {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -41,21 +41,17 @@ export default function Index() {
       <ProtectedRoute>
         <NavbarMenus />
       </ProtectedRoute>
-      <main
-        className={clsx(
-          'bg-gradient flex flex-col gap-5 lg:gap-32',
-        )}
-      >
+      <main className={clsx('bg-gradient flex flex-col gap-5 lg:gap-32')}>
         <div className="text-primary relative grid gap-4 lg:gap-6">
           <Guides />
           <AnimatePresence>
             <motion.div
               className="mx-auto mb-44 w-full"
-              initial={{ y: 140, opacity: 0 }}
-              animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
-              exit={{ y: 220, opacity: 0 }}
+              initial={{y: 140, opacity: 0}}
+              animate={{y: 0, opacity: 1, transition: {duration: 0.3}}}
+              exit={{y: 220, opacity: 0}}
               transition={{
-                opacity: { duration: shouldReduceMotion ? 0 : 0.5 },
+                opacity: {duration: shouldReduceMotion ? 0 : 0.5},
                 ease: 'linear',
               }}
             >
@@ -97,40 +93,48 @@ function Guides() {
   if (isClose) return <></>
   return (
     <div className="relative mx-auto flex max-w-5xl flex-col items-center justify-center gap-6 rounded-lg border border-white bg-gray-100 dark:border-gray-800 dark:bg-gray-900 md:gap-8">
-      <div className='grid grid-cols-2 gap-6 py-6 px-6'>
-        <div className='col-span-1 flex flex-col gap-y-4'>
-          <h1 className="text-left font-semibold leading-10 text-3xl">
+      <div className="grid grid-cols-2 gap-6 px-6 py-6">
+        <div className="col-span-1 flex flex-col gap-y-4">
+          <h1 className="text-left text-3xl font-semibold leading-10">
             Personal Financial
           </h1>
           <p className="px-0 text-left text-md font-normal text-gray-400 dark:text-gray-200">
-            So I started to walk into the water. I won't lie to you boys, I was terrified. But I pressed on, and as I made my way past the breakers a strange calm came over me.
+            So I started to walk into the water. I won't lie to you boys, I was
+            terrified. But I pressed on, and as I made my way past the breakers
+            a strange calm came over me.
           </p>
-          <ButtonLink
-            type="button"
-            to="/cash-flow/new"
-          >
-            <p className='text-sm'>Get Started</p>
+          <ButtonLink type="button" to="/cash-flow/new">
+            <p className="text-sm">Get Started</p>
           </ButtonLink>
         </div>
-        <div className='col-span-1 flex flex-col gap-y-4'>
-          <h1 className="text-left font-semibold leading-10 text-3xl">
+        <div className="col-span-1 flex flex-col gap-y-4">
+          <h1 className="text-left text-3xl font-semibold leading-10">
             Read Guides
           </h1>
           <p className="px-0 text-left text-md font-normal text-gray-400 dark:text-gray-200">
-            So I started to walk into the water. I won't lie to you boys, I was terrified. But I pressed on, and as I made my way past the breakers a strange calm came over me. I don't know if it was divine intervention or the kinship of all living things but I tell you Jerry at that moment, I was a marine biologist.
+            So I started to walk into the water. I won't lie to you boys, I was
+            terrified. But I pressed on, and as I made my way past the breakers
+            a strange calm came over me. I don't know if it was divine
+            intervention or the kinship of all living things but I tell you
+            Jerry at that moment, I was a marine biologist.
           </p>
           <ButtonLink
             type="button"
             to="/cash-flow/new"
-            className='flex items-center gap-x-2'
+            className="flex items-center gap-x-2"
           >
             <BookOpenCheck size={16} />
-            <p className='text-sm'>Guides</p>
+            <p className="text-sm">Guides</p>
           </ButtonLink>
         </div>
       </div>
       <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
-        <UIButton onClick={() => setIsClose(true)} type="button" size="sm" variant="subtle">
+        <UIButton
+          onClick={() => setIsClose(true)}
+          type="button"
+          size="sm"
+          variant="subtle"
+        >
           <X size={16} />
         </UIButton>
       </div>
@@ -201,7 +205,7 @@ function NavbarMenus() {
   const isSelected = (to: string) =>
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
-    <div className='flex items-center'>
+    <div className="flex items-center">
       <ButtonLink
         type="button"
         size="sm"

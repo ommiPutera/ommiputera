@@ -109,7 +109,7 @@ export const NodeSelector: FC<NodeSelectorProps> = ({
       </button>
 
       {isOpen && (
-        <section className="fixed top-full z-[99999] mt-1 flex w-48 flex-col overflow-hidden rounded border border-gray-200 p-1 shadow-xl animate-in fade-in slide-in-from-top-1">
+        <section className="rounded fixed top-full z-[99999] mt-1 flex w-48 flex-col overflow-hidden border border-gray-200 p-1 shadow-xl animate-in fade-in slide-in-from-top-1">
           {items.map((item, index) => (
             <button
               key={index}
