@@ -2,6 +2,7 @@ import { useSortable } from '@dnd-kit/sortable'
 import TaskCard from './task-card'
 import { CSS } from '@dnd-kit/utilities'
 import type { Column, Id, Task } from './types'
+import clsx from 'clsx'
 
 interface Props {
   column: Column
@@ -31,6 +32,7 @@ function ColumnContainer({
         type: 'Column',
         column,
       },
+      disabled: true
     })
 
   const style = {
@@ -43,26 +45,38 @@ function ColumnContainer({
       <div
         ref={setNodeRef}
         style={style}
-        {...attributes} {...listeners}
+        {...attributes}
+        {...listeners}
         className="relative flex h-[100px] min-h-[100px] cursor-grab items-center rounded-md border-2 p-2.5 text-left opacity-30"
       />
     )
   }
 
-
   return (
     <div
-      ref={setNodeRef} style={style} {...attributes} {...listeners}
-      className="flex w-[300px] flex-col rounded-lg border border-red-900"
+      ref={setNodeRef}
+      style={style}
+      {...attributes}
+      {...listeners}
+      className={clsx("flex w-[250px] flex-col")}
     >
-      <div
-        className="flex cursor-grab items-center justify-between rounded-t-lg px-2 py-2 text-md font-bold"
-      >
-        <div className="rounded-md bg-white dark:bg-gray-800 px-2.5 py-1">
-          <p className='text-sm font-medium'>{column.title}</p>
-        </div>
+      <div className={clsx("border-b-2 mb-2 pb-1 px-2 w-full flex item-center", {
+        'border-red-900': column.id === 'toPlan',
+        'border-orange-900': column.id === 'onPlanning',
+        'border-green-900': column.id === 'achieve',
+        'border-violet-900': column.id === 'onGoing',
+        'border-gray-700': column.id === 'failed',
+      })}>
+        <span className={clsx("w-2 h-2 my-auto mr-2 rounded-full", {
+          'bg-red-900': column.id === 'toPlan',
+          'bg-orange-900': column.id === 'onPlanning',
+          'bg-green-900': column.id === 'achieve',
+          'bg-violet-900': column.id === 'onGoing',
+          'bg-gray-700': column.id === 'failed',
+        })}></span>
+        <p className="text-sm font-semibold leading-[13px] mt-0.5">{column.title}</p>
       </div>
-      <div className="flex min-h-[4rem] flex-grow flex-col gap-2 overflow-y-auto overflow-x-hidden p-2">
+      <div className="flex flex-grow flex-col overflow-y-auto overflow-x-hidden gap-1.5">
         {tasks.map(task => (
           <TaskCard
             key={task.id}

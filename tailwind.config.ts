@@ -12,6 +12,14 @@ module.exports = {
       lg: '1024px',
       xl: '1500px', // this is the "design resolution"
     },
+    borderRadius: {
+      none: '0',
+      sm: '0.225rem',
+      md: '0.375rem',
+      lg: '0.5rem',
+      full: '9999px',
+      large: '12px',
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
@@ -65,8 +73,22 @@ module.exports = {
         800: 'var(--color-orange-800)',
         900: 'var(--color-orange-900)',
       },
+      violet: {
+        100: 'var(--color-violet-100)',
+        200: 'var(--color-violet-200)',
+        300: 'var(--color-violet-300)',
+        400: 'var(--color-violet-400)',
+        500: 'var(--color-violet-500)',
+        600: 'var(--color-violet-600)',
+        700: 'var(--color-violet-700)',
+        800: 'var(--color-violet-800)',
+        900: 'var(--color-violet-900)',
+      },
     },
     extend: {
+      opacity: {
+        '5': '.5',
+      },
       maxWidth: {
         '8xl': '96rem',
       },

@@ -1,9 +1,10 @@
 import clsx from 'clsx'
 import React from 'react'
-import {AnchorOrLink} from '~/utils/misc'
+import { AnchorOrLink } from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
+  rounded?: 'sm' | 'md' | 'lg' | 'full'
   variant?: 'primary' | 'subtle' | 'danger'
   children: React.ReactNode | React.ReactNode[]
   className?: string
@@ -11,7 +12,8 @@ interface ButtonProps {
 
 function Button({
   variant = 'primary',
-  size = 'sm',
+  size = 'md',
+  rounded = 'md',
   children,
   className,
   ...props
@@ -31,7 +33,11 @@ function Button({
         className,
       )}
     >
-      <Inner variant={variant} size={size}>
+      <Inner
+        variant={variant}
+        size={size}
+        rounded={rounded}
+      >
         {children}
       </Inner>
     </button>
@@ -42,20 +48,29 @@ function Inner({
   children,
   variant,
   size,
+  rounded,
   className,
-}: Pick<ButtonProps, 'children' | 'variant' | 'size' | 'className'>) {
+}: Pick<ButtonProps, 'children' | 'variant' | 'size' | 'rounded' | 'className'>) {
   return (
     <div
       className={clsx(
-        'relative flex h-full w-full items-center justify-center whitespace-nowrap rounded-full',
+        'relative flex h-fit w-fit items-center font-medium justify-center whitespace-nowrap',
         {
+          // Variant
           '': variant === 'subtle',
-          'border-gray-200 group-disabled:border-gray-100 dark:border-gray-800':
-            variant === 'primary',
+          'bg-black dark:bg-white text-white dark:text-black': variant === 'primary',
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
-          'px-2 pb-[5px] pt-1 text-md': size === 'sm',
-          'px-5 pb-2 pt-1.5 text-base': size === 'md',
-          'px-8 py-3.5 text-lg': size === 'lg',
+
+          // Size
+          'text-sm px-2.5 py-0.5': size === 'sm',
+          'text-md px-3.5 py-1': size === 'md',
+          'text-lg': size === 'lg',
+
+          // Rounded
+          'rounded-[4px]': rounded === 'sm',
+          'rounded-md': rounded === 'md',
+          'rounded-lg': rounded === 'lg',
+          'rounded-full': rounded === 'full'
         },
         className,
       )}
@@ -69,29 +84,28 @@ const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> & ButtonProps
 >(function ButtonLink(
-  {variant = 'primary', size = 'sm', children, className, ...props},
+  {
+    variant = 'primary',
+    size = 'md',
+    rounded = 'md',
+    children,
+    className,
+    ...props
+  },
   ref,
 ) {
   return (
-    <AnchorOrLink
-      ref={ref}
-      className={clsx(
-        'group relative inline-flex w-min rounded-full font-medium ring-white disabled:cursor-not-allowed disabled:bg-gray-200 disabled:text-gray-700',
-        {
-          '': variant === 'subtle',
-          'bg-gray-900 text-white dark:bg-white dark:text-black':
-            variant === 'primary',
-          'border-red-300 bg-red-100 text-red-800 hover:bg-red-200 disabled:border-red-100':
-            variant === 'danger',
-        },
-      )}
-      {...props}
-    >
-      <Inner variant={variant} size={size} className={clsx(className)}>
+    <AnchorOrLink ref={ref}>
+      <Inner
+        variant={variant}
+        size={size}
+        rounded={rounded}
+        className={clsx(className)}
+      >
         {children}
       </Inner>
-    </AnchorOrLink>
+    </AnchorOrLink >
   )
 })
 
-export {Button, ButtonLink}
+export { Button, ButtonLink }

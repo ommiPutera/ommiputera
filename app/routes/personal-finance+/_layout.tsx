@@ -8,7 +8,6 @@ import {
   BookOpenCheck,
   FilePlus,
   Layout,
-  Plus,
   Settings,
   X,
 } from 'lucide-react'
@@ -44,63 +43,14 @@ export default function Index() {
       </ProtectedRoute>
       <main
         className={clsx(
-          'bg-gradient flex flex-col gap-5 dark:bg-gray-900 lg:gap-32 lg:py-8',
+          'bg-gradient flex flex-col gap-5 lg:gap-32',
         )}
       >
         <div className="text-primary relative grid gap-4 lg:gap-6">
-          <div className="relative mx-auto flex max-w-5xl flex-col items-center justify-center gap-6 rounded-lg border border-white bg-gray-100 py-12 dark:border-gray-800 dark:bg-gray-900 md:gap-8">
-            <h1 className="2xl:w-3/5 w-[85vw] px-0 text-center text-4xl font-semibold leading-10 md:w-2/3 lg:w-3/4 lg:text-7xl lg:leading-[4.5rem]">
-              Welcome to Your Personal Financial
-            </h1>
-            <p className="px-0 text-center text-lg font-normal leading-normal text-gray-400 dark:text-gray-200 md:w-2/3 lg:px-9 lg:text-xl xl:w-3/5">
-              First of all, thank you for interested in reading about me, On
-              this page, I will tell all about my life and my experiences
-            </p>
-            <ButtonLink
-              type="button"
-              size="sm"
-              variant="subtle"
-              to="/cash-flow/new"
-              className="flex items-center gap-x-2 px-0"
-            >
-              <Plus size={16} />
-              <p>New Plan</p>
-            </ButtonLink>
-            <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
-              <UIButton type="button" size="sm" variant="subtle">
-                <X size={16} />
-              </UIButton>
-            </div>
-          </div>
-          <div className="relative mx-auto flex w-full max-w-5xl items-end justify-between rounded-lg border border-white bg-gray-100 px-6 py-6 dark:border-gray-800 dark:bg-gray-900">
-            <div className="">
-              <h4 className="mb-4 text-2xl font-medium">Read Guides</h4>
-              <p className="text-base font-normal leading-normal text-gray-400 dark:text-gray-200 md:w-2/3">
-                First of all, thank you for interested in reading about me, On
-                this page, I will tell all about my life and my experiences
-              </p>
-            </div>
-            <div className="flex items-center gap-x-4">
-              <ButtonLink
-                type="button"
-                size="md"
-                variant="primary"
-                to="/cash-flow/new"
-                className="flex items-center gap-x-2 rounded-lg px-4"
-              >
-                <BookOpenCheck size={16} />
-                <p>Guides</p>
-              </ButtonLink>
-            </div>
-            <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
-              <UIButton type="button" size="sm" variant="subtle">
-                <X size={16} />
-              </UIButton>
-            </div>
-          </div>
+          <Guides />
           <AnimatePresence>
             <motion.div
-              className="mx-auto w-full mb-44"
+              className="mx-auto mb-44 w-full"
               initial={{ y: 140, opacity: 0 }}
               animate={{ y: 0, opacity: 1, transition: { duration: 0.3 } }}
               exit={{ y: 220, opacity: 0 }}
@@ -120,7 +70,7 @@ export default function Index() {
                     className="flex items-center gap-x-2"
                   >
                     <Layout size={18} strokeWidth={2.5} />
-                    <p className="mt-1 text-md">Board View</p>
+                    <p className="mt-1 text-md">Board</p>
                   </TabComponent>
                   <TabComponent
                     to="/personal-finance/analytics"
@@ -138,6 +88,53 @@ export default function Index() {
         </div>
       </main>
     </>
+  )
+}
+
+function Guides() {
+  const [isClose, setIsClose] = React.useState(false)
+
+  if (isClose) return <></>
+  return (
+    <div className="relative mx-auto flex max-w-5xl flex-col items-center justify-center gap-6 rounded-lg border border-white bg-gray-100 dark:border-gray-800 dark:bg-gray-900 md:gap-8">
+      <div className='grid grid-cols-2 gap-6 py-6 px-6'>
+        <div className='col-span-1 flex flex-col gap-y-4'>
+          <h1 className="text-left font-semibold leading-10 text-3xl">
+            Personal Financial
+          </h1>
+          <p className="px-0 text-left text-md font-normal text-gray-400 dark:text-gray-200">
+            So I started to walk into the water. I won't lie to you boys, I was terrified. But I pressed on, and as I made my way past the breakers a strange calm came over me.
+          </p>
+          <ButtonLink
+            type="button"
+            to="/cash-flow/new"
+          >
+            <p className='text-sm'>Get Started</p>
+          </ButtonLink>
+        </div>
+        <div className='col-span-1 flex flex-col gap-y-4'>
+          <h1 className="text-left font-semibold leading-10 text-3xl">
+            Read Guides
+          </h1>
+          <p className="px-0 text-left text-md font-normal text-gray-400 dark:text-gray-200">
+            So I started to walk into the water. I won't lie to you boys, I was terrified. But I pressed on, and as I made my way past the breakers a strange calm came over me. I don't know if it was divine intervention or the kinship of all living things but I tell you Jerry at that moment, I was a marine biologist.
+          </p>
+          <ButtonLink
+            type="button"
+            to="/cash-flow/new"
+            className='flex items-center gap-x-2'
+          >
+            <BookOpenCheck size={16} />
+            <p className='text-sm'>Guides</p>
+          </ButtonLink>
+        </div>
+      </div>
+      <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
+        <UIButton onClick={() => setIsClose(true)} type="button" size="sm" variant="subtle">
+          <X size={16} />
+        </UIButton>
+      </div>
+    </div>
   )
 }
 
@@ -204,7 +201,7 @@ function NavbarMenus() {
   const isSelected = (to: string) =>
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
-    <div>
+    <div className='flex items-center'>
       <ButtonLink
         type="button"
         size="sm"

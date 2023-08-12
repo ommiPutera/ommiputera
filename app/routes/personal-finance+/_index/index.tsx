@@ -11,12 +11,13 @@ import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-ki
 import type { Post } from '@prisma/client'
 import type { LoaderFunction } from '@remix-run/node'
 import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus } from 'lucide-react'
+import { Filter, PlusCircle } from 'lucide-react'
 import React from 'react'
 import { ButtonLink } from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
 import type { Column, Id, Task } from '~/components/kanban/types'
+import { Badge } from '~/components/shadcn/badge'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 
@@ -37,39 +38,35 @@ function Board() {
 
   const defaultCols: Column[] = [
     {
-      id: 'todo',
-      title: 'Todo ---- 1',
+      id: 'toPlan',
+      title: 'To Plan',
     },
     {
-      id: 'doing',
-      title: 'Doing ---- 2',
+      id: 'onPlanning',
+      title: 'On Planning',
     },
     {
-      id: 'doing3',
-      title: 'Doing ---- 3',
+      id: 'onGoing',
+      title: 'On Going',
     },
     {
-      id: 'doing4',
-      title: 'Doing ---- 4',
+      id: 'achieve',
+      title: 'Achieve',
     },
     {
-      id: 'doing5',
-      title: 'Doing ---- 5',
-    },
-    {
-      id: 'doing6',
-      title: 'Doing ---- 6',
+      id: 'failed',
+      title: 'Failed',
     },
   ]
 
   const postTest: Task[] | undefined = posts?.map((post, index) => {
     return {
       id: post.id,
-      columnId: index % 2 === 0 ? 'todo' : 'doing',
+      columnId: index % 2 === 0 ? 'onPlanning' : 'toPlan',
       content: (
         <div
           key={post.id}
-          className="col-span-1 cursor-pointer rounded-md border border-white bg-white p-4 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-900"
+          className="col-span-1 cursor-pointer rounded-md border border-white bg-gray-100 dark:bg-gray-800 px-3 py-2 hover:border-gray-100 dark:border-gray-800"
         >
           <UpdatePage {...JSON.parse(JSON.stringify(post))} />
         </div>
@@ -222,20 +219,12 @@ function Kanban({
 
   function onDragEnd(event: DragEndEvent) {
     const { active, over } = event
-    console.log("active: ", active)
-    console.log("over: ", over)
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over?.data.current?.type === 'Task'
     if (active.id !== over?.id && isActiveATask === isOverATask) {
       setColumns(columns => {
         const activeColumnIndex = columns.findIndex(col => col.id === active.id)
         const overColumnIndex = columns.findIndex(col => col.id === over?.id)
-        // console.log("active.id: ", active.id)
-        // console.log("over?.id: ", over?.id)
-        // console.log("columns: ", columns)
-        // console.log("activeColumnIndex: ", activeColumnIndex)
-        // console.log("overColumnIndex: ", overColumnIndex)
-        // console.log(arrayMove(columns, activeColumnIndex, overColumnIndex))
         return arrayMove(columns, activeColumnIndex, overColumnIndex)
       })
     }
@@ -270,11 +259,8 @@ function Kanban({
     const isOverAColumn = over.data.current?.type === 'Column'
     // Im dropping a Task over a column
     if (isActiveATask && isOverAColumn) {
-      console.log('here 2')
       setTasks(tasks => {
         const activeIndex = tasks.findIndex(t => t.id === activeId)
-        console.log('tasks[activeIndex].columnId: ', tasks[activeIndex].columnId)
-        console.log('overId: ', overId)
         tasks[activeIndex].columnId = overId
 
         return arrayMove(tasks, activeIndex, activeIndex)
@@ -295,18 +281,14 @@ function Tools() {
   if (!isPostsExist) return <></>
   return (
     <div className="relative mx-auto flex w-full max-w-5xl justify-between">
-      <div className="">
-        <ButtonLink
-          type="button"
-          size="sm"
-          variant="subtle"
-          to="/cash-flow/new"
-          className="flex items-center gap-x-2 rounded-lg border border-gray-100 bg-black px-3 text-white dark:border-gray-800 dark:bg-white dark:text-black"
-        >
-          <Plus size={16} />
-          <p>New Plan</p>
-        </ButtonLink>
-      </div>
+      <ButtonLink
+        type="button"
+        to="/cash-flow/new"
+        className='flex items-center gap-x-2'
+      >
+        <PlusCircle size={16} />
+        <p className='text-sm'>New Plan</p>
+      </ButtonLink>
       <div className="">
         <ButtonLink
           type="button"
@@ -326,11 +308,14 @@ function Tools() {
 function UpdatePage({ id, title }: Post) {
   return (
     <div className="flex flex-col">
+      <div className='mb-2'>
+        <Badge variant="orange" size="xs">Monthly</Badge>
+      </div>
       <Link to={`/cash-flow/${id}`}>
         <div className="flex items-center gap-x-5">
           <h4 className="text-lg font-semibold">{title}</h4>
         </div>
-        <p className="text-secondary mt-6 text-left text-sm font-light">
+        <p className="text-secondary mt-2 text-left text-sm font-light">
           Updated 13h ago..
         </p>
       </Link>

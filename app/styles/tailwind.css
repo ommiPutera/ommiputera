@@ -6,6 +6,73 @@
 @tailwind utilities;
 @tailwind screens;
 
+@layer base {
+  :root {
+    --color-black: #0b0b0b;
+    --color-white: #fff;
+    --color-blue-100: #e8f2ff;
+    --color-blue-500: #4b96ff;
+    --color-gray-100: #e8e8e8;
+    --color-gray-200: #b6b6b6;
+    --color-gray-300: #858585;
+    --color-gray-400: #696969;
+    --color-gray-500: #454545;
+    --color-gray-600: #333333;
+    --color-gray-700: #313131;
+    --color-gray-800: #212121;
+    --color-gray-900: #141414;
+    --color-green-100: #011f14;
+    --color-green-200: #013220;
+    --color-green-300: #01452c;
+    --color-green-400: #025839;
+    --color-green-500: #026c45;
+    --color-green-600: #037f51;
+    --color-green-700: #03925e;
+    --color-green-800: #03a56a;
+    --color-green-900: #04b976;
+    --color-orange-100: #472900;
+    --color-orange-200: #6b3d00;
+    --color-orange-300: #8e5200;
+    --color-orange-400: #b26700;
+    --color-orange-500: #d67b00;
+    --color-orange-600: #f99000;
+    --color-orange-700: #ffa01e;
+    --color-orange-800: #ffaf42;
+    --color-orange-900: #ffbe66;
+    --color-red-100: #2a1314;
+    --color-red-200: #3c1618;
+    --color-red-300: #561a1e;
+    --color-red-400: #671e21;
+    --color-red-500: #832126;
+    --color-red-600: #e5484d;
+    --color-red-700: #e5484d;
+    --color-red-800: #d93036;
+    --color-red-900: #ff6166;
+    --color-violet-100: #DAC3E8;
+    --color-violet-200: #D2B7E5;
+    --color-violet-300: #C19EE0;
+    --color-violet-400: #B185DB;
+    --color-violet-500: #A06CD5;
+    --color-violet-600: #9163CB;
+    --color-violet-700: #815AC0;
+    --color-violet-800: #7251B5;
+    --color-violet-900: #6247AA;
+  
+    --space-3xs: clamp(0.25rem, calc(0.23rem + 0.12vw), 0.31rem);
+    --space-2xs: clamp(0.5rem, calc(0.48rem + 0.12vw), 0.56rem);
+    --space-xs: clamp(0.75rem, calc(0.7rem + 0.24vw), 0.88rem);
+    --space-sm: clamp(1rem, calc(0.95rem + 0.24vw), 1.13rem);
+    --space-md: clamp(1.5rem, calc(1.43rem + 0.37vw), 1.69rem);
+    --space-lg: clamp(2rem, calc(1.9rem + 0.49vw), 2.25rem);
+    --space-xl: clamp(3rem, calc(2.85rem + 0.73vw), 3.38rem);
+    --space-2xl: clamp(4rem, calc(3.8rem + 0.98vw), 4.5rem);
+    --space-3xl: clamp(6rem, calc(5.71rem + 1.46vw), 6.75rem);
+  
+    --duration: 200ms;
+    --ease: cubic-bezier(0.33, 1, 0.68, 1);
+  }
+}
+
 /* tailwind is configured to prefer this font */
 @font-face {
   font-family: 'Matter';
