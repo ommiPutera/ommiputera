@@ -1,4 +1,4 @@
-import {Link, useLocation} from '@remix-run/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 import {
   BookOpenCheck,
@@ -8,10 +8,10 @@ import {
   MoreHorizontal,
   Settings,
 } from 'lucide-react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {Logo} from '~/components/navbar'
-import {UIButton} from '~/components/shadcn/button'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { Logo } from '~/components/navbar'
+import { UIButton } from '~/components/shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,12 +47,12 @@ function LayoutTitle({
               size="sm"
               variant="subtle"
               prefetch="intent"
-              to="/cash-flow/templates"
+              to="/personal-finance/templates"
               className={clsx(
                 'flex items-center gap-x-2 hover:bg-gray-600 hover:text-white',
                 {
-                  'text-secondary': !isSelected('/cash-flow/templates'),
-                  'text-white': isSelected('/cash-flow/templates'),
+                  'text-secondary': !isSelected('/personal-finance/templates'),
+                  'text-white': isSelected('/personal-finance/templates'),
                 },
               )}
             >
@@ -64,12 +64,12 @@ function LayoutTitle({
               size="sm"
               variant="subtle"
               prefetch="intent"
-              to="/cash-flow/settings"
+              to="/personal-finance/settings"
               className={clsx(
                 'flex items-center gap-x-2 hover:bg-gray-600 hover:text-white',
                 {
-                  'text-secondary': !isSelected('/cash-flow/settings'),
-                  'text-white': isSelected('/cash-flow/settings'),
+                  'text-secondary': !isSelected('/personal-finance/settings'),
+                  'text-white': isSelected('/personal-finance/settings'),
                 },
               )}
             >
@@ -84,7 +84,7 @@ function LayoutTitle({
       <div
         className={clsx(
           'w-full border-b border-b-gray-800 bg-black px-[4vw] xl:px-10vw',
-          {'pb-44 pt-10': float, 'py-10': !float},
+          { 'pb-44 pt-10': float, 'py-10': !float },
         )}
       >
         <div className="relative mx-auto w-full max-w-5xl items-center">
@@ -125,7 +125,7 @@ function MoreMenus() {
       </DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuGroup className="p-1">
-        <Link to="/cash-flow/guides">
+        <Link to="/personal-finance/guides">
           <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
             <div className="flex items-center gap-x-2">
               <BookOpenCheck size={18} />
@@ -156,4 +156,4 @@ function MoreMenus() {
   )
 }
 
-export {LayoutTitle}
+export { LayoutTitle }

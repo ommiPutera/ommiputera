@@ -1,6 +1,6 @@
-import {BookOpenCheck, ChevronRight, ChevronsUpDown} from 'lucide-react'
-import {Avatar, AvatarImage} from './shadcn/avatar'
-import {useRootData} from '~/utils/use-root-data'
+import { BookOpenCheck, ChevronRight, ChevronsUpDown } from 'lucide-react'
+import { Avatar, AvatarImage } from './shadcn/avatar'
+import { useRootData } from '~/utils/use-root-data'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,18 +10,20 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 
 function Profile() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <div className="ml-1 flex items-center gap-x-2 rounded-full border-2 border-gray-200 bg-gray-100 px-4 py-1.5 hover:border-black dark:border-gray-600 dark:bg-gray-800 dark:hover:border-gray-200">
-          <Avatar className="relative h-5 w-5">
-            <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-          </Avatar>
-          <p className="-mb-0.5 text-sm font-normal">{user?.username}</p>
+        <div className="ml-1 flex items-center justify-between gap-x-2 rounded-full border-2 border-gray-200 bg-gray-100 px-4 py-1.5 hover:border-black dark:border-gray-600 dark:bg-gray-800 dark:hover:border-gray-200">
+          <div className='flex items-center gap-2'>
+            <Avatar className="relative h-5 w-5">
+              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+            </Avatar>
+            <p className="-mb-0.5 text-sm font-normal">{user?.username}</p>
+          </div>
           <ChevronsUpDown size={14} />
         </div>
       </DropdownMenuTrigger>
@@ -31,7 +33,7 @@ function Profile() {
 }
 
 function MoreMenus() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <DropdownMenuContent>
       <DropdownMenuLabel className="px-2">
@@ -58,4 +60,4 @@ function MoreMenus() {
   )
 }
 
-export {Profile}
+export { Profile }

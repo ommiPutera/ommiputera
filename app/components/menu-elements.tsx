@@ -1,14 +1,14 @@
-import {Link} from '@remix-run/react'
-import {Building2, Wallet2} from 'lucide-react'
-import {useRootData} from '~/utils/use-root-data'
+import { Link } from '@remix-run/react'
+import { Building2, Wallet2 } from 'lucide-react'
+import { useRootData } from '~/utils/use-root-data'
 
 const RowSoftwares = () => {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="grid h-full w-[380px] grid-cols-2 items-center gap-x-2">
       <div className="col-span-1">
         <Link
-          to={user ? '/cash-flow' : '/intro/personal-finance'}
+          to={user ? '/personal-finance' : '/intro/personal-finance'}
           prefetch="intent"
         >
           <div className="w-full rounded-lg px-3 py-2 hover:bg-gray-100 hover:dark:bg-gray-800">
@@ -43,12 +43,12 @@ const RowSoftwares = () => {
 }
 
 const RowProducts = () => {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="grid h-full w-[380px] grid-cols-2 items-center gap-x-2">
       <div className="col-span-1">
         <Link
-          to={user ? '/cash-flow' : '/intro/personal-finance'}
+          to={user ? '/personal-finance' : '/intro/personal-finance'}
           prefetch="intent"
         >
           <div className="w-full rounded-lg px-3 py-2 hover:bg-gray-100 hover:dark:bg-gray-800">
@@ -115,4 +115,4 @@ const RowAdmin = () => {
   )
 }
 
-export {RowSoftwares, RowProducts, RowAdmin}
+export { RowSoftwares, RowProducts, RowAdmin }

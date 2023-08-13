@@ -1,14 +1,14 @@
 import clsx from 'clsx'
-import {AnchorOrLink} from '~/utils/misc'
-import {useRootData} from '~/utils/use-root-data'
-import {Logo} from './navbar'
-import {useLocation} from '@remix-run/react'
-import {includes, some} from 'lodash'
+import { AnchorOrLink } from '~/utils/misc'
+import { useRootData } from '~/utils/use-root-data'
+import { Logo } from './navbar'
+import { useLocation } from '@remix-run/react'
+import { includes, some } from 'lodash'
 
-const ROUTE_WITHOUT_FOOTER = ['/login', '/cash-flow']
+const ROUTE_WITHOUT_FOOTER = ['/login', '/personal-finance']
 
 function Footer() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
   const isShowFooter = some(ROUTE_WITHOUT_FOOTER, el =>
     includes(location.pathname, el),

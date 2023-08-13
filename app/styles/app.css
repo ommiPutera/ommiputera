@@ -196,7 +196,6 @@ p {
   grid-column: full;
   display: grid;
   grid-template-columns: inherit;
-  padding-block: calc(0.8rem * 2);
   overflow-x: scroll;
 }
 .full-bleed-kanban::-webkit-scrollbar {
@@ -212,13 +211,13 @@ p {
 .full-bleed-kanban .wrapper-full-bleed-kanban::before {
   content: "";
   align-self: stretch;
-  padding-inline-start: calc((100vw - 1010px) / 2);
+  padding-inline-start: 1.9rem;
   margin-left: -1rem;
 }
 .full-bleed-kanban .wrapper-full-bleed-kanban::after {
   content: "";
   align-self: stretch;
-  padding-inline-end: calc((100vw - 1050px) / 2);
+  padding-inline-end: 1rem;
   margin-right: -1rem;
 }
 .full-bleed-kanban .item-full-bleed-kanban {
