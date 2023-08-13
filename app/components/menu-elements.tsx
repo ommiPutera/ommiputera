@@ -1,9 +1,9 @@
-import { Link } from '@remix-run/react'
-import { Building2, Wallet2 } from 'lucide-react'
-import { useRootData } from '~/utils/use-root-data'
+import {Link} from '@remix-run/react'
+import {Building2, Wallet2} from 'lucide-react'
+import {useRootData} from '~/utils/use-root-data'
 
 const RowSoftwares = () => {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="grid h-full w-[380px] grid-cols-2 items-center gap-x-2">
       <div className="col-span-1">
@@ -43,7 +43,7 @@ const RowSoftwares = () => {
 }
 
 const RowProducts = () => {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="grid h-full w-[380px] grid-cols-2 items-center gap-x-2">
       <div className="col-span-1">
@@ -115,4 +115,4 @@ const RowAdmin = () => {
   )
 }
 
-export { RowSoftwares, RowProducts, RowAdmin }
+export {RowSoftwares, RowProducts, RowAdmin}

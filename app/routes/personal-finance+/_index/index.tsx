@@ -1,4 +1,4 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -12,31 +12,31 @@ import {
   arrayMove,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus, PlusCircle } from 'lucide-react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, PlusCircle} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
-import type { Column, Id, Task } from '~/components/kanban/types'
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
+import type {Column, Id, Task} from '~/components/kanban/types'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
 function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   const defaultCols: Column[] = [
@@ -74,7 +74,7 @@ function Board() {
 
   return (
     <>
-      <div className="flex flex-col mb-6 px-3">
+      <div className="mb-6 flex flex-col px-3">
         <Tools />
       </div>
       {isPostsExist ? (
@@ -186,7 +186,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return { ...task, content }
+      return {...task, content}
     })
 
     setTasks(newTasks)
@@ -203,7 +203,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return { ...col, title }
+      return {...col, title}
     })
 
     setColumns(newColumns)
@@ -222,7 +222,7 @@ function Kanban({
   }
 
   function onDragEnd(event: DragEndEvent) {
-    const { active, over } = event
+    const {active, over} = event
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over?.data.current?.type === 'Task'
     if (active.id !== over?.id && isActiveATask === isOverATask) {
@@ -235,7 +235,7 @@ function Kanban({
   }
 
   function onDragOver(event: DragOverEvent) {
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id
@@ -278,14 +278,14 @@ function generateId() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
-    <div className="relative mx-auto flex w-full max-w-3xl px-3 justify-between">
+    <div className="relative mx-auto flex w-full max-w-3xl justify-between px-3">
       <ButtonLink
-        size='sm'
+        size="sm"
         type="button"
         to="/personal-finance/new"
         className="flex items-center gap-x-2"
@@ -309,7 +309,7 @@ function Tools() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="col-span-1 cursor-pointer rounded-sm border border-gray-100 bg-white px-2 py-2.5 shadow-sm hover:border-gray-100 hover:bg-gray-100/50 dark:border-gray-800 dark:bg-gray-800 hover:dark:bg-gray-700">
       <Link to={`/cash-flow/${id}`} className="flex flex-col gap-1.5">
