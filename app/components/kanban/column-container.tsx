@@ -1,7 +1,7 @@
-import { useSortable } from '@dnd-kit/sortable'
+import {useSortable} from '@dnd-kit/sortable'
 import TaskCard from './task-card'
-import { CSS } from '@dnd-kit/utilities'
-import type { Column, Id, Task } from './types'
+import {CSS} from '@dnd-kit/utilities'
+import type {Column, Id, Task} from './types'
 import clsx from 'clsx'
 
 interface Props {
@@ -25,7 +25,7 @@ function ColumnContainer({
   updateTask,
   disabled,
 }: Props) {
-  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
+  const {setNodeRef, attributes, listeners, transform, transition, isDragging} =
     useSortable({
       id: column.id,
       data: {
