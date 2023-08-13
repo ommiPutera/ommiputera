@@ -1,7 +1,7 @@
-import {useSortable} from '@dnd-kit/sortable'
+import { useSortable } from '@dnd-kit/sortable'
 import TaskCard from './task-card'
-import {CSS} from '@dnd-kit/utilities'
-import type {Column, Id, Task} from './types'
+import { CSS } from '@dnd-kit/utilities'
+import type { Column, Id, Task } from './types'
 import clsx from 'clsx'
 
 interface Props {
@@ -25,7 +25,7 @@ function ColumnContainer({
   updateTask,
   disabled,
 }: Props) {
-  const {setNodeRef, attributes, listeners, transform, transition, isDragging} =
+  const { setNodeRef, attributes, listeners, transform, transition, isDragging } =
     useSortable({
       id: column.id,
       data: {
@@ -61,12 +61,12 @@ function ColumnContainer({
       className={clsx('flex w-[250px] flex-col')}
     >
       <div
-        className={clsx('item-center mb-2 flex w-full border-b-2 px-2 pb-1', {
-          'border-red-900': column.id === 'toPlan',
-          'border-orange-900': column.id === 'onPlanning',
-          'border-green-900': column.id === 'achieve',
-          'border-violet-900': column.id === 'onGoing',
-          'border-gray-700': column.id === 'failed',
+        className={clsx('item-center mb-2 flex w-full border-b-2 pb-1', {
+          'border-red-900/50': column.id === 'toPlan',
+          'border-orange-900/50': column.id === 'onPlanning',
+          'border-green-900/50': column.id === 'achieve',
+          'border-violet-900/50': column.id === 'onGoing',
+          'border-gray-700/50': column.id === 'failed',
         })}
       >
         <span
@@ -82,7 +82,7 @@ function ColumnContainer({
           {column.title}
         </p>
       </div>
-      <div className="flex flex-grow flex-col gap-1.5 overflow-y-auto overflow-x-hidden">
+      <div className="flex flex-grow flex-col gap-1 overflow-y-auto overflow-x-hidden">
         {tasks.map(task => (
           <TaskCard
             key={task.id}

@@ -1,4 +1,4 @@
-import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
+import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -12,32 +12,31 @@ import {
   arrayMove,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import type {Post} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, useLoaderData} from '@remix-run/react'
-import {Filter, PlusCircle} from 'lucide-react'
+import type { Post } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus, PlusCircle } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
+import { ButtonLink } from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
-import type {Column, Id, Task} from '~/components/kanban/types'
-import {Badge} from '~/components/shadcn/badge'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
+import type { Column, Id, Task } from '~/components/kanban/types'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
 function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   const defaultCols: Column[] = [
@@ -68,12 +67,7 @@ function Board() {
       id: post.id,
       columnId: index % 2 === 0 ? 'onPlanning' : 'toPlan',
       content: (
-        <div
-          key={post.id}
-          className="col-span-1 cursor-pointer rounded-md border border-white bg-gray-100 px-3 py-2 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-800"
-        >
-          <UpdatePage {...JSON.parse(JSON.stringify(post))} />
-        </div>
+        <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
       ),
     }
   })
@@ -192,7 +186,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return {...task, content}
+      return { ...task, content }
     })
 
     setTasks(newTasks)
@@ -209,7 +203,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return {...col, title}
+      return { ...col, title }
     })
 
     setColumns(newColumns)
@@ -228,7 +222,7 @@ function Kanban({
   }
 
   function onDragEnd(event: DragEndEvent) {
-    const {active, over} = event
+    const { active, over } = event
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over?.data.current?.type === 'Task'
     if (active.id !== over?.id && isActiveATask === isOverATask) {
@@ -241,7 +235,7 @@ function Kanban({
   }
 
   function onDragOver(event: DragOverEvent) {
-    const {active, over} = event
+    const { active, over } = event
     if (!over) return
 
     const activeId = active.id
@@ -284,7 +278,7 @@ function generateId() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -314,21 +308,18 @@ function Tools() {
   )
 }
 
-function UpdatePage({id, title}: Post) {
+function UpdatePage({ id, title }: Post) {
   return (
-    <div className="flex flex-col">
-      <div className="mb-2">
-        <Badge variant="orange" size="xs">
-          Monthly
-        </Badge>
-      </div>
-      <Link to={`/cash-flow/${id}`}>
+    <div className="col-span-1 cursor-pointer hover:bg-gray-100/50 hover:dark:bg-gray-700 rounded-sm border border-gray-100 shadow-sm bg-white px-2 py-2.5 hover:border-gray-100 dark:border-gray-800 dark:bg-gray-800">
+      <Link to={`/cash-flow/${id}`} className='flex flex-col gap-1.5'>
         <div className="flex items-center gap-x-5">
-          <h4 className="text-lg font-semibold">{title}</h4>
+          <h4 className="text-md leading-tight font-semibold">{title}</h4>
         </div>
-        <p className="text-secondary mt-2 text-left text-sm font-light">
-          Updated 13h ago..
-        </p>
+        <div className='flex gap-1 items-center'>
+          <div className='text-[10px] leading-[12px] px-2 pb-[3px] pt-[2px] rounded-sm bg-orange-900/25 bg-opacity-95 dark:bg-orange-100 text-black dark:text-orange-900'>
+            Monthly
+          </div>
+        </div>
       </Link>
     </div>
   )
@@ -354,7 +345,7 @@ function NoData() {
           to="/cash-flow/new"
           className="flex items-center gap-x-2"
         >
-          {/* <Plus size={16} /> */}
+          <Plus size={16} />
           <p>New Plan</p>
         </ButtonLink>
       </div>
