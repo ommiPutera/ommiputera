@@ -1,18 +1,29 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from "@dnd-kit/core"
-import { DndContext, DragOverlay, PointerSensor, closestCenter, useSensor, useSensors } from "@dnd-kit/core"
-import { SortableContext, arrayMove, verticalListSortingStrategy } from "@dnd-kit/sortable"
-import type { Post } from "@prisma/client"
-import { Link, useLoaderData } from "@remix-run/react"
-import { Filter, Plus, PlusCircle } from "lucide-react"
-import React from "react"
-import { ButtonLink } from "~/components/button"
-import ColumnContainer from "~/components/kanban/column-container"
-import TaskCard from "~/components/kanban/task-card"
-import type { Column, Id, Task } from "~/components/kanban/types"
-import type { LoaderData } from "."
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
+import {
+  DndContext,
+  DragOverlay,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from '@dnd-kit/core'
+import {
+  SortableContext,
+  arrayMove,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, PlusCircle} from 'lucide-react'
+import React from 'react'
+import {ButtonLink} from '~/components/button'
+import ColumnContainer from '~/components/kanban/column-container'
+import TaskCard from '~/components/kanban/task-card'
+import type {Column, Id, Task} from '~/components/kanban/types'
+import type {LoaderData} from '.'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   const defaultCols: Column[] = [
     {
@@ -64,7 +75,7 @@ export default function Board() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -99,7 +110,7 @@ function Tools() {
 function NoData() {
   return (
     <div className="mx-auto grid max-w-3xl gap-y-4 rounded-lg py-16 text-center">
-      <div className="mx-auto w-fit rounded-full bg-gray-100 dark:bg-gray-800 p-5">
+      <div className="mx-auto w-fit rounded-full bg-gray-100 p-5 dark:bg-gray-800">
         <img src="/vectors/checklist.png" alt="" className="h-10 w-10" />
       </div>
       <div>
@@ -124,7 +135,7 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({id, title}: Post) {
   return (
     <div className="col-span-1 cursor-pointer rounded-sm border border-gray-100 bg-white px-2 py-2.5 shadow-sm hover:border-gray-100 hover:bg-gray-100/50 dark:border-gray-800 dark:bg-gray-800 hover:dark:bg-gray-700">
       <Link to={`/personal-finance/${id}`} className="flex flex-col gap-1.5">
@@ -239,7 +250,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return { ...task, content }
+      return {...task, content}
     })
 
     setTasks(newTasks)
@@ -256,7 +267,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return { ...col, title }
+      return {...col, title}
     })
 
     setColumns(newColumns)
@@ -275,7 +286,7 @@ function Kanban({
   }
 
   function onDragEnd(event: DragEndEvent) {
-    const { active, over } = event
+    const {active, over} = event
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over?.data.current?.type === 'Task'
     if (active.id !== over?.id && isActiveATask === isOverATask) {
@@ -288,7 +299,7 @@ function Kanban({
   }
 
   function onDragOver(event: DragOverEvent) {
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id

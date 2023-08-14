@@ -1,20 +1,16 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import {
-  FilePlus,
-  Settings,
-  Trash,
-} from 'lucide-react'
+import {FilePlus, Settings, Trash} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Logo } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Logo} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -28,8 +24,8 @@ export default function Index() {
     <main className="bg-white dark:bg-black">
       <div className="relative mx-auto grid max-w-6xl grid-cols-12">
         <div className="col-span-3">
-          <div className="sticky top-0 flex min-h-screen h-auto w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
-            <div className="pt-6 pb-3">
+          <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
+            <div className="pb-3 pt-6">
               <p className="whitespace-nowrap text-2xl font-semibold leading-none text-black dark:text-white">
                 Personal Financial
               </p>
@@ -50,15 +46,19 @@ export default function Index() {
   )
 }
 
-export function WrapperOutlet({ children }: { children: JSX.Element | React.ReactNode }) {
-  return (
-    <>
-      {children}
-    </>
-  )
+export function WrapperOutlet({
+  children,
+}: {
+  children: JSX.Element | React.ReactNode
+}) {
+  return <>{children}</>
 }
 
-export function OutletCenter({ children }: { children: JSX.Element | React.ReactNode }) {
+export function OutletCenter({
+  children,
+}: {
+  children: JSX.Element | React.ReactNode
+}) {
   return (
     <div className="col-span-6 min-h-screen border-l border-r border-gray-100 dark:border-gray-800">
       {children}
@@ -66,10 +66,14 @@ export function OutletCenter({ children }: { children: JSX.Element | React.React
   )
 }
 
-export function OutletRight({ children }: { children: JSX.Element | React.ReactNode }) {
+export function OutletRight({
+  children,
+}: {
+  children: JSX.Element | React.ReactNode
+}) {
   return (
     <div className="col-span-3">
-      <div className="sticky top-0 flex min-h-screen h-auto w-full flex-col gap-6 bg-white pl-6 dark:bg-black">
+      <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black">
         {children}
       </div>
     </div>
