@@ -1,16 +1,17 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {FilePlus, Settings, Trash} from 'lucide-react'
+import { FilePlus, Settings, Trash } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Logo} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -22,25 +23,33 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto grid max-w-6xl grid-cols-12">
-        <div className="col-span-3">
+      <div className="relative mx-auto max-w-7xl flex">
+        <div className="min-w-[15rem]">
           <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
-            <div className="pb-3 pt-6">
-              <p className="whitespace-nowrap text-2xl font-semibold leading-none text-black dark:text-white">
-                Personal Financial
-              </p>
+            <div className="py-4 flex items-center">
+              <div>
+                <p className="whitespace-nowrap text-[22px] mb-2 font-semibold leading-none text-black dark:text-white">
+                  Personal Financial
+                </p>
+                <p className='whitespace-nowrap block font-semibold leading-none text-black dark:text-white'>
+                  <span className='font-medium text-xs text-gray-400 dark:text-gray-200'>Powered by{" "}</span>
+                  <span>ommiputera</span>
+                  <span className='ml-[1px] text-[10px] font-normal text-gray-400 dark:text-gray-200'>.com</span>
+                </p>
+              </div>
             </div>
             <NavbarMenus />
             <div className="absolute bottom-0 w-full border-t border-gray-100 px-3 pb-8 pt-6 dark:border-gray-800">
               <Logo />
               <p className="mt-1 text-left text-xs font-normal leading-snug text-gray-300 dark:text-gray-200">
-                So I started to walk into the water. I won't lie to you boys, I
-                was terrified. But I pressed on.
+                So I started to walk into the water.
               </p>
             </div>
           </div>
         </div>
-        <Outlet />
+        <div className='grid grid-cols-12'>
+          <Outlet />
+        </div>
       </div>
     </main>
   )
@@ -60,7 +69,7 @@ export function OutletCenter({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-6 min-h-screen border-l border-r border-gray-100 dark:border-gray-800">
+    <div className="col-span-8 min-h-screen border-l border-r border-gray-100 dark:border-gray-800">
       {children}
     </div>
   )
@@ -72,8 +81,19 @@ export function OutletRight({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-3">
+    <div className="col-span-4">
       <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black">
+        <div className="sticky top-0 w-full bg-white py-3 dark:bg-black">
+          <div className="flex items-center justify-between gap-2">
+            <div>
+              <DarkModeToggle />
+            </div>
+            <div className='flex items-center gap-2'>
+              <Profile />
+              <MoreAction />
+            </div>
+          </div>
+        </div>
         {children}
       </div>
     </div>
@@ -91,6 +111,7 @@ function NavbarMenus() {
         variant="subtle"
         to="/personal-finance/templates"
         prefetch="intent"
+        align='left'
         className={clsx(
           'flex items-center gap-x-2 px-0 hover:text-black hover:dark:text-white',
           {
@@ -111,6 +132,7 @@ function NavbarMenus() {
         variant="subtle"
         to="/personal-finance/templates"
         prefetch="intent"
+        align='left'
         className={clsx(
           'flex items-center gap-x-2 px-0 hover:text-black hover:dark:text-white',
           {
@@ -131,6 +153,7 @@ function NavbarMenus() {
         variant="subtle"
         to="/personal-finance/templates"
         prefetch="intent"
+        align='left'
         className={clsx(
           'flex items-center gap-x-2 px-0 hover:text-black hover:dark:text-white',
           {

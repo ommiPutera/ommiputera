@@ -1,10 +1,11 @@
 import clsx from 'clsx'
 import React from 'react'
-import {AnchorOrLink} from '~/utils/misc'
+import { AnchorOrLink } from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
   rounded?: 'sm' | 'md' | 'lg' | 'full'
+  align?: 'center' | 'left' | 'right'
   variant?: 'primary' | 'subtle' | 'danger'
   children: React.ReactNode | React.ReactNode[]
   className?: string
@@ -12,6 +13,7 @@ interface ButtonProps {
 
 function Button({
   variant = 'primary',
+  align = 'center',
   size = 'md',
   rounded = 'md',
   children,
@@ -33,7 +35,12 @@ function Button({
         className,
       )}
     >
-      <Inner variant={variant} size={size} rounded={rounded}>
+      <Inner
+        variant={variant}
+        size={size}
+        rounded={rounded}
+        align={align}
+      >
         {children}
       </Inner>
     </button>
@@ -45,16 +52,21 @@ function Inner({
   variant,
   size,
   rounded,
+  align,
   className,
 }: Pick<
   ButtonProps,
-  'children' | 'variant' | 'size' | 'rounded' | 'className'
+  'children' | 'variant' | 'size' | 'rounded' | 'className' | 'align'
 >) {
   return (
     <div
       className={clsx(
-        'relative flex h-fit w-fit items-center justify-center whitespace-nowrap font-medium',
+        'relative flex h-full w-full items-center whitespace-nowrap font-medium',
         {
+          // Align
+          'justify-center': align === 'center',
+          'justify-start': align === 'left',
+          'justify-end': align === 'right',
           // Variant
           '': variant === 'subtle',
           'bg-black text-white dark:bg-white dark:text-black':
@@ -84,7 +96,7 @@ const ButtonLink = React.forwardRef<
   HTMLAnchorElement,
   React.ComponentPropsWithRef<typeof AnchorOrLink> & ButtonProps
 >(function ButtonLink(
-  {variant = 'primary', size, rounded = 'md', children, className, ...props},
+  { variant = 'primary', size, rounded = 'md', align = 'center', children, className, ...props },
   ref,
 ) {
   return (
@@ -93,6 +105,7 @@ const ButtonLink = React.forwardRef<
         variant={variant}
         size={size}
         rounded={rounded}
+        align={align}
         className={clsx(className)}
       >
         {children}
@@ -101,4 +114,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export {Button, ButtonLink}
+export { Button, ButtonLink }

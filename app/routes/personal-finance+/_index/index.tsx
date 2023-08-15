@@ -1,26 +1,27 @@
-import {Tab} from '@headlessui/react'
-import type {Post} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
+import { Tab } from '@headlessui/react'
+import type { Post } from '@prisma/client'
+import TextareaAutosize from 'react-textarea-autosize'
+import type { LoaderFunction } from '@remix-run/node'
 import clsx from 'clsx'
-import {BookOpenCheck, Layout, PieChart, X} from 'lucide-react'
+import { BookOpenCheck, Layout, PieChart, X } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {UIButton} from '~/components/shadcn/button'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
+import { Button, ButtonLink } from '~/components/button'
+import { UIButton } from '~/components/shadcn/button'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 import Analytics from './analytics'
 import Board from './board'
-import {ProfileGroup} from '~/components/navbar'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import { Form } from '@remix-run/react'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -31,7 +32,7 @@ export default function Index() {
     <WrapperOutlet>
       <OutletCenter>
         <Section />
-        <Guides />
+        <NewPost />
         <Tab.Group
           as="div"
           selectedIndex={selectedIndex}
@@ -59,7 +60,7 @@ export default function Index() {
         </Tab.Group>
       </OutletCenter>
       <OutletRight>
-        <ProfileGroup />
+        <Guides />
       </OutletRight>
     </WrapperOutlet>
   )
@@ -67,8 +68,30 @@ export default function Index() {
 
 function Section() {
   return (
-    <div className="sticky top-0 z-[99] w-full border-b border-gray-100 bg-white px-6 py-3 dark:border-gray-800 dark:bg-black">
+    <div className="sticky top-0 z-[99] w-full border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-black px-6 py-4">
       <h2 className="text-xl font-semibold">Beranda</h2>
+    </div>
+  )
+}
+
+function NewPost() {
+  const titletRef = React.useRef<HTMLTextAreaElement>(null)
+  return (
+    <div className="mx-auto my-0 w-full justify-between gap-x-8 px-6 py-6 border-b border-gray-100 dark:border-gray-800">
+      <div className="relative h-auto w-full">
+        <Form method="POST" className="w-full" action=".">
+          <div className="px-6 md:px-0">
+            <TextareaAutosize
+              ref={titletRef}
+              id="title-field"
+              name="title"
+              placeholder="Untitled"
+              className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none lg:text-5xl"
+            />
+          </div>
+          <Button variant='primary' className='w-full'>Posting</Button>
+        </Form>
+      </div>
     </div>
   )
 }
@@ -78,9 +101,9 @@ function Guides() {
 
   if (isClose) return <></>
   return (
-    <div className="relative mx-3 my-3 flex flex-col items-center justify-center gap-6 rounded-md border border-gray-100 dark:border-gray-800 md:gap-8">
-      <div className="grid grid-cols-2 gap-6 px-3 py-4">
-        <div className="col-span-1 flex flex-col">
+    <div className="relative flex flex-col items-center justify-center gap-6 rounded-md border border-gray-100 dark:border-gray-800 md:gap-8">
+      <div className="flex flex-col gap-6 px-6 py-8">
+        <div className="flex flex-col">
           <h1 className="text-left text-xl font-semibold leading-10">
             Personal Financial
           </h1>
@@ -89,7 +112,7 @@ function Guides() {
             terrified.
           </p>
           <ButtonLink
-            className="mt-4"
+            className="mt-4 py-1.5"
             size="sm"
             rounded="sm"
             type="button"
@@ -98,7 +121,7 @@ function Guides() {
             <p className="text-sm">Get Started</p>
           </ButtonLink>
         </div>
-        <div className="col-span-1 flex flex-col">
+        <div className="flex flex-col">
           <h1 className="text-left text-xl font-semibold leading-10">
             Read Guides
           </h1>
@@ -111,14 +134,14 @@ function Guides() {
             size="sm"
             rounded="sm"
             to="/personal-finance/new"
-            className="mt-4 flex items-center gap-x-2"
+            className="mt-4 flex items-center gap-x-2 py-1.5"
           >
             <BookOpenCheck size={16} />
             <p className="text-sm">Guides</p>
           </ButtonLink>
         </div>
       </div>
-      <div className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
+      <div className="absolute right-1.5 top-1.5 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
         <UIButton
           onClick={() => setIsClose(true)}
           type="button"
@@ -144,7 +167,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({selected}) =>
+      className={({ selected }) =>
         clsx(
           'relative my-1 rounded-md border-b-0 border-b-transparent px-2 py-1 font-semibold focus:outline-none',
           {
@@ -156,7 +179,7 @@ function TabComponent({
       }
       {...props}
     >
-      {({selected}) => (
+      {({ selected }) => (
         <>
           {children}
           <div
