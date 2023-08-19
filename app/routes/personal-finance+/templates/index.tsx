@@ -1,7 +1,3 @@
 export default function Index() {
-  return (
-    <div>
-      Templates
-    </div>
-  )
+  return <div>Templates</div>
 }

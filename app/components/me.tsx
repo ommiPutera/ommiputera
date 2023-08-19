@@ -1,6 +1,6 @@
-import { BookOpenCheck, ChevronRight } from 'lucide-react'
-import { Avatar, AvatarImage } from './shadcn/avatar'
-import { useRootData } from '~/utils/use-root-data'
+import {BookOpenCheck, ChevronRight} from 'lucide-react'
+import {Avatar, AvatarImage} from './shadcn/avatar'
+import {useRootData} from '~/utils/use-root-data'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,25 +10,29 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import { Link } from '@remix-run/react'
+import {Link} from '@remix-run/react'
 
 function Profile() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
-        <div className="ml-1 flex max-w-[200px] items-center justify-between gap-2 w-full">
+        <div className="ml-1 flex w-full max-w-[200px] items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <Avatar className="relative h-8 w-8">
               <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
             </Avatar>
             <div>
               <p className="-mb-0.5 text-sm font-medium">
-                {user?.username ? user?.username.length >= 20
-                  ? user?.username.slice(0, 20) + '..'
-                  : user?.username : '~'}
+                {user?.username
+                  ? user?.username.length >= 20
+                    ? user?.username.slice(0, 20) + '..'
+                    : user?.username
+                  : '~'}
               </p>
-              <p className="-mb-0.5 text-[11px] dark:text-gray-200 font-normal">{user?.role} Account</p>
+              <p className="-mb-0.5 text-[11px] font-normal dark:text-gray-200">
+                {user?.role} Account
+              </p>
             </div>
           </div>
         </div>
@@ -39,7 +43,7 @@ function Profile() {
 }
 
 function MoreMenus() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <DropdownMenuContent>
       <DropdownMenuLabel className="px-2">
@@ -66,4 +70,4 @@ function MoreMenus() {
   )
 }
 
-export { Profile }
+export {Profile}

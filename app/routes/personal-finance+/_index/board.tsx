@@ -1,4 +1,4 @@
-import type { DragEndEvent, DragOverEvent, DragStartEvent } from '@dnd-kit/core'
+import type {DragEndEvent, DragOverEvent, DragStartEvent} from '@dnd-kit/core'
 import {
   DndContext,
   DragOverlay,
@@ -12,19 +12,19 @@ import {
   arrayMove,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable'
-import type { Post } from '@prisma/client'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus, PlusCircle } from 'lucide-react'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, PlusCircle} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
-import type { Column, Id, Task } from '~/components/kanban/types'
-import type { LoaderData } from '.'
-import { format } from 'date-fns'
+import type {Column, Id, Task} from '~/components/kanban/types'
+import type {LoaderData} from '.'
+import {format} from 'date-fns'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   const defaultCols: Column[] = [
     {
@@ -72,7 +72,7 @@ export default function Board() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -108,7 +108,7 @@ function NoData() {
   return (
     <div className="mx-auto grid max-w-3xl gap-y-4 rounded-lg py-16 text-center">
       <div className="mx-auto w-fit pb-2">
-        <img src="/vectors/checklist.png" alt="" className="h-20 w-h-20" />
+        <img src="/vectors/checklist.png" alt="" className="w-h-20 h-20" />
       </div>
       <div>
         <h5 className="text-xl font-semibold">No expense data created</h5>
@@ -132,7 +132,7 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title, updatedAt }: Post) {
+function UpdatePage({id, title, updatedAt}: Post) {
   return (
     <div className="col-span-1 cursor-pointer border-b border-gray-100 py-2.5 dark:border-gray-800">
       <Link to={`/personal-finance/${id}`}>
@@ -247,7 +247,7 @@ function Kanban({
   function updateTask(id: Id, content: JSX.Element | React.ReactNode | string) {
     const newTasks = tasks.map(task => {
       if (task.id !== id) return task
-      return { ...task, content }
+      return {...task, content}
     })
 
     setTasks(newTasks)
@@ -264,7 +264,7 @@ function Kanban({
   function updateColumn(id: Id, title: string) {
     const newColumns = columns.map(col => {
       if (col.id !== id) return col
-      return { ...col, title }
+      return {...col, title}
     })
 
     setColumns(newColumns)
@@ -283,7 +283,7 @@ function Kanban({
   }
 
   function onDragEnd(event: DragEndEvent) {
-    const { active, over } = event
+    const {active, over} = event
     const isActiveATask = active.data.current?.type === 'Task'
     const isOverATask = over?.data.current?.type === 'Task'
     if (active.id !== over?.id && isActiveATask === isOverATask) {
@@ -296,7 +296,7 @@ function Kanban({
   }
 
   function onDragOver(event: DragOverEvent) {
-    const { active, over } = event
+    const {active, over} = event
     if (!over) return
 
     const activeId = active.id

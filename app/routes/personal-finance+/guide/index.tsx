@@ -1,7 +1,3 @@
 export default function Index() {
-  return (
-    <div>
-      Guides
-    </div>
-  )
+  return <div>Guides</div>
 }

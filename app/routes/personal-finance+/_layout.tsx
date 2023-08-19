@@ -1,17 +1,17 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { BookOpen, FilePlus, Home, Settings, Trash } from 'lucide-react'
+import {BookOpen, FilePlus, Home, Settings, Trash} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -28,7 +28,9 @@ export default function Index() {
           <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
             <NavbarMenus />
             <div className="absolute bottom-0 w-full py-4">
-              <p className='text-sm text-gray-400 dark:text-gray-200 mb-1'>Personal Finance by ommiputera</p>
+              <p className="mb-1 text-sm text-gray-400 dark:text-gray-200">
+                Personal Finance by ommiputera
+              </p>
               <Logo />
             </div>
           </div>
@@ -91,12 +93,39 @@ function NavbarMenus() {
   const isSelected = (to: string) => to === location.pathname
   return (
     <div className="flex flex-col justify-center gap-7 py-6">
-      <Link to="/personal-finance" prefetch='intent'>
-        <div className='flex gap-3'>
-          <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.9998 0C11.5741 0 9.60767 1.96644 9.60767 4.39216C9.60767 6.81788 11.5741 8.78431 13.9998 8.78431H23.6077C26.0334 8.78431 27.9998 6.81788 27.9998 4.39216C27.9998 1.96644 26.0334 0 23.6077 0H13.9998Z" fill="#F11A7B" />
-            <rect x="8.78418" y="9.60785" width="8.78431" height="8.78431" rx="4.39216" transform="rotate(90 8.78418 9.60785)" fill="#F11A7B" />
-            <rect x="18.2549" y="19.2156" width="8.78431" height="8.78431" rx="4.39216" transform="rotate(90 18.2549 19.2156)" fill="#F11A7B" />
+      <Link to="/personal-finance" prefetch="intent">
+        <div className="flex gap-3">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 28 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M13.9998 0C11.5741 0 9.60767 1.96644 9.60767 4.39216C9.60767 6.81788 11.5741 8.78431 13.9998 8.78431H23.6077C26.0334 8.78431 27.9998 6.81788 27.9998 4.39216C27.9998 1.96644 26.0334 0 23.6077 0H13.9998Z"
+              fill="#F11A7B"
+            />
+            <rect
+              x="8.78418"
+              y="9.60785"
+              width="8.78431"
+              height="8.78431"
+              rx="4.39216"
+              transform="rotate(90 8.78418 9.60785)"
+              fill="#F11A7B"
+            />
+            <rect
+              x="18.2549"
+              y="19.2156"
+              width="8.78431"
+              height="8.78431"
+              rx="4.39216"
+              transform="rotate(90 18.2549 19.2156)"
+              fill="#F11A7B"
+            />
           </svg>
         </div>
       </Link>
@@ -109,12 +138,9 @@ function NavbarMenus() {
         className={clsx(
           'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
           {
-            'text-gray-400 dark:text-gray-200 font-medium': !isSelected(
-              '/personal-finance',
-            ),
-            'text-black dark:text-white': isSelected(
-              '/personal-finance',
-            ),
+            'font-medium text-gray-400 dark:text-gray-200':
+              !isSelected('/personal-finance'),
+            'text-black dark:text-white': isSelected('/personal-finance'),
           },
         )}
       >
@@ -130,12 +156,10 @@ function NavbarMenus() {
         className={clsx(
           'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
           {
-            'text-gray-400 dark:text-gray-200 font-medium': !isSelected(
+            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/guide',
             ),
-            'text-black dark:text-white': isSelected(
-              '/personal-finance/guide',
-            ),
+            'text-black dark:text-white': isSelected('/personal-finance/guide'),
           },
         )}
       >
@@ -151,7 +175,7 @@ function NavbarMenus() {
         className={clsx(
           'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
           {
-            'text-gray-400 dark:text-gray-200 font-medium': !isSelected(
+            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/templates',
             ),
             'text-black dark:text-white': isSelected(
@@ -172,7 +196,7 @@ function NavbarMenus() {
         className={clsx(
           'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
           {
-            'text-gray-400 dark:text-gray-200 font-medium': !isSelected(
+            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/settings',
             ),
             'text-black dark:text-white': isSelected(
@@ -193,12 +217,10 @@ function NavbarMenus() {
         className={clsx(
           'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
           {
-            'text-gray-400 dark:text-gray-200 font-medium': !isSelected(
+            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/trash',
             ),
-            'text-black dark:text-white': isSelected(
-              '/personal-finance/trash',
-            ),
+            'text-black dark:text-white': isSelected('/personal-finance/trash'),
           },
         )}
       >

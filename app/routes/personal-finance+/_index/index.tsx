@@ -1,24 +1,24 @@
-import { Tab } from '@headlessui/react'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
+import {Tab} from '@headlessui/react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
 import clsx from 'clsx'
-import { BookOpenCheck, Layout, PieChart } from 'lucide-react'
+import {BookOpenCheck, Layout, PieChart} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
 import Analytics from './analytics'
 import Board from './board'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -34,10 +34,13 @@ export default function Index() {
           onChange={setSelectedIndex}
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
         >
-          <div className="sticky top-0 z-[99] w-full bg-white py-4 dark:bg-black/80 backdrop-blur-md">
+          <div className="sticky top-0 z-[99] w-full bg-white py-4 backdrop-blur-md dark:bg-black/80">
             <h2 className="text-center text-xl font-semibold">Beranda</h2>
             <Tab.List className="z-0 mx-auto flex overflow-x-scroll border-b border-gray-100 px-6 dark:border-gray-800 lg:col-span-3 lg:overflow-x-hidden">
-              <TabComponent index={0} className="flex items-center gap-x-2 sticky top-0">
+              <TabComponent
+                index={0}
+                className="sticky top-0 flex items-center gap-x-2"
+              >
                 <Layout size={18} strokeWidth={2.5} />
                 <p className="mt-1 text-md">Board</p>
               </TabComponent>
@@ -150,7 +153,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({ selected }) =>
+      className={({selected}) =>
         clsx(
           'relative my-1 rounded-md border-b-0 border-b-transparent px-2 py-1 font-semibold focus:outline-none',
           {
@@ -162,7 +165,7 @@ function TabComponent({
       }
       {...props}
     >
-      {({ selected }) => (
+      {({selected}) => (
         <>
           {children}
           <div
