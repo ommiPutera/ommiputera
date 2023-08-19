@@ -32,10 +32,6 @@ export default function Board() {
       title: 'To Plan',
     },
     {
-      id: 'onPlanning',
-      title: 'On Planning',
-    },
-    {
       id: 'onGoing',
       title: 'On Going',
     },
@@ -52,7 +48,7 @@ export default function Board() {
   const postTest: Task[] | undefined = posts?.map((post, index) => {
     return {
       id: post.id,
-      columnId: index % 2 === 0 ? 'onPlanning' : 'toPlan',
+      columnId: index % 2 === 0 ? 'onGoing' : 'toPlan',
       content: (
         <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
       ),
@@ -111,13 +107,13 @@ function Tools() {
 function NoData() {
   return (
     <div className="mx-auto grid max-w-3xl gap-y-4 rounded-lg py-16 text-center">
-      <div className="mx-auto w-fit rounded-full bg-gray-100 p-5 dark:bg-gray-800">
-        <img src="/vectors/checklist.png" alt="" className="h-10 w-10" />
+      <div className="mx-auto w-fit pb-2">
+        <img src="/vectors/checklist.png" alt="" className="h-20 w-h-20" />
       </div>
       <div>
-        <h5 className="text-lg font-medium">No expense data created.</h5>
-        <p className="text-center text-sm font-normal leading-normal text-gray-400 dark:text-gray-200">
-          You don't have any posts yet. Start creating content.
+        <h5 className="text-xl font-semibold">No expense data created</h5>
+        <p className="text-center text-md font-normal leading-normal text-gray-400 dark:text-gray-200">
+          You don't have any records yet, start creating your record..
         </p>
       </div>
       <div className="mx-auto">
@@ -138,11 +134,15 @@ function NoData() {
 
 function UpdatePage({ id, title, updatedAt }: Post) {
   return (
-    <div className="col-span-1 cursor-pointer py-2.5 border-b border-gray-100 dark:border-gray-800">
+    <div className="col-span-1 cursor-pointer border-b border-gray-100 py-2.5 dark:border-gray-800">
       <Link to={`/personal-finance/${id}`}>
         <div className="flex flex-col">
-          <h4 className="text-md font-semibold leading-4 whitespace-normal">{title.length >= 35 ? title.slice(0, 35) + '..' : title}</h4>
-          <p className='text-sm font-normal text-gray-400 dark:text-gray-200'>{format(new Date(updatedAt), 'dd/MM/yy')}</p>
+          <h4 className="whitespace-normal text-md font-semibold leading-4">
+            {title.length >= 35 ? title.slice(0, 35) + '..' : title}
+          </h4>
+          <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
+            {format(new Date(updatedAt), 'dd/MM/yy')}
+          </p>
         </div>
       </Link>
     </div>

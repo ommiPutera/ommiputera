@@ -1,17 +1,15 @@
 import { Tab } from '@headlessui/react'
 import type { Post } from '@prisma/client'
-import TextareaAutosize from 'react-textarea-autosize'
 import type { LoaderFunction } from '@remix-run/node'
 import clsx from 'clsx'
 import { BookOpenCheck, Layout, PieChart } from 'lucide-react'
 import React from 'react'
-import { Button, ButtonLink } from '~/components/button'
+import { ButtonLink } from '~/components/button'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import Analytics from './analytics'
 import Board from './board'
 import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
-import { Form } from '@remix-run/react'
 
 export type LoaderData = {
   posts: Post[] | null
@@ -30,24 +28,25 @@ export default function Index() {
   return (
     <WrapperOutlet>
       <OutletCenter>
-        <Section />
-        {/* <NewPost /> */}
         <Tab.Group
           as="div"
           selectedIndex={selectedIndex}
           onChange={setSelectedIndex}
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
         >
-          <Tab.List className="z-0 mx-auto flex overflow-x-scroll border-b border-gray-100 px-6 dark:border-gray-800 lg:col-span-3 lg:overflow-x-hidden">
-            <TabComponent index={0} className="flex items-center gap-x-2">
-              <Layout size={18} strokeWidth={2.5} />
-              <p className="mt-1 text-md">Board</p>
-            </TabComponent>
-            <TabComponent index={1} className="flex items-center gap-x-2">
-              <PieChart size={18} strokeWidth={2.5} />
-              <p className="mt-1 text-md">Analytics</p>
-            </TabComponent>
-          </Tab.List>
+          <div className="sticky top-0 z-[99] w-full bg-white py-4 dark:bg-black/80 backdrop-blur-md">
+            <h2 className="text-center text-xl font-semibold">Beranda</h2>
+            <Tab.List className="z-0 mx-auto flex overflow-x-scroll border-b border-gray-100 px-6 dark:border-gray-800 lg:col-span-3 lg:overflow-x-hidden">
+              <TabComponent index={0} className="flex items-center gap-x-2 sticky top-0">
+                <Layout size={18} strokeWidth={2.5} />
+                <p className="mt-1 text-md">Board</p>
+              </TabComponent>
+              <TabComponent index={1} className="flex items-center gap-x-2">
+                <PieChart size={18} strokeWidth={2.5} />
+                <p className="mt-1 text-md">Analytics</p>
+              </TabComponent>
+            </Tab.List>
+          </div>
           <Tab.Panels className="py-6">
             <Tab.Panel>
               <Board />
@@ -60,38 +59,9 @@ export default function Index() {
       </OutletCenter>
       <OutletRight>
         <Guides />
+        <BrowseTemplate />
       </OutletRight>
     </WrapperOutlet>
-  )
-}
-
-function Section() {
-  return (
-    <div className="sticky top-0 z-[99] w-full border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-black px-6 py-4">
-      <h2 className="text-xl font-semibold text-center">Beranda</h2>
-    </div>
-  )
-}
-
-function NewPost() {
-  const titletRef = React.useRef<HTMLTextAreaElement>(null)
-  return (
-    <div className="mx-auto my-0 w-full justify-between gap-x-8 px-6 py-6 border-b border-gray-100 dark:border-gray-800">
-      <div className="relative h-auto w-full">
-        <Form method="POST" className="w-full" action=".">
-          <div className="px-6 md:px-0">
-            <TextareaAutosize
-              ref={titletRef}
-              id="title-field"
-              name="title"
-              placeholder="Untitled"
-              className="w-full resize-none appearance-none overflow-hidden bg-transparent text-3xl font-bold leading-tight focus:outline-none lg:text-5xl"
-            />
-          </div>
-          <Button variant='primary' className='w-full'>Posting</Button>
-        </Form>
-      </div>
-    </div>
   )
 }
 
@@ -129,11 +99,38 @@ function Guides() {
             type="button"
             size="sm"
             rounded="sm"
-            to="/personal-finance/new"
+            to="/personal-finance/guides"
             className="mt-4 flex items-center gap-x-2 py-1.5"
           >
             <BookOpenCheck size={16} />
             <p className="text-sm">Guides</p>
+          </ButtonLink>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function BrowseTemplate() {
+  return (
+    <div className="relative flex flex-col items-center justify-center rounded-md border border-gray-100 dark:border-gray-800">
+      <div className="flex flex-col gap-6 p-6">
+        <div className="flex flex-col">
+          <h1 className="text-left text-base font-semibold leading-10">
+            Browse Template
+          </h1>
+          <p className="px-0 text-left text-xs font-normal text-gray-400 dark:text-gray-200">
+            So I started to walk into the water. I won't lie to you boys, I was
+            terrified.
+          </p>
+          <ButtonLink
+            className="mt-4 py-1.5"
+            size="sm"
+            rounded="sm"
+            type="button"
+            to="/personal-finance/new"
+          >
+            <p className="text-sm">Get Started</p>
           </ButtonLink>
         </div>
       </div>

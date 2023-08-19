@@ -58,7 +58,7 @@ function ColumnContainer({
       style={style}
       {...attributes}
       {...listeners}
-      className={clsx('flex w-[180px] flex-col')}
+      className={clsx('flex w-[240px] flex-col')}
     >
       <div
         className={clsx('item-center mb-2 flex w-full border-b-2 pb-1', {
@@ -82,7 +82,7 @@ function ColumnContainer({
           {column.title}
         </p>
       </div>
-      <div className="flex flex-grow flex-col overflow-y-auto overflow-x-hidden">
+      <div className={clsx("flex flex-grow flex-col overflow-y-auto overflow-x-hidden")}>
         {tasks.map(task => (
           <TaskCard
             key={task.id}

@@ -24,8 +24,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      white: 'var(--color-white)',
-      black: 'var(--color-black)',
+      white: 'rgb(var(--color-white) / <alpha-value>)',
+      black: 'rgb(var(--color-black) / <alpha-value>)',
       blue: {
         100: 'var(--color-blue-100)',
         500: 'var(--color-blue-500)',

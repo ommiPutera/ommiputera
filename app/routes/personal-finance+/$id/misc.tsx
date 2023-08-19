@@ -1,10 +1,10 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { Dialog } from '@headlessui/react'
-import { Button } from '~/components/button'
-import type { SaveStatus } from '.'
-import { FormType } from '.'
-import { Form, Link, useLoaderData } from '@remix-run/react'
+import {Dialog} from '@headlessui/react'
+import {Button} from '~/components/button'
+import type {SaveStatus} from '.'
+import {FormType} from '.'
+import {Form, Link, useLoaderData} from '@remix-run/react'
 import {
   ChevronRight,
   FilePlus,
@@ -13,8 +13,8 @@ import {
   Trash2,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type { LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+import type {LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -31,10 +31,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
   if (!id) return redirect('/personal-finance')
-  const data: LoaderData = { postId: id }
+  const data: LoaderData = {postId: id}
   return data
 }
 
@@ -56,14 +56,18 @@ export function Header({
   }
 
   return (
-    <div className="sticky max-h-[63px] left-0 top-0 z-50 mx-auto flex w-full max-w-5xl justify-center border-b border-gray-100 bg-white px-6 py-4 dark:border-gray-800 dark:bg-black">
+    <div className="sticky left-0 top-0 z-50 mx-auto flex max-h-[63px] w-full max-w-5xl justify-center border-b border-gray-100 bg-white px-6 py-4 dark:border-gray-800 dark:bg-black">
       <div className="grid w-full grid-cols-12 items-center justify-start gap-x-4">
         <div className="col-span-4 flex items-center gap-x-2 text-md font-normal">
           <BackButton saveStatus={saveStatus} submitContent={submitContent} />
         </div>
-        <div className='col-span-4 text-center'>
+        <div className="col-span-4 text-center">
           <p className="whitespace-normal text-xl font-semibold">
-            {title ? title.length >= 15 ? title.slice(0, 15) + '..' : title : '~ Untitled'}
+            {title
+              ? title.length >= 15
+                ? title.slice(0, 15) + '..'
+                : title
+              : '~ Untitled'}
           </p>
         </div>
         <div className="col-span-4 flex items-center justify-end gap-2">
@@ -202,7 +206,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       open={isShowDeleteModal}
       onClose={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
       className="z-50 flex w-full items-center"
     >
       <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-100 bg-black p-0 dark:border-gray-800 lg:mx-auto lg:max-w-[20vw]">

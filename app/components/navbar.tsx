@@ -434,7 +434,7 @@ function MoreAction() {
         <UIButton
           size="sm"
           variant="subtle"
-          className="flex h-9 w-9 items-center rounded-full p-0 hover:bg-gray-200 hover:dark:bg-gray-800"
+          className="flex h-9 w-9 items-center rounded-full p-1 hover:bg-gray-200 hover:dark:bg-gray-800"
         >
           <MoreHorizontal size={18} />
         </UIButton>
