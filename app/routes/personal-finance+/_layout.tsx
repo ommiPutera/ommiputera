@@ -23,21 +23,9 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto max-w-7xl flex">
-        <div className="min-w-[15rem]">
+      <div className="relative mx-auto max-w-6xl flex">
+        <div className="min-w-[14rem] hidden lg:block">
           <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
-            <div className="py-4 flex items-center">
-              <div>
-                <p className="whitespace-nowrap text-[22px] mb-2 font-semibold leading-none text-black dark:text-white">
-                  Personal Financial
-                </p>
-                <p className='whitespace-nowrap block font-semibold leading-none text-black dark:text-white'>
-                  <span className='font-medium text-xs text-gray-400 dark:text-gray-200'>Powered by{" "}</span>
-                  <span>ommiputera</span>
-                  <span className='ml-[1px] text-[10px] font-normal text-gray-400 dark:text-gray-200'>.com</span>
-                </p>
-              </div>
-            </div>
             <NavbarMenus />
             <div className="absolute bottom-0 w-full border-t border-gray-100 px-3 pb-8 pt-6 dark:border-gray-800">
               <Logo />
@@ -47,7 +35,7 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <div className='grid grid-cols-12'>
+        <div className='grid grid-cols-12 w-full'>
           <Outlet />
         </div>
       </div>
@@ -69,7 +57,7 @@ export function OutletCenter({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-8 min-h-screen border-l border-r border-gray-100 dark:border-gray-800">
+    <div className="col-span-12 lg:col-span-8 w-full min-h-screen border-l border-r border-gray-100 dark:border-gray-800">
       {children}
     </div>
   )
@@ -81,7 +69,7 @@ export function OutletRight({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-4">
+    <div className="hidden lg:block lg:col-span-4 w-full">
       <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black">
         <div className="sticky top-0 w-full bg-white py-3 dark:bg-black">
           <div className="flex items-center justify-between gap-2">
@@ -105,7 +93,7 @@ function NavbarMenus() {
   const isSelected = (to: string) =>
     to === location.pathname || location.pathname.startsWith(`${to}/`)
   return (
-    <div className="flex flex-col justify-center gap-2">
+    <div className="flex flex-col justify-center gap-2 py-5">
       <ButtonLink
         type="button"
         variant="subtle"

@@ -1,5 +1,5 @@
-import type {JSONContent} from '@tiptap/core'
-import {filter, map, sum} from 'lodash'
+import type { JSONContent } from '@tiptap/core'
+import { filter, map, sum } from 'lodash'
 import {
   ArrowRightFromLine,
   ArrowRightToLine,
@@ -45,7 +45,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return {json: item, index: index}
+        return { json: item, index: index }
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -127,7 +127,7 @@ export default function SidePage({
       <div className="rounded-sm border border-gray-100 bg-white px-2 py-3 dark:border-gray-800 dark:bg-black">
         <div className="flex flex-col gap-1">
           <h1 className="text-secondary text-md font-semibold">
-            Data of {title ?? ''} Page
+            Data of {title ? title.length >= 25 ? title.slice(0, 25) + '..' : title : '~ Untitled'} Page
           </h1>
           <div className="mt-2 flex items-center">
             <div className="flex items-center gap-1">
@@ -217,7 +217,7 @@ const getMarkName = (name: MarkName | string) => {
   }
 }
 
-function CalcItem({mark}: {mark: TResult}) {
+function CalcItem({ mark }: { mark: TResult }) {
   return (
     <div className="rounded-sm py-2">
       <Accordion type="single" collapsible className="w-full">
@@ -241,7 +241,7 @@ function CalcItem({mark}: {mark: TResult}) {
   )
 }
 
-function FreeCash({marks}: {marks: TResult[]}) {
+function FreeCash({ marks }: { marks: TResult[] }) {
   const income = marks.find(mark => mark.name === 'Income')
   const expense = marks.find(mark => mark.name === 'Expense')
   const free =

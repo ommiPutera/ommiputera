@@ -206,19 +206,18 @@ p {
   grid-column: content;
   display: flex;
   align-items: start;
-  column-gap: 0.6rem;
+  column-gap: 1.5rem;
 }
 .full-bleed-kanban .wrapper-full-bleed-kanban::before {
   content: "";
   align-self: stretch;
-  padding-inline-start: 1.9rem;
+  padding-inline-start: 1rem;
   margin-left: -1rem;
 }
 .full-bleed-kanban .wrapper-full-bleed-kanban::after {
   content: "";
   align-self: stretch;
-  padding-inline-end: 1rem;
-  margin-right: -1rem;
+  padding-inline-end: 0.5rem;
 }
 .full-bleed-kanban .item-full-bleed-kanban {
   flex-shrink: 0;

@@ -3,10 +3,9 @@ import type { Post } from '@prisma/client'
 import TextareaAutosize from 'react-textarea-autosize'
 import type { LoaderFunction } from '@remix-run/node'
 import clsx from 'clsx'
-import { BookOpenCheck, Layout, PieChart, X } from 'lucide-react'
+import { BookOpenCheck, Layout, PieChart } from 'lucide-react'
 import React from 'react'
 import { Button, ButtonLink } from '~/components/button'
-import { UIButton } from '~/components/shadcn/button'
 import { db } from '~/utils/db.server'
 import { getUser } from '~/utils/session.server'
 import Analytics from './analytics'
@@ -32,7 +31,7 @@ export default function Index() {
     <WrapperOutlet>
       <OutletCenter>
         <Section />
-        <NewPost />
+        {/* <NewPost /> */}
         <Tab.Group
           as="div"
           selectedIndex={selectedIndex}
@@ -69,7 +68,7 @@ export default function Index() {
 function Section() {
   return (
     <div className="sticky top-0 z-[99] w-full border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-black px-6 py-4">
-      <h2 className="text-xl font-semibold">Beranda</h2>
+      <h2 className="text-xl font-semibold text-center">Beranda</h2>
     </div>
   )
 }
@@ -97,17 +96,14 @@ function NewPost() {
 }
 
 function Guides() {
-  const [isClose, setIsClose] = React.useState(false)
-
-  if (isClose) return <></>
   return (
-    <div className="relative flex flex-col items-center justify-center gap-6 rounded-md border border-gray-100 dark:border-gray-800 md:gap-8">
-      <div className="flex flex-col gap-6 px-6 py-8">
+    <div className="relative flex flex-col items-center justify-center rounded-md border border-gray-100 dark:border-gray-800">
+      <div className="flex flex-col gap-6 p-6">
         <div className="flex flex-col">
-          <h1 className="text-left text-xl font-semibold leading-10">
+          <h1 className="text-left text-base font-semibold leading-10">
             Personal Financial
           </h1>
-          <p className="px-0 text-left text-sm font-normal leading-snug text-gray-400 dark:text-gray-200">
+          <p className="px-0 text-left text-xs font-normal text-gray-400 dark:text-gray-200">
             So I started to walk into the water. I won't lie to you boys, I was
             terrified.
           </p>
@@ -122,10 +118,10 @@ function Guides() {
           </ButtonLink>
         </div>
         <div className="flex flex-col">
-          <h1 className="text-left text-xl font-semibold leading-10">
+          <h1 className="text-left text-base font-semibold leading-10">
             Read Guides
           </h1>
-          <p className="px-0 text-left text-sm font-normal leading-snug text-gray-400 dark:text-gray-200">
+          <p className="px-0 text-left text-xs font-normal text-gray-400 dark:text-gray-200">
             So I started to walk into the water. I won't lie to you boys, I was
             terrified. But I pressed on.
           </p>
@@ -140,16 +136,6 @@ function Guides() {
             <p className="text-sm">Guides</p>
           </ButtonLink>
         </div>
-      </div>
-      <div className="absolute right-1.5 top-1.5 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-200 hover:dark:bg-gray-800">
-        <UIButton
-          onClick={() => setIsClose(true)}
-          type="button"
-          size="sm"
-          variant="subtle"
-        >
-          <X size={16} />
-        </UIButton>
       </div>
     </div>
   )

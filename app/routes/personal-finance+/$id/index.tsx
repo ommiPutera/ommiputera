@@ -221,7 +221,7 @@ export default function Index() {
               />
             </Form>
             <Form method="POST" className="w-full">
-              <div className="pt-9">
+              <div className="pt-9 w-full">
                 <Editor
                   titletEl={titletRef}
                   focus={isEditorFocus}

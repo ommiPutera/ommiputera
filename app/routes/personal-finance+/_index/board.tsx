@@ -21,6 +21,7 @@ import ColumnContainer from '~/components/kanban/column-container'
 import TaskCard from '~/components/kanban/task-card'
 import type { Column, Id, Task } from '~/components/kanban/types'
 import type { LoaderData } from '.'
+import { format } from 'date-fns'
 
 export default function Board() {
   const { posts } = useLoaderData<LoaderData>()
@@ -135,17 +136,13 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title }: Post) {
+function UpdatePage({ id, title, updatedAt }: Post) {
   return (
-    <div className="col-span-1 cursor-pointer rounded-sm border border-gray-100 bg-white px-3 py-4 shadow-sm hover:border-gray-100 hover:bg-gray-100/50 dark:border-gray-800 dark:bg-gray-800 hover:dark:bg-gray-700">
-      <Link to={`/personal-finance/${id}`} className="flex flex-col gap-1.5">
-        <div className="flex items-center gap-x-5">
-          <h4 className="text-md font-semibold leading-tight">{title.length >= 40 ? title + '..' : title}</h4>
-        </div>
-        <div className="flex items-center gap-1">
-          <div className="rounded-sm bg-orange-900/25 bg-opacity-95 px-2 pb-[3px] pt-[2px] text-[10px] leading-[12px] text-black dark:bg-orange-100 dark:text-orange-900">
-            Monthly
-          </div>
+    <div className="col-span-1 cursor-pointer py-2.5 border-b border-gray-100 dark:border-gray-800">
+      <Link to={`/personal-finance/${id}`}>
+        <div className="flex flex-col">
+          <h4 className="text-md font-semibold leading-4 whitespace-normal">{title.length >= 35 ? title.slice(0, 35) + '..' : title}</h4>
+          <p className='text-sm font-normal text-gray-400 dark:text-gray-200'>{format(new Date(updatedAt), 'dd/MM/yy')}</p>
         </div>
       </Link>
     </div>
