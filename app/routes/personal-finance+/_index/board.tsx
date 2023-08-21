@@ -1,13 +1,13 @@
-import type { Post } from '@prisma/client'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus, PlusCircle } from 'lucide-react'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, PlusCircle} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import type { LoaderData } from '.'
-import { format } from 'date-fns'
+import {ButtonLink} from '~/components/button'
+import type {LoaderData} from '.'
+import {format} from 'date-fns'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
@@ -29,7 +29,7 @@ export default function Board() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -89,13 +89,13 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title, updatedAt }: Post) {
+function UpdatePage({id, title, updatedAt}: Post) {
   return (
     <Link to={`/personal-finance/${id}`}>
-      <div className="col-span-1 cursor-pointer flex flex-col gap-1">
-        <div className='h-36 px-5 py-4 flex flex-col gap-4 justify-center border border-gray-100 dark:border-gray-800 rounded-md hover:border-green-900 bg-[#FFF9F0]'>
-          <div className='bg-green-900 text-white px-1.5 rounded-sm w-fit'>
-            <p className='text-[10px] leading-4'>Completed</p>
+      <div className="col-span-1 flex cursor-pointer flex-col gap-1">
+        <div className="flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 hover:border-green-900 dark:border-gray-800">
+          <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">
+            <p className="text-[10px] leading-4">Completed</p>
           </div>
           <h4 className="whitespace-normal text-xl font-bold leading-5 text-gray-500">
             {title.length >= 35 ? title.slice(0, 35) + '..' : title}
