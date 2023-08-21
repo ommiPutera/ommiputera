@@ -1,40 +1,44 @@
-import type {Post} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
-import {Filter, Plus, PlusCircle} from 'lucide-react'
+import type { Post } from '@prisma/client'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus, Star } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import type {LoaderData} from '.'
-import {format} from 'date-fns'
+import { ButtonLink } from '~/components/button'
+import type { LoaderData } from '.'
+import { format } from 'date-fns'
+import clsx from 'clsx'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
-    <>
-      <div className="mb-6 flex flex-col">
+    <div className='flex flex-col gap-6 relative'>
+      <div className="flex flex-col px-6" >
         <Tools />
+      </div >
+      <Bubble />
+      <div className='px-6'>
+        {isPostsExist ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 gap-4">
+            {posts?.map(post => (
+              <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
+            ))}
+          </div>
+        ) : (
+          <NoData />
+        )}
       </div>
-      {isPostsExist ? (
-        <div className="grid grid-cols-3 gap-4">
-          {posts?.map(post => (
-            <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
-          ))}
-        </div>
-      ) : (
-        <NoData />
-      )}
-    </>
+    </div >
   )
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
-    <div className="relative mx-auto flex w-full max-w-3xl justify-between">
+    <div className="relative mx-auto flex w-full justify-between">
       <ButtonLink
         size="md"
         rounded="md"
@@ -42,19 +46,51 @@ function Tools() {
         to="/personal-finance/new"
         className="flex items-center gap-x-2"
       >
-        <PlusCircle size={16} strokeWidth={2.5} />
+        <Plus size={18} strokeWidth={2.5} />
         <p className="text-sm">New Plan</p>
       </ButtonLink>
-      <div className="">
+      <ButtonLink
+        type="button"
+        size="sm"
+        variant="subtle"
+        to="/personal-finance/new"
+        className="flex items-center gap-x-2 rounded-lg px-3 text-blue-500"
+      >
+        <Filter size={16} />
+        <p>Filter</p>
+      </ButtonLink>
+    </div>
+  )
+}
+
+function Bubble() {
+  const [scrollPosition, setScrollPosition] = React.useState(0);
+  const handleScroll = () => {
+    const position = window.pageYOffset;
+    setScrollPosition(position);
+  };
+
+  React.useEffect(() => {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  if (scrollPosition < 120) return <></>
+  return (
+    <div className='flex justify-center z-[999]'>
+      <div className="fixed top-40 bg-green-900 shadow-2xl border-2 border-white w-fit px-2 py-1 rounded-full">
         <ButtonLink
           type="button"
           size="sm"
           variant="subtle"
           to="/personal-finance/new"
-          className="flex items-center gap-x-2 rounded-lg px-3 text-blue-500"
+          className="flex items-center gap-x-2 text-white"
         >
-          <Filter size={16} />
-          <p>Filter</p>
+          <Plus size={18} strokeWidth={2.5} />
+          <p>New Plan</p>
         </ButtonLink>
       </div>
     </div>
@@ -64,8 +100,8 @@ function Tools() {
 function NoData() {
   return (
     <div className="mx-auto grid max-w-3xl gap-y-4 rounded-lg py-16 text-center">
-      <div className="mx-auto w-fit pb-2">
-        <img src="/vectors/checklist.png" alt="" className="w-h-20 h-20" />
+      <div className="mx-auto w-fit mb-24">
+        <img src="/vectors/checklist.png" alt="" className="w-28 h-28" />
       </div>
       <div>
         <h5 className="text-xl font-semibold">No expense data created</h5>
@@ -89,27 +125,48 @@ function NoData() {
   )
 }
 
-function UpdatePage({id, title, updatedAt}: Post) {
+function UpdatePage({ id, title, updatedAt }: Post) {
+  const [isHover, setIsHover] = React.useState(false)
+  const [isFav, setIsFav] = React.useState(false)
   return (
-    <Link to={`/personal-finance/${id}`}>
-      <div className="col-span-1 flex cursor-pointer flex-col gap-1">
-        <div className="flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 hover:border-green-900 dark:border-gray-800">
-          <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">
-            <p className="text-[10px] leading-4">Completed</p>
+    <div
+      className='relative'
+      onMouseEnter={() => setIsHover(true)}
+      onMouseLeave={() => setIsHover(false)}
+    >
+      <Link to={`/personal-finance/${id}`}>
+        <div className="col-span-1 flex cursor-pointer flex-col gap-1">
+          <div className={clsx("flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800", { "border-green-900": isHover })}>
+            <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">
+              <p className="text-[10px] leading-4">Completed</p>
+            </div>
+            <h4 className="whitespace-normal text-xl font-bold leading-5 text-gray-500">
+              {title.length >= 35 ? title.slice(0, 35) + '..' : title}
+            </h4>
           </div>
-          <h4 className="whitespace-normal text-xl font-bold leading-5 text-gray-500">
-            {title.length >= 35 ? title.slice(0, 35) + '..' : title}
-          </h4>
+          <div className="flex flex-col">
+            <h4 className="whitespace-normal text-sm font-normal leading-4">
+              {title.length >= 35 ? title.slice(0, 35) + '..' : title}
+            </h4>
+            <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
+              {format(new Date(updatedAt), 'dd/MM/yy')}
+            </p>
+          </div>
         </div>
-        <div className="flex flex-col">
-          <h4 className="whitespace-normal text-sm font-normal leading-4">
-            {title.length >= 35 ? title.slice(0, 35) + '..' : title}
-          </h4>
-          <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
-            {format(new Date(updatedAt), 'dd/MM/yy')}
-          </p>
-        </div>
-      </div>
-    </Link>
+      </Link>
+      {isHover &&
+        <button
+          className='p-1 rounded-sm absolute top-2 right-2 bg-black'
+          onClick={() => setIsFav(!isFav)}
+        >
+          <Star
+            size={12}
+            strokeWidth={1.5}
+            color={isFav ? 'orange' : ' white'}
+            fill={isFav ? 'orange' : 'black'}
+          />
+        </button>
+      }
+    </div>
   )
 }

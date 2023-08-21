@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {BookOpen, FilePlus, Home, Settings, Trash} from 'lucide-react'
+import { BookOpen, FilePlus, Home, Settings, Trash } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
-import {useTheme} from '~/utils/theme-provider'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
+import { useTheme } from '~/utils/theme-provider'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -25,8 +25,8 @@ export default function Index() {
   return (
     <main className="bg-white dark:bg-black">
       <div className="relative mx-auto flex max-w-[85rem]">
-        <div className="hidden min-w-[13rem] lg:block">
-          <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
+        <div className="hidden min-w-[13rem] md:block">
+          <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white px-6 dark:bg-black">
             <NavbarMenus />
             <div className="absolute bottom-0 w-full py-4">
               <Logo size="md" />
@@ -55,7 +55,7 @@ export function OutletCenter({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-12 min-h-screen w-full border-l border-r border-gray-100 dark:border-gray-800 lg:col-span-8">
+    <div className="col-span-12 min-h-screen w-full border-l lg:border-r border-gray-100 dark:border-gray-800 xl:col-span-8">
       {children}
     </div>
   )
@@ -67,7 +67,7 @@ export function OutletRight({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="hidden w-full lg:col-span-4 lg:block">
+    <div className="hidden w-full lg:col-span-4 xl:block">
       <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black">
         <div className="sticky top-0 w-full bg-white py-3 dark:bg-black">
           <div className="flex items-center justify-between gap-2 py-1">
@@ -91,7 +91,7 @@ function NavbarMenus() {
   const isSelected = (to: string) => to === location.pathname
   const [theme] = useTheme()
   return (
-    <div className="flex flex-col justify-center gap-7 py-6">
+    <div className="flex flex-col justify-center gap-8 py-6">
       <Link to="/personal-finance" prefetch="intent" className="mb-1">
         <div className="flex gap-3">
           <svg
@@ -135,7 +135,7 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2.5 px-0 hover:text-black hover:dark:text-white',
           {
             'text-gray-400 dark:text-gray-200':
               !isSelected('/personal-finance'),
@@ -153,7 +153,7 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2.5 px-0 hover:text-black hover:dark:text-white',
           {
             'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/guide',
@@ -172,7 +172,7 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2.5 px-0 hover:text-black hover:dark:text-white',
           {
             'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/templates',
@@ -193,7 +193,7 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2.5 px-0 hover:text-black hover:dark:text-white',
           {
             'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/settings',
@@ -214,7 +214,7 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2.5 px-0 hover:text-black hover:dark:text-white',
           {
             'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/trash',

@@ -1,25 +1,25 @@
-import {Tab} from '@headlessui/react'
-import type {Post} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
+import { Tab } from '@headlessui/react'
+import type { Post } from '@prisma/client'
+import type { LoaderFunction } from '@remix-run/node'
 import clsx from 'clsx'
 // @ts-ignore
-import {BookOpenCheck, Home, icons} from 'lucide-react'
+import { BookOpenCheck, Home, icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
 import Analytics from './analytics'
 import Board from './board'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
-  const data: LoaderData = {posts}
+  const posts = await db.post.findMany({ where: { authorId: user?.id } })
+  const data: LoaderData = { posts }
   return data
 }
 
@@ -35,8 +35,8 @@ export default function Index() {
           onChange={setSelectedIndex}
           className="w-full grid-cols-12 gap-x-8 overflow-visible"
         >
-          <div className="sticky top-0 z-[99] mb-4 w-full border-b border-gray-100 bg-white/[0.65] px-3 pt-4 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] lg:px-0">
-            <div className="mb-6 mt-2 flex items-center gap-2.5 px-0 lg:px-6">
+          <div className="sticky top-0 z-[99] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 lg:pt-4 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65]">
+            <div className="mb-6 mt-2 flex items-center gap-2.5 px-6">
               <Home size={22} strokeWidth={3} />
               <h2 className="mt-1 text-left text-xl font-semibold">Beranda</h2>
             </div>
@@ -61,7 +61,7 @@ export default function Index() {
               />
             </Tab.List>
           </div>
-          <Tab.Panels className="px-6 pb-[15rem] pt-2">
+          <Tab.Panels className="pb-[18rem] pt-2">
             <Tab.Panel>
               <Board />
             </Tab.Panel>
@@ -172,7 +172,7 @@ function TabItem({
         <h2 className="mt-0.5 text-md font-semibold">{title}</h2>
         <div
           className={clsx(
-            'absolute -bottom-3 left-0 h-[3.5px] w-full rounded-lg',
+            'absolute -bottom-3 left-0 h-[4px] w-full rounded-lg',
             {
               'bg-green-900': selectedIndex === index,
             },
@@ -195,7 +195,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({selected}) =>
+      className={({ selected }) =>
         clsx(
           'relative flex w-full justify-center border-b-0 border-b-transparent py-3 font-semibold hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
           {
