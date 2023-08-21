@@ -208,7 +208,7 @@ p {
   grid-column: content;
   display: flex;
   align-items: start;
-  column-gap: 1.5rem;
+  column-gap: 0.5rem;
 }
 .full-bleed-kanban .wrapper-full-bleed-kanban::before {
   content: "";

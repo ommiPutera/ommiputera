@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {BookOpen, FilePlus, Home, Settings, Trash} from 'lucide-react'
+import { BookOpen, FilePlus, Home, Settings, Trash } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
-import {useTheme} from '~/utils/theme-provider'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
+import { useTheme } from '~/utils/theme-provider'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -24,7 +24,7 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto flex max-w-[80rem]">
+      <div className="relative mx-auto flex max-w-[85rem]">
         <div className="hidden min-w-[13rem] lg:block">
           <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
             <NavbarMenus />
@@ -55,8 +55,7 @@ export function OutletCenter({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-12 min-h-screen w-full lg:col-span-8">
-      {/* <div className="col-span-12 min-h-screen w-full border-l border-r border-gray-100 dark:border-gray-800 lg:col-span-8"> */}
+    <div className="col-span-12 min-h-screen w-full border-l border-r border-gray-100 dark:border-gray-800 lg:col-span-8">
       {children}
     </div>
   )
