@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { BookOpen, FilePlus, Home, Settings, Trash } from 'lucide-react'
+import {BookOpen, FilePlus, Home, Settings, Trash} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
-import { useTheme } from '~/utils/theme-provider'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
+import {useTheme} from '~/utils/theme-provider'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -29,7 +29,7 @@ export default function Index() {
           <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
             <NavbarMenus />
             <div className="absolute bottom-0 w-full py-4">
-              <Logo size='md' />
+              <Logo size="md" />
             </div>
           </div>
         </div>
@@ -93,7 +93,7 @@ function NavbarMenus() {
   const [theme] = useTheme()
   return (
     <div className="flex flex-col justify-center gap-7 py-6">
-      <Link to="/personal-finance" prefetch="intent" className='mb-1'>
+      <Link to="/personal-finance" prefetch="intent" className="mb-1">
         <div className="flex gap-3">
           <svg
             width="28"
