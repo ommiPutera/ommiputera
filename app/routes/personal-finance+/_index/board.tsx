@@ -1,25 +1,25 @@
-import type { Post } from '@prisma/client'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus, Star } from 'lucide-react'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, Star} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import type { LoaderData } from '.'
-import { format } from 'date-fns'
+import {ButtonLink} from '~/components/button'
+import type {LoaderData} from '.'
+import {format} from 'date-fns'
 import clsx from 'clsx'
 
 export default function Board() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   return (
-    <div className='flex flex-col gap-6 relative'>
-      <div className="flex flex-col px-6" >
+    <div className="relative flex flex-col gap-6">
+      <div className="flex flex-col px-6">
         <Tools />
-      </div >
+      </div>
       <Bubble />
-      <div className='px-6'>
+      <div className="px-6">
         {isPostsExist ? (
-          <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-3">
             {posts?.map(post => (
               <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
             ))}
@@ -28,12 +28,12 @@ export default function Board() {
           <NoData />
         )}
       </div>
-    </div >
+    </div>
   )
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -64,24 +64,24 @@ function Tools() {
 }
 
 function Bubble() {
-  const [scrollPosition, setScrollPosition] = React.useState(0);
+  const [scrollPosition, setScrollPosition] = React.useState(0)
   const handleScroll = () => {
-    const position = window.pageYOffset;
-    setScrollPosition(position);
-  };
+    const position = window.pageYOffset
+    setScrollPosition(position)
+  }
 
   React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('scroll', handleScroll, {passive: true})
 
     return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
 
   if (scrollPosition < 120) return <></>
   return (
-    <div className='flex justify-center z-[999]'>
-      <div className="fixed top-40 bg-green-900 shadow-2xl border-2 border-white w-fit px-2 py-1 rounded-full">
+    <div className="z-[999] flex justify-center">
+      <div className="fixed top-40 w-fit rounded-full border-2 border-white bg-green-900 px-2 py-1 shadow-2xl">
         <ButtonLink
           type="button"
           size="sm"
@@ -100,8 +100,8 @@ function Bubble() {
 function NoData() {
   return (
     <div className="mx-auto grid max-w-3xl gap-y-4 rounded-lg py-16 text-center">
-      <div className="mx-auto w-fit mb-24">
-        <img src="/vectors/checklist.png" alt="" className="w-28 h-28" />
+      <div className="mx-auto mb-24 w-fit">
+        <img src="/vectors/checklist.png" alt="" className="h-28 w-28" />
       </div>
       <div>
         <h5 className="text-xl font-semibold">No expense data created</h5>
@@ -125,18 +125,23 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title, updatedAt }: Post) {
+function UpdatePage({id, title, updatedAt}: Post) {
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(false)
   return (
     <div
-      className='relative'
+      className="relative"
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
       <Link to={`/personal-finance/${id}`}>
         <div className="col-span-1 flex cursor-pointer flex-col gap-1">
-          <div className={clsx("flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800", { "border-green-900": isHover })}>
+          <div
+            className={clsx(
+              'flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800',
+              {'border-green-900': isHover},
+            )}
+          >
             <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">
               <p className="text-[10px] leading-4">Completed</p>
             </div>
@@ -154,9 +159,9 @@ function UpdatePage({ id, title, updatedAt }: Post) {
           </div>
         </div>
       </Link>
-      {isHover &&
+      {isHover && (
         <button
-          className='p-1 rounded-sm absolute top-2 right-2 bg-black'
+          className="absolute right-2 top-2 rounded-sm bg-black p-1"
           onClick={() => setIsFav(!isFav)}
         >
           <Star
@@ -166,7 +171,7 @@ function UpdatePage({ id, title, updatedAt }: Post) {
             fill={isFav ? 'orange' : 'black'}
           />
         </button>
-      }
+      )}
     </div>
   )
 }

@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { BookOpen, FilePlus, Home, Settings, Trash } from 'lucide-react'
+import {BookOpen, FilePlus, Home, Settings, Trash} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
-import { useTheme } from '~/utils/theme-provider'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
+import {useTheme} from '~/utils/theme-provider'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -55,7 +55,7 @@ export function OutletCenter({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-12 min-h-screen w-full border-l lg:border-r border-gray-100 dark:border-gray-800 xl:col-span-8">
+    <div className="col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-8">
       {children}
     </div>
   )
