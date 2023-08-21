@@ -1,17 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Link, Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {BookOpen, FilePlus, Home, Settings, Trash} from 'lucide-react'
+import { BookOpen, FilePlus, Home, Settings, Trash } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
+import { useTheme } from '~/utils/theme-provider'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -23,15 +24,12 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto flex max-w-[75rem]">
-        <div className="hidden min-w-[15rem] lg:block">
+      <div className="relative mx-auto flex max-w-[80rem]">
+        <div className="hidden min-w-[13rem] lg:block">
           <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
             <NavbarMenus />
             <div className="absolute bottom-0 w-full py-4">
-              <p className="mb-1 text-sm text-gray-400 dark:text-gray-200">
-                Personal Finance by ommiputera
-              </p>
-              <Logo />
+              <Logo size='md' />
             </div>
           </div>
         </div>
@@ -57,7 +55,8 @@ export function OutletCenter({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="col-span-12 min-h-screen w-full border-l border-r border-gray-100 dark:border-gray-800 lg:col-span-8">
+    <div className="col-span-12 min-h-screen w-full lg:col-span-8">
+      {/* <div className="col-span-12 min-h-screen w-full border-l border-r border-gray-100 dark:border-gray-800 lg:col-span-8"> */}
       {children}
     </div>
   )
@@ -91,9 +90,10 @@ export function OutletRight({
 function NavbarMenus() {
   const location = useLocation()
   const isSelected = (to: string) => to === location.pathname
+  const [theme] = useTheme()
   return (
     <div className="flex flex-col justify-center gap-7 py-6">
-      <Link to="/personal-finance" prefetch="intent">
+      <Link to="/personal-finance" prefetch="intent" className='mb-1'>
         <div className="flex gap-3">
           <svg
             width="28"
@@ -106,7 +106,7 @@ function NavbarMenus() {
               fill-rule="evenodd"
               clip-rule="evenodd"
               d="M13.9998 0C11.5741 0 9.60767 1.96644 9.60767 4.39216C9.60767 6.81788 11.5741 8.78431 13.9998 8.78431H23.6077C26.0334 8.78431 27.9998 6.81788 27.9998 4.39216C27.9998 1.96644 26.0334 0 23.6077 0H13.9998Z"
-              fill="#F11A7B"
+              fill={theme === 'dark' ? '#fff' : '#000'}
             />
             <rect
               x="8.78418"
@@ -115,7 +115,7 @@ function NavbarMenus() {
               height="8.78431"
               rx="4.39216"
               transform="rotate(90 8.78418 9.60785)"
-              fill="#F11A7B"
+              fill={theme === 'dark' ? '#fff' : '#000'}
             />
             <rect
               x="18.2549"
@@ -124,7 +124,7 @@ function NavbarMenus() {
               height="8.78431"
               rx="4.39216"
               transform="rotate(90 18.2549 19.2156)"
-              fill="#F11A7B"
+              fill={theme === 'dark' ? '#fff' : '#000'}
             />
           </svg>
         </div>
@@ -136,16 +136,16 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
           {
-            'font-medium text-gray-400 dark:text-gray-200':
+            'text-gray-400 dark:text-gray-200':
               !isSelected('/personal-finance'),
             'text-black dark:text-white': isSelected('/personal-finance'),
           },
         )}
       >
-        <Home size={24} />
-        <span className="text-base leading-tight">Beranda</span>
+        <Home size={20} strokeWidth={2.5} />
+        <h2 className="text-md font-semibold">Beranda</h2>
       </ButtonLink>
       <ButtonLink
         type="button"
@@ -154,17 +154,17 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
           {
-            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
+            'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/guide',
             ),
             'text-black dark:text-white': isSelected('/personal-finance/guide'),
           },
         )}
       >
-        <BookOpen size={24} />
-        <span className="text-base leading-tight">Guide</span>
+        <BookOpen size={20} strokeWidth={2.5} />
+        <h2 className="text-md font-semibold">Guide</h2>
       </ButtonLink>
       <ButtonLink
         type="button"
@@ -173,9 +173,9 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
           {
-            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
+            'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/templates',
             ),
             'text-black dark:text-white': isSelected(
@@ -184,8 +184,8 @@ function NavbarMenus() {
           },
         )}
       >
-        <FilePlus size={24} />
-        <span className="text-base leading-tight">Create Templates</span>
+        <FilePlus size={20} strokeWidth={2.5} />
+        <h2 className="text-md font-semibold">Templates</h2>
       </ButtonLink>
       <ButtonLink
         type="button"
@@ -194,9 +194,9 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
           {
-            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
+            'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/settings',
             ),
             'text-black dark:text-white': isSelected(
@@ -205,8 +205,8 @@ function NavbarMenus() {
           },
         )}
       >
-        <Settings size={24} />
-        <span className="text-base leading-tight">Settings & Members</span>
+        <Settings size={20} strokeWidth={2.5} />
+        <h2 className="text-md font-semibold">Settings</h2>
       </ButtonLink>
       <ButtonLink
         type="button"
@@ -215,17 +215,17 @@ function NavbarMenus() {
         prefetch="intent"
         align="left"
         className={clsx(
-          'flex items-center gap-3 px-0 hover:text-black hover:dark:text-white',
+          'flex items-center gap-2 px-0 hover:text-black hover:dark:text-white',
           {
-            'font-medium text-gray-400 dark:text-gray-200': !isSelected(
+            'text-gray-400 dark:text-gray-200': !isSelected(
               '/personal-finance/trash',
             ),
             'text-black dark:text-white': isSelected('/personal-finance/trash'),
           },
         )}
       >
-        <Trash size={24} />
-        <span className="text-base leading-tight">Trash</span>
+        <Trash size={20} strokeWidth={2.5} />
+        <h2 className="text-md font-semibold">Trash</h2>
       </ButtonLink>
     </div>
   )
