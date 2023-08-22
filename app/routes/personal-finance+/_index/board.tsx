@@ -1,18 +1,18 @@
-import type { Post } from '@prisma/client'
-import { Link, useLoaderData } from '@remix-run/react'
-import { Filter, Plus, Star } from 'lucide-react'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
+import {Filter, Plus, Star} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import type { LoaderData } from '.'
-import { AnimatePresence, motion } from "framer-motion";
-import { format } from 'date-fns'
+import {ButtonLink} from '~/components/button'
+import type {LoaderData} from '.'
+import {AnimatePresence, motion} from 'framer-motion'
+import {format} from 'date-fns'
 import clsx from 'clsx'
 import useScrollPosition from '~/components/hooks/use-scroll-position'
 
 export default function Board() {
   return (
     <div className="relative flex flex-col">
-      <div className="flex flex-col px-6 mb-6">
+      <div className="mb-6 flex flex-col px-6">
         <Tools />
       </div>
       <div className="z-10 flex justify-center">
@@ -26,7 +26,7 @@ export default function Board() {
 }
 
 function Cards() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
@@ -44,7 +44,7 @@ function Cards() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -79,11 +79,11 @@ function Bubble() {
 
   return (
     <AnimatePresence>
-      {scrollPosition > 70 &&
+      {scrollPosition > 70 && (
         <motion.div
-          initial={{ y: -160, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          initial={{y: -160, opacity: 0}}
+          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
+          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -101,7 +101,7 @@ function Bubble() {
             <p>New Plan</p>
           </ButtonLink>
         </motion.div>
-      }
+      )}
     </AnimatePresence>
   )
 }
@@ -134,7 +134,7 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title, updatedAt }: Post) {
+function UpdatePage({id, title, updatedAt}: Post) {
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(false)
   return (
@@ -148,7 +148,7 @@ function UpdatePage({ id, title, updatedAt }: Post) {
           <div
             className={clsx(
               'flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800',
-              { 'border-green-900': isHover },
+              {'border-green-900': isHover},
             )}
           >
             <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">

@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Link, Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Link, Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import { icons } from 'lucide-react'
+import {icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -92,39 +92,48 @@ export function OutletRight({
   )
 }
 
-
 function NavbarMenu() {
   return (
     <div className="flex flex-col justify-center py-5">
-      <Link to="/" prefetch="intent" className="flex gap-1 mb-1.5 mt-0.5 items-center">
-        <span className='text-2xl font-normal pb-2'>Omition</span>
-        <span className='text-2xl font-semibold bg-gradient-to-tr from-green-900 to-[#01BAEF] bg-clip-text text-transparent'>Finance</span>
+      <Link
+        to="/"
+        prefetch="intent"
+        className="mb-1.5 mt-0.5 flex items-center gap-1"
+      >
+        <span className="pb-2 text-2xl font-normal">Omition</span>
+        <span className="bg-gradient-to-tr from-green-900 to-[#01BAEF] bg-clip-text text-2xl font-semibold text-transparent">
+          Finance
+        </span>
       </Link>
+      <NavbarItem title="Beranda" route="/personal-finance" iconName="Home" />
       <NavbarItem
-        title='Beranda'
-        route='/personal-finance'
-        iconName='Home'
+        title="Pengaturan"
+        route="/personal-finance/settings"
+        iconName="Settings"
       />
       <NavbarItem
-        title='Pengaturan'
-        route='/personal-finance/settings'
-        iconName='Settings'
+        title="Panduan"
+        route="/personal-finance/guide"
+        iconName="BookOpen"
       />
       <NavbarItem
-        title='Panduan'
-        route='/personal-finance/guide'
-        iconName='BookOpen'
-      />
-      <NavbarItem
-        title='Templates'
-        route='/personal-finance/templates'
-        iconName='FilePlus'
+        title="Templates"
+        route="/personal-finance/templates"
+        iconName="FilePlus"
       />
     </div>
   )
 }
 
-function NavbarItem({ route, title, iconName }: { route: string, title: string, iconName: string }) {
+function NavbarItem({
+  route,
+  title,
+  iconName,
+}: {
+  route: string
+  title: string
+  iconName: string
+}) {
   const location = useLocation()
   const isSelected = route === location.pathname
 
@@ -137,7 +146,7 @@ function NavbarItem({ route, title, iconName }: { route: string, title: string, 
       prefetch="intent"
       align="left"
       className={clsx(
-        'flex items-center gap-2.5 hover:text-black hover:dark:text-white py-4 px-0',
+        'flex items-center gap-2.5 px-0 py-4 hover:text-black hover:dark:text-white',
         {
           'text-gray-300 dark:text-gray-200': !isSelected,
           'text-black dark:text-white': isSelected,
@@ -145,7 +154,7 @@ function NavbarItem({ route, title, iconName }: { route: string, title: string, 
       )}
     >
       <LucideIcon size={22} strokeWidth={2.5} />
-      <h2 className="text-lg font-semibold pt-0.5">{title}</h2>
+      <h2 className="pt-0.5 text-lg font-semibold">{title}</h2>
     </ButtonLink>
   )
 }
