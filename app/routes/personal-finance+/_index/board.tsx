@@ -1,39 +1,50 @@
-import type {Post} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
-import {Filter, Plus, Star} from 'lucide-react'
+import type { Post } from '@prisma/client'
+import { Link, useLoaderData } from '@remix-run/react'
+import { Filter, Plus, Star } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import type {LoaderData} from '.'
-import {format} from 'date-fns'
+import { ButtonLink } from '~/components/button'
+import type { LoaderData } from '.'
+import { AnimatePresence, motion } from "framer-motion";
+import { format } from 'date-fns'
 import clsx from 'clsx'
+import useScrollPosition from '~/components/hooks/use-scroll-position'
 
 export default function Board() {
-  const {posts} = useLoaderData<LoaderData>()
-  const isPostsExist = Boolean(posts?.length)
-
   return (
-    <div className="relative flex flex-col gap-6">
-      <div className="flex flex-col px-6">
+    <div className="relative flex flex-col">
+      <div className="flex flex-col px-6 mb-6">
         <Tools />
       </div>
-      <Bubble />
+      <div className="z-10 flex justify-center">
+        <Bubble />
+      </div>
       <div className="px-6">
-        {isPostsExist ? (
-          <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-3">
-            {posts?.map(post => (
-              <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
-            ))}
-          </div>
-        ) : (
-          <NoData />
-        )}
+        <Cards />
       </div>
     </div>
   )
 }
 
+function Cards() {
+  const { posts } = useLoaderData<LoaderData>()
+  const isPostsExist = Boolean(posts?.length)
+  return (
+    <>
+      {isPostsExist ? (
+        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-3">
+          {posts?.map(post => (
+            <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
+          ))}
+        </div>
+      ) : (
+        <NoData />
+      )}
+    </>
+  )
+}
+
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -64,44 +75,42 @@ function Tools() {
 }
 
 function Bubble() {
-  const [scrollPosition, setScrollPosition] = React.useState(0)
-  const handleScroll = () => {
-    const position = window.pageYOffset
-    setScrollPosition(position)
-  }
+  const scrollPosition = useScrollPosition()
 
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll, {passive: true})
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-    }
-  }, [])
-
-  if (scrollPosition < 120) return <></>
   return (
-    <div className="z-[999] flex justify-center">
-      <div className="fixed top-40 w-fit rounded-full border-2 border-white bg-green-900 px-2 py-1 shadow-2xl">
-        <ButtonLink
-          type="button"
-          size="sm"
-          variant="subtle"
-          to="/personal-finance/new"
-          className="flex items-center gap-x-2 text-white"
+    <AnimatePresence>
+      {scrollPosition > 70 &&
+        <motion.div
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          transition={{
+            delay: 0.3,
+            ease: 'linear',
+          }}
+          className="fixed top-36 w-fit rounded-full bg-green-900 px-2 py-1 shadow-2xl"
         >
-          <Plus size={18} strokeWidth={2.5} />
-          <p>New Plan</p>
-        </ButtonLink>
-      </div>
-    </div>
+          <ButtonLink
+            type="button"
+            size="sm"
+            variant="subtle"
+            to="/personal-finance/new"
+            className="flex items-center gap-x-2 text-white"
+          >
+            <Plus size={18} strokeWidth={2.5} />
+            <p>New Plan</p>
+          </ButtonLink>
+        </motion.div>
+      }
+    </AnimatePresence>
   )
 }
 
 function NoData() {
   return (
     <div className="mx-auto grid max-w-3xl gap-y-4 rounded-lg py-16 text-center">
-      <div className="mx-auto mb-24 w-fit">
-        <img src="/vectors/checklist.png" alt="" className="h-28 w-28" />
+      <div className="mx-auto mb-16 w-fit">
+        <img src="/vectors/checklist.png" alt="" className="h-24 w-24" />
       </div>
       <div>
         <h5 className="text-xl font-semibold">No expense data created</h5>
@@ -125,7 +134,7 @@ function NoData() {
   )
 }
 
-function UpdatePage({id, title, updatedAt}: Post) {
+function UpdatePage({ id, title, updatedAt }: Post) {
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(false)
   return (
@@ -135,11 +144,11 @@ function UpdatePage({id, title, updatedAt}: Post) {
       onMouseLeave={() => setIsHover(false)}
     >
       <Link to={`/personal-finance/${id}`}>
-        <div className="col-span-1 flex cursor-pointer flex-col gap-1">
+        <div className="col-span-1 flex cursor-default flex-col gap-1">
           <div
             className={clsx(
               'flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800',
-              {'border-green-900': isHover},
+              { 'border-green-900': isHover },
             )}
           >
             <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">

@@ -79,6 +79,7 @@
   src: url('/fonts/Matter-Medium.woff2') format('woff2'),
     url('/fonts/Matter-Medium.woff') format('woff');
   font-weight: 500;
+  line-height: 1;
   font-style: normal;
   font-display: swap;
 }
@@ -88,6 +89,7 @@
   src: url('/fonts/Matter-Light.woff2') format('woff2'),
     url('/fonts/Matter-Light.woff') format('woff');
   font-weight: 300;
+  line-height: 1;
   font-style: normal;
   font-display: swap;
 }
@@ -97,6 +99,7 @@
   src: url('/fonts/Matter-Regular.woff2') format('woff2'),
     url('/fonts/Matter-Regular.woff') format('woff');
   font-weight: 400;
+  line-height: 1;
   font-style: normal;
   font-display: swap;
 }
@@ -106,6 +109,7 @@
   src: url('/fonts/Matter-SemiBold.woff2') format('woff2'),
     url('/fonts/Matter-SemiBold.woff') format('woff');
   font-weight: 600;
+  line-height: 1;
   font-style: normal;
   font-display: swap;
 }

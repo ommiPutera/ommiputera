@@ -129,50 +129,6 @@ module.exports = {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
       },
-      typography: (theme: any) => {
-        const fontSize = (size: string) => {
-          const result = theme(`fontSize.${size}`)
-          return Array.isArray(result) ? result[0] : result
-        }
-
-        return {
-          DEFAULT: {
-            css: {
-              'h1, h2, h3, h4, h5, h6': {
-                marginTop: 0,
-                marginBottom: 0,
-                fontWeight: theme('fontWeight.normal'),
-
-                [`@media (min-width: ${theme('screens.lg')})`]: {
-                  fontWeight: theme('fontWeight.medium'),
-                },
-              },
-              'h1, h2': {
-                fontSize: fontSize('2xl'),
-                marginTop: theme('spacing.20'),
-                marginBottom: theme('spacing.10'),
-                [`@media (min-width: ${theme('screens.lg')})`]: {
-                  fontSize: fontSize('3xl'),
-                },
-              },
-              h3: {
-                fontSize: fontSize('xl'),
-                marginTop: theme('spacing.16'),
-                marginBottom: theme('spacing.10'),
-                [`@media (min-width: ${theme('screens.lg')})`]: {
-                  fontSize: fontSize('2xl'),
-                },
-              },
-              'h4, h5, h6': {
-                fontSize: fontSize('lg'),
-                [`@media (min-width: ${theme('screens.lg')})`]: {
-                  fontSize: fontSize('xl'),
-                },
-              },
-            },
-          },
-        }
-      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
