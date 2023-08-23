@@ -1,14 +1,14 @@
-import { Tab } from '@headlessui/react'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
+import {Tab} from '@headlessui/react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
 import clsx from 'clsx'
 // @ts-ignore
-import { Home, MoveRight, icons } from 'lucide-react'
+import {Home, MoveRight, icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import {ButtonLink} from '~/components/button'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
 import Analytics from './analytics'
 import Board from './board'
 import {
@@ -17,17 +17,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import { SectionSpacer } from '~/components/spacer'
-import { getImgProps, images } from '~/images'
+import {SectionSpacer} from '~/components/spacer'
+import {getImgProps, images} from '~/images'
 
 export type LoaderData = {
   posts: Post[] | null
 }
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await getUser(request)
-  const posts = await db.post.findMany({ where: { authorId: user?.id } })
-  const data: LoaderData = { posts }
+  const posts = await db.post.findMany({where: {authorId: user?.id}})
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -55,7 +55,7 @@ function Tabs() {
       onChange={setSelectedIndex}
       className="w-full grid-cols-12 gap-x-8 overflow-visible"
     >
-      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-md dark:backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] lg:pt-4">
+      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-md dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:pt-4">
         <div className="mb-6 mt-2 flex items-center gap-2.5 px-6">
           <Home size={22} strokeWidth={3} />
           <h2 className="mt-1 text-left text-xl font-semibold">Beranda</h2>
@@ -113,7 +113,7 @@ function BrowseTemplate() {
       <div className="">
         <img
           id="templateCover"
-          className="object-cover rounded-sm"
+          className="rounded-sm object-cover"
           {...getImgProps(images.templateCover, {
             widths: [840, 1100, 1300, 2600, 3984],
             sizes: ['(max-width:1620px) 1090px', '60vh'],
@@ -186,7 +186,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({ selected }) =>
+      className={({selected}) =>
         clsx(
           'relative flex w-full justify-center border-b-0 border-b-transparent py-3 font-semibold hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
           {

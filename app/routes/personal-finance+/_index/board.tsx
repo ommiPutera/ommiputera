@@ -1,13 +1,13 @@
-import type { Post } from '@prisma/client'
-import { Link, useLoaderData } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { format } from 'date-fns'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Filter, Plus, Star } from 'lucide-react'
+import {format} from 'date-fns'
+import {AnimatePresence, motion} from 'framer-motion'
+import {Filter, Plus, Star} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import useScrollPosition from '~/components/hooks/use-scroll-position'
-import type { LoaderData } from '.'
+import type {LoaderData} from '.'
 
 export default function Board() {
   return (
@@ -26,7 +26,7 @@ export default function Board() {
 }
 
 function Cards() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
@@ -44,7 +44,7 @@ function Cards() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -81,9 +81,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{ y: -160, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          initial={{y: -160, opacity: 0}}
+          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
+          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -134,7 +134,7 @@ function NoData() {
   )
 }
 
-function Card({ id, title, updatedAt }: Post) {
+function Card({id, title, updatedAt}: Post) {
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(false)
   return (
@@ -148,21 +148,29 @@ function Card({ id, title, updatedAt }: Post) {
           <div
             className={clsx(
               'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              { 'border-green-900': isHover },
+              {'border-green-900': isHover},
             )}
           >
-            <CardBadge title="Completed" variant='green' />
+            <CardBadge title="Completed" variant="green" />
             <h4 className="whitespace-normal text-xl font-bold leading-6 text-gray-500">
-              {title.length >= 42 ? title.slice(0, 42) + '..' : !title.length ? 'Untitled - draf' : title}
+              {title.length >= 42
+                ? title.slice(0, 42) + '..'
+                : !title.length
+                ? 'Untitled - draf'
+                : title}
             </h4>
-            <div className='flex flex-wrap gap-2 mt-4'>
-              <CardBadge title="Month" variant='violet' />
-              <CardBadge title="Debt" variant='orange' />
+            <div className="mt-4 flex flex-wrap gap-2">
+              <CardBadge title="Month" variant="violet" />
+              <CardBadge title="Debt" variant="orange" />
             </div>
           </div>
           <div className="flex flex-col">
             <h4 className="whitespace-normal text-sm font-normal leading-4">
-              {title.length >= 42 ? title.slice(0, 42) + '..' : !title.length ? 'Untitled - draf' : title}
+              {title.length >= 42
+                ? title.slice(0, 42) + '..'
+                : !title.length
+                ? 'Untitled - draf'
+                : title}
             </h4>
             <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
               {format(new Date(updatedAt), 'dd/MM/yy')}
@@ -187,15 +195,24 @@ function Card({ id, title, updatedAt }: Post) {
   )
 }
 
-
-function CardBadge({ title, variant }: { title: string, variant: 'green' | 'violet' | 'orange' }) {
+function CardBadge({
+  title,
+  variant,
+}: {
+  title: string
+  variant: 'green' | 'violet' | 'orange'
+}) {
   return (
-    <div className={clsx("w-fit rounded-sm px-1.5", {
-      'bg-green-900 text-white': variant === 'green',
-      'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-white': variant === 'violet',
-      'dark:bg-orange-400 dark:text-white bg-orange-900/50 text-orange-500': variant === 'orange'
-    })}>
-      <p className="text-[10px] leading-[14px] pt-[0.3px]">{title}</p>
+    <div
+      className={clsx('w-fit rounded-sm px-1.5', {
+        'bg-green-900 text-white': variant === 'green',
+        'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-white':
+          variant === 'violet',
+        'bg-orange-900/50 text-orange-500 dark:bg-orange-400 dark:text-white':
+          variant === 'orange',
+      })}
+    >
+      <p className="pt-[0.3px] text-[10px] leading-[14px]">{title}</p>
     </div>
   )
 }

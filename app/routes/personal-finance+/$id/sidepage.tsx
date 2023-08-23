@@ -1,5 +1,5 @@
-import type { JSONContent } from '@tiptap/core'
-import { filter, map, sum } from 'lodash'
+import type {JSONContent} from '@tiptap/core'
+import {filter, map, sum} from 'lodash'
 import {
   ArrowRightFromLine,
   ArrowRightToLine,
@@ -10,14 +10,14 @@ import {
   MoveRight,
 } from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import { SectionSpacer } from '~/components/spacer'
+import {SectionSpacer} from '~/components/spacer'
 
 type TResult = {
   name: string
@@ -48,7 +48,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return { json: item, index: index }
+        return {json: item, index: index}
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -126,9 +126,7 @@ export default function SidePage({
   }, [calculate, content])
 
   if (!title?.length) {
-    return (
-      <Guide />
-    )
+    return <Guide />
   }
 
   return (
@@ -184,26 +182,31 @@ export default function SidePage({
   )
 }
 
-function BoldThis({ children }: { children: JSX.Element | React.ReactNode }) {
-  return (
-    <b className='font-semibold text-black dark:text-white'>{children}</b>
-  )
+function BoldThis({children}: {children: JSX.Element | React.ReactNode}) {
+  return <b className="font-semibold text-black dark:text-white">{children}</b>
 }
 
 function Guide() {
   return (
     <div className="">
-      <div className='flex flex-col gap-4'>
-        <h1 className="text-xl font-semibold leading-10">How to use this template</h1>
-        <ul className='flex flex-col gap-4'>
+      <div className="flex flex-col gap-4">
+        <h1 className="text-xl font-semibold leading-10">
+          How to use this template
+        </h1>
+        <ul className="flex flex-col gap-4">
           <li className="text-sm font-normal text-gray-700 dark:text-gray-100">
-            <BoldThis>1. Establish goals:</BoldThis> Fill in the problem to be solved, goal of brainstorm and any additional context that might be helpful for everyone to know below.
+            <BoldThis>1. Establish goals:</BoldThis> Fill in the problem to be
+            solved, goal of brainstorm and any additional context that might be
+            helpful for everyone to know below.
           </li>
           <li className="text-sm font-normal text-gray-700 dark:text-gray-100">
-            <BoldThis>2. Sketch out ideas:</BoldThis> Each team member gets 8 minutes to sketch out 8 ideas. One idea for each rectangle.
+            <BoldThis>2. Sketch out ideas:</BoldThis> Each team member gets 8
+            minutes to sketch out 8 ideas. One idea for each rectangle.
           </li>
           <li className="text-sm font-normal text-gray-700 dark:text-gray-100">
-            <BoldThis>3. Share:</BoldThis> Each team member will take a few minutes to share out their ideas and discuss them with the team. Once everyone has gone, vote on your favourite solutions!
+            <BoldThis>3. Share:</BoldThis> Each team member will take a few
+            minutes to share out their ideas and discuss them with the team.
+            Once everyone has gone, vote on your favourite solutions!
           </li>
         </ul>
       </div>
@@ -211,7 +214,8 @@ function Guide() {
       <div>
         <h1 className="text-xl font-semibold leading-10">Explore</h1>
         <p className="px-0 text-left text-sm font-normal text-gray-700 dark:text-gray-100">
-          Explore our collection of <BoldThis>300+ FigJam templates</BoldThis> by navigating to the templates modal in the top left of your screen.
+          Explore our collection of <BoldThis>300+ FigJam templates</BoldThis>{' '}
+          by navigating to the templates modal in the top left of your screen.
         </p>
         <div className="mt-4">
           <ButtonLink
@@ -276,7 +280,7 @@ const getMarkName = (name: MarkName | string) => {
   }
 }
 
-function CalcItem({ mark }: { mark: TResult }) {
+function CalcItem({mark}: {mark: TResult}) {
   return (
     <div className="rounded-sm py-2">
       <Accordion type="single" collapsible className="w-full">
@@ -300,7 +304,7 @@ function CalcItem({ mark }: { mark: TResult }) {
   )
 }
 
-function FreeCash({ marks }: { marks: TResult[] }) {
+function FreeCash({marks}: {marks: TResult[]}) {
   const income = marks.find(mark => mark.name === 'Income')
   const expense = marks.find(mark => mark.name === 'Expense')
   const free =
