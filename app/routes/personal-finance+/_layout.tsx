@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Link, Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -41,7 +41,11 @@ function Navigation() {
     <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white px-6 dark:bg-black">
       <NavbarMenu />
       <div className="absolute bottom-0 w-full py-4">
-        <Logo size="lg" />
+        <NavbarItem
+          title="Lainnya"
+          route="/personal-finance/templates"
+          iconName="AlignJustify"
+        />
       </div>
     </div>
   )
@@ -57,11 +61,15 @@ export function WrapperOutlet({
 
 export function OutletCenter({
   children,
+  ...props
 }: {
-  children: JSX.Element | React.ReactNode
-}) {
+  children: JSX.Element | React.ReactNode[]
+} & JSX.IntrinsicElements['div']) {
   return (
-    <div className="col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-8">
+    <div
+      {...props}
+      className={clsx("col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-9", props.className)}
+    >
       {children}
     </div>
   )
@@ -69,13 +77,17 @@ export function OutletCenter({
 
 export function OutletRight({
   children,
+  ...props
 }: {
-  children: JSX.Element | React.ReactNode
-}) {
+  children: JSX.Element | React.ReactNode[]
+} & JSX.IntrinsicElements['div']) {
   return (
-    <div className="hidden w-full lg:col-span-4 xl:block">
-      <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black">
-        <div className="sticky top-0 w-full bg-white py-3 dark:bg-black">
+    <div className="hidden w-full lg:col-span-3 xl:block">
+      <div
+        {...props}
+        className={clsx("sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 pl-6 bg-white dark:bg-black", props.className)}
+      >
+        <div className="sticky top-0 w-full py-3">
           <div className="flex items-center justify-between gap-2 py-1">
             <div>
               <Profile />
@@ -95,17 +107,14 @@ export function OutletRight({
 function NavbarMenu() {
   return (
     <div className="flex flex-col justify-center py-5">
-      <Link
-        to="/"
-        prefetch="intent"
-        className="mb-1.5 mt-0.5 flex items-center gap-1"
-      >
-        <span className="pb-2 text-2xl font-normal">Omition</span>
-        <span className="bg-gradient-to-tr from-green-900 to-[#01BAEF] bg-clip-text text-2xl font-semibold text-transparent">
-          Finance
-        </span>
-      </Link>
-      <NavbarItem title="Beranda" route="/personal-finance" iconName="Home" />
+      <div className='mt-2 mb-3 '>
+        <Logo size="lg" />
+      </div>
+      <NavbarItem
+        title="Beranda"
+        route="/personal-finance"
+        iconName="Home"
+      />
       <NavbarItem
         title="Pengaturan"
         route="/personal-finance/settings"
@@ -154,7 +163,7 @@ function NavbarItem({
       )}
     >
       <LucideIcon size={22} strokeWidth={2.5} />
-      <h2 className="pt-0.5 text-lg font-semibold">{title}</h2>
+      <h2 className="pt-0.5 text-md font-semibold">{title}</h2>
     </ButtonLink>
   )
 }
