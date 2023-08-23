@@ -31,9 +31,9 @@ function Cards() {
   return (
     <>
       {isPostsExist ? (
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 xl:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-4 gap-y-7 lg:grid-cols-4 xl:grid-cols-3">
           {posts?.map(post => (
-            <UpdatePage key={post.id} {...JSON.parse(JSON.stringify(post))} />
+            <Card key={post.id} {...JSON.parse(JSON.stringify(post))} />
           ))}
         </div>
       ) : (
@@ -134,7 +134,7 @@ function NoData() {
   )
 }
 
-function UpdatePage({ id, title, updatedAt }: Post) {
+function Card({ id, title, updatedAt }: Post) {
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(false)
   return (
@@ -144,23 +144,25 @@ function UpdatePage({ id, title, updatedAt }: Post) {
       onMouseLeave={() => setIsHover(false)}
     >
       <Link to={`/personal-finance/${id}`}>
-        <div className="col-span-1 flex cursor-default flex-col gap-1">
+        <div className="col-span-1 flex cursor-default flex-col gap-2">
           <div
             className={clsx(
-              'flex h-36 flex-col justify-center gap-4 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800',
+              'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
               { 'border-green-900': isHover },
             )}
           >
-            <div className="w-fit rounded-sm bg-green-900 px-1.5 text-white">
-              <p className="text-[10px] leading-4">Completed</p>
-            </div>
-            <h4 className="whitespace-normal text-xl font-bold leading-5 text-gray-500">
-              {title.length >= 35 ? title.slice(0, 35) + '..' : title}
+            <CardBadge title="Completed" variant='green' />
+            <h4 className="whitespace-normal text-xl font-bold leading-6 text-gray-500">
+              {title.length >= 42 ? title.slice(0, 42) + '..' : !title.length ? 'Untitled - draf' : title}
             </h4>
+            <div className='flex flex-wrap gap-2 mt-4'>
+              <CardBadge title="Month" variant='violet' />
+              <CardBadge title="Debt" variant='orange' />
+            </div>
           </div>
           <div className="flex flex-col">
             <h4 className="whitespace-normal text-sm font-normal leading-4">
-              {title.length >= 35 ? title.slice(0, 35) + '..' : title}
+              {title.length >= 42 ? title.slice(0, 42) + '..' : !title.length ? 'Untitled - draf' : title}
             </h4>
             <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
               {format(new Date(updatedAt), 'dd/MM/yy')}
@@ -181,6 +183,19 @@ function UpdatePage({ id, title, updatedAt }: Post) {
           />
         </button>
       )}
+    </div>
+  )
+}
+
+
+function CardBadge({ title, variant }: { title: string, variant: 'green' | 'violet' | 'orange' }) {
+  return (
+    <div className={clsx("w-fit rounded-sm px-1.5", {
+      'bg-green-900 text-white': variant === 'green',
+      'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-white': variant === 'violet',
+      'dark:bg-orange-400 dark:text-white bg-orange-900/50 text-orange-500': variant === 'orange'
+    })}>
+      <p className="text-[10px] leading-[14px] pt-[0.3px]">{title}</p>
     </div>
   )
 }

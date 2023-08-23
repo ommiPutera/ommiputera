@@ -1,5 +1,5 @@
-import type {TransformerOption} from '@cld-apis/types'
-import {buildImageUrl, setConfig} from 'cloudinary-build-url'
+import type { TransformerOption } from '@cld-apis/types'
+import { buildImageUrl, setConfig } from 'cloudinary-build-url'
 
 setConfig({
   cloudName: 'ommiputera',
@@ -12,20 +12,20 @@ export type ImageBuilder = {
 }
 
 const createImages = <
-  ImageType extends Record<string, {id: string; alt: string}>,
+  ImageType extends Record<string, { id: string; alt: string }>,
 >(
   images: ImageType,
 ) => {
   const imageBuilders: Record<string, ImageBuilder> = {}
-  for (const [name, {id, alt}] of Object.entries(images)) {
+  for (const [name, { id, alt }] of Object.entries(images)) {
     imageBuilders[name] = getImageBuilder(id, alt)
   }
-  return imageBuilders as {[Name in keyof ImageType]: ImageBuilder}
+  return imageBuilders as { [Name in keyof ImageType]: ImageBuilder }
 }
 
 const getImageBuilder = (id: string, alt: string = ''): ImageBuilder => {
   function imageBuilder(transformations?: TransformerOption) {
-    return buildImageUrl(id, {transformations})
+    return buildImageUrl(id, { transformations })
   }
   imageBuilder.alt = alt
   imageBuilder.id = id
@@ -36,6 +36,10 @@ const images = createImages({
   placeholder: {
     id: 'omi/placeholder__image',
     alt: `image..`,
+  },
+  templateCover: {
+    id: 'omi/template_cover',
+    alt: 'template_cover'
   },
   ommi: {
     id: 'omi/ommi__',
@@ -67,7 +71,7 @@ function getImgProps(
       quality: 'auto',
       format: 'auto',
       ...transformations,
-      resize: {width: averageSize, ...transformations?.resize},
+      resize: { width: averageSize, ...transformations?.resize },
     }),
     srcSet: widths
       .map(width =>
@@ -76,7 +80,7 @@ function getImgProps(
             quality: 'auto',
             format: 'auto',
             ...transformations,
-            resize: {width, ...transformations?.resize},
+            resize: { width, ...transformations?.resize },
           }),
           `${width}w`,
         ].join(' '),
@@ -87,4 +91,4 @@ function getImgProps(
   } as const
 }
 
-export {images, getImgProps}
+export { images, getImgProps }

@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import { icons } from 'lucide-react'
+import {icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -68,7 +68,10 @@ export function OutletCenter({
   return (
     <div
       {...props}
-      className={clsx("col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-9", props.className)}
+      className={clsx(
+        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-9',
+        props.className,
+      )}
     >
       {children}
     </div>
@@ -85,7 +88,10 @@ export function OutletRight({
     <div className="hidden w-full lg:col-span-3 xl:block">
       <div
         {...props}
-        className={clsx("sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 pl-6 bg-white dark:bg-black", props.className)}
+        className={clsx(
+          'sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black',
+          props.className,
+        )}
       >
         <div className="sticky top-0 w-full py-3">
           <div className="flex items-center justify-between gap-2 py-1">
@@ -107,14 +113,10 @@ export function OutletRight({
 function NavbarMenu() {
   return (
     <div className="flex flex-col justify-center py-5">
-      <div className='mt-2 mb-3 '>
+      <div className="mb-3 mt-2 ">
         <Logo size="lg" />
       </div>
-      <NavbarItem
-        title="Beranda"
-        route="/personal-finance"
-        iconName="Home"
-      />
+      <NavbarItem title="Beranda" route="/personal-finance" iconName="Home" />
       <NavbarItem
         title="Pengaturan"
         route="/personal-finance/settings"

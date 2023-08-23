@@ -11,9 +11,14 @@ import { getUser } from '~/utils/session.server'
 import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
 import Analytics from './analytics'
 import Board from './board'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '~/components/shadcn/accordion'
-import { Link } from '@remix-run/react'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '~/components/shadcn/accordion'
 import { SectionSpacer } from '~/components/spacer'
+import { getImgProps, images } from '~/images'
 
 export type LoaderData = {
   posts: Post[] | null
@@ -33,9 +38,9 @@ export default function Index() {
         <Tabs />
       </OutletCenter>
       <OutletRight>
-        <Pages />
-        <SectionSpacer size='xxs' />
         <BrowseTemplate />
+        <SectionSpacer size="xxs" />
+        <Pages />
       </OutletRight>
     </WrapperOutlet>
   )
@@ -50,7 +55,7 @@ function Tabs() {
       onChange={setSelectedIndex}
       className="w-full grid-cols-12 gap-x-8 overflow-visible"
     >
-      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] lg:pt-4">
+      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-md dark:backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] lg:pt-4">
         <div className="mb-6 mt-2 flex items-center gap-2.5 px-6">
           <Home size={22} strokeWidth={3} />
           <h2 className="mt-1 text-left text-xl font-semibold">Beranda</h2>
@@ -90,87 +95,44 @@ function Pages() {
       className="w-full"
     >
       <AccordionItem value="item-1">
-        <AccordionTrigger>
-          Favorite pages
-        </AccordionTrigger>
-        <AccordionContent>
-          Test
-        </AccordionContent>
+        <AccordionTrigger>Favorite pages</AccordionTrigger>
+        <AccordionContent>Test</AccordionContent>
       </AccordionItem>
+      <SectionSpacer size="sm" />
       <AccordionItem value="item-2">
-        <AccordionTrigger>
-          Recent pages
-        </AccordionTrigger>
-        <AccordionContent>
-          Test
-        </AccordionContent>
+        <AccordionTrigger>Recent pages</AccordionTrigger>
+        <AccordionContent>Test</AccordionContent>
       </AccordionItem>
     </Accordion>
   )
 }
 
-function TemplateCard({ id, title, ...props }: { id: string, title: string } & JSX.IntrinsicElements['div']) {
-  const [isHover, setIsHover] = React.useState(false)
-  return (
-    <div
-      className="relative"
-      onMouseEnter={() => setIsHover(true)}
-      onMouseLeave={() => setIsHover(false)}
-      {...props}
-    >
-      <Link to={`/personal-finance/${id}`}>
-        <div className="col-span-1 flex cursor-default flex-col">
-          <div
-            className={clsx(
-              'flex h-16 flex-col justify-center gap-4 rounded-t-md border border-gray-100 bg-[#FFF9F0] px-5 py-4 dark:border-gray-800',
-              { '': isHover },
-            )}
-          >
-            <h4 className="whitespace-normal text-xl font-bold leading-5 text-gray-500">
-              {title.length >= 35 ? title.slice(0, 35) + '..' : title}
-            </h4>
-          </div>
-          <div className="flex flex-col rounded-b-md bg-gray-100 text-black px-2 py-1">
-            <h4 className="whitespace-normal text-xs font-normal leading-4">
-              {title.length >= 35 ? title.slice(0, 35) + '..' : title}
-            </h4>
-          </div>
-        </div>
-      </Link>
-    </div>
-  )
-}
-
-
 function BrowseTemplate() {
   return (
-    <div className="flex flex-col gap-2">
-      <div className='grid grid-cols-2 gap-4'>
-        <TemplateCard
-          id="basics"
-          title="Basics"
-          className='col-span-1'
-        />
-        <TemplateCard
-          id="basics"
-          title="Basics"
-          className='col-span-1'
+    <div className="flex flex-col gap-4">
+      <div className="">
+        <img
+          id="templateCover"
+          className="object-cover rounded-sm"
+          {...getImgProps(images.templateCover, {
+            widths: [840, 1100, 1300, 2600, 3984],
+            sizes: ['(max-width:1620px) 1090px', '60vh'],
+          })}
         />
       </div>
       <div className="flex flex-col">
-        <h1 className="text-lg font-semibold leading-10">
-          Browse Template
-        </h1>
+        <h1 className="text-lg font-semibold leading-10">Browse Template</h1>
         <p className="px-0 text-left text-sm font-normal text-gray-400 dark:text-gray-200">
-          A vertically stacked set of interactive headings that each reveal a section of content.
+          A vertically stacked set of interactive headings that each reveal a
+          section of content.
         </p>
-        <div className='mt-4'>
+        <div className="mt-4">
           <ButtonLink
             size="md"
             rounded="md"
             type="button"
             to="/personal-finance/new"
-            className='gap-2'
+            className="gap-2"
           >
             <p className="text-sm">Explore</p>
             <MoveRight size={16} strokeWidth={2.5} />
