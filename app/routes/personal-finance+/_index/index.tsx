@@ -6,11 +6,6 @@ import clsx from 'clsx'
 import {Home, MoveRight, icons} from 'lucide-react'
 import React from 'react'
 import {ButtonLink} from '~/components/button'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
-import Analytics from './analytics'
-import Board from './board'
 import {
   Accordion,
   AccordionContent,
@@ -19,6 +14,11 @@ import {
 } from '~/components/shadcn/accordion'
 import {SectionSpacer} from '~/components/spacer'
 import {getImgProps, images} from '~/images'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import Analytics from './analytics'
+import Board from './board'
 
 export type LoaderData = {
   posts: Post[] | null

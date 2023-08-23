@@ -6,7 +6,7 @@ import {AnimatePresence, motion} from 'framer-motion'
 import {Filter, Plus, Star} from 'lucide-react'
 import React from 'react'
 import {ButtonLink} from '~/components/button'
-import useScrollPosition from '~/components/hooks/use-scroll-position'
+import useScrollPosition from '~/lib/hooks/use-scroll-position'
 import type {LoaderData} from '.'
 
 export default function Board() {
