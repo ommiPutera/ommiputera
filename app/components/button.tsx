@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { AnchorOrLink } from '~/utils/misc'
+import {AnchorOrLink} from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
@@ -24,7 +24,7 @@ function Button({
     <button
       {...props}
       className={clsx(
-        'group relative inline-flex w-full border font-medium ring-white hover:bg-gray-100 dark:hover:bg-gray-800 disabled:cursor-not-allowed disabled:border-gray-400 disabled:bg-gray-200 disabled:text-gray-700 disabled:hover:bg-gray-200',
+        'group relative inline-flex w-full border font-medium ring-white hover:bg-gray-100 disabled:cursor-not-allowed disabled:border-gray-400 disabled:bg-gray-200 disabled:text-gray-700 disabled:hover:bg-gray-200 dark:hover:bg-gray-800',
         {
           'border-none': variant === 'subtle',
           'bg-white text-black': variant === 'primary',
@@ -118,4 +118,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export { Button, ButtonLink }
+export {Button, ButtonLink}

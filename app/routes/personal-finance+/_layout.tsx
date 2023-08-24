@@ -63,7 +63,7 @@ export function OutletCenter({
   children,
   ...props
 }: {
-  children: JSX.Element | React.ReactNode[]
+  children: JSX.Element | React.ReactNode[] | React.ReactNode
 } & JSX.IntrinsicElements['div']) {
   return (
     <div
@@ -82,7 +82,7 @@ export function OutletRight({
   children,
   ...props
 }: {
-  children: JSX.Element | React.ReactNode[]
+  children: JSX.Element | React.ReactNode[] | React.ReactNode
 } & JSX.IntrinsicElements['div']) {
   return (
     <div className="hidden w-full lg:col-span-3 xl:block">

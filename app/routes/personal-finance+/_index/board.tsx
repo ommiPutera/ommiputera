@@ -1,13 +1,13 @@
-import type { Post } from '@prisma/client'
-import { Link, useLoaderData, useSearchParams } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import {Link, useLoaderData, useSearchParams} from '@remix-run/react'
 import clsx from 'clsx'
-import { format } from 'date-fns'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Plus, Star, ArrowDownUp, X } from 'lucide-react'
+import {format} from 'date-fns'
+import {AnimatePresence, motion} from 'framer-motion'
+import {Check, Plus, Star, ArrowDownUp, X} from 'lucide-react'
 import React from 'react'
-import { Button, ButtonLink } from '~/components/button'
+import {Button, ButtonLink} from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import type { LoaderData } from '.'
+import type {LoaderData} from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,11 +17,11 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import { Badge } from '~/components/shadcn/badge'
+import {Badge} from '~/components/shadcn/badge'
 
 export default function Board() {
   return (
-    <div className="relative flex flex-col mt-4">
+    <div className="relative mt-4 flex flex-col">
       <div className="mb-6 flex flex-col px-6">
         <Tools />
       </div>
@@ -31,7 +31,7 @@ export default function Board() {
       <div className="z-[5] flex justify-center">
         <Bubble />
       </div>
-      <div className="px-6 mt-6">
+      <div className="mt-6 px-6">
         <Cards />
       </div>
     </div>
@@ -39,7 +39,7 @@ export default function Board() {
 }
 
 function Cards() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
@@ -57,21 +57,17 @@ function Cards() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
   return (
     <div className="relative mx-auto flex w-full justify-between">
-      <div className='flex -ml-2'>
-        <Button variant='subtle'>
-          All
-        </Button>
-        <Button variant='subtle'>
-          Recently viewed
-        </Button>
+      <div className="-ml-2 flex">
+        <Button variant="subtle">All</Button>
+        <Button variant="subtle">Recently viewed</Button>
       </div>
-      <div className="flex gap-6 justify-end">
+      <div className="flex justify-end gap-6">
         <div className="flex items-center gap-4">
           <Sort />
         </div>
@@ -97,7 +93,7 @@ function Sort() {
         <div className="ml-1 flex w-full max-w-[200px] items-center justify-between gap-2">
           <div className="flex items-center gap-2">
             <ArrowDownUp size={16} strokeWidth={2.5} />
-            <p className='text-md font-medium'>Sort</p>
+            <p className="text-md font-medium">Sort</p>
           </div>
         </div>
       </DropdownMenuTrigger>
@@ -114,28 +110,32 @@ function ActiveSort() {
   const generatedOrderField = () => {
     switch (orderField) {
       case 'createdAt':
-        return `Waktu dibuat: ${order === 'desc' ? 'Terbaru' : 'Terlama'}`;
+        return `Waktu dibuat: ${order === 'desc' ? 'Terbaru' : 'Terlama'}`
       case 'title':
-        return `Judul: ${order === 'desc' ? 'Z-A' : 'A-Z'}`;
+        return `Judul: ${order === 'desc' ? 'Z-A' : 'A-Z'}`
       default:
-        break;
+        break
     }
   }
 
   const handleRemove = () => {
-    if (order) searchParams.delete('order');
-    if (orderField) searchParams.delete('orderField');
-    setSearchParams(searchParams);
+    if (order) searchParams.delete('order')
+    if (orderField) searchParams.delete('orderField')
+    setSearchParams(searchParams)
   }
 
   if (!order) return <></>
   return (
     <div>
-      <Badge variant="success" size="default" className='w-fit flex gap-1.5 items-center'>
+      <Badge
+        variant="success"
+        size="default"
+        className="flex w-fit items-center gap-1.5"
+      >
         {generatedOrderField()}
         <button
           onClick={handleRemove}
-          className="visually-hidden text-black dark:text-white text-sm pt-0.5"
+          className="visually-hidden pt-0.5 text-sm text-black dark:text-white"
           aria-hidden={!order}
         >
           <X size={14} />
@@ -151,15 +151,17 @@ function SortMenus() {
   const orderField = searchParams.get('orderField')
 
   const handleRemove = () => {
-    if (order) searchParams.delete('order');
-    if (orderField) searchParams.delete('orderField');
-    setSearchParams(searchParams);
+    if (order) searchParams.delete('order')
+    if (orderField) searchParams.delete('orderField')
+    setSearchParams(searchParams)
   }
 
   return (
     <DropdownMenuContent className="p-0">
       <DropdownMenuLabel className="flex items-center justify-between  px-3 pb-1 pt-2">
-        <p className='text-sm text-gray-400 dark:text-gray-200'>Urutkan berdasarkan</p>
+        <p className="text-sm text-gray-400 dark:text-gray-200">
+          Urutkan berdasarkan
+        </p>
         <button
           onClick={handleRemove}
           className="visually-hidden text-red-900"
@@ -216,7 +218,8 @@ function SortItem({
       className={clsx(
         'flex w-full min-w-[240px] items-center justify-between gap-12 rounded-none border-transparent px-3 hover:bg-gray-100 hover:dark:bg-gray-800',
         {
-          'bg-green-900 text-white hover:bg-green-900/90 dark:hover:bg-green-900/40': isSelected,
+          'bg-green-900 text-white hover:bg-green-900/90 dark:hover:bg-green-900/40':
+            isSelected,
         },
       )}
     >
@@ -238,9 +241,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{ y: -160, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          initial={{y: -160, opacity: 0}}
+          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
+          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -291,7 +294,7 @@ function NoData() {
   )
 }
 
-function Card({ id, title, updatedAt }: Post) {
+function Card({id, title, updatedAt}: Post) {
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(false)
   return (
@@ -305,7 +308,7 @@ function Card({ id, title, updatedAt }: Post) {
           <div
             className={clsx(
               'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              { 'border-green-900': isHover },
+              {'border-green-900': isHover},
             )}
           >
             <CardBadge title="Completed" variant="green" />
@@ -313,8 +316,8 @@ function Card({ id, title, updatedAt }: Post) {
               {title.length >= 42
                 ? title.slice(0, 42) + '..'
                 : !title.length
-                  ? 'Untitled - draf'
-                  : title}
+                ? 'Untitled - draf'
+                : title}
             </h4>
             <div className="mt-4 flex flex-wrap gap-2">
               <CardBadge title="Month" variant="violet" />
@@ -326,8 +329,8 @@ function Card({ id, title, updatedAt }: Post) {
               {title.length >= 42
                 ? title.slice(0, 42) + '..'
                 : !title.length
-                  ? 'Untitled - draf'
-                  : title}
+                ? 'Untitled - draf'
+                : title}
             </h4>
             <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
               {format(new Date(updatedAt), 'dd/MM/yyyy')}
