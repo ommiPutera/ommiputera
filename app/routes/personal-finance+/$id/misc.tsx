@@ -1,10 +1,10 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {Dialog} from '@headlessui/react'
-import {Button} from '~/components/button'
-import type {SaveStatus} from '.'
-import {FormType} from '.'
-import {Form, Link, useLoaderData} from '@remix-run/react'
+import { Dialog } from '@headlessui/react'
+import { Button } from '~/components/button'
+import type { SaveStatus } from '.'
+import { FormType } from '.'
+import { Form, useLoaderData, useNavigate } from '@remix-run/react'
 import {
   ChevronRight,
   FilePlus,
@@ -14,8 +14,8 @@ import {
   Book,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type {LoaderArgs} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
+import type { LoaderArgs } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,10 +30,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
   if (!id) return redirect('/personal-finance')
-  const data: LoaderData = {postId: id}
+  const data: LoaderData = { postId: id }
   return data
 }
 
@@ -57,7 +57,7 @@ export function Header({
   return (
     <div className="sticky top-0 z-[99] mb-4 w-full border-b border-gray-100 bg-white/[0.65] px-3 pt-4 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:px-6">
       <div className="mb-6 mt-2 flex items-center gap-2.5">
-        <Book size={22} strokeWidth={3} />
+        <Book size={23} strokeWidth={2.5} />
         <h2 className="mt-1 text-left text-xl font-semibold">
           {title
             ? title.length >= 15
@@ -156,6 +156,7 @@ function BackButton({
   saveStatus: SaveStatus
   submitContent: () => void
 }) {
+  const navigate = useNavigate()
   const alertUser = React.useCallback(
     (event: any) => {
       event.preventDefault()
@@ -176,17 +177,16 @@ function BackButton({
   }, [alertUser, submitContent])
 
   return (
-    <Link to="/personal-finance" prefetch="intent">
-      <UIButton
-        type="button"
-        variant="subtle"
-        size="sm"
-        className="flex items-center gap-2 hover:bg-gray-100 hover:dark:bg-gray-700"
-      >
-        <MoveLeftIcon size={18} />
-        <p>Back</p>
-      </UIButton>
-    </Link>
+    <UIButton
+      onClick={() => navigate(-1)}
+      type="button"
+      variant="subtle"
+      size="sm"
+      className="flex items-center gap-2 hover:bg-gray-100 hover:dark:bg-gray-700"
+    >
+      <MoveLeftIcon size={18} />
+      <p>Back</p>
+    </UIButton>
   )
 }
 
@@ -206,7 +206,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       open={isShowDeleteModal}
       onClose={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
       className="z-50 flex w-full items-center"
     >
       <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-100 bg-black p-0 dark:border-gray-800 lg:mx-auto lg:max-w-[20vw]">
