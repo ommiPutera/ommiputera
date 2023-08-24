@@ -24,9 +24,29 @@ export type LoaderData = {
   posts: Post[] | null
 }
 
+type PostFields = 'updatedAt' | 'title'
+type SortOrder = 'asc' | 'desc'
+type OrderField = PostFields
+const isSortOrder = (s: unknown): s is SortOrder => s === 'asc' || s === 'desc'
+const isOrderField = (s: unknown): s is OrderField =>
+  s === 'title' || s === 'createdAt'
+
 export const loader: LoaderFunction = async ({request}) => {
+  const {searchParams} = new URL(request.url)
   const user = await getUser(request)
-  const posts = await db.post.findMany({where: {authorId: user?.id}})
+
+  let order = 'desc'
+  let orderField = 'createdAt'
+  const spOrder = searchParams.get('order')
+  const spOrderField = searchParams.get('orderField')
+  if (isSortOrder(spOrder)) order = spOrder
+  if (isOrderField(spOrderField)) orderField = spOrderField
+
+  const posts = await db.post.findMany({
+    where: {authorId: user?.id},
+    orderBy: {[orderField]: order},
+  })
+
   const data: LoaderData = {posts}
   return data
 }
@@ -55,7 +75,7 @@ function Tabs() {
       onChange={setSelectedIndex}
       className="w-full grid-cols-12 gap-x-8 overflow-visible"
     >
-      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-md dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:pt-4">
+      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:pt-4">
         <div className="mb-6 mt-2 flex items-center gap-2.5 px-6">
           <Home size={22} strokeWidth={3} />
           <h2 className="mt-1 text-left text-xl font-semibold">Beranda</h2>

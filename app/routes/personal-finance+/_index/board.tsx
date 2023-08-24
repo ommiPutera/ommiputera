@@ -1,13 +1,22 @@
 import type {Post} from '@prisma/client'
-import {Link, useLoaderData} from '@remix-run/react'
+import {Link, useLoaderData, useSearchParams} from '@remix-run/react'
 import clsx from 'clsx'
 import {format} from 'date-fns'
 import {AnimatePresence, motion} from 'framer-motion'
-import {Filter, Plus, Star} from 'lucide-react'
+import {Check, Filter, Plus, Star} from 'lucide-react'
 import React from 'react'
 import {ButtonLink} from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
 import type {LoaderData} from '.'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '~/components/shadcn/dropdown-menu'
 
 export default function Board() {
   return (
@@ -60,17 +69,110 @@ function Tools() {
         <Plus size={18} strokeWidth={2.5} />
         <p className="text-sm">New Plan</p>
       </ButtonLink>
-      <ButtonLink
-        type="button"
-        size="sm"
-        variant="subtle"
-        to="/personal-finance/new"
-        className="flex items-center gap-x-2 rounded-lg px-3 text-blue-500"
-      >
-        <Filter size={16} />
-        <p>Filter</p>
-      </ButtonLink>
+      <div className="flex items-center gap-4">
+        <ButtonLink
+          type="button"
+          size="sm"
+          variant="subtle"
+          to="/personal-finance/new"
+          className="flex items-center gap-x-2 rounded-lg px-3 text-blue-500"
+        >
+          <Filter size={16} />
+          <p>Filter</p>
+        </ButtonLink>
+        <SortComponent />
+      </div>
     </div>
+  )
+}
+
+function SortComponent() {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild className="cursor-pointer">
+        <div className="ml-1 flex w-full max-w-[200px] items-center justify-between gap-2">
+          <div className="flex items-center gap-2">Sort</div>
+        </div>
+      </DropdownMenuTrigger>
+      <MoreMenus />
+    </DropdownMenu>
+  )
+}
+
+function MoreMenus() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const order = searchParams.get('order')
+
+  return (
+    <DropdownMenuContent className="p-0">
+      <DropdownMenuLabel className="flex items-center justify-between  px-3 pb-1 pt-2">
+        <p>Sort</p>
+        <button
+          onClick={() => setSearchParams({})}
+          className="visually-hidden text-red-900"
+          aria-hidden={!order}
+        >
+          Reset
+        </button>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup className="p-0">
+        <SortItem
+          title="Waktu Dibuat: Terbaru"
+          orderBy="desc"
+          orderField="createdAt"
+        />
+        <SortItem
+          title="Waktu Dibuat: Terlama"
+          orderBy="asc"
+          orderField="createdAt"
+        />
+        <SortItem title="Judul: A-Z" orderBy="asc" orderField="title" />
+        <SortItem title="Judul: Z-A" orderBy="desc" orderField="title" />
+      </DropdownMenuGroup>
+    </DropdownMenuContent>
+  )
+}
+
+function SortItem({
+  title,
+  orderBy,
+  orderField,
+}: {
+  title: string
+  orderBy: 'asc' | 'desc'
+  orderField: 'createdAt' | 'title'
+}) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const orField = searchParams.get('orderField')
+  const order = searchParams.get('order')
+  const isSelected = order === orderBy && orField === orderField
+
+  const handleParams = () => {
+    setSearchParams({
+      order: orderBy,
+      orderField: orderField,
+    })
+  }
+
+  return (
+    <DropdownMenuItem
+      onClick={handleParams}
+      className={clsx(
+        'flex w-full min-w-[240px] items-center justify-between gap-12 rounded-none border-transparent px-3 hover:bg-gray-100 hover:dark:bg-gray-800',
+        {
+          'bg-green-900 text-white hover:bg-green-900/90': isSelected,
+        },
+      )}
+    >
+      {title}
+      <Check
+        className="visually-hidden"
+        aria-hidden={!isSelected}
+        size={18}
+        strokeWidth={2.5}
+      />
+    </DropdownMenuItem>
   )
 }
 
