@@ -1,5 +1,5 @@
-import { ArchiveRestore } from 'lucide-react'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import {ArchiveRestore} from 'lucide-react'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
 
 export default function Index() {
   return (
@@ -12,9 +12,7 @@ export default function Index() {
           </div>
         </div>
       </OutletCenter>
-      <OutletRight>
-        Right
-      </OutletRight>
+      <OutletRight>Right</OutletRight>
     </WrapperOutlet>
   )
 }

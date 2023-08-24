@@ -1,5 +1,5 @@
-import { BookOpen } from 'lucide-react'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import {BookOpen} from 'lucide-react'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
 
 export default function Index() {
   return (
