@@ -11,7 +11,7 @@
     "postinstall": "prisma generate",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
     "prepare": "husky install || true",
-    "pscale-dev-server": "pscale connect ommiputera initial-setup --port 3306",
+    "pscale-dev-server": "pscale connect ommiputera development --port 3306",
     "remix-dev": "remix dev",
     "typecheck": "tsc"
   },

@@ -25,14 +25,14 @@ model Post {
   id          String   @id @default(cuid())
   title       String
   content     Json?
-  type        PostType @default(BASIC_NOTES)
-  isPublished Boolean  @default(false)
-  isFavorite  Boolean  @default(false)
-  isLocked    Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
   authorId    String
   userId      String?
+  createdAt   DateTime @default(now())
+  isFavorite  Boolean  @default(false)
+  isLocked    Boolean  @default(false)
+  isPublished Boolean  @default(false)
+  type        PostType @default(BASIC_NOTES)
+  updatedAt   DateTime @default(now())
   User        User?    @relation(fields: [userId], references: [id])
 
   @@index([userId])
