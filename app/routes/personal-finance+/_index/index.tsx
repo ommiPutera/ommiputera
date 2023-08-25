@@ -1,22 +1,22 @@
-import { Tab } from '@headlessui/react'
-import type { Post } from '@prisma/client'
-import type { LoaderFunction } from '@remix-run/node'
+import {Tab} from '@headlessui/react'
+import type {Post} from '@prisma/client'
+import type {LoaderFunction} from '@remix-run/node'
 import clsx from 'clsx'
 // @ts-ignore
-import { Home, MoveRight, icons } from 'lucide-react'
+import {Home, MoveRight, icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import { SectionSpacer } from '~/components/spacer'
-import { getImgProps, images } from '~/images'
-import { db } from '~/utils/db.server'
-import { getUser } from '~/utils/session.server'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import {SectionSpacer} from '~/components/spacer'
+import {getImgProps, images} from '~/images'
+import {db} from '~/utils/db.server'
+import {getUser} from '~/utils/session.server'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
 import Analytics from './analytics'
 import Board from './board'
 
@@ -31,8 +31,8 @@ const isSortOrder = (s: unknown): s is SortOrder => s === 'asc' || s === 'desc'
 const isOrderField = (s: unknown): s is OrderField =>
   s === 'title' || s === 'createdAt'
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { searchParams } = new URL(request.url)
+export const loader: LoaderFunction = async ({request}) => {
+  const {searchParams} = new URL(request.url)
   const user = await getUser(request)
 
   let order = 'desc'
@@ -43,11 +43,11 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (isOrderField(spOrderField)) orderField = spOrderField
 
   const posts = await db.post.findMany({
-    where: { authorId: user?.id },
-    orderBy: { [orderField]: order },
+    where: {authorId: user?.id},
+    orderBy: {[orderField]: order},
   })
 
-  const data: LoaderData = { posts }
+  const data: LoaderData = {posts}
   return data
 }
 
@@ -206,7 +206,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({ selected }) =>
+      className={({selected}) =>
         clsx(
           'relative flex w-full justify-center border-b-0 border-b-transparent py-3 font-semibold hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
           {

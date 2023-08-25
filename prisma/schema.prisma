@@ -7,6 +7,15 @@
 // `npx prisma studio` - open the Studio, which allows you to edit the schema.
 // `npx prisma migrate reset` - reset the migrations to the last version. This will reset the DB and run the seed script
 // `npx prisma migrate dev --name <descriptive-name>` - generate a migration file for any changes you make to the schema (this will be committed).
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Commands to know:
+// `npx prisma generate` - update TypeScript definitions based on this schema
+// `npx prisma db push` - push the schema changes to the database
+// `npx prisma studio` - open the Studio, which allows you to edit the schema.
+// `npx prisma migrate reset` - reset the migrations to the last version. This will reset the DB and run the seed script
+// `npx prisma migrate dev --name <descriptive-name>` - generate a migration file for any changes you make to the schema (this will be committed).
 
 generator client {
   provider = "prisma-client-js"
@@ -32,15 +41,18 @@ model User {
 }
 
 model Post {
-  id        String   @id @default(cuid())
-  title     String
-  content   Json?
-  published Boolean  @default(false)
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  updatedAt DateTime @default(now()) @map(name: "updated_at")
-  authorId  String
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    String?
+  id          String   @id @default(cuid())
+  title       String
+  content     Json?
+  type        PostType @default(BASIC_NOTES)
+  isPublished Boolean  @default(false)
+  isFavorite  Boolean  @default(false)
+  isLocked    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  authorId    String
+  User        User?    @relation(fields: [userId], references: [id])
+  userId      String?
 
   @@index([userId])
 }
@@ -65,4 +77,14 @@ enum Role {
   OWNER
   CLIENT
   BASIC
+}
+
+enum PostType {
+  MONTHLY_PLANNING
+  BASIC_NOTES
+  DEBT
+  INVESTMENT
+  SAVING
+  GOLD
+  STOCK
 }
