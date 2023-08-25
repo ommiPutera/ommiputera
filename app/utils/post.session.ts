@@ -6,7 +6,7 @@ type CreateType = {
   title: string
   content?: JSONContent
   authorId: string
-  published: boolean
+  isPublished: boolean
   redirectTo?: string
 }
 
@@ -18,17 +18,28 @@ export async function deletePost({id}: {id: string}) {
   return await db.post.delete({where: {id: id}})
 }
 
+export async function favoritePost({id, bool}: {id: string; bool: boolean}) {
+  return await db.post.update({
+    where: {
+      id: id,
+    },
+    data: {
+      isFavorite: bool,
+    },
+  })
+}
+
 export async function createPost({
   title,
   content,
   authorId,
-  published,
+  isPublished,
   redirectTo,
 }: CreateType) {
   const post = await db.post.create({
     data: {
       title,
-      published,
+      isPublished,
       authorId,
       content: content,
     },
@@ -43,6 +54,7 @@ export async function updateTitle({id, title}: {id: string; title: string}) {
     },
     data: {
       title,
+      updatedAt: new Date(),
     },
   })
 }
@@ -60,6 +72,7 @@ export async function updateContent({
     },
     data: {
       content,
+      updatedAt: new Date(),
     },
   })
 }

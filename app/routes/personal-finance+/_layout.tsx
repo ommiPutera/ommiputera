@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -89,11 +89,11 @@ export function OutletRight({
       <div
         {...props}
         className={clsx(
-          'sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black',
+          'sticky top-0 flex h-full min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black',
           props.className,
         )}
       >
-        <div className="sticky top-0 w-full py-3">
+        <div className="sticky top-0 z-50 w-full py-3 bg-white dark:bg-black">
           <div className="flex items-center justify-between gap-2 py-1">
             <div>
               <Profile />

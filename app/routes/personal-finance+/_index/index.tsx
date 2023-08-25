@@ -1,27 +1,35 @@
-import {Tab} from '@headlessui/react'
-import type {Post} from '@prisma/client'
-import type {LoaderFunction} from '@remix-run/node'
+import { Tab } from '@headlessui/react'
+import type { Post } from '@prisma/client'
+import type { ActionFunction, LoaderFunction } from '@remix-run/node'
 import clsx from 'clsx'
 // @ts-ignore
-import {Home, MoveRight, icons} from 'lucide-react'
+import { Home, MoveRight, Star, icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
+import { ButtonLink } from '~/components/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import {SectionSpacer} from '~/components/spacer'
-import {getImgProps, images} from '~/images'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import { SectionSpacer } from '~/components/spacer'
+import { getImgProps, images } from '~/images'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
 import Analytics from './analytics'
-import Board from './board'
+import Board, { FavoritePage } from './board'
+import { Link, useLoaderData } from '@remix-run/react'
+import { favoritePost } from '~/utils/post.session'
 
 export type LoaderData = {
   posts: Post[] | null
+  recentPosts: Post[] | null
+  favoritePosts: Post[] | null
+}
+
+export enum FormType {
+  FAVORITE = 'FAVORITE',
 }
 
 type PostFields = 'updatedAt' | 'title'
@@ -31,8 +39,8 @@ const isSortOrder = (s: unknown): s is SortOrder => s === 'asc' || s === 'desc'
 const isOrderField = (s: unknown): s is OrderField =>
   s === 'title' || s === 'createdAt'
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {searchParams} = new URL(request.url)
+export const loader: LoaderFunction = async ({ request }) => {
+  const { searchParams } = new URL(request.url)
   const user = await getUser(request)
 
   let order = 'desc'
@@ -43,12 +51,44 @@ export const loader: LoaderFunction = async ({request}) => {
   if (isOrderField(spOrderField)) orderField = spOrderField
 
   const posts = await db.post.findMany({
-    where: {authorId: user?.id},
-    orderBy: {[orderField]: order},
+    where: { authorId: user?.id },
+    orderBy: { [orderField]: order },
   })
 
-  const data: LoaderData = {posts}
+  const recentPosts = await db.post.findMany({
+    where: { authorId: user?.id },
+    orderBy: { updatedAt: 'desc' },
+    take: 3
+  })
+
+  const favoritePosts = await db.post.findMany({
+    where: { authorId: user?.id, isFavorite: true },
+    orderBy: { updatedAt: 'desc' },
+  })
+
+  const data: LoaderData = {
+    posts,
+    recentPosts,
+    favoritePosts
+  }
   return data
+}
+
+export const action: ActionFunction = async ({ request }) => {
+  const formData = await request.formData()
+  const { _action, postId, isFavorite } = Object.fromEntries(formData)
+
+  switch (_action) {
+    case FormType.FAVORITE: {
+      if (typeof postId !== 'string') {
+        return { formError: `Form not submitted correctly.` }
+      }
+      return await favoritePost({ id: postId, bool: !Number(isFavorite) })
+    }
+    default: {
+      return { formError: `Action type invalid` }
+    }
+  }
 }
 
 export default function Index() {
@@ -108,20 +148,67 @@ function Tabs() {
 }
 
 function Pages() {
+  const {
+    recentPosts,
+    favoritePosts
+  } = useLoaderData<LoaderData>()
+
   return (
     <Accordion
       type="multiple"
       defaultValue={['item-1', 'item-2']}
-      className="w-full"
+      className="w-full h-fit mb-28 sticky top-24"
     >
       <AccordionItem value="item-2">
-        <AccordionTrigger>Recent pages</AccordionTrigger>
-        <AccordionContent>Test</AccordionContent>
+        <AccordionTrigger>Baru baru ini</AccordionTrigger>
+        <AccordionContent className='flex flex-col gap-1 -mt-2'>
+          {recentPosts?.map(post => (
+            <Link
+              to={`/personal-finance/${post.id}`}
+              key={post.id}
+            >
+              <div className='w-full flex items-center gap-3 py-2 px-6 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'>
+                <p className='text-sm'>{post.title}</p>
+              </div>
+            </Link>
+          ))}
+        </AccordionContent>
       </AccordionItem>
       <SectionSpacer size="sm" />
       <AccordionItem value="item-1">
         <AccordionTrigger>Favorite pages</AccordionTrigger>
-        <AccordionContent>Test</AccordionContent>
+        <AccordionContent className='flex flex-col gap-1 -mt-2'>
+          {favoritePosts?.length ? favoritePosts?.map(post => (
+            <div key={post.id} className='relative'>
+              <Link
+                to={`/personal-finance/${post.id}`}
+                prefetch='intent'
+              >
+                <div className='w-full flex items-center gap-3 py-2 px-6 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md'>
+                  <p className='text-sm'>{post.title}</p>
+                </div>
+              </Link>
+              <FavoritePage {...JSON.parse(JSON.stringify(post))}>
+                <button
+                  className="absolute top-0 bottom-0 right-4"
+                  type='submit'
+                >
+                  <Star
+                    size={13}
+                    strokeWidth={2.5}
+                    color='orange'
+                    fill='orange'
+                  />
+                </button>
+              </FavoritePage>
+            </div>
+          ))
+            :
+            <p className="px-0 text-left text-sm font-normal text-gray-400 dark:text-gray-200">
+              Arahkan kursor ke file manapun dan klik simbol bintang untuk menambahkannya di sini
+            </p>
+          }
+        </AccordionContent>
       </AccordionItem>
     </Accordion>
   )
@@ -206,7 +293,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({selected}) =>
+      className={({ selected }) =>
         clsx(
           'relative flex w-full justify-center border-b-0 border-b-transparent py-3 font-semibold hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
           {
