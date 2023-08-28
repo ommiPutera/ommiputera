@@ -1,13 +1,13 @@
-import type { Post } from '@prisma/client'
-import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
 import clsx from 'clsx'
-import { format } from 'date-fns'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon } from 'lucide-react'
+import {format} from 'date-fns'
+import {AnimatePresence, motion} from 'framer-motion'
+import {Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon} from 'lucide-react'
 import React from 'react'
-import { Button, ButtonLink } from '~/components/button'
+import {Button, ButtonLink} from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import { FormType, type LoaderData } from '.'
+import {FormType, type LoaderData} from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +17,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import { Badge } from '~/components/shadcn/badge'
+import {Badge} from '~/components/shadcn/badge'
 
 export default function Board() {
   return (
@@ -39,7 +39,7 @@ export default function Board() {
 }
 
 function Cards() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
@@ -57,7 +57,7 @@ function Cards() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -258,9 +258,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{ y: -160, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          initial={{y: -160, opacity: 0}}
+          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
+          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -313,7 +313,7 @@ function NoData() {
 
 function Card(data: Post) {
   const [isHover, setIsHover] = React.useState(false)
-  const { id, title, createdAt, isFavorite } = data
+  const {id, title, createdAt, isFavorite} = data
   const [isFav, setIsFav] = React.useState(isFavorite)
 
   React.useEffect(() => {
@@ -331,7 +331,7 @@ function Card(data: Post) {
           <div
             className={clsx(
               'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              { 'border-green-900': isHover },
+              {'border-green-900': isHover},
             )}
           >
             <CardBadge title="Completed" variant="green" />
@@ -339,8 +339,8 @@ function Card(data: Post) {
               {title.length >= 42
                 ? title.slice(0, 42) + '..'
                 : !title.length
-                  ? 'Untitled - draf'
-                  : title}
+                ? 'Untitled - draf'
+                : title}
             </h4>
             <div className="mt-4 flex flex-wrap gap-2">
               <CardBadge title="Month" variant="violet" />
@@ -352,8 +352,8 @@ function Card(data: Post) {
               {title.length >= 42
                 ? title.slice(0, 42) + '..'
                 : !title.length
-                  ? 'Untitled - draf'
-                  : title}
+                ? 'Untitled - draf'
+                : title}
             </h4>
             <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
               {format(new Date(createdAt), 'dd/MM/yyyy')}
@@ -412,7 +412,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & { children: JSX.Element | React.ReactNode }) {
+}: Post & {children: JSX.Element | React.ReactNode}) {
   return (
     <Form method="POST" className="w-full">
       {children}
