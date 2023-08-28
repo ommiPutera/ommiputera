@@ -1,18 +1,45 @@
-import {ArchiveRestore} from 'lucide-react'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import { ButtonLink } from '~/components/button'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import Default from './default'
 
 export default function Index() {
   return (
     <WrapperOutlet>
       <OutletCenter>
-        <div className="sticky top-0 z-[99] mb-4 w-full border-b border-gray-100 bg-white/[0.65] px-3 pt-4 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:px-6">
-          <div className="mb-6 mt-2 flex items-center gap-2.5">
-            <ArchiveRestore size={23} strokeWidth={2.5} />
-            <h2 className="mt-1 text-left text-xl font-semibold">Templates</h2>
-          </div>
+        <div className='px-6 pt-12 pb-6 text-center'>
+          <h2 className='text-5xl font-semibold'>Templat Perencanaan</h2>
+          <p className='text-base font-medium text-gray-400 dark:text-gray-200'>Build anything with thousands of templates</p>
         </div>
+        <Default />
       </OutletCenter>
-      <OutletRight>Right</OutletRight>
+      <OutletRight>
+        <SubmitTemplate />
+      </OutletRight>
     </WrapperOutlet>
+  )
+}
+
+function SubmitTemplate() {
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
+        <h1 className="text-lg font-semibold leading-tight mb-2">Submit your template to Community</h1>
+        <p className="px-0 text-left text-sm font-normal text-gray-400 dark:text-gray-200">
+          A vertically stacked set of interactive headings that each reveal a
+          section of content.
+        </p>
+        <div className="mt-4">
+          <ButtonLink
+            size="md"
+            rounded="md"
+            type="button"
+            to="/personal-finance/new"
+            className="gap-2"
+          >
+            <p className="text-sm">Submit a template</p>
+          </ButtonLink>
+        </div>
+      </div>
+    </div>
   )
 }
