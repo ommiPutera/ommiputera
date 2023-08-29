@@ -1,5 +1,5 @@
 import React from 'react'
-import { Avatar, AvatarImage } from '~/components/shadcn/avatar'
+import {Avatar, AvatarImage} from '~/components/shadcn/avatar'
 
 export default function Month() {
   return (
@@ -11,14 +11,11 @@ export default function Month() {
         </p>
       </div>
       <div>
-        <h4 className="mb-4 text-lg font-semibold">
-          Yang disediakan
-        </h4>
+        <h4 className="mb-4 text-lg font-semibold">Yang disediakan</h4>
         <div className="grid grid-cols-2 gap-4">
           <Card />
           <Card />
           <Card />
-
         </div>
       </div>
       <div>
