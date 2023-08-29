@@ -1,13 +1,14 @@
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {format} from 'date-fns'
-import {AnimatePresence, motion} from 'framer-motion'
-import {Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon} from 'lucide-react'
+import { id as idLocale } from 'date-fns/locale'
+import { format, formatDistance } from 'date-fns'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
+import { Button, ButtonLink } from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from '.'
+import { FormType, type LoaderData } from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,7 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import {Badge} from '~/components/shadcn/badge'
+import { Badge } from '~/components/shadcn/badge'
 
 export default function Board() {
   return (
@@ -39,7 +40,7 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
@@ -57,7 +58,7 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -116,8 +117,97 @@ function Filter() {
           </div>
         </div>
       </DropdownMenuTrigger>
-      <SortMenus />
+      <FilterMenus />
     </DropdownMenu>
+  )
+}
+
+function FilterMenus() {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const order = searchParams.get('order')
+  const orderField = searchParams.get('orderField')
+
+  const handleRemove = () => {
+    if (order) searchParams.delete('order')
+    if (orderField) searchParams.delete('orderField')
+    setSearchParams(searchParams)
+  }
+
+  return (
+    <DropdownMenuContent className="p-0">
+      <DropdownMenuLabel className="flex items-center justify-between px-3 pb-1 pt-2">
+        <p className="text-sm text-gray-400 dark:text-gray-200">
+          Filter berdasarkan
+        </p>
+        <button
+          onClick={handleRemove}
+          className="visually-hidden text-red-900"
+          aria-hidden={!order}
+        >
+          Reset
+        </button>
+      </DropdownMenuLabel>
+      <DropdownMenuSeparator />
+      <DropdownMenuGroup className="p-0">
+        <FilterItem
+          title="Waktu Dibuat: Terbaru"
+          orderBy="desc"
+          orderField="createdAt"
+        />
+        <FilterItem
+          title="Waktu Dibuat: Terlama"
+          orderBy="asc"
+          orderField="createdAt"
+        />
+        <FilterItem title="Judul: A-Z" orderBy="asc" orderField="title" />
+        <FilterItem title="Judul: Z-A" orderBy="desc" orderField="title" />
+      </DropdownMenuGroup>
+    </DropdownMenuContent>
+  )
+}
+
+function FilterItem({
+  title,
+  orderBy,
+  orderField,
+}: {
+  title: string
+  orderBy: 'asc' | 'desc'
+  orderField: 'createdAt' | 'title'
+}) {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const orderItem = searchParams.get('orderField')
+  const order = searchParams.get('order')
+  const isSelected = order === orderBy && orderItem === orderField
+
+  const handleParams = () => {
+    if (isSelected) setSearchParams({})
+    else
+      setSearchParams({
+        order: orderBy,
+        orderField: orderField,
+      })
+  }
+
+  return (
+    <DropdownMenuItem
+      onClick={handleParams}
+      className={clsx(
+        'flex w-full min-w-[240px] items-center justify-between gap-12 rounded-none border-transparent px-3 hover:bg-gray-100 hover:dark:bg-gray-800',
+        {
+          'bg-green-900 text-white hover:bg-green-900/90 dark:hover:bg-green-900/40':
+            isSelected,
+        },
+      )}
+    >
+      {title}
+      <Check
+        className="visually-hidden"
+        aria-hidden={!isSelected}
+        size={16}
+        strokeWidth={2.5}
+      />
+    </DropdownMenuItem>
   )
 }
 
@@ -258,9 +348,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -312,8 +402,8 @@ function NoData() {
 }
 
 function Card(data: Post) {
+  const { id, title, createdAt, isFavorite } = data
   const [isHover, setIsHover] = React.useState(false)
-  const {id, title, createdAt, isFavorite} = data
   const [isFav, setIsFav] = React.useState(isFavorite)
 
   React.useEffect(() => {
@@ -331,17 +421,18 @@ function Card(data: Post) {
           <div
             className={clsx(
               'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              {'border-green-900': isHover},
+              { 'border-green-900': isHover },
             )}
           >
             <CardBadge title="Completed" variant="green" />
-            <h4 className="whitespace-normal text-xl font-bold leading-6 text-gray-500">
-              {title.length >= 42
-                ? title.slice(0, 42) + '..'
-                : !title.length
-                ? 'Untitled - draf'
-                : title}
-            </h4>
+            <div>
+              <h4 className="whitespace-normal text-xl font-bold leading-6 text-gray-500">
+                {modifyTitle(title)}
+              </h4>
+              <p className="text-xs font-normal text-gray-400 dark:text-gray-300">
+                {format(new Date(createdAt), 'dd/MM/yyyy')}
+              </p>
+            </div>
             <div className="mt-4 flex flex-wrap gap-2">
               <CardBadge title="Month" variant="violet" />
               <CardBadge title="Debt" variant="orange" />
@@ -349,14 +440,14 @@ function Card(data: Post) {
           </div>
           <div className="flex flex-col">
             <h4 className="whitespace-normal text-sm font-normal leading-4">
-              {title.length >= 42
-                ? title.slice(0, 42) + '..'
-                : !title.length
-                ? 'Untitled - draf'
-                : title}
+              {modifyTitle(title)}
             </h4>
-            <p className="text-sm font-normal text-gray-400 dark:text-gray-200">
-              {format(new Date(createdAt), 'dd/MM/yyyy')}
+            <p className="mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-200">
+              Diedit{' '}
+              {formatDistance(new Date(data.updatedAt), new Date(), {
+                addSuffix: true,
+                locale: idLocale,
+              })}
             </p>
           </div>
         </div>
@@ -377,9 +468,11 @@ function Card(data: Post) {
               />
             </button>
           </FavoritePage>
-          <button className="rounded-sm bg-black p-1">
-            <Lock size={12} strokeWidth={1.5} />
-          </button>
+          <div className="w-full">
+            <button className="rounded-sm bg-black p-1">
+              <Lock size={12} strokeWidth={1.5} color="white" />
+            </button>
+          </div>
         </div>
       )}
     </div>
@@ -412,7 +505,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -421,4 +514,12 @@ export function FavoritePage({
       <input type="hidden" name="_action" value={FormType.FAVORITE} />
     </Form>
   )
+}
+
+const modifyTitle = (title: string) => {
+  return title.length >= 42
+    ? title.slice(0, 42) + '..'
+    : !title.length
+      ? 'Untitled - draf'
+      : title
 }
