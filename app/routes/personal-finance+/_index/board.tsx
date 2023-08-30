@@ -1,14 +1,14 @@
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {id as idLocale} from 'date-fns/locale'
-import {format, formatDistance} from 'date-fns'
-import {AnimatePresence, motion} from 'framer-motion'
-import {Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon} from 'lucide-react'
+import { id as idLocale } from 'date-fns/locale'
+import { format, formatDistance } from 'date-fns'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
+import { Button, ButtonLink } from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from '.'
+import { FormType, type LoaderData } from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,7 +18,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import {Badge} from '~/components/shadcn/badge'
+import { Badge } from '~/components/shadcn/badge'
+import getFormatDistance from '~/lib/getFormatDistance'
 
 export default function Board() {
   return (
@@ -40,7 +41,7 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
@@ -58,7 +59,7 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -343,14 +344,13 @@ function SortItem({
 
 function Bubble() {
   const scrollPosition = useScrollPosition()
-
   return (
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -402,13 +402,18 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const {id, title, createdAt, isFavorite} = data
+  const { id, title, createdAt, updatedAt, isFavorite } = data
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
 
   React.useEffect(() => {
     setIsFav(isFavorite)
   }, [isFavorite])
+
+  const locale = {
+    ...idLocale,
+    formatDistance: (token: string, count: number, options: any) => getFormatDistance(token, count, options),
+  };
 
   return (
     <div
@@ -421,7 +426,7 @@ function Card(data: Post) {
           <div
             className={clsx(
               'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              {'border-green-900': isHover},
+              { 'border-green-900': isHover },
             )}
           >
             <CardBadge title="Completed" variant="green" />
@@ -442,11 +447,12 @@ function Card(data: Post) {
             <h4 className="whitespace-normal text-sm font-normal leading-4">
               {modifyTitle(title)}
             </h4>
-            <p className="mt-0.5 text-xs font-normal text-gray-400 dark:text-gray-200">
+            <p className="text-xs font-normal text-gray-300 dark:text-gray-200">
               Diedit{' '}
-              {formatDistance(new Date(data.updatedAt), new Date(), {
+              {formatDistance(new Date(updatedAt), new Date(), {
                 addSuffix: true,
-                locale: idLocale,
+                includeSeconds: true,
+                locale: locale,
               })}
             </p>
           </div>
@@ -505,7 +511,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -520,6 +526,6 @@ const modifyTitle = (title: string) => {
   return title.length >= 42
     ? title.slice(0, 42) + '..'
     : !title.length
-    ? 'Untitled - draf'
-    : title
+      ? 'Untitled - draf'
+      : title
 }
