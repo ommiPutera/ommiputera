@@ -1,5 +1,5 @@
-import type { JSONContent } from '@tiptap/core'
-import { filter, map, sum } from 'lodash'
+import type {JSONContent} from '@tiptap/core'
+import {filter, map, sum} from 'lodash'
 import {
   ArrowRightFromLine,
   ArrowRightToLine,
@@ -10,14 +10,14 @@ import {
   MoveRight,
 } from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import { SectionSpacer } from '~/components/spacer'
+import {SectionSpacer} from '~/components/spacer'
 
 type TResult = {
   name: string
@@ -48,7 +48,7 @@ export default function SidePage({
   const calculate = React.useCallback(() => {
     if (json) {
       const jsonIndexing = map(json, (item, index) => {
-        return { json: item, index: index }
+        return {json: item, index: index}
       })
 
       const marksFilteringHeading3 = filter(jsonIndexing, item => {
@@ -130,7 +130,7 @@ export default function SidePage({
   }
 
   return (
-    <div className="flex flex-col gap-12 sticky top-24">
+    <div className="sticky top-24 flex flex-col gap-12">
       <div className="flex flex-col gap-2">
         <h1 className="text-secondary text-md font-semibold">
           Data of{' '}
@@ -182,7 +182,7 @@ export default function SidePage({
   )
 }
 
-function BoldThis({ children }: { children: JSX.Element | React.ReactNode }) {
+function BoldThis({children}: {children: JSX.Element | React.ReactNode}) {
   return <b className="font-semibold text-black dark:text-white">{children}</b>
 }
 
@@ -280,7 +280,7 @@ const getMarkName = (name: MarkName | string) => {
   }
 }
 
-function CalcItem({ mark }: { mark: TResult }) {
+function CalcItem({mark}: {mark: TResult}) {
   return (
     <div className="rounded-sm py-2">
       <Accordion type="single" collapsible className="w-full">
@@ -304,7 +304,7 @@ function CalcItem({ mark }: { mark: TResult }) {
   )
 }
 
-function FreeCash({ marks }: { marks: TResult[] }) {
+function FreeCash({marks}: {marks: TResult[]}) {
   const income = marks.find(mark => mark.name === 'Income')
   const expense = marks.find(mark => mark.name === 'Expense')
   const free =
