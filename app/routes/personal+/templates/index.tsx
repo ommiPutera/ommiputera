@@ -1,8 +1,8 @@
-import {ButtonLink} from '~/components/button'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
-import {Tab} from '@headlessui/react'
+import { ButtonLink } from '~/components/button'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import { Tab } from '@headlessui/react'
 import React from 'react'
-import {Wallet} from 'lucide-react'
+import { Wallet } from 'lucide-react'
 import clsx from 'clsx'
 import Month from './month'
 
@@ -75,7 +75,7 @@ function SubmitTemplate() {
             size="md"
             rounded="md"
             type="button"
-            to="/personal-finance/new"
+            to="/personal/new"
             className="gap-2"
           >
             <p className="text-sm">Submit a template</p>
@@ -128,7 +128,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({selected}) =>
+      className={({ selected }) =>
         clsx(
           'relative flex items-start border-b-0 border-b-transparent py-3 font-semibold focus:outline-none',
           {

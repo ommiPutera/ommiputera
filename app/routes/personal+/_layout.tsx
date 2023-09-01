@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -24,8 +24,8 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto flex max-w-[85rem]">
-        <div className="hidden min-w-[15.5rem] md:block">
+      <div className="relative mx-auto flex max-w-[72rem]">
+        <div className="hidden min-w-[13rem] md:block">
           <Navigation />
         </div>
         <div className="grid w-full grid-cols-12">
@@ -43,7 +43,7 @@ function Navigation() {
       <div className="absolute bottom-0 w-full py-4">
         <NavbarItem
           title="Lainnya"
-          route="/personal-finance/templates"
+          route="/personal/templates"
           iconName="AlignJustify"
         />
       </div>
@@ -113,25 +113,25 @@ export function OutletRight({
 function NavbarMenu() {
   return (
     <div className="flex flex-col justify-center py-5">
-      <div className="mb-3 mt-2 ">
-        <Logo size="lg" />
+      <div className="mb-7 mt-6 ">
+        <Logo size="md" />
       </div>
-      <NavbarItem title="Beranda" route="/personal-finance" iconName="Home" />
+      <NavbarItem title="Beranda" route="/personal" iconName="Home" />
       <NavbarItem
         title="Templates"
-        route="/personal-finance/templates"
+        route="/personal/templates"
         iconName="Palette"
       />
-      <NavbarItem
+      {/* <NavbarItem
         title="Pengaturan"
-        route="/personal-finance/settings"
+        route="/personal/settings"
         iconName="Settings"
       />
       <NavbarItem
         title="Panduan"
-        route="/personal-finance/guide"
+        route="/personal/guide"
         iconName="BookOpen"
-      />
+      /> */}
     </div>
   )
 }
@@ -156,16 +156,20 @@ function NavbarItem({
       to={route}
       prefetch="intent"
       align="left"
-      className={clsx(
-        'flex items-center gap-2.5 px-0 py-4 hover:text-black hover:dark:text-white',
-        {
-          'text-gray-300 dark:text-gray-200': !isSelected,
-          'text-black dark:text-white': isSelected,
-        },
-      )}
+      className={clsx('flex items-center gap-3 px-0 py-4 hover:text-black hover:dark:text-white', {
+        'text-gray-300 dark:text-gray-200': !isSelected,
+        'text-black dark:text-white': isSelected,
+      })}
     >
-      <LucideIcon size={22} strokeWidth={2.5} />
-      <h2 className="pt-0.5 text-md font-semibold">{title}</h2>
+      <LucideIcon size={26} strokeWidth={1.5} />
+      <h2
+        className={clsx("pb-0.5 text-md", {
+          'font-normal': !isSelected,
+          'font-medium': isSelected,
+        })}
+      >
+        {title}
+      </h2>
     </ButtonLink>
   )
 }

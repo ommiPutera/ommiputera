@@ -1,6 +1,6 @@
-import {BookOpenCheck, ChevronRight} from 'lucide-react'
-import {Avatar, AvatarImage} from './shadcn/avatar'
-import {useRootData} from '~/utils/use-root-data'
+import { BookOpenCheck, ChevronRight } from 'lucide-react'
+import { Avatar, AvatarImage } from './shadcn/avatar'
+import { useRootData } from '~/utils/use-root-data'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import {Link} from '@remix-run/react'
+import { Link } from '@remix-run/react'
 
 function Profile() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
@@ -25,13 +25,13 @@ function Profile() {
             <div>
               <p className="-mb-1 text-sm font-medium">
                 {user?.username
-                  ? user?.username.length >= 20
-                    ? user?.username.slice(0, 20) + '..'
+                  ? user?.username.length >= 16
+                    ? user?.username.slice(0, 16) + '..'
                     : user?.username
                   : '~'}
               </p>
               <p className="text-[12px] font-normal capitalize text-gray-400 dark:text-gray-200">
-                {user?.role.toLowerCase()} Account
+                {user?.role.toLowerCase()}
               </p>
             </div>
           </div>
@@ -43,7 +43,7 @@ function Profile() {
 }
 
 function MoreMenus() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <DropdownMenuContent>
       <DropdownMenuLabel className="px-2">
@@ -70,4 +70,4 @@ function MoreMenus() {
   )
 }
 
-export {Profile}
+export { Profile }

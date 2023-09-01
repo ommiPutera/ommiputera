@@ -1,26 +1,26 @@
-import {Tab} from '@headlessui/react'
-import type {Post} from '@prisma/client'
-import type {ActionFunction, LoaderFunction} from '@remix-run/node'
+import { Tab } from '@headlessui/react'
+import type { Post } from '@prisma/client'
+import type { ActionFunction, LoaderFunction } from '@remix-run/node'
 import clsx from 'clsx'
 // @ts-ignore
-import {Home, MoveRight, Star, icons} from 'lucide-react'
+import { MoveRight, Star, icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
+import { ButtonLink } from '~/components/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import {SectionSpacer} from '~/components/spacer'
-import {getImgProps, images} from '~/images'
-import {db} from '~/utils/db.server'
-import {getUser} from '~/utils/session.server'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import { SectionSpacer } from '~/components/spacer'
+import { getImgProps, images } from '~/images'
+import { db } from '~/utils/db.server'
+import { getUser } from '~/utils/session.server'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
 import Analytics from './analytics'
-import Board, {FavoritePage} from './board'
-import {Link, useLoaderData} from '@remix-run/react'
-import {favoritePost} from '~/utils/post.session'
+import Board, { FavoritePage } from './board'
+import { Link, useLoaderData } from '@remix-run/react'
+import { favoritePost } from '~/utils/post.session'
 
 export type LoaderData = {
   posts: Post[] | null
@@ -39,8 +39,8 @@ const isSortOrder = (s: unknown): s is SortOrder => s === 'asc' || s === 'desc'
 const isOrderField = (s: unknown): s is OrderField =>
   s === 'title' || s === 'createdAt'
 
-export const loader: LoaderFunction = async ({request}) => {
-  const {searchParams} = new URL(request.url)
+export const loader: LoaderFunction = async ({ request }) => {
+  const { searchParams } = new URL(request.url)
   const user = await getUser(request)
 
   let order = 'desc'
@@ -51,19 +51,19 @@ export const loader: LoaderFunction = async ({request}) => {
   if (isOrderField(spOrderField)) orderField = spOrderField
 
   const posts = await db.post.findMany({
-    where: {authorId: user?.id},
-    orderBy: {[orderField]: order},
+    where: { authorId: user?.id },
+    orderBy: { [orderField]: order },
   })
 
   const recentPosts = await db.post.findMany({
-    where: {authorId: user?.id},
-    orderBy: {updatedAt: 'desc'},
+    where: { authorId: user?.id },
+    orderBy: { updatedAt: 'desc' },
     take: 3,
   })
 
   const favoritePosts = await db.post.findMany({
-    where: {authorId: user?.id, isFavorite: true},
-    orderBy: {updatedAt: 'desc'},
+    where: { authorId: user?.id, isFavorite: true },
+    orderBy: { updatedAt: 'desc' },
   })
 
   const data: LoaderData = {
@@ -74,19 +74,19 @@ export const loader: LoaderFunction = async ({request}) => {
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, isFavorite} = Object.fromEntries(formData)
+  const { _action, postId, isFavorite } = Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.FAVORITE: {
       if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+        return { formError: `Form not submitted correctly.` }
       }
-      return await favoritePost({id: postId, bool: !Number(isFavorite)})
+      return await favoritePost({ id: postId, bool: !Number(isFavorite) })
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
@@ -116,8 +116,7 @@ function Tabs() {
       className="w-full grid-cols-12 gap-x-8 overflow-visible"
     >
       <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:pt-4">
-        <div className="mb-6 mt-2 flex items-center gap-2.5 px-6">
-          <Home size={22} strokeWidth={3} />
+        <div className="mb-6 mt-2 flex items-center px-6">
           <h2 className="mt-1 text-left text-xl font-semibold">Beranda</h2>
         </div>
         <Tab.List className="z-0 mx-auto flex overflow-x-scroll lg:col-span-3 lg:overflow-x-hidden">
@@ -148,7 +147,7 @@ function Tabs() {
 }
 
 function Pages() {
-  const {recentPosts, favoritePosts} = useLoaderData<LoaderData>()
+  const { recentPosts, favoritePosts } = useLoaderData<LoaderData>()
 
   return (
     <Accordion
@@ -160,7 +159,7 @@ function Pages() {
         <AccordionTrigger>Baru baru ini</AccordionTrigger>
         <AccordionContent className="-mt-2 flex flex-col">
           {recentPosts?.map(post => (
-            <Link to={`/personal-finance/${post.id}`} key={post.id}>
+            <Link to={`/personal/${post.id}`} key={post.id}>
               <div className="flex w-full items-center gap-3 rounded-md px-6 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800">
                 <p className="text-sm">{post.title}</p>
               </div>
@@ -175,7 +174,7 @@ function Pages() {
           {favoritePosts?.length ? (
             favoritePosts?.map(post => (
               <div key={post.id} className="relative">
-                <Link to={`/personal-finance/${post.id}`} prefetch="intent">
+                <Link to={`/personal/${post.id}`} prefetch="intent">
                   <div className="flex w-full items-center gap-3 rounded-md px-6 py-1.5 hover:bg-gray-100 dark:hover:bg-gray-800">
                     <p className="text-sm">{post.title}</p>
                   </div>
@@ -231,7 +230,7 @@ function BrowseTemplate() {
             size="md"
             rounded="md"
             type="button"
-            to="/personal-finance/new"
+            to="/personal/new"
             className="gap-2"
           >
             <p className="text-sm">Explore</p>
@@ -258,9 +257,9 @@ function TabItem({
 
   return (
     <TabComponent index={index}>
-      <div className="relative flex w-auto items-center gap-1.5">
-        <LucideIcon size={18} strokeWidth={2.5} />
-        <h2 className="mt-0.5 text-md font-semibold">{title}</h2>
+      <div className="relative flex w-auto items-center gap-2.5">
+        <LucideIcon size={18} strokeWidth={selectedIndex === index ? 2.5 : 2} />
+        <h2 className="mb-0.5 text-md">{title}</h2>
         <div
           className={clsx(
             'absolute -bottom-3 left-0 h-[4px] w-full rounded-lg',
@@ -286,12 +285,12 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({selected}) =>
+      className={({ selected }) =>
         clsx(
-          'relative flex w-full justify-center border-b-0 border-b-transparent py-3 font-semibold hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
+          'relative flex w-full justify-center border-b-0 border-b-transparent py-3 hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
           {
-            'text-black dark:text-white': selected,
-            'text-gray-300 dark:text-gray-300': !selected,
+            'text-black dark:text-white font-medium': selected,
+            'text-gray-300 dark:text-gray-300 font-normal': !selected,
           },
           className,
         )

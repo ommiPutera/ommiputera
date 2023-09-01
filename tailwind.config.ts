@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     screens: {
       md: '640px',
-      lg: '1024px',
-      xl: '1500px', // this is the "design resolution"
+      lg: '964px',
+      xl: '1300px', // this is the "design resolution"
     },
     borderRadius: {
       none: '0',
@@ -131,5 +131,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate')],
+  plugins: [require('@tailwindcss/typography'), require('tailwindcss-animate'), {}],
 }

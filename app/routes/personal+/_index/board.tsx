@@ -1,14 +1,14 @@
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {id as idLocale} from 'date-fns/locale'
-import {format, formatDistance} from 'date-fns'
-import {AnimatePresence, motion} from 'framer-motion'
-import {Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon} from 'lucide-react'
+import { id as idLocale } from 'date-fns/locale'
+import { format, formatDistance } from 'date-fns'
+import { AnimatePresence, motion } from 'framer-motion'
+import { Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
+import { Button, ButtonLink } from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from '.'
+import { FormType, type LoaderData } from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,8 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import {Badge} from '~/components/shadcn/badge'
-import getFormatDistance from '~/lib/getFormatDistance'
+import { Badge } from '~/components/shadcn/badge'
 
 export default function Board() {
   return (
@@ -41,12 +40,12 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
   return (
     <>
       {isPostsExist ? (
-        <div className="grid grid-cols-2 gap-x-4 gap-y-7 lg:grid-cols-4 xl:grid-cols-3">
+        <div className="grid grid-cols-2 gap-x-2.5 gap-y-5 lg:grid-cols-4 xl:grid-cols-3">
           {posts?.map(post => (
             <Card key={post.id} {...JSON.parse(JSON.stringify(post))} />
           ))}
@@ -59,7 +58,7 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
 
   if (!isPostsExist) return <></>
@@ -80,11 +79,11 @@ function Tools() {
           size="md"
           rounded="md"
           type="button"
-          to="/personal-finance/new"
+          to="/personal/new"
           className="flex items-center gap-1"
         >
           <Plus size={16} strokeWidth={2.5} />
-          <p className="text-sm">Rencana baru</p>
+          <p className="text-sm">Baru</p>
         </ButtonLink>
       </div>
     </div>
@@ -348,9 +347,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -361,7 +360,7 @@ function Bubble() {
             type="button"
             size="sm"
             variant="subtle"
-            to="/personal-finance/new"
+            to="/personal/new"
             className="flex items-center gap-x-2 text-white"
           >
             <Plus size={18} strokeWidth={2.5} />
@@ -390,7 +389,7 @@ function NoData() {
           type="button"
           size="sm"
           variant="subtle"
-          to="/personal-finance/new"
+          to="/personal/new"
           className="flex items-center gap-x-2"
         >
           <Plus size={16} />
@@ -402,7 +401,7 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const {id, title, createdAt, updatedAt, isFavorite} = data
+  const { id, title, createdAt, updatedAt, isFavorite } = data
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
 
@@ -411,9 +410,7 @@ function Card(data: Post) {
   }, [isFavorite])
 
   const locale = {
-    ...idLocale,
-    formatDistance: (token: string, count: number, options: any) =>
-      getFormatDistance(token, count, options),
+    ...idLocale
   }
 
   return (
@@ -422,33 +419,33 @@ function Card(data: Post) {
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <Link to={`/personal-finance/${id}`}>
-        <div className="col-span-1 flex cursor-default flex-col gap-2">
+      <Link to={`/personal/${id}`}>
+        <div className="col-span-1 flex cursor-default flex-col gap-2 overflow-hidden">
           <div
             className={clsx(
-              'flex h-[160px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              {'border-green-900': isHover},
+              'flex h-[140px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
+              { 'border-green-900': isHover },
             )}
           >
             <CardBadge title="Completed" variant="green" />
             <div>
-              <h4 className="whitespace-normal text-xl font-bold leading-6 text-gray-500">
+              <h4 className="whitespace-normal text-lg font-semibold leading-4 text-gray-500">
                 {modifyTitle(title)}
               </h4>
-              <p className="text-xs font-normal text-gray-400 dark:text-gray-300">
+              <p className="text-xs mt-1 font-normal text-gray-400 dark:text-gray-300">
                 {format(new Date(createdAt), 'dd/MM/yyyy')}
               </p>
             </div>
-            <div className="mt-4 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap gap-2">
               <CardBadge title="Month" variant="violet" />
               <CardBadge title="Debt" variant="orange" />
             </div>
           </div>
           <div className="flex flex-col">
-            <h4 className="whitespace-normal text-sm font-normal leading-4">
+            <h4 className="whitespace-normal text-sm font-normal">
               {modifyTitle(title)}
             </h4>
-            <p className="text-xs font-normal text-gray-300 dark:text-gray-200">
+            <p className="text-[11px] mt-0.5 font-normal text-gray-200 dark:text-gray-400">
               Diedit{' '}
               {formatDistance(new Date(updatedAt), new Date(), {
                 addSuffix: true,
@@ -512,7 +509,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -524,9 +521,9 @@ export function FavoritePage({
 }
 
 const modifyTitle = (title: string) => {
-  return title.length >= 42
-    ? title.slice(0, 42) + '..'
+  return title.length >= 28
+    ? title.slice(0, 28) + '..'
     : !title.length
-    ? 'Untitled - draf'
-    : title
+      ? 'Untitled - draf'
+      : title
 }
