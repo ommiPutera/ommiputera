@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import { icons } from 'lucide-react'
+import {icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -156,14 +156,17 @@ function NavbarItem({
       to={route}
       prefetch="intent"
       align="left"
-      className={clsx('flex items-center gap-3 px-0 py-4 hover:text-black hover:dark:text-white', {
-        'text-gray-300 dark:text-gray-200': !isSelected,
-        'text-black dark:text-white': isSelected,
-      })}
+      className={clsx(
+        'flex items-center gap-3 px-0 py-4 hover:text-black hover:dark:text-white',
+        {
+          'text-gray-300 dark:text-gray-200': !isSelected,
+          'text-black dark:text-white': isSelected,
+        },
+      )}
     >
       <LucideIcon size={26} strokeWidth={1.5} />
       <h2
-        className={clsx("pb-0.5 text-md", {
+        className={clsx('pb-0.5 text-md', {
           'font-normal': !isSelected,
           'font-medium': isSelected,
         })}
