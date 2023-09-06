@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage } from '~/components/shadcn/avatar'
+import {Avatar, AvatarImage} from '~/components/shadcn/avatar'
 
 export default function Month() {
   return (

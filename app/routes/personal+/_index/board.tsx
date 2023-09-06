@@ -1,14 +1,24 @@
-import type { Post } from '@prisma/client'
-import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
 import clsx from 'clsx'
-import { id as idLocale } from 'date-fns/locale'
-import { format, formatDistance } from 'date-fns'
-import { AnimatePresence, motion } from 'framer-motion'
-import { Check, Plus, Star, ArrowDownUp, X, Lock, FilterIcon, LayoutGrid, LayoutList } from 'lucide-react'
+import {id as idLocale} from 'date-fns/locale'
+import {format, formatDistance} from 'date-fns'
+import {AnimatePresence, motion} from 'framer-motion'
+import {
+  Check,
+  Plus,
+  Star,
+  ArrowDownUp,
+  X,
+  Lock,
+  FilterIcon,
+  LayoutGrid,
+  LayoutList,
+} from 'lucide-react'
 import React from 'react'
-import { Button, ButtonLink } from '~/components/button'
+import {Button, ButtonLink} from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import { FormType, type LoaderData } from '.'
+import {FormType, type LoaderData} from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,8 +28,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import { Badge } from '~/components/shadcn/badge'
-import useGrid, { layoutEnums } from '~/lib/hooks/use-grid'
+import {Badge} from '~/components/shadcn/badge'
+import useGrid, {layoutEnums} from '~/lib/hooks/use-grid'
 
 export default function Board() {
   return (
@@ -41,17 +51,19 @@ export default function Board() {
 }
 
 function Cards() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const { layout } = useGrid()
+  const {layout} = useGrid()
 
   return (
     <>
       {isPostsExist ? (
-        <div className={clsx("", {
-          "grid grid-cols-2 gap-x-2.5 gap-y-5 lg:grid-cols-4 xl:grid-cols-3": layout === layoutEnums.GRID,
-          "flex flex-col gap-5": layout === layoutEnums.NO_GRID,
-        })}
+        <div
+          className={clsx('', {
+            'grid grid-cols-2 gap-x-2.5 gap-y-5 lg:grid-cols-4 xl:grid-cols-3':
+              layout === layoutEnums.GRID,
+            'flex flex-col gap-5': layout === layoutEnums.NO_GRID,
+          })}
         >
           {posts?.map(post => (
             <Card key={post.id} {...JSON.parse(JSON.stringify(post))} />
@@ -65,9 +77,9 @@ function Cards() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const { layout, setLayout } = useGrid()
+  const {layout, setLayout} = useGrid()
 
   if (!isPostsExist) return <></>
   return (
@@ -75,18 +87,19 @@ function Tools() {
       <div className="flex">
         <Button
           variant="subtle"
-          className={clsx("py-2", {
-            "text-white": layout === layoutEnums.GRID,
-            "text-gray-400": layout !== layoutEnums.GRID
+          className={clsx('py-2', {
+            'text-white': layout === layoutEnums.GRID,
+            'text-gray-400': layout !== layoutEnums.GRID,
           })}
           onClick={() => setLayout(layoutEnums.GRID)}
         >
           <LayoutGrid size={20} strokeWidth={2.5} />
         </Button>
-        <Button variant="subtle"
-          className={clsx("py-2", {
-            "text-white": layout === layoutEnums.NO_GRID,
-            "text-gray-400": layout !== layoutEnums.NO_GRID
+        <Button
+          variant="subtle"
+          className={clsx('py-2', {
+            'text-white': layout === layoutEnums.NO_GRID,
+            'text-gray-400': layout !== layoutEnums.NO_GRID,
           })}
           onClick={() => setLayout(layoutEnums.NO_GRID)}
         >
@@ -105,7 +118,7 @@ function Tools() {
           rounded="md"
           type="button"
           to="/personal/new"
-          className="flex items-center gap-1 w-full"
+          className="flex w-full items-center gap-1"
         >
           <Plus size={16} strokeWidth={2.5} />
           <p className="text-sm">Baru</p>
@@ -372,9 +385,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{ y: -160, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          initial={{y: -160, opacity: 0}}
+          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
+          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -426,7 +439,7 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const { id, title, createdAt, updatedAt, isFavorite } = data
+  const {id, title, createdAt, updatedAt, isFavorite} = data
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
 
@@ -449,7 +462,7 @@ function Card(data: Post) {
           <div
             className={clsx(
               'flex h-[150px] flex-col justify-center gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] px-5 dark:border-gray-800',
-              { 'border-green-900': isHover },
+              {'border-green-900': isHover},
             )}
           >
             <CardBadge title="Completed" variant="green" />
@@ -534,7 +547,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & { children: JSX.Element | React.ReactNode }) {
+}: Post & {children: JSX.Element | React.ReactNode}) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -549,6 +562,6 @@ const modifyTitle = (title: string) => {
   return title.length >= 28
     ? title.slice(0, 28) + '..'
     : !title.length
-      ? 'Untitled - draf'
-      : title
+    ? 'Untitled - draf'
+    : title
 }

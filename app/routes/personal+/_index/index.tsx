@@ -115,7 +115,7 @@ function Tabs() {
       onChange={setSelectedIndex}
       className="w-full grid-cols-12 gap-x-8 overflow-visible"
     >
-      <div className="sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 glass backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:pt-4">
+      <div className="glass sticky top-0 z-[10] mb-4 w-full border-b border-gray-100 bg-white/[0.65] p-0 pt-6 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:pt-4">
         <div className="mb-6 mt-2 flex items-center px-6">
           <h2 className="mt-1 text-left text-xl font-semibold">Beranda</h2>
         </div>
