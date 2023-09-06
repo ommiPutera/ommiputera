@@ -1,5 +1,5 @@
-import {ArrowRight} from 'lucide-react'
-import {Badge} from '../shadcn/badge'
+import { ArrowRight } from 'lucide-react'
+import { Badge } from '../shadcn/badge'
 
 function HomeHeroSection() {
   return (
@@ -25,7 +25,7 @@ function HomeHeroSection() {
   )
 }
 
-function PersonalFinanceHeroSection() {
+function PersonalHeroSection() {
   return (
     <div className="text-primary relative mx-auto grid max-w-5xl gap-8 lg:gap-12">
       <div className="flex flex-col items-center justify-center gap-6 md:gap-8">
@@ -58,4 +58,4 @@ function ProjectHeroSection() {
   )
 }
 
-export {HomeHeroSection, PersonalFinanceHeroSection, ProjectHeroSection}
+export { HomeHeroSection, PersonalHeroSection, ProjectHeroSection }

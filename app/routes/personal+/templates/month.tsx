@@ -1,26 +1,23 @@
-import React from 'react'
-import {Avatar, AvatarImage} from '~/components/shadcn/avatar'
+import { Avatar, AvatarImage } from '~/components/shadcn/avatar'
 
 export default function Month() {
   return (
     <div className="flex flex-col gap-12">
       <div>
         <h2 className="text-2xl font-semibold">Pencatatan bulanan</h2>
-        <p className="text-md font-medium text-gray-400 dark:text-gray-200">
+        <p className="text-md font-light text-gray-400 dark:text-gray-200">
           Build anything with thousands of templates
         </p>
       </div>
       <div>
         <h4 className="mb-4 text-lg font-semibold">Yang disediakan</h4>
-        <div className="grid grid-cols-2 gap-4">
-          <Card />
-          <Card />
+        <div className="grid grid-cols-1 gap-4">
           <Card />
         </div>
       </div>
       <div>
         <h4 className="mb-4 text-lg font-semibold">Dari Komunitas</h4>
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4">
           <Card />
           <Card />
           <Card />

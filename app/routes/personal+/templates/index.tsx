@@ -1,8 +1,8 @@
-import {ButtonLink} from '~/components/button'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
-import {Tab} from '@headlessui/react'
+import { ButtonLink } from '~/components/button'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import { Tab } from '@headlessui/react'
 import React from 'react'
-import {Wallet} from 'lucide-react'
+import { Wallet } from 'lucide-react'
 import clsx from 'clsx'
 import Month from './month'
 
@@ -18,7 +18,7 @@ export default function Index() {
             className="w-h-16 mb-4 h-16"
           />
           <h2 className="text-5xl font-semibold">Templat Perencanaan</h2>
-          <p className="text-lg text-gray-400 dark:text-gray-200">
+          <p className="text-lg text-gray-400 font-light dark:text-gray-200">
             Build anything with thousands of templates
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function Index() {
             className="w-full grid-cols-12 gap-x-8 overflow-visible"
           >
             <Tab.List className="z-0 mx-auto">
-              <div className="flex w-full gap-4 pr-6">
+              <div className="grid grid-cols-3 w-full gap-x-4">
                 <TabItem
                   title="Bulanan"
                   index={0}
@@ -97,7 +97,7 @@ function TabItem({
 }) {
   return (
     <TabComponent index={index}>
-      <div className="relative flex w-44 flex-col gap-2 rounded-md bg-gray-100 px-6 py-4 text-left dark:bg-gray-900">
+      <div className="relative flex w-full flex-col gap-2 rounded-md bg-gray-100 px-6 py-4 text-left dark:bg-gray-900">
         <Wallet strokeWidth={2.5} />
         <div>
           <h2 className="mt-0.5 text-lg font-semibold">{title}</h2>
@@ -128,7 +128,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({selected}) =>
+      className={({ selected }) =>
         clsx(
           'relative flex items-start border-b-0 border-b-transparent py-3 font-semibold focus:outline-none',
           {

@@ -189,7 +189,6 @@ p {
 }
 
 .glass {
-  background: rgb(18, 17, 15, 0.7);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
 }
