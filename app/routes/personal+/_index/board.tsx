@@ -1,9 +1,9 @@
-import type { Post } from '@prisma/client'
-import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
+import type {Post} from '@prisma/client'
+import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
 import clsx from 'clsx'
-import { id as idLocale } from 'date-fns/locale'
-import { format, formatDistance } from 'date-fns'
-import { AnimatePresence, motion } from 'framer-motion'
+import {id as idLocale} from 'date-fns/locale'
+import {format, formatDistance} from 'date-fns'
+import {AnimatePresence, motion} from 'framer-motion'
 import {
   Check,
   Plus,
@@ -16,9 +16,9 @@ import {
   LayoutList,
 } from 'lucide-react'
 import React from 'react'
-import { Button, ButtonLink } from '~/components/button'
+import {Button, ButtonLink} from '~/components/button'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import { FormType, type LoaderData } from '.'
+import {FormType, type LoaderData} from '.'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,8 +28,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import { Badge } from '~/components/shadcn/badge'
-import useGrid, { layoutEnums } from '~/lib/hooks/use-grid'
+import {Badge} from '~/components/shadcn/badge'
+import useGrid, {layoutEnums} from '~/lib/hooks/use-grid'
 
 export default function Board() {
   return (
@@ -51,9 +51,9 @@ export default function Board() {
 }
 
 function Cards() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const { layout } = useGrid()
+  const {layout} = useGrid()
 
   return (
     <>
@@ -78,9 +78,9 @@ function Cards() {
 }
 
 function Tools() {
-  const { posts } = useLoaderData<LoaderData>()
+  const {posts} = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const { layout, setLayout } = useGrid()
+  const {layout, setLayout} = useGrid()
 
   if (!isPostsExist) return <></>
   return (
@@ -90,7 +90,7 @@ function Tools() {
           variant="subtle"
           className={clsx('py-2', {
             'dark:text-white': layout === layoutEnums.GRID,
-            'dark:text-gray-400 text-gray-200': layout !== layoutEnums.GRID,
+            'text-gray-200 dark:text-gray-400': layout !== layoutEnums.GRID,
           })}
           onClick={() => setLayout(layoutEnums.GRID)}
         >
@@ -100,7 +100,7 @@ function Tools() {
           variant="subtle"
           className={clsx('py-2', {
             'dark:text-white': layout === layoutEnums.NO_GRID,
-            'dark:text-gray-400 text-gray-200': layout !== layoutEnums.NO_GRID,
+            'text-gray-200 dark:text-gray-400': layout !== layoutEnums.NO_GRID,
           })}
           onClick={() => setLayout(layoutEnums.NO_GRID)}
         >
@@ -386,9 +386,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{ y: -160, opacity: 0 }}
-          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
-          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
+          initial={{y: -160, opacity: 0}}
+          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
+          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -440,10 +440,10 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const { id, title, createdAt, updatedAt, isFavorite } = data
+  const {id, title, createdAt, updatedAt, isFavorite} = data
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
-  const { layout } = useGrid()
+  const {layout} = useGrid()
 
   const isNoGrid = layout === layoutEnums.NO_GRID
   const isGrid = layout === layoutEnums.GRID
@@ -458,24 +458,27 @@ function Card(data: Post) {
 
   return (
     <div
-      className={clsx("relative", {
-        "hover:bg-gray-100/50 hover:dark:bg-gray-700/50": isNoGrid
+      className={clsx('relative', {
+        'hover:bg-gray-100/50 hover:dark:bg-gray-700/50': isNoGrid,
       })}
       onMouseEnter={() => setIsHover(true)}
       onMouseLeave={() => setIsHover(false)}
     >
-      <Link to={`/personal/${id}`} prefetch='intent'>
-        <div className={clsx("col-span-1 flex cursor-default overflow-hidden", {
-          "flex-col gap-2": isGrid,
-          "flex-row gap-6 items-center": isNoGrid,
-        })}>
+      <Link to={`/personal/${id}`} prefetch="intent">
+        <div
+          className={clsx('col-span-1 flex cursor-default overflow-hidden', {
+            'flex-col gap-2': isGrid,
+            'flex-row items-center gap-6': isNoGrid,
+          })}
+        >
           <div
             className={clsx(
               'flex gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] dark:border-gray-800',
               {
                 'border-green-900': isHover,
-                "h-[150px] flex-col justify-center px-5": isGrid,
-                "h-[100px] w-full max-w-[180px] flex-row justify-start items-center px-4": isNoGrid,
+                'h-[150px] flex-col justify-center px-5': isGrid,
+                'h-[100px] w-full max-w-[180px] flex-row items-center justify-start px-4':
+                  isNoGrid,
               },
             )}
           >
@@ -488,16 +491,14 @@ function Card(data: Post) {
                 {format(new Date(createdAt), 'dd/MM/yyyy')}
               </p>
             </div>
-            {
-              isGrid
-              &&
+            {isGrid && (
               <div className="mt-2 flex flex-wrap gap-2">
                 <CardBadge title="Month" variant="violet" />
                 <CardBadge title="Debt" variant="orange" />
               </div>
-            }
+            )}
           </div>
-          <div className="flex flex-col w-full">
+          <div className="flex w-full flex-col">
             <h4 className="whitespace-normal text-sm font-normal">
               {modifyTitle(title)}
             </h4>
@@ -510,22 +511,20 @@ function Card(data: Post) {
               })}
             </p>
           </div>
-          {
-            isNoGrid
-            &&
-            <div className="flex flex-wrap gap-2 w-full h-full justify-end mr-2">
+          {isNoGrid && (
+            <div className="mr-2 flex h-full w-full flex-wrap justify-end gap-2">
               <CardBadge title="Month" variant="violet" />
               <CardBadge title="Debt" variant="orange" />
               <CardBadge title="Completed" variant="green" />
             </div>
-          }
+          )}
         </div>
       </Link>
       {isHover && (
         <div
-          className={clsx("absolute flex gap-1 rounded-sm p-1", {
-            "right-2 top-2": isGrid,
-            "right-1 top-1": isNoGrid,
+          className={clsx('absolute flex gap-1 rounded-sm p-1', {
+            'right-2 top-2': isGrid,
+            'right-1 top-1': isNoGrid,
           })}
         >
           <FavoritePage {...data}>
@@ -579,7 +578,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & { children: JSX.Element | React.ReactNode }) {
+}: Post & {children: JSX.Element | React.ReactNode}) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -594,6 +593,6 @@ const modifyTitle = (title: string) => {
   return title.length >= 28
     ? title.slice(0, 28) + '..'
     : !title.length
-      ? 'Untitled - draf'
-      : title
+    ? 'Untitled - draf'
+    : title
 }
