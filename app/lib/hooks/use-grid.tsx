@@ -1,4 +1,4 @@
-import {create} from 'zustand'
+import { create } from 'zustand'
 
 export enum layoutEnums {
   GRID = 'grid',
@@ -12,7 +12,7 @@ interface GridState {
 
 const useGrid = create<GridState>()(set => ({
   layout: layoutEnums.GRID,
-  setLayout: layout => set(state => ({layout: layout})),
+  setLayout: layout => set(state => ({ layout: layout })),
 }))
 
 export default useGrid

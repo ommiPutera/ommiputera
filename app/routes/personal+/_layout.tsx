@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -38,7 +38,7 @@ export default function Index() {
 
 function Navigation() {
   return (
-    <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white px-6 dark:bg-black">
+    <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
       <NavbarMenu />
       <div className="absolute bottom-0 w-full py-4">
         <NavbarItem
@@ -113,7 +113,7 @@ export function OutletRight({
 function NavbarMenu() {
   return (
     <div className="flex flex-col justify-center py-5">
-      <div className="mb-7 mt-6 ">
+      <div className="my-2">
         <Logo size="md" />
       </div>
       <NavbarItem title="Beranda" route="/personal" iconName="Home" />
@@ -164,13 +164,8 @@ function NavbarItem({
         },
       )}
     >
-      <LucideIcon size={26} strokeWidth={1.5} />
-      <h2
-        className={clsx('pb-0.5 text-md', {
-          'font-normal': !isSelected,
-          'font-medium': isSelected,
-        })}
-      >
+      <LucideIcon size={26} strokeWidth={1.9} />
+      <h2 className='pb-0.5 text-md font-medium'>
         {title}
       </h2>
     </ButtonLink>
