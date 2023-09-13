@@ -1,9 +1,9 @@
 import clsx from 'clsx'
 import React from 'react'
-import {AnchorOrLink} from '~/utils/misc'
+import { AnchorOrLink } from '~/utils/misc'
 
 interface ButtonProps {
-  size?: 'sm' | 'md' | 'lg'
+  size?: 'sm' | 'md' | 'lg' | 'none'
   rounded?: 'sm' | 'md' | 'lg' | 'full'
   align?: 'center' | 'left' | 'right'
   variant?: 'primary' | 'subtle' | 'danger'
@@ -70,6 +70,7 @@ function Inner({
           'border-red-200 group-disabled:border-red-700': variant === 'danger',
 
           // Size
+          'p-0': size === 'none',
           'px-2.5 py-0.5 text-sm': size === 'sm',
           'px-3.5 py-1 text-md': size === 'md',
           'text-lg': size === 'lg',
@@ -118,4 +119,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export {Button, ButtonLink}
+export { Button, ButtonLink }

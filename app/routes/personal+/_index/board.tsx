@@ -1,24 +1,21 @@
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {id as idLocale} from 'date-fns/locale'
-import {format, formatDistance} from 'date-fns'
-import {AnimatePresence, motion} from 'framer-motion'
+import { format, formatDistance } from 'date-fns'
+import { id as idLocale } from 'date-fns/locale'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
-  Check,
-  Plus,
-  Star,
   ArrowDownUp,
-  X,
-  Lock,
-  FilterIcon,
+  Check,
   LayoutGrid,
   LayoutList,
+  Plus,
+  Star,
+  X,
 } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
-import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from '.'
+import { Button, ButtonLink } from '~/components/button'
+import { Badge } from '~/components/shadcn/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,8 +25,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import {Badge} from '~/components/shadcn/badge'
-import useGrid, {layoutEnums} from '~/lib/hooks/use-grid'
+import useGrid, { layoutEnums } from '~/lib/hooks/use-grid'
+import useScrollPosition from '~/lib/hooks/use-scroll-position'
+import { FormType, type LoaderData } from '.'
 
 export default function Board() {
   return (
@@ -51,9 +49,9 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout} = useGrid()
+  const { layout } = useGrid()
 
   return (
     <>
@@ -78,9 +76,9 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout, setLayout} = useGrid()
+  const { layout, setLayout } = useGrid()
 
   if (!isPostsExist) return <></>
   return (
@@ -88,7 +86,8 @@ function Tools() {
       <div className="flex">
         <Button
           variant="subtle"
-          className={clsx('py-2', {
+          size='none'
+          className={clsx('p-2', {
             'dark:text-white': layout === layoutEnums.GRID,
             'text-gray-200 dark:text-gray-400': layout !== layoutEnums.GRID,
           })}
@@ -98,7 +97,8 @@ function Tools() {
         </Button>
         <Button
           variant="subtle"
-          className={clsx('py-2', {
+          size='none'
+          className={clsx('p-2', {
             'dark:text-white': layout === layoutEnums.NO_GRID,
             'text-gray-200 dark:text-gray-400': layout !== layoutEnums.NO_GRID,
           })}
@@ -109,9 +109,6 @@ function Tools() {
       </div>
       <div className="flex justify-end gap-6">
         <div className="flex items-center gap-4">
-          <Filter />
-        </div>
-        <div className="flex items-center gap-4">
           <Sort />
         </div>
         <ButtonLink
@@ -119,7 +116,7 @@ function Tools() {
           rounded="md"
           type="button"
           to="/personal/new"
-          className="flex w-full items-center gap-1"
+          className="flex w-full items-center gap-2"
         >
           <Plus size={16} strokeWidth={2.5} />
           <p className="text-sm">Baru</p>
@@ -142,111 +139,6 @@ function Sort() {
       </DropdownMenuTrigger>
       <SortMenus />
     </DropdownMenu>
-  )
-}
-
-function Filter() {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild className="cursor-pointer">
-        <div className="ml-1 flex w-full max-w-[200px] items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <FilterIcon size={16} strokeWidth={2.5} />
-            <p className="text-md font-medium">Filter</p>
-          </div>
-        </div>
-      </DropdownMenuTrigger>
-      <FilterMenus />
-    </DropdownMenu>
-  )
-}
-
-function FilterMenus() {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const order = searchParams.get('order')
-  const orderField = searchParams.get('orderField')
-
-  const handleRemove = () => {
-    if (order) searchParams.delete('order')
-    if (orderField) searchParams.delete('orderField')
-    setSearchParams(searchParams)
-  }
-
-  return (
-    <DropdownMenuContent className="p-0">
-      <DropdownMenuLabel className="flex items-center justify-between px-3 pb-1 pt-2">
-        <p className="text-sm text-gray-400 dark:text-gray-200">
-          Filter berdasarkan
-        </p>
-        <button
-          onClick={handleRemove}
-          className="visually-hidden text-red-900"
-          aria-hidden={!order}
-        >
-          Reset
-        </button>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup className="p-0">
-        <FilterItem
-          title="Waktu Dibuat: Terbaru"
-          orderBy="desc"
-          orderField="createdAt"
-        />
-        <FilterItem
-          title="Waktu Dibuat: Terlama"
-          orderBy="asc"
-          orderField="createdAt"
-        />
-        <FilterItem title="Judul: A-Z" orderBy="asc" orderField="title" />
-        <FilterItem title="Judul: Z-A" orderBy="desc" orderField="title" />
-      </DropdownMenuGroup>
-    </DropdownMenuContent>
-  )
-}
-
-function FilterItem({
-  title,
-  orderBy,
-  orderField,
-}: {
-  title: string
-  orderBy: 'asc' | 'desc'
-  orderField: 'createdAt' | 'title'
-}) {
-  const [searchParams, setSearchParams] = useSearchParams()
-  const orderItem = searchParams.get('orderField')
-  const order = searchParams.get('order')
-  const isSelected = order === orderBy && orderItem === orderField
-
-  const handleParams = () => {
-    if (isSelected) setSearchParams({})
-    else
-      setSearchParams({
-        order: orderBy,
-        orderField: orderField,
-      })
-  }
-
-  return (
-    <DropdownMenuItem
-      onClick={handleParams}
-      className={clsx(
-        'flex w-full min-w-[240px] items-center justify-between gap-12 rounded-none border-transparent px-3 hover:bg-gray-100 hover:dark:bg-gray-800',
-        {
-          'bg-green-900 text-white hover:bg-green-900/90 dark:hover:bg-green-900/40':
-            isSelected,
-        },
-      )}
-    >
-      {title}
-      <Check
-        className="visually-hidden"
-        aria-hidden={!isSelected}
-        size={16}
-        strokeWidth={2.5}
-      />
-    </DropdownMenuItem>
   )
 }
 
@@ -386,9 +278,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -440,10 +332,10 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const {id, title, createdAt, updatedAt, isFavorite} = data
+  const { id, title, createdAt, updatedAt, isFavorite } = data
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
-  const {layout} = useGrid()
+  const { layout } = useGrid()
 
   const isNoGrid = layout === layoutEnums.NO_GRID
   const isGrid = layout === layoutEnums.GRID
@@ -520,12 +412,9 @@ function Card(data: Post) {
           )}
         </div>
       </Link>
-      {isHover && (
+      {(isHover || isFav) && (
         <div
-          className={clsx('absolute flex gap-1 rounded-sm p-1', {
-            'right-2 top-2': isGrid,
-            'right-1 top-1': isNoGrid,
-          })}
+          className={clsx('right-1 top-1 absolute flex gap-1 rounded-sm p-1')}
         >
           <FavoritePage {...data}>
             <button
@@ -541,11 +430,6 @@ function Card(data: Post) {
               />
             </button>
           </FavoritePage>
-          <div className="w-full">
-            <button className="rounded-sm bg-black p-1">
-              <Lock size={12} strokeWidth={1.5} color="white" />
-            </button>
-          </div>
         </div>
       )}
     </div>
@@ -578,7 +462,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -593,6 +477,6 @@ const modifyTitle = (title: string) => {
   return title.length >= 28
     ? title.slice(0, 28) + '..'
     : !title.length
-    ? 'Untitled - draf'
-    : title
+      ? 'Untitled - draf'
+      : title
 }

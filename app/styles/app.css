@@ -349,5 +349,5 @@ table.styled-table > tbody tr td.action {
   position: absolute;
   height: 20rem;
   content: '';
-  @apply bg-gradient-to-b from-gray-100 to-white dark:from-black dark:to-gray-900;
+  @apply bg-gradient-to-b dark:from-black dark:to-gray-900;
 }
