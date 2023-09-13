@@ -1,7 +1,7 @@
-import { type V2_MetaFunction } from '@remix-run/react'
+import {type V2_MetaFunction} from '@remix-run/react'
 
-export const meta: V2_MetaFunction = ({ matches }) => {
-  return [{ title: 'Auth' }]
+export const meta: V2_MetaFunction = ({matches}) => {
+  return [{title: 'Auth'}]
 }
 
 export default function Index() {

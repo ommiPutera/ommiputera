@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import React from 'react'
-import { AnchorOrLink } from '~/utils/misc'
+import {AnchorOrLink} from '~/utils/misc'
 
 interface ButtonProps {
   size?: 'sm' | 'md' | 'lg' | 'none'
@@ -119,4 +119,4 @@ const ButtonLink = React.forwardRef<
   )
 })
 
-export { Button, ButtonLink }
+export {Button, ButtonLink}
