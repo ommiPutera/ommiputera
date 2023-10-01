@@ -9,9 +9,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     screens: {
-      md: '640px',
-      lg: '964px',
-      xl: '1300px', // this is the "design resolution"
+      md: '425px',
+      lg: '768px',
+      xl: '1024px', // this is the "design resolution"
     },
     borderRadius: {
       none: '0',
