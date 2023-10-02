@@ -1,103 +1,98 @@
-"use client";
+'use client'
 
-import { useEffect, useRef, useState } from "react";
-import {
-  useEditor,
-  EditorContent,
-  JSONContent,
-  Extension,
-} from "@tiptap/react";
-import { defaultEditorProps } from "./props";
-import { defaultExtensions } from "./extensions";
-import useLocalStorage from "@/lib/hooks/use-local-storage";
-import { useDebouncedCallback } from "use-debounce";
-import { useCompletion } from "ai/react";
-import { toast } from "sonner";
-import va from "@vercel/analytics";
-import { defaultEditorContent } from "./default-content";
-import { EditorBubbleMenu } from "./bubble-menu";
-import { getPrevText } from "~/lib/editor";
-import { ImageResizer } from "./extensions/image-resizer";
-import type { EditorProps } from "@tiptap/pm/view";
-import type { Editor as EditorClass } from "@tiptap/core";
+import {useEffect, useRef, useState} from 'react'
+import {useEditor, EditorContent, JSONContent, Extension} from '@tiptap/react'
+import {defaultEditorProps} from './props'
+import {defaultExtensions} from './extensions'
+import useLocalStorage from '@/lib/hooks/use-local-storage'
+import {useDebouncedCallback} from 'use-debounce'
+import {useCompletion} from 'ai/react'
+import {toast} from 'sonner'
+import va from '@vercel/analytics'
+import {defaultEditorContent} from './default-content'
+import {EditorBubbleMenu} from './bubble-menu'
+import {getPrevText} from '~/lib/editor'
+import {ImageResizer} from './extensions/image-resizer'
+import type {EditorProps} from '@tiptap/pm/view'
+import type {Editor as EditorClass} from '@tiptap/core'
 
 export default function Editor({
-  completionApi = "/api/generate",
-  className = "relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg",
+  completionApi = '/api/generate',
+  className = 'relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg',
   defaultValue = defaultEditorContent,
   extensions = [],
   editorProps = {},
-  onUpdate = () => { },
-  onDebouncedUpdate = () => { },
+  onUpdate = () => {},
+  onDebouncedUpdate = () => {},
   debounceDuration = 750,
-  storageKey = "novel__content",
+  storageKey = 'novel__content',
   disableLocalStorage = false,
 }: {
   /**
    * The API route to use for the OpenAI completion API.
    * Defaults to "/api/generate".
    */
-  completionApi?: string;
+  completionApi?: string
   /**
    * Additional classes to add to the editor container.
    * Defaults to "relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg".
    */
-  className?: string;
+  className?: string
   /**
    * The default value to use for the editor.
    * Defaults to defaultEditorContent.
    */
-  defaultValue?: JSONContent | string;
+  defaultValue?: JSONContent | string
   /**
    * A list of extensions to use for the editor, in addition to the default Novel extensions.
    * Defaults to [].
    */
-  extensions?: Extension[];
+  extensions?: Extension[]
   /**
    * Props to pass to the underlying Tiptap editor, in addition to the default Novel editor props.
    * Defaults to {}.
    */
-  editorProps?: EditorProps;
+  editorProps?: EditorProps
   /**
    * A callback function that is called whenever the editor is updated.
    * Defaults to () => {}.
    */
   // eslint-disable-next-line no-unused-vars
-  onUpdate?: (editor?: EditorClass) => void | Promise<void>;
+  onUpdate?: (editor?: EditorClass) => void | Promise<void>
   /**
    * A callback function that is called whenever the editor is updated, but only after the defined debounce duration.
    * Defaults to () => {}.
    */
   // eslint-disable-next-line no-unused-vars
-  onDebouncedUpdate?: (editor?: EditorClass) => void | Promise<void>;
+  onDebouncedUpdate?: (editor?: EditorClass) => void | Promise<void>
   /**
    * The duration (in milliseconds) to debounce the onDebouncedUpdate callback.
    * Defaults to 750.
    */
-  debounceDuration?: number;
+  debounceDuration?: number
   /**
    * The key to use for storing the editor's value in local storage.
    * Defaults to "novel__content".
    */
-  storageKey?: string;
+  storageKey?: string
   /**
    * Disable local storage read/save.
    * Defaults to false.
    */
-  disableLocalStorage?: boolean;
+  disableLocalStorage?: boolean
 }) {
-  const [content, setContent] = useLocalStorage(storageKey, defaultValue);
+  const [content, setContent] = useLocalStorage(storageKey, defaultValue)
 
-  const [hydrated, setHydrated] = useState(false);
+  const [hydrated, setHydrated] = useState(false)
 
-  const debouncedUpdates = useDebouncedCallback(async ({ editor }) => {
-    const json = editor.getJSON();
-    onDebouncedUpdate(editor);
+  const debouncedUpdates = useDebouncedCallback(async ({editor}) => {
+    const json = editor.getJSON()
+    onDebouncedUpdate(editor)
 
     if (!disableLocalStorage) {
-      setContent(json);
+      setContent(json)
     }
-  }, debounceDuration);
+  }, debounceDuration)
 
   const editor = useEditor({
     extensions: [...defaultExtensions, ...extensions],
@@ -105,116 +100,116 @@ export default function Editor({
       ...defaultEditorProps,
       ...editorProps,
     },
-    onUpdate: (e) => {
-      const selection = e.editor.state.selection;
+    onUpdate: e => {
+      const selection = e.editor.state.selection
       const lastTwo = getPrevText(e.editor, {
         chars: 2,
-      });
-      if (lastTwo === "++" && !isLoading) {
+      })
+      if (lastTwo === '++' && !isLoading) {
         e.editor.commands.deleteRange({
           from: selection.from - 2,
           to: selection.from,
-        });
+        })
         complete(
           getPrevText(e.editor, {
             chars: 5000,
-          })
-        );
+          }),
+        )
         // complete(e.editor.storage.markdown.getMarkdown());
-        va.track("Autocomplete Shortcut Used");
+        va.track('Autocomplete Shortcut Used')
       } else {
-        onUpdate(e.editor);
-        debouncedUpdates(e);
+        onUpdate(e.editor)
+        debouncedUpdates(e)
       }
     },
-    autofocus: "end",
-  });
+    autofocus: 'end',
+  })
 
-  const { complete, completion, isLoading, stop } = useCompletion({
-    id: "novel",
+  const {complete, completion, isLoading, stop} = useCompletion({
+    id: 'novel',
     api: completionApi,
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
         from: editor.state.selection.from - completion.length,
         to: editor.state.selection.from,
-      });
+      })
     },
-    onError: (err) => {
-      toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
+    onError: err => {
+      toast.error(err.message)
+      if (err.message === 'You have reached your request limit for the day.') {
+        va.track('Rate Limit Reached')
       }
     },
-  });
+  })
 
-  const prev = useRef("");
+  const prev = useRef('')
 
   // Insert chunks of the generated text
   useEffect(() => {
-    const diff = completion.slice(prev.current.length);
-    prev.current = completion;
-    editor?.commands.insertContent(diff);
-  }, [isLoading, editor, completion]);
+    const diff = completion.slice(prev.current.length)
+    prev.current = completion
+    editor?.commands.insertContent(diff)
+  }, [isLoading, editor, completion])
 
   useEffect(() => {
     // if user presses escape or cmd + z and it's loading,
     // stop the request, delete the completion, and insert back the "++"
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" || (e.metaKey && e.key === "z")) {
-        stop();
-        if (e.key === "Escape") {
+      if (e.key === 'Escape' || (e.metaKey && e.key === 'z')) {
+        stop()
+        if (e.key === 'Escape') {
           editor?.commands.deleteRange({
             from: editor.state.selection.from - completion.length,
             to: editor.state.selection.from,
-          });
+          })
         }
-        editor?.commands.insertContent("++");
+        editor?.commands.insertContent('++')
       }
-    };
+    }
     const mousedownHandler = (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      stop();
-      if (window.confirm("AI writing paused. Continue?")) {
-        complete(editor?.getText() || "");
+      e.preventDefault()
+      e.stopPropagation()
+      stop()
+      if (window.confirm('AI writing paused. Continue?')) {
+        complete(editor?.getText() || '')
       }
-    };
+    }
     if (isLoading) {
-      document.addEventListener("keydown", onKeyDown);
-      window.addEventListener("mousedown", mousedownHandler);
+      document.addEventListener('keydown', onKeyDown)
+      window.addEventListener('mousedown', mousedownHandler)
     } else {
-      document.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousedown", mousedownHandler);
+      document.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('mousedown', mousedownHandler)
     }
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousedown", mousedownHandler);
-    };
-  }, [stop, isLoading, editor, complete, completion.length]);
+      document.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('mousedown', mousedownHandler)
+    }
+  }, [stop, isLoading, editor, complete, completion.length])
 
   // Default: Hydrate the editor with the content from localStorage.
   // If disableLocalStorage is true, hydrate the editor with the defaultValue.
   useEffect(() => {
-    if (!editor || hydrated) return;
+    if (!editor || hydrated) return
 
-    const value = disableLocalStorage ? defaultValue : content;
+    const value = disableLocalStorage ? defaultValue : content
 
     if (value) {
-      editor.commands.setContent(value);
-      setHydrated(true);
+      editor.commands.setContent(value)
+      setHydrated(true)
     }
-  }, [editor, defaultValue, content, hydrated, disableLocalStorage]);
+  }, [editor, defaultValue, content, hydrated, disableLocalStorage])
 
   return (
     <div
       onClick={() => {
-        editor?.chain().focus().run();
+        editor?.chain().focus().run()
       }}
       className={className}
     >
       {editor && <EditorBubbleMenu editor={editor} />}
-      {editor?.isActive("image") && <ImageResizer editor={editor} />}
+      {editor?.isActive('image') && <ImageResizer editor={editor} />}
       <EditorContent editor={editor} />
     </div>
-  );
+  )
 }
