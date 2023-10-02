@@ -1,14 +1,14 @@
 import clsx from 'clsx'
-import { AnchorOrLink } from '~/utils/misc'
-import { useRootData } from '~/utils/use-root-data'
-import { Logo } from './navbar'
-import { useLocation } from '@remix-run/react'
-import { includes, some } from 'lodash'
+import {AnchorOrLink} from '~/utils/misc'
+import {useRootData} from '~/utils/use-root-data'
+import {Logo} from './navbar'
+import {useLocation} from '@remix-run/react'
+import {includes, some} from 'lodash'
 
 const ROUTE_WITHOUT_FOOTER = ['/login', '/personal']
 
 function Footer() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isShowFooter = some(ROUTE_WITHOUT_FOOTER, el =>
     includes(location.pathname, el),
@@ -19,7 +19,7 @@ function Footer() {
     <footer
       className={clsx('z-[2] px-5vw py-9 lg:px-10vw lg:pb-12 lg:pt-24', {
         'dark:bg-gray-900': !user,
-        'dark:bg-gradient-to-t from-black to-gray-900': user,
+        'from-black to-gray-900 dark:bg-gradient-to-t': user,
       })}
     >
       <div className="grid-rows-max-content relative mx-auto grid max-w-5xl grid-cols-4 gap-x-4 md:grid-cols-8 xl:grid-cols-12 xl:gap-x-6">

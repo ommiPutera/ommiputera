@@ -1,6 +1,6 @@
-import { BookOpenCheck, ChevronRight } from 'lucide-react'
-import { Avatar, AvatarImage } from './shadcn/avatar'
-import { useRootData } from '~/utils/use-root-data'
+import {BookOpenCheck, ChevronRight} from 'lucide-react'
+import {Avatar, AvatarImage} from './shadcn/avatar'
+import {useRootData} from '~/utils/use-root-data'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,10 +10,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './shadcn/dropdown-menu'
-import { Link } from '@remix-run/react'
+import {Link} from '@remix-run/react'
 
 function Profile() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="cursor-pointer">
@@ -43,7 +43,7 @@ function Profile() {
 }
 
 function MoreMenus() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <DropdownMenuContent>
       <DropdownMenuLabel className="px-2">
@@ -70,4 +70,4 @@ function MoreMenus() {
   )
 }
 
-export { Profile }
+export {Profile}
