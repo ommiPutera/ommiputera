@@ -1,110 +1,60 @@
-'use client'
-
-import {useEffect, useRef, useState} from 'react'
-import {useEditor, EditorContent, JSONContent, Extension} from '@tiptap/react'
-import {defaultEditorProps} from './props'
-import {defaultExtensions} from './extensions'
-import useLocalStorage from '@/lib/hooks/use-local-storage'
-import {useDebouncedCallback} from 'use-debounce'
-import {useCompletion} from 'ai/react'
-import {toast} from 'sonner'
+import React from 'react'
+import { useEditor, EditorContent } from '@tiptap/react'
+import { TiptapEditorProps } from './props'
+import { TiptapExtensions } from './extensions'
+import { useDebouncedCallback } from 'use-debounce'
+import { useCompletion } from 'ai/react'
+import { toast } from 'sonner'
 import va from '@vercel/analytics'
-import {defaultEditorContent} from './default-content'
-import {EditorBubbleMenu} from './bubble-menu'
-import {getPrevText} from '~/lib/editor'
-import {ImageResizer} from './extensions/image-resizer'
-import type {EditorProps} from '@tiptap/pm/view'
-import type {Editor as EditorClass} from '@tiptap/core'
+import { EditorBubbleMenu } from './components'
+import { getPrevText } from '~/lib/editor'
+import type { Editor as EditorType, JSONContent } from '@tiptap/core'
 
-export default function Editor({
-  completionApi = '/api/generate',
-  className = 'relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg',
-  defaultValue = defaultEditorContent,
-  extensions = [],
-  editorProps = {},
-  onUpdate = () => {},
-  onDebouncedUpdate = () => {},
-  debounceDuration = 750,
-  storageKey = 'novel__content',
-  disableLocalStorage = false,
-}: {
-  /**
-   * The API route to use for the OpenAI completion API.
-   * Defaults to "/api/generate".
-   */
-  completionApi?: string
-  /**
-   * Additional classes to add to the editor container.
-   * Defaults to "relative min-h-[500px] w-full max-w-screen-lg border-stone-200 bg-white sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:shadow-lg".
-   */
-  className?: string
-  /**
-   * The default value to use for the editor.
-   * Defaults to defaultEditorContent.
-   */
-  defaultValue?: JSONContent | string
-  /**
-   * A list of extensions to use for the editor, in addition to the default Novel extensions.
-   * Defaults to [].
-   */
-  extensions?: Extension[]
-  /**
-   * Props to pass to the underlying Tiptap editor, in addition to the default Novel editor props.
-   * Defaults to {}.
-   */
-  editorProps?: EditorProps
-  /**
-   * A callback function that is called whenever the editor is updated.
-   * Defaults to () => {}.
-   */
-  // eslint-disable-next-line no-unused-vars
-  onUpdate?: (editor?: EditorClass) => void | Promise<void>
-  /**
-   * A callback function that is called whenever the editor is updated, but only after the defined debounce duration.
-   * Defaults to () => {}.
-   */
-  // eslint-disable-next-line no-unused-vars
-  onDebouncedUpdate?: (editor?: EditorClass) => void | Promise<void>
-  /**
-   * The duration (in milliseconds) to debounce the onDebouncedUpdate callback.
-   * Defaults to 750.
-   */
-  debounceDuration?: number
-  /**
-   * The key to use for storing the editor's value in local storage.
-   * Defaults to "novel__content".
-   */
-  storageKey?: string
-  /**
-   * Disable local storage read/save.
-   * Defaults to false.
-   */
-  disableLocalStorage?: boolean
-}) {
-  const [content, setContent] = useLocalStorage(storageKey, defaultValue)
+type EditorProps = {
+  submit: () => void
+  content: JSONContent | null
+  setContent: React.Dispatch<React.SetStateAction<JSONContent>>
+  setSaveStatus: React.Dispatch<
+    React.SetStateAction<'Saved' | 'Unsaved' | 'Saving..'>
+  >
+  focus?: boolean
+  titletEl: React.RefObject<HTMLTextAreaElement>
+}
 
-  const [hydrated, setHydrated] = useState(false)
+const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
+  { submit, content, setContent, setSaveStatus, focus = false, titletEl },
+  ref,
+) {
+  const [hydrated, setHydrated] = React.useState(false)
 
-  const debouncedUpdates = useDebouncedCallback(async ({editor}) => {
-    const json = editor.getJSON()
-    onDebouncedUpdate(editor)
-
-    if (!disableLocalStorage) {
+  const debouncedUpdates = useDebouncedCallback(
+    async ({ editor }: { editor: EditorType }) => {
+      const json = editor.getJSON()
+      setSaveStatus('Saving..')
       setContent(json)
-    }
-  }, debounceDuration)
+
+      // Simulate a delay in saving.
+      setTimeout(() => {
+        setSaveStatus('Saved')
+        submit()
+      }, 750)
+    },
+    750,
+  )
 
   const editor = useEditor({
-    extensions: [...defaultExtensions, ...extensions],
-    editorProps: {
-      ...defaultEditorProps,
-      ...editorProps,
-    },
+    extensions: TiptapExtensions,
+    editorProps: TiptapEditorProps,
     onUpdate: e => {
+      setSaveStatus('Unsaved')
       const selection = e.editor.state.selection
       const lastTwo = getPrevText(e.editor, {
         chars: 2,
       })
+      const json = e.editor.getJSON()
+      if (typeof json?.content?.[1]?.content === 'undefined' && titletEl) {
+        // titletEl.current?.focus()
+      }
       if (lastTwo === '++' && !isLoading) {
         e.editor.commands.deleteRange({
           from: selection.from - 2,
@@ -118,16 +68,15 @@ export default function Editor({
         // complete(e.editor.storage.markdown.getMarkdown());
         va.track('Autocomplete Shortcut Used')
       } else {
-        onUpdate(e.editor)
         debouncedUpdates(e)
       }
     },
-    autofocus: 'end',
+    autofocus: false,
   })
 
-  const {complete, completion, isLoading, stop} = useCompletion({
+  const { complete, completion, isLoading, stop } = useCompletion({
     id: 'novel',
-    api: completionApi,
+    api: '/api/generate',
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
         from: editor.state.selection.from - completion.length,
@@ -142,16 +91,16 @@ export default function Editor({
     },
   })
 
-  const prev = useRef('')
+  const prev = React.useRef('')
 
   // Insert chunks of the generated text
-  useEffect(() => {
+  React.useEffect(() => {
     const diff = completion.slice(prev.current.length)
     prev.current = completion
     editor?.commands.insertContent(diff)
   }, [isLoading, editor, completion])
 
-  useEffect(() => {
+  React.useEffect(() => {
     // if user presses escape or cmd + z and it's loading,
     // stop the request, delete the completion, and insert back the "++"
     const onKeyDown = (e: KeyboardEvent) => {
@@ -187,29 +136,34 @@ export default function Editor({
     }
   }, [stop, isLoading, editor, complete, completion.length])
 
-  // Default: Hydrate the editor with the content from localStorage.
-  // If disableLocalStorage is true, hydrate the editor with the defaultValue.
-  useEffect(() => {
-    if (!editor || hydrated) return
-
-    const value = disableLocalStorage ? defaultValue : content
-
-    if (value) {
-      editor.commands.setContent(value)
+  // Hydrate the editor with the content from localStorage.
+  React.useEffect(() => {
+    if (editor && content && !hydrated) {
+      editor.commands.setContent(content)
       setHydrated(true)
     }
-  }, [editor, defaultValue, content, hydrated, disableLocalStorage])
+  }, [editor, content, hydrated])
+
+  React.useEffect(() => {
+    if (editor && focus) {
+      const json = editor.getJSON()
+      if (typeof json.content?.[1] === 'undefined') {
+        editor.commands.focus()
+      }
+    }
+  }, [editor, focus])
 
   return (
     <div
       onClick={() => {
         editor?.chain().focus().run()
       }}
-      className={className}
+      className="sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg relative min-h-[500px] w-full"
     >
       {editor && <EditorBubbleMenu editor={editor} />}
-      {editor?.isActive('image') && <ImageResizer editor={editor} />}
       <EditorContent editor={editor} />
     </div>
   )
-}
+})
+
+export default Editor
