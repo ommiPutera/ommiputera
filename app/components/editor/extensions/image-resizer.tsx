@@ -1,26 +1,26 @@
-import Moveable from "react-moveable";
+import Moveable from 'react-moveable'
 
 // @ts-ignore
-export const ImageResizer = ({ editor }) => {
+export const ImageResizer = ({editor}) => {
   const updateMediaSize = () => {
     const imageInfo = document.querySelector(
-      ".ProseMirror-selectednode"
-    ) as HTMLImageElement;
+      '.ProseMirror-selectednode',
+    ) as HTMLImageElement
     if (imageInfo) {
-      const selection = editor.state.selection;
+      const selection = editor.state.selection
       editor.commands.setImage({
         src: imageInfo.src,
-        width: Number(imageInfo.style.width.replace("px", "")),
-        height: Number(imageInfo.style.height.replace("px", "")),
-      });
-      editor.commands.setNodeSelection(selection.from);
+        width: Number(imageInfo.style.width.replace('px', '')),
+        height: Number(imageInfo.style.height.replace('px', '')),
+      })
+      editor.commands.setNodeSelection(selection.from)
     }
-  };
+  }
 
   return (
     <>
       <Moveable
-        target={document.querySelector(".ProseMirror-selectednode") as any}
+        target={document.querySelector('.ProseMirror-selectednode') as any}
         container={null}
         origin={false}
         /* Resize event edges */
@@ -39,22 +39,22 @@ export const ImageResizer = ({ editor }) => {
           // dist,
           delta,
         }: // direction,
-          // clientX,
-          // clientY,
-          any) => {
-          delta[0] && (target!.style.width = `${width}px`);
-          delta[1] && (target!.style.height = `${height}px`);
+        // clientX,
+        // clientY,
+        any) => {
+          delta[0] && (target!.style.width = `${width}px`)
+          delta[1] && (target!.style.height = `${height}px`)
         }}
         // { target, isDrag, clientX, clientY }: any
         onResizeEnd={() => {
-          updateMediaSize();
+          updateMediaSize()
         }}
         /* scalable */
         /* Only one of resizable, scalable, warpable can be used. */
         scalable={true}
         throttleScale={0}
         /* Set the direction of resizable */
-        renderDirections={["w", "e"]}
+        renderDirections={['w', 'e']}
         onScale={({
           target,
           // scale,
@@ -62,11 +62,11 @@ export const ImageResizer = ({ editor }) => {
           // delta,
           transform,
         }: // clientX,
-          // clientY,
-          any) => {
-          target!.style.transform = transform;
+        // clientY,
+        any) => {
+          target!.style.transform = transform
         }}
       />
     </>
-  );
-};
+  )
+}

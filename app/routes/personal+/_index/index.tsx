@@ -1,25 +1,25 @@
-import { Tab } from '@headlessui/react'
-import type { Post } from '@prisma/client'
-import type { ActionFunction, LoaderFunction } from '@remix-run/node'
-import { Link, useLoaderData } from '@remix-run/react'
+import {Tab} from '@headlessui/react'
+import type {Post} from '@prisma/client'
+import type {ActionFunction, LoaderFunction} from '@remix-run/node'
+import {Link, useLoaderData} from '@remix-run/react'
 import clsx from 'clsx'
-import { MoveRight, Star } from 'lucide-react'
+import {MoveRight, Star} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
+import {ButtonLink} from '~/components/button'
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '~/components/shadcn/accordion'
-import { SectionSpacer } from '~/components/spacer'
-import { getImgProps, images } from '~/images'
-import { db } from '~/utils/db.server'
-import { favoritePost } from '~/utils/post.session'
-import { getUser } from '~/utils/session.server'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import {SectionSpacer} from '~/components/spacer'
+import {getImgProps, images} from '~/images'
+import {db} from '~/utils/db.server'
+import {favoritePost} from '~/utils/post.session'
+import {getUser} from '~/utils/session.server'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
 import Analytics from './analytics'
-import Board, { FavoritePage } from './board'
+import Board, {FavoritePage} from './board'
 
 export type LoaderData = {
   posts: Post[] | null
@@ -38,8 +38,8 @@ const isSortOrder = (s: unknown): s is SortOrder => s === 'asc' || s === 'desc'
 const isOrderField = (s: unknown): s is OrderField =>
   s === 'title' || s === 'createdAt'
 
-export const loader: LoaderFunction = async ({ request }) => {
-  const { searchParams } = new URL(request.url)
+export const loader: LoaderFunction = async ({request}) => {
+  const {searchParams} = new URL(request.url)
   const user = await getUser(request)
 
   let order = 'desc'
@@ -50,19 +50,19 @@ export const loader: LoaderFunction = async ({ request }) => {
   if (isOrderField(spOrderField)) orderField = spOrderField
 
   const posts = await db.post.findMany({
-    where: { authorId: user?.id },
-    orderBy: { [orderField]: order },
+    where: {authorId: user?.id},
+    orderBy: {[orderField]: order},
   })
 
   const recentPosts = await db.post.findMany({
-    where: { authorId: user?.id },
-    orderBy: { updatedAt: 'desc' },
+    where: {authorId: user?.id},
+    orderBy: {updatedAt: 'desc'},
     take: 3,
   })
 
   const favoritePosts = await db.post.findMany({
-    where: { authorId: user?.id, isFavorite: true },
-    orderBy: { updatedAt: 'desc' },
+    where: {authorId: user?.id, isFavorite: true},
+    orderBy: {updatedAt: 'desc'},
   })
 
   const data: LoaderData = {
@@ -73,19 +73,19 @@ export const loader: LoaderFunction = async ({ request }) => {
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const { _action, postId, isFavorite } = Object.fromEntries(formData)
+  const {_action, postId, isFavorite} = Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.FAVORITE: {
       if (typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      return await favoritePost({ id: postId, bool: !Number(isFavorite) })
+      return await favoritePost({id: postId, bool: !Number(isFavorite)})
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
@@ -136,7 +136,7 @@ function Tabs() {
 }
 
 function Pages() {
-  const { recentPosts, favoritePosts } = useLoaderData<LoaderData>()
+  const {recentPosts, favoritePosts} = useLoaderData<LoaderData>()
   return (
     <Accordion
       type="multiple"
@@ -268,7 +268,7 @@ function TabComponent({
 }) {
   return (
     <Tab
-      className={({ selected }) =>
+      className={({selected}) =>
         clsx(
           'relative flex w-full justify-center border-b-0 border-b-transparent py-3 font-medium hover:bg-gray-100/30 focus:outline-none dark:hover:bg-gray-800/40',
           {

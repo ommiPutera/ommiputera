@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import { icons } from 'lucide-react'
+import {icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
@@ -24,7 +24,7 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto flex max-w-[72rem] w-full">
+      <div className="relative mx-auto flex w-full max-w-[72rem]">
         <div className="hidden min-w-[15rem] md:block">
           <Navigation />
         </div>

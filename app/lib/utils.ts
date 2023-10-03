@@ -7,20 +7,20 @@ export function cn(...inputs: ClassValue[]) {
 
 export function isValidUrl(url: string) {
   try {
-    new URL(url);
-    return true;
+    new URL(url)
+    return true
   } catch (e) {
-    return false;
+    return false
   }
 }
 
 export function getUrlFromString(str: string) {
-  if (isValidUrl(str)) return str;
+  if (isValidUrl(str)) return str
   try {
-    if (str.includes(".") && !str.includes(" ")) {
-      return new URL(`https://${str}`).toString();
+    if (str.includes('.') && !str.includes(' ')) {
+      return new URL(`https://${str}`).toString()
     }
   } catch (e) {
-    return null;
+    return null
   }
 }

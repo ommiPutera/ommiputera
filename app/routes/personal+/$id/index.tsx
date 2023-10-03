@@ -1,11 +1,11 @@
-import type { Post } from '@prisma/client'
-import type { ActionFunction, LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
-import { Form, useActionData, useLoaderData } from '@remix-run/react'
-import type { JSONContent } from '@tiptap/core'
+import type {Post} from '@prisma/client'
+import type {ActionFunction, LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
+import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import type {JSONContent} from '@tiptap/core'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useDebouncedCallback } from 'use-debounce'
+import {useDebouncedCallback} from 'use-debounce'
 import Editor from '~/components/editor'
 import {
   createPost,
@@ -14,9 +14,9 @@ import {
   updateContent,
   updateTitle,
 } from '~/utils/post.session'
-import { useUser } from '~/utils/use-root-data'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
-import { Header } from './misc'
+import {useUser} from '~/utils/use-root-data'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import {Header} from './misc'
 import SidePage from './sidepage'
 
 export type SaveStatus = 'Saved' | 'Unsaved' | 'Saving..'
@@ -45,39 +45,39 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
-  const post = await getPost({ id: id ?? '' })
-  if (id === 'new') return { postId: id, isNewPage: true }
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
+  const post = await getPost({id: id ?? ''})
+  if (id === 'new') return {postId: id, isNewPage: true}
 
   if (!id || !post) return redirect('/personal')
-  const data: LoaderData = { post, postId: id, isNewPage: false }
+  const data: LoaderData = {post, postId: id, isNewPage: false}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const { _action, postId, title, authorId, postJSON } =
+  const {_action, postId, title, authorId, postJSON} =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      await deletePost({ id: postId })
+      await deletePost({id: postId})
       return redirect('/personal', {})
     }
     case FormType.CREATE: {
       if (typeof authorId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       let content
       if (postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
+        content = JSON.parse(JSON.stringify({blocks: ['none']}))
       }
       return await createPost({
         title: title ? String(title) : 'Untitled Page...',
@@ -89,17 +89,17 @@ export const action: ActionFunction = async ({ request }) => {
     }
     case FormType.UPDATE_TITLE: {
       if (typeof title !== 'string' || typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await updateTitle({
         id: postId,
         title,
       })
-      return { post }
+      return {post}
     }
     case FormType.UPDATE_CONTENT: {
       if (typeof postId !== 'string' || typeof postJSON !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       return await updateContent({
         id: postId,
@@ -107,13 +107,13 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
 
 export default function Index() {
-  const { post, postId } = useLoaderData<LoaderData>()
+  const {post, postId} = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const titletRef = React.useRef<HTMLTextAreaElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
@@ -178,7 +178,7 @@ export default function Index() {
           saveStatus={saveStatus}
           submitContent={submitContent}
         />
-        <div className="mx-auto my-0 mt-6 lg:mt-32 w-full justify-between gap-x-8 px-4 lg:px-20 pb-[30vh]">
+        <div className="mx-auto my-0 mt-6 w-full justify-between gap-x-8 px-4 pb-[30vh] lg:mt-32 lg:px-20">
           <div className="relative h-auto w-full">
             <Form method="POST" className="w-full" action=".">
               <div className="">
@@ -202,7 +202,7 @@ export default function Index() {
                   }}
                   defaultValue={post?.title}
                   placeholder="Untitled"
-                  className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl text-gray-500 dark:text-gray-100 font-bold leading-tight focus:outline-none"
+                  className="w-full resize-none appearance-none overflow-hidden bg-transparent text-5xl font-bold leading-tight text-gray-500 focus:outline-none dark:text-gray-100"
                 />
               </div>
               <input

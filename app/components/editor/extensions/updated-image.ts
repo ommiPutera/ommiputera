@@ -1,4 +1,4 @@
-import Image from "@tiptap/extension-image";
+import Image from '@tiptap/extension-image'
 
 const UpdatedImage = Image.extend({
   addAttributes() {
@@ -10,8 +10,8 @@ const UpdatedImage = Image.extend({
       height: {
         default: null,
       },
-    };
+    }
   },
-});
+})
 
-export default UpdatedImage;
+export default UpdatedImage

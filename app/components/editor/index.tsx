@@ -1,15 +1,15 @@
 import React from 'react'
-import { useEditor, EditorContent } from '@tiptap/react'
-import { defaultEditorProps } from './props'
-import { useDebouncedCallback } from 'use-debounce'
-import { useCompletion } from 'ai/react'
-import { toast } from 'sonner'
+import {useEditor, EditorContent} from '@tiptap/react'
+import {defaultEditorProps} from './props'
+import {useDebouncedCallback} from 'use-debounce'
+import {useCompletion} from 'ai/react'
+import {toast} from 'sonner'
 import va from '@vercel/analytics'
-import { EditorBubbleMenu } from './bubble-menu'
-import { getPrevText } from '~/lib/editor'
-import type { Editor as EditorClass, Extension, JSONContent } from '@tiptap/core'
-import { defaultExtensions } from './extensions'
-import { ImageResizer } from './extensions/image-resizer'
+import {EditorBubbleMenu} from './bubble-menu'
+import {getPrevText} from '~/lib/editor'
+import type {Editor as EditorClass, Extension, JSONContent} from '@tiptap/core'
+import {defaultExtensions} from './extensions'
+import {ImageResizer} from './extensions/image-resizer'
 
 type EditorProps = {
   submit: () => void
@@ -36,15 +36,15 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
     titletEl,
     extensions = [],
     editorProps = {},
-    onUpdate = () => { },
-    completionApi = "/api/generate",
+    onUpdate = () => {},
+    completionApi = '/api/generate',
   },
   ref,
 ) {
   const [hydrated, setHydrated] = React.useState(false)
 
   const debouncedUpdates = useDebouncedCallback(
-    async ({ editor }: { editor: EditorClass }) => {
+    async ({editor}: {editor: EditorClass}) => {
       const json = editor.getJSON()
       setSaveStatus('Saving..')
       setContent(json)
@@ -64,92 +64,92 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
       ...defaultEditorProps,
       ...editorProps,
     },
-    onUpdate: (e) => {
-      const selection = e.editor.state.selection;
+    onUpdate: e => {
+      const selection = e.editor.state.selection
       const lastTwo = getPrevText(e.editor, {
         chars: 2,
-      });
-      if (lastTwo === "++" && !isLoading) {
+      })
+      if (lastTwo === '++' && !isLoading) {
         e.editor.commands.deleteRange({
           from: selection.from - 2,
           to: selection.from,
-        });
+        })
         complete(
           getPrevText(e.editor, {
             chars: 5000,
-          })
-        );
+          }),
+        )
         // complete(e.editor.storage.markdown.getMarkdown());
-        va.track("Autocomplete Shortcut Used");
+        va.track('Autocomplete Shortcut Used')
       } else {
-        onUpdate(e.editor);
-        debouncedUpdates(e);
+        onUpdate(e.editor)
+        debouncedUpdates(e)
       }
     },
-    autofocus: "end",
-  });
+    autofocus: 'end',
+  })
 
-  const { complete, completion, isLoading, stop } = useCompletion({
-    id: "novel",
+  const {complete, completion, isLoading, stop} = useCompletion({
+    id: 'novel',
     api: completionApi,
     onFinish: (_prompt, completion) => {
       editor?.commands.setTextSelection({
         from: editor.state.selection.from - completion.length,
         to: editor.state.selection.from,
-      });
+      })
     },
-    onError: (err) => {
-      toast.error(err.message);
-      if (err.message === "You have reached your request limit for the day.") {
-        va.track("Rate Limit Reached");
+    onError: err => {
+      toast.error(err.message)
+      if (err.message === 'You have reached your request limit for the day.') {
+        va.track('Rate Limit Reached')
       }
     },
-  });
+  })
 
-  const prev = React.useRef("");
+  const prev = React.useRef('')
 
   // Insert chunks of the generated text
   React.useEffect(() => {
-    const diff = completion.slice(prev.current.length);
-    prev.current = completion;
-    editor?.commands.insertContent(diff);
-  }, [isLoading, editor, completion]);
+    const diff = completion.slice(prev.current.length)
+    prev.current = completion
+    editor?.commands.insertContent(diff)
+  }, [isLoading, editor, completion])
 
   React.useEffect(() => {
     // if user presses escape or cmd + z and it's loading,
     // stop the request, delete the completion, and insert back the "++"
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" || (e.metaKey && e.key === "z")) {
-        stop();
-        if (e.key === "Escape") {
+      if (e.key === 'Escape' || (e.metaKey && e.key === 'z')) {
+        stop()
+        if (e.key === 'Escape') {
           editor?.commands.deleteRange({
             from: editor.state.selection.from - completion.length,
             to: editor.state.selection.from,
-          });
+          })
         }
-        editor?.commands.insertContent("++");
+        editor?.commands.insertContent('++')
       }
-    };
+    }
     const mousedownHandler = (e: MouseEvent) => {
-      e.preventDefault();
-      e.stopPropagation();
-      stop();
-      if (window.confirm("AI writing paused. Continue?")) {
-        complete(editor?.getText() || "");
+      e.preventDefault()
+      e.stopPropagation()
+      stop()
+      if (window.confirm('AI writing paused. Continue?')) {
+        complete(editor?.getText() || '')
       }
-    };
+    }
     if (isLoading) {
-      document.addEventListener("keydown", onKeyDown);
-      window.addEventListener("mousedown", mousedownHandler);
+      document.addEventListener('keydown', onKeyDown)
+      window.addEventListener('mousedown', mousedownHandler)
     } else {
-      document.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousedown", mousedownHandler);
+      document.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('mousedown', mousedownHandler)
     }
     return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      window.removeEventListener("mousedown", mousedownHandler);
-    };
-  }, [stop, isLoading, editor, complete, completion.length]);
+      document.removeEventListener('keydown', onKeyDown)
+      window.removeEventListener('mousedown', mousedownHandler)
+    }
+  }, [stop, isLoading, editor, complete, completion.length])
 
   // Hydrate the editor with the content from localStorage.
   React.useEffect(() => {
@@ -176,7 +176,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
       className="sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg relative min-h-[500px] w-full"
     >
       {editor && <EditorBubbleMenu editor={editor} />}
-      {editor?.isActive("image") && <ImageResizer editor={editor} />}
+      {editor?.isActive('image') && <ImageResizer editor={editor} />}
       <EditorContent editor={editor} />
     </div>
   )
