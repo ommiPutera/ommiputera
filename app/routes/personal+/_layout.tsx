@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -24,8 +24,8 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto flex max-w-[72rem]">
-        <div className="hidden min-w-[13rem] md:block">
+      <div className="relative mx-auto flex max-w-[72rem] w-full">
+        <div className="hidden min-w-[15rem] md:block">
           <Navigation />
         </div>
         <div className="grid w-full grid-cols-12">
@@ -38,7 +38,7 @@ export default function Index() {
 
 function Navigation() {
   return (
-    <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white pr-6 dark:bg-black">
+    <div className="sticky top-0 flex h-auto min-h-screen w-full flex-col gap-6 bg-white px-6 dark:bg-black">
       <NavbarMenu />
       <div className="absolute bottom-0 w-full py-4">
         <NavbarItem
@@ -69,7 +69,7 @@ export function OutletCenter({
     <div
       {...props}
       className={clsx(
-        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-9',
+        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-8',
         props.className,
       )}
     >
@@ -85,11 +85,11 @@ export function OutletRight({
   children: JSX.Element | React.ReactNode[] | React.ReactNode
 } & JSX.IntrinsicElements['div']) {
   return (
-    <div className="hidden w-full lg:col-span-3 xl:block">
+    <div className="hidden w-full lg:col-span-4 xl:block">
       <div
         {...props}
         className={clsx(
-          'sticky top-0 flex h-full min-h-screen w-full flex-col gap-6 bg-white pl-6 dark:bg-black',
+          'sticky top-0 flex h-full min-h-screen w-full flex-col gap-6 bg-white px-6 dark:bg-black',
           props.className,
         )}
       >
@@ -117,20 +117,10 @@ function NavbarMenu() {
         <Logo size="md" />
       </div>
       <NavbarItem title="Beranda" route="/personal" iconName="Home" />
-      <NavbarItem
+      {/* <NavbarItem
         title="Templates"
         route="/personal/templates"
         iconName="Palette"
-      />
-      {/* <NavbarItem
-        title="Pengaturan"
-        route="/personal/settings"
-        iconName="Settings"
-      />
-      <NavbarItem
-        title="Panduan"
-        route="/personal/guide"
-        iconName="BookOpen"
       /> */}
     </div>
   )

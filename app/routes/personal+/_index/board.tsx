@@ -1,9 +1,9 @@
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {format, formatDistance} from 'date-fns'
-import {id as idLocale} from 'date-fns/locale'
-import {AnimatePresence, motion} from 'framer-motion'
+import { format, formatDistance } from 'date-fns'
+import { id as idLocale } from 'date-fns/locale'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowDownUp,
   Check,
@@ -14,8 +14,8 @@ import {
   X,
 } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
-import {Badge} from '~/components/shadcn/badge'
+import { Button, ButtonLink } from '~/components/button'
+import { Badge } from '~/components/shadcn/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,9 +25,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import useGrid, {layoutEnums} from '~/lib/hooks/use-grid'
+import useGrid, { layoutEnums } from '~/lib/hooks/use-grid'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from '.'
+import { FormType, type LoaderData } from '.'
 
 export default function Board() {
   return (
@@ -49,9 +49,9 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout} = useGrid()
+  const { layout } = useGrid()
 
   return (
     <>
@@ -76,9 +76,9 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout, setLayout} = useGrid()
+  const { layout, setLayout } = useGrid()
 
   if (!isPostsExist) return <></>
   return (
@@ -278,14 +278,14 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
           }}
-          className="fixed top-36 w-fit rounded-full bg-green-900 px-2 py-1 shadow-2xl"
+          className="fixed top-40 w-fit rounded-full bg-green-900 px-2 py-1 shadow-2xl"
         >
           <ButtonLink
             type="button"
@@ -332,10 +332,10 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const {id, title, createdAt, updatedAt, isFavorite} = data
+  const { id, title, createdAt, updatedAt, isFavorite } = data
+  const { layout } = useGrid()
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
-  const {layout} = useGrid()
 
   const isNoGrid = layout === layoutEnums.NO_GRID
   const isGrid = layout === layoutEnums.GRID
@@ -365,10 +365,10 @@ function Card(data: Post) {
         >
           <div
             className={clsx(
-              'flex gap-3 rounded-md border border-gray-100 bg-[#FFF9F0] dark:border-gray-800',
+              'flex gap-2 rounded-md border border-gray-100 bg-[#FFF9F0] dark:border-gray-800',
               {
                 'border-green-900': isHover,
-                'h-[150px] flex-col justify-center px-5': isGrid,
+                'h-[110px] flex-col justify-center px-3': isGrid,
                 'h-[100px] w-full max-w-[180px] flex-row items-center justify-start px-4':
                   isNoGrid,
               },
@@ -376,23 +376,23 @@ function Card(data: Post) {
           >
             {isGrid && <CardBadge title="Completed" variant="green" />}
             <div>
-              <h4 className="whitespace-normal text-lg font-semibold leading-5 text-gray-500">
-                {modifyTitle(title)}
+              <h4 className="whitespace-normal line-clamp-1 text-base font-semibold leading-5 text-gray-500">
+                {title}
               </h4>
-              <p className="mt-1 text-xs font-normal text-gray-400 dark:text-gray-300">
+              <p className="mt-1 text-[11px] font-normal text-gray-400 dark:text-gray-300">
                 {format(new Date(createdAt), 'dd/MM/yyyy')}
               </p>
             </div>
-            {isGrid && (
+            {/* {isGrid && (
               <div className="mt-2 flex flex-wrap gap-2">
                 <CardBadge title="Month" variant="violet" />
                 <CardBadge title="Debt" variant="orange" />
               </div>
-            )}
+            )} */}
           </div>
           <div className="flex w-full flex-col">
-            <h4 className="whitespace-normal text-sm font-normal">
-              {modifyTitle(title)}
+            <h4 className="whitespace-normal text-sm font-normal line-clamp-1">
+              {title}
             </h4>
             <p className="-mt-0.5 text-[11px] font-normal text-gray-200">
               Diedit{' '}
@@ -462,7 +462,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}
@@ -471,12 +471,4 @@ export function FavoritePage({
       <input type="hidden" name="_action" value={FormType.FAVORITE} />
     </Form>
   )
-}
-
-const modifyTitle = (title: string) => {
-  return title.length >= 28
-    ? title.slice(0, 28) + '..'
-    : !title.length
-    ? 'Untitled - draf'
-    : title
 }

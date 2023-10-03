@@ -7,22 +7,19 @@ import Paragraph from '@tiptap/extension-paragraph'
 import Heading from '@tiptap/extension-heading'
 import TiptapUnderline from '@tiptap/extension-underline'
 import TextStyle from '@tiptap/extension-text-style'
-import {Color} from '@tiptap/extension-color'
+import { Color } from '@tiptap/extension-color'
 import TaskItem from '@tiptap/extension-task-item'
 import TaskList from '@tiptap/extension-task-list'
-import {Markdown} from 'tiptap-markdown'
+import { Markdown } from 'tiptap-markdown'
 import Highlight from '@tiptap/extension-highlight'
 import SlashCommand from './slash-command'
-import {InputRule} from '@tiptap/core'
+import { InputRule } from '@tiptap/core'
+import UpdatedImage from "./updated-image";
+import CustomKeymap from "./custom-keymap";
+import DragAndDrop from "./drag-and-drop";
 import UploadImagesPlugin from '../plugins/upload-images'
 
-const CustomImage = TiptapImage.extend({
-  addProseMirrorPlugins() {
-    return [UploadImagesPlugin()]
-  },
-})
-
-export const TiptapExtensions = [
+export const defaultExtensions = [
   StarterKit.configure({
     bulletList: {
       HTMLAttributes: {
@@ -69,10 +66,10 @@ export const TiptapExtensions = [
       return [
         new InputRule({
           find: /^(?:---|—-|___\s|\*\*\*\s)$/,
-          handler: ({state, range}) => {
+          handler: ({ state, range }) => {
             const attributes = {}
 
-            const {tr} = state
+            const { tr } = state
             const start = range.from
             let end = range.to
 
@@ -95,14 +92,23 @@ export const TiptapExtensions = [
         'text-gray-400 underline underline-offset-[3px] hover:text-gray-600 transition-colors cursor-pointer',
     },
   }),
-  CustomImage.configure({
+  TiptapImage.extend({
+    addProseMirrorPlugins() {
+      return [UploadImagesPlugin()];
+    },
+  }).configure({
     allowBase64: true,
     HTMLAttributes: {
-      class: 'rounded-lg border border-gray-200',
+      class: "rounded-lg border border-gray-200",
+    },
+  }),
+  UpdatedImage.configure({
+    HTMLAttributes: {
+      class: "rounded-lg border border-gray-200",
     },
   }),
   Placeholder.configure({
-    placeholder: ({node}) => {
+    placeholder: ({ node }) => {
       if (node.type.name === 'heading') {
         return `Heading ${node.attrs.level}`
       }
@@ -116,12 +122,12 @@ export const TiptapExtensions = [
   Color,
   Paragraph.configure({
     HTMLAttributes: {
-      class: 'text-md p-0 font-normal',
+      class: 'text-sm relative top-[4px] p-0 font-medium',
     },
   }),
   Heading.configure({
     HTMLAttributes: {
-      class: 'font-semibold',
+      class: 'font-bold',
     },
   }),
   Highlight.configure({
@@ -129,12 +135,12 @@ export const TiptapExtensions = [
   }),
   TaskList.configure({
     HTMLAttributes: {
-      class: 'not-prose pl-0',
+      class: "not-prose items-start pl-[2px] my-0",
     },
   }),
   TaskItem.configure({
     HTMLAttributes: {
-      class: 'flex items-start my-1',
+      class: "flex my-0",
     },
     nested: true,
   }),
@@ -142,4 +148,6 @@ export const TiptapExtensions = [
     html: false,
     transformCopiedText: true,
   }),
+  CustomKeymap,
+  DragAndDrop,
 ]
