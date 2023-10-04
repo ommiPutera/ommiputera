@@ -1,28 +1,28 @@
-import type {Post} from '@prisma/client'
-import type {ActionFunction, LoaderArgs} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
-import {Form, useActionData, useLoaderData} from '@remix-run/react'
-import type {JSONContent} from '@tiptap/core'
+import { PostStatus, type Post } from '@prisma/client'
+import type { ActionFunction, LoaderArgs } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
+import { Form, useActionData, useLoaderData } from '@remix-run/react'
+import type { JSONContent } from '@tiptap/core'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import {useDebouncedCallback} from 'use-debounce'
-// import Editor from '~/components/editor'
+import { useDebouncedCallback } from 'use-debounce'
 import {
   createPost,
   deletePost,
   getPost,
   updateContent,
   updateTitle,
+  updateStatusPost
 } from '~/utils/post.session'
-import {useUser} from '~/utils/use-root-data'
-import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
-import {Header} from './misc'
+import { useUser } from '~/utils/use-root-data'
+import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
+import { Header } from './misc'
 import SidePage from './sidepage'
 // @ts-ignore
-import {Check, ChevronsUpDownIcon, icons} from 'lucide-react'
-import {Listbox, Transition} from '@headlessui/react'
-import {format} from 'date-fns'
-import {capitalize} from 'lodash'
+import { Check, ChevronsUpDownIcon, icons } from 'lucide-react'
+import { Listbox, Transition } from '@headlessui/react'
+import { format } from 'date-fns'
+import { capitalize } from 'lodash'
 import clsx from 'clsx'
 
 const Editor = React.lazy(async () => await import('~/components/editor'))
@@ -50,78 +50,97 @@ export enum FormType {
   CREATE = 'CREATE',
   UPDATE_TITLE = 'UPDATE_TITLE',
   UPDATE_CONTENT = 'UPDATE_CONTENT',
+  UPDATE_STATUS = 'UPDATE_STATUS',
   DELETE = 'DELETE',
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
-  const post = await getPost({id: id ?? ''})
-  if (id === 'new') return {postId: id, isNewPage: true}
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
+  const post = await getPost({ id: id ?? '' })
+  if (id === 'new') return { postId: id, isNewPage: true }
 
   if (!id || !post) return redirect('/personal')
-  const data: LoaderData = {post, postId: id, isNewPage: false}
+  const data: LoaderData = { post, postId: id, isNewPage: false }
   return data
 }
 
-export const action: ActionFunction = async ({request}) => {
+export const action: ActionFunction = async ({ request }) => {
   const formData = await request.formData()
-  const {_action, postId, title, authorId, postJSON} =
-    Object.fromEntries(formData)
+  const formPayload = Object.fromEntries(formData)
 
-  switch (_action) {
-    case FormType.DELETE: {
-      if (typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+  switch (formPayload._action) {
+    case FormType.UPDATE_STATUS: {
+      if
+        (typeof formPayload.postId !== 'string') {
+        return { formError: `Form not submitted correctly.` }
       }
-      await deletePost({id: postId})
+      if (
+        formPayload.status === PostStatus.COMPLETED ||
+        formPayload.status === PostStatus.NOT_STARTED ||
+        formPayload.status === PostStatus.UNDERWAY
+      ) {
+        const post = await updateStatusPost({
+          id: formPayload.postId,
+          status: formPayload.status
+        })
+        return { post }
+      } else {
+        return { formError: `Form not submitted correctly.` }
+      }
+    }
+    case FormType.DELETE: {
+      if (typeof formPayload.postId !== 'string') {
+        return { formError: `Form not submitted correctly.` }
+      }
+      await deletePost({ id: formPayload.postId })
       return redirect('/personal', {})
     }
     case FormType.CREATE: {
-      if (typeof authorId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+      if (typeof formPayload.authorId !== 'string') {
+        return { formError: `Form not submitted correctly.` }
       }
       let content
-      if (postJSON) {
+      if (formPayload.postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({blocks: ['none']}))
+        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
       }
       return await createPost({
-        title: title ? String(title) : 'Untitled Page...',
-        authorId,
+        title: formPayload.title ? String(formPayload.title) : 'Untitled Page...',
+        authorId: formPayload.authorId,
         isPublished: true,
         content,
         redirectTo: '/personal/',
       })
     }
     case FormType.UPDATE_TITLE: {
-      if (typeof title !== 'string' || typeof postId !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+      if (typeof formPayload.title !== 'string' || typeof formPayload.postId !== 'string') {
+        return { formError: `Form not submitted correctly.` }
       }
       const post = await updateTitle({
-        id: postId,
-        title,
+        id: formPayload.postId,
+        title: formPayload.title,
       })
-      return {post}
+      return { post }
     }
     case FormType.UPDATE_CONTENT: {
-      if (typeof postId !== 'string' || typeof postJSON !== 'string') {
-        return {formError: `Form not submitted correctly.`}
+      if (typeof formPayload.postId !== 'string' || typeof formPayload.postJSON !== 'string') {
+        return { formError: `Form not submitted correctly.` }
       }
       return await updateContent({
-        id: postId,
-        content: JSON.parse(postJSON),
+        id: formPayload.postId,
+        content: JSON.parse(formPayload.postJSON),
       })
     }
     default: {
-      return {formError: `Action type invalid`}
+      return { formError: `Action type invalid` }
     }
   }
 }
 
 export default function Index() {
-  const {post, postId} = useLoaderData<LoaderData>()
+  const { post, postId } = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const titletRef = React.useRef<HTMLTextAreaElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
@@ -273,40 +292,52 @@ export default function Index() {
 }
 
 function PageData() {
-  const {post} = useLoaderData<LoaderData>()
+  const { post, postId } = useLoaderData<LoaderData>()
   if (!post) return <></>
   return (
-    <Form>
-      <div className="my-3 flex flex-col gap-1.5">
+    <div className="my-3 flex flex-col gap-1.5">
+      <Form method="POST" className="w-full">
         <PageDataItem
           name="Status"
           iconName="ChevronDownSquare"
           value={post.status.toString()}
+          payloadName="status"
         />
-        <PageDataItem
-          name="Created"
-          iconName="Clock10"
-          readOnly
-          value={format(new Date(post.createdAt), 'MMMM dd, yyyy mm:ss')}
+        <input
+          type="hidden"
+          name="_action"
+          value={FormType.UPDATE_STATUS}
         />
-      </div>
-    </Form>
+        <input
+          type="hidden"
+          name="postId"
+          value={postId}
+        />
+      </Form>
+      <PageDataItem
+        name="Created"
+        iconName="Clock10"
+        readOnly
+        value={format(new Date(post.createdAt), 'MMMM dd, yyyy mm:ss')}
+      />
+    </div>
   )
 }
 
 function PageDataItem({
   name,
   iconName,
+  payloadName,
   readOnly = false,
   value,
 }: {
   name: string
   iconName: string
+  payloadName?: string
   readOnly?: boolean
   value: string | Date
 }) {
   const LucideIcon = icons[iconName]
-
   return (
     <div className="flex items-center">
       <div className="flex items-center gap-2">
@@ -318,7 +349,11 @@ function PageDataItem({
           {value.toString()}
         </p>
       ) : (
-        <Select value={value} items={arrStatus} />
+        <Select
+          value={value}
+          items={arrStatus}
+          payloadName={payloadName ?? ''}
+        />
       )}
     </div>
   )
@@ -326,73 +361,82 @@ function PageDataItem({
 
 const arrStatus: string[] = ['COMPLETED', 'NOT_STARTED', 'UNDERWAY']
 
-function Select({value, items}: {value: string | Date; items: string[]}) {
+function Select({ value, items, payloadName }: { value: string | Date; items: string[], payloadName: string }) {
   const [selected, setSelected] = React.useState(value)
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
-      <div className="relative -ml-1">
-        <Listbox.Button className="dark:active::bg-gray-800 active::bg-gray-100/50: sm:text-sm relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:focus:bg-gray-800">
-          <p className="pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-100">
-            {capitalize(selected.toString()).replace(/_/g, ' ')}
-          </p>
-          <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <ChevronsUpDownIcon
-              strokeWidth={2.5}
-              className="h-4 w-4 text-gray-500 dark:text-gray-100"
-              aria-hidden="true"
-            />
-          </span>
-        </Listbox.Button>
-        <Transition
-          as={React.Fragment}
-          leave="transition ease-in duration-100 w-full"
-          leaveFrom="opacity-100"
-          leaveTo="opacity-0"
-        >
-          <Listbox.Options className="sm:text-sm absolute z-50  mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-100 bg-white bg-white/[0.65] p-0 py-1 text-base shadow-lg backdrop-blur-lg focus:outline-none dark:border-gray-800 dark:bg-gray-900/[0.65] dark:backdrop-blur-lg">
-            {items.map(item => (
-              <Listbox.Option
-                key={item}
-                className={({selected}) =>
-                  clsx(
-                    'relative flex w-full min-w-[120px] cursor-pointer items-center justify-between gap-12 px-3 py-1',
-                    {
-                      'bg-green-900 hover:bg-green-900/90 dark:hover:bg-green-900/40':
-                        selected,
-                      'hover:bg-gray-100 hover:dark:bg-gray-800': !selected,
-                    },
-                  )
-                }
-                value={item}
-              >
-                {({selected}) => (
-                  <>
-                    <span
-                      className={clsx(
-                        'block truncate text-sm font-normal text-gray-500 dark:text-gray-100',
-                        {
-                          'text-white': selected,
-                        },
-                      )}
-                    >
-                      {capitalize(item).replace(/_/g, ' ')}
-                    </span>
-                    {selected ? (
-                      <Check
-                        className="visually-hidden text-white"
-                        aria-hidden={!selected}
-                        size={16}
-                        strokeWidth={2.5}
-                      />
-                    ) : null}
-                  </>
-                )}
-              </Listbox.Option>
-            ))}
-          </Listbox.Options>
-        </Transition>
-      </div>
-    </Listbox>
+    <>
+      <input
+        type="hidden"
+        name={payloadName}
+        value={selected.toString()}
+      />
+      <Listbox value={selected} onChange={setSelected}>
+        <div className="relative -ml-1">
+          <Listbox.Button className="dark:active::bg-gray-800 active::bg-gray-100/50: sm:text-sm relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:focus:bg-gray-800">
+            <p className="pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-100">
+              {capitalize(selected.toString()).replace(/_/g, ' ')}
+            </p>
+            <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronsUpDownIcon
+                strokeWidth={2.5}
+                className="h-4 w-4 text-gray-500 dark:text-gray-100"
+                aria-hidden="true"
+              />
+            </span>
+          </Listbox.Button>
+          <Transition
+            as={React.Fragment}
+            leave="transition ease-in duration-100 w-full"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+            <Listbox.Options className="sm:text-sm absolute z-50  mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-100 bg-white bg-white/[0.65] p-0 py-1 text-base shadow-lg backdrop-blur-lg focus:outline-none dark:border-gray-800 dark:bg-gray-900/[0.65] dark:backdrop-blur-lg">
+              {items.map(item => (
+                <Listbox.Option
+                  as='button'
+                  type='submit'
+                  key={item}
+                  className={({ selected }) =>
+                    clsx(
+                      'relative flex w-full min-w-[120px] cursor-pointer items-center justify-between gap-12 px-3 py-1',
+                      {
+                        'bg-green-900 hover:bg-green-900/90 dark:hover:bg-green-900/40':
+                          selected,
+                        'hover:bg-gray-100 hover:dark:bg-gray-800': !selected,
+                      },
+                    )
+                  }
+                  value={item}
+                >
+                  {({ selected }) => (
+                    <>
+                      <span
+                        className={clsx(
+                          'block truncate text-sm font-normal text-gray-500 dark:text-gray-100',
+                          {
+                            'text-white': selected,
+                          },
+                        )}
+                      >
+                        {capitalize(item).replace(/_/g, ' ')}
+                      </span>
+                      {selected ? (
+                        <Check
+                          className="visually-hidden text-white"
+                          aria-hidden={!selected}
+                          size={16}
+                          strokeWidth={2.5}
+                        />
+                      ) : null}
+                    </>
+                  )}
+                </Listbox.Option>
+              ))}
+            </Listbox.Options>
+          </Transition>
+        </div>
+      </Listbox>
+    </>
   )
 }
