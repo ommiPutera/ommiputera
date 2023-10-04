@@ -1,11 +1,11 @@
-import type { Post } from '@prisma/client'
-import type { ActionFunction, LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
-import { Form, useActionData, useLoaderData } from '@remix-run/react'
-import type { JSONContent } from '@tiptap/core'
+import type {Post} from '@prisma/client'
+import type {ActionFunction, LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
+import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import type {JSONContent} from '@tiptap/core'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useDebouncedCallback } from 'use-debounce'
+import {useDebouncedCallback} from 'use-debounce'
 // import Editor from '~/components/editor'
 import {
   createPost,
@@ -14,15 +14,15 @@ import {
   updateContent,
   updateTitle,
 } from '~/utils/post.session'
-import { useUser } from '~/utils/use-root-data'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
-import { Header } from './misc'
+import {useUser} from '~/utils/use-root-data'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import {Header} from './misc'
 import SidePage from './sidepage'
 // @ts-ignore
-import { Check, ChevronsUpDownIcon, icons } from 'lucide-react'
-import { Listbox, Transition } from '@headlessui/react'
-import { format } from 'date-fns'
-import { capitalize } from 'lodash'
+import {Check, ChevronsUpDownIcon, icons} from 'lucide-react'
+import {Listbox, Transition} from '@headlessui/react'
+import {format} from 'date-fns'
+import {capitalize} from 'lodash'
 import clsx from 'clsx'
 
 const Editor = React.lazy(async () => await import('~/components/editor'))
@@ -53,39 +53,39 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
-  const post = await getPost({ id: id ?? '' })
-  if (id === 'new') return { postId: id, isNewPage: true }
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
+  const post = await getPost({id: id ?? ''})
+  if (id === 'new') return {postId: id, isNewPage: true}
 
   if (!id || !post) return redirect('/personal')
-  const data: LoaderData = { post, postId: id, isNewPage: false }
+  const data: LoaderData = {post, postId: id, isNewPage: false}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
-  const { _action, postId, title, authorId, postJSON } =
+  const {_action, postId, title, authorId, postJSON} =
     Object.fromEntries(formData)
 
   switch (_action) {
     case FormType.DELETE: {
       if (typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      await deletePost({ id: postId })
+      await deletePost({id: postId})
       return redirect('/personal', {})
     }
     case FormType.CREATE: {
       if (typeof authorId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       let content
       if (postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
+        content = JSON.parse(JSON.stringify({blocks: ['none']}))
       }
       return await createPost({
         title: title ? String(title) : 'Untitled Page...',
@@ -97,17 +97,17 @@ export const action: ActionFunction = async ({ request }) => {
     }
     case FormType.UPDATE_TITLE: {
       if (typeof title !== 'string' || typeof postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await updateTitle({
         id: postId,
         title,
       })
-      return { post }
+      return {post}
     }
     case FormType.UPDATE_CONTENT: {
       if (typeof postId !== 'string' || typeof postJSON !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       return await updateContent({
         id: postId,
@@ -115,13 +115,13 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
 
 export default function Index() {
-  const { post, postId } = useLoaderData<LoaderData>()
+  const {post, postId} = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const titletRef = React.useRef<HTMLTextAreaElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
@@ -273,19 +273,19 @@ export default function Index() {
 }
 
 function PageData() {
-  const { post } = useLoaderData<LoaderData>()
+  const {post} = useLoaderData<LoaderData>()
   if (!post) return <></>
   return (
     <Form>
-      <div className="flex flex-col gap-1.5 my-3">
+      <div className="my-3 flex flex-col gap-1.5">
         <PageDataItem
           name="Status"
-          iconName='ChevronDownSquare'
+          iconName="ChevronDownSquare"
           value={post.status.toString()}
         />
         <PageDataItem
           name="Created"
-          iconName='Clock10'
+          iconName="Clock10"
           readOnly
           value={format(new Date(post.createdAt), 'MMMM dd, yyyy mm:ss')}
         />
@@ -298,11 +298,11 @@ function PageDataItem({
   name,
   iconName,
   readOnly = false,
-  value
+  value,
 }: {
-  name: string,
-  iconName: string,
-  readOnly?: boolean,
+  name: string
+  iconName: string
+  readOnly?: boolean
   value: string | Date
 }) {
   const LucideIcon = icons[iconName]
@@ -311,29 +311,31 @@ function PageDataItem({
     <div className="flex items-center">
       <div className="flex items-center gap-2">
         <LucideIcon size={14} strokeWidth={2.5} className="text-gray-300" />
-        <p className="w-[70px] text-sm font-medium text-gray-300">
-          {name}
-        </p>
+        <p className="w-[70px] text-sm font-medium text-gray-300">{name}</p>
       </div>
-      {readOnly ?
-        <p className='pl-2 text-sm font-medium text-gray-500 dark:text-gray-100'>{value.toString()}</p>
-        :
+      {readOnly ? (
+        <p className="pl-2 text-sm font-medium text-gray-500 dark:text-gray-100">
+          {value.toString()}
+        </p>
+      ) : (
         <Select value={value} items={arrStatus} />
-      }
+      )}
     </div>
   )
 }
 
 const arrStatus: string[] = ['COMPLETED', 'NOT_STARTED', 'UNDERWAY']
 
-function Select({ value, items }: { value: string | Date, items: string[] }) {
+function Select({value, items}: {value: string | Date; items: string[]}) {
   const [selected, setSelected] = React.useState(value)
 
   return (
     <Listbox value={selected} onChange={setSelected}>
       <div className="relative -ml-1">
-        <Listbox.Button className="relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left focus:outline-none focus-visible:border-none focus:bg-gray-100/50 dark:focus:bg-gray-800 dark:active::bg-gray-800 active::bg-gray-100/50: focus-visible:ring-0 sm:text-sm">
-          <p className="pointer-events-none text-sm text-gray-500 dark:text-gray-100 font-medium">{capitalize(selected.toString()).replace(/_/g, ' ')}</p>
+        <Listbox.Button className="dark:active::bg-gray-800 active::bg-gray-100/50: sm:text-sm relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:focus:bg-gray-800">
+          <p className="pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-100">
+            {capitalize(selected.toString()).replace(/_/g, ' ')}
+          </p>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronsUpDownIcon
               strokeWidth={2.5}
@@ -348,21 +350,32 @@ function Select({ value, items }: { value: string | Date, items: string[] }) {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="z-50 absolute mt-1  bg-white/[0.65] dark:border-gray-800 dark:bg-gray-900/[0.65] dark:backdrop-blur-lg p-0 shadow-lg backdrop-blur-lg max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base border border-gray-100 focus:outline-none sm:text-sm">
-            {items.map((item) => (
+          <Listbox.Options className="sm:text-sm absolute z-50  mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-100 bg-white bg-white/[0.65] p-0 py-1 text-base shadow-lg backdrop-blur-lg focus:outline-none dark:border-gray-800 dark:bg-gray-900/[0.65] dark:backdrop-blur-lg">
+            {items.map(item => (
               <Listbox.Option
                 key={item}
-                className={({ selected }) => clsx('relative px-3 py-1 flex w-full min-w-[120px] items-center justify-between gap-12 cursor-pointer', {
-                  "bg-green-900 hover:bg-green-900/90 dark:hover:bg-green-900/40": selected,
-                  "hover:bg-gray-100 hover:dark:bg-gray-800": !selected
-                })}
+                className={({selected}) =>
+                  clsx(
+                    'relative flex w-full min-w-[120px] cursor-pointer items-center justify-between gap-12 px-3 py-1',
+                    {
+                      'bg-green-900 hover:bg-green-900/90 dark:hover:bg-green-900/40':
+                        selected,
+                      'hover:bg-gray-100 hover:dark:bg-gray-800': !selected,
+                    },
+                  )
+                }
                 value={item}
               >
-                {({ selected, }) => (
+                {({selected}) => (
                   <>
-                    <span className={clsx('block truncate text-sm text-gray-500 dark:text-gray-100 font-normal', {
-                      'text-white': selected
-                    })}>
+                    <span
+                      className={clsx(
+                        'block truncate text-sm font-normal text-gray-500 dark:text-gray-100',
+                        {
+                          'text-white': selected,
+                        },
+                      )}
+                    >
                       {capitalize(item).replace(/_/g, ' ')}
                     </span>
                     {selected ? (
