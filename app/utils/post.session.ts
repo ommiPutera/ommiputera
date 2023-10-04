@@ -47,13 +47,7 @@ export async function updateStatusPost({
   })
 }
 
-export async function updateTypePost({
-  id,
-  type,
-}: {
-  id: string
-  type: PostType
-}) {
+export async function updateTypePost({id, type}: {id: string; type: PostType}) {
   return await db.post.update({
     where: {
       id: id,
