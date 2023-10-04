@@ -1,9 +1,9 @@
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {format, formatDistance} from 'date-fns'
-import {id as idLocale} from 'date-fns/locale'
-import {AnimatePresence, motion} from 'framer-motion'
+import { format, formatDistance } from 'date-fns'
+import { id as idLocale } from 'date-fns/locale'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowDownUp,
   Check,
@@ -14,8 +14,8 @@ import {
   X,
 } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
-import {Badge} from '~/components/shadcn/badge'
+import { Button, ButtonLink } from '~/components/button'
+import { Badge } from '~/components/shadcn/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,9 +25,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import useGrid, {layoutEnums} from '~/lib/hooks/use-grid'
+import useGrid, { layoutEnums } from '~/lib/hooks/use-grid'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from '.'
+import { FormType, type LoaderData } from './route'
 
 export default function Board() {
   return (
@@ -49,9 +49,9 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout} = useGrid()
+  const { layout } = useGrid()
 
   return (
     <>
@@ -76,9 +76,9 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout, setLayout} = useGrid()
+  const { layout, setLayout } = useGrid()
 
   if (!isPostsExist) return <></>
   return (
@@ -278,9 +278,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -332,8 +332,8 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const {id, title, createdAt, updatedAt, isFavorite} = data
-  const {layout} = useGrid()
+  const { id, title, createdAt, updatedAt, isFavorite } = data
+  const { layout } = useGrid()
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
 
@@ -462,7 +462,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}

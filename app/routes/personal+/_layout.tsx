@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -63,14 +63,13 @@ export function OutletCenter({
   children,
   ...props
 }: {
-  children: JSX.Element | React.ReactNode[] | React.ReactNode
-} & JSX.IntrinsicElements['div']) {
+  children: JSX.Element | React.ReactNode
+}) {
   return (
     <div
       {...props}
       className={clsx(
         'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-8',
-        props.className,
       )}
     >
       {children}
@@ -82,15 +81,14 @@ export function OutletRight({
   children,
   ...props
 }: {
-  children: JSX.Element | React.ReactNode[] | React.ReactNode
-} & JSX.IntrinsicElements['div']) {
+  children: JSX.Element | React.ReactNode
+}) {
   return (
     <div className="hidden w-full lg:col-span-4 xl:block">
       <div
         {...props}
         className={clsx(
           'sticky top-0 flex h-full min-h-screen w-full flex-col gap-6 bg-white px-6 dark:bg-black',
-          props.className,
         )}
       >
         <div className="sticky top-0 z-50 w-full bg-white py-3 dark:bg-black">

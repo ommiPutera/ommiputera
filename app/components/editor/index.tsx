@@ -1,15 +1,15 @@
 import React from 'react'
-import {useEditor, EditorContent} from '@tiptap/react'
-import {defaultEditorProps} from './props'
-import {useDebouncedCallback} from 'use-debounce'
-import {useCompletion} from 'ai/react'
-import {toast} from 'sonner'
+import { useEditor, EditorContent } from '@tiptap/react'
+import { defaultEditorProps } from './props'
+import { useDebouncedCallback } from 'use-debounce'
+import { useCompletion } from 'ai/react'
+import { toast } from 'sonner'
 import va from '@vercel/analytics'
-import {EditorBubbleMenu} from './bubble-menu'
-import {getPrevText} from '~/lib/editor'
-import type {Editor as EditorClass, Extension, JSONContent} from '@tiptap/core'
-import {defaultExtensions} from './extensions'
-import {ImageResizer} from './extensions/image-resizer'
+import { EditorBubbleMenu } from './bubble-menu'
+import { getPrevText } from '~/lib/editor'
+import type { Editor as EditorClass, Extension, JSONContent } from '@tiptap/core'
+import { defaultExtensions } from './extensions'
+import { ImageResizer } from './extensions/image-resizer'
 
 type EditorProps = {
   submit: () => void
@@ -36,7 +36,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
     titletEl,
     extensions = [],
     editorProps = {},
-    onUpdate = () => {},
+    onUpdate = () => { },
     completionApi = '/api/generate',
   },
   ref,
@@ -44,7 +44,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
   const [hydrated, setHydrated] = React.useState(false)
 
   const debouncedUpdates = useDebouncedCallback(
-    async ({editor}: {editor: EditorClass}) => {
+    async ({ editor }: { editor: EditorClass }) => {
       const json = editor.getJSON()
       setSaveStatus('Saving..')
       setContent(json)
@@ -86,10 +86,10 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
         debouncedUpdates(e)
       }
     },
-    autofocus: 'end',
+    autofocus: false,
   })
 
-  const {complete, completion, isLoading, stop} = useCompletion({
+  const { complete, completion, isLoading, stop } = useCompletion({
     id: 'novel',
     api: completionApi,
     onFinish: (_prompt, completion) => {
@@ -151,7 +151,6 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
     }
   }, [stop, isLoading, editor, complete, completion.length])
 
-  // Hydrate the editor with the content from localStorage.
   React.useEffect(() => {
     if (editor && content && !hydrated) {
       editor.commands.setContent(content)
@@ -163,6 +162,7 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
     if (editor && focus) {
       const json = editor.getJSON()
       if (typeof json.content?.[1] === 'undefined') {
+        console.log('here')
         editor.commands.focus()
       }
     }
@@ -170,9 +170,9 @@ const Editor = React.forwardRef<HTMLDivElement, EditorProps>(function Editor(
 
   return (
     <div
-      onClick={() => {
-        editor?.chain().focus().run()
-      }}
+      // onClick={() => {
+      //   editor?.chain().focus().run()
+      // }}
       className="sm:mb-[calc(20vh)] sm:rounded-lg sm:border sm:px-12 sm:shadow-lg relative min-h-[500px] w-full"
     >
       {editor && <EditorBubbleMenu editor={editor} />}
