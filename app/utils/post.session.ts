@@ -1,7 +1,7 @@
 import {redirect} from '@remix-run/node'
 import {db} from './db.server'
 import type {JSONContent} from '@tiptap/core'
-import type { PostStatus } from '@prisma/client'
+import type {PostStatus, PostType} from '@prisma/client'
 
 type CreateType = {
   title: string
@@ -30,13 +30,36 @@ export async function favoritePost({id, bool}: {id: string; bool: boolean}) {
   })
 }
 
-export async function updateStatusPost({id, status}: {id: string; status: PostStatus}) {
+export async function updateStatusPost({
+  id,
+  status,
+}: {
+  id: string
+  status: PostStatus
+}) {
   return await db.post.update({
     where: {
       id: id,
     },
     data: {
       status: status,
+    },
+  })
+}
+
+export async function updateTypePost({
+  id,
+  type,
+}: {
+  id: string
+  type: PostType
+}) {
+  return await db.post.update({
+    where: {
+      id: id,
+    },
+    data: {
+      type: type,
     },
   })
 }

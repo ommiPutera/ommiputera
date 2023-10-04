@@ -1,4 +1,4 @@
-import { PostStatus, type Post } from '@prisma/client'
+import { PostStatus, type Post, PostType } from '@prisma/client'
 import type { ActionFunction, LoaderArgs } from '@remix-run/node'
 import { redirect } from '@remix-run/node'
 import { Form, useActionData, useLoaderData } from '@remix-run/react'
@@ -12,7 +12,8 @@ import {
   getPost,
   updateContent,
   updateTitle,
-  updateStatusPost
+  updateStatusPost,
+  updateTypePost,
 } from '~/utils/post.session'
 import { useUser } from '~/utils/use-root-data'
 import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
@@ -51,6 +52,7 @@ export enum FormType {
   UPDATE_TITLE = 'UPDATE_TITLE',
   UPDATE_CONTENT = 'UPDATE_CONTENT',
   UPDATE_STATUS = 'UPDATE_STATUS',
+  UPDATE_TYPE = 'UPDATE_TYPE',
   DELETE = 'DELETE',
 }
 
@@ -70,8 +72,7 @@ export const action: ActionFunction = async ({ request }) => {
 
   switch (formPayload._action) {
     case FormType.UPDATE_STATUS: {
-      if
-        (typeof formPayload.postId !== 'string') {
+      if (typeof formPayload.postId !== 'string') {
         return { formError: `Form not submitted correctly.` }
       }
       if (
@@ -81,7 +82,24 @@ export const action: ActionFunction = async ({ request }) => {
       ) {
         const post = await updateStatusPost({
           id: formPayload.postId,
-          status: formPayload.status
+          status: formPayload.status,
+        })
+        return { post }
+      } else {
+        return { formError: `Form not submitted correctly.` }
+      }
+    }
+    case FormType.UPDATE_TYPE: {
+      if (typeof formPayload.postId !== 'string') {
+        return { formError: `Form not submitted correctly.` }
+      }
+      if (
+        formPayload.type === PostType.BASIC_NOTES ||
+        formPayload.type === PostType.MONTHLY_PLANNING
+      ) {
+        const post = await updateTypePost({
+          id: formPayload.postId,
+          type: formPayload.type,
         })
         return { post }
       } else {
@@ -107,7 +125,9 @@ export const action: ActionFunction = async ({ request }) => {
         content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
       }
       return await createPost({
-        title: formPayload.title ? String(formPayload.title) : 'Untitled Page...',
+        title: formPayload.title
+          ? String(formPayload.title)
+          : 'Untitled Page...',
         authorId: formPayload.authorId,
         isPublished: true,
         content,
@@ -115,7 +135,10 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     case FormType.UPDATE_TITLE: {
-      if (typeof formPayload.title !== 'string' || typeof formPayload.postId !== 'string') {
+      if (
+        typeof formPayload.title !== 'string' ||
+        typeof formPayload.postId !== 'string'
+      ) {
         return { formError: `Form not submitted correctly.` }
       }
       const post = await updateTitle({
@@ -125,7 +148,10 @@ export const action: ActionFunction = async ({ request }) => {
       return { post }
     }
     case FormType.UPDATE_CONTENT: {
-      if (typeof formPayload.postId !== 'string' || typeof formPayload.postJSON !== 'string') {
+      if (
+        typeof formPayload.postId !== 'string' ||
+        typeof formPayload.postJSON !== 'string'
+      ) {
         return { formError: `Form not submitted correctly.` }
       }
       return await updateContent({
@@ -291,6 +317,9 @@ export default function Index() {
   )
 }
 
+const optsStatus: string[] = [PostStatus.COMPLETED, PostStatus.NOT_STARTED, PostStatus.UNDERWAY]
+const optsType: string[] = [PostType.BASIC_NOTES, PostType.MONTHLY_PLANNING]
+
 function PageData() {
   const { post, postId } = useLoaderData<LoaderData>()
   if (!post) return <></>
@@ -301,18 +330,22 @@ function PageData() {
           name="Status"
           iconName="ChevronDownSquare"
           value={post.status.toString()}
+          options={optsStatus}
           payloadName="status"
         />
-        <input
-          type="hidden"
-          name="_action"
-          value={FormType.UPDATE_STATUS}
+        <input type="hidden" name="_action" value={FormType.UPDATE_STATUS} />
+        <input type="hidden" name="postId" value={postId} />
+      </Form>
+      <Form method="POST" className="w-full">
+        <PageDataItem
+          name="Type"
+          iconName="ChevronDownSquare"
+          value={post.type.toString()}
+          options={optsType}
+          payloadName="type"
         />
-        <input
-          type="hidden"
-          name="postId"
-          value={postId}
-        />
+        <input type="hidden" name="_action" value={FormType.UPDATE_TYPE} />
+        <input type="hidden" name="postId" value={postId} />
       </Form>
       <PageDataItem
         name="Created"
@@ -329,12 +362,14 @@ function PageDataItem({
   iconName,
   payloadName,
   readOnly = false,
+  options = [],
   value,
 }: {
   name: string
   iconName: string
   payloadName?: string
   readOnly?: boolean
+  options?: string[]
   value: string | Date
 }) {
   const LucideIcon = icons[iconName]
@@ -345,13 +380,15 @@ function PageDataItem({
         <p className="w-[70px] text-sm font-medium text-gray-300">{name}</p>
       </div>
       {readOnly ? (
-        <p className="pl-2 text-sm font-medium text-gray-500 dark:text-gray-100">
-          {value.toString()}
-        </p>
+        <div className='h-[30px] flex items-center'>
+          <p className="pl-2 text-sm font-medium text-gray-500 dark:text-gray-100">
+            {value.toString()}
+          </p>
+        </div>
       ) : (
         <Select
           value={value}
-          items={arrStatus}
+          items={options}
           payloadName={payloadName ?? ''}
         />
       )}
@@ -359,20 +396,22 @@ function PageDataItem({
   )
 }
 
-const arrStatus: string[] = ['COMPLETED', 'NOT_STARTED', 'UNDERWAY']
-
-function Select({ value, items, payloadName }: { value: string | Date; items: string[], payloadName: string }) {
+function Select({
+  value,
+  items,
+  payloadName,
+}: {
+  value: string | Date
+  items: string[]
+  payloadName: string
+}) {
   const [selected, setSelected] = React.useState(value)
 
   return (
     <>
-      <input
-        type="hidden"
-        name={payloadName}
-        value={selected.toString()}
-      />
+      <input type="hidden" name={payloadName} value={selected.toString()} />
       <Listbox value={selected} onChange={setSelected}>
-        <div className="relative -ml-1">
+        <div className="relative -ml-1 h-[30px]">
           <Listbox.Button className="dark:active::bg-gray-800 active::bg-gray-100/50: sm:text-sm relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:focus:bg-gray-800">
             <p className="pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-100">
               {capitalize(selected.toString()).replace(/_/g, ' ')}
@@ -394,8 +433,8 @@ function Select({ value, items, payloadName }: { value: string | Date; items: st
             <Listbox.Options className="sm:text-sm absolute z-50  mt-1 max-h-60 w-full overflow-auto rounded-md border border-gray-100 bg-white bg-white/[0.65] p-0 py-1 text-base shadow-lg backdrop-blur-lg focus:outline-none dark:border-gray-800 dark:bg-gray-900/[0.65] dark:backdrop-blur-lg">
               {items.map(item => (
                 <Listbox.Option
-                  as='button'
-                  type='submit'
+                  as="button"
+                  type="submit"
                   key={item}
                   className={({ selected }) =>
                     clsx(
