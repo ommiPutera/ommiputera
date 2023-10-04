@@ -1,18 +1,18 @@
-import type { LoaderFunction } from '@remix-run/node'
-import { Outlet, useLocation } from '@remix-run/react'
+import type {LoaderFunction} from '@remix-run/node'
+import {Outlet, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import { icons } from 'lucide-react'
+import {icons} from 'lucide-react'
 import React from 'react'
-import { ButtonLink } from '~/components/button'
-import { Profile } from '~/components/me'
-import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
-import { requireUserSession } from '~/utils/session.server'
+import {ButtonLink} from '~/components/button'
+import {Profile} from '~/components/me'
+import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
+import {requireUserSession} from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({ request }) => {
+export const loader: LoaderFunction = async ({request}) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', { status: 401 })
+    throw new Response('Unauthorized', {status: 401})
   }
   return {}
 }
