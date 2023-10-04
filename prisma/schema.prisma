@@ -22,18 +22,19 @@ model User {
 }
 
 model Post {
-  id          String   @id @default(cuid())
+  id          String     @id @default(cuid())
   title       String
   content     Json?
   authorId    String
   userId      String?
-  createdAt   DateTime @default(now())
-  isFavorite  Boolean  @default(false)
-  isLocked    Boolean  @default(false)
-  isPublished Boolean  @default(false)
-  type        PostType @default(BASIC_NOTES)
-  updatedAt   DateTime @default(now())
-  User        User?    @relation(fields: [userId], references: [id])
+  createdAt   DateTime   @default(now())
+  isFavorite  Boolean    @default(false)
+  isLocked    Boolean    @default(false)
+  isPublished Boolean    @default(false)
+  type        PostType   @default(BASIC_NOTES)
+  status      PostStatus @default(NOT_STARTED)
+  updatedAt   DateTime   @default(now())
+  User        User?      @relation(fields: [userId], references: [id])
 
   @@index([userId])
 }
@@ -68,4 +69,10 @@ enum PostType {
   SAVING
   GOLD
   STOCK
+}
+
+enum PostStatus {
+  COMPLETED
+  UNDERWAY
+  NOT_STARTED
 }
