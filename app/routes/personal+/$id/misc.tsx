@@ -1,10 +1,10 @@
-import {UIButton} from '~/components/shadcn/button'
+import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import {Dialog} from '@headlessui/react'
-import {Button} from '~/components/button'
-import type {SaveStatus} from './route'
-import {FormType} from './route'
-import {Form, useLoaderData, useNavigate} from '@remix-run/react'
+import { Dialog } from '@headlessui/react'
+import { Button } from '~/components/button'
+import type { SaveStatus } from './route'
+import { FormType } from './route'
+import { Form, useLoaderData, useNavigate } from '@remix-run/react'
 import {
   ArrowLeft,
   ChevronRight,
@@ -13,8 +13,8 @@ import {
   Trash2,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type {LoaderArgs} from '@remix-run/node'
-import {redirect} from '@remix-run/node'
+import type { LoaderArgs } from '@remix-run/node'
+import { redirect } from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,10 +29,10 @@ type LoaderData = {
   postId: string
 }
 
-export const loader = async ({request, params}: LoaderArgs) => {
-  const {id} = params
+export const loader = async ({ request, params }: LoaderArgs) => {
+  const { id } = params
   if (!id) return redirect('/personal')
-  const data: LoaderData = {postId: id}
+  const data: LoaderData = { postId: id }
   return data
 }
 
@@ -120,6 +120,16 @@ function MoreMenus({
             <ChevronRight size={16} />
           </div>
         </DropdownMenuItem>
+        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
+          <div className="flex items-center gap-x-2">
+            <FilePlus size={18} />
+            <p>Share</p>
+          </div>
+          <div className="text-secondary flex items-center gap-x-1">
+            <p className="">Bagikan</p>
+            <ChevronRight size={16} />
+          </div>
+        </DropdownMenuItem>
         {type !== FormType.CREATE && (
           <DropdownMenuItem className="rounded-md border border-transparent px-2 hover:border-red-300 hover:bg-red-200">
             <UIButton
@@ -197,7 +207,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       open={isShowDeleteModal}
       onClose={closeDeleteModal}
-      style={{backgroundColor: 'rgba(0, 0, 0, 0.8)'}}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
       className="z-50 flex w-full items-center"
     >
       <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-100 bg-black p-0 dark:border-gray-800 lg:mx-auto lg:max-w-[20vw]">
