@@ -1,10 +1,10 @@
-import {PostStatus, PostType} from '@prisma/client'
-import type {Post} from '@prisma/client'
-import {Form, Link, useLoaderData, useSearchParams} from '@remix-run/react'
+import { PostStatus, PostType } from '@prisma/client'
+import type { Post } from '@prisma/client'
+import { Form, Link, useLoaderData, useSearchParams } from '@remix-run/react'
 import clsx from 'clsx'
-import {format, formatDistance} from 'date-fns'
-import {id as idLocale} from 'date-fns/locale'
-import {AnimatePresence, motion} from 'framer-motion'
+import { format, formatDistance } from 'date-fns'
+import { id as idLocale } from 'date-fns/locale'
+import { AnimatePresence, motion } from 'framer-motion'
 import {
   ArrowDownUp,
   Check,
@@ -15,8 +15,8 @@ import {
   X,
 } from 'lucide-react'
 import React from 'react'
-import {Button, ButtonLink} from '~/components/button'
-import {Badge} from '~/components/shadcn/badge'
+import { Button, ButtonLink } from '~/components/button'
+import { Badge } from '~/components/shadcn/badge'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -26,10 +26,10 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '~/components/shadcn/dropdown-menu'
-import useGrid, {layoutEnums} from '~/lib/hooks/use-grid'
+import useGrid, { layoutEnums } from '~/lib/hooks/use-grid'
 import useScrollPosition from '~/lib/hooks/use-scroll-position'
-import {FormType, type LoaderData} from './route'
-import {capitalize} from 'lodash'
+import { FormType, type LoaderData } from './route'
+import { capitalize } from 'lodash'
 
 export default function Board() {
   return (
@@ -51,9 +51,9 @@ export default function Board() {
 }
 
 function Cards() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout} = useGrid()
+  const { layout } = useGrid()
 
   return (
     <>
@@ -78,9 +78,9 @@ function Cards() {
 }
 
 function Tools() {
-  const {posts} = useLoaderData<LoaderData>()
+  const { posts } = useLoaderData<LoaderData>()
   const isPostsExist = Boolean(posts?.length)
-  const {layout, setLayout} = useGrid()
+  const { layout, setLayout } = useGrid()
 
   if (!isPostsExist) return <></>
   return (
@@ -280,9 +280,9 @@ function Bubble() {
     <AnimatePresence>
       {scrollPosition > 70 && (
         <motion.div
-          initial={{y: -160, opacity: 0}}
-          animate={{y: 0, opacity: 1, transition: {duration: 0.6}}}
-          exit={{y: -160, opacity: 0, transition: {duration: 0.6}}}
+          initial={{ y: -160, opacity: 0 }}
+          animate={{ y: 0, opacity: 1, transition: { duration: 0.6 } }}
+          exit={{ y: -160, opacity: 0, transition: { duration: 0.6 } }}
           transition={{
             delay: 0.3,
             ease: 'linear',
@@ -334,8 +334,8 @@ function NoData() {
 }
 
 function Card(data: Post) {
-  const {id, title, createdAt, updatedAt, isFavorite, status, type} = data
-  const {layout} = useGrid()
+  const { id, title, createdAt, updatedAt, isFavorite, status, type } = data
+  const { layout } = useGrid()
   const [isHover, setIsHover] = React.useState(false)
   const [isFav, setIsFav] = React.useState(isFavorite)
 
@@ -370,8 +370,8 @@ function Card(data: Post) {
               'flex gap-2 rounded-md border border-gray-100 bg-[#FFF9F0] dark:border-gray-800',
               {
                 'border-green-900': isHover,
-                'h-[110px] flex-col justify-center px-4': isGrid,
-                'h-[90px] w-full max-w-[180px] flex-row items-center justify-start px-4':
+                'h-[120px] flex-col justify-center px-4': isGrid,
+                'h-[90px] max-w-[180px] w-full flex-row items-center justify-start px-4':
                   isNoGrid,
               },
             )}
@@ -436,11 +436,11 @@ function Card(data: Post) {
   )
 }
 
-export function CardBadge({name}: {name: PostStatus | PostType}) {
+export function CardBadge({ name }: { name: PostStatus | PostType }) {
   return (
     <div
       className={clsx('w-fit rounded-sm px-1.5', {
-        'border border-gray-100 bg-white text-blue-500':
+        'border border-gray-100 bg-white font-medium text-gray-500':
           name === PostType.BASIC_NOTES || name === PostType.MONTHLY_PLANNING,
         'bg-green-900 text-white': name === PostStatus.COMPLETED,
         'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-white':
@@ -460,7 +460,7 @@ export function FavoritePage({
   id,
   isFavorite,
   children,
-}: Post & {children: JSX.Element | React.ReactNode}) {
+}: Post & { children: JSX.Element | React.ReactNode }) {
   return (
     <Form method="POST" className="w-full">
       {children}

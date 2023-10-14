@@ -1,14 +1,15 @@
 import { UIButton } from '~/components/shadcn/button'
 import React from 'react'
-import { Dialog } from '@headlessui/react'
+import { Dialog, Listbox, Transition } from '@headlessui/react'
 import { Button } from '~/components/button'
 import type { SaveStatus } from './route'
 import { FormType } from './route'
 import { Form, useLoaderData, useNavigate } from '@remix-run/react'
 import {
   ArrowLeft,
+  Check,
   ChevronRight,
-  FilePlus,
+  ChevronsUpDownIcon,
   MoreHorizontal,
   Trash2,
 } from 'lucide-react'
@@ -20,10 +21,11 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
+  DropdownMenuSeparator
 } from '~/components/shadcn/dropdown-menu'
+import { Input } from '~/components/shadcn/input'
+import { capitalize } from 'lodash'
 
 type LoaderData = {
   postId: string
@@ -47,11 +49,6 @@ export function Header({
   saveStatus: SaveStatus
   submitContent: () => void
 }) {
-  const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
-
-  const handleDeletePost = () => {
-    setIsShowDeleteModal(true)
-  }
 
   return (
     <div className="glass glass sticky top-0 z-[99] mb-4 w-full border-b border-gray-100 bg-white/[0.65] px-3 pt-4 backdrop-blur-lg dark:border-gray-800 dark:bg-black/[0.65] dark:backdrop-blur-lg lg:px-6">
@@ -72,81 +69,100 @@ export function Header({
             ></span>
             <p>{saveStatus}</p>
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <UIButton
-                size="sm"
-                variant="subtle"
-                className="flex items-center rounded-md px-2 hover:bg-gray-600"
-              >
-                <MoreHorizontal size={18} />
-              </UIButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="">
-              <MoreMenus type={type} handleDeletePost={handleDeletePost} />
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <OtherOptions type={type} />
         </div>
-        <DeleteDialog
-          isShowDeleteModal={isShowDeleteModal}
-          setIsShowDeleteModal={setIsShowDeleteModal}
-        />
       </div>
     </div>
+  )
+}
+
+function OtherOptions({ type }: { type: FormType }) {
+  const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
+  const [isShowShareModal, setIsShowShareModal] = React.useState(false)
+
+  const handleDeletePost = () => {
+    setIsShowDeleteModal(true)
+  }
+  const handleSharePost = () => {
+    setIsShowShareModal(true)
+  }
+
+  return (
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <UIButton
+            size="sm"
+            variant="subtle"
+            className="flex items-center rounded-md px-2 dark:hover:bg-gray-600 hover:bg-gray-100"
+          >
+            <MoreHorizontal size={18} />
+          </UIButton>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="">
+          <MoreMenus
+            type={type}
+            handleDeletePost={handleDeletePost}
+            handleSharePost={handleSharePost}
+          />
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <DeleteDialog
+        isShowDeleteModal={isShowDeleteModal}
+        setIsShowDeleteModal={setIsShowDeleteModal}
+      />
+      <ShareDialog
+        isShowShareModal={isShowShareModal}
+        setIsShowShareModal={setIsShowShareModal}
+      />
+    </>
   )
 }
 
 function MoreMenus({
   type,
   handleDeletePost,
+  handleSharePost
 }: {
   type: FormType
   handleDeletePost: () => void
+  handleSharePost: () => void
 }) {
   return (
-    <>
-      <DropdownMenuLabel className="px-2">
-        <p className="font-semibold">View Options</p>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuGroup className="p-1">
-        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
+    <DropdownMenuGroup className="p-1">
+      <DropdownMenuItem className="p-0 flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 dark:border-gray-800">
+        <UIButton
+          onClick={handleSharePost}
+          variant="subtle"
+          type="button"
+          className="h-auto w-full flex justify-between px-2 py-1 cursor-default"
+        >
           <div className="flex items-center gap-x-2">
-            <FilePlus size={18} />
-            <p>Settings</p>
-          </div>
-          <div className="text-secondary flex items-center gap-x-1">
-            <p className="">Pengaturan</p>
-            <ChevronRight size={16} />
-          </div>
-        </DropdownMenuItem>
-        <DropdownMenuItem className="flex items-center gap-x-12 rounded-md border border-transparent px-2 hover:border-gray-100 hover:bg-gray-800 dark:border-gray-800">
-          <div className="flex items-center gap-x-2">
-            <FilePlus size={18} />
             <p>Share</p>
           </div>
-          <div className="text-secondary flex items-center gap-x-1">
-            <p className="">Bagikan</p>
+          <div className="flex items-center gap-x-1">
+            <p className="text-gray-400 dark:text-gray-200 font-normal">Bagikan</p>
             <ChevronRight size={16} />
           </div>
+        </UIButton>
+      </DropdownMenuItem>
+      <DropdownMenuSeparator className='mt-2' />
+      {type !== FormType.CREATE && (
+        <DropdownMenuItem className="rounded-md p-0 mt-2.5 border border-transparent hover:border-red-900 dark:hover:border-red-300 hover:bg-red-900/10 dark:hover:bg-red-200">
+          <UIButton
+            onClick={handleDeletePost}
+            variant="subtle"
+            type="button"
+            className="h-auto w-full px-2 py-1 cursor-default"
+          >
+            <div className="flex items-center gap-x-2">
+              <Trash2 size={18} className="text-red-800" />
+              <p className="text-red-800">Hapus Halaman</p>
+            </div>
+          </UIButton>
         </DropdownMenuItem>
-        {type !== FormType.CREATE && (
-          <DropdownMenuItem className="rounded-md border border-transparent px-2 hover:border-red-300 hover:bg-red-200">
-            <UIButton
-              onClick={handleDeletePost}
-              variant="subtle"
-              type="button"
-              className="h-auto cursor-default"
-            >
-              <div className="flex items-center gap-x-2">
-                <Trash2 size={18} className="text-red-800" />
-                <p className="text-red-800">Delete Page</p>
-              </div>
-            </UIButton>
-          </DropdownMenuItem>
-        )}
-      </DropdownMenuGroup>
-    </>
+      )}
+    </DropdownMenuGroup>
   )
 }
 
@@ -198,48 +214,163 @@ const DeleteDialog = ({
   isShowDeleteModal: boolean
   setIsShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>
 }) => {
-  // const {toast} = useToast()
   const data = useLoaderData<LoaderData>()
-  const closeDeleteModal = () => setIsShowDeleteModal(false)
+  const closeModal = () => setIsShowDeleteModal(false)
 
   return (
     <Dialog
       aria-label="Delete project"
       open={isShowDeleteModal}
-      onClose={closeDeleteModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.8)' }}
-      className="z-50 flex w-full items-center"
+      onClose={closeModal}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      className="z-[9999] flex w-full items-center absolute top-0 h-screen"
     >
-      <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-6 rounded-lg border border-gray-100 bg-black p-0 dark:border-gray-800 lg:mx-auto lg:max-w-[20vw]">
-        <div className="border-b border-gray-100 px-6 py-4 text-center dark:border-gray-800">
-          <h1 className="text-lg font-semibold">
-            Are you sure you want to delete?
+      <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-2 rounded-lg border border-gray-100 bg-white dark:bg-black p-0 dark:border-gray-400 lg:mx-auto lg:max-w-[20vw]">
+        <div className="border-b border-gray-100 px-6 py-4 text-center dark:border-gray-400">
+          <h1 className="text-lg font-bold">
+            Apakah kamu yakin ingin menghapus halaman ini?
           </h1>
         </div>
         <div className="px-6 py-4">
-          <p className="text-secondary mt-4 text-md font-light leading-tight lg:mt-2 lg:leading-relaxed">
-            Monitoring is a powerful query editor that allows you to visualize
-            and gain insight into bandwidth, errors, performance, traffic, Top
-            Paths usage, and more across all projects.
+          <p className="text-md">
+            Halaman ini akan dihapus selamanya, kami belum memiliki fitur backup untuk menyimpan penghapusan halaman.
           </p>
         </div>
-        <div className="flex w-full justify-between border-t border-gray-100 px-6 py-4 dark:border-gray-800">
-          <UIButton
-            size="sm"
-            type="button"
-            className="w-min"
-            onClick={closeDeleteModal}
-          >
-            Cancel
-          </UIButton>
-          <Form method="POST" className="w-min">
-            <Button size="sm" variant="danger" type="submit">
-              Yes, delete.
+        <div className="flex w-full justify-end gap-4 border-t border-gray-100 px-6 py-6 dark:border-gray-400">
+          <Form method="POST">
+            <Button variant="danger" type="submit" className="w-min">
+              Ya, Hapus
             </Button>
             <input type="hidden" name="_action" value={FormType.DELETE} />
             <input type="hidden" name="postId" value={data?.postId} />
           </Form>
+          <UIButton
+            size="sm"
+            type="button"
+            className="w-min"
+            onClick={closeModal}
+          >
+            Batal
+          </UIButton>
         </div>
+      </Dialog.Panel>
+    </Dialog>
+  )
+}
+
+const ShareDialog = ({
+  isShowShareModal,
+  setIsShowShareModal,
+}: {
+  isShowShareModal: boolean
+  setIsShowShareModal: React.Dispatch<React.SetStateAction<boolean>>
+}) => {
+  const [selected, setSelected] = React.useState('VIEW_ONLY')
+  const data = useLoaderData<LoaderData>()
+  const closeModal = () => setIsShowShareModal(false)
+
+  return (
+    <Dialog
+      aria-label="Delete project"
+      open={isShowShareModal}
+      onClose={closeModal}
+      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      className="z-[998] flex w-full items-center absolute top-0 h-screen"
+    >
+      <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-2 rounded-lg border border-gray-100 bg-white dark:bg-black p-0 dark:border-gray-400 lg:mx-auto lg:max-w-[30vw]">
+        <div className="border-b border-gray-100 px-6 py-4 dark:border-gray-400">
+          <h1 className="text-xl font-bold">
+            Bagikan halaman
+          </h1>
+        </div>
+        <Form method="POST">
+          <div className="px-6 py-4 gap-4">
+            <div className='flex items-center gap-4'>
+              <Listbox value={selected} onChange={setSelected}>
+                <div className="relative w-fit">
+                  <Listbox.Button className="dark:bg-gray-800 bg-gray-100/50 text-sm relative w-full cursor-default rounded-sm py-2 pl-4 pr-9 border border-gray-100 dark:border-gray-400 text-left focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:focus:bg-gray-800">
+                    <p className="pointer-events-none whitespace-nowrap text-sm font-medium text-gray-500 dark:text-gray-100">
+                      {capitalize(selected.toString()).replace(/_/g, ' ')}
+                    </p>
+                    <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                      <ChevronsUpDownIcon
+                        strokeWidth={2.5}
+                        className="h-4 w-4 text-gray-500 dark:text-gray-100"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  </Listbox.Button>
+                  <Transition
+                    as={React.Fragment}
+                    leave="transition ease-in duration-100 w-fit"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0"
+                  >
+                    <Listbox.Options className="sm:text-sm absolute z-50  mt-1 max-h-60 w-fit overflow-auto rounded-md border border-gray-100 bg-white bg-white/[0.65] p-0 py-1 text-base shadow-lg backdrop-blur-lg focus:outline-none dark:border-gray-800 dark:bg-gray-900/[0.65] dark:backdrop-blur-lg">
+                      {['VIEW_ONLY', 'CAN_EDIT'].map(item => (
+                        <Listbox.Option
+                          key={item}
+                          className={({ selected }) =>
+                            clsx(
+                              'relative flex w-full min-w-[120px] cursor-pointer items-center justify-between gap-12 px-3 py-1',
+                              {
+                                'bg-green-900 hover:bg-green-900/90 dark:hover:bg-green-900/40':
+                                  selected,
+                                'hover:bg-gray-100 hover:dark:bg-gray-800': !selected,
+                              },
+                            )
+                          }
+                          value={item}
+                        >
+                          {({ selected }) => (
+                            <>
+                              <span
+                                className={clsx(
+                                  'block truncate text-sm font-normal text-gray-500 dark:text-gray-100',
+                                  {
+                                    'text-white': selected,
+                                  },
+                                )}
+                              >
+                                {capitalize(item.toString()).replace(/_/g, ' ')}
+                              </span>
+                              {selected ? (
+                                <Check
+                                  className="visually-hidden text-white"
+                                  aria-hidden={!selected}
+                                  size={16}
+                                  strokeWidth={2.5}
+                                />
+                              ) : null}
+                            </>
+                          )}
+                        </Listbox.Option>
+                      ))}
+                    </Listbox.Options>
+                  </Transition>
+                </div>
+              </Listbox>
+              <Input type="email" placeholder="Email" value={selected} />
+            </div>
+            <input type="hidden" name="_action" value={FormType.DELETE} />
+            <input type="hidden" name="postId" value={data?.postId} />
+          </div>
+          <div className="flex w-full justify-end gap-4 border-t border-gray-100 px-6 py-6 dark:border-gray-400">
+            <input type="hidden" name="_action" value={FormType.DELETE} />
+            <input type="hidden" name="postId" value={data?.postId} />
+            <UIButton
+              size="sm"
+              type="button"
+              className="w-min"
+              onClick={closeModal}
+            >
+              Batal
+            </UIButton>
+            <Button variant="primary" type="submit" className="w-min">
+              Undang
+            </Button>
+          </div>
+        </Form>
       </Dialog.Panel>
     </Dialog>
   )
