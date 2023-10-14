@@ -1,8 +1,8 @@
-import { Menu } from '@headlessui/react'
-import { Link, useLocation } from '@remix-run/react'
+import {Menu} from '@headlessui/react'
+import {Link, useLocation} from '@remix-run/react'
 import clsx from 'clsx'
-import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { LogOut, MoreHorizontal } from 'lucide-react'
+import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
+import {LogOut, MoreHorizontal} from 'lucide-react'
 import React from 'react'
 import {
   NavigationMenu,
@@ -12,14 +12,14 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '~/components/shadcn/navigation-menu'
-import { BurgerMenu } from '~/utils/icons'
-import { Theme, Themed, useTheme } from '~/utils/theme-provider'
-import { useRootData } from '~/utils/use-root-data'
-import { ButtonLink } from './button'
-import { Profile } from './me'
-import { RowAdmin, RowSoftwares } from './menu-elements'
-import { Badge } from './shadcn/badge'
-import { UIButton } from './shadcn/button'
+import {BurgerMenu} from '~/utils/icons'
+import {Theme, Themed, useTheme} from '~/utils/theme-provider'
+import {useRootData} from '~/utils/use-root-data'
+import {ButtonLink} from './button'
+import {Profile} from './me'
+import {RowAdmin, RowSoftwares} from './menu-elements'
+import {Badge} from './shadcn/badge'
+import {UIButton} from './shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -53,7 +53,7 @@ const LINKS: TypeLinks = [
       </div>
     ),
     asParent: true,
-    child: [{ component: <RowSoftwares /> }],
+    child: [{component: <RowSoftwares />}],
   },
   // {
   //   name: 'Products',
@@ -62,11 +62,11 @@ const LINKS: TypeLinks = [
   // },
 ]
 
-const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
+const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/personal']
 
 function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const bool = ROUTE_WITHOUT_NAVBAR.findIndex(
     el => el === location.pathname || location.pathname.startsWith(el),
@@ -77,7 +77,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <div className="relative">
       <div
@@ -101,7 +101,7 @@ function ProtectedRoute({
 }: {
   children?: JSX.Element | React.ReactNode
 }) {
-  const { user } = useRootData()
+  const {user} = useRootData()
   const location = useLocation()
   const isSelected = (to: string) => location.pathname === to
   const isOwner = user?.role == 'OWNER'
@@ -121,7 +121,7 @@ function ProtectedRoute({
             {children ? (
               children
             ) : (
-              <div className='flex gap-2'>
+              <div className="flex gap-2">
                 {isOwner && (
                   <ButtonLink
                     type="button"
@@ -190,7 +190,7 @@ function MobileNav() {
         </div>
         <Menu>
           <Menu.Button className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-            {({ open }) => {
+            {({open}) => {
               const state = open ? 'open' : 'closed'
               setIsOpen(open)
               return <BurgerMenu state={state} />
@@ -203,7 +203,7 @@ function MobileNav() {
   )
 }
 
-function MobileMenuList({ isOpen }: { isOpen: boolean }) {
+function MobileMenuList({isOpen}: {isOpen: boolean}) {
   const shouldReduceMotion = useReducedMotion()
   React.useEffect(() => {
     if (isOpen) {
@@ -222,18 +222,18 @@ function MobileMenuList({ isOpen }: { isOpen: boolean }) {
         className="absolute left-0 right-0 z-[9999] mt-8 w-full origin-top-right rounded-md bg-white shadow-lg focus:outline-none"
         as="div"
       >
-        {({ open }) => {
+        {({open}) => {
           const state = open ? 'open' : 'closed'
           if (state === 'closed') return <></>
           return (
             <motion.div
-              initial={{ y: -10, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -10, opacity: 0 }}
+              initial={{y: -10, opacity: 0}}
+              animate={{y: 0, opacity: 1}}
+              exit={{y: -10, opacity: 0}}
               transition={{
-                opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-                rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-                scale: { duration: shouldReduceMotion ? 0 : 0.5 },
+                opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+                rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+                scale: {duration: shouldReduceMotion ? 0 : 0.5},
                 ease: 'linear',
               }}
               className="fixed mt-12 flex h-full w-full flex-col overflow-y-scroll bg-white pb-12 dark:border-gray-100 dark:bg-gray-900"
@@ -352,7 +352,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: { component: string | React.ReactNode }[]
+  child?: {component: string | React.ReactNode}[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -470,7 +470,7 @@ function MoreMenus() {
   )
 }
 
-function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' }) {
+function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
   const [, setTheme] = useTheme()
   const handleTransition = () => {
     document.body.classList.add('transition-none')

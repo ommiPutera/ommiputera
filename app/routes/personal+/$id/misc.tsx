@@ -1,10 +1,10 @@
-import { UIButton } from '~/components/shadcn/button'
+import {UIButton} from '~/components/shadcn/button'
 import React from 'react'
-import { Dialog, Listbox, Transition } from '@headlessui/react'
-import { Button } from '~/components/button'
-import type { SaveStatus } from './route'
-import { FormType } from './route'
-import { Form, useLoaderData, useNavigate } from '@remix-run/react'
+import {Dialog, Listbox, Transition} from '@headlessui/react'
+import {Button} from '~/components/button'
+import type {SaveStatus} from './route'
+import {FormType} from './route'
+import {Form, useLoaderData, useNavigate} from '@remix-run/react'
 import {
   ArrowLeft,
   Check,
@@ -14,8 +14,8 @@ import {
   Trash2,
 } from 'lucide-react'
 import clsx from 'clsx'
-import type { LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
+import type {LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,17 +24,17 @@ import {
   DropdownMenuTrigger,
   DropdownMenuSeparator,
 } from '~/components/shadcn/dropdown-menu'
-import { Input } from '~/components/shadcn/input'
-import { capitalize } from 'lodash'
+import {Input} from '~/components/shadcn/input'
+import {capitalize} from 'lodash'
 
 type LoaderData = {
   postId: string
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
   if (!id) return redirect('/personal')
-  const data: LoaderData = { postId: id }
+  const data: LoaderData = {postId: id}
   return data
 }
 
@@ -66,7 +66,7 @@ export function Header({
                 'bg-orange-900': saveStatus === 'Saving..',
               })}
             ></span>
-            <p className='font-medium text-sm'>{saveStatus}</p>
+            <p className="text-sm font-medium">{saveStatus}</p>
           </div>
           <OtherOptions type={type} />
         </div>
@@ -75,7 +75,7 @@ export function Header({
   )
 }
 
-function OtherOptions({ type }: { type: FormType }) {
+function OtherOptions({type}: {type: FormType}) {
   const [isShowDeleteModal, setIsShowDeleteModal] = React.useState(false)
   const [isShowShareModal, setIsShowShareModal] = React.useState(false)
 
@@ -90,9 +90,7 @@ function OtherOptions({ type }: { type: FormType }) {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div
-            className="flex items-center justify-center rounded-full w-9 h-9 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600"
-          >
+          <div className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full hover:bg-gray-100 dark:hover:bg-gray-600">
             <MoreHorizontal size={18} />
           </div>
         </DropdownMenuTrigger>
@@ -221,7 +219,7 @@ const DeleteDialog = ({
       aria-label="Delete project"
       open={isShowDeleteModal}
       onClose={closeModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}
       className="absolute top-0 z-[9999] flex h-screen w-full items-center"
     >
       <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-2 rounded-lg border border-gray-100 bg-white p-0 dark:border-gray-400 dark:bg-black lg:mx-auto lg:max-w-[20vw]">
@@ -274,7 +272,7 @@ const ShareDialog = ({
       aria-label="Delete project"
       open={isShowShareModal}
       onClose={closeModal}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
+      style={{backgroundColor: 'rgba(0, 0, 0, 0.5)'}}
       className="absolute top-0 z-[998] flex h-screen w-full items-center"
     >
       <Dialog.Panel className="mx-4 flex w-full max-w-[100vw] flex-col gap-y-2 rounded-lg border border-gray-100 bg-white p-0 dark:border-gray-400 dark:bg-black lg:mx-auto lg:max-w-[30vw]">
@@ -308,7 +306,7 @@ const ShareDialog = ({
                       {['VIEW_ONLY', 'CAN_EDIT'].map(item => (
                         <Listbox.Option
                           key={item}
-                          className={({ selected }) =>
+                          className={({selected}) =>
                             clsx(
                               'relative flex w-full min-w-[120px] cursor-pointer items-center justify-between gap-12 px-3 py-1',
                               {
@@ -321,7 +319,7 @@ const ShareDialog = ({
                           }
                           value={item}
                         >
-                          {({ selected }) => (
+                          {({selected}) => (
                             <>
                               <span
                                 className={clsx(
