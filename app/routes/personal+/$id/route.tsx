@@ -1,11 +1,11 @@
-import { PostStatus, type Post, PostType } from '@prisma/client'
-import type { ActionFunction, LoaderArgs } from '@remix-run/node'
-import { redirect } from '@remix-run/node'
-import { Form, useActionData, useLoaderData } from '@remix-run/react'
-import type { JSONContent } from '@tiptap/core'
+import {PostStatus, type Post, PostType} from '@prisma/client'
+import type {ActionFunction, LoaderArgs} from '@remix-run/node'
+import {redirect} from '@remix-run/node'
+import {Form, useActionData, useLoaderData} from '@remix-run/react'
+import type {JSONContent} from '@tiptap/core'
 import React from 'react'
 import TextareaAutosize from 'react-textarea-autosize'
-import { useDebouncedCallback } from 'use-debounce'
+import {useDebouncedCallback} from 'use-debounce'
 import {
   createPost,
   deletePost,
@@ -15,15 +15,15 @@ import {
   updateStatusPost,
   updateTypePost,
 } from '~/utils/post.session'
-import { useUser } from '~/utils/use-root-data'
-import { OutletCenter, OutletRight, WrapperOutlet } from '../_layout'
-import { Header } from './misc'
+import {useUser} from '~/utils/use-root-data'
+import {OutletCenter, OutletRight, WrapperOutlet} from '../_layout'
+import {Header} from './misc'
 import SidePage from './sidepage'
 // @ts-ignore
-import { Check, ChevronsUpDownIcon, icons } from 'lucide-react'
-import { Listbox, Transition } from '@headlessui/react'
-import { format } from 'date-fns'
-import { capitalize } from 'lodash'
+import {Check, ChevronsUpDownIcon, icons} from 'lucide-react'
+import {Listbox, Transition} from '@headlessui/react'
+import {format} from 'date-fns'
+import {capitalize} from 'lodash'
 import clsx from 'clsx'
 
 const Editor = React.lazy(async () => await import('~/components/editor'))
@@ -56,24 +56,24 @@ export enum FormType {
   DELETE = 'DELETE',
 }
 
-export const loader = async ({ request, params }: LoaderArgs) => {
-  const { id } = params
-  const post = await getPost({ id: id ?? '' })
-  if (id === 'new') return { postId: id, isNewPage: true }
+export const loader = async ({request, params}: LoaderArgs) => {
+  const {id} = params
+  const post = await getPost({id: id ?? ''})
+  if (id === 'new') return {postId: id, isNewPage: true}
 
   if (!id || !post) return redirect('/personal')
-  const data: LoaderData = { post, postId: id, isNewPage: false }
+  const data: LoaderData = {post, postId: id, isNewPage: false}
   return data
 }
 
-export const action: ActionFunction = async ({ request }) => {
+export const action: ActionFunction = async ({request}) => {
   const formData = await request.formData()
   const formPayload = Object.fromEntries(formData)
 
   switch (formPayload._action) {
     case FormType.UPDATE_STATUS: {
       if (typeof formPayload.postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       if (
         formPayload.status === PostStatus.COMPLETED ||
@@ -84,14 +84,14 @@ export const action: ActionFunction = async ({ request }) => {
           id: formPayload.postId,
           status: formPayload.status,
         })
-        return { post }
+        return {post}
       } else {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
     }
     case FormType.UPDATE_TYPE: {
       if (typeof formPayload.postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       if (
         formPayload.type === PostType.BASIC_NOTES ||
@@ -101,28 +101,28 @@ export const action: ActionFunction = async ({ request }) => {
           id: formPayload.postId,
           type: formPayload.type,
         })
-        return { post }
+        return {post}
       } else {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
     }
     case FormType.DELETE: {
       if (typeof formPayload.postId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
-      await deletePost({ id: formPayload.postId })
+      await deletePost({id: formPayload.postId})
       return redirect('/personal', {})
     }
     case FormType.CREATE: {
       if (typeof formPayload.authorId !== 'string') {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       let content
       if (formPayload.postJSON) {
         // @ts-ignore
         content = JSON.parse(postJSON)
       } else {
-        content = JSON.parse(JSON.stringify({ blocks: ['none'] }))
+        content = JSON.parse(JSON.stringify({blocks: ['none']}))
       }
       return await createPost({
         title: formPayload.title
@@ -139,20 +139,20 @@ export const action: ActionFunction = async ({ request }) => {
         typeof formPayload.title !== 'string' ||
         typeof formPayload.postId !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       const post = await updateTitle({
         id: formPayload.postId,
         title: formPayload.title,
       })
-      return { post }
+      return {post}
     }
     case FormType.UPDATE_CONTENT: {
       if (
         typeof formPayload.postId !== 'string' ||
         typeof formPayload.postJSON !== 'string'
       ) {
-        return { formError: `Form not submitted correctly.` }
+        return {formError: `Form not submitted correctly.`}
       }
       return await updateContent({
         id: formPayload.postId,
@@ -160,13 +160,13 @@ export const action: ActionFunction = async ({ request }) => {
       })
     }
     default: {
-      return { formError: `Action type invalid` }
+      return {formError: `Action type invalid`}
     }
   }
 }
 
 export default function Index() {
-  const { post, postId } = useLoaderData<LoaderData>()
+  const {post, postId} = useLoaderData<LoaderData>()
   const submitContentRef = React.useRef<HTMLInputElement>(null)
   const titletRef = React.useRef<HTMLTextAreaElement>(null)
   const submitTitleRef = React.useRef<HTMLInputElement>(null)
@@ -329,7 +329,7 @@ const optsStatus: string[] = [
 const optsType: string[] = [PostType.BASIC_NOTES, PostType.MONTHLY_PLANNING]
 
 function PageData() {
-  const { post, postId } = useLoaderData<LoaderData>()
+  const {post, postId} = useLoaderData<LoaderData>()
   if (!post) return <></>
   return (
     <div className="my-3 flex flex-col gap-1.5">
@@ -415,7 +415,7 @@ function Select({
       <input type="hidden" name={payloadName} value={selected.toString()} />
       <Listbox value={selected} onChange={setSelected}>
         <div className="relative -ml-1 h-[30px]">
-          <Listbox.Button className="dark:hover:bg-gray-800 hover:bg-gray-100/50 sm:text-sm relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:focus:bg-gray-800">
+          <Listbox.Button className="sm:text-sm relative w-full cursor-default rounded-sm bg-transparent py-1 pl-3 pr-8 text-left hover:bg-gray-100/50 focus:bg-gray-100/50 focus:outline-none focus-visible:border-none focus-visible:ring-0 dark:hover:bg-gray-800 dark:focus:bg-gray-800">
             <p className="pointer-events-none text-sm font-medium text-gray-500 dark:text-gray-100">
               {capitalize(selected.toString()).replace(/_/g, ' ')}
             </p>
@@ -439,20 +439,20 @@ function Select({
                   as="button"
                   type="submit"
                   key={item}
-                  className={({ selected, active }) =>
+                  className={({selected, active}) =>
                     clsx(
                       'relative flex w-full min-w-[120px] cursor-pointer items-center justify-between gap-12 px-3 py-1',
                       {
                         'bg-green-900 hover:bg-green-900/90 dark:hover:bg-green-900/40':
                           selected,
                         'hover:bg-gray-100 hover:dark:bg-gray-800': !selected,
-                        'bg-gray-100 dark:bg-gray-800': active && !selected
+                        'bg-gray-100 dark:bg-gray-800': active && !selected,
                       },
                     )
                   }
                   value={item}
                 >
-                  {({ selected }) => (
+                  {({selected}) => (
                     <>
                       <span
                         className={clsx(

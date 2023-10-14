@@ -1,28 +1,28 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import {motion, useReducedMotion} from 'framer-motion'
 
-const BurgerMenu = ({ state }: { state: string }) => {
+const BurgerMenu = ({state}: {state: string}) => {
   const shouldReduceMotion = useReducedMotion()
   const transition = shouldReduceMotion
     ? {
-      opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
-      rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
-      scale: { duration: shouldReduceMotion ? 0 : 0.5 },
-    }
+        opacity: {duration: shouldReduceMotion ? 0 : 0.2},
+        rotate: {duration: shouldReduceMotion ? 0 : 0.5},
+        scale: {duration: shouldReduceMotion ? 0 : 0.5},
+      }
     : {}
 
   const topVariants = {
-    open: { rotate: 45, y: 7, originX: '16px', originY: '10px' },
-    closed: { rotate: 0, y: 0, originX: 0, originY: 0 },
+    open: {rotate: 45, y: 7, originX: '16px', originY: '10px'},
+    closed: {rotate: 0, y: 0, originX: 0, originY: 0},
   }
 
   const centerVariants = {
-    open: { opacity: 0 },
-    closed: { opacity: 1 },
+    open: {opacity: 0},
+    closed: {opacity: 1},
   }
 
   const bottomVariants = {
-    open: { rotate: -45, y: -5, originX: '16px', originY: '22px' },
-    closed: { rotate: 0, y: 0, originX: 0, originY: 0 },
+    open: {rotate: -45, y: -5, originX: '16px', originY: '22px'},
+    closed: {rotate: 0, y: 0, originX: 0, originY: 0},
   }
 
   return (
@@ -73,4 +73,4 @@ const BurgerMenu = ({ state }: { state: string }) => {
   )
 }
 
-export { BurgerMenu }
+export {BurgerMenu}
