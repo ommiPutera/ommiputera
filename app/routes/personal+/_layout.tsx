@@ -1,18 +1,18 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
 // @ts-ignore
-import {icons} from 'lucide-react'
+import { icons } from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -24,11 +24,11 @@ export default function Index() {
 
   return (
     <main className="bg-white dark:bg-black">
-      <div className="relative mx-auto flex w-full max-w-[72rem]">
+      <div className="relative mx-auto flex w-full">
         <div className="hidden min-w-[15rem] md:block">
           <Navigation />
         </div>
-        <div className="grid w-full grid-cols-12">
+        <div className="grid mx-auto w-full max-w-5xl grid-cols-12">
           <Outlet />
         </div>
       </div>
@@ -69,7 +69,7 @@ export function OutletCenter({
     <div
       {...props}
       className={clsx(
-        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-8',
+        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-9',
       )}
     >
       {children}
@@ -84,7 +84,7 @@ export function OutletRight({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="hidden w-full lg:col-span-4 xl:block">
+    <div className="hidden w-full lg:col-span-3 xl:block">
       <div
         {...props}
         className={clsx(

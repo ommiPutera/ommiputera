@@ -1,26 +1,25 @@
-import {Menu} from '@headlessui/react'
-import {Link, useLocation} from '@remix-run/react'
+import { Menu } from '@headlessui/react'
+import { Link, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-import {AnimatePresence, motion, useReducedMotion} from 'framer-motion'
-import {LogOut, MoreHorizontal} from 'lucide-react'
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
+import { LogOut, MoreHorizontal } from 'lucide-react'
 import React from 'react'
 import {
   NavigationMenu,
   NavigationMenuContent,
-  NavigationMenuIndicator,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
   NavigationMenuTrigger,
 } from '~/components/shadcn/navigation-menu'
-import {BurgerMenu} from '~/utils/icons'
-import {Theme, Themed, useTheme} from '~/utils/theme-provider'
-import {useRootData} from '~/utils/use-root-data'
-import {ButtonLink} from './button'
-import {Profile} from './me'
-import {RowAdmin, RowSoftwares} from './menu-elements'
-import {Badge} from './shadcn/badge'
-import {UIButton} from './shadcn/button'
+import { BurgerMenu } from '~/utils/icons'
+import { Theme, Themed, useTheme } from '~/utils/theme-provider'
+import { useRootData } from '~/utils/use-root-data'
+import { ButtonLink } from './button'
+import { Profile } from './me'
+import { RowAdmin, RowSoftwares } from './menu-elements'
+import { Badge } from './shadcn/badge'
+import { UIButton } from './shadcn/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,15 +45,15 @@ const LINKS: TypeLinks = [
   // { name: 'About', to: '/about', asParent: false },
   {
     name: (
-      <div className="flex gap-x-2">
-        <div>Softwares</div>
+      <div className="flex gap-2">
         <Badge variant="success" size="xs">
           Free
         </Badge>
+        <div>Softwares</div>
       </div>
     ),
     asParent: true,
-    child: [{component: <RowSoftwares />}],
+    child: [{ component: <RowSoftwares /> }],
   },
   // {
   //   name: 'Products',
@@ -63,11 +62,11 @@ const LINKS: TypeLinks = [
   // },
 ]
 
-const MOBILE_LINKS = [{name: 'Home', to: '/', asParent: false}, ...LINKS]
+const MOBILE_LINKS = [{ name: 'Home', to: '/', asParent: false }, ...LINKS]
 const ROUTE_WITHOUT_NAVBAR = ['/login', '/personal']
 
 function Index() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
   const bool = ROUTE_WITHOUT_NAVBAR.findIndex(
     el => el === location.pathname || location.pathname.startsWith(el),
@@ -78,7 +77,7 @@ function Index() {
 }
 
 function PublicRoute() {
-  const {user} = useRootData()
+  const { user } = useRootData()
   return (
     <div className="relative">
       <div
@@ -102,7 +101,7 @@ function ProtectedRoute({
 }: {
   children?: JSX.Element | React.ReactNode
 }) {
-  const {user} = useRootData()
+  const { user } = useRootData()
   const location = useLocation()
   const isSelected = (to: string) => location.pathname === to
   const isOwner = user?.role == 'OWNER'
@@ -122,34 +121,32 @@ function ProtectedRoute({
             {children ? (
               children
             ) : (
-              <>
+              <div className='flex gap-2'>
                 {isOwner && (
-                  <div className="px-4">
-                    <ButtonLink
-                      type="button"
-                      size="sm"
-                      variant="subtle"
-                      to="/overview"
-                      prefetch="intent"
-                      className={clsx(
-                        'flex items-center gap-x-2 hover:text-black hover:dark:text-white',
-                        {
-                          'text-gray-400 dark:text-gray-300':
-                            !isSelected('/overview'),
-                          'text-black dark:text-white': isSelected('/overview'),
-                        },
-                      )}
-                    >
-                      <p className="text-md">Overview</p>
-                    </ButtonLink>
-                  </div>
+                  <ButtonLink
+                    type="button"
+                    size="sm"
+                    variant="subtle"
+                    to="/overview"
+                    prefetch="intent"
+                    className={clsx(
+                      'flex items-center gap-2 hover:text-black hover:dark:text-white',
+                      {
+                        'text-gray-400 dark:text-gray-300':
+                          !isSelected('/overview'),
+                        'text-black dark:text-white': isSelected('/overview'),
+                      },
+                    )}
+                  >
+                    <p className="text-sm">Overview</p>
+                  </ButtonLink>
                 )}
                 <div>
                   <NavigationMenu>
                     <NavigationMenuList>
                       {isOwner && (
                         <NavigationMenuItem>
-                          <NavigationMenuTrigger className="w-full whitespace-nowrap px-4 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+                          <NavigationMenuTrigger className="w-full whitespace-nowrap text-sm font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
                             Admin
                           </NavigationMenuTrigger>
                           <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
@@ -158,18 +155,17 @@ function ProtectedRoute({
                         </NavigationMenuItem>
                       )}
                       <NavigationMenuItem>
-                        <NavigationMenuTrigger className="w-full whitespace-nowrap px-4 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
+                        <NavigationMenuTrigger className="w-full whitespace-nowrap text-sm font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white dark:data-[state=open]:text-white lg:tracking-wide">
                           Softwares
                         </NavigationMenuTrigger>
                         <NavigationMenuContent className="bg-white pb-[8px] pl-[6px] pr-[8px] pt-[6px] dark:bg-gray-900">
                           <RowSoftwares />
                         </NavigationMenuContent>
                       </NavigationMenuItem>
-                      <NavigationMenuIndicator />
                     </NavigationMenuList>
                   </NavigationMenu>
                 </div>
-              </>
+              </div>
             )}
           </div>
           <div className="flex w-full justify-end gap-4">
@@ -194,7 +190,7 @@ function MobileNav() {
         </div>
         <Menu>
           <Menu.Button className="focus:border-primary hover:border-primary border-secondary text-primary inline-flex h-12 w-12 items-center justify-center rounded-full border-2 p-1 transition focus:outline-none">
-            {({open}) => {
+            {({ open }) => {
               const state = open ? 'open' : 'closed'
               setIsOpen(open)
               return <BurgerMenu state={state} />
@@ -207,7 +203,7 @@ function MobileNav() {
   )
 }
 
-function MobileMenuList({isOpen}: {isOpen: boolean}) {
+function MobileMenuList({ isOpen }: { isOpen: boolean }) {
   const shouldReduceMotion = useReducedMotion()
   React.useEffect(() => {
     if (isOpen) {
@@ -226,18 +222,18 @@ function MobileMenuList({isOpen}: {isOpen: boolean}) {
         className="absolute left-0 right-0 z-[9999] mt-8 w-full origin-top-right rounded-md bg-white shadow-lg focus:outline-none"
         as="div"
       >
-        {({open}) => {
+        {({ open }) => {
           const state = open ? 'open' : 'closed'
           if (state === 'closed') return <></>
           return (
             <motion.div
-              initial={{y: -10, opacity: 0}}
-              animate={{y: 0, opacity: 1}}
-              exit={{y: -10, opacity: 0}}
+              initial={{ y: -10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -10, opacity: 0 }}
               transition={{
-                opacity: {duration: shouldReduceMotion ? 0 : 0.2},
-                rotate: {duration: shouldReduceMotion ? 0 : 0.5},
-                scale: {duration: shouldReduceMotion ? 0 : 0.5},
+                opacity: { duration: shouldReduceMotion ? 0 : 0.2 },
+                rotate: { duration: shouldReduceMotion ? 0 : 0.5 },
+                scale: { duration: shouldReduceMotion ? 0 : 0.5 },
                 ease: 'linear',
               }}
               className="fixed mt-12 flex h-full w-full flex-col overflow-y-scroll bg-white pb-12 dark:border-gray-100 dark:bg-gray-900"
@@ -277,7 +273,7 @@ function MobileNavLink({
   if (to && !asParent) {
     return (
       <Menu.Item as={Link} to={to}>
-        <div className="m-0 flex items-center justify-between border-t border-gray-200 px-5vw py-10 text-md dark:border-gray-600">
+        <div className="m-0 flex items-center justify-between border-t border-gray-200 px-5vw py-10 text-sm dark:border-gray-600">
           {children}
           {isSelected && <div className="h-2 w-2 rounded-full bg-white"></div>}
         </div>
@@ -308,7 +304,6 @@ function DesktopNav() {
               {link.name}
             </DesktopNavLink>
           ))}
-          <NavigationMenuIndicator />
         </NavigationMenuList>
       </NavigationMenu>
       {LINKS.map(link => {
@@ -319,7 +314,7 @@ function DesktopNav() {
             prefetch="intent"
             to={link.to ?? ''}
             className={clsx(
-              'block whitespace-nowrap px-4 py-1.5 text-md font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
+              'block whitespace-nowrap px-4 py-1.5 text-sm font-medium text-gray-400 hover:text-black focus:outline-none dark:text-gray-300 hover:dark:text-white lg:tracking-wide',
               {
                 active: isSelected(link.to),
                 'text-black': !isSelected(link?.to),
@@ -357,7 +352,7 @@ function DesktopNavLink({
   ...rest
 }: Omit<Parameters<typeof Link>['0'], 'to'> & {
   to?: string
-  child?: {component: string | React.ReactNode}[]
+  child?: { component: string | React.ReactNode }[]
   closeContent: () => void
   isOpen: boolean
   asParent: boolean
@@ -475,7 +470,7 @@ function MoreMenus() {
   )
 }
 
-function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
+function DarkModeToggle({ variant = 'icon' }: { variant?: 'icon' | 'labelled' }) {
   const [, setTheme] = useTheme()
   const handleTransition = () => {
     document.body.classList.add('transition-none')
@@ -495,7 +490,7 @@ function DarkModeToggle({variant = 'icon'}: {variant?: 'icon' | 'labelled'}) {
       }}
       className={clsx(
         'color-scheme-toggle',
-        'focus:border-secondary inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full border-2 p-1 transition hover:bg-gray-200 focus:outline-none hover:dark:bg-gray-800 md:h-9 md:w-9',
+        'inline-flex h-12 w-12 items-center justify-center overflow-hidden rounded-full p-2 transition hover:bg-gray-100 focus:outline-none hover:dark:bg-gray-800 md:h-9 md:w-9',
       )}
       title="Toggle between light and dark mode"
     >
