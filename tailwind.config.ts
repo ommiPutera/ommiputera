@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     screens: {
       md: '425px',
-      lg: '768px',
-      xl: '1024px', // this is the "design resolution"
+      lg: '1024px',
+      xl: '1440px', // this is the "design resolution"
     },
     borderRadius: {
       none: '0',

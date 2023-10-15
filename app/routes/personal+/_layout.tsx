@@ -1,18 +1,16 @@
-import type {LoaderFunction} from '@remix-run/node'
-import {Outlet, useLocation} from '@remix-run/react'
+import type { LoaderFunction } from '@remix-run/node'
+import { Outlet, useLocation } from '@remix-run/react'
 import clsx from 'clsx'
-// @ts-ignore
-import {icons} from 'lucide-react'
 import React from 'react'
-import {ButtonLink} from '~/components/button'
-import {Profile} from '~/components/me'
-import {DarkModeToggle, Logo, MoreAction} from '~/components/navbar'
-import {requireUserSession} from '~/utils/session.server'
+import { ButtonLink } from '~/components/button'
+import { Profile } from '~/components/me'
+import { DarkModeToggle, Logo, MoreAction } from '~/components/navbar'
+import { requireUserSession } from '~/utils/session.server'
 
-export const loader: LoaderFunction = async ({request}) => {
+export const loader: LoaderFunction = async ({ request }) => {
   const user = await requireUserSession(request)
   if (!user) {
-    throw new Response('Unauthorized', {status: 401})
+    throw new Response('Unauthorized', { status: 401 })
   }
   return {}
 }
@@ -25,10 +23,10 @@ export default function Index() {
   return (
     <main className="bg-white dark:bg-black">
       <div className="relative mx-auto flex w-full">
-        <div className="hidden min-w-[15rem] md:block">
+        <div className="hidden max-w-[14rem] md:block">
           <Navigation />
         </div>
-        <div className="mx-auto grid w-full max-w-5xl grid-cols-12">
+        <div className="grid mx-auto w-full max-w-4xl xl:max-w-5xl grid-cols-12">
           <Outlet />
         </div>
       </div>
@@ -44,7 +42,7 @@ function Navigation() {
         <NavbarItem
           title="Lainnya"
           route="/personal/templates"
-          iconName="AlignJustify"
+          icon="/icons/hamburger.png"
         />
       </div>
     </div>
@@ -69,7 +67,7 @@ export function OutletCenter({
     <div
       {...props}
       className={clsx(
-        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r xl:col-span-9',
+        'col-span-12 min-h-screen w-full border-l border-gray-100 dark:border-gray-800 lg:border-r lg:col-span-8 xl:col-span-9',
       )}
     >
       {children}
@@ -84,7 +82,7 @@ export function OutletRight({
   children: JSX.Element | React.ReactNode
 }) {
   return (
-    <div className="hidden w-full lg:col-span-3 xl:block">
+    <div className="hidden w-full lg:col-span-4 xl:col-span-3 lg:block">
       <div
         {...props}
         className={clsx(
@@ -110,11 +108,13 @@ export function OutletRight({
 
 function NavbarMenu() {
   return (
-    <div className="flex flex-col justify-center py-5">
-      <div className="my-2">
+    <div className="flex flex-col gap-8 justify-center py-5">
+      <div className="my-2 flex flex-col gap-8">
         <Logo size="md" />
       </div>
-      <NavbarItem title="Beranda" route="/personal" iconName="Home" />
+      <div className='flex flex-col'>
+        <NavbarItem title="Beranda" route="/personal" icon="/icons/home.png" />
+      </div>
     </div>
   )
 }
@@ -122,16 +122,15 @@ function NavbarMenu() {
 function NavbarItem({
   route,
   title,
-  iconName,
+  icon,
 }: {
   route: string
   title: string
-  iconName: string
+  icon: string
 }) {
   const location = useLocation()
   const isSelected = route === location.pathname
 
-  const LucideIcon = icons[iconName]
   return (
     <ButtonLink
       type="button"
@@ -140,14 +139,14 @@ function NavbarItem({
       prefetch="intent"
       align="left"
       className={clsx(
-        'flex items-center gap-3 px-0 py-4 hover:text-black hover:dark:text-white',
+        'flex items-center gap-4 px-0 py-2 group hover:text-black hover:dark:text-white',
         {
           'text-gray-300 dark:text-gray-200': !isSelected,
           'text-black dark:text-white': isSelected,
         },
       )}
     >
-      <LucideIcon size={26} strokeWidth={1.9} />
+      <img src={icon} alt="" className={clsx("h-5 w-5 group-hover:grayscale-0", { 'grayscale': !isSelected, })} />
       <h2 className="pb-0.5 text-md font-medium">{title}</h2>
     </ButtonLink>
   )
