@@ -6,7 +6,7 @@
   "scripts": {
     "build": "prisma generate && remix build",
     "clean": "rm -rf ./node_modules/ .cache/",
-    "dev": "conc \"npm:remix-dev\" \"npm:pscale-dev-server\"",
+    "dev": "conc --kill-others --success first \"npm:pscale-dev-server\" \"npm:remix-dev\" ",
     "format": "prettier --write \"**/*.+(js|jsx|json|yml|yaml|css|less|scss|ts|tsx|md|gql|graphql|mdx|vue)\"",
     "postinstall": "prisma generate",
     "lint": "eslint --cache --cache-location ./node_modules/.cache/.eslintcache --ext js,jsx,ts,tsx .",
@@ -102,7 +102,7 @@
   },
   "devDependencies": {
     "@cld-apis/types": "^0.1.6",
-    "@prisma/client": "^5.4.1",
+    "@prisma/client": "^5.5.0",
     "@remix-run/dev": "1.19.3",
     "@remix-run/eslint-config": "^1.17.1",
     "@remix-run/serve": "1.19.3",
@@ -117,7 +117,7 @@
     "postcss-cli": "^10.1.0",
     "prettier": "^2.8.8",
     "prettier-plugin-tailwindcss": "^0.3.0",
-    "prisma": "^5.4.1",
+    "prisma": "^5.5.0",
     "remix-flat-routes": "^0.5.8",
     "tailwindcss": "^3.3.2",
     "ts-node": "^10.9.1",
@@ -129,6 +129,6 @@
     "npm": "8"
   },
   "prisma": {
-    "seed": "ts-node --require tsconfig-paths/register prisma/seed.ts"
+    "seed": "tsx other/runfile prisma/seed.ts"
   }
 }
