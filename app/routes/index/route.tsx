@@ -1,15 +1,15 @@
-import { HomeHeroSection } from '~/components/sections/hero'
+import {HomeHeroSection} from '~/components/sections/hero'
 // import Pricing from './pricing'
 // import RecentWork from './recent-work'
 // import WorkinOn from './working-on'
 // import { SectionSpacer } from '~/components/spacer'
 // import MiniApp from './mini-app'
 import clsx from 'clsx'
-import { useRootData } from '~/utils/use-root-data'
+import {useRootData} from '~/utils/use-root-data'
 
 // bg-gradient-to-b from-black to-gray-900
 export default function Index() {
-  const { user } = useRootData()
+  const {user} = useRootData()
   return (
     <main
       className={clsx('flex flex-col gap-5 lg:gap-32 ', {
