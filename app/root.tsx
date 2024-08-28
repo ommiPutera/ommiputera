@@ -10,8 +10,10 @@ import {
 } from "@remix-run/react";
 import { LoaderFunctionArgs, SerializeFrom } from "@remix-run/node";
 
-import { ThemeProvider, useTheme } from "@/utils/theme-provider";
+import { ThemeProvider } from "@/utils/theme-provider";
 import { getThemeSession } from "@/utils/theme.server";
+
+import ToggleTheme from "@/components/toggle-theme";
 
 import "./tailwind.css";
 
@@ -32,34 +34,31 @@ export async function loader({ request }: LoaderFunctionArgs) {
 }
 
 export const meta: MetaFunction<typeof loader> = ({ data }) => {
-  const requestInfo = data?.requestInfo;
-
+  let requestInfo = data?.requestInfo;
+  let theme = requestInfo?.session.theme;
   return [
     { title: "Ommi Putera" },
     { name: "description", content: "Welcome to ommiputera site" },
-    {
-      viewport:
-        "width=device-width,initial-scale=1,maximum-scale=1.0,viewport-fit=cover",
-    },
-    {
-      "theme-color": requestInfo?.session.theme === "dark" ? "#1F2028" : "#FFF",
-    },
+    { "theme-color": theme === "dark" ? "#000" : "#FFF" },
   ];
 };
 
-function App() {
-  const [theme] = useTheme();
-
+export function Layout({ children }: { children: React.ReactNode }) {
+  let { requestInfo } = useLoaderData<LoaderData>();
+  let theme = requestInfo?.session?.theme;
   return (
-    <html lang="en" className={`${theme}`} data-color-scheme={theme}>
+    <html lang="en" data-color-scheme={theme}>
       <head>
         <meta charSet="utf-8" />
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,maximum-scale=1.0,viewport-fit=cover"
+        />
         <Meta />
         <Links />
       </head>
-      <body>
-        {theme}
-        <Outlet />
+      <body className={`${theme}`}>
+        {children}
         <ScrollRestoration />
         <Scripts />
       </body>
@@ -67,11 +66,16 @@ function App() {
   );
 }
 
-export default function Layout() {
-  const { requestInfo } = useLoaderData<LoaderData>();
+export default function App() {
+  let { requestInfo } = useLoaderData<LoaderData>();
   return (
     <ThemeProvider specifiedTheme={requestInfo?.session.theme}>
-      <App />
+      <main>
+        <Outlet />
+        <div className="fixed bottom-8">
+          <ToggleTheme />
+        </div>
+      </main>
     </ThemeProvider>
   );
 }

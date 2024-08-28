@@ -5,23 +5,52 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 0 0% 0%;
     --border: 214.3 31.8% 91.4%;
+    --primary-100: 130 72% 87%;
+    --primary-200: 137 71% 75%;
+    --primary-300: 143 52% 57%;
+    --primary-400: 149 54% 38%;
+    --primary-500: 155 88% 16%;
+    --primary-600: 161 91% 14%;
+    --primary-700: 167 93% 11%;
+    --primary-800: 173 96% 9%;
+    --primary-900: 180 100% 7%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 0 0% 13%;
+    --foreground: 0 0% 100%;
     --border: 214.3 31.8% 91.4%;
+    --primary-100: 130 72% 87%;
+    --primary-200: 137 71% 75%;
+    --primary-300: 143 52% 57%;
+    --primary-400: 149 54% 38%;
+    --primary-500: 155 88% 16%;
+    --primary-600: 161 91% 14%;
+    --primary-700: 167 93% 11%;
+    --primary-800: 173 96% 9%;
+    --primary-900: 180 100% 7%;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
   }
   body {
     @apply bg-background text-foreground;
+    -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
+    font-synthesis: none;
+    text-rendering: optimizelegibility;
+    font-optical-sizing: auto;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+      "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      "Noto Color Emoji";
   }
 
   /* Heading */

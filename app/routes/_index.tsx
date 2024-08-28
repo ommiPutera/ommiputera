@@ -11,8 +11,9 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div className="p-4 font-sans">
+    <div>
       <HeroSection />
+      Woi
     </div>
   );
 }

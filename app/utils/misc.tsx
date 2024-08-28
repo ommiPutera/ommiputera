@@ -15,7 +15,7 @@ const AnchorOrLink = React.forwardRef<
     prefetch?: LinkProps["prefetch"];
   }
 >(function AnchorOrLink(props, ref) {
-  const {
+  let {
     to,
     href,
     download,
