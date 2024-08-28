@@ -24,6 +24,8 @@ module.exports = {
   // Base config
   extends: ["eslint:recommended"],
 
+  "@typescript-eslint/no-explicit-any": "error",
+
   overrides: [
     // React
     {
