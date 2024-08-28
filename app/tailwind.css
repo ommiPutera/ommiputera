@@ -14,7 +14,7 @@
     --foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
   }
-};
+}
 
 @layer base {
   * {
@@ -23,4 +23,31 @@
   body {
     @apply bg-background text-foreground;
   }
-};
+
+  /* Heading */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold;
+  }
+  h1 {
+    @apply text-5xl;
+  }
+  h2 {
+    @apply text-4xl;
+  }
+  h3 {
+    @apply text-3xl;
+  }
+  h4 {
+    @apply text-2xl;
+  }
+
+  /* Paragraph */
+  p {
+    @apply text-sm font-normal;
+  }
+}
