@@ -24,13 +24,13 @@ function Intro() {
       <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight text-center">Hi, I&apos;m Ommi 👋</h1>
       <p className="mt-1 md:mt-2 text-md md:text-xl font-normal leading-5 max-w-xs md:max-w-md mx-auto text-center">Software Engineer based in Jakarta, Indonesia. I love building things with Remix.</p>
       <ul className="text-center flex justify-center gap-3 text-sm md:text-lg mt-4 md:mt-6">
-        <li className="underline">
+        <li className="underline text-muted-foreground">
           <Link href="/">Github</Link>
         </li>
-        <li className="underline">
+        <li className="underline text-muted-foreground">
           <Link href="/">Resume</Link>
         </li>
-        <li className="underline">
+        <li className="underline text-muted-foreground">
           <Link href="/">Portfolio</Link>
         </li>
       </ul>
