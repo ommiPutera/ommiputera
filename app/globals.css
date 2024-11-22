@@ -31,7 +31,7 @@
     --radius: 0.5rem;
   
     --hero-height: 262px;
-    --hero-height-mobile: 195px;
+    --hero-height-mobile: 170px;
   }
 }
 
@@ -41,5 +41,8 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .shadow-circle {
+    box-shadow: 0 0 12px 0 white,0 0 0 48px white;
   }
 }
