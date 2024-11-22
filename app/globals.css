@@ -4,7 +4,7 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 40 21% 95%;
     --foreground: 213 13% 17%;
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -30,7 +30,7 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   
-    --hero-height: 262px;
+    --hero-height: 232px;
     --hero-height-mobile: 170px;
   }
 }
@@ -43,6 +43,6 @@
     @apply bg-background text-foreground;
   }
   .shadow-circle {
-    box-shadow: 0 0 12px 0 white,0 0 0 48px white;
+    box-shadow: 0 0 12px 0 #f4f2ee,0 0 0 48px #f4f2ee;
   }
 }
