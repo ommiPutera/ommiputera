@@ -1,3 +1,5 @@
+import { ArrowDown } from "lucide-react"
+
 import Link from "next/link"
 
 export default function ShellPage({ children }: { children: React.ReactNode }) {
@@ -21,18 +23,18 @@ export default function ShellPage({ children }: { children: React.ReactNode }) {
 
 function Intro() {
   return (
-    <div className="absolute top-0 px-7 md:px-20 bg-background w-full h-full pt-6 md:pt-11">
+    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-6 md:pt-8">
       <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">Hi, I&apos;m Ommi 👋</h1>
-      <p className="mt-1 md:mt-3 text-base md:text-xl text-slate-800 font-medium leading-5 max-w-[265px] md:max-w-[450px]">Software Engineer based in Jakarta, Indonesia. I love building things with Remix.</p>
-      <ul className="flex gap-3 text-sm md:text-base mt-2 md:mt-4">
+      <p className="mt-1 text-base md:text-lg text-neutral-800 text-center mx-auto font-normal leading-5 md:leading-tight max-w-[265px] md:max-w-[450px]">Software Engineer based in Jakarta, Indonesia. I love building things with Remix.</p>
+      <ul className="flex gap-3 text-sm justify-center md:text-base mt-3 md:mt-1">
         <li className="underline text-muted-foreground">
           <Link href="/">Github</Link>
         </li>
         <li className="underline text-muted-foreground">
-          <Link href="/">Resume</Link>
-        </li>
-        <li className="underline text-muted-foreground">
-          <Link href="/">Portfolio</Link>
+          <Link href="/" className="flex items-center gap-1">
+            <span>Resume</span>
+            <ArrowDown className="w-4 h-4 md:w-5 md:h-5 stroke-1 stroke-neutral-900" />
+          </Link>
         </li>
       </ul>
     </div>
