@@ -24,7 +24,7 @@ export default function Section({
   return (
     <div
       className={cn(
-        "flex flex-col px-4 py-8 md:p-6 overflow-hidden cursor-pointer relative",
+        "flex flex-col px-4 py-10 md:py-8 md:p-6 overflow-hidden cursor-pointer relative",
         className,
       )}
       onClick={() => (href ? router.push(href.toString()) : null)}

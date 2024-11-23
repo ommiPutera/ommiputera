@@ -1,7 +1,7 @@
 import { ArrowUpRight, FolderClosed, FolderOpen, Sparkle } from "lucide-react";
 import Image from "next/image";
 
-import Link from "next/link";
+import Link, { LinkProps } from "next/link";
 
 import Content from "~/components/content";
 import Section from "~/components/section";
@@ -50,7 +50,7 @@ function Intro() {
 function Close() {
   return (
     <Section className="pt-0 md:pt-0" href="/">
-      <Title text="More Projects">
+      <Title text="More Project">
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <FolderClosed className="w-5 h-5" />
         </div>
@@ -102,17 +102,7 @@ function DipayCore() {
           />
         </div>
       </Content>
-      <Content>
-        <div className="md:mt-1">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"
-          >
-            <span>Read more</span>
-            <ArrowUpRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </Content>
+      <ReadMore href="/" />
     </Section>
   );
 }
@@ -149,17 +139,7 @@ function Dipay() {
           />
         </div>
       </Content>
-      <Content>
-        <div className="md:mt-1">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"
-          >
-            <span>Read more</span>
-            <ArrowUpRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </Content>
+      <ReadMore href="/" />
     </Section>
   );
 }
@@ -173,8 +153,8 @@ function Naufal() {
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <Title
-        text="Personal/Porfolio Website Naufal"
-        description="Naufal Ghifari - 2022"
+        text="Personal/Porfolio Website for Naufal Ghifari"
+        description="2022"
       >
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <Sparkle className="w-5 h-5" />
@@ -196,17 +176,7 @@ function Naufal() {
           />
         </div>
       </Content>
-      <Content>
-        <div className="md:mt-1">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"
-          >
-            <span>Read more</span>
-            <ArrowUpRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </Content>
+      <ReadMore href="/" />
     </Section>
   );
 }
@@ -243,17 +213,23 @@ function DipayDisbursement() {
           />
         </div>
       </Content>
-      <Content>
-        <div className="md:mt-1">
-          <Link
-            href="/"
-            className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"
-          >
-            <span>Read more</span>
-            <ArrowUpRight className="w-5 h-5" />
-          </Link>
-        </div>
-      </Content>
+      <ReadMore href="/" />
     </Section>
+  );
+}
+
+function ReadMore({ href }: { href: LinkProps["href"] }) {
+  return (
+    <Content>
+      <div className="-mt-2 md:mt-1 bg-white pb-4 -mb-4 md:pb-0">
+        <Link
+          href={href}
+          className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"
+        >
+          <span>Read more</span>
+          <ArrowUpRight className="w-5 h-5" />
+        </Link>
+      </div>
+    </Content>
   );
 }

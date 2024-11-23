@@ -14,6 +14,8 @@ import {
 import Br from "~/components/br";
 import Content from "~/components/content";
 import Section from "~/components/section";
+import Stack from "~/components/sections/my-stack.section";
+import Projects from "~/components/sections/projects.section";
 import ShellPage from "~/components/shell-page";
 import Title from "~/components/title";
 import {
@@ -31,7 +33,6 @@ import {
   TimelineItem,
   TimelineTitle,
 } from "~/components/ui/timeline";
-import Projects from "~/components/sections/projects.section";
 
 export default function Home() {
   return (
@@ -42,6 +43,7 @@ export default function Home() {
       <Blog />
       <Education />
       <Projects />
+      <Stack />
       <Uses />
       <Contact />
     </ShellPage>
@@ -136,7 +138,7 @@ function About() {
 
 function Work() {
   return (
-    <Section href="https://www.linkedin.com/in/ommiputera">
+    <Section>
       <Title text="Work Experience">
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <Briefcase className="w-5 h-5" />
@@ -161,7 +163,7 @@ function Work() {
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 hover:border-blue-700 focus-visible:bg-slate-100"
+          className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 focus-visible:bg-slate-100"
         >
           <div className="flex items-start gap-2.5">
             <Image
@@ -316,11 +318,17 @@ function Uses() {
 function Contact() {
   return (
     <Section>
-      <Title text="Contact">
+      <Title text="Contact" description="Get in Touch">
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <MonitorSmartphone className="w-5 h-5" />
         </div>
       </Title>
+      <Content>
+        <p className="text-sm font-normal text-accent-foreground leading-5">
+          Want to chat? Just shoot me a dm with a direct question on twitter and
+          I&apos;ll respond whenever I can. I will ignore all soliciting.
+        </p>
+      </Content>
     </Section>
   );
 }
