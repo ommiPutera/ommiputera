@@ -5,8 +5,6 @@ import { ArrowDown, ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { cn } from "~/lib/utils";
-
 type THeaderProps = {
   withHome?: boolean;
   title?: string;
@@ -17,11 +15,9 @@ export default function ShellPage({
   withHome = false,
   children,
   withBack = false,
-  aThread = false,
 }: {
   children: React.ReactNode;
   withBack?: boolean;
-  aThread?: boolean;
 } & THeaderProps) {
   return (
     <div className="container mx-auto max-w-screen-sm">
@@ -32,12 +28,7 @@ export default function ShellPage({
           <RoundedBorder />
         </div>
         <div className="px-3 md:px-14 relative overflow-hidden">
-          <div
-            className={cn(
-              "bg-white border-x border-b border-neutral-200 divide-y divide-neutral-200 relative",
-              aThread && "divide-none",
-            )}
-          >
+          <div className="bg-white border-x border-b border-neutral-200 divide-y divide-neutral-200 relative">
             {children}
             <Footer />
           </div>
@@ -50,20 +41,19 @@ export default function ShellPage({
 function BackBtn() {
   const router = useRouter();
   return (
-    <button
-      className="absolute -top-0.5 -left-3 px-7 md:px-20 pt-8 md:pt-12"
-      onClick={() => router.back()}
-    >
-      <ArrowLeft className="w-6 h-6 stroke-neutral-900 stroke-3" />
-    </button>
+    <div className="absolute -top-0.5 -left-3 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
+      <button onClick={() => router.back()}>
+        <ArrowLeft className="w-6 h-6 stroke-neutral-900 stroke-3" />
+      </button>
+    </div>
   );
 }
 
 function Header({ title, withHome }: THeaderProps) {
   return (
-    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-8 md:pt-12">
+    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6">
       <h1 className="text-base md:text-lg font-bold">{title}</h1>
-      <ul className="flex gap-3 text-sm justify-center md:text-base mt-1">
+      <ul className="flex gap-3 text-sm justify-center md:text-base">
         {withHome && (
           <li className="underline text-muted-foreground">
             <Link href="/">Home</Link>
@@ -73,9 +63,6 @@ function Header({ title, withHome }: THeaderProps) {
           <Link href="https://github.com/ommiPutera" target="_blank">
             Github
           </Link>
-        </li>
-        <li className="underline text-muted-foreground">
-          <Link href="/block">Blog</Link>
         </li>
         <li className="underline text-muted-foreground">
           <Link href="/" className="flex items-center gap-1">

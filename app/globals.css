@@ -30,8 +30,8 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    --hero-height: 130px;
-    --hero-height-mobile: 100px;
+    --hero-height: 100px;
+    --hero-height-mobile: 70px;
   }
 }
 
