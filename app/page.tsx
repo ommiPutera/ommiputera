@@ -6,7 +6,6 @@ import {
   CarFront,
   CornerUpRight,
   Dot,
-  FolderOpen,
   Library,
   MonitorSmartphone,
   PenLine,
@@ -32,6 +31,7 @@ import {
   TimelineItem,
   TimelineTitle,
 } from "~/components/ui/timeline";
+import Projects from "~/components/sections/projects.section";
 
 export default function Home() {
   return (
@@ -136,7 +136,7 @@ function About() {
 
 function Work() {
   return (
-    <Section>
+    <Section href="https://www.linkedin.com/in/ommiputera">
       <Title text="Work Experience">
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <Briefcase className="w-5 h-5" />
@@ -161,7 +161,7 @@ function Work() {
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 focus-visible:bg-slate-100"
+          className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 hover:border-blue-700 focus-visible:bg-slate-100"
         >
           <div className="flex items-start gap-2.5">
             <Image
@@ -172,7 +172,7 @@ function Work() {
               className="border border-neutral-100 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-tight text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
                 Dipay Indonesia
               </h4>
               <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
@@ -236,7 +236,7 @@ function Education() {
           how to build websites and apps, and also how to become an effective
           learner.
         </p>
-        <div className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 focus-visible:bg-slate-100">
+        <div className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4">
           <div className="flex items-start gap-2.5">
             <Image
               src="/logos/purwadhika_logo.webp"
@@ -246,7 +246,7 @@ function Education() {
               className="border border-neutral-100 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-tight text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
                 Purwadhika Digital Technology School
               </h4>
               <p className="text-xs md:text-sm font-normal text-muted-foreground">
@@ -266,7 +266,7 @@ function Education() {
               className="border border-neutral-100 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-tight text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
                 University of Bengkulu
               </h4>
               <p className="text-xs md:text-sm font-normal text-muted-foreground">
@@ -286,7 +286,7 @@ function Education() {
 function Blog() {
   return (
     <Section>
-      <Title text="Blog">
+      <Title text="Blog" description="WIP">
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <PenLine className="w-5 h-5" />
         </div>
@@ -297,18 +297,6 @@ function Blog() {
           thoughts and insights soon. 💪
         </p>
       </Content>
-    </Section>
-  );
-}
-
-function Projects() {
-  return (
-    <Section>
-      <Title text="My Projects">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
-          <FolderOpen className="w-5 h-5" />
-        </div>
-      </Title>
     </Section>
   );
 }
