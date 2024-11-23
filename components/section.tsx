@@ -11,11 +11,13 @@ export default function Section({
   children,
   href,
   className = "",
+  connectorClassName = "",
   withConnector = false,
 }: {
   children: React.ReactNode;
   href?: LinkProps["href"];
   className?: string;
+  connectorClassName?: string;
   withConnector?: boolean;
 }) {
   const router = useRouter();
@@ -29,7 +31,12 @@ export default function Section({
     >
       <div className="z-[2]">{children}</div>
       {withConnector && (
-        <TimelineConnector className="left-9 md:left-11 top-14 z-[1] h-[calc(100%_-_44px)]" />
+        <TimelineConnector
+          className={cn(
+            "left-9 md:left-11 top-14 z-[1] h-[calc(100%_-_44px)]",
+            connectorClassName,
+          )}
+        />
       )}
     </div>
   );

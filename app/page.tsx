@@ -246,10 +246,10 @@ function Education() {
               className="border border-neutral-100 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900">
                 Purwadhika Digital Technology School
               </h4>
-              <p className="text-xs md:text-sm font-normal text-muted-foreground">
+              <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
                 Jan 2021 - Aug 2021
               </p>
               <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
@@ -266,10 +266,10 @@ function Education() {
               className="border border-neutral-100 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900">
                 University of Bengkulu
               </h4>
-              <p className="text-xs md:text-sm font-normal text-muted-foreground">
+              <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
                 Aug 2016 - Aug 2020
               </p>
               <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
