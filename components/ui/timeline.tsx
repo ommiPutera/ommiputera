@@ -104,7 +104,7 @@ const TimelineDate = React.forwardRef<
     {...props}
   />
 ));
-TimelineDescription.displayName = "TimelineDescription";
+TimelineDate.displayName = "TimelineDate";
 
 const TimelineContent = React.forwardRef<
   HTMLDivElement,

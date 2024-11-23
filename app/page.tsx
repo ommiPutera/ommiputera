@@ -5,7 +5,16 @@ import { Briefcase, CarFront, CornerUpRight, Dot, FolderOpen, Library, MonitorSm
 
 import ShellPage from "~/components/shell-page";
 import { Carousel, CarouselContent, CarouselItem } from "~/components/ui/carousel";
-import { Timeline, TimelineConnector, TimelineContent, TimelineDate, TimelineDescription, TimelineHeader, TimelineIcon, TimelineItem, TimelineTitle } from "~/components/ui/timeline";
+import {
+  Timeline,
+  TimelineConnector,
+  TimelineContent,
+  TimelineDate,
+  TimelineHeader,
+  TimelineIcon,
+  TimelineItem,
+  TimelineTitle
+} from "~/components/ui/timeline";
 
 export default function Home() {
   return (
