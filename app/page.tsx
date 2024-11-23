@@ -115,7 +115,7 @@ function About() {
                   width={500}
                   height={500}
                   alt=""
-                  className="border border-neutral-100  object-cover overflow-hidden rounded-xl"
+                  className="border border-neutral-100 object-cover overflow-hidden rounded-xl"
                 />
               </CarouselItem>
             ))}
@@ -136,11 +136,19 @@ function Work() {
       </Title>
       <Content>
         <p className="text-sm font-normal text-accent-foreground leading-5">
-          During my time at Dipay, I have contributed significantly to various
-          projects, refining my skills in Web Standard Programming, React,
-          TypeScript, and Deployment. My journey from Frontend Engineer to
-          Fullstack Engineer has been marked by leading the development of Dipay
-          Disbursement, a scalable web application for payments.
+          During my time at{" "}
+          <Link
+            href="https://dipay.id/"
+            target="_blank"
+            className="text-blue-700 font-medium"
+          >
+            Dipay
+          </Link>
+          , I have contributed significantly to various projects, refining my
+          skills in Web Standard Programming, React, TypeScript, and Deployment.
+          My journey from Frontend Engineer to Fullstack Engineer has been
+          marked by leading the development of Dipay Disbursement, a scalable
+          web application for payments.
         </p>
         <Link
           href="https://www.linkedin.com/in/ommiputera"

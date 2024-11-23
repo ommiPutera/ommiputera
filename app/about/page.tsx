@@ -1,4 +1,5 @@
 import { CornerUpRight } from "lucide-react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -15,7 +16,7 @@ import {
 
 export default function About() {
   return (
-    <ShellPage title="About Ommi" withHome aThread>
+    <ShellPage title="ommiputera.com" withHome withBack aThread>
       <Me />
       <Section2 />
     </ShellPage>
@@ -46,22 +47,25 @@ function Me() {
         </p>
         <p className="text-sm font-normal text-accent-foreground leading-5">
           I enjoy taking on new challenges and continuously improving my skills.
-          Feel free to browse through my portfolio to see examples of my work.
-          If you&apos;d like to collaborate or just say hello, don&apos;t
-          hesitate to reach out!
+          Feel free to browse through my{" "}
+          <Link href="/projects" className="text-blue-700 font-medium">
+            projects
+          </Link>{" "}
+          to see examples of my work. If you&apos;d like to collaborate or just
+          say hello, don&apos;t hesitate to reach out!
         </p>
-        <p className="text-sm font-medium text-accent-foreground leading-5">
+        <p className="text-sm text-accent-foreground leading-5">
           <span>You can follow me on</span>{" "}
-          <Link href="" target="_blank" className="text-blue-700">
+          <Link href="" target="_blank" className="text-blue-700 font-medium">
             Twitter,{" "}
           </Link>
-          <Link href="" target="_blank" className="text-blue-700">
+          <Link href="" target="_blank" className="text-blue-700 font-medium">
             LinkedIn,{" "}
           </Link>
-          <Link href="" target="_blank" className="text-blue-700">
+          <Link href="" target="_blank" className="text-blue-700 font-medium">
             Github,{" "}
           </Link>
-          <Link href="" target="_blank" className="text-blue-700">
+          <Link href="" target="_blank" className="text-blue-700 font-medium">
             Instagram.
           </Link>
         </p>

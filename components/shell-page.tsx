@@ -1,6 +1,9 @@
-import { ArrowDown } from "lucide-react";
+"use client";
+
+import { ArrowDown, ArrowLeft } from "lucide-react";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import { cn } from "~/lib/utils";
 
@@ -12,10 +15,12 @@ type THeaderProps = {
 export default function ShellPage({
   title = "ommiputera.com",
   withHome = false,
-  aThread = false,
   children,
+  withBack = false,
+  aThread = false,
 }: {
   children: React.ReactNode;
+  withBack?: boolean;
   aThread?: boolean;
 } & THeaderProps) {
   return (
@@ -23,6 +28,7 @@ export default function ShellPage({
       <main className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header title={title} withHome={withHome} />
+          {withBack && <BackBtn />}
           <RoundedBorder />
         </div>
         <div className="px-3 md:px-14 relative overflow-hidden">
@@ -41,21 +47,35 @@ export default function ShellPage({
   );
 }
 
+function BackBtn() {
+  const router = useRouter();
+  return (
+    <button
+      className="absolute -top-0.5 -left-3 px-7 md:px-20 pt-8 md:pt-12"
+      onClick={() => router.back()}
+    >
+      <ArrowLeft className="w-6 h-6 stroke-neutral-900 stroke-3" />
+    </button>
+  );
+}
+
 function Header({ title, withHome }: THeaderProps) {
   return (
     <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-8 md:pt-12">
       <h1 className="text-base md:text-lg font-bold">{title}</h1>
-      <ul className="flex gap-3 text-sm justify-center md:text-base">
+      <ul className="flex gap-3 text-sm justify-center md:text-base mt-1">
         {withHome && (
           <li className="underline text-muted-foreground">
             <Link href="/">Home</Link>
           </li>
         )}
         <li className="underline text-muted-foreground">
-          <Link href="/">Github</Link>
+          <Link href="https://github.com/ommiPutera" target="_blank">
+            Github
+          </Link>
         </li>
         <li className="underline text-muted-foreground">
-          <Link href="/">LinkedIn</Link>
+          <Link href="/block">Blog</Link>
         </li>
         <li className="underline text-muted-foreground">
           <Link href="/" className="flex items-center gap-1">
