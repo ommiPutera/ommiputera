@@ -30,7 +30,7 @@ const TimelineConnector = React.forwardRef<
     ref={ref}
     aria-hidden={true}
     className={cn(
-      "absolute top-[7px] left-[4px] -translate-x-1/2 translate-y-2 h-[calc(100%_+_6px)] w-px bg-slate-300",
+      "absolute top-[7px] left-[4px] -translate-x-1/2 translate-y-2 h-[calc(100%_+_6px)] w-px bg-neutral-200",
       className,
     )}
     {...props}
@@ -73,7 +73,10 @@ const TimelineIcon = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col size-2 bg-slate-400 rounded-full", className)}
+    className={cn(
+      "flex flex-col size-2 bg-neutral-400 rounded-full",
+      className,
+    )}
     {...props}
   />
 ));

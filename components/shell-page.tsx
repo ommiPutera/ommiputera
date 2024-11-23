@@ -2,16 +2,36 @@ import { ArrowDown } from "lucide-react";
 
 import Link from "next/link";
 
-export default function ShellPage({ children }: { children: React.ReactNode }) {
+import { cn } from "~/lib/utils";
+
+type THeaderProps = {
+  withHome?: boolean;
+  title?: string;
+};
+
+export default function ShellPage({
+  title = "ommiputera.com",
+  withHome = false,
+  aThread = false,
+  children,
+}: {
+  children: React.ReactNode;
+  aThread?: boolean;
+} & THeaderProps) {
   return (
     <div className="container mx-auto max-w-screen-sm">
       <main className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
-          <Header />
+          <Header title={title} withHome={withHome} />
           <RoundedBorder />
         </div>
         <div className="px-3 md:px-14 relative overflow-hidden">
-          <div className="bg-white border-x border-b border-neutral-200 divide-y divide-neutral-200 relative">
+          <div
+            className={cn(
+              "bg-white border-x border-b border-neutral-200 divide-y divide-neutral-200 relative",
+              aThread && "divide-none",
+            )}
+          >
             {children}
             <Footer />
           </div>
@@ -21,11 +41,16 @@ export default function ShellPage({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Header() {
+function Header({ title, withHome }: THeaderProps) {
   return (
     <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-8 md:pt-12">
-      <h1 className="text-base md:text-lg font-bold">ommiputera.com</h1>
+      <h1 className="text-base md:text-lg font-bold">{title}</h1>
       <ul className="flex gap-3 text-sm justify-center md:text-base">
+        {withHome && (
+          <li className="underline text-muted-foreground">
+            <Link href="/">Home</Link>
+          </li>
+        )}
         <li className="underline text-muted-foreground">
           <Link href="/">Github</Link>
         </li>
@@ -61,9 +86,12 @@ function RoundedBorder() {
 
 function Footer() {
   return (
-    <div className="px-4 pb-8 pt-24 text-center md:px-6 md:pt-24 md:pb-12">
-      <p className="text-sm font-normal leading-5 text-muted-foreground max-w-52 md:max-w-72 mx-auto">
+    <div className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16">
+      <p className="text-xs md:text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
         © {new Date().getFullYear()} Ommi Putera. All rights reserved.
+      </p>
+      <p className="text-xs md:text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
+        Build with Kapal Api and 76 Mangga.
       </p>
     </div>
   );
