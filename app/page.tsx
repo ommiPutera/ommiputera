@@ -36,7 +36,7 @@ import {
 export default function Home() {
   return (
     <ShellPage>
-      <Intro />
+      <Hi />
       <About />
       <Work />
       <Blog />
@@ -48,10 +48,10 @@ export default function Home() {
   );
 }
 
-function Intro() {
+function Hi() {
   return (
     <Section>
-      <Title text="Hi, I'm Ommi 👋">
+      <Title text="Hi, I'm Ommi Putera 👋">
         <Image
           src="/images/profile.jpeg"
           width={40}
