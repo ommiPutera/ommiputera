@@ -73,10 +73,7 @@ const TimelineIcon = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      "flex flex-col size-2 bg-slate-400 rounded-full",
-      className,
-    )}
+    className={cn("flex flex-col size-2 bg-slate-400 rounded-full", className)}
     {...props}
   />
 ));
@@ -100,7 +97,10 @@ const TimelineDate = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs md:text-sm font-normal text-neutral-700 leading-5", className)}
+    className={cn(
+      "text-xs md:text-sm font-normal text-neutral-700 leading-5",
+      className,
+    )}
     {...props}
   />
 ));
@@ -112,7 +112,10 @@ const TimelineContent = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col items-start px-[34px] py-0 gap-0.5", className)}
+    className={cn(
+      "flex flex-col items-start px-[34px] py-0 gap-0.5",
+      className,
+    )}
     {...props}
   />
 ));
