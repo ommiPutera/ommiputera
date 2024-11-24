@@ -23,7 +23,7 @@ export default function Projects() {
 function Intro() {
   return (
     <Section withConnector>
-      <Title text="Projects 🔥">
+      <Title text="Projects 🔥" description="Curated">
         <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <FolderOpen className="w-5 h-5" />
         </div>

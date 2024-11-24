@@ -15,7 +15,7 @@ export default function Title({
       <div
         className={cn(
           "min-h-10 flex flex-col justify-center -mt-1 md:-mt-1.5",
-          description && "mt-1.5 md:mt-0",
+          description && "mt-1 md:mt-0",
         )}
       >
         <h2 className="text-sm md:text-base font-bold tracking-normal">

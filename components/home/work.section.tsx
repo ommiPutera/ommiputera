@@ -44,17 +44,19 @@ export default function Work() {
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 dark:border-neutral-800 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-neutral-50 hover:dark:bg-neutral-900 focus-visible:bg-slate-100"
+          className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-neutral-50 hover:dark:bg-neutral-900 focus-visible:bg-slate-100"
         >
           <div className="flex items-start gap-2.5">
-            <Image
-              src="/logos/dipayindonesia_logo.webp"
-              width={40}
-              height={40}
-              alt=""
-              className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
-            />
-            <div>
+            <div className="w-full max-w-10">
+              <Image
+                src="/logos/dipayindonesia_logo.webp"
+                width={40}
+                height={40}
+                alt=""
+                className="overflow-hidden"
+              />
+            </div>
+            <div className="w-full">
               <h4 className="text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
               </h4>

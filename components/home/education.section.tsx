@@ -20,16 +20,18 @@ export default function Education() {
           how to build websites and apps, and also how to become an effective
           learner.
         </p>
-        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4">
-          <div className="flex items-start gap-2.5">
-            <Image
-              src="/logos/purwadhika_logo.webp"
-              width={40}
-              height={40}
-              alt=""
-              className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
-            />
-            <div>
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4">
+          <div className="flex items-start gap-2.5 w-full">
+            <div className="w-full max-w-10">
+              <Image
+                src="/logos/purwadhika_logo.webp"
+                width={40}
+                height={40}
+                alt=""
+                className="overflow-hidden"
+              />
+            </div>
+            <div className="w-full">
               <h4 className="text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Purwadhika Digital Technology School
               </h4>
@@ -42,14 +44,16 @@ export default function Education() {
             </div>
           </div>
           <div className="flex items-start gap-2.5">
-            <Image
-              src="/logos/unib_logo.webp"
-              width={40}
-              height={40}
-              alt=""
-              className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
-            />
-            <div>
+            <div className="w-full max-w-10">
+              <Image
+                src="/logos/unib_logo.webp"
+                width={40}
+                height={40}
+                alt=""
+                className="overflow-hidden"
+              />
+            </div>
+            <div className="w-full">
               <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900 dark:text-neutral-100">
                 University of Bengkulu
               </h4>

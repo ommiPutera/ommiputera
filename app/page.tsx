@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { CarFront, MonitorSmartphone, PenLine } from "lucide-react";
+import { CarFront, PenLine } from "lucide-react";
 
 import Content from "~/components/content";
 import About from "~/components/home/about.section";
+import Contact from "~/components/home/contact.section";
 import Education from "~/components/home/education.section";
 import Stack from "~/components/home/my-stack.section";
 import Projects from "~/components/home/projects.section";
@@ -27,6 +28,7 @@ export default function Home() {
       <Stack />
       <Uses />
       <Contact />
+      <ThankYou />
     </ShellPage>
   );
 }
@@ -34,7 +36,7 @@ export default function Home() {
 function Hi() {
   return (
     <Section>
-      <Title text="Hi, I'm Ommi Putera 👋">
+      <Title text="Hi, I'm Ommi Putera 👋" description="Introduction">
         <Image
           src="/images/profile.jpeg"
           width={40}
@@ -64,7 +66,7 @@ function Mode() {
   return (
     <ModeClickable>
       <Section>
-        <Title text="Prefer dark/light mode?">
+        <Title text="Prefer dark/light mode?" description="Ommi Putera">
           <Image
             src="/images/profile.jpeg"
             width={40}
@@ -119,19 +121,53 @@ function Uses() {
   );
 }
 
-function Contact() {
+function ThankYou() {
   return (
     <Section>
-      <Title text="Contact" description="Get in Touch">
-        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
-          <MonitorSmartphone className="w-5 h-5" />
-        </div>
+      <Title text="Thank you for stopping by! 👋" description="Ommi Putera">
+        <Image
+          src="/images/profile.jpeg"
+          width={40}
+          height={40}
+          alt=""
+          className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+        />
       </Title>
       <Content>
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
-          Want to chat? Just shoot me a dm with a direct question on twitter and
-          I&apos;ll respond whenever I can. I will ignore all soliciting.
+        <p className="text-sm text-accent-foreground leading-5">
+          <span>You can follow me on</span>{" "}
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            Twitter,{" "}
+          </Link>
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            LinkedIn,{" "}
+          </Link>
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            Github,{" "}
+          </Link>
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            Instagram.
+          </Link>
         </p>
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
+          <Image src="/images/thank-you.jpg" width={800} height={400} alt="" />
+        </div>
       </Content>
     </Section>
   );
