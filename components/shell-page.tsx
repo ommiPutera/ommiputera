@@ -65,7 +65,7 @@ function Header({ title, withHome }: THeaderProps) {
           </Link>
         </li>
         <li className="underline text-muted-foreground">
-          <Link href="/" className="flex items-center gap-1">
+          <Link href="/" className="flex items-center">
             <span>Resume</span>
             <ArrowDown className="w-4 h-4 md:w-5 md:h-5 stroke-1 stroke-neutral-900" />
           </Link>

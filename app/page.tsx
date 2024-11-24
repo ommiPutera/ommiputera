@@ -248,7 +248,7 @@ function Education() {
               className="border border-neutral-100 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
                 Purwadhika Digital Technology School
               </h4>
               <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">

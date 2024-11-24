@@ -23,7 +23,7 @@ export default function Projects() {
 function Intro() {
   return (
     <Section withConnector>
-      <Title text="Projects">
+      <Title text="Projects 🔥">
         <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
           <FolderOpen className="w-5 h-5" />
         </div>
@@ -221,7 +221,7 @@ function DipayDisbursement() {
 function ReadMore({ href }: { href: LinkProps["href"] }) {
   return (
     <Content>
-      <div className="-mt-2 md:mt-1 bg-white pb-4 -mb-4 md:pb-0">
+      <div className="mt-2 md:mt-1">
         <Link
           href={href}
           className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"

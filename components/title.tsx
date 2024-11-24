@@ -14,15 +14,15 @@ export default function Title({
       <div className="bg-white">{children}</div>
       <div
         className={cn(
-          "min-h-10 flex flex-col justify-center gap-1 md:gap-0",
+          "min-h-10 flex flex-col justify-center -mt-1 md:mt-0",
           description && "mt-1.5",
         )}
       >
-        <h2 className="text-sm md:text-base font-bold tracking-normal leading-4 md:leading-5 max-w-[250px] md:max-w-[360px]">
+        <h2 className="text-sm md:text-base font-bold tracking-normal">
           {text}
         </h2>
         {description && (
-          <p className="text-xs md:text-sm text-neutral-500 mb-2">
+          <p className="text-xs md:text-sm text-neutral-500 mb-4 md:mb-2">
             {description}
           </p>
         )}
