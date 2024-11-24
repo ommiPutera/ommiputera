@@ -29,7 +29,7 @@ function Intro() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           <span>
             Here are some showcase of my latest projects. They&apos;re sure to
             catch your eye!
@@ -56,7 +56,7 @@ function Close() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           <span>Interested in checking out more? </span>
           <Link
             href="/about"
@@ -87,7 +87,7 @@ function DipayCore() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -124,7 +124,7 @@ function Dipay() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -161,7 +161,7 @@ function Naufal() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -198,7 +198,7 @@ function DipayDisbursement() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -221,7 +221,7 @@ function DipayDisbursement() {
 function ReadMore({ href }: { href: LinkProps["href"] }) {
   return (
     <Content>
-      <div className="mt-2 md:mt-1">
+      <div className="mt-4 md:mt-2">
         <Link
           href={href}
           className="text-sm font-semibold text-blue-700 underline inline-flex items-center gap-1"

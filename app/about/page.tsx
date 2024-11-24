@@ -34,20 +34,20 @@ function Me() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Highly motivated and results-driven Software Engineer with 3+ years of
           experience specializing in scalable frontend and backend development
           for fintech products.
         </p>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Proven ability to lead high-impact projects, build seamless user
           experiences, and contribute to a collaborative team environment.
         </p>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Expertise in React, Next.js, Remix, Node.js, and Nest.js, with a
           strong focus on stability, performance, and security.
         </p>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           I enjoy taking on new challenges and continuously improving my skills.
           Feel free to browse through my{" "}
           <Link

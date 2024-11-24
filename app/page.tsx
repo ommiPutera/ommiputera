@@ -63,7 +63,7 @@ function Hi() {
         />
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Software Engineer based in Jakarta, Indonesia. I love building things
           with{" "}
           <Link
@@ -89,12 +89,12 @@ function About() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Highly motivated and results-driven Software Engineer with 3+ years of
           experience specializing in scalable frontend and backend development
           for fintech products.
         </p>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           <span>Proven ability to lead high-impact projects</span>
           <br />
           <Link
@@ -145,7 +145,7 @@ function Work() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           During my time at{" "}
           <Link
             href="https://dipay.id/"
@@ -233,7 +233,7 @@ function Education() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Purwadhika helped me dive into the world of web development. I learned
           how to build websites and apps, and also how to become an effective
           learner.
@@ -294,7 +294,7 @@ function Blog() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           My blog is a work in progress. I&apos;m looking forward to sharing my
           thoughts and insights soon. 💪
         </p>
@@ -324,7 +324,7 @@ function Contact() {
         </div>
       </Title>
       <Content>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Want to chat? Just shoot me a dm with a direct question on twitter and
           I&apos;ll respond whenever I can. I will ignore all soliciting.
         </p>

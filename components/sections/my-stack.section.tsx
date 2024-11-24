@@ -16,7 +16,7 @@ export default function Stack() {
         </div>
       </Title>
       <Content>
-        <div className="text-sm font-normal text-accent-foreground leading-5">
+        <div className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           <ul>
             <li>Front-End dev</li>
             <li>👉Tailwind CSS</li>
