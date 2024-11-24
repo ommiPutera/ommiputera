@@ -29,7 +29,7 @@ function Me() {
   return (
     <Section withConnector>
       <Title text="About">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <CornerUpRight className="w-5 h-5" />
         </div>
       </Title>
@@ -111,7 +111,7 @@ function Me() {
                   width={500}
                   height={500}
                   alt=""
-                  className="border border-neutral-100  object-cover overflow-hidden rounded-xl"
+                  className="border border-neutral-100 dark:border-neutral-700 object-cover overflow-hidden rounded-xl"
                 />
               </CarouselItem>
             ))}
@@ -126,7 +126,7 @@ function Section2() {
   return (
     <Section className="pt-0 md:pt-0">
       <Title text="About">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <CornerUpRight className="w-5 h-5" />
         </div>
       </Title>

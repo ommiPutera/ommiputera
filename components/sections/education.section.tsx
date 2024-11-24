@@ -10,7 +10,7 @@ export default function Education() {
   return (
     <Section>
       <Title text="Education">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Library className="w-5 h-5" />
         </div>
       </Title>
@@ -20,14 +20,14 @@ export default function Education() {
           how to build websites and apps, and also how to become an effective
           learner.
         </p>
-        <div className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4">
           <div className="flex items-start gap-2.5">
             <Image
               src="/logos/purwadhika_logo.webp"
               width={40}
               height={40}
               alt=""
-              className="border border-neutral-100 overflow-hidden"
+              className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
             />
             <div>
               <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
@@ -47,7 +47,7 @@ export default function Education() {
               width={40}
               height={40}
               alt=""
-              className="border border-neutral-100 overflow-hidden"
+              className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
             />
             <div>
               <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900">

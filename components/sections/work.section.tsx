@@ -21,7 +21,7 @@ export default function Work() {
   return (
     <Section>
       <Title text="Work Experience">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Briefcase className="w-5 h-5" />
         </div>
       </Title>
@@ -44,7 +44,7 @@ export default function Work() {
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 focus-visible:bg-slate-100"
+          className="border border-neutral-200 dark:border-neutral-800 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 focus-visible:bg-slate-100"
         >
           <div className="flex items-start gap-2.5">
             <Image
@@ -52,7 +52,7 @@ export default function Work() {
               width={40}
               height={40}
               alt=""
-              className="border border-neutral-100 overflow-hidden"
+              className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
             />
             <div>
               <h4 className="text-sm font-semibold tracking-normal text-neutral-900">

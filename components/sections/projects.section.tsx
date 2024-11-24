@@ -24,7 +24,7 @@ function Intro() {
   return (
     <Section withConnector>
       <Title text="Projects 🔥">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <FolderOpen className="w-5 h-5" />
         </div>
       </Title>
@@ -51,7 +51,7 @@ function Close() {
   return (
     <Section className="pt-0 md:pt-0" href="/">
       <Title text="More Project">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <FolderClosed className="w-5 h-5" />
         </div>
       </Title>
@@ -82,7 +82,7 @@ function DipayCore() {
         text="In Charge of Development for Dipay Core"
         description="Dipay Indonesia"
       >
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Sparkle className="w-5 h-5" />
         </div>
       </Title>
@@ -93,7 +93,7 @@ function DipayCore() {
           fit the specific needs and requirements, rather than relying on
           third-party tools.
         </p>
-        <div className="border border-neutral-200 rounded-xl flex flex-col gap-4 overflow-hidden">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/projects/dipay-core.jpeg"
             width={800}
@@ -119,7 +119,7 @@ function Dipay() {
         text="Revamped a Landing Page using Next.js"
         description="Dipay Indonesia"
       >
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Sparkle className="w-5 h-5" />
         </div>
       </Title>
@@ -130,7 +130,7 @@ function Dipay() {
           fit the specific needs and requirements, rather than relying on
           third-party tools.
         </p>
-        <div className="border border-neutral-200 rounded-xl flex flex-col gap-4 overflow-hidden">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/projects/personal-page.jpeg"
             width={800}
@@ -156,7 +156,7 @@ function Naufal() {
         text="Personal/Porfolio Website for Naufal Ghifari"
         description="2022"
       >
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Sparkle className="w-5 h-5" />
         </div>
       </Title>
@@ -167,7 +167,7 @@ function Naufal() {
           fit the specific needs and requirements, rather than relying on
           third-party tools.
         </p>
-        <div className="border border-neutral-200 rounded-xl flex flex-col gap-4 overflow-hidden">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/projects/naufal-page.jpeg"
             width={800}
@@ -193,7 +193,7 @@ function DipayDisbursement() {
         text="Development of Dipay Disbursement"
         description="Dipay Indonesia - 2024"
       >
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Sparkle className="w-5 h-5" />
         </div>
       </Title>
@@ -204,7 +204,7 @@ function DipayDisbursement() {
           fit the specific needs and requirements, rather than relying on
           third-party tools.
         </p>
-        <div className="border border-neutral-200 rounded-xl flex flex-col gap-4 overflow-hidden">
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/projects/dipay-disburesment.jpeg"
             width={800}

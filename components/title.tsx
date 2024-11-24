@@ -11,7 +11,7 @@ export default function Title({
 }) {
   return (
     <div className="flex items-start gap-2">
-      <div className="bg-white">{children}</div>
+      <div className="bg-white dark:bg-black">{children}</div>
       <div
         className={cn(
           "min-h-10 flex flex-col justify-center -mt-1 md:mt-0",

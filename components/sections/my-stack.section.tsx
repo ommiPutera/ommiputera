@@ -11,7 +11,7 @@ export default function Stack() {
         text={`My ${new Date().getFullYear()} Tech Stack ✅`}
         description="Get in Touch"
       >
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <Cpu className="w-5 h-5" />
         </div>
       </Title>

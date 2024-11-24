@@ -28,7 +28,7 @@ export default function ShellPage({
           <RoundedBorder />
         </div>
         <div className="px-3 md:px-14 relative overflow-hidden">
-          <div className="bg-white border-x border-b border-neutral-200 divide-y divide-neutral-200 relative">
+          <div className="bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 relative">
             {children}
             <Footer />
           </div>
@@ -43,7 +43,7 @@ function BackBtn() {
   return (
     <div className="absolute -top-0.5 -left-3 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
       <button onClick={() => router.back()}>
-        <ArrowLeft className="w-6 h-6 stroke-neutral-900 stroke-3" />
+        <ArrowLeft className="w-6 h-6 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
       </button>
     </div>
   );
@@ -79,13 +79,13 @@ function RoundedBorder() {
   return (
     <div>
       <div className="w-full h-3 top-[calc(var(--hero-height-mobile)_-_11px)] md:top-[calc(var(--hero-height)_-_11.5px)] absolute overflow-hidden">
-        <div className="w-[calc(100%_-_100px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-b border-neutral-200"></div>
+        <div className="w-[calc(100%_-_100px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-b border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden left-3 md:left-14">
-        <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 rounded-tl-3xl shadow-circle"></div>
+        <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tl-3xl shadow-circle"></div>
       </div>
       <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden right-3 md:right-14">
-        <div className="absolute top-0 right-0 w-14 h-12 border border-neutral-200 rounded-tr-3xl shadow-circle"></div>
+        <div className="absolute top-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tr-3xl shadow-circle"></div>
       </div>
     </div>
   );

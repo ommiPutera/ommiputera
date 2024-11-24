@@ -30,7 +30,7 @@ const TimelineConnector = React.forwardRef<
     ref={ref}
     aria-hidden={true}
     className={cn(
-      "absolute top-[7px] left-[4px] -translate-x-1/2 translate-y-2 h-[calc(100%_+_6px)] w-px bg-neutral-200",
+      "absolute top-[7px] left-[4px] -translate-x-1/2 translate-y-2 h-[calc(100%_+_6px)] w-px bg-neutral-200 dark:bg-neutral-800",
       className,
     )}
     {...props}

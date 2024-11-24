@@ -17,7 +17,7 @@ export default function About() {
   return (
     <Section href="/about">
       <Title text="About">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <CornerUpRight className="w-5 h-5" />
         </div>
       </Title>
@@ -58,7 +58,7 @@ export default function About() {
                   width={400}
                   height={400}
                   alt=""
-                  className="border border-neutral-100 object-cover overflow-hidden rounded-xl"
+                  className="border border-neutral-100 dark:border-neutral-700 object-cover overflow-hidden rounded-xl"
                 />
               </CarouselItem>
             ))}

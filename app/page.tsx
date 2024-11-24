@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CarFront, MonitorSmartphone, PenLine } from "lucide-react";
 
 import Content from "~/components/content";
+import { ModeToggle } from "~/components/mode-toggle";
 import Section from "~/components/section";
 import About from "~/components/sections/about.section";
 import Education from "~/components/sections/education.section";
@@ -17,10 +18,11 @@ export default function Home() {
   return (
     <ShellPage>
       <Hi />
+      <Mode />
       <About />
       <Work />
-      <Blog />
       <Education />
+      <Blog />
       <Projects />
       <Stack />
       <Uses />
@@ -38,7 +40,7 @@ function Hi() {
           width={40}
           height={40}
           alt=""
-          className="object-cover overflow-hidden rounded-full border border-neutral-200"
+          className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
         />
       </Title>
       <Content>
@@ -59,11 +61,34 @@ function Hi() {
   );
 }
 
+function Mode() {
+  return (
+    <Section>
+      <Title text="Do you 👋">
+        <Image
+          src="/images/profile.jpeg"
+          width={40}
+          height={40}
+          alt=""
+          className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+        />
+      </Title>
+      <Content>
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+          Software Engineer based in Jakarta, Indonesia. I love building things
+          with
+        </p>
+        <ModeToggle />
+      </Content>
+    </Section>
+  );
+}
+
 function Blog() {
   return (
     <Section>
       <Title text="Blog" description="WIP">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <PenLine className="w-5 h-5" />
         </div>
       </Title>
@@ -81,7 +106,7 @@ function Uses() {
   return (
     <Section>
       <Title text="Uses">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <CarFront className="w-5 h-5" />
         </div>
       </Title>
@@ -93,7 +118,7 @@ function Contact() {
   return (
     <Section>
       <Title text="Contact" description="Get in Touch">
-        <div className="border border-neutral-200 h-10 w-10 flex justify-center items-center rounded-full">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
           <MonitorSmartphone className="w-5 h-5" />
         </div>
       </Title>
