@@ -4,12 +4,12 @@ import Link from "next/link";
 import { CarFront, PenLine } from "lucide-react";
 
 import Content from "~/components/content";
-import About from "~/components/home/about.section";
-import Contact from "~/components/home/contact.section";
-import Education from "~/components/home/education.section";
-import Stack from "~/components/home/my-stack.section";
-import Projects from "~/components/home/projects.section";
-import Work from "~/components/home/work.section";
+import About from "~/app/(home)/about.section";
+import Contact from "~/app/(home)/contact.section";
+import Education from "~/app/(home)/education.section";
+import Stack from "~/app/(home)/my-stack.section";
+import Projects from "~/app/(home)/projects.section";
+import Work from "~/app/(home)/work.section";
 import { ModeClickable, ModeEmoji, ModeToggle } from "~/components/mode-toggle";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
