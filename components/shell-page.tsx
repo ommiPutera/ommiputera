@@ -51,7 +51,7 @@ function BackBtn() {
 
 function Header({ title, withHome }: THeaderProps) {
   return (
-    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6">
+    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-2.5 md:pt-6">
       <h1 className="text-base md:text-lg font-bold">{title}</h1>
       <ul className="flex gap-3 text-sm justify-center md:text-base">
         {withHome && (
@@ -60,14 +60,14 @@ function Header({ title, withHome }: THeaderProps) {
           </li>
         )}
         <li className="underline text-muted-foreground">
-          <Link href="https://github.com/ommiPutera" target="_blank">
-            Github
+          <Link href="/" className="flex items-center">
+            <span>Resume</span>
+            <ArrowDown className="w-4 h-4 md:w-5 md:h-5 stroke-1 stroke-neutral-900 dark:stroke-neutral-100" />
           </Link>
         </li>
         <li className="underline text-muted-foreground">
-          <Link href="/" className="flex items-center">
-            <span>Resume</span>
-            <ArrowDown className="w-4 h-4 md:w-5 md:h-5 stroke-1 stroke-neutral-900" />
+          <Link href="https://github.com/ommiPutera" target="_blank">
+            Github
           </Link>
         </li>
       </ul>

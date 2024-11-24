@@ -82,7 +82,7 @@
   }
   .dark .shadow-circle {
     box-shadow:
-      0 0 12px 0 #000,
-      0 0 0 48px #000;
+      0 0 12px 0 #08090a,
+      0 0 0 48px #08090a;
   }
 }

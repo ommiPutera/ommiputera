@@ -4,13 +4,13 @@ import Link from "next/link";
 import { CarFront, MonitorSmartphone, PenLine } from "lucide-react";
 
 import Content from "~/components/content";
-import { ModeToggle } from "~/components/mode-toggle";
+import About from "~/components/home/about.section";
+import Education from "~/components/home/education.section";
+import Stack from "~/components/home/my-stack.section";
+import Projects from "~/components/home/projects.section";
+import Work from "~/components/home/work.section";
+import { ModeClickable, ModeEmoji, ModeToggle } from "~/components/mode-toggle";
 import Section from "~/components/section";
-import About from "~/components/sections/about.section";
-import Education from "~/components/sections/education.section";
-import Stack from "~/components/sections/my-stack.section";
-import Projects from "~/components/sections/projects.section";
-import Work from "~/components/sections/work.section";
 import ShellPage from "~/components/shell-page";
 import Title from "~/components/title";
 
@@ -62,26 +62,30 @@ function Hi() {
 
 function Mode() {
   return (
-    <Section>
-      <Title text="Prefer dark/light mode?">
-        <Image
-          src="/images/profile.jpeg"
-          width={40}
-          height={40}
-          alt=""
-          className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
-        />
-      </Title>
-      <Content>
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
-          Dark mode will reduce screen brightness for a more comfortable viewing
-          experience.
-        </p>
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
-          <span>Turn on {<ModeToggle />} mode by clicking this button.</span>
-        </p>
-      </Content>
-    </Section>
+    <ModeClickable>
+      <Section>
+        <Title text="Prefer dark/light mode?">
+          <Image
+            src="/images/profile.jpeg"
+            width={40}
+            height={40}
+            alt=""
+            className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+          />
+        </Title>
+        <Content>
+          <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+            Dark mode will reduce screen brightness for a more comfortable
+            viewing experience.
+          </p>
+          <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+            <span>
+              Turn on <ModeToggle /> mode by clicking this button <ModeEmoji />{" "}
+            </span>
+          </p>
+        </Content>
+      </Section>
+    </ModeClickable>
   );
 }
 

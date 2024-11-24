@@ -221,7 +221,7 @@ function DipayDisbursement() {
 function ReadMore({ href }: { href: LinkProps["href"] }) {
   return (
     <Content>
-      <div className="mt-4 md:mt-2">
+      <div className="mt-4 md:mt-3">
         <Link
           href={href}
           className="text-sm font-semibold text-blue-700 dark:text-blue-500 underline inline-flex items-center gap-1"
