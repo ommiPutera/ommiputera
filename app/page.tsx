@@ -18,8 +18,8 @@ export default function Home() {
   return (
     <ShellPage>
       <Hi />
-      <Mode />
       <About />
+      <Mode />
       <Work />
       <Education />
       <Blog />
@@ -50,11 +50,10 @@ function Hi() {
           <Link
             href="https://remix.run/"
             target="_blank"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
-            Remix
+            Remix.
           </Link>
-          .
         </p>
       </Content>
     </Section>
@@ -64,7 +63,7 @@ function Hi() {
 function Mode() {
   return (
     <Section>
-      <Title text="Do you 👋">
+      <Title text="Prefer dark/light mode?">
         <Image
           src="/images/profile.jpeg"
           width={40}
@@ -75,10 +74,12 @@ function Mode() {
       </Title>
       <Content>
         <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
-          Software Engineer based in Jakarta, Indonesia. I love building things
-          with
+          Dark mode will reduce screen brightness for a more comfortable viewing
+          experience.
         </p>
-        <ModeToggle />
+        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+          <span>Turn on {<ModeToggle />} mode by clicking this button.</span>
+        </p>
       </Content>
     </Section>
   );

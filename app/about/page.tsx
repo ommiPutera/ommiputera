@@ -52,7 +52,7 @@ function Me() {
           Feel free to browse through my{" "}
           <Link
             href="/projects"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
             projects
           </Link>{" "}
@@ -64,28 +64,28 @@ function Me() {
           <Link
             href=""
             target="_blank"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
             Twitter,{" "}
           </Link>
           <Link
             href=""
             target="_blank"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
             LinkedIn,{" "}
           </Link>
           <Link
             href=""
             target="_blank"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
             Github,{" "}
           </Link>
           <Link
             href=""
             target="_blank"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
             Instagram.
           </Link>

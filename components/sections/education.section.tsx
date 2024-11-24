@@ -30,7 +30,7 @@ export default function Education() {
               className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Purwadhika Digital Technology School
               </h4>
               <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
@@ -50,7 +50,7 @@ export default function Education() {
               className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal leading-4 text-neutral-900 dark:text-neutral-100">
                 University of Bengkulu
               </h4>
               <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">

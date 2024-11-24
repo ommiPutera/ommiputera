@@ -32,7 +32,7 @@ export default function About() {
           <br />
           <Link
             href="/about"
-            className="font-medium text-blue-700 hover:underline"
+            className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
           >
             Show more
           </Link>

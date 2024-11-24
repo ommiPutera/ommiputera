@@ -31,7 +31,7 @@ export default function Work() {
           <Link
             href="https://dipay.id/"
             target="_blank"
-            className="text-blue-700 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
           >
             Dipay
           </Link>
@@ -44,7 +44,7 @@ export default function Work() {
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 dark:border-neutral-800 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-slate-50 focus-visible:bg-slate-100"
+          className="border border-neutral-200 dark:border-neutral-800 rounded-xl px-2 py-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-neutral-50 hover:dark:bg-neutral-900 focus-visible:bg-slate-100"
         >
           <div className="flex items-start gap-2.5">
             <Image
@@ -55,7 +55,7 @@ export default function Work() {
               className="border border-neutral-100 dark:border-neutral-700 overflow-hidden"
             />
             <div>
-              <h4 className="text-sm font-semibold tracking-normal text-neutral-900">
+              <h4 className="text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
               </h4>
               <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
