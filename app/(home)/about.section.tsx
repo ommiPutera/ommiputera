@@ -41,7 +41,7 @@ export default function About() {
       <Br />
       <Content>
         <Carousel>
-          <CarouselContent overflowVisible className="-ml-0.5">
+          <CarouselContent overflowVisible className="-ml-2">
             {[
               "ommi-original.webp",
               "my-laptop.webp",
@@ -50,7 +50,7 @@ export default function About() {
               "me.webp",
             ].map((image) => (
               <CarouselItem
-                className="pl-0.5 overflow-hidden rounded-xl max-h-[400px] max-w-[400px]"
+                className="pl-2 overflow-hidden rounded-xl max-h-[400px] max-w-[400px]"
                 key={image}
               >
                 <Image

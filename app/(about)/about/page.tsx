@@ -94,7 +94,7 @@ function Me() {
       <Br />
       <Content>
         <Carousel>
-          <CarouselContent overflowVisible className="-ml-0.5">
+          <CarouselContent overflowVisible className="-ml-2">
             {[
               "ommi-original.webp",
               "my-laptop.webp",
@@ -103,7 +103,7 @@ function Me() {
               "me.webp",
             ].map((image) => (
               <CarouselItem
-                className="pl-0.5 overflow-hidden rounded-xl"
+                className="pl-2 overflow-hidden rounded-xl"
                 key={image}
               >
                 <Image

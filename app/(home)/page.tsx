@@ -3,13 +3,13 @@ import Link from "next/link";
 
 import { CarFront, PenLine } from "lucide-react";
 
-import Content from "~/components/content";
 import About from "~/app/(home)/about.section";
 import Contact from "~/app/(home)/contact.section";
 import Education from "~/app/(home)/education.section";
 import Stack from "~/app/(home)/my-stack.section";
 import Projects from "~/app/(home)/projects.section";
 import Work from "~/app/(home)/work.section";
+import Content from "~/components/content";
 import { ModeClickable, ModeEmoji, ModeToggle } from "~/components/mode-toggle";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
@@ -47,8 +47,8 @@ function Hi() {
       </Title>
       <Content>
         <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
-          Software Engineer based in Jakarta, Indonesia. I love building things
-          with{" "}
+          Software Engineer based in Jakarta, 🇮🇩 Indonesia. I love building
+          things with{" "}
           <Link
             href="https://remix.run/"
             target="_blank"
