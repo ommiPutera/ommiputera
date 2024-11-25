@@ -104,7 +104,7 @@ const TimelineDate = React.forwardRef<
   <p
     ref={ref}
     className={cn(
-      "text-xs md:text-sm font-normal text-neutral-700 dark:text-neutral-300 leading-5",
+      "text-sm font-normal text-neutral-700 dark:text-neutral-300 leading-5",
       className,
     )}
     {...props}

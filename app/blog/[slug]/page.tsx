@@ -113,8 +113,22 @@ export default async function Blog({
             />
           </div>
         </div>
+        <div className="mt-2 flex flex-col gap-4">
+          <h2 className="text-2xl font-bold tracking-tight mt-0.5 md:mt-0">
+            {post.metadata.title}
+          </h2>
+          <div className="rounded-xl overflow-hidden">
+            <Image
+              src={post.metadata.image}
+              width={800}
+              height={40}
+              alt=""
+              className="h-[450px] md:h-[300px] object-cover"
+            />
+          </div>
+        </div>
         <article
-          className="prose dark:prose-invert mt-1 text-xs md:text-sm font-normal text-accent-foreground leading-5"
+          className="prose dark:prose-invert mt-6"
           dangerouslySetInnerHTML={{ __html: post.source }}
         ></article>
       </Section>

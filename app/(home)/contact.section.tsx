@@ -9,11 +9,11 @@ import Section from "~/components/section";
 export default function Contact() {
   return (
     <Section>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <MonitorSmartphone className="w-5 h-5" />
       </div>
       <Content title="Contact">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Would you be interested in working on a project together? I&apos;d
           love to hear your thoughts.
         </p>

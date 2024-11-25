@@ -1,5 +1,7 @@
 import { Suspense } from "react";
 
+import { cn } from "~/lib/utils";
+
 export default function Content({
   children,
   title,
@@ -12,16 +14,7 @@ export default function Content({
   return (
     <div className="ml-[48px] -mt-10 flex flex-col gap-3 md:gap-4 bg-white dark:bg-black">
       <div>
-        <h2 className="text-sm md:text-base font-bold tracking-normal">
-          {title}
-        </h2>
-        {description && (
-          <Suspense fallback={<p className="h-5" />}>
-            <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1.5">
-              {description}
-            </p>
-          </Suspense>
-        )}
+        <ContentTitle title={title} description={description} />
         {children}
       </div>
     </div>
@@ -37,12 +30,17 @@ export function ContentTitle({
 }) {
   return (
     <>
-      <h2 className="text-[15px] leading-5 break-all md:text-base font-bold tracking-normal md:leading-4 mt-0.5 md:mt-0">
+      <h2
+        className={cn(
+          "text-sm md:text-base font-bold tracking-normal md:leading-4 mt-0.5 md:mt-1",
+          !description && "mb-1 md:mb-1.5",
+        )}
+      >
         {title}
       </h2>
       {description && (
         <Suspense fallback={<p className="h-5" />}>
-          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1.5">
+          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1 mt-0 md:mt-1">
             {description}
           </p>
         </Suspense>

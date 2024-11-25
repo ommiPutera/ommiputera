@@ -27,7 +27,7 @@ export default function Section({
     <section
       id={id}
       className={cn(
-        "flex flex-col px-2 py-4 md:py-8 md:px-6 overflow-hidden cursor-pointer relative",
+        "flex flex-col p-4 md:py-8 md:px-6 overflow-hidden cursor-pointer relative",
         className,
       )}
       onClick={() => (href ? router.push(href.toString()) : null)}
@@ -36,7 +36,7 @@ export default function Section({
       {withConnector && (
         <TimelineConnector
           className={cn(
-            "left-7 md:left-11 top-14 z-[1] h-[calc(100%_-_44px)]",
+            "left-9 md:left-11 top-12 md:top-9 z-[1] h-[calc(100%_-_44px)]",
             connectorClassName,
           )}
         />

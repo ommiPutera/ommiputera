@@ -47,7 +47,7 @@ function Hi() {
         />
       </div>
       <Content title="Hi, I'm Ommi Putera 👋" description="Introduction">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Software Engineer based in Jakarta, 🇮🇩 Indonesia. I love building
           things with{" "}
           <Link
@@ -77,11 +77,11 @@ function Mode() {
           />
         </div>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
-          <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+          <p className="text-sm font-normal text-accent-foreground leading-5">
             Dark mode will reduce screen brightness for a more comfortable
             viewing experience.
           </p>
-          <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+          <p className="text-sm font-normal text-accent-foreground leading-5">
             <span>
               Turn on <ModeToggle /> mode by clicking this button <ModeEmoji />{" "}
             </span>
@@ -95,11 +95,11 @@ function Mode() {
 function Blog() {
   return (
     <Section href="/blog">
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <PenLine className="w-5 h-5" />
       </div>
       <Content title="Blog" description="WIP">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           My blog is a work in progress. I&apos;m looking forward to sharing my
           thoughts and insights soon. 💪
         </p>
@@ -111,7 +111,7 @@ function Blog() {
 function Uses() {
   return (
     <Section>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CarFront className="w-5 h-5" />
       </div>
       <Content title="Uses">

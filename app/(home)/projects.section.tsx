@@ -23,11 +23,11 @@ export default function Projects() {
 function Intro() {
   return (
     <Section withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderOpen className="w-5 h-5" />
       </div>
       <Content title="Projects 🔥" description="Curated">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           <span>
             Here are some showcase of my latest projects. They&apos;re sure to
             catch your eye!
@@ -48,11 +48,11 @@ function Intro() {
 function Close() {
   return (
     <Section className="pt-0 md:pt-0" href="/">
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderClosed className="w-5 h-5" />
       </div>
       <Content title="More Project">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           <span>Interested in checking out more? </span>
           <Link
             href="/about"
@@ -74,14 +74,14 @@ function DipayCore() {
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Sparkle className="w-5 h-5" />
       </div>
       <Content
-        title="In Charge of Development for Dipay Core"
+        title="In Charge of Development for Dipay Core Dashboard"
         description="Dipay Indonesia"
       >
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -110,14 +110,14 @@ function Dipay() {
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Sparkle className="w-5 h-5" />
       </div>
       <Content
         title="Revamped a Landing Page using Next.js"
         description="Dipay Indonesia"
       >
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -146,14 +146,14 @@ function Naufal() {
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Sparkle className="w-5 h-5" />
       </div>
       <Content
         title="Personal/Porfolio Website for Naufal Ghifari"
         description="2022"
       >
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -182,14 +182,14 @@ function DipayDisbursement() {
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Sparkle className="w-5 h-5" />
       </div>
       <Content
         title="Development of Dipay Disbursement"
         description="Dipay Indonesia - 2024"
       >
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on

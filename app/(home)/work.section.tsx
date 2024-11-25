@@ -20,11 +20,11 @@ import Br from "~/components/br";
 export default function Work() {
   return (
     <Section>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Briefcase className="w-5 h-5" />
       </div>
       <Content title="Work Experience">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           During my time at{" "}
           <Link
             href="https://dipay.id/"
@@ -64,7 +64,7 @@ export default function Work() {
                 <Dot className="text-slate-400 w-3 h-3" />
                 <span>3yrs 2mos</span>
               </p>
-              <p className="text-xs md:text-sm font-normal text-muted-foreground">
+              <p className="text-sm font-normal text-muted-foreground">
                 Jakarta, Indonesia - On-site
               </p>
             </div>

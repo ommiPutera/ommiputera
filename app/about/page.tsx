@@ -22,27 +22,27 @@ export default function About() {
 function Me() {
   return (
     <Section withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CornerUpRight className="w-5 h-5" />
       </div>
       <Content title="About">
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Highly motivated and results-driven Software Engineer with 3+ years of
           experience specializing in scalable frontend and backend development
           for fintech products.
         </p>
         <Br />
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Proven ability to lead high-impact projects, build seamless user
           experiences, and contribute to a collaborative team environment.
         </p>
         <Br />
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           Expertise in React, Next.js, Remix, Node.js, and Nest.js, with a
           strong focus on stability, performance, and security.
         </p>
         <Br />
-        <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal text-accent-foreground leading-5">
           I enjoy taking on new challenges and continuously improving my skills.
           Feel free to browse through my{" "}
           <Link
@@ -96,7 +96,7 @@ function Me() {
 function Section2() {
   return (
     <Section className="pt-0 md:pt-0">
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CornerUpRight className="w-5 h-5" />
       </div>
       <Content title="Here are some of the values I live by.">

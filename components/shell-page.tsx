@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowDown, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -51,18 +51,12 @@ function BackBtn() {
 
 function Header({ title, withHome }: THeaderProps) {
   return (
-    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-2.5 md:pt-6">
+    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3 md:pt-6">
       <h1 className="text-base md:text-lg font-bold">{title}</h1>
-      <ul className="flex gap-2 text-sm justify-center md:text-base">
-        {withHome && (
-          <li className="underline text-muted-foreground">
-            <Link href="/">Home</Link>
-          </li>
-        )}
+      <ul className="flex gap-4 text-sm justify-center md:text-base mt-1">
         <li className="underline text-muted-foreground">
           <Link href="/" className="flex items-center">
-            <span>Resume</span>
-            <ArrowDown className="w-4 h-4 md:w-5 md:h-5 stroke-1 stroke-neutral-900 dark:stroke-neutral-100" />
+            Resume
           </Link>
         </li>
         <li className="underline text-muted-foreground">
@@ -70,6 +64,11 @@ function Header({ title, withHome }: THeaderProps) {
             Github
           </Link>
         </li>
+        {withHome && (
+          <li className="underline text-muted-foreground">
+            <Link href="/">Home</Link>
+          </li>
+        )}
       </ul>
     </div>
   );
@@ -79,7 +78,7 @@ function RoundedBorder() {
   return (
     <div>
       <div className="w-full h-3 top-[calc(var(--hero-height-mobile)_-_11px)] md:top-[calc(var(--hero-height)_-_11.5px)] absolute overflow-hidden">
-        <div className="w-[calc(100%_-_100px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-b border-neutral-200 dark:border-neutral-800"></div>
+        <div className="w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-b border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden left-2 md:left-14">
         <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tl-3xl shadow-circle"></div>
@@ -94,10 +93,10 @@ function RoundedBorder() {
 function Footer() {
   return (
     <div className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16">
-      <p className="text-xs md:text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
+      <p className="text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
         © {new Date().getFullYear()} Ommi Putera. All rights reserved.
       </p>
-      <p className="text-xs md:text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
+      <p className="text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
         Build with Kapal Api and 76 Mangga.
       </p>
     </div>
