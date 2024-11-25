@@ -114,21 +114,31 @@ export default async function Blog({
           </div>
         </div>
         <div className="mt-2 flex flex-col gap-4">
-          <h2 className="text-2xl font-bold tracking-tight mt-0.5 md:mt-0">
-            {post.metadata.title}
-          </h2>
-          <div className="rounded-xl border border-neutral-100 dark:border-neutral-800 overflow-hidden">
-            <Image
-              src={post.metadata.image}
-              width={800}
-              height={40}
-              alt=""
-              className="h-[220px] md:h-[300px] object-cover"
-            />
+          <div className="flex flex-col gap-2">
+            <h2 className="text-2xl font-extrabold tracking-tight mt-0.5 md:mt-0">
+              {post.metadata.title}
+            </h2>
+            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal text-accent-foreground leading-5">
+              {post.metadata.summary}
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 md:gap-2 w-[calc(100%_+_32px)] md:w-full -ml-4 md:ml-0">
+            <div className="md:rounded-xl md:border border-neutral-100 dark:border-neutral-800 overflow-hidden">
+              <Image
+                src={post.metadata.image}
+                width={800}
+                height={40}
+                alt={post.metadata.bannerCredit}
+                className="h-[220px] md:h-[300px] object-cover"
+              />
+            </div>
+            <p className="text-xs text-center text-neutral-400 dark:text-neutral-500 leading-4">
+              {post.metadata.bannerCredit}
+            </p>
           </div>
         </div>
         <article
-          className="prose dark:prose-invert mt-6"
+          className="prose dark:prose-invert mt-8"
           dangerouslySetInnerHTML={{ __html: post.source }}
         ></article>
       </Section>

@@ -21,7 +21,7 @@ export default function ShellPage({
 } & THeaderProps) {
   return (
     <div className="container mx-auto max-w-[680px]">
-      <main className="flex flex-col relative">
+      <main className="flex flex-col relative overflow-hidden">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header title={title} withHome={withHome} />
           {withBack && <BackBtn />}
