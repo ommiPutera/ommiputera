@@ -28,7 +28,7 @@ export default function ShellPage({
           <RoundedBorder />
         </div>
         <div className="px-3 md:px-14 relative overflow-hidden">
-          <div className="bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 relative">
+          <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 relative">
             {children}
             <Footer />
           </div>

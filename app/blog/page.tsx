@@ -1,7 +1,10 @@
 import { PenLine } from "lucide-react";
 
-import { getBlogPosts } from "~/data/blog";
+import Image from "next/image";
 
+import { getBlogPosts, Metadata } from "~/data/blog";
+
+import Br from "~/components/br";
 import Content from "~/components/content";
 import ReadMore from "~/components/read-more";
 import Section from "~/components/section";
@@ -26,16 +29,15 @@ export default async function BlogPage() {
       <div>
         <Blog />
         {blogs.map((post, index) => {
-          const title = post.metadata.title;
           const slug = post.slug;
-          const publishedAt = post.metadata.publishedAt;
+          const source = post.source;
           return (
             <BlogItem
               key={post.slug}
-              title={title}
+              source={source}
               slug={slug}
-              publishedAt={publishedAt}
               isTheLastItem={index === blogs.length - 1}
+              {...(post.metadata as Metadata)}
             />
           );
         })}
@@ -60,16 +62,17 @@ function Blog() {
 }
 
 function BlogItem({
-  title,
   slug,
-  publishedAt,
   isTheLastItem,
+  publishedAt,
+  image,
+  summary,
+  title,
 }: {
-  title: string;
   slug: string;
-  publishedAt: string;
+  source: string;
   isTheLastItem: boolean;
-}) {
+} & Metadata) {
   return (
     <Section
       href={`/blog/${slug}`}
@@ -82,11 +85,12 @@ function BlogItem({
       </div>
       <Content title={title} description={publishedAt}>
         <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
-          Improve the accuracy and efficiency of image recognition technology.
-          By creating our own tools, we can customize the annotation process to
-          fit the specific needs and requirements, rather than relying on
-          third-party tools.
+          {summary}
         </p>
+        <Br />
+        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
+          <Image src={image} width={800} height={400} alt="" />
+        </div>
       </Content>
       <ReadMore href={`/blog/${slug}`} />
     </Section>
