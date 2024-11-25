@@ -53,10 +53,15 @@ function Header({ title, withHome }: THeaderProps) {
   return (
     <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3 md:pt-6">
       <h1 className="text-base md:text-lg font-bold">{title}</h1>
-      <ul className="flex gap-4 text-sm justify-center md:text-base mt-1">
+      <ul className="flex gap-3 md:gap-4 text-sm justify-center md:text-base mt-1.5 md:mt-1">
         <li className="underline text-muted-foreground">
           <Link href="/" className="flex items-center">
             Resume
+          </Link>
+        </li>
+        <li className="underline text-muted-foreground">
+          <Link href="/blog" className="flex items-center">
+            Blog
           </Link>
         </li>
         <li className="underline text-muted-foreground">

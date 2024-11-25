@@ -10,7 +10,7 @@ export default function Contact() {
   return (
     <Section>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <MonitorSmartphone className="w-5 h-5" />
+        <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Contact">
         <p className="text-sm font-normal text-accent-foreground leading-5">
@@ -28,7 +28,7 @@ export default function Contact() {
           >
             <div className="flex items-center gap-1.5">
               <div>
-                <Mail className="w-5 h-5" />
+                <Mail className="w-4 h-4 md:w-5 md:h-5" />
               </div>
               <p className="text-xs md:text-sm font-medium text-accent-foreground leading-5">
                 Email me
@@ -42,7 +42,7 @@ export default function Contact() {
           >
             <div className="flex items-center gap-1.5">
               <div>
-                <Smartphone className="w-5 h-5" />
+                <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
               </div>
               <p className="text-xs md:text-sm font-medium text-accent-foreground leading-5">
                 WhatsApp me

@@ -26,7 +26,7 @@ export default function AboutGalery() {
               width={400}
               height={400}
               alt=""
-              className="border border-neutral-100 dark:border-neutral-700 object-cover overflow-hidden rounded-xl"
+              className="border border-neutral-100 dark:border-neutral-800 object-cover overflow-hidden rounded-xl"
             />
           </CarouselItem>
         ))}

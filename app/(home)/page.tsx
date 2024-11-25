@@ -96,7 +96,7 @@ function Blog() {
   return (
     <Section href="/blog">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <PenLine className="w-5 h-5" />
+        <PenLine className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Blog" description="WIP">
         <p className="text-sm font-normal text-accent-foreground leading-5">
@@ -112,7 +112,7 @@ function Uses() {
   return (
     <Section>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <CarFront className="w-5 h-5" />
+        <CarFront className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Uses">
         <p className="text-sm text-accent-foreground leading-5">

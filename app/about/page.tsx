@@ -23,7 +23,7 @@ function Me() {
   return (
     <Section withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <CornerUpRight className="w-5 h-5" />
+        <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
         <p className="text-sm font-normal text-accent-foreground leading-5">
@@ -97,7 +97,7 @@ function Section2() {
   return (
     <Section className="pt-0 md:pt-0">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <CornerUpRight className="w-5 h-5" />
+        <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Here are some of the values I live by.">
         <p className="text-sm text-accent-foreground leading-5">WIP</p>

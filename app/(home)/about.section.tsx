@@ -11,7 +11,7 @@ export default function About() {
   return (
     <Section href="/about">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <CornerUpRight className="w-5 h-5" />
+        <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
         <p className="text-sm font-normal text-accent-foreground leading-5">

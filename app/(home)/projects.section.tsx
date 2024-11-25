@@ -24,7 +24,7 @@ function Intro() {
   return (
     <Section withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <FolderOpen className="w-5 h-5" />
+        <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Projects 🔥" description="Curated">
         <p className="text-sm font-normal text-accent-foreground leading-5">
@@ -49,7 +49,7 @@ function Close() {
   return (
     <Section className="pt-0 md:pt-0" href="/">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <FolderClosed className="w-5 h-5" />
+        <FolderClosed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="More Project">
         <p className="text-sm font-normal text-accent-foreground leading-5">
@@ -75,7 +75,7 @@ function DipayCore() {
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Sparkle className="w-5 h-5" />
+        <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content
         title="In Charge of Development for Dipay Core Dashboard"
@@ -111,7 +111,7 @@ function Dipay() {
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Sparkle className="w-5 h-5" />
+        <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content
         title="Revamped a Landing Page using Next.js"
@@ -147,7 +147,7 @@ function Naufal() {
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Sparkle className="w-5 h-5" />
+        <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content
         title="Personal/Porfolio Website for Naufal Ghifari"
@@ -183,7 +183,7 @@ function DipayDisbursement() {
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Sparkle className="w-5 h-5" />
+        <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content
         title="Development of Dipay Disbursement"
@@ -218,7 +218,7 @@ function ReadMore({ href }: { href: LinkProps["href"] }) {
         className="text-sm font-semibold text-blue-700 dark:text-blue-500 underline inline-flex items-center gap-1"
       >
         <span>Read more</span>
-        <ArrowUpRight className="w-5 h-5" />
+        <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </Link>
     </div>
   );

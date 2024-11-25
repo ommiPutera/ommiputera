@@ -50,7 +50,7 @@ function Blog() {
   return (
     <Section withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <PenLine className="w-5 h-5" />
+        <PenLine className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="The latest of my writing here">
         <p className="text-sm font-normal text-accent-foreground leading-5">
@@ -82,7 +82,7 @@ function BlogItem({
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <PenLine className="w-5 h-5" />
+        <PenLine className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title={title} description={publishedAt}>
         <p className="text-sm font-normal text-accent-foreground leading-5">
