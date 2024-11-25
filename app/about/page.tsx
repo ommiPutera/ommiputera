@@ -10,7 +10,7 @@ import ShellPage from "~/components/shell-page";
 
 export default function About() {
   return (
-    <ShellPage title="ommiputera.com" withHome withBack>
+    <ShellPage title="About" withHome withBack>
       <div>
         <Me />
         <Section2 />

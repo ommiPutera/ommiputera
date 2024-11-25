@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
-import Content from "~/components/content";
+import { ContentTitle } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
@@ -72,7 +72,7 @@ export default async function Blog({
   }
 
   return (
-    <ShellPage title={post.metadata.title} withHome withBack>
+    <ShellPage title="Blog" withHome withBack>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -96,24 +96,27 @@ export default async function Blog({
         }}
       />
       <Section>
-        <div>
-          <Image
-            src="/images/profile.jpeg"
-            width={40}
-            height={40}
-            alt=""
-            className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
-          />
+        <div className="flex gap-2">
+          <div className="w-full max-w-10">
+            <Image
+              src="/images/profile.jpeg"
+              width={40}
+              height={40}
+              alt=""
+              className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+            />
+          </div>
+          <div className="w-full">
+            <ContentTitle
+              title="Ommi Putera"
+              description={formatDate(post.metadata.publishedAt)}
+            />
+          </div>
         </div>
-        <Content
-          title={post.metadata.title}
-          description={formatDate(post.metadata.publishedAt)}
-        >
-          <article
-            className="prose dark:prose-invert text-xs md:text-sm font-normal text-accent-foreground leading-5"
-            dangerouslySetInnerHTML={{ __html: post.source }}
-          ></article>
-        </Content>
+        <article
+          className="prose dark:prose-invert mt-1 text-xs md:text-sm font-normal text-accent-foreground leading-5"
+          dangerouslySetInnerHTML={{ __html: post.source }}
+        ></article>
       </Section>
     </ShellPage>
   );
