@@ -87,10 +87,14 @@ function BlogItem({
         <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           {summary}
         </p>
-        <Br />
-        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
-          <Image src={image} width={800} height={400} alt="" />
-        </div>
+        {image && (
+          <div>
+            <Br />
+            <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
+              <Image src={image} width={800} height={400} alt="" />
+            </div>
+          </div>
+        )}
       </Content>
       <ReadMore href={`/blog/${slug}`} />
     </Section>

@@ -1,23 +1,21 @@
-import { getBlogPosts, getPost } from "~/data/blog";
-import { DATA } from "~/data/resume";
-import { formatDate } from "~/lib/utils";
-import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import { getBlogPosts, getPost } from "~/data/blog";
+import { DATA } from "~/data/resume";
+
+import { formatDate } from "~/lib/utils";
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  return posts.map((post) => ({
+    slug: post.slug,
+  }))
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: {
-    slug: string;
-  };
-}): Promise<Metadata | undefined> {
-  const post = await getPost(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   const {
     title,
@@ -53,14 +51,9 @@ export async function generateMetadata({
   };
 }
 
-export default async function Blog({
-  params,
-}: {
-  params: {
-    slug: string;
-  };
-}) {
-  const post = await getPost(params.slug);
+export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPost(slug);
 
   if (!post) {
     notFound();
