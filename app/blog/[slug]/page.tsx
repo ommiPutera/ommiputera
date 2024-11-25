@@ -118,7 +118,7 @@ export default async function Blog({
             <h2 className="text-2xl font-extrabold tracking-tight mt-0.5 md:mt-0">
               {post.metadata.title}
             </h2>
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal text-accent-foreground leading-5">
+            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal leading-5">
               {post.metadata.summary}
             </p>
           </div>
@@ -132,7 +132,7 @@ export default async function Blog({
                 className="h-[220px] md:h-[300px] object-cover"
               />
             </div>
-            <p className="text-xs text-center text-neutral-400 dark:text-neutral-500 leading-4">
+            <p className="text-xs text-center text-neutral-400 dark:text-neutral-500 leading-4 px-6">
               {post.metadata.bannerCredit}
             </p>
           </div>

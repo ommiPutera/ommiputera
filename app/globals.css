@@ -34,7 +34,7 @@
     --radius: 0.5rem;
 
     --hero-height: 100px;
-    --hero-height-mobile: 80px;
+    --hero-height-mobile: 84px;
   }
 
   .dark {
@@ -91,5 +91,5 @@
   @apply text-xl mt-3 font-bold;
 }
 .prose p {
-  @apply text-sm font-normal text-accent-foreground leading-5 mt-2;
+  @apply text-sm font-normal leading-5 mt-2;
 }

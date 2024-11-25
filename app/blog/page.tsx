@@ -4,6 +4,8 @@ import Image from "next/image";
 
 import { getBlogPosts, Metadata } from "~/data/blog";
 
+import { formatDate } from "~/lib/utils";
+
 import Br from "~/components/br";
 import Content from "~/components/content";
 import ReadMore from "~/components/read-more";
@@ -52,9 +54,14 @@ function Blog() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <PenLine className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="The latest of my writing here">
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+      <Content title="Blog">
+        <p className="text-sm font-normal  leading-5">
           Find the latest of my writing here.
+        </p>
+        <Br />
+        <p className="text-sm font-normal  leading-5">
+          My blog is a work in progress. I&apos;m looking forward to sharing my
+          thoughts and insights soon. 💪
         </p>
       </Content>
     </Section>
@@ -84,10 +91,8 @@ function BlogItem({
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <PenLine className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title={title} description={publishedAt}>
-        <p className="text-sm font-normal text-accent-foreground leading-5">
-          {summary}
-        </p>
+      <Content title={title} description={formatDate(publishedAt)}>
+        <p className="text-sm font-normal  leading-5">{summary}</p>
         {image && (
           <div>
             <Br />

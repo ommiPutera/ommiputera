@@ -13,7 +13,7 @@ export default function Education() {
         <Library className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Education">
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           Purwadhika helped me dive into the world of web development. I learned
           how to build websites and apps, and also how to become an effective
           learner.
@@ -37,7 +37,7 @@ export default function Education() {
               <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
                 Jan 2021 - Aug 2021
               </p>
-              <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
+              <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
                 Full Stack Web and Mobile Development
               </p>
             </div>
@@ -59,7 +59,7 @@ export default function Education() {
               <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
                 Aug 2016 - Aug 2020
               </p>
-              <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
+              <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
                 Bachelor of Economics
               </p>
             </div>

@@ -24,7 +24,7 @@ export default function Work() {
         <Briefcase className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Work Experience">
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           During my time at{" "}
           <Link
             href="https://dipay.id/"
@@ -59,7 +59,7 @@ export default function Work() {
               <h4 className="text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
               </h4>
-              <p className="text-xs md:text-sm mt-0.5 font-normal text-accent-foreground inline-flex items-center">
+              <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
                 <span>Full-time</span>
                 <Dot className="text-slate-400 w-3 h-3" />
                 <span>3yrs 2mos</span>

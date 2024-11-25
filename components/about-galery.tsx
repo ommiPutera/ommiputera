@@ -9,7 +9,7 @@ import {
 export default function AboutGalery() {
   return (
     <Carousel>
-      <CarouselContent overflowVisible className="-ml-2">
+      <CarouselContent overflowVisible className="-ml-1 md:-ml-2">
         {[
           "ommi-original.webp",
           "my-laptop.webp",
@@ -18,7 +18,7 @@ export default function AboutGalery() {
           "me.webp",
         ].map((image) => (
           <CarouselItem
-            className="pl-2 overflow-hidden rounded-xl max-h-[400px] max-w-[400px]"
+            className="pl-1 md:pl-2 overflow-hidden rounded-xl max-h-[400px] max-w-[400px]"
             key={image}
           >
             <Image

@@ -12,7 +12,7 @@ export default function Content({
   description?: string;
 }) {
   return (
-    <div className="ml-[48px] -mt-10 flex flex-col gap-3 md:gap-4 bg-white dark:bg-black">
+    <div className="ml-[48px] md:ml-[52px] -mt-10 flex flex-col gap-3 md:gap-4 bg-white dark:bg-black">
       <div>
         <ContentTitle title={title} description={description} />
         {children}

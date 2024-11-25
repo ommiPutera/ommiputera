@@ -14,15 +14,16 @@ export default function About() {
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal leading-5">
           Highly motivated and results-driven Software Engineer with 3+ years of
           experience specializing in scalable frontend and backend development
           for fintech products.
         </p>
         <Br />
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal leading-5">
           <span>Proven ability to lead high-impact projects</span>
-          <br />
+        </p>
+        <p className="text-sm font-normal leading-5">
           <Link
             href="/about"
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"

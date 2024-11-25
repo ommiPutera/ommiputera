@@ -13,7 +13,7 @@ export default function Contact() {
         <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Contact">
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           Would you be interested in working on a project together? I&apos;d
           love to hear your thoughts.
         </p>
@@ -30,7 +30,7 @@ export default function Contact() {
               <div>
                 <Mail className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-xs md:text-sm font-medium text-accent-foreground leading-5">
+              <p className="text-xs md:text-sm font-medium  leading-5">
                 Email me
               </p>
             </div>
@@ -44,7 +44,7 @@ export default function Contact() {
               <div>
                 <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-xs md:text-sm font-medium text-accent-foreground leading-5">
+              <p className="text-xs md:text-sm font-medium  leading-5">
                 WhatsApp me
               </p>
             </div>

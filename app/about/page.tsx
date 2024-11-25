@@ -26,23 +26,23 @@ function Me() {
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           Highly motivated and results-driven Software Engineer with 3+ years of
           experience specializing in scalable frontend and backend development
           for fintech products.
         </p>
         <Br />
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           Proven ability to lead high-impact projects, build seamless user
           experiences, and contribute to a collaborative team environment.
         </p>
         <Br />
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           Expertise in React, Next.js, Remix, Node.js, and Nest.js, with a
           strong focus on stability, performance, and security.
         </p>
         <Br />
-        <p className="text-sm font-normal text-accent-foreground leading-5">
+        <p className="text-sm font-normal  leading-5">
           I enjoy taking on new challenges and continuously improving my skills.
           Feel free to browse through my{" "}
           <Link
@@ -55,7 +55,7 @@ function Me() {
           say hello, don&apos;t hesitate to reach out!
         </p>
         <Br />
-        <p className="text-sm text-accent-foreground leading-5">
+        <p className="text-sm  leading-5">
           <span>You can follow me on</span>{" "}
           <Link
             href=""
@@ -100,7 +100,7 @@ function Section2() {
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Here are some of the values I live by.">
-        <p className="text-sm text-accent-foreground leading-5">WIP</p>
+        <p className="text-sm  leading-5">WIP</p>
       </Content>
     </Section>
   );
