@@ -22,7 +22,7 @@ export default function Section({
 }) {
   const router = useRouter();
   return (
-    <div
+    <section
       className={cn(
         "flex flex-col px-2 py-4 md:py-8 md:px-6 overflow-hidden cursor-pointer relative",
         className,
@@ -38,6 +38,6 @@ export default function Section({
           )}
         />
       )}
-    </div>
+    </section>
   );
 }

@@ -94,7 +94,7 @@ function Mode() {
 
 function Blog() {
   return (
-    <Section>
+    <Section href="/blog">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
         <PenLine className="w-5 h-5" />
       </div>
