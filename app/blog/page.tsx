@@ -72,6 +72,7 @@ function BlogItem({
   slug: string;
   source: string;
   isTheLastItem: boolean;
+  id?: string;
 } & Metadata) {
   return (
     <Section

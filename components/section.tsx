@@ -13,16 +13,19 @@ export default function Section({
   className = "",
   connectorClassName = "",
   withConnector = false,
+  id,
 }: {
   children: React.ReactNode;
   href?: LinkProps["href"];
   className?: string;
   connectorClassName?: string;
   withConnector?: boolean;
+  id?: string;
 }) {
   const router = useRouter();
   return (
     <section
+      id={id}
       className={cn(
         "flex flex-col px-2 py-4 md:py-8 md:px-6 overflow-hidden cursor-pointer relative",
         className,

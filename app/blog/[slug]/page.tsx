@@ -1,5 +1,9 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
+
+import Content from "~/components/content";
+import Section from "~/components/section";
+import ShellPage from "~/components/shell-page";
 
 import { getBlogPosts, getPost } from "~/data/blog";
 import { DATA } from "~/data/resume";
@@ -10,10 +14,14 @@ export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({
     slug: post.slug,
-  }))
+  }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await getPost(slug);
 
@@ -51,7 +59,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+export default async function Blog({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await getPost(slug);
 
@@ -60,7 +72,7 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
   }
 
   return (
-    <section id="blog">
+    <ShellPage title={post.metadata.title} withHome withBack>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -83,20 +95,26 @@ export default async function Blog({ params }: { params: Promise<{ slug: string 
           }),
         }}
       />
-      <h1 className="title font-medium text-2xl tracking-tighter max-w-[650px]">
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm max-w-[650px]">
-        <Suspense fallback={<p className="h-5" />}>
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">
-            {formatDate(post.metadata.publishedAt)}
-          </p>
-        </Suspense>
-      </div>
-      <article
-        className="prose dark:prose-invert"
-        dangerouslySetInnerHTML={{ __html: post.source }}
-      ></article>
-    </section>
+      <Section>
+        <div>
+          <Image
+            src="/images/profile.jpeg"
+            width={40}
+            height={40}
+            alt=""
+            className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+          />
+        </div>
+        <Content
+          title={post.metadata.title}
+          description={formatDate(post.metadata.publishedAt)}
+        >
+          <article
+            className="prose dark:prose-invert text-xs md:text-sm font-normal text-accent-foreground leading-5"
+            dangerouslySetInnerHTML={{ __html: post.source }}
+          ></article>
+        </Content>
+      </Section>
+    </ShellPage>
   );
 }

@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 export default function Content({
   children,
   title,
@@ -14,9 +16,11 @@ export default function Content({
           {title}
         </h2>
         {description && (
-          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1.5">
-            {description}
-          </p>
+          <Suspense fallback={<p className="h-5" />}>
+            <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1.5">
+              {description}
+            </p>
+          </Suspense>
         )}
         {children}
       </div>

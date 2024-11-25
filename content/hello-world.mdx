@@ -1,8 +1,22 @@
 ---
-title: "Hello World"
+title: "Common mistakes with React Testing Library"
 publishedAt: "2024-06-18"
 summary: "My first post on my new blog."
 image: "https://images.unsplash.com/photo-1522424427542-e6fc86ff5253?q=80&w=2948&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 ---
 
-Hi there 👋 I created React Testing Library because I wasn't satisfied with the testing landscape at the time. It expanded to DOM Testing Library and now we have Testing Library implementations (wrappers) for every popular JavaScript framework and testing tool that targets the DOM (and even some that don't).
+Finding a sweet spot in the middle of the spectrum of abstraction is key to
+developing maintainable tests.
+
+## ANA Testing
+
+The best example of "Absolutely No Abstraction" I've seen in testing is for
+[ExpressJS route handlers](https://expressjs.com/en/guide/routing.html). For you
+to understand what I mean when I say "ANA is bad for testing" I'm going to give
+you a typical test file and ask you to pretend you're going to maintain this
+codebase and these tests. It's important for you to understand how this route
+works. You're relieved that there are tests in place which will help you make
+sure you're not going to break something. So now you're going to use the tests
+to understand the nuances of the route handler.
+
+Try to read this test and understand the one nuance between the two of them.
