@@ -5,7 +5,6 @@ import { Briefcase, Dot } from "lucide-react";
 
 import Content from "~/components/content";
 import Section from "~/components/section";
-import Title from "~/components/title";
 import {
   Timeline,
   TimelineConnector,
@@ -16,16 +15,15 @@ import {
   TimelineItem,
   TimelineTitle,
 } from "~/components/ui/timeline";
+import Br from "~/components/br";
 
 export default function Work() {
   return (
     <Section>
-      <Title text="Work Experience">
-        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
-          <Briefcase className="w-5 h-5" />
-        </div>
-      </Title>
-      <Content>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+        <Briefcase className="w-5 h-5" />
+      </div>
+      <Content title="Work Experience">
         <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           During my time at{" "}
           <Link
@@ -41,6 +39,7 @@ export default function Work() {
           development of Dipay Disbursement, a scalable web application for
           payments.
         </p>
+        <Br />
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"

@@ -2,24 +2,23 @@ import { Library } from "lucide-react";
 
 import Image from "next/image";
 
+import Br from "~/components/br";
 import Content from "~/components/content";
 import Section from "~/components/section";
-import Title from "~/components/title";
 
 export default function Education() {
   return (
     <Section>
-      <Title text="Education">
-        <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
-          <Library className="w-5 h-5" />
-        </div>
-      </Title>
-      <Content>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 w-10 flex justify-center items-center rounded-full">
+        <Library className="w-5 h-5" />
+      </div>
+      <Content title="Education">
         <p className="text-xs md:text-sm font-normal text-accent-foreground leading-5">
           Purwadhika helped me dive into the world of web development. I learned
           how to build websites and apps, and also how to become an effective
           learner.
         </p>
+        <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4">
           <div className="flex items-start gap-2.5 w-full">
             <div className="w-full max-w-10">
