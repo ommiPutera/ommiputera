@@ -17,10 +17,19 @@ import Stack from "./my-stack.section";
 import Projects from "./projects.section";
 import Work from "./work.section";
 
-export default function Home() {
+type Params = Promise<{ accessToken: string }>
+type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
+export default async function Home(props: {
+  params: Params
+  searchParams: SearchParams
+}) {
+  const searchParams = await props.searchParams
+  const accessToken = searchParams.accessToken
+  const id = searchParams.id
+
   return (
     <ShellPage>
-      <Hi />
+      <Hi accessToken={accessToken} id={id} />
       <About />
       <Mode />
       <Work />
@@ -35,7 +44,15 @@ export default function Home() {
   );
 }
 
-function Hi() {
+async function Hi({ accessToken, id }: { accessToken: string | string[] | undefined, id: string | string[] | undefined }) {
+  const data = await fetch(`https://api.bloum.id/invitation/${id}/rsvp`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      "Content-Type": "application/json",
+    },
+  });
+  const rsvp = await data.json()
   return (
     <Section>
       <div>
@@ -58,6 +75,14 @@ function Hi() {
           >
             Remix.
           </Link>
+        </p>
+        <p>
+          acc: {accessToken}
+          <br />
+          id: {id}
+        </p>
+        <p>
+          resp: {JSON.stringify(rsvp, null, 2)}
         </p>
       </Content>
     </Section>
