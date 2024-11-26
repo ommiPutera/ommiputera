@@ -1,16 +1,14 @@
-import { PenLine } from "lucide-react";
 
 import Image from "next/image";
+import Link from "next/link";
+
+import { ContentTitle } from "~/components/content";
+import Section from "~/components/section";
+import ShellPage from "~/components/shell-page";
 
 import { getBlogPosts, Metadata } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
-
-import Br from "~/components/br";
-import Content from "~/components/content";
-import ReadMore from "~/components/read-more";
-import Section from "~/components/section";
-import ShellPage from "~/components/shell-page";
 
 export const metadata = {
   title: "Blog",
@@ -28,49 +26,45 @@ export default async function BlogPage() {
   });
   return (
     <ShellPage title="Blog" withHome withBack>
-      <div>
-        <Blog />
-        {blogs.map((post, index) => {
-          const slug = post.slug;
-          const source = post.source;
-          return (
-            <BlogItem
-              key={post.slug}
-              source={source}
-              slug={slug}
-              isTheLastItem={index === blogs.length - 1}
-              {...(post.metadata as Metadata)}
+      <Section>
+        <div className="flex gap-2">
+          <div className="w-full max-w-10">
+            <Image
+              src="/images/profile.jpeg"
+              width={40}
+              height={40}
+              alt=""
+              className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
             />
-          );
-        })}
-      </div>
+          </div>
+          <div className="w-full">
+            <ContentTitle
+              title="The Blog"
+              description="Thoughts, mental models, and tutorials about front-end development."
+            />
+          </div>
+        </div>
+        <div className="mt-2 flex flex-col gap-4">
+          {blogs.map((post) => {
+            const slug = post.slug;
+            const source = post.source;
+            return (
+              <Blog
+                key={post.slug}
+                source={source}
+                slug={slug}
+                {...(post.metadata as Metadata)}
+              />
+            );
+          })}
+        </div>
+      </Section>
     </ShellPage>
-  );
+  )
 }
 
-function Blog() {
-  return (
-    <Section withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <PenLine className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
-      <Content title="Blog">
-        <p className="text-sm font-normal  leading-5">
-          Find the latest of my writing here.
-        </p>
-        <Br />
-        <p className="text-sm font-normal  leading-5">
-          My blog is a work in progress. I&apos;m looking forward to sharing my
-          thoughts and insights soon. 💪
-        </p>
-      </Content>
-    </Section>
-  );
-}
-
-function BlogItem({
+function Blog({
   slug,
-  isTheLastItem,
   publishedAt,
   image,
   summary,
@@ -78,31 +72,34 @@ function BlogItem({
 }: {
   slug: string;
   source: string;
-  isTheLastItem: boolean;
   id?: string;
 } & Metadata) {
   return (
-    <Section
+    <Link
       href={`/blog/${slug}`}
-      withConnector={!isTheLastItem}
-      className="pt-0 md:pt-0"
-      connectorClassName="top-0 h-[calc(100%_-_0px)]"
+      className="rounded-xl w-full cursor-pointer block h-full overflow-hidden border shadow"
     >
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <PenLine className="w-4 h-4 md:w-5 md:h-5" />
+      <div className="relative">
+        <Image
+          src={image}
+          width={600}
+          height={600}
+          alt=""
+          className="object-cover overflow-hidden h-[300px] md:h-[350px]"
+        />
+        <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
-      <Content title={title} description={formatDate(publishedAt)}>
-        <p className="text-sm font-normal  leading-5">{summary}</p>
-        {image && (
-          <div>
-            <Br />
-            <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
-              <Image src={image} width={800} height={400} alt="" />
-            </div>
-          </div>
-        )}
-      </Content>
-      <ReadMore href={`/blog/${slug}`} />
-    </Section>
-  );
+      <div className="p-4  border-neutral-200 dark:border-neutral-700">
+        <h2 className="text-lg font-bold mb-2 w-full">
+          {title}
+        </h2>
+        <p className="text-xs md:text-sm font-normal text-neutral-400 dark:text-neutral-500 leading-5 mb-1">
+          {formatDate(publishedAt)}
+        </p>
+        <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-300 md:leading-5">
+          {summary}
+        </p>
+      </div>
+    </Link>
+  )
 }

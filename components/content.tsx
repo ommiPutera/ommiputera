@@ -40,7 +40,7 @@ export function ContentTitle({
       </h2>
       {description && (
         <Suspense fallback={<p className="h-5" />}>
-          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1 mt-0 md:mt-1">
+          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1 md:mt-1">
             {description}
           </p>
         </Suspense>

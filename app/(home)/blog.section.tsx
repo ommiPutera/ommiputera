@@ -38,6 +38,7 @@ export default function Blog() {
             Show more
           </Link>
         </p>
+        <Br />
         <Blogs />
       </Content>
     </Section>
@@ -55,7 +56,7 @@ async function Blogs() {
   });
   return (
     <Carousel>
-      <CarouselContent overflowVisible className="-ml-1 md:-ml-2">
+      <CarouselContent overflowVisible className="-ml-1.5 md:-ml-2">
         {blogs.map((post) => {
           const slug = post.slug;
           return (
@@ -80,12 +81,12 @@ function BlogItem({
 }: { slug: string } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1 md:pl-2 overflow-hidden max-h-[600px] max-w-[600px]"
+      className="pl-1.5 md:pl-2 overflow-hidden max-h-[600px] max-w-[300px]"
       key={image}
     >
       <Link
         href={`/blog/${slug}`}
-        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-100 dark:border-neutral-800"
+        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-700"
       >
         <div className="relative">
           <Image
@@ -93,15 +94,15 @@ function BlogItem({
             width={600}
             height={600}
             alt=""
-            className="object-cover overflow-hidden"
+            className="object-cover overflow-hidden h-[350px]"
           />
           <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
-          <h2 className="absolute bottom-2 py-3 px-6 text-base font-bold md:text-xl text-neutral-200 text-center w-full">
+          <h2 className="absolute bottom-2 py-3 px-6 text-lg font-bold text-neutral-200 text-center w-full">
             {title}
           </h2>
         </div>
-        <div className="p-3 border-t border-neutral-100 dark:border-neutral-800">
-          <p className="text-xs md:text-sm font-semibold text-neutral-400 dark:text-neutral-500 leading-5 mb-1">
+        <div className="p-3 border-t border-neutral-200 dark:border-neutral-700">
+          <p className="text-xs md:text-sm font-normal text-neutral-400 dark:text-neutral-500 leading-5 mb-1">
             {formatDate(publishedAt)}
           </p>
           <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-300 md:leading-5">

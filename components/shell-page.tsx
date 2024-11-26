@@ -20,7 +20,7 @@ export default function ShellPage({
   withBack?: boolean;
 } & THeaderProps) {
   return (
-    <div className="container mx-auto max-w-[740px]">
+    <div className="container mx-auto max-w-[620px]">
       <main className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header title={title} withHome={withHome} />
@@ -53,7 +53,7 @@ function Header({ title, withHome }: THeaderProps) {
   return (
     <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6">
       <h1 className="text-base md:text-lg font-bold">{title}</h1>
-      <ul className="flex gap-3 md:gap-4 text-sm justify-center md:text-base mt-1.5 md:mt-1">
+      <ul className="flex gap-3 md:gap-4 text-sm justify-center md:text-base">
         <li className="underline text-muted-foreground">
           <Link href="/" className="flex items-center">
             Resume
