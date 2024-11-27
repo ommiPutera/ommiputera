@@ -27,8 +27,8 @@ export default async function Home() {
       <Education />
       <Blog />
       <Projects />
-      <Stack />
-      <Uses />
+      {/* <Stack /> */}
+      {/* <Uses /> */}
       <Contact />
       <ThankYou />
     </ShellPage>

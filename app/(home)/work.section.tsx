@@ -24,8 +24,9 @@ export default function Work() {
         <Briefcase className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Work Experience">
-        <p className="text-sm font-normal  leading-5">
-          During my time at{" "}
+        <p className="text-sm font-normal leading-5">
+          My journey into coding really took off during my time at Purwadhika,
+          and since then, I&apos;ve been growing my career at{" "}
           <Link
             href="https://dipay.id/"
             target="_blank"
@@ -33,11 +34,16 @@ export default function Work() {
           >
             Dipay
           </Link>
-          , I have contributed significantly to various projects, refining my
-          skills in Web Standard, React, TypeScript, and CI/CD. My journey from
-          Frontend Engineer to Fullstack Engineer has been marked by leading the
-          development of Dipay Disbursement, a scalable web application for
-          payments.
+          . I started as a Frontend Engineer and worked my way up to Fullstack
+          Engineer, gaining hands-on experience with Web Standards, React,
+          TypeScript, and CI/CD along the way.
+        </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          One of the highlights has been leading the development of Dipay
+          Disbursement, a scalable web app for payments. It&apos;s been an
+          exciting challenge that&apos;s pushed me to keep learning and building
+          solutions that make a real difference.
         </p>
         <Br />
         <Link

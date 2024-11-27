@@ -14,9 +14,10 @@ export default function Education() {
       </div>
       <Content title="Education">
         <p className="text-sm font-normal  leading-5">
-          Purwadhika helped me dive into the world of web development. I learned
-          how to build websites and apps, and also how to become an effective
-          learner.
+          Purwadhika was where I really got my start in web development. There,
+          I learned how to build websites and apps from the ground up, but more
+          importantly, I picked up how to be an effective learner—something
+          that&apos;s been key as I continue to grow in this field.
         </p>
         <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4">

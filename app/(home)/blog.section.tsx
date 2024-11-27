@@ -27,16 +27,15 @@ export default function Blog() {
         />
       </div>
       <Content title="Blog" description="Ommi Putera">
-        <p className="text-sm font-normal  leading-5">
-          I write about what I&apos;ve been working on, problems I&apos;ve
-          solved, and things I&apos;m still trying to figure out.
-        </p>
         <p className="text-sm font-normal leading-5">
+          I share what I&apos;ve been working on, the challenges I&apos;ve
+          tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
+          lessons learned and things I&apos;m exploring along the way.{" "}
           <Link
             href="/blog"
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
           >
-            Show more
+            View all
           </Link>
         </p>
         <Br />
@@ -87,7 +86,8 @@ function BlogItem({
     >
       <Link
         href={`/blog/${slug}`}
-        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-700"
+        prefetch
+        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800"
       >
         <div className="relative">
           <Image
