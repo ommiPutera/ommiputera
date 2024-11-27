@@ -20,8 +20,8 @@ export default function ShellPage({
   withBack?: boolean;
 } & THeaderProps) {
   return (
-    <div className="container mx-auto max-w-[680px]">
-      <main className="flex flex-col relative">
+    <div className="container mx-auto max-w-[680px]" aria-hidden="true">
+      <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header title={title} withHome={withHome} />
           {withBack && <BackBtn />}
@@ -29,11 +29,11 @@ export default function ShellPage({
         </div>
         <div className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 relative">
-            {children}
+            <main role="main">{children}</main>
             <Footer />
           </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
@@ -51,8 +51,13 @@ function BackBtn() {
 
 function Header({ title, withHome }: THeaderProps) {
   return (
-    <div className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6">
-      <h1 className="text-base md:text-lg font-bold">{title}</h1>
+    <nav
+      role="navigation"
+      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6"
+    >
+      <header role="banner">
+        <h1 className="text-base md:text-lg font-bold">{title}</h1>
+      </header>
       <ul className="flex gap-3 md:gap-4 text-sm justify-center md:text-base">
         <li className="underline text-muted-foreground">
           <Link href="/" className="flex items-center">
@@ -75,7 +80,7 @@ function Header({ title, withHome }: THeaderProps) {
           </li>
         )}
       </ul>
-    </div>
+    </nav>
   );
 }
 
@@ -97,13 +102,16 @@ function RoundedBorder() {
 
 function Footer() {
   return (
-    <div className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16">
+    <footer
+      role="contentinfo"
+      className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16"
+    >
       <p className="text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
         © {new Date().getFullYear()} Ommi Putera. All rights reserved.
       </p>
       <p className="text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
         Build with Kapal Api and 76 Mangga.
       </p>
-    </div>
+    </footer>
   );
 }
