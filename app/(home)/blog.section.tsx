@@ -1,4 +1,3 @@
-import { PenLine } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -18,17 +17,19 @@ import { formatDate } from "~/lib/utils";
 export default function Blog() {
   return (
     <Section>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <PenLine className="w-4 h-4 md:w-5 md:h-5" />
+      <div className="w-full max-w-10">
+        <Image
+          src="/images/profile.jpeg"
+          width={40}
+          height={40}
+          alt=""
+          className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+        />
       </div>
-      <Content title="Blog">
+      <Content title="Blog" description="Ommi Putera">
         <p className="text-sm font-normal  leading-5">
-          Find the latest of my writing here.
-        </p>
-        <Br />
-        <p className="text-sm font-normal  leading-5">
-          My blog is a work in progress. I&apos;m looking forward to sharing my
-          thoughts and insights soon. 💪
+          I write about what I&apos;ve been working on, problems I&apos;ve
+          solved, and things I&apos;m still trying to figure out.
         </p>
         <p className="text-sm font-normal leading-5">
           <Link
@@ -81,7 +82,7 @@ function BlogItem({
 }: { slug: string } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1.5 md:pl-2 overflow-hidden max-h-[600px] max-w-[300px]"
+      className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[274px]"
       key={image}
     >
       <Link
@@ -94,14 +95,14 @@ function BlogItem({
             width={600}
             height={600}
             alt=""
-            className="object-cover overflow-hidden h-[350px]"
+            className="object-cover overflow-hidden h-[300px] w-full"
           />
           <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
           <h2 className="absolute bottom-2 py-3 px-6 text-lg font-bold text-neutral-200 text-center w-full">
             {title}
           </h2>
         </div>
-        <div className="p-3 border-t border-neutral-200 dark:border-neutral-700">
+        <div className="p-3">
           <p className="text-xs md:text-sm font-normal text-neutral-400 dark:text-neutral-500 leading-5 mb-1">
             {formatDate(publishedAt)}
           </p>

@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import Link from "next/link";
 
@@ -38,13 +37,10 @@ export default async function BlogPage() {
             />
           </div>
           <div className="w-full">
-            <ContentTitle
-              title="The Blog"
-              description="Thoughts, mental models, and tutorials about front-end development."
-            />
+            <ContentTitle title="Blog" description="Ommi Putera" />
           </div>
         </div>
-        <div className="mt-2 flex flex-col gap-4">
+        <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
           {blogs.map((post) => {
             const slug = post.slug;
             const source = post.source;
@@ -60,7 +56,7 @@ export default async function BlogPage() {
         </div>
       </Section>
     </ShellPage>
-  )
+  );
 }
 
 function Blog({
@@ -77,7 +73,7 @@ function Blog({
   return (
     <Link
       href={`/blog/${slug}`}
-      className="rounded-xl w-full cursor-pointer block h-full overflow-hidden border shadow"
+      className="rounded-xl w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-700 shadow"
     >
       <div className="relative">
         <Image
@@ -85,14 +81,12 @@ function Blog({
           width={600}
           height={600}
           alt=""
-          className="object-cover overflow-hidden h-[300px] md:h-[350px]"
+          className="object-cover overflow-hidden h-[300px] w-full"
         />
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
-      <div className="p-4  border-neutral-200 dark:border-neutral-700">
-        <h2 className="text-lg font-bold mb-2 w-full">
-          {title}
-        </h2>
+      <div className="p-4 border-neutral-200 dark:border-neutral-700">
+        <h2 className="text-lg font-bold mb-2 w-full">{title}</h2>
         <p className="text-xs md:text-sm font-normal text-neutral-400 dark:text-neutral-500 leading-5 mb-1">
           {formatDate(publishedAt)}
         </p>
@@ -101,5 +95,5 @@ function Blog({
         </p>
       </div>
     </Link>
-  )
+  );
 }

@@ -15,7 +15,6 @@ export default function AboutGalery() {
           "my-laptop.webp",
           "teams-work.webp",
           "beach.jpg",
-          "me.webp",
         ].map((image) => (
           <CarouselItem
             className="pl-1.5 md:pl-2 overflow-hidden rounded-xl max-h-[400px] max-w-[400px]"

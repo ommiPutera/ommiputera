@@ -1,15 +1,15 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { CarFront } from "lucide-react";
+import { CarFront, CornerUpRight } from "lucide-react";
 
+import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
 import Content from "~/components/content";
 import { ModeClickable, ModeEmoji, ModeToggle } from "~/components/mode-toggle";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
-import About from "./about.section";
 import Blog from "./blog.section";
 import Contact from "./contact.section";
 import Education from "./education.section";
@@ -17,19 +17,10 @@ import Stack from "./my-stack.section";
 import Projects from "./projects.section";
 import Work from "./work.section";
 
-type Params = Promise<{ accessToken: string }>
-type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>
-export default async function Home(props: {
-  params: Params
-  searchParams: SearchParams
-}) {
-  const searchParams = await props.searchParams
-  const accessToken = searchParams.accessToken
-  const id = searchParams.id
-
+export default async function Home() {
   return (
     <ShellPage>
-      <Hi accessToken={accessToken} id={id} />
+      <Hi />
       <About />
       <Mode />
       <Work />
@@ -44,15 +35,7 @@ export default async function Home(props: {
   );
 }
 
-async function Hi({ accessToken, id }: { accessToken: string | string[] | undefined, id: string | string[] | undefined }) {
-  const data = await fetch(`https://api.bloum.id/invitation/${id}/rsvp`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      "Content-Type": "application/json",
-    },
-  });
-  const rsvp = await data.json()
+async function Hi() {
   return (
     <Section>
       <div>
@@ -64,9 +47,9 @@ async function Hi({ accessToken, id }: { accessToken: string | string[] | undefi
           className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
         />
       </div>
-      <Content title="Hi, I'm Ommi Putera 👋" description="Introduction">
-        <p className="text-sm font-normal  leading-5">
-          Software Engineer based in Jakarta, 🇮🇩 Indonesia. I love building
+      <Content title="Hi, I'm Ommi 👋" description="Greeting">
+        <p className="text-sm font-normal leading-5">
+          Software Engineer based in <b>Jakarta, Indonesia</b>. I love building
           things with{" "}
           <Link
             href="https://remix.run/"
@@ -76,14 +59,32 @@ async function Hi({ accessToken, id }: { accessToken: string | string[] | undefi
             Remix.
           </Link>
         </p>
-        <p>
-          acc: {accessToken}
-          <br />
-          id: {id}
+      </Content>
+    </Section>
+  );
+}
+
+function About() {
+  return (
+    <Section>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="About">
+        <p className="text-sm font-normal leading-5">
+          My name is Ommi Putera K., and I work at <b>Dipay Indonesia</b> as a
+          Full Stack Engineer. I am passionate about crafting quality software
         </p>
-        <p>
-          resp: {JSON.stringify(rsvp, null, 2)}
+        <p className="text-sm font-normal leading-5">
+          <Link
+            href="/about"
+            className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
+          >
+            Show more
+          </Link>
         </p>
+        <Br />
+        <AboutGalery />
       </Content>
     </Section>
   );
