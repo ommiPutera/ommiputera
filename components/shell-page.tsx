@@ -27,12 +27,12 @@ export default function ShellPage({
           {withBack && <BackBtn />}
           <RoundedBorder />
         </div>
-        <div className="px-2.5 md:px-14 relative overflow-hidden">
+        <main role="main" className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 relative">
-            <main role="main">{children}</main>
+            {children}
             <Footer />
           </div>
-        </div>
+        </main>
       </div>
     </div>
   );
