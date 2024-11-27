@@ -103,10 +103,10 @@ function BlogItem({
           </h2>
         </div>
         <div className="p-3">
-          <p className="text-xs md:text-sm font-normal text-neutral-400 dark:text-neutral-500 leading-5 mb-1">
+          <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 leading-5 mb-1">
             {formatDate(publishedAt)}
           </p>
-          <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-300 md:leading-5">
+          <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-100 md:leading-5">
             {summary}
           </p>
         </div>

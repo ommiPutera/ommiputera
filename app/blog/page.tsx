@@ -94,11 +94,11 @@ function Blog({
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
       <div className="p-4 border-neutral-200 dark:border-neutral-800">
-        <h2 className="text-base font-bold mb-1.5 w-full">{title}</h2>
-        <p className="text-xs md:text-sm font-normal text-neutral-400 dark:text-neutral-500 leading-5 md:mb-1">
+        <h2 className="text-ms font-bold mb-1.5 w-full">{title}</h2>
+        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 leading-5 mb-1">
           {formatDate(publishedAt)}
         </p>
-        <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-300 md:leading-5">
+        <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-100 md:leading-5">
           {summary}
         </p>
       </div>

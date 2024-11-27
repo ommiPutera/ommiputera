@@ -20,7 +20,11 @@ export default function ShellPage({
   withBack?: boolean;
 } & THeaderProps) {
   return (
-    <div className="container mx-auto max-w-[680px]" aria-hidden="true">
+    <div
+      className="container mx-auto max-w-[680px]"
+      aria-hidden="true"
+      tabIndex={-1}
+    >
       <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header title={title} withHome={withHome} />

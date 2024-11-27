@@ -96,7 +96,7 @@ export default async function Blog({
         }}
       />
       <Section>
-        <div className="flex gap-2">
+        <div className="flex gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2 md:pb-7">
           <div className="w-full max-w-10">
             <Image
               src="/images/profile.jpeg"
@@ -113,32 +113,29 @@ export default async function Blog({
             />
           </div>
         </div>
-        <div className="mt-2 flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <h2 className="text-2xl font-extrabold tracking-tight mt-0.5 md:mt-0">
+        <div className="mt-6 flex flex-col gap-4">
+          <div className="flex flex-col gap-2 mx-5 md:mx-12">
+            <h2 className="text-2xl font-extrabold tracking-tight">
               {post.metadata.title}
             </h2>
             <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal leading-5">
               {post.metadata.summary}
             </p>
           </div>
-          <div className="flex flex-col gap-3 md:gap-2 w-[calc(100%_+_32px)] md:w-full -ml-4 md:ml-0">
-            <div className="md:rounded-xl md:border border-neutral-100 dark:border-neutral-800 overflow-hidden">
+          <div className="w-full">
+            <div className="rounded-xl overflow-hidden">
               <Image
                 src={post.metadata.image}
                 width={800}
                 height={40}
-                alt={post.metadata.bannerCredit}
-                className="h-[220px] md:h-[300px] object-cover"
+                alt=""
+                className="h-[440px] md:h-[340px] object-cover"
               />
             </div>
-            <p className="text-xs text-center text-neutral-400 dark:text-neutral-500 leading-4 px-6">
-              {post.metadata.bannerCredit}
-            </p>
           </div>
         </div>
         <article
-          className="prose dark:prose-invert mt-8"
+          className="prose dark:prose-invert mt-6 mx-5 md:mx-12"
           dangerouslySetInnerHTML={{ __html: post.source }}
         ></article>
       </Section>
