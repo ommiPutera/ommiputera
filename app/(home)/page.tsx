@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { CarFront, CornerUpRight } from "lucide-react";
+import { CornerUpRight } from "lucide-react";
 
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
@@ -13,7 +13,7 @@ import ShellPage from "~/components/shell-page";
 import Blog from "./blog.section";
 import Contact from "./contact.section";
 import Education from "./education.section";
-import Stack from "./my-stack.section";
+// import Stack from "./my-stack.section";
 import Projects from "./projects.section";
 import Work from "./work.section";
 
@@ -120,18 +120,18 @@ function Mode() {
   );
 }
 
-function Uses() {
-  return (
-    <Section>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <CarFront className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
-      <Content title="Uses">
-        <p className="text-sm  leading-5">Work in progres</p>
-      </Content>
-    </Section>
-  );
-}
+// function Uses() {
+//   return (
+//     <Section>
+//       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+//         <CarFront className="w-4 h-4 md:w-5 md:h-5" />
+//       </div>
+//       <Content title="Uses">
+//         <p className="text-sm  leading-5">Work in progres</p>
+//       </Content>
+//     </Section>
+//   );
+// }
 
 function ThankYou() {
   return (

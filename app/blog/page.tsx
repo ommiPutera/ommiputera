@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Br from "~/components/br";
 
 import { ContentTitle } from "~/components/content";
 import Section from "~/components/section";
@@ -40,7 +41,13 @@ export default async function BlogPage() {
             <ContentTitle title="Blog" description="Ommi Putera" />
           </div>
         </div>
-        <div className="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
+        <p className="text-sm font-normal leading-5">
+          I share what I&apos;ve been working on, the challenges I&apos;ve
+          tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
+          lessons learned and things I&apos;m exploring along the way.
+        </p>
+        <Br />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
           {blogs.map((post) => {
             const slug = post.slug;
             const source = post.source;
