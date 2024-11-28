@@ -72,9 +72,14 @@ function About() {
       </div>
       <Content title="About">
         <p className="text-sm font-normal leading-5">
-          My name is Ommi Putera K., I work at <b>Dipay Indonesia</b> as a Full
-          Stack Engineer. I am passionate about crafting quality software
+          My name is <b>Ommi Putera K.</b>
         </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          I work at <b>Dipay Indonesia</b> as a Full Stack Engineer.
+        </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">I am passionate about</p>
         <p className="text-sm font-normal leading-5">
           <Link
             href="/about"
@@ -106,12 +111,12 @@ function Mode() {
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
           <p className="text-sm font-normal  leading-5">
             Dark mode will reduce screen brightness for a more comfortable
-            viewing experience.
+            reading experience.
           </p>
           <Br />
           <p className="text-sm font-normal  leading-5">
             <span>
-              Turn on <ModeToggle /> mode by clicking this button <ModeEmoji />{" "}
+              Turn on <ModeToggle /> mode by clicking this section <ModeEmoji />{" "}
             </span>
           </p>
         </Content>

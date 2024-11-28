@@ -17,7 +17,13 @@ export default function Contact() {
           Would you be interested in working on a project together? I&apos;d
           love to hear your thoughts.
         </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          The best way to get in touch with me is to email{" "}
+          <b>me@ommiputera.com</b>
+        </p>
       </Content>
+      <Br />
       <Br />
       <div className="ml-[48px]">
         <div className="flex items-center gap-2">

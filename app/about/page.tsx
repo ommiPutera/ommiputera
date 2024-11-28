@@ -1,5 +1,6 @@
 import { CornerUpRight } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
@@ -26,9 +27,15 @@ function Me() {
       </div>
       <Content title="About">
         <p className="text-sm font-normal leading-5">
-          My name is Ommi Putera K., I work at <b>Dipay Indonesia</b> as a Full
-          Stack Engineer. I am passionate about crafting quality software that
-          makes a positive impact.
+          My name is <b>Ommi Putera K.</b>
+        </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          I work at <b>Dipay Indonesia</b> as a Full Stack Engineer.
+        </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          I am passionate about crafting quality software.
         </p>
         <Br />
         <p className="text-sm font-normal leading-5">
@@ -48,8 +55,7 @@ function Me() {
         <p className="text-sm font-normal leading-5">
           During the program, I discovered my true passion for coding and web
           development. It sparked a deep commitment to continuous learning and
-          growth as a software engineer. I aim to contribute to innovative
-          projects that drive meaningful change.
+          growth as a software engineer.
         </p>
         <Br />
         <AboutGalery />
@@ -104,6 +110,7 @@ function Values() {
           </p>
         </div>
         <Br />
+        <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/me.webp"
@@ -113,6 +120,42 @@ function Values() {
             className="max-h-[350px] object-cover"
           />
         </div>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          The best way to get in touch with me is to email{" "}
+          <b>me@ommiputera.com</b>
+        </p>
+        <Br />
+        <p className="text-sm leading-5">
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            Twitter,{" "}
+          </Link>
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            LinkedIn,{" "}
+          </Link>
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            Github,{" "}
+          </Link>
+          <Link
+            href=""
+            target="_blank"
+            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+          >
+            Instagram.
+          </Link>
+        </p>
       </Content>
     </Section>
   );

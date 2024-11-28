@@ -113,7 +113,7 @@ export default async function Blog({
             />
           </div>
         </div>
-        <div className="mt-6 flex flex-col gap-4">
+        <div className="mt-14 flex flex-col gap-4">
           <div className="flex flex-col gap-2 mx-5 md:mx-12">
             <h2 className="text-2xl font-extrabold tracking-tight">
               {post.metadata.title}

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import Br from "~/components/br";
 
+import Br from "~/components/br";
 import { ContentTitle } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";

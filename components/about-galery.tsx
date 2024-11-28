@@ -25,6 +25,7 @@ export default function AboutGalery() {
               width={400}
               height={400}
               alt=""
+              blurDataURL=""
               className="border border-neutral-200 dark:border-neutral-700 object-cover overflow-hidden rounded-xl"
             />
           </CarouselItem>
