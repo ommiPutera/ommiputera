@@ -1,7 +1,8 @@
+import { FolderOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import Br from "~/components/br";
 
+import Br from "~/components/br";
 import { ContentTitle } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
@@ -15,7 +16,7 @@ export const metadata = {
   description: "My thoughts on software development, life, and more.",
 };
 
-export default async function BlogPage() {
+export default async function ProjectsPage() {
   const posts = await getBlogPosts();
 
   const blogs = posts.sort((a, b) => {
@@ -28,23 +29,16 @@ export default async function BlogPage() {
     <ShellPage title="Blog" withHome withBack>
       <Section>
         <div className="flex gap-2">
-          <div className="w-full max-w-10">
-            <Image
-              src="/images/profile.jpeg"
-              width={40}
-              height={40}
-              alt=""
-              className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
-            />
+          <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+            <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
           </div>
           <div className="w-full">
-            <ContentTitle title="Blog" description="Ommi Putera" />
+            <ContentTitle title="Projects 🔥" description="Curated" />
           </div>
         </div>
         <p className="text-sm font-normal leading-5 mt-1">
-          I share what I&apos;ve been working on, the challenges I&apos;ve
-          tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
-          lessons learned and things I&apos;m exploring along the way.
+          Here are some showcase of my latest projects. They&apos;re sure to
+          catch your eye!
         </p>
         <Br />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
@@ -52,7 +46,7 @@ export default async function BlogPage() {
             const slug = post.slug;
             const source = post.source;
             return (
-              <Blog
+              <Project
                 key={post.slug}
                 source={source}
                 slug={slug}
@@ -66,7 +60,7 @@ export default async function BlogPage() {
   );
 }
 
-function Blog({
+function Project({
   slug,
   publishedAt,
   image,
@@ -79,7 +73,7 @@ function Blog({
 } & Metadata) {
   return (
     <Link
-      href={`/blog/${slug}`}
+      href={`/projects/${slug}`}
       prefetch
       className="rounded-xl w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow"
     >

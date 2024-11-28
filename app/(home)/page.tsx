@@ -72,8 +72,8 @@ function About() {
       </div>
       <Content title="About">
         <p className="text-sm font-normal leading-5">
-          My name is Ommi Putera K., and I work at <b>Dipay Indonesia</b> as a
-          Full Stack Engineer. I am passionate about crafting quality software
+          My name is Ommi Putera K., I work at <b>Dipay Indonesia</b> as a Full
+          Stack Engineer. I am passionate about crafting quality software
         </p>
         <p className="text-sm font-normal leading-5">
           <Link

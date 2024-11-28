@@ -26,20 +26,23 @@ function Me() {
       </div>
       <Content title="About">
         <p className="text-sm font-normal leading-5">
-          My name is Ommi Putera K., and I work at <b>Dipay Indonesia</b> as a
-          Full Stack Engineer. I am passionate about crafting quality software
-          that makes a positive impact.
+          My name is Ommi Putera K., I work at <b>Dipay Indonesia</b> as a Full
+          Stack Engineer. I am passionate about crafting quality software that
+          makes a positive impact.
         </p>
         <Br />
         <p className="text-sm font-normal leading-5">
-          Born in <b>1998 in Bengkulu, Indonesia</b>, I was preparing to start
-          my career after graduating with an economics degree when the COVID-19
-          pandemic hit in late 2019. The widespread layoffs across industries
-          made me rethink my career path. Amid this uncertainty, I discovered
-          the thriving field of digital technology, particularly web
-          development. Determined to seize the opportunity, I enrolled in the{" "}
-          <b>Purwadhika Digital Technology School’s</b> Full Stack Web and
-          Mobile Development Bootcamp in early 2021.
+          Born in <b>1998 in Bengkulu, Indonesia</b>.
+        </p>
+        <Br />
+        <p className="text-sm font-normal leading-5">
+          I was preparing to start my career after graduating with an economics
+          degree when the COVID-19 pandemic hit in late 2019. The widespread
+          layoffs across industries made me rethink my career path. Amid this
+          uncertainty, I discovered the thriving field of digital technology,
+          particularly web development. Determined to seize the opportunity, I
+          enrolled in the <b>Purwadhika Digital Technology School’s</b> Full
+          Stack Web and Mobile Development Bootcamp in early 2021.
         </p>
         <Br />
         <p className="text-sm font-normal leading-5">
@@ -65,7 +68,7 @@ function Values() {
         title="Values"
         description="The principles that guide my approach to work and life."
       >
-        <div>
+        <div className="mt-2">
           <h2 className="text-sm md:text-base font-bold tracking-normal md:leading-4">
             Continuous Learning
           </h2>

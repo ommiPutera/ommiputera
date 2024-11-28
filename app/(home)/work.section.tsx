@@ -25,8 +25,7 @@ export default function Work() {
       </div>
       <Content title="Work Experience">
         <p className="text-sm font-normal leading-5">
-          My journey into coding really took off during my time at Purwadhika,
-          and since then, I&apos;ve been growing my career at{" "}
+          I&apos;ve been growing my career at{" "}
           <Link
             href="https://dipay.id/"
             target="_blank"

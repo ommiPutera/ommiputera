@@ -34,7 +34,7 @@ function Intro() {
           </span>
           <br />
           <Link
-            href="/about"
+            href="/projects"
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
           >
             Show more
@@ -55,7 +55,7 @@ function Close() {
         <p className="text-sm font-normal  leading-5">
           <span>Interested in checking out more? </span>
           <Link
-            href="/about"
+            href="/projects"
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
           >
             View all
