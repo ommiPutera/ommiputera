@@ -10,8 +10,8 @@ export default {
   theme: {
     fontSize: {
       xs: ["13px", "18px"],
-      sm: ["14px", "20px"],
-      base: ["16px", "24px"],
+      sm: ["15px", "21px"],
+      base: ["17px", "25px"],
       lg: ["20px", "28px"],
       xl: ["24px", "32px"],
       "2xl": ["28px", "34.5px"],

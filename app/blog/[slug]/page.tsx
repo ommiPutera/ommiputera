@@ -73,6 +73,50 @@ export default async function Blog({
 
   return (
     <ShellPage title="Blog" withHome withBack>
+      <Section>
+        <div className="flex gap-2 border-b border-neutral-200 w-full dark:border-neutral-800 pb-4 pt-2 md:pt-0 md:pb-7 px-5 md:px-12">
+          <div className="w-fit max-w-10">
+            <Image
+              src="/images/profile.jpeg"
+              width={40}
+              height={40}
+              alt=""
+              className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+            />
+          </div>
+          <div className="w-fit">
+            <ContentTitle
+              title="Ommi Putera"
+              description={formatDate(post.metadata.publishedAt)}
+            />
+          </div>
+        </div>
+        <div className="mt-4 md:mt-7 flex flex-col gap-4">
+          <div className="flex flex-col gap-2 mx-5 md:mx-12">
+            <h2 className="text-2xl font-extrabold tracking-tight">
+              {post.metadata.title}
+            </h2>
+            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal leading-5">
+              {post.metadata.summary}
+            </p>
+          </div>
+          <div className="w-full">
+            <div className="rounded-xl overflow-hidden">
+              <Image
+                src={post.metadata.image}
+                width={800}
+                height={40}
+                alt=""
+                className="h-[440px] md:h-[340px] object-cover"
+              />
+            </div>
+          </div>
+        </div>
+        <article
+          className="prose dark:prose-invert mt-6 mx-5 md:mx-12 mb-6"
+          dangerouslySetInnerHTML={{ __html: post.source }}
+        ></article>
+      </Section>
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -95,50 +139,6 @@ export default async function Blog({
           }),
         }}
       />
-      <Section>
-        <div className="flex gap-2 border-b border-neutral-200 dark:border-neutral-800 pb-2 md:pb-7">
-          <div className="w-full max-w-10">
-            <Image
-              src="/images/profile.jpeg"
-              width={40}
-              height={40}
-              alt=""
-              className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
-            />
-          </div>
-          <div className="w-full">
-            <ContentTitle
-              title="Ommi Putera"
-              description={formatDate(post.metadata.publishedAt)}
-            />
-          </div>
-        </div>
-        <div className="mt-14 flex flex-col gap-4">
-          <div className="flex flex-col gap-2 mx-5 md:mx-12">
-            <h2 className="text-2xl font-extrabold tracking-tight">
-              {post.metadata.title}
-            </h2>
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal leading-5">
-              {post.metadata.summary}
-            </p>
-          </div>
-          <div className="w-full">
-            <div className="rounded-xl overflow-hidden">
-              <Image
-                src={post.metadata.image}
-                width={800}
-                height={40}
-                alt=""
-                className="h-[440px] md:h-[340px] object-cover"
-              />
-            </div>
-          </div>
-        </div>
-        <article
-          className="prose dark:prose-invert mt-6 mx-5 md:mx-12"
-          dangerouslySetInnerHTML={{ __html: post.source }}
-        ></article>
-      </Section>
     </ShellPage>
   );
 }

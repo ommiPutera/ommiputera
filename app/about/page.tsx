@@ -1,7 +1,10 @@
-import { CornerUpRight, Mail, Signpost } from "lucide-react";
+"use client";
+
+import { ChevronLeft, CornerUpRight, Mail, Signpost } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
@@ -50,8 +53,8 @@ function Me() {
           layoffs across industries made me rethink my career path. Amid this
           uncertainty, I discovered the thriving field of digital technology,
           particularly web development. Determined to seize the opportunity, I
-          enrolled in the <b>Purwadhika Digital Technology School’s</b> Full
-          Stack Web and Mobile Development Bootcamp in early 2021.
+          enrolled in the <b>Purwadhika Digital Technology School&apos;s</b>{" "}
+          Full Stack Web and Mobile Development Bootcamp in early 2021.
         </p>
         <Br />
         <p className="text-sm font-normal leading-5">
@@ -77,7 +80,7 @@ function Values() {
         description="The principles that guide my approach to work and life."
       >
         <div className="mt-2">
-          <h2 className="text-sm md:text-base font-bold tracking-normal md:leading-4">
+          <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Continuous Learning
           </h2>
           <p className="text-sm font-normal leading-5">
@@ -89,7 +92,7 @@ function Values() {
         </div>
         <Br />
         <div>
-          <h2 className="text-sm md:text-base font-bold tracking-normal md:leading-4">
+          <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Effective Collaboration
           </h2>
           <p className="text-sm font-normal leading-5">
@@ -101,7 +104,7 @@ function Values() {
         </div>
         <Br />
         <div>
-          <h2 className="text-sm md:text-base font-bold tracking-normal md:leading-4">
+          <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Empathy
           </h2>
           <p className="text-sm font-normal leading-5">
@@ -111,7 +114,6 @@ function Values() {
             effective, and impactful.
           </p>
         </div>
-        <Br />
         <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
@@ -158,16 +160,15 @@ function Values() {
             Instagram.
           </Link>
         </p>
-        <Br />
-        <Br />
       </Content>
     </Section>
   );
 }
 
 function NextTo() {
+  const router = useRouter();
   return (
-    <Section className="pt-0 md:pt-0">
+    <Section className="pt-0 md:pt-0 mb-6">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Signpost className="w-4 h-4 md:w-5 md:h-5" />
       </div>
@@ -199,14 +200,17 @@ function NextTo() {
               </p>
             </div>
           </Link>
-          <Link
-            href="/"
+          <button
+            onClick={() => router.back()}
             className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
-            <p className="text-xs md:text-sm font-medium whitespace-nowrap leading-5">
-              Home
-            </p>
-          </Link>
+            <div className="flex items-center gap-1.5">
+              <div>
+                <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+              </div>
+              <p className="text-xs md:text-sm font-medium  leading-5">Back</p>
+            </div>
+          </button>
         </div>
       </Content>
     </Section>

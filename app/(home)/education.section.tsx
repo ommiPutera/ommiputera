@@ -1,6 +1,7 @@
 import { Library } from "lucide-react";
 
 import Image from "next/image";
+import Link from "next/link";
 
 import Br from "~/components/br";
 import Content from "~/components/content";
@@ -20,7 +21,11 @@ export default function Education() {
           that&apos;s been key as I continue to grow in this field.
         </p>
         <Br />
-        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4">
+        <Link
+          href="https://www.linkedin.com/in/ommiputera"
+          target="_blank"
+          className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4"
+        >
           <div className="flex items-start gap-2.5 w-full">
             <div className="w-full max-w-10">
               <Image
@@ -65,7 +70,7 @@ export default function Education() {
               </p>
             </div>
           </div>
-        </div>
+        </Link>
       </Content>
     </Section>
   );
