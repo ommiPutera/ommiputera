@@ -1,4 +1,5 @@
-import { CornerUpRight } from "lucide-react";
+import { CornerUpRight, Mail, Signpost } from "lucide-react";
+
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,6 +15,7 @@ export default function About() {
       <div>
         <Me />
         <Values />
+        <NextTo />
       </div>
     </ShellPage>
   );
@@ -66,7 +68,7 @@ function Me() {
 
 function Values() {
   return (
-    <Section className="pt-0 md:pt-0">
+    <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
@@ -156,6 +158,56 @@ function Values() {
             Instagram.
           </Link>
         </p>
+        <Br />
+        <Br />
+      </Content>
+    </Section>
+  );
+}
+
+function NextTo() {
+  return (
+    <Section className="pt-0 md:pt-0">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Signpost className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Next?">
+        <p className="text-sm font-normal leading-5">
+          Navigate to another page using this menu.
+        </p>
+        <Br />
+        <div className="flex items-center gap-2">
+          <Link
+            href="/blog"
+            className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
+          >
+            <p className="text-xs md:text-sm font-medium whitespace-nowrap leading-5">
+              Blog
+            </p>
+          </Link>
+          <Link
+            href="mailto:omiputrakarunia@gmail.com"
+            target="_blank"
+            className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
+          >
+            <div className="flex items-center gap-1.5">
+              <div>
+                <Mail className="w-4 h-4 md:w-5 md:h-5" />
+              </div>
+              <p className="text-xs md:text-sm font-medium  leading-5">
+                Email me
+              </p>
+            </div>
+          </Link>
+          <Link
+            href="/"
+            className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
+          >
+            <p className="text-xs md:text-sm font-medium whitespace-nowrap leading-5">
+              Home
+            </p>
+          </Link>
+        </div>
       </Content>
     </Section>
   );

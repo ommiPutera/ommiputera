@@ -75,7 +75,7 @@ function Project({
     <Link
       href={`/projects/${slug}`}
       prefetch
-      className="rounded-xl w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-800 shadow"
+      className="rounded-xl w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-800"
     >
       <div className="relative">
         <Image
