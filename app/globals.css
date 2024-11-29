@@ -86,10 +86,3 @@
       0 0 0 48px #08090a;
   }
 }
-
-.prose h2 {
-  @apply text-xl mt-3 mb-1.5 font-bold;
-}
-.prose p {
-  @apply text-sm font-normal leading-5 mt-2;
-}

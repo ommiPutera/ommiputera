@@ -93,9 +93,9 @@ export default async function Blog({
         </div>
         <div className="mt-4 md:mt-7 flex flex-col gap-4">
           <div className="flex flex-col gap-2 mx-5 md:mx-12">
-            <h2 className="text-2xl font-extrabold tracking-tight">
+            <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight">
               {post.metadata.title}
-            </h2>
+            </h1>
             <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal leading-5">
               {post.metadata.summary}
             </p>
