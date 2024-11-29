@@ -109,12 +109,12 @@ function Mode() {
           />
         </div>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
-          <p className="text-sm font-normal  leading-5">
+          <p className="text-sm font-normal leading-5">
             Dark mode will reduce screen brightness for a more comfortable
             reading experience.
           </p>
           <Br />
-          <p className="text-sm font-normal  leading-5">
+          <p className="text-sm font-normal leading-5">
             <span>
               Turn on <ModeToggle /> mode by clicking this section <ModeEmoji />{" "}
             </span>
