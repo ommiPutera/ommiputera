@@ -97,7 +97,7 @@ function BlogItem({
             alt=""
             className="object-cover overflow-hidden h-[300px] w-full"
           />
-          <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
+          <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-3/4"></div>
           <h2 className="absolute bottom-2 py-3 px-6 text-lg font-bold text-neutral-200 text-center w-full">
             {title}
           </h2>

@@ -24,7 +24,6 @@ export default function Contact() {
         </p>
       </Content>
       <Br />
-      <Br />
       <div className="ml-[48px]">
         <div className="flex items-center gap-2">
           <Link
