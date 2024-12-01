@@ -70,8 +70,8 @@ function Header({ title, withHome }: THeaderProps) {
           </Link>
         </li>
         <li className="underline text-muted-foreground">
-          <Link href="https://github.com/ommiPutera" target="_blank">
-            Github
+          <Link href="/projects" className="flex items-center">
+            Projects
           </Link>
         </li>
         {withHome && (
@@ -106,10 +106,10 @@ function Footer() {
       role="contentinfo"
       className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16"
     >
-      <p className="text-sm prose dark:prose-invert text-muted-foreground max-w-96 mx-auto">
+      <p className="text-xs prose dark:prose-invert max-w-96 mx-auto">
         © {new Date().getFullYear()} Ommi Putera. All rights reserved.
       </p>
-      <p className="text-sm prose dark:prose-invert text-muted-foreground max-w-72 mx-auto">
+      <p className="text-xs prose dark:prose-invert max-w-72 mx-auto">
         Build with Kapal Api and 76 Mangga.
       </p>
     </footer>

@@ -11,7 +11,7 @@ import { getBlogPosts, Metadata } from "~/data/blog";
 import { formatDate } from "~/lib/utils";
 
 export const metadata = {
-  title: "Blog",
+  title: "The Ommi Putera Blog",
   description: "My thoughts on software development, life, and more.",
 };
 
@@ -25,7 +25,7 @@ export default async function BlogPage() {
     return 1;
   });
   return (
-    <ShellPage title="Blog" withHome withBack>
+    <ShellPage title="The Ommi Putera Blog" withHome withBack>
       <Section>
         <div className="flex gap-2">
           <div className="w-full max-w-10">

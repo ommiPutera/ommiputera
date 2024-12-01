@@ -28,11 +28,13 @@ function Intro() {
       </div>
       <Content title="Projects 🔥" description="Curated">
         <p className="text-sm prose dark:prose-invert">
-          <span>
-            Here are some showcase of my latest projects. They&apos;re sure to
-            catch your eye!
-          </span>
-          <br />
+          Here are some showcase of my latest projects.
+        </p>
+        <Br />
+        <p className="text-sm prose dark:prose-invert">
+          They&apos;re sure to catch your eye!
+        </p>
+        <p className="text-sm prose dark:prose-invert">
           <Link
             href="/projects"
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
@@ -47,7 +49,7 @@ function Intro() {
 
 function Close() {
   return (
-    <Section className="pt-0 md:pt-0" href="/">
+    <Section className="pt-0 md:pt-0">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderClosed className="w-4 h-4 md:w-5 md:h-5" />
       </div>

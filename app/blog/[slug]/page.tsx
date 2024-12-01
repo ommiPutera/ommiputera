@@ -72,7 +72,7 @@ export default async function Blog({
   }
 
   return (
-    <ShellPage title="Blog" withHome withBack>
+    <ShellPage title="The Ommi Putera Blog" withHome withBack>
       <Section>
         <div className="flex gap-2 border-b border-neutral-200 w-full dark:border-neutral-800 pb-4 pt-2 md:pt-0 md:pb-7 px-5 md:px-12">
           <div className="w-fit max-w-10">
@@ -96,7 +96,7 @@ export default async function Blog({
             <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
               {post.metadata.title}
             </h1>
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal leading-5">
+            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal">
               {post.metadata.summary}
             </p>
           </div>

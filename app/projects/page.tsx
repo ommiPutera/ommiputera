@@ -12,8 +12,8 @@ import { getBlogPosts, Metadata } from "~/data/blog";
 import { formatDate } from "~/lib/utils";
 
 export const metadata = {
-  title: "Blog",
-  description: "My thoughts on software development, life, and more.",
+  title: "The Ommi Putera Projects",
+  description: "",
 };
 
 export default async function ProjectsPage() {
@@ -89,10 +89,10 @@ function Project({
       </div>
       <div className="p-4 border-neutral-200 dark:border-neutral-800">
         <h2 className="text-ms font-bold mb-1.5 w-full">{title}</h2>
-        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 leading-5 mb-1">
+        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 mb-1">
           {formatDate(publishedAt)}
         </p>
-        <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-100 md:leading-5">
+        <p className="text-xs md:text-sm font-normal text-neutral-600 dark:text-neutral-100">
           {summary}
         </p>
       </div>

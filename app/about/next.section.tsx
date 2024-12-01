@@ -1,31 +1,35 @@
-import { Mail, MonitorSmartphone, Smartphone } from "lucide-react";
+"use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import { ChevronLeft, Mail, Signpost } from "lucide-react";
 
 import Br from "~/components/br";
 import Content from "~/components/content";
 import Section from "~/components/section";
 
-export default function Contact() {
+export default function NextTo() {
+  const router = useRouter();
   return (
-    <Section>
+    <Section className="pt-0 md:pt-0 mb-6">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
+        <Signpost className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Contact">
+      <Content title="Next?">
         <p className="text-sm prose dark:prose-invert">
-          Would you be interested in working on a project together? I&apos;d
-          love to hear your thoughts.
+          Navigate to another page..
         </p>
         <Br />
-        <p className="text-sm prose dark:prose-invert">
-          The best way to get in touch with me is to email{" "}
-          <b>me@ommiputera.com</b>
-        </p>
-      </Content>
-      <Br />
-      <div className="ml-[48px]">
         <div className="flex items-center gap-2">
+          <Link
+            href="/blog"
+            className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
+          >
+            <p className="text-xs md:text-sm font-medium whitespace-nowra">
+              Blog
+            </p>
+          </Link>
           <Link
             href="mailto:omiputrakarunia@gmail.com"
             target="_blank"
@@ -38,20 +42,19 @@ export default function Contact() {
               <p className="text-xs md:text-sm font-medium">Email me</p>
             </div>
           </Link>
-          <Link
-            href="https://wa.me/+6281219603026"
-            target="_blank"
+          <button
+            onClick={() => router.back()}
             className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
             <div className="flex items-center gap-1.5">
               <div>
-                <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
+                <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-xs md:text-sm font-medium">WhatsApp me</p>
+              <p className="text-xs md:text-sm font-medium">Back</p>
             </div>
-          </Link>
+          </button>
         </div>
-      </div>
+      </Content>
     </Section>
   );
 }

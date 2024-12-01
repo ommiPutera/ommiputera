@@ -14,8 +14,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Ommi Putera - Home",
-  description: "",
+  title: "Ommi Putera",
+  description: "Ommi Personal Website",
 };
 
 export default function RootLayout({

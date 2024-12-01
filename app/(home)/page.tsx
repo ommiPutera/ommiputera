@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -13,9 +14,13 @@ import ShellPage from "~/components/shell-page";
 import Blog from "./blog.section";
 import Contact from "./contact.section";
 import Education from "./education.section";
-// import Stack from "./my-stack.section";
 import Projects from "./projects.section";
 import Work from "./work.section";
+
+export const metadata: Metadata = {
+  title: "Ommi Putera",
+  description: "Ommi Personal Website",
+};
 
 export default async function Home() {
   return (
@@ -27,8 +32,6 @@ export default async function Home() {
       <Education />
       <Blog />
       <Projects />
-      {/* <Stack /> */}
-      {/* <Uses /> */}
       <Contact />
       <ThankYou />
     </ShellPage>
