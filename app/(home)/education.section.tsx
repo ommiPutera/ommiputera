@@ -14,7 +14,7 @@ export default function Education() {
         <Library className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Education">
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Purwadhika was where I really got my start in web development. There,
           I learned how to build websites and apps from the ground up, but more
           importantly, I picked up how to be an effective learner—something

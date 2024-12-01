@@ -41,7 +41,7 @@ export default async function BlogPage() {
             <ContentTitle title="Blog" description="Ommi Putera" />
           </div>
         </div>
-        <p className="text-sm font-normal leading-5 mt-1">
+        <p className="text-sm prose dark:prose-invert mt-1">
           I share what I&apos;ve been working on, the challenges I&apos;ve
           tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
           lessons learned and things I&apos;m exploring along the way.

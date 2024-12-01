@@ -27,7 +27,7 @@ function Intro() {
         <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Projects 🔥" description="Curated">
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           <span>
             Here are some showcase of my latest projects. They&apos;re sure to
             catch your eye!
@@ -52,7 +52,7 @@ function Close() {
         <FolderClosed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="More Project">
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           <span>Interested in checking out more? </span>
           <Link
             href="/projects"
@@ -81,7 +81,7 @@ function DipayCore() {
         title="In Charge of Development for Dipay Core Dashboard"
         description="Dipay Indonesia"
       >
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -117,7 +117,7 @@ function Dipay() {
         title="Revamped a Landing Page using Next.js"
         description="Dipay Indonesia"
       >
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -153,7 +153,7 @@ function Naufal() {
         title="Personal/Porfolio Website for Naufal Ghifari"
         description="2022"
       >
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on
@@ -189,7 +189,7 @@ function DipayDisbursement() {
         title="Development of Dipay Disbursement"
         description="Dipay Indonesia - 2024"
       >
-        <p className="text-sm font-normal  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Improve the accuracy and efficiency of image recognition technology.
           By creating our own tools, we can customize the annotation process to
           fit the specific needs and requirements, rather than relying on

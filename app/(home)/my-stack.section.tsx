@@ -10,7 +10,7 @@ export default function Stack() {
         <Cpu className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title={`My ${new Date().getFullYear()} Tech Stack ✅`}>
-        <div className="text-sm font-normal  leading-5">
+        <div className="text-sm prose dark:prose-invert">
           <ul>
             <li>Front-End dev</li>
             <li>👉Tailwind CSS</li>

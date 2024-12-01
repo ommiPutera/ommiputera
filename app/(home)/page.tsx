@@ -48,7 +48,7 @@ async function Hi() {
         />
       </div>
       <Content title="Hi, I'm Ommi 👋" description="Greeting">
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Software Engineer based in <b>Jakarta, Indonesia</b>. I love building
           things with{" "}
           <Link
@@ -71,16 +71,16 @@ function About() {
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           My name is <b>Ommi Putera K.</b>
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           I work at <b>Dipay Indonesia</b> as a Full Stack Engineer.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">I am passionate about</p>
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">I am passionate about</p>
+        <p className="text-sm prose dark:prose-invert">
           <Link
             href="/about"
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
@@ -109,12 +109,12 @@ function Mode() {
           />
         </div>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
-          <p className="text-sm font-normal leading-5">
+          <p className="text-sm prose dark:prose-invert">
             Dark mode will reduce screen brightness for a more comfortable
             reading experience.
           </p>
           <Br />
-          <p className="text-sm font-normal leading-5">
+          <p className="text-sm prose dark:prose-invert">
             <span>
               Turn on <ModeToggle /> mode by clicking this section <ModeEmoji />{" "}
             </span>
@@ -132,7 +132,7 @@ function Mode() {
 //         <CarFront className="w-4 h-4 md:w-5 md:h-5" />
 //       </div>
 //       <Content title="Uses">
-//         <p className="text-sm  leading-5">Work in progres</p>
+//         <p className="text-sm prose dark:prose-invert">Work in progres</p>
 //       </Content>
 //     </Section>
 //   );
@@ -149,7 +149,7 @@ function ThankYou() {
         className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
       />
       <Content title="Thank you for stopping by! 👋" description="Ommi Putera">
-        <p className="text-sm  leading-5">
+        <p className="text-sm prose dark:prose-invert">
           <span>You can follow me on</span>{" "}
           <Link
             href=""

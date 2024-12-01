@@ -20,11 +20,7 @@ export default function ShellPage({
   withBack?: boolean;
 } & THeaderProps) {
   return (
-    <div
-      className="container mx-auto max-w-[720px]"
-      aria-hidden="true"
-      tabIndex={-1}
-    >
+    <div className="mx-auto max-w-[720px]">
       <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header title={title} withHome={withHome} />
@@ -91,7 +87,7 @@ function Header({ title, withHome }: THeaderProps) {
 function RoundedBorder() {
   return (
     <div>
-      <div className="w-full h-3 top-[calc(var(--hero-height-mobile)_-_11.2px)] md:top-[calc(var(--hero-height)_-_11.5px)] absolute overflow-hidden">
+      <div className="w-full h-3 top-[calc(var(--hero-height-mobile)_-_11px)] md:top-[calc(var(--hero-height)_-_11.2px)] absolute overflow-hidden">
         <div className="w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-b border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden left-2.5 md:left-14">
@@ -110,10 +106,10 @@ function Footer() {
       role="contentinfo"
       className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16"
     >
-      <p className="text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
+      <p className="text-sm prose dark:prose-invert text-muted-foreground max-w-96 mx-auto">
         © {new Date().getFullYear()} Ommi Putera. All rights reserved.
       </p>
-      <p className="text-sm font-normal leading-5 text-muted-foreground max-w-72 mx-auto">
+      <p className="text-sm prose dark:prose-invert text-muted-foreground max-w-72 mx-auto">
         Build with Kapal Api and 76 Mangga.
       </p>
     </footer>

@@ -36,7 +36,7 @@ export default async function ProjectsPage() {
             <ContentTitle title="Projects 🔥" description="Curated" />
           </div>
         </div>
-        <p className="text-sm font-normal leading-5 mt-1">
+        <p className="text-sm prose dark:prose-invert mt-1">
           Here are some showcase of my latest projects. They&apos;re sure to
           catch your eye!
         </p>

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Briefcase, Dot } from "lucide-react";
+import { Briefcase } from "lucide-react";
 
 import Content from "~/components/content";
 import Section from "~/components/section";
@@ -24,7 +24,7 @@ export default function Work() {
         <Briefcase className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Work Experience">
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           I&apos;ve been growing my career at{" "}
           <Link
             href="https://dipay.id/"
@@ -38,11 +38,13 @@ export default function Work() {
           TypeScript, and CI/CD along the way.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
-          One of the highlights has been leading the development of Dipay
-          Disbursement, a scalable web app for payments. It&apos;s been an
-          exciting challenge that&apos;s pushed me to keep learning and building
-          solutions that make a real difference.
+        <p className="text-sm prose dark:prose-invert">
+          One of the highlights has been leading the development of{" "}
+          <b>Dipay Enterprise Disbursement</b>, a scalable web app that
+          automates mass fund transfers for businesses, enhancing efficiency and
+          strengthening partnerships. This project has been a rewarding
+          challenge, driving me to keep learning and building impactful
+          solutions.
         </p>
         <Br />
         <Link
@@ -66,11 +68,9 @@ export default function Work() {
               </h4>
               <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
                 <span>Full-time</span>
-                <Dot className="text-slate-400 w-3 h-3" />
-                <span>3yrs 2mos</span>
               </p>
               <p className="text-sm font-normal text-muted-foreground">
-                Jakarta, Indonesia - On-site
+                Jakarta, Indonesia
               </p>
             </div>
           </div>
@@ -85,8 +85,6 @@ export default function Work() {
                 <TimelineContent className="pr-0">
                   <TimelineDate className="flex items-center flex-wrap">
                     <span>Jul 2024 - Present</span>
-                    <Dot className="text-slate-400 w-3 h-3" />
-                    <span>5mos</span>
                   </TimelineDate>
                 </TimelineContent>
               </TimelineItem>
@@ -98,8 +96,6 @@ export default function Work() {
                 <TimelineContent className="pr-0">
                   <TimelineDate className="flex items-center flex-wrap">
                     <span>Oct 2021 - Jul 2024</span>
-                    <Dot className="text-slate-400 w-3 h-3" />
-                    <span>2yrs 10mos</span>
                   </TimelineDate>
                 </TimelineContent>
               </TimelineItem>

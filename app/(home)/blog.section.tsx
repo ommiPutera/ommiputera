@@ -27,7 +27,7 @@ export default function Blog() {
         />
       </div>
       <Content title="Blog" description="Ommi Putera">
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           I share what I&apos;ve been working on, the challenges I&apos;ve
           tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
           lessons learned and things I&apos;m exploring along the way.{" "}

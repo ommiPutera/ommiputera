@@ -31,33 +31,34 @@ function Me() {
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           My name is <b>Ommi Putera K.</b>
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           I work at <b>Dipay Indonesia</b> as a Full Stack Engineer.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           I am passionate about crafting quality software.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Born in <b>1998 in Bengkulu, Indonesia</b>.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           I was preparing to start my career after graduating with an economics
-          degree when the COVID-19 pandemic hit in late 2019. The widespread
-          layoffs across industries made me rethink my career path. Amid this
-          uncertainty, I discovered the thriving field of digital technology,
-          particularly web development. Determined to seize the opportunity, I
-          enrolled in the <b>Purwadhika Digital Technology School&apos;s</b>{" "}
-          Full Stack Web and Mobile Development Bootcamp in early 2021.
+          degree when the COVID-19 pandemic hit in late 2019. The wave of
+          layoffs across industries pushed me to explore alternative career
+          paths. Amid this uncertainty, I discovered the thriving field of
+          digital technology, particularly web development. Determined to seize
+          the opportunity, I joined{" "}
+          <b>Purwadhika Digital Technology School&apos;s</b> Full Stack Web and
+          Mobile Development Bootcamp in early 2021.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           During the program, I discovered my true passion for coding and web
           development. It sparked a deep commitment to continuous learning and
           growth as a software engineer.
@@ -83,7 +84,7 @@ function Values() {
           <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Continuous Learning
           </h2>
-          <p className="text-sm font-normal leading-5">
+          <p className="text-sm prose dark:prose-invert">
             An engineer understands that learning never ends. By staying curious
             and embracing new ideas and technologies, I drive personal growth
             and adapt to the ever-changing demands of the industry. This mindset
@@ -95,7 +96,7 @@ function Values() {
           <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Effective Collaboration
           </h2>
-          <p className="text-sm font-normal leading-5">
+          <p className="text-sm prose dark:prose-invert">
             True collaboration begins with humility. By fostering open
             communication and respecting the contributions of every team member,
             regardless of experience, I help create a supportive and inclusive
@@ -107,7 +108,7 @@ function Values() {
           <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Empathy
           </h2>
-          <p className="text-sm font-normal leading-5">
+          <p className="text-sm prose dark:prose-invert">
             Empathy is the bridge between technology and people. By genuinely
             understanding the needs and perspectives of users and clients, I
             ensure that the products and solutions I develop are meaningful,
@@ -125,7 +126,7 @@ function Values() {
           />
         </div>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           The best way to get in touch with me is to email{" "}
           <b>me@ommiputera.com</b>
         </p>
@@ -173,8 +174,8 @@ function NextTo() {
         <Signpost className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Next?">
-        <p className="text-sm font-normal leading-5">
-          Navigate to another page using this menu.
+        <p className="text-sm prose dark:prose-invert">
+          Navigate to another page..
         </p>
         <Br />
         <div className="flex items-center gap-2">

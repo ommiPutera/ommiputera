@@ -13,12 +13,12 @@ export default function Contact() {
         <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Contact">
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           Would you be interested in working on a project together? I&apos;d
           love to hear your thoughts.
         </p>
         <Br />
-        <p className="text-sm font-normal leading-5">
+        <p className="text-sm prose dark:prose-invert">
           The best way to get in touch with me is to email{" "}
           <b>me@ommiputera.com</b>
         </p>
