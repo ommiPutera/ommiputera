@@ -11,8 +11,8 @@ export default function Projects() {
   return (
     <div>
       <Intro />
-      <DipayCore />
       <DipayDisbursement />
+      <DipayCore />
       <Dipay />
       <Naufal />
       <Close />
@@ -72,6 +72,7 @@ function DipayCore() {
   return (
     <Section
       withConnector
+      href="/dipay-core-dashboard"
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
@@ -79,7 +80,7 @@ function DipayCore() {
         <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content
-        title="In Charge of Development for Dipay Core Dashboard"
+        title="Building a Dipay Core Dashboard"
         description="Dipay Indonesia"
       >
         <p className="text-sm prose dark:prose-invert">
@@ -185,7 +186,7 @@ function DipayDisbursement() {
         <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content
-        title="Development of Dipay Disbursement"
+        title="Building a Dipay Enterprise Disbursement"
         description="Dipay Indonesia - 2024"
       >
         <p className="text-sm prose dark:prose-invert">

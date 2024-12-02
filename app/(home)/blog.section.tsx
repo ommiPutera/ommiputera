@@ -97,16 +97,14 @@ function BlogItem({
             alt=""
             className="object-cover overflow-hidden h-[320px] w-full"
           />
-          <div className="absolute bottom-0 from-background to-transparent bg-gradient-to-t w-full h-full"></div>
-          <h2 className="absolute top-1/2 py-3 px-6 text-xl font-bold text-neutral-200 text-center w-full">
+          <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2 dark:h-full"></div>
+          <h2 className="absolute z-10 top-1/2 py-3 px-6 text-xl font-bold text-neutral-50 text-center w-full">
             {title}
           </h2>
         </div>
         <div className="p-4 border-neutral-200 dark:border-neutral-800 prose dark:prose-invert">
-          <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300">
+          <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
             <span>{formatDate(publishedAt)}</span>
-            <br />
-            <br />
             <span>{summary}</span>
           </p>
         </div>

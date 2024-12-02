@@ -94,12 +94,10 @@ function Blog({
         />
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
-      <div className="p-4 prose dark:prose-invert">
-        <h3 className="text-lg font-bold w-full">{title}</h3>
-        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300">
+      <div className="p-9 md:p-4 prose dark:prose-invert">
+        <h3 className="text-xl font-bold w-full">{title}</h3>
+        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
           <span>{formatDate(publishedAt)}</span>
-          <br />
-          <br />
           <span>{summary}</span>
         </p>
       </div>

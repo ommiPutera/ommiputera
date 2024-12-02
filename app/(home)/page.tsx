@@ -188,6 +188,7 @@ function ThankYou() {
           <Image src="/images/thank-you.jpg" width={800} height={400} alt="" />
         </div>
       </Content>
+      <Br />
     </Section>
   );
 }

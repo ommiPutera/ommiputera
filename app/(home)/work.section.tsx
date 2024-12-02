@@ -63,7 +63,7 @@ export default function Work() {
               />
             </div>
             <div className="w-full">
-              <h4 className="text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
+              <h4 className="text-xs font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
               </h4>
               <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
@@ -80,7 +80,9 @@ export default function Work() {
                 <TimelineConnector />
                 <TimelineHeader>
                   <TimelineIcon />
-                  <TimelineTitle>Full Stack Engineer</TimelineTitle>
+                  <TimelineTitle className="text-xs">
+                    Full Stack Engineer
+                  </TimelineTitle>
                 </TimelineHeader>
                 <TimelineContent className="pr-0">
                   <TimelineDate className="flex items-center flex-wrap">
@@ -91,7 +93,9 @@ export default function Work() {
               <TimelineItem>
                 <TimelineHeader>
                   <TimelineIcon />
-                  <TimelineTitle>Frontend Engineer</TimelineTitle>
+                  <TimelineTitle className="text-xs">
+                    Frontend Engineer
+                  </TimelineTitle>
                 </TimelineHeader>
                 <TimelineContent className="pr-0">
                   <TimelineDate className="flex items-center flex-wrap">

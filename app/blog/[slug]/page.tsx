@@ -113,7 +113,7 @@ export default async function Blog({
           </div>
         </div>
         <article
-          className="prose dark:prose-invert mt-6 mx-5 md:mx-12 mb-6"
+          className="prose dark:prose-invert mt-6 mx-5 md:mx-auto max-w-[422px] mb-6"
           dangerouslySetInnerHTML={{ __html: post.source }}
         ></article>
       </Section>

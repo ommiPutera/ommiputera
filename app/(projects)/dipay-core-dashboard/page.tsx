@@ -1,4 +1,5 @@
 import Image from "next/image";
+
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
@@ -7,7 +8,7 @@ export default function ProjectDipayDisbursement() {
     <ShellPage title="Dipay Disbursement" withHome withBack>
       <Section className="p-0 md:p-0">
         <Image
-          src="/images/projects/dipay-disburesment.jpeg"
+          src="/images/projects/dipay-core.jpeg"
           width={600}
           height={600}
           alt=""
@@ -20,7 +21,7 @@ export default function ProjectDipayDisbursement() {
             Dipay Indonesia - 2024
           </p>
           <h3 className="text-xl font-extrabold w-full my-4 leading-7">
-            Building a Dipay Enterprise Disbursement
+            Building a Dipay Core Dashboard
           </h3>
           <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2 prose dark:prose-invert">
             Improve the accuracy and efficiency of image recognition technology.
