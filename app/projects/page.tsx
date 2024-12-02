@@ -26,7 +26,7 @@ export default async function ProjectsPage() {
     return 1;
   });
   return (
-    <ShellPage title="Blog" withHome withBack>
+    <ShellPage title="The Ommi Putera Projects" withHome withBack>
       <Section>
         <div className="flex gap-2">
           <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
