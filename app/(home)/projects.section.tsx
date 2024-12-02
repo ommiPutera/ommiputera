@@ -71,7 +71,6 @@ function Close() {
 function DipayCore() {
   return (
     <Section
-      href="/"
       withConnector
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
@@ -107,7 +106,6 @@ function DipayCore() {
 function Dipay() {
   return (
     <Section
-      href="/"
       withConnector
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
@@ -143,7 +141,6 @@ function Dipay() {
 function Naufal() {
   return (
     <Section
-      href="/"
       withConnector
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
@@ -179,7 +176,7 @@ function Naufal() {
 function DipayDisbursement() {
   return (
     <Section
-      href="/"
+      href="/dipay-disbursement"
       withConnector
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"

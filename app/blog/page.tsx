@@ -47,7 +47,7 @@ export default async function BlogPage() {
           lessons learned and things I&apos;m exploring along the way.
         </p>
         <Br />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
           {blogs.map((post) => {
             const slug = post.slug;
             const source = post.source;
@@ -61,6 +61,7 @@ export default async function BlogPage() {
             );
           })}
         </div>
+        <Br />
       </Section>
     </ShellPage>
   );
@@ -89,17 +90,16 @@ function Blog({
           width={600}
           height={600}
           alt=""
-          className="object-cover overflow-hidden h-[300px] w-full"
+          className="object-cover overflow-hidden h-[260px] w-full"
         />
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
-      <div className="p-4 border-neutral-200 dark:border-neutral-800 prose dark:prose-invert">
-        <h3 className="text-ms font-bold w-full">{title}</h3>
+      <div className="p-4 prose dark:prose-invert bg-background">
+        <h3 className="text-base font-bold w-full">{title}</h3>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300">
-          {formatDate(publishedAt)}
-        </p>
-        <p className="text-xs md:text-sm leading-4 font-normal text-neutral-600 dark:text-neutral-100">
-          {summary}
+          <span>{formatDate(publishedAt)}</span>
+          <br />
+          <span>{summary}</span>
         </p>
       </div>
     </Link>

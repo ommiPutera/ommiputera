@@ -66,12 +66,22 @@ function Header({ title, withHome }: THeaderProps) {
             Resume
           </Link>
         </li>
-        <li className={cn("underline text-muted-foreground", pathname.startsWith("/blog") && "text-blue-500")}>
+        <li
+          className={cn(
+            "underline text-muted-foreground",
+            pathname.startsWith("/blog") && "text-blue-500",
+          )}
+        >
           <Link href="/blog" className="flex items-center">
             Blog
           </Link>
         </li>
-        <li className={cn("underline text-muted-foreground", pathname.startsWith("/projects") && "text-blue-500")}>
+        <li
+          className={cn(
+            "underline text-muted-foreground",
+            pathname.startsWith("/projects") && "text-blue-500",
+          )}
+        >
           <Link href="/projects" className="flex items-center">
             Projects
           </Link>

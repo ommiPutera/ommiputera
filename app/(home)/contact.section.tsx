@@ -14,11 +14,6 @@ export default function Contact() {
       </div>
       <Content title="Contact">
         <p className="text-sm prose dark:prose-invert">
-          Would you be interested in working on a project together? I&apos;d
-          love to hear your thoughts.
-        </p>
-        <Br />
-        <p className="text-sm prose dark:prose-invert">
           The best way to get in touch with me is to email{" "}
           <b>me@ommiputera.com</b>
         </p>
