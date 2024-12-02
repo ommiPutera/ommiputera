@@ -82,7 +82,7 @@ function Blog({
     <Link
       href={`/blog/${slug}`}
       prefetch
-      className="rounded-xl w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-800"
+      className="rounded-xl bg-background w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-800"
     >
       <div className="relative">
         <Image
@@ -90,14 +90,15 @@ function Blog({
           width={600}
           height={600}
           alt=""
-          className="object-cover overflow-hidden h-[260px] w-full"
+          className="object-cover overflow-hidden h-[320px] w-full"
         />
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
-      <div className="p-4 prose dark:prose-invert bg-background">
-        <h3 className="text-base font-bold w-full">{title}</h3>
+      <div className="p-4 prose dark:prose-invert">
+        <h3 className="text-lg font-bold w-full">{title}</h3>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300">
           <span>{formatDate(publishedAt)}</span>
+          <br />
           <br />
           <span>{summary}</span>
         </p>
