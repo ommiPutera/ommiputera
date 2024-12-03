@@ -28,6 +28,20 @@ const data: TData[] = [
     summary:
       "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
   },
+  {
+    slug: "dipay-landing",
+    imageSource: "/images/projects/personal-page.jpeg",
+    title: "Revamped a Landing Page using Next.js",
+    summary:
+      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
+  },
+  {
+    slug: "naufal-website",
+    imageSource: "/images/projects/naufal-page.jpeg",
+    title: "Personal/Porfolio Website for Naufal Ghifari",
+    summary:
+      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
+  },
 ];
 type TData = {
   slug: string;
@@ -81,11 +95,15 @@ function Project({ slug, imageSource, title, summary }: TData) {
       prefetch
       className="rounded-xl w-full cursor-pointer block h-full overflow-hidden bg-background border dark:border-neutral-800"
     >
-      <Image src={imageSource} width={800} height={400} alt="" />
+      <Image
+        src={imageSource}
+        width={800}
+        height={400}
+        alt=""
+        className="h-full min-h-[248px] md:h-[340px] object-cover"
+      />
       <div className="p-9 md:p-0 max-w-[422px] md:my-12 md:mx-auto group">
-        <p className="text-blue-500 text-xs md:text-sm font-semibold">
-          Dipay Indonesia - 2024
-        </p>
+        <p className="text-blue-500 text-xs md:text-sm font-semibold">2024</p>
         <h3 className="text-xl font-extrabold w-full my-4 leading-7">
           {title}
         </h3>

@@ -90,12 +90,12 @@ function Blog({
           width={600}
           height={600}
           alt=""
-          className="object-cover overflow-hidden h-[320px] w-full"
+          className="object-cover overflow-hidden h-[220px] w-full"
         />
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
       <div className="p-9 md:p-4 prose dark:prose-invert">
-        <h3 className="text-xl font-bold w-full">{title}</h3>
+        <h3 className="text-xl font-extrabold w-full leading-7">{title}</h3>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
           <span>{formatDate(publishedAt)}</span>
           <span>{summary}</span>

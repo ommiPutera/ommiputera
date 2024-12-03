@@ -1,3 +1,4 @@
+import Link, { type LinkProps } from "next/link";
 import { Suspense } from "react";
 
 import { cn } from "~/lib/utils";
@@ -46,5 +47,27 @@ export function ContentTitle({
         </Suspense>
       )}
     </>
+  );
+}
+
+export function ContentParagraph({ children }: { children: React.ReactNode }) {
+  return <p className="text-sm prose dark:prose-invert">{children}</p>;
+}
+
+type AnchorProps = React.DetailedHTMLProps<
+  React.AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+>;
+export function ContentLink({
+  text,
+  ...props
+}: LinkProps & AnchorProps & { text: string }) {
+  return (
+    <Link
+      {...props}
+      className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
+    >
+      {text}
+    </Link>
   );
 }

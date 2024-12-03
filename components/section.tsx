@@ -44,3 +44,11 @@ export default function Section({
     </section>
   );
 }
+
+export function SectionAvatar({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+      {children}
+    </div>
+  );
+}

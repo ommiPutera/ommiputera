@@ -6,7 +6,6 @@ import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
 import { getBlogPosts, getPost } from "~/data/blog";
-import { DATA } from "~/data/resume";
 
 import { formatDate } from "~/lib/utils";
 
@@ -15,48 +14,6 @@ export async function generateStaticParams() {
   return posts.map((post) => ({
     slug: post.slug,
   }));
-}
-
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const post = await getPost(slug);
-
-  const {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata;
-  const ogImage = image
-    ? `${DATA.url}${image}`
-    : `${DATA.url}/og?title=${title}`;
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime,
-      url: `${DATA.url}/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
-    },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImage],
-    },
-  };
 }
 
 export default async function Blog({
@@ -128,14 +85,6 @@ export default async function Blog({
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
             description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${DATA.url}${post.metadata.image}`
-              : `${DATA.url}/og?title=${post.metadata.title}`,
-            url: `${DATA.url}/blog/${post.slug}`,
-            author: {
-              "@type": "Person",
-              name: DATA.name,
-            },
           }),
         }}
       />

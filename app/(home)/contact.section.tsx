@@ -3,20 +3,20 @@ import { Mail, MonitorSmartphone, Smartphone } from "lucide-react";
 import Link from "next/link";
 
 import Br from "~/components/br";
-import Content from "~/components/content";
-import Section from "~/components/section";
+import Content, { ContentParagraph } from "~/components/content";
+import Section, { SectionAvatar } from "~/components/section";
 
 export default function Contact() {
   return (
     <Section>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+      <SectionAvatar>
         <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
+      </SectionAvatar>
       <Content title="Contact">
-        <p className="text-sm prose dark:prose-invert">
-          The best way to get in touch with me is to email{" "}
+        <ContentParagraph>
+          <span>The best way to get in touch with me is to email </span>
           <b>me@ommiputera.com</b>
-        </p>
+        </ContentParagraph>
       </Content>
       <Br />
       <div className="ml-[48px]">

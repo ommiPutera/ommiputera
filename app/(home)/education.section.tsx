@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Br from "~/components/br";
-import Content from "~/components/content";
+import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 
 export default function Education() {
@@ -14,12 +14,12 @@ export default function Education() {
         <Library className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Education">
-        <p className="text-sm prose dark:prose-invert">
+        <ContentParagraph>
           Purwadhika was where I really got my start in web development. There,
           I learned how to build websites and apps from the ground up, but more
           importantly, I picked up how to be an effective learner—something
           that&apos;s been key as I continue to grow in this field.
-        </p>
+        </ContentParagraph>
         <Br />
         <Link
           href="https://www.linkedin.com/in/ommiputera"

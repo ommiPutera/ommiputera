@@ -50,7 +50,7 @@ export default function Work() {
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-neutral-50 hover:dark:bg-neutral-900 focus-visible:bg-slate-100"
+          className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-neutral-50 hover:dark:bg-neutral-900"
         >
           <div className="flex items-start gap-2.5">
             <div className="w-full max-w-10">
