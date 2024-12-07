@@ -1,12 +1,13 @@
-import { FolderOpen, MoveRight } from "lucide-react";
+import { MoveRight } from "lucide-react";
 import Image from "next/image";
 
 import Link from "next/link";
 
 import Br from "~/components/br";
-import { ContentTitle } from "~/components/content";
+import { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
+import { BackgroundBeams } from "~/components/ui/background-beams";
 
 export const metadata = {
   title: "The Ommi Putera Projects",
@@ -14,20 +15,20 @@ export const metadata = {
 };
 
 const data: TData[] = [
-  {
-    slug: "dipay-disbursement",
-    imageSource: "/images/projects/dipay-disburesment.jpeg",
-    title: "Building a Dipay Enterprise Disbursement",
-    summary:
-      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  },
-  {
-    slug: "dipay-core-dashboard",
-    imageSource: "/images/projects/dipay-core.jpeg",
-    title: "Building a Dipay Core Dashboard",
-    summary:
-      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  },
+  // {
+  //   slug: "dipay-disbursement",
+  //   imageSource: "/images/projects/dipay-disburesment.jpeg",
+  //   title: "Building a Dipay Enterprise Disbursement",
+  //   summary:
+  //     "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
+  // },
+  // {
+  //   slug: "dipay-core-dashboard",
+  //   imageSource: "/images/projects/dipay-core.jpeg",
+  //   title: "Building a Dipay Core Dashboard",
+  //   summary:
+  //     "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
+  // },
   {
     slug: "dipay-landing",
     imageSource: "/images/projects/personal-page.jpeg",
@@ -54,18 +55,14 @@ export default async function ProjectsPage() {
   return (
     <ShellPage title="The Ommi Putera Projects" withHome withBack>
       <Section>
-        <div className="flex flex-row gap-2">
-          <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-            <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
-          </div>
-          <div className="w-fit">
-            <ContentTitle title="Projects 🔥" description="Curated" />
-          </div>
+        <div className="my-4">
+          <h1 className="relative z-10 text-2xl md:text-4xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-300  text-center font-sans font-bold">
+            Curated Projects
+          </h1>
+          <ContentParagraph className="text-center text-base mx-12 md:mx-24 mt-1">
+            Showcase of my latest projects. They&apos;re sure to catch your eye!
+          </ContentParagraph>
         </div>
-        <p className="text-sm prose dark:prose-invert mt-1">
-          Here are some showcase of my latest projects. They&apos;re sure to
-          catch your eye!
-        </p>
         <Br />
         <div className="flex flex-col gap-6 md:gap-8">
           {data.map((post) => {
@@ -118,5 +115,31 @@ function Project({ slug, imageSource, title, summary }: TData) {
         </p>
       </div>
     </Link>
+  );
+}
+
+export function BackgroundBeamsDemo() {
+  return (
+    <div className="h-[40rem] w-full rounded-md bg-neutral-950 relative flex flex-col items-center justify-center antialiased">
+      <div className="max-w-2xl mx-auto p-4">
+        <h1 className="relative z-10 text-lg md:text-7xl  bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600  text-center font-sans font-bold">
+          Join the waitlist
+        </h1>
+        <p></p>
+        <p className="text-neutral-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
+          Welcome to MailJet, the best transactional email service on the web.
+          We provide reliable, scalable, and customizable email solutions for
+          your business. Whether you&apos;re sending order confirmations,
+          password reset emails, or promotional campaigns, MailJet has got you
+          covered.
+        </p>
+        <input
+          type="text"
+          placeholder="hi@manuarora.in"
+          className="rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500  w-full relative z-10 mt-4  bg-neutral-950 placeholder:text-neutral-700"
+        />
+      </div>
+      <BackgroundBeams />
+    </div>
   );
 }

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import Br from "~/components/br";
-import { ContentTitle } from "~/components/content";
+import { ContentParagraph, ContentTitle } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
@@ -41,11 +41,11 @@ export default async function BlogPage() {
             <ContentTitle title="Blog" description="Ommi Putera" />
           </div>
         </div>
-        <p className="text-sm prose dark:prose-invert mt-1">
+        <ContentParagraph className="mt-1">
           I share what I&apos;ve been working on, the challenges I&apos;ve
           tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
           lessons learned and things I&apos;m exploring along the way.
-        </p>
+        </ContentParagraph>
         <Br />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
           {blogs.map((post) => {

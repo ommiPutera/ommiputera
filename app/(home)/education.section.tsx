@@ -16,15 +16,15 @@ export default function Education() {
       <Content title="Education">
         <ContentParagraph>
           Purwadhika was where I really got my start in web development. There,
-          I learned how to build websites and apps from the ground up, but more
-          importantly, I picked up how to be an effective learner—something
-          that&apos;s been key as I continue to grow in this field.
+          I learned the fundamentals of web development and, more importantly,
+          cultivated effective learning habits, which have been invaluable in my
+          continued growth.
         </ContentParagraph>
         <Br />
         <Link
           href="https://www.linkedin.com/in/ommiputera"
           target="_blank"
-          className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4"
+          className="border border-neutral-200 dark:border-neutral-800 rounded-xl p-3 md:px-3 md:py-4 flex flex-col gap-4 hover:bg-neutral-50 hover:dark:bg-neutral-900"
         >
           <div className="flex items-start gap-2.5 w-full">
             <div className="w-full max-w-10">
@@ -40,7 +40,7 @@ export default function Education() {
               <h4 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Purwadhika Digital Technology School
               </h4>
-              <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
+              <p className="text-xs md:text-sm font-normal text-muted-foreground">
                 Jan 2021 - Aug 2021
               </p>
               <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
@@ -62,7 +62,7 @@ export default function Education() {
               <h4 className="text-xs md:text-sm font-semibold tracking-normal leading-4 text-neutral-900 dark:text-neutral-100">
                 University of Bengkulu
               </h4>
-              <p className="text-xs md:text-sm font-normal text-muted-foreground mt-1">
+              <p className="text-xs md:text-sm font-normal text-muted-foreground">
                 Aug 2016 - Aug 2020
               </p>
               <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">

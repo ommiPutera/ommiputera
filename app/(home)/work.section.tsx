@@ -25,7 +25,7 @@ export default function Work() {
       </div>
       <Content title="Work Experience">
         <p className="text-sm prose dark:prose-invert">
-          I&apos;ve been growing my career at{" "}
+          I&apos;ve been advancing my career at{" "}
           <Link
             href="https://dipay.id/"
             target="_blank"
@@ -63,7 +63,7 @@ export default function Work() {
               />
             </div>
             <div className="w-full">
-              <h4 className="text-xs font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
+              <h4 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
               </h4>
               <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
@@ -80,7 +80,7 @@ export default function Work() {
                 <TimelineConnector />
                 <TimelineHeader>
                   <TimelineIcon />
-                  <TimelineTitle className="text-xs">
+                  <TimelineTitle className="text-xs md:text-sm">
                     Full Stack Engineer
                   </TimelineTitle>
                 </TimelineHeader>
@@ -93,7 +93,7 @@ export default function Work() {
               <TimelineItem>
                 <TimelineHeader>
                   <TimelineIcon />
-                  <TimelineTitle className="text-xs">
+                  <TimelineTitle className="text-xs md:text-sm">
                     Frontend Engineer
                   </TimelineTitle>
                 </TimelineHeader>

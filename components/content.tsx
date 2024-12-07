@@ -50,8 +50,18 @@ export function ContentTitle({
   );
 }
 
-export function ContentParagraph({ children }: { children: React.ReactNode }) {
-  return <p className="text-sm prose dark:prose-invert">{children}</p>;
+export function ContentParagraph({
+  children,
+  className = "",
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <p className={cn("text-sm prose dark:prose-invert", className)}>
+      {children}
+    </p>
+  );
 }
 
 type AnchorProps = React.DetailedHTMLProps<

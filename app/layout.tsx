@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { ThemeProvider } from "~/components/theme-provider";
+import { BackgroundBeams } from "~/components/ui/background-beams";
 
 import "./globals.css";
 
@@ -32,6 +33,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <BackgroundBeams className="fixed top-0 left-0 h-full w-full" />
           {children}
         </ThemeProvider>
         <Analytics />

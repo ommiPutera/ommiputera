@@ -158,10 +158,10 @@ function ThankYou() {
             />
           </span>
         </ContentParagraph>
-        <Br />
+        {/* <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image src="/images/thank-you.jpg" width={800} height={400} alt="" />
-        </div>
+        </div> */}
       </Content>
     </Section>
   );
