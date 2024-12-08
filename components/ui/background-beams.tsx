@@ -2,11 +2,14 @@
 
 import { motion } from "framer-motion";
 import React from "react";
+import { useMediaQuery } from "~/hooks/use-media-query";
 
 import { cn } from "~/lib/utils";
 
 const Background = React.memo(
   ({ className }: { className?: string }) => {
+    const isMobile = useMediaQuery("(max-width: 425px)");
+
     const paths = [
       "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
       "M-373 -197C-373 -197 -305 208 159 335C623 462 691 867 691 867",
@@ -59,6 +62,8 @@ const Background = React.memo(
       "M-44 -573C-44 -573 24 -168 488 -41C952 86 1020 491 1020 491",
       "M-37 -581C-37 -581 31 -176 495 -49C959 78 1027 483 1027 483",
     ];
+
+    if (isMobile) return <></>
     return (
       <div
         className={cn(
