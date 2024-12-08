@@ -23,6 +23,7 @@ export default function NextTo() {
         <Br />
         <div className="flex items-center gap-2">
           <Link
+            prefetch
             href="/blog"
             className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >

@@ -73,7 +73,7 @@ function Header({ title, withHome }: THeaderProps) {
             pathname.startsWith("/blog") && "text-blue-500",
           )}
         >
-          <Link href="/blog" className="flex items-center">
+          <Link href="/blog" prefetch className="flex items-center">
             Blog
           </Link>
         </li>
@@ -83,13 +83,15 @@ function Header({ title, withHome }: THeaderProps) {
             pathname.startsWith("/projects") && "text-blue-500",
           )}
         >
-          <Link href="/projects" className="flex items-center">
+          <Link href="/projects" prefetch className="flex items-center">
             Projects
           </Link>
         </li>
         {withHome && (
           <li className="underline text-muted-foreground">
-            <Link href="/">Home</Link>
+            <Link href="/" prefetch>
+              Home
+            </Link>
           </li>
         )}
       </ul>

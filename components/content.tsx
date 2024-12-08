@@ -74,8 +74,9 @@ export function ContentLink({
 }: LinkProps & AnchorProps & { text: string }) {
   return (
     <Link
-      {...props}
+      prefetch
       className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
+      {...props}
     >
       {text}
     </Link>

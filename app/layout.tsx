@@ -27,13 +27,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
+        <BackgroundBeams className="fixed top-0 left-0 h-full w-full" />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <BackgroundBeams className="fixed top-0 left-0 h-full w-full" />
           {children}
         </ThemeProvider>
         <Analytics />

@@ -5,7 +5,7 @@ import React from "react";
 
 import { cn } from "~/lib/utils";
 
-export const BackgroundBeams = React.memo(
+const Background = React.memo(
   ({ className }: { className?: string }) => {
     const paths = [
       "M-380 -189C-380 -189 -312 216 152 343C616 470 684 875 684 875",
@@ -125,4 +125,6 @@ export const BackgroundBeams = React.memo(
     );
   },
 );
-BackgroundBeams.displayName = "BackgroundBeams";
+
+export const BackgroundBeams = React.cache(({ className }: { className: string }) => <Background className={className} />)
+Background.displayName = "BackgroundBeams";
