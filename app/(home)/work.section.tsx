@@ -1,8 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Briefcase } from "lucide-react";
+import { BriefcaseBusiness } from "lucide-react";
 
+import Br from "~/components/br";
 import Content from "~/components/content";
 import Section from "~/components/section";
 import {
@@ -15,17 +16,16 @@ import {
   TimelineItem,
   TimelineTitle,
 } from "~/components/ui/timeline";
-import Br from "~/components/br";
 
 export default function Work() {
   return (
     <Section>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Briefcase className="w-4 h-4 md:w-5 md:h-5" />
+        <BriefcaseBusiness className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Work Experience">
         <p className="text-sm prose dark:prose-invert">
-          I&apos;ve been advancing my career at{" "}
+          I&apos;ve been growing my career at{" "}
           <Link
             href="https://dipay.id/"
             target="_blank"
@@ -33,18 +33,19 @@ export default function Work() {
           >
             Dipay
           </Link>
-          . I started as a Frontend Engineer and worked my way up to Fullstack
-          Engineer, gaining hands-on experience with Web Standards, React,
-          TypeScript, and CI/CD along the way.
+          , starting as a Frontend Engineer and progressing to a Full Stack
+          Engineer. Along the way, I’ve honed my skills in Web Standards, React,
+          TypeScript, and CI/CD, gaining invaluable hands-on experience in
+          building robust and scalable applications.
         </p>
         <Br />
         <p className="text-sm prose dark:prose-invert">
-          One of the highlights has been leading the development of{" "}
-          <b>Dipay Enterprise Disbursement</b>, a scalable web app that
-          automates mass fund transfers for businesses, enhancing efficiency and
-          strengthening partnerships. This project has been a rewarding
-          challenge, driving me to keep learning and building impactful
-          solutions.
+          One of my most rewarding projects has been leading the development of{" "}
+          <b>Dipay Enterprise Disbursement</b>, a scalable web application that
+          automates mass fund transfers for businesses. This solution has not
+          only streamlined operations but also strengthened partnerships, making
+          a tangible impact. Tackling this challenge has fueled my drive to keep
+          learning and creating software that delivers meaningful results.
         </p>
         <Br />
         <Link

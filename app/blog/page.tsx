@@ -42,9 +42,8 @@ export default async function BlogPage() {
           </div>
         </div>
         <ContentParagraph className="mt-1">
-          I share what I&apos;ve been working on, the challenges I&apos;ve
-          tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix of
-          lessons learned and things I&apos;m exploring along the way.
+          I write about the React ecosystem, TypeScript, and the lessons
+          I&apos;ve learned while tackling real-world challenges.
         </ContentParagraph>
         <Br />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2">
@@ -82,7 +81,7 @@ function Blog({
     <Link
       href={`/blog/${slug}`}
       prefetch
-      className="rounded-xl bg-background w-full cursor-pointer block h-full md:max-w-[274px] overflow-hidden border border-neutral-200 dark:border-neutral-800"
+      className="rounded-xl bg-background w-full cursor-pointer block h-full md:max-w-[300px] overflow-hidden border border-neutral-200 dark:border-neutral-800"
     >
       <div className="relative">
         <Image
@@ -90,7 +89,7 @@ function Blog({
           width={600}
           height={600}
           alt=""
-          className="object-cover overflow-hidden h-[220px] w-full"
+          className="object-cover overflow-hidden h-[320px] w-full"
         />
         <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>

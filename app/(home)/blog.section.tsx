@@ -26,15 +26,15 @@ export default function Blog() {
           className="object-cover overflow-hidden rounded-full"
         />
       </SectionAvatar>
-      <Content title="Blog" description="Ommi Putera">
+      <Content title="The Blog" description="Ommi Putera">
         <ContentParagraph>
           <span>
-            I share what I&apos;ve been working on, the challenges I&apos;ve
-            tackled, and the stuff I&apos;m still figuring out. It&apos;s a mix
-            of lessons learned and things I&apos;m exploring along the way.{" "}
+            I write about the React ecosystem, TypeScript, and the lessons
+            I&apos;ve learned while tackling real-world challenges.{" "}
           </span>
-          <ContentLink href="/blog" text=" View all" />
         </ContentParagraph>
+        <Br />
+        <ContentLink href="/blog" text="View all" />
         <Br />
         <Blogs />
       </Content>
@@ -77,13 +77,13 @@ function BlogItem({
 }: { slug: string } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[274px]"
+      className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]"
       key={image}
     >
       <Link
         href={`/blog/${slug}`}
         prefetch
-        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800 bg-background"
+        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800 bg-white dark:bg-background"
       >
         <div className="relative">
           <Image
@@ -91,10 +91,10 @@ function BlogItem({
             width={600}
             height={600}
             alt=""
-            className="object-cover overflow-hidden h-[220px] w-full"
+            className="object-cover overflow-hidden h-[380px] w-full"
           />
           <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2 dark:h-full"></div>
-          <h2 className="absolute z-10 top-1/2 py-3 px-6 text-xl font-extrabold leading-7 text-neutral-50 text-center w-full">
+          <h2 className="absolute z-10 bottom-6 py-3 px-6 text-xl font-extrabold leading-7 text-neutral-50 text-center w-full">
             {title}
           </h2>
         </div>

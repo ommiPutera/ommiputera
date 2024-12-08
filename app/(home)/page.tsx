@@ -13,7 +13,6 @@ import ShellPage from "~/components/shell-page";
 import Blog from "./blog.section";
 import Contact from "./contact.section";
 import Education from "./education.section";
-import Projects from "./projects.section";
 import Work from "./work.section";
 
 export const metadata: Metadata = {
@@ -25,12 +24,12 @@ export default async function Home() {
   return (
     <ShellPage>
       <Hi />
-      <About />
       <Mode />
+      <About />
       <Work />
       <Education />
       <Blog />
-      <Projects />
+      {/* <Projects /> */}
       <Contact />
       <ThankYou />
     </ShellPage>
@@ -74,14 +73,13 @@ function About() {
       </SectionAvatar>
       <Content title="About">
         <ContentParagraph>
-          My name is <b>Ommi Putera K.</b>
+          I&apos;m <b>Ommi Putera!</b>
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          I work at <b>Dipay Indonesia</b> as a Full Stack Engineer.
+          I currently work at <b>Dipay Indonesia</b> as a Full Stack Engineer,
+          where I&apos;m driven by a passion for building
         </ContentParagraph>
-        <Br />
-        <ContentParagraph>I am passionate about</ContentParagraph>
         <ContentParagraph>
           <ContentLink href="/about" text="Show more" />
         </ContentParagraph>

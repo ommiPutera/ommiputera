@@ -7,7 +7,7 @@ import Link from "next/link";
 
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
-import Content from "~/components/content";
+import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
@@ -37,36 +37,31 @@ function Me() {
       </div>
       <Content title="About">
         <p className="text-sm prose dark:prose-invert">
-          My name is <b>Ommi Putera K.</b>
+          I&apos;m <b>Ommi Putera!</b>
         </p>
         <Br />
         <p className="text-sm prose dark:prose-invert">
-          I work at <b>Dipay Indonesia</b> as a Full Stack Engineer.
+          I currently work at <b>Dipay Indonesia</b> as a Full Stack Engineer,
+          where I&apos;m driven by a passion for building high-quality software
+          that makes a difference.
         </p>
         <Br />
         <p className="text-sm prose dark:prose-invert">
-          I am passionate about crafting quality software.
+          I was born in 1998 in Bengkulu, Indonesia. My journey into tech began
+          in an unexpected way. After earning my degree in economics, I was
+          ready to launch my career when the COVID-19 pandemic struck in late
+          2019. With industries facing widespread layoffs, I started searching
+          for new paths—and that&apos;s when I stumbled upon the dynamic world
+          of digital technology.
         </p>
         <Br />
         <p className="text-sm prose dark:prose-invert">
-          Born in <b>1998 in Bengkulu, Indonesia</b>.
-        </p>
-        <Br />
-        <p className="text-sm prose dark:prose-invert">
-          I was preparing to start my career after graduating with an economics
-          degree when the COVID-19 pandemic hit in late 2019. The wave of
-          layoffs across industries pushed me to explore alternative career
-          paths. Amid this uncertainty, I discovered the thriving field of
-          digital technology, particularly web development. Determined to seize
-          the opportunity, I joined{" "}
-          <b>Purwadhika Digital Technology School&apos;s</b> Full Stack Web and
-          Mobile Development Bootcamp in early 2021.
-        </p>
-        <Br />
-        <p className="text-sm prose dark:prose-invert">
-          During the program, I discovered my true passion for coding and web
-          development. It sparked a deep commitment to continuous learning and
-          growth as a software engineer.
+          Eager to pivot, I joined Purwadhika Digital Technology School&apos;s
+          Full Stack Web and Mobile Development Bootcamp in early 2021. It was
+          there that I discovered my passion for coding and web development. The
+          experience didn’t just teach me the technical skills I needed but also
+          ignited a lifelong commitment to continuous learning and growth in
+          software engineering.
         </p>
         <Br />
         <AboutGalery />
@@ -81,19 +76,20 @@ function Values() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content
-        title="Values"
-        description="The principles that guide my approach to work and life."
-      >
+      <Content title="Values">
+        <ContentParagraph>
+          The principles that guide my work and life.
+        </ContentParagraph>
         <div className="mt-2">
           <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
             Continuous Learning
           </h2>
           <p className="text-sm prose dark:prose-invert">
-            An engineer understands that learning never ends. By staying curious
-            and embracing new ideas and technologies, I drive personal growth
-            and adapt to the ever-changing demands of the industry. This mindset
-            fuels innovation and keeps my skills sharp.
+            As an engineer, I believe learning is a lifelong journey. Staying
+            curious and embracing new ideas and technologies not only drives my
+            personal growth but also keeps me adaptable in a constantly evolving
+            industry. This mindset fuels innovation and ensures my skills stay
+            sharp.
           </p>
         </div>
         <Br />
@@ -102,10 +98,11 @@ function Values() {
             Effective Collaboration
           </h2>
           <p className="text-sm prose dark:prose-invert">
-            True collaboration begins with humility. By fostering open
-            communication and respecting the contributions of every team member,
-            regardless of experience, I help create a supportive and inclusive
-            environment where ideas flourish and teams succeed.
+            Collaboration thrives on humility and mutual respect. I prioritize
+            open communication and value the contributions of every team member,
+            regardless of their background or experience. By fostering a
+            supportive and inclusive environment, I help teams unlock their full
+            potential and achieve success together.
           </p>
         </div>
         <Br />
@@ -114,10 +111,10 @@ function Values() {
             Empathy
           </h2>
           <p className="text-sm prose dark:prose-invert">
-            Empathy is the bridge between technology and people. By genuinely
+            Empathy connects technology with the people it serves. By
             understanding the needs and perspectives of users and clients, I
-            ensure that the products and solutions I develop are meaningful,
-            effective, and impactful.
+            ensure the products and solutions I create are not just functional,
+            but also meaningful, impactful, and aligned with real-world needs.
           </p>
         </div>
         <Br />

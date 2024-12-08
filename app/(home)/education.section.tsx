@@ -1,4 +1,4 @@
-import { Library } from "lucide-react";
+import { BookText } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -11,14 +11,15 @@ export default function Education() {
   return (
     <Section>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Library className="w-4 h-4 md:w-5 md:h-5" />
+        <BookText className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Education">
         <ContentParagraph>
-          Purwadhika was where I really got my start in web development. There,
-          I learned the fundamentals of web development and, more importantly,
-          cultivated effective learning habits, which have been invaluable in my
-          continued growth.
+          Purwadhika is where my journey into web development truly began. It
+          was here that I mastered the fundamentals of web development and, more
+          importantly, developed effective learning habits. These habits have
+          become a cornerstone of my continuous growth and adaptability as a
+          software engineer.
         </ContentParagraph>
         <Br />
         <Link

@@ -24,9 +24,9 @@ export default function Contact() {
           <Link
             href="mailto:omiputrakarunia@gmail.com"
             target="_blank"
-            className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
+            className="block border w-full border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center justify-center gap-1.5">
               <div>
                 <Mail className="w-4 h-4 md:w-5 md:h-5" />
               </div>
@@ -36,9 +36,9 @@ export default function Contact() {
           <Link
             href="https://wa.me/+6281219603026"
             target="_blank"
-            className="block border w-fit border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
+            className="block border w-full border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center justify-center gap-1.5">
               <div>
                 <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
               </div>
