@@ -37,7 +37,7 @@ function Intro() {
         <p className="text-sm prose dark:prose-invert">
           <Link
             href="/projects"
-            className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
+            className="font-medium text-blue-700 dark:text-blue-600 hover:underline"
           >
             Show more
           </Link>
@@ -58,7 +58,7 @@ function Close() {
           <span>Interested in checking out more? </span>
           <Link
             href="/projects"
-            className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
+            className="font-medium text-blue-700 dark:text-blue-600 hover:underline"
           >
             View all
           </Link>
@@ -194,7 +194,7 @@ function ReadMore({ href }: { href: LinkProps["href"] }) {
     <div className="mt-1 ml-[48px]">
       <Link
         href={href}
-        className="text-sm font-semibold text-blue-700 dark:text-blue-500 underline inline-flex items-center gap-1"
+        className="text-sm font-semibold text-blue-700 dark:text-blue-600 underline inline-flex items-center gap-1"
       >
         <span>Read more</span>
         <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />

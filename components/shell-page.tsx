@@ -44,7 +44,7 @@ function BackBtn() {
   const router = useRouter();
   return (
     <div className="absolute -top-0.5 -.5 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
-      <button onClick={() => router.back()}>
+      <button onClick={() => router.back()} aria-label="back button">
         <ArrowLeft className="w-5 h-5 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
       </button>
     </div>
@@ -71,7 +71,7 @@ function Header({ title, withHome }: THeaderProps) {
           <li
             className={cn(
               "underline text-muted-foreground",
-              pathname.startsWith("/blog") && "text-blue-500",
+              pathname.startsWith("/blog") && "text-blue-600",
             )}
           >
             <Link href="/blog" className="flex items-center">
@@ -81,7 +81,7 @@ function Header({ title, withHome }: THeaderProps) {
           <li
             className={cn(
               "underline text-muted-foreground",
-              pathname.startsWith("/projects") && "text-blue-500",
+              pathname.startsWith("/projects") && "text-blue-600",
             )}
           >
             <Link href="/projects" className="flex items-center">

@@ -17,7 +17,7 @@ export default function ProjectDipayDisbursement() {
       </Section>
       <Section className="p-0 md:p-0">
         <div className="p-9 md:p-0 max-w-[422px] md:my-12 md:mx-auto group">
-          <p className="text-blue-500 text-xs md:text-sm font-semibold">
+          <p className="text-blue-600 text-xs md:text-sm font-semibold">
             Dipay Indonesia - 2024
           </p>
           <h3 className="text-xl font-extrabold w-full my-4 leading-7">

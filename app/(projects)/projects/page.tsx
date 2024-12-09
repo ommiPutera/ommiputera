@@ -98,16 +98,16 @@ function Project({ slug, imageSource, title, summary }: TData) {
         className="h-full min-h-[248px] md:h-[340px] object-cover rounded-xl"
       />
       <div className="p-9 md:p-0 max-w-[422px] md:my-12 md:mx-auto group">
-        <p className="text-blue-500 text-xs md:text-sm font-semibold">2024</p>
-        <h3 className="text-xl font-extrabold w-full my-4 leading-7">
+        <p className="text-blue-600 text-xs md:text-sm font-semibold">2024</p>
+        <h2 className="text-xl font-extrabold w-full my-4 leading-7">
           {title}
-        </h3>
+        </h2>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2 prose dark:prose-invert">
           {summary}
         </p>
         <br />
         <br />
-        <p className="text-xs font-semibold inline-flex gap-4 items-center group-hover:text-blue-500">
+        <p className="text-xs font-semibold inline-flex gap-4 items-center group-hover:text-blue-600">
           <span>View</span>
           <MoveRight className="w-4 h-4" />
         </p>

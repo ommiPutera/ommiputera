@@ -38,9 +38,9 @@ export default function Education() {
               />
             </div>
             <div className="w-full">
-              <h4 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
+              <h3 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Purwadhika Digital Technology School
-              </h4>
+              </h3>
               <p className="text-xs md:text-sm font-normal text-muted-foreground">
                 Jan 2021 - Aug 2021
               </p>
@@ -60,9 +60,9 @@ export default function Education() {
               />
             </div>
             <div className="w-full">
-              <h4 className="text-xs md:text-sm font-semibold tracking-normal leading-4 text-neutral-900 dark:text-neutral-100">
+              <h3 className="text-xs md:text-sm font-semibold tracking-normal leading-4 text-neutral-900 dark:text-neutral-100">
                 University of Bengkulu
-              </h4>
+              </h3>
               <p className="text-xs md:text-sm font-normal text-muted-foreground">
                 Aug 2016 - Aug 2020
               </p>

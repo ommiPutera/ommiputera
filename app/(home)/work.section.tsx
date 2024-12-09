@@ -29,7 +29,7 @@ export default function Work() {
           <Link
             href="https://dipay.id/"
             target="_blank"
-            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
+            className="text-blue-700 dark:text-blue-600 font-medium hover:underline"
           >
             Dipay
           </Link>
@@ -64,9 +64,9 @@ export default function Work() {
               />
             </div>
             <div className="w-full">
-              <h4 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
+              <h3 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
-              </h4>
+              </h3>
               <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
                 <span>Full-time</span>
               </p>
