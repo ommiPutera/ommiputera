@@ -61,38 +61,40 @@ function Header({ title, withHome }: THeaderProps) {
       <header role="banner">
         <h1 className="text-sm font-bold">{title}</h1>
       </header>
-      <ul className="flex gap-5 text-sm justify-center md:mt-1">
-        <li className="underline text-muted-foreground">
-          <Link href="/" className="flex items-center">
-            Resume
-          </Link>
-        </li>
-        <li
-          className={cn(
-            "underline text-muted-foreground",
-            pathname.startsWith("/blog") && "text-blue-500",
-          )}
-        >
-          <Link href="/blog" className="flex items-center">
-            Blog
-          </Link>
-        </li>
-        <li
-          className={cn(
-            "underline text-muted-foreground",
-            pathname.startsWith("/projects") && "text-blue-500",
-          )}
-        >
-          <Link href="/projects" className="flex items-center">
-            Projects
-          </Link>
-        </li>
-        {withHome && (
+      <nav role="navigation">
+        <ul className="flex gap-5 text-sm justify-center md:mt-1">
           <li className="underline text-muted-foreground">
-            <Link href="/">Home</Link>
+            <Link href="/" className="flex items-center">
+              Resume
+            </Link>
           </li>
-        )}
-      </ul>
+          <li
+            className={cn(
+              "underline text-muted-foreground",
+              pathname.startsWith("/blog") && "text-blue-500",
+            )}
+          >
+            <Link href="/blog" className="flex items-center">
+              Blog
+            </Link>
+          </li>
+          <li
+            className={cn(
+              "underline text-muted-foreground",
+              pathname.startsWith("/projects") && "text-blue-500",
+            )}
+          >
+            <Link href="/projects" className="flex items-center">
+              Projects
+            </Link>
+          </li>
+          {withHome && (
+            <li className="underline text-muted-foreground">
+              <Link href="/">Home</Link>
+            </li>
+          )}
+        </ul>
+      </nav>
     </nav>
   );
 }
