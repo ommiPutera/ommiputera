@@ -29,7 +29,7 @@ export default function Work() {
           <Link
             href="https://dipay.id/"
             target="_blank"
-            className="text-blue-600 dark:text-blue-400 font-medium hover:underline"
+            className="text-blue-600 dark:text-blue-400 font-medium underline"
           >
             Dipay
           </Link>

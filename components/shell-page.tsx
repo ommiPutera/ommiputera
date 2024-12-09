@@ -59,10 +59,10 @@ function Header({ title, withHome }: THeaderProps) {
       className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6"
     >
       <header role="banner">
-        <h1 className="text-sm font-bold">{title}</h1>
+        <h1 className="text-base font-extrabold">{title}</h1>
       </header>
       <nav role="navigation">
-        <ul className="flex gap-5 text-sm justify-center md:mt-1">
+        <ul className="flex gap-4 text-sm justify-center md:mt-1">
           <li className="underline text-muted-foreground">
             <Link href="/" className="flex items-center">
               Resume
@@ -72,7 +72,7 @@ function Header({ title, withHome }: THeaderProps) {
             className={cn(
               "underline text-muted-foreground",
               pathname.startsWith("/blog") &&
-                "text-blue-600 dark:text-blue-400",
+                "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link href="/blog" className="flex items-center">
@@ -82,8 +82,8 @@ function Header({ title, withHome }: THeaderProps) {
           <li
             className={cn(
               "underline text-muted-foreground",
-              pathname.startsWith("/projects") &&
-                "text-blue-600 dark:text-blue-400",
+              pathname.startsWith("/project") &&
+                "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link href="/projects" className="flex items-center">

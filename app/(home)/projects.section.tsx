@@ -37,7 +37,7 @@ function Intro() {
         <p className="text-sm prose dark:prose-invert">
           <Link
             href="/projects"
-            className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            className="font-medium text-blue-600 dark:text-blue-400 underline"
           >
             Show more
           </Link>
@@ -58,7 +58,7 @@ function Close() {
           <span>Interested in checking out more? </span>
           <Link
             href="/projects"
-            className="font-medium text-blue-600 dark:text-blue-400 hover:underline"
+            className="font-medium text-blue-600 dark:text-blue-400 underline"
           >
             View all
           </Link>

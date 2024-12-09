@@ -15,28 +15,28 @@ export const metadata = {
 
 const data: TData[] = [
   {
-    slug: "dipay-disbursement",
+    slug: "project-dipay-disbursement",
     imageSource: "/images/projects/dipay-disburesment.jpeg",
     title: "Building a Dipay Enterprise Disbursement",
     summary:
       "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
   },
   {
-    slug: "dipay-core-dashboard",
+    slug: "project-dipay-core-dashboard",
     imageSource: "/images/projects/dipay-core.jpeg",
     title: "Building a Dipay Core Dashboard",
     summary:
       "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
   },
   {
-    slug: "dipay-landing",
+    slug: "project-dipay-landing",
     imageSource: "/images/projects/personal-page.jpeg",
     title: "Revamped a Landing Page using Next.js",
     summary:
       "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
   },
   {
-    slug: "naufal-website",
+    slug: "project-naufal-website",
     imageSource: "/images/projects/naufal-page.jpeg",
     title: "Personal/Porfolio Website for Naufal Ghifari",
     summary:
