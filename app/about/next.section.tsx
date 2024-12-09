@@ -43,10 +43,10 @@ export default function NextTo() {
             className="block border w-full text-center border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
             <div className="flex items-center justify-center gap-1.5">
-              <p className="text-xs md:text-sm font-medium">Email me</p>
               <div>
                 <Mail className="w-4 h-4 md:w-5 md:h-5" />
               </div>
+              <p className="text-xs md:text-sm font-medium">Email me</p>
             </div>
           </Link>
           <button
@@ -54,10 +54,10 @@ export default function NextTo() {
             className="block border w-full text-center border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
             <div className="flex items-center justify-center gap-1.5">
-              <p className="text-xs md:text-sm font-medium">Back</p>
               <div>
                 <ArrowLeft className="w-4 h-4 md:w-5 md:h-5" />
               </div>
+              <p className="text-xs md:text-sm font-medium">Back</p>
             </div>
           </button>
         </div>

@@ -67,7 +67,7 @@ async function Blogs() {
         <CarouselItem className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]">
           <Link
             href="/blog"
-            className="rounded-xl border dark:bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-200 dark:border-neutral-800"
+            className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-200 dark:border-neutral-800"
           >
             <div className="flex flex-col justify-center items-center gap-1.5 px-4 h-full text-neutral-600 dark:text-neutral-100">
               <FolderOpen className="h-7 w-7 md:h-8 md:w-8" />
