@@ -26,22 +26,16 @@ export default function NextTo() {
         <Br />
         <div className="grid grid-cols-2 gap-2">
           <Link
-            prefetch
             href="/blog"
             className="block border w-full text-center border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
-            <p className="text-xs md:text-sm font-medium whitespace-nowra">
-              Blog
-            </p>
+            <p className="text-xs md:text-sm font-medium">Blog</p>
           </Link>
           <Link
-            prefetch
             href="/projects"
             className="block border w-full text-center border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >
-            <p className="text-xs md:text-sm font-medium whitespace-nowra">
-              Projects
-            </p>
+            <p className="text-xs md:text-sm font-medium">Projects</p>
           </Link>
           <Link
             href="mailto:omiputrakarunia@gmail.com"

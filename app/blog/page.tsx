@@ -64,7 +64,7 @@ function BentoBlog({
   image,
   summary,
   title,
-  index
+  index,
 }: {
   slug: string;
   source: string;
@@ -74,8 +74,10 @@ function BentoBlog({
   return (
     <Link
       href={`/blog/${slug}`}
-      prefetch
-      className={cn("rounded-xl bg-white dark:bg-background w-full cursor-pointer block h-full overflow-hidden border border-neutral-200 dark:border-neutral-800", index === 3 || index === 6 ? "md:col-span-2" : "")}
+      className={cn(
+        "rounded-xl bg-white dark:bg-background w-full cursor-pointer block h-full overflow-hidden border border-neutral-200 dark:border-neutral-800",
+        index === 2 || index === 5 ? "md:col-span-2" : "",
+      )}
     >
       <div className="relative">
         <Image
@@ -109,7 +111,7 @@ const BentoGrid = ({
     <div
       className={cn(
         "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 mx-auto h-full",
-        className
+        className,
       )}
     >
       {children}

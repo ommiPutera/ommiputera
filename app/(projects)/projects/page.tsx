@@ -88,7 +88,6 @@ function Project({ slug, imageSource, title, summary }: TData) {
   return (
     <Link
       href={`/${slug}`}
-      prefetch
       className="rounded-xl w-full cursor-pointer block h-full overflow-hidden bg-background border dark:border-neutral-800"
     >
       <Image

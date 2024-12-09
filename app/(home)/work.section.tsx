@@ -4,7 +4,7 @@ import Link from "next/link";
 import { BriefcaseBusiness } from "lucide-react";
 
 import Br from "~/components/br";
-import Content from "~/components/content";
+import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import {
   Timeline,
@@ -24,7 +24,7 @@ export default function Work() {
         <BriefcaseBusiness className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Work Experience">
-        <p className="text-sm prose dark:prose-invert">
+        <ContentParagraph>
           I&apos;ve been growing my career at{" "}
           <Link
             href="https://dipay.id/"
@@ -37,16 +37,16 @@ export default function Work() {
           Engineer. Along the way, I’ve honed my skills in Web Standards, React,
           TypeScript, and CI/CD, gaining invaluable hands-on experience in
           building robust and scalable applications.
-        </p>
+        </ContentParagraph>
         <Br />
-        <p className="text-sm prose dark:prose-invert">
+        <ContentParagraph>
           One of my most rewarding projects has been leading the development of{" "}
           <b>Dipay Enterprise Disbursement</b>, a scalable web application that
           automates mass fund transfers for businesses. This solution has not
           only streamlined operations but also strengthened partnerships, making
           a tangible impact. Tackling this challenge has fueled my drive to keep
           learning and creating software that delivers meaningful results.
-        </p>
+        </ContentParagraph>
         <Br />
         <Link
           href="https://www.linkedin.com/in/ommiputera"

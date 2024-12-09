@@ -37,7 +37,6 @@ function Intro() {
         <p className="text-sm prose dark:prose-invert">
           <Link
             href="/projects"
-            prefetch
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
           >
             Show more
@@ -59,7 +58,6 @@ function Close() {
           <span>Interested in checking out more? </span>
           <Link
             href="/projects"
-            prefetch
             className="font-medium text-blue-700 dark:text-blue-500 hover:underline"
           >
             View all
@@ -196,7 +194,6 @@ function ReadMore({ href }: { href: LinkProps["href"] }) {
     <div className="mt-1 ml-[48px]">
       <Link
         href={href}
-        prefetch
         className="text-sm font-semibold text-blue-700 dark:text-blue-500 underline inline-flex items-center gap-1"
       >
         <span>Read more</span>
