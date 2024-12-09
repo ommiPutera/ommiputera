@@ -100,7 +100,7 @@ function Header({ title, withHome }: THeaderProps) {
 function RoundedBorder() {
   return (
     <div>
-      <div className="w-full h-3 top-[calc(var(--hero-height-mobile)_-_11px)] md:top-[calc(var(--hero-height)_-_11.2px)] absolute overflow-hidden">
+      <div className="w-full h-3 top-[calc(var(--hero-height-mobile)_-_10.9px)] md:top-[calc(var(--hero-height)_-_10px)] absolute overflow-hidden">
         <div className="w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-b border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden left-2.5 md:left-14">

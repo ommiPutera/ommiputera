@@ -79,15 +79,15 @@ function BentoBlog({
         index === 2 || index === 5 ? "md:col-span-2" : "",
       )}
     >
-      <div className="relative">
+      <div className="relative rounded-xl">
         <Image
           src={image}
           width={600}
           height={600}
           alt=""
-          className="object-cover overflow-hidden h-[320px] w-full"
+          className="object-cover rounded-xl h-[320px] w-full"
         />
-        <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2"></div>
+        <div className="absolute bottom-0 from-neutral-950 rounded-xl to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
       <div className="p-9 md:p-4 prose dark:prose-invert">
         <h3 className="text-xl  font-extrabold w-full">{title}</h3>

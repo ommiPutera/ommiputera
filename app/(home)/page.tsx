@@ -9,10 +9,12 @@ import Content, { ContentLink, ContentParagraph } from "~/components/content";
 import { ModeClickable, ModeEmoji, ModeToggle } from "~/components/mode-toggle";
 import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
+import Social from "~/components/social";
 
 import Blog from "./blog.section";
 import Contact from "./contact.section";
 import Education from "./education.section";
+import Projects from "./projects.section";
 import Work from "./work.section";
 
 export const metadata: Metadata = {
@@ -29,7 +31,7 @@ export default async function Home() {
       <Work />
       <Education />
       <Blog />
-      {/* <Projects /> */}
+      <Projects />
       <Contact />
       <ThankYou />
     </ShellPage>
@@ -131,35 +133,7 @@ function ThankYou() {
         />
       </SectionAvatar>
       <Content title="Thank you for stopping by! 👋" description="Ommi Putera">
-        <ContentParagraph>
-          <span>You can follow me on</span>{" "}
-          <span className="inline-flex gap-2">
-            <ContentLink
-              href="https://remix.run/"
-              target="_blank"
-              text="Twitter"
-            />
-            <ContentLink
-              href="https://remix.run/"
-              target="_blank"
-              text="LinkedIn"
-            />
-            <ContentLink
-              href="https://remix.run/"
-              target="_blank"
-              text="Github"
-            />
-            <ContentLink
-              href="https://remix.run/"
-              target="_blank"
-              text="Instagram"
-            />
-          </span>
-        </ContentParagraph>
-        {/* <Br />
-        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
-          <Image src="/images/thank-you.jpg" width={800} height={400} alt="" />
-        </div> */}
+        <Social />
       </Content>
     </Section>
   );

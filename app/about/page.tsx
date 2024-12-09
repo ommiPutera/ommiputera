@@ -3,13 +3,13 @@ import { Metadata } from "next";
 import { CornerUpRight } from "lucide-react";
 
 import Image from "next/image";
-import Link from "next/link";
 
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
 import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
+import Social from "~/components/social";
 
 import NextTo from "./next.section";
 
@@ -133,36 +133,7 @@ function Values() {
           <b>me@ommiputera.com</b>
         </ContentParagraph>
         <Br />
-        <p className="text-sm">
-          <Link
-            href=""
-            target="_blank"
-            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
-          >
-            Twitter,{" "}
-          </Link>
-          <Link
-            href=""
-            target="_blank"
-            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
-          >
-            LinkedIn,{" "}
-          </Link>
-          <Link
-            href=""
-            target="_blank"
-            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
-          >
-            Github,{" "}
-          </Link>
-          <Link
-            href=""
-            target="_blank"
-            className="text-blue-700 dark:text-blue-500 font-medium hover:underline"
-          >
-            Instagram.
-          </Link>
-        </p>
+        <Social />
       </Content>
     </Section>
   );

@@ -22,7 +22,7 @@ export default function Contact() {
       <div className="ml-[48px]">
         <div className="flex items-center gap-2">
           <Link
-            href="mailto:omiputrakarunia@gmail.com"
+            href="mailto:me@ommiputera.com"
             target="_blank"
             className="block border w-full border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >

@@ -58,12 +58,12 @@ export default async function ProjectsPage() {
           <h1 className="relative z-10 text-2xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-500 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-center font-sans font-extrabold">
             Curated Projects
           </h1>
-          <ContentParagraph className="text-center text-base mx-12 md:mx-24 mt-1">
+          <ContentParagraph className="text-center text-sm md:text-base mx-6 md:mx-24 mt-1">
             Showcase of my latest projects. They&apos;re sure to catch your eye!
           </ContentParagraph>
         </div>
         <Br />
-        <div className="flex flex-col gap-6 md:gap-8">
+        <div className="flex flex-col gap-4 md:gap-6">
           {data.map((post) => {
             const slug = post.slug;
             const imageSource = post.imageSource;
@@ -88,14 +88,14 @@ function Project({ slug, imageSource, title, summary }: TData) {
   return (
     <Link
       href={`/${slug}`}
-      className="rounded-xl w-full cursor-pointer block h-full overflow-hidden bg-background border dark:border-neutral-800"
+      className="rounded-xl w-full relative cursor-pointer overflow-hidden block h-full bg-white dark:bg-background border dark:border-neutral-800"
     >
       <Image
         src={imageSource}
         width={800}
         height={400}
         alt=""
-        className="h-full min-h-[248px] md:h-[340px] object-cover"
+        className="h-full min-h-[248px] md:h-[340px] object-cover rounded-xl"
       />
       <div className="p-9 md:p-0 max-w-[422px] md:my-12 md:mx-auto group">
         <p className="text-blue-500 text-xs md:text-sm font-semibold">2024</p>

@@ -33,7 +33,7 @@ export function ContentTitle({
     <>
       <h2
         className={cn(
-          "text-sm md:text-base font-bold tracking-normal md:leading-4 mt-0.5 md:mt-1",
+          "text-sm font-bold text-black dark:text-white tracking-normal md:leading-4 mt-0.5 md:mt-1",
           !description && "mb-1 md:mb-1.5",
         )}
       >

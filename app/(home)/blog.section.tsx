@@ -1,3 +1,4 @@
+import { FolderOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -53,7 +54,7 @@ async function Blogs() {
   return (
     <Carousel>
       <CarouselContent overflowVisible className="-ml-1.5 md:-ml-2">
-        {blogs.map((post) => {
+        {blogs.slice(0, 3).map((post) => {
           const slug = post.slug;
           return (
             <BlogItem
@@ -63,6 +64,19 @@ async function Blogs() {
             />
           );
         })}
+        <CarouselItem className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]">
+          <Link
+            href="/blog"
+            className="rounded-xl border dark:bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-200 dark:border-neutral-800"
+          >
+            <div className="flex flex-col justify-center items-center gap-1.5 px-4 h-full text-neutral-600 dark:text-neutral-100">
+              <FolderOpen className="h-7 w-7 md:h-8 md:w-8" />
+              <p className="text-sm font-semibold text-center w-full">
+                Explore
+              </p>
+            </div>
+          </Link>
+        </CarouselItem>
       </CarouselContent>
     </Carousel>
   );
