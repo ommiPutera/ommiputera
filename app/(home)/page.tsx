@@ -6,7 +6,7 @@ import { CornerUpRight } from "lucide-react";
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
 import Content, { ContentLink, ContentParagraph } from "~/components/content";
-import { ModeClickable, ModeEmoji, ModeToggle } from "~/components/mode-toggle";
+import { ModeClickable, ModeEmoji } from "~/components/mode-toggle";
 import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import Social from "~/components/social";
@@ -52,9 +52,11 @@ async function Hi() {
       </SectionAvatar>
       <Content title="Hi, I'm Ommi 👋" description="Greeting">
         <ContentParagraph>
+          <span>Welcome to my corner of the web!</span>
+          <Br />
           <span>
-            Software Engineer based in <b>Jakarta, Indonesia</b>. I love
-            building things with{" "}
+            I&apos;m a Software Engineer based in <b>Jakarta, Indonesia</b>. I
+            love building things with{" "}
           </span>
           <ContentLink
             href="https://remix.run/"
@@ -75,12 +77,12 @@ function About() {
       </SectionAvatar>
       <Content title="About">
         <ContentParagraph>
-          I&apos;m <b>Ommi Putera!</b>
+          I&apos;m <b>Ommi Putera</b>
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          I currently work at <b>Dipay Indonesia</b> as a Full Stack Engineer,
-          where I&apos;m driven by a passion for building
+          A passionate Software Engineer who loves building scalable and
+          efficient web applications
         </ContentParagraph>
         <ContentParagraph>
           <ContentLink href="/about" text="Show more" />
@@ -107,12 +109,12 @@ function Mode() {
         </SectionAvatar>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
           <ContentParagraph>
-            Dark mode will reduce screen brightness for a more comfortable
-            reading experience.
+            Dark mode for a comfy, eye-friendly experience, or switch to light
+            mode for a bright and energetic vibe.
           </ContentParagraph>
           <Br />
           <ContentParagraph>
-            Turn on <ModeToggle /> mode by clicking this section <ModeEmoji />
+            Just click the section to toggle between the two <ModeEmoji />
           </ContentParagraph>
         </Content>
       </Section>

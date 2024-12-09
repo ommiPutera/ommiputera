@@ -15,11 +15,10 @@ export default function Education() {
       </div>
       <Content title="Education">
         <ContentParagraph>
-          Purwadhika is where my journey into web development truly began. It
-          was here that I mastered the fundamentals of web development and, more
-          importantly, developed effective learning habits. These habits have
-          become a cornerstone of my continuous growth and adaptability as a
-          software engineer.
+          This is where I began my career in web development. The comprehensive
+          curriculum gave me a strong foundation in both front-end and back-end
+          technologies, and the hands-on approach prepared me for real-world
+          software engineering challenges.
         </ContentParagraph>
         <Br />
         <Link

@@ -30,7 +30,7 @@ const data: TData[] = [
   },
   {
     slug: "project-dipay-landing",
-    imageSource: "/images/projects/personal-page.jpeg",
+    imageSource: "/images/projects/personal.png",
     title: "Revamped a Landing Page using Next.js",
     summary:
       "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
@@ -56,7 +56,7 @@ export default async function ProjectsPage() {
       <Section>
         <div className="my-4 overflow-hidden relative">
           <h1 className="relative z-10 text-2xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-500 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-center font-sans font-extrabold">
-            Curated Projects
+            Projects
           </h1>
           <ContentParagraph className="text-center text-sm md:text-base mx-6 md:mx-24 mt-1">
             Showcase of my latest projects. They&apos;re sure to catch your eye!

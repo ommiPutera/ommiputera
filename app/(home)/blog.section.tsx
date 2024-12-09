@@ -27,11 +27,12 @@ export default function Blog() {
           className="object-cover overflow-hidden rounded-full"
         />
       </SectionAvatar>
-      <Content title="The Blog" description="Ommi Putera">
+      <Content title="Featured Blog Posts" description="Ommi Putera">
         <ContentParagraph>
           <span>
-            I write about the React ecosystem, TypeScript, and the lessons
-            I&apos;ve learned while tackling real-world challenges.{" "}
+            I love sharing my insights on the React ecosystem, TypeScript, and
+            the lessons I&apos;ve learned while building real-world
+            applications.
           </span>
         </ContentParagraph>
         <Br />
@@ -69,9 +70,11 @@ async function Blogs() {
             href="/blog"
             className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-blue-600 dark:border-blue-400"
           >
-            <div className="flex flex-col justify-center items-center gap-2 px-4 h-full text-neutral-600 dark:text-neutral-100">
-              <FolderOpen className="h-7 w-7 md:h-8 md:w-8 stroke-1" />
-              <p className="text-sm text-center w-full">Explore</p>
+            <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-100">
+              <FolderOpen className="h-8 w-8 stroke-1" />
+              <p className="text-sm text-center w-full max-w-[200px]">
+                Want to dive into more? View all my writings here!
+              </p>
             </div>
           </Link>
         </CarouselItem>

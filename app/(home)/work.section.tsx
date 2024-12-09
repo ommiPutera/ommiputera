@@ -25,27 +25,24 @@ export default function Work() {
       </div>
       <Content title="Work Experience">
         <ContentParagraph>
-          I&apos;ve been growing my career at{" "}
-          <Link
-            href="https://dipay.id/"
-            target="_blank"
-            className="text-blue-600 dark:text-blue-400 font-medium underline"
-          >
-            Dipay
-          </Link>
-          , starting as a Frontend Engineer and progressing to a Full Stack
-          Engineer. Along the way, I’ve honed my skills in Web Standards, React,
-          TypeScript, and CI/CD, gaining invaluable hands-on experience in
-          building robust and scalable applications.
+          As a Full Stack Engineer at Dipay, I&apos;m responsible for developing
+          complex, end-to-end solutions that drive business success. I’ve worked
+          on everything from improving UI/UX to integrating scalable backend
+          systems. My technical expertise includes React, TypeScript, CI/CD, and
+          Web Standards, which I apply to build highly maintainable and
+          efficient applications.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          One of my most rewarding projects has been leading the development of{" "}
-          <b>Dipay Enterprise Disbursement</b>, a scalable web application that
-          automates mass fund transfers for businesses. This solution has not
-          only streamlined operations but also strengthened partnerships, making
-          a tangible impact. Tackling this challenge has fueled my drive to keep
-          learning and creating software that delivers meaningful results.
+          <b>Key Achievement:</b>
+          <br />
+          <span>
+            One of my proudest moments at Dipay was leading the development of
+            Dipay Enterprise Disbursement, a web app that automates mass fund
+            transfers for businesses. This project has significantly reduced
+            manual work for clients, leading to better efficiency and stronger
+            partnerships.
+          </span>
         </ContentParagraph>
         <Br />
         <Link

@@ -37,13 +37,15 @@ function Me() {
       </div>
       <Content title="About">
         <ContentParagraph>
-          I&apos;m <b>Ommi Putera!</b>
+          I&apos;m <b>Ommi Putera</b>
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          I currently work at <b>Dipay Indonesia</b> as a Full Stack Engineer,
-          where I&apos;m driven by a passion for building high-quality software
-          that makes a difference.
+          A passionate Software Engineer who loves building scalable and
+          efficient web applications. Currently, I work at{" "}
+          <b>Dipay Indonesia</b>, where I&apos;m fortunate to contribute to
+          developing tools that help businesses automate and streamline their
+          operations
         </ContentParagraph>
         <Br />
         <ContentParagraph>

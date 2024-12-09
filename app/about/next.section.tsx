@@ -17,11 +17,8 @@ export default function NextTo() {
         <Signpost className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Next">
-        <ContentParagraph>Where to from here?</ContentParagraph>
-        <Br />
         <ContentParagraph>
-          Explore more about my work, values, and journey. Navigate to another
-          page to dive deeper!
+          Where to from here? Navigate to another page to dive deeper!
         </ContentParagraph>
         <Br />
         <div className="grid grid-cols-2 gap-2">
