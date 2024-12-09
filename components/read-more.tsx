@@ -7,7 +7,7 @@ export default function ReadMore({ href }: { href: LinkProps["href"] }) {
     <div className="mt-1 ml-[48px]">
       <Link
         href={href}
-        className="text-sm font-semibold text-blue-700 dark:text-blue-600 underline inline-flex items-center gap-1"
+        className="text-sm font-semibold text-blue-700 dark:text-blue-600 dark:text-blue-400 underline inline-flex items-center gap-1"
       >
         <span>Read more</span>
         <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />

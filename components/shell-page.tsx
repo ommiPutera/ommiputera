@@ -71,7 +71,8 @@ function Header({ title, withHome }: THeaderProps) {
           <li
             className={cn(
               "underline text-muted-foreground",
-              pathname.startsWith("/blog") && "text-blue-600",
+              pathname.startsWith("/blog") &&
+                "text-blue-600 dark:text-blue-400",
             )}
           >
             <Link href="/blog" className="flex items-center">
@@ -81,7 +82,8 @@ function Header({ title, withHome }: THeaderProps) {
           <li
             className={cn(
               "underline text-muted-foreground",
-              pathname.startsWith("/projects") && "text-blue-600",
+              pathname.startsWith("/projects") &&
+                "text-blue-600 dark:text-blue-400",
             )}
           >
             <Link href="/projects" className="flex items-center">

@@ -9,7 +9,7 @@ export function ModeToggle() {
   return (
     <span
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="text-blue-700 dark:text-blue-600 font-medium"
+      className="text-blue-700 dark:text-blue-600 dark:text-blue-400 font-medium"
     >
       <span className="inline-block dark:hidden hover:underline">Dark</span>
       <span className="hidden dark:inline-block hover:underline">Light</span>

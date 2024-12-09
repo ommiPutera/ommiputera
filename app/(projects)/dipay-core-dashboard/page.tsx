@@ -17,12 +17,12 @@ export default function ProjectDipayDisbursement() {
       </Section>
       <Section className="p-0 md:p-0">
         <div className="p-9 md:p-0 max-w-[422px] md:my-12 md:mx-auto group">
-          <p className="text-blue-600 text-xs md:text-sm font-semibold">
+          <p className="text-blue-600 dark:text-blue-400 text-xs md:text-sm font-semibold">
             Dipay Indonesia - 2024
           </p>
-          <h3 className="text-xl font-extrabold w-full my-4 leading-7">
+          <h2 className="text-xl font-extrabold w-full my-4 leading-7">
             Building a Dipay Core Dashboard
-          </h3>
+          </h2>
           <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2 prose dark:prose-invert">
             Improve the accuracy and efficiency of image recognition technology.
             By creating our own tools, we can customize the annotation process
