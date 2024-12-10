@@ -15,10 +15,10 @@ export default function Education() {
       </div>
       <Content title="Education">
         <ContentParagraph>
-          This is where I began my career in web development. The comprehensive
-          curriculum gave me a strong foundation in both front-end and back-end
-          technologies, and the hands-on approach prepared me for real-world
-          software engineering challenges.
+          This is where my journey in web development began. The comprehensive
+          curriculum provided me with a solid foundation in front-end and
+          back-end technologies, while the hands-on approach equipped me to
+          tackle real-world software engineering challenges.
         </ContentParagraph>
         <Br />
         <Link

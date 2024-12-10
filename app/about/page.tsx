@@ -6,7 +6,7 @@ import Image from "next/image";
 
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
-import Content, { ContentParagraph } from "~/components/content";
+import Content, { ContentLink, ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import Social from "~/components/social";
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <ShellPage title="About Ommi Putera" withHome withBack>
+    <ShellPage title="A little bit about me" withHome withBack>
       <div>
         <Me />
         <Values />
@@ -36,16 +36,32 @@ function Me() {
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="About">
+        <ContentParagraph>Hi, I&apos;m Ommi 👋</ContentParagraph>
+        <Br />
         <ContentParagraph>
-          I&apos;m <b>Ommi Putera</b>
+          <span>
+            Welcome to my corner of the web! I&apos;m a Software Engineer based
+            in <b>Jakarta, Indonesia</b> 🇮🇩
+          </span>
+          <Br />
+          <span>I love building things with </span>
+          <ContentLink
+            href="https://remix.run/"
+            target="_blank"
+            text=" Remix."
+          />
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          A passionate Software Engineer who loves building scalable and
-          efficient web applications. Currently, I work at{" "}
-          <b>Dipay Indonesia</b>, where I&apos;m fortunate to contribute to
-          developing tools that help businesses automate and streamline their
-          operations
+          <span>
+            Currently, I&apos;m working as a Full Stack Engineer at a fintech
+            startup that specializes in financial services in Indonesia called
+          </span>
+          <ContentLink
+            href="https://dipay.id/"
+            target="_blank"
+            text=" Dipay."
+          />
         </ContentParagraph>
         <Br />
         <ContentParagraph>
@@ -58,12 +74,17 @@ function Me() {
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          Eager to pivot, I joined Purwadhika Digital Technology School&apos;s
-          Full Stack Web and Mobile Development Bootcamp in early 2021. It was
-          there that I discovered my passion for coding and web development. The
-          experience didn’t just teach me the technical skills I needed but also
-          ignited a lifelong commitment to continuous learning and growth in
-          software engineering.
+          Eager to pivot, I joined{" "}
+          <ContentLink
+            href="https://purwadhika.com/"
+            target="_blank"
+            text=" Purwadhika"
+          />{" "}
+          Digital Technology School&apos;s Full Stack Web and Mobile Development
+          Bootcamp in early 2021. That&apos;s where I found my passion for
+          coding and web development. It equipped me with key technical skills
+          and sparked my enthusiasm for continuous growth in software
+          engineering.
         </ContentParagraph>
         <Br />
         <AboutGalery />

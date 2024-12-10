@@ -21,7 +21,7 @@ export default function Contact() {
         <Br />
         <ContentParagraph>
           I&apos;d love to hear from you, whether it&apos;s about a project,
-          collaboration, or just a friendly conversation.
+          collaboration, or just a friendly conversation ☺️
         </ContentParagraph>
       </Content>
       <Br />
@@ -36,7 +36,9 @@ export default function Contact() {
               <div>
                 <Mail className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-xs md:text-sm font-medium">Email me</p>
+              <p className="text-xs md:text-sm font-medium whitespace-nowrap">
+                Email me
+              </p>
             </div>
           </Link>
           <Link
@@ -48,7 +50,9 @@ export default function Contact() {
               <div>
                 <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
               </div>
-              <p className="text-xs md:text-sm font-medium">WhatsApp me</p>
+              <p className="text-xs md:text-sm font-medium whitespace-nowrap">
+                WhatsApp me
+              </p>
             </div>
           </Link>
         </div>

@@ -25,9 +25,11 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <ShellPage>
-      <Hi />
+      <div>
+        <Hi />
+        <About />
+      </div>
       <Mode />
-      <About />
       <Work />
       <Education />
       <Blog />
@@ -40,7 +42,7 @@ export default async function Home() {
 
 async function Hi() {
   return (
-    <Section>
+    <Section withConnector>
       <SectionAvatar>
         <Image
           src="/images/profile.jpeg"
@@ -52,12 +54,12 @@ async function Hi() {
       </SectionAvatar>
       <Content title="Hi, I'm Ommi 👋" description="Greeting">
         <ContentParagraph>
-          <span>Welcome to my corner of the web!</span>
-          <Br />
           <span>
-            I&apos;m a Software Engineer based in <b>Jakarta, Indonesia</b>. I
-            love building things with{" "}
+            Welcome to my corner of the web! I&apos;m a Software Engineer based
+            in <b>Jakarta, Indonesia</b> 🇮🇩
           </span>
+          <Br />
+          <span>I love building things with </span>
           <ContentLink
             href="https://remix.run/"
             target="_blank"
@@ -71,18 +73,17 @@ async function Hi() {
 
 function About() {
   return (
-    <Section>
+    <Section
+      className="pt-0 md:pt-0"
+      connectorClassName="top-0 h-[calc(100%_-_0px)]"
+    >
       <SectionAvatar>
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </SectionAvatar>
       <Content title="About">
         <ContentParagraph>
-          I&apos;m <b>Ommi Putera</b>
-        </ContentParagraph>
-        <Br />
-        <ContentParagraph>
-          A passionate Software Engineer who loves building scalable and
-          efficient web applications
+          Currently, I&apos;m working as a Full Stack Engineer at a fintech
+          startup that specializes
         </ContentParagraph>
         <ContentParagraph>
           <ContentLink href="/about" text="Show more" />
@@ -108,11 +109,6 @@ function Mode() {
           />
         </SectionAvatar>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
-          <ContentParagraph>
-            Dark mode for a comfy, eye-friendly experience, or switch to light
-            mode for a bright and energetic vibe.
-          </ContentParagraph>
-          <Br />
           <ContentParagraph>
             Just click the section to toggle between the two <ModeEmoji />
           </ContentParagraph>

@@ -32,7 +32,7 @@ function Intro() {
       </div>
       <Content title="Projects 🔥">
         <ContentParagraph>
-          Here&apos;s a glimpse of some of the work I&apos;ve done recently
+          Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.
         </ContentParagraph>
         <ContentParagraph>
           <Link
@@ -55,12 +55,12 @@ function Close() {
       </div>
       <Content title="More Project">
         <p className="text-sm prose dark:prose-invert">
-          <span>Looking for more? </span>
+          <span>Looking for more? Explore all my projects</span>{" "}
           <Link
             href="/projects"
             className="font-medium text-blue-600 dark:text-blue-400 underline"
           >
-            Explore all my projects here!
+            here!
           </Link>
         </p>
       </Content>
@@ -86,7 +86,7 @@ function Dipay() {
           I revamped Dipay&apos;s landing page using Next.js, implementing SEO
           best practices to enhance visibility while delivering a modern,
           high-performance design that reduced load times and boosted user
-          engagement.
+          engagement. 🚀
         </p>
         <Br />
         <ProjectCover src="/images/projects/personal.png" />

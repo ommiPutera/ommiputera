@@ -26,22 +26,27 @@ export default function Work() {
       <Content title="Work Experience">
         <ContentParagraph>
           As a Full Stack Engineer at Dipay, I&apos;m responsible for developing
-          complex, end-to-end solutions that drive business success. I’ve worked
-          on everything from improving UI/UX to integrating scalable backend
-          systems. My technical expertise includes React, TypeScript, CI/CD, and
-          Web Standards, which I apply to build highly maintainable and
-          efficient applications.
+          complex, end-to-end solutions that drive business success. I&apos;ve
+          worked on everything from improving UI/UX to integrating scalable
+          backend systems.
+        </ContentParagraph>
+        <Br />
+        <ContentParagraph>
+          My technical expertise includes React, TypeScript, CI/CD, and Web
+          Standards, which I apply to build highly maintainable and efficient
+          applications.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
           <b>Key Achievement:</b>
           <br />
           <span>
-            One of my proudest moments at Dipay was leading the development of
-            Dipay Enterprise Disbursement, a web app that automates mass fund
-            transfers for businesses. This project has significantly reduced
-            manual work for clients, leading to better efficiency and stronger
-            partnerships.
+            One of my proudest accomplishments at Dipay was leading the
+            development of
+            <b> Dipay Enterprise (Disbursement)</b> — a web app designed to
+            automate mass fund transfers for businesses. This solution has
+            streamlined processes, reduced manual work for clients, and fostered
+            greater efficiency and stronger partnerships.
           </span>
         </ContentParagraph>
         <Br />
@@ -64,7 +69,7 @@ export default function Work() {
               <h3 className="text-xs md:text-sm font-semibold tracking-normal text-neutral-900 dark:text-neutral-100">
                 Dipay Indonesia
               </h3>
-              <p className="text-xs md:text-sm mt-0.5 font-normal  inline-flex items-center">
+              <p className="text-xs md:text-sm mt-0.5 font-normal inline-flex items-center">
                 <span>Full-time</span>
               </p>
               <p className="text-sm font-normal text-muted-foreground">

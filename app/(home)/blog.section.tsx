@@ -30,7 +30,7 @@ export default function Blog() {
       <Content title="Featured Blog Posts" description="Ommi Putera">
         <ContentParagraph>
           <span>
-            I love sharing my insights on the React ecosystem, TypeScript, and
+            I love sharing my writing about the React ecosystem, TypeScript, and
             the lessons I&apos;ve learned while building real-world
             applications.
           </span>
