@@ -35,9 +35,7 @@ function Me() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="About">
-        <ContentParagraph>Hi, I&apos;m Ommi 👋</ContentParagraph>
-        <Br />
+      <Content title="Hi, I'm Ommi 👋">
         <ContentParagraph>
           <span>
             Welcome to my corner of the web! I&apos;m a Software Engineer based
@@ -67,10 +65,10 @@ function Me() {
         <ContentParagraph>
           I was born in 1998 in Bengkulu, Indonesia. My journey into tech began
           in an unexpected way. After earning my degree in economics, I was
-          ready to launch my career when the COVID-19 pandemic struck in late
-          2019. With industries facing widespread layoffs, I started searching
-          for new paths—and that&apos;s when I stumbled upon the dynamic world
-          of digital technology.
+          ready to dive into my career when the COVID-19 pandemic happend in
+          late 2019. With industries facing widespread layoffs, I started
+          searching for new paths — and that&apos;s when I stumbled upon the
+          world of digital technology.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
