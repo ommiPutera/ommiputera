@@ -52,11 +52,11 @@ async function Hi() {
           className="object-cover overflow-hidden rounded-full"
         />
       </SectionAvatar>
-      <Content title="Hi, I'm Ommi 👋" description="Greeting">
+      <Content title="Hi, I'm Ommi Putera 👋" description="Greeting">
         <ContentParagraph>
           <span>
-            Welcome to my corner of the web! I&apos;m a Software Engineer based
-            in <b>Jakarta, Indonesia</b> 🇮🇩
+            Welcome to my corner of the internet! I&apos;m a Software Engineer
+            based in <b>Jakarta, Indonesia</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with </span>

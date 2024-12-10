@@ -32,9 +32,8 @@ export default function Work() {
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          My technical expertise includes React, TypeScript, CI/CD, and Web
-          Standards, which I apply to build highly maintainable and efficient
-          applications.
+          My technical expertise includes React, TypeScript, and Web Standards,
+          which I apply to build highly maintainable and efficient applications.
         </ContentParagraph>
         <Br />
         <ContentParagraph>

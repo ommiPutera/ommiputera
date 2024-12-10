@@ -54,7 +54,7 @@ function Close() {
         <FolderClosed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="More Project">
-        <p className="text-sm prose dark:prose-invert">
+        <ContentParagraph>
           <span>Looking for more? Explore all my projects</span>{" "}
           <Link
             href="/projects"
@@ -62,7 +62,7 @@ function Close() {
           >
             here!
           </Link>
-        </p>
+        </ContentParagraph>
       </Content>
     </Section>
   );
@@ -82,12 +82,12 @@ function Dipay() {
         title="Revamped a Landing Page using Next.js"
         description="Dipay Indonesia"
       >
-        <p className="text-sm prose dark:prose-invert">
+        <ContentParagraph>
           I revamped Dipay&apos;s landing page using Next.js, implementing SEO
           best practices to enhance visibility while delivering a modern,
           high-performance design that reduced load times and boosted user
           engagement. 🚀
-        </p>
+        </ContentParagraph>
         <Br />
         <ProjectCover src="/images/projects/personal.png" />
       </Content>
@@ -110,12 +110,12 @@ function Naufal() {
         <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Naufal Ghifari Website" description="Personal/Porfolio">
-        <p className="text-sm prose dark:prose-invert">
+        <ContentParagraph>
           I developed Naufal Ghifari&apos;s personal portfolio website,
           transforming a creative design into a responsive, high-performance
           platform that showcases his skills, projects, and professional
           journey.
-        </p>
+        </ContentParagraph>
         <Br />
         <ProjectCover src="/images/projects/naufal-page.jpeg" />
       </Content>

@@ -30,9 +30,8 @@ export default function Blog() {
       <Content title="Featured Blog Posts" description="Ommi Putera">
         <ContentParagraph>
           <span>
-            I love sharing my writing about the React ecosystem, TypeScript, and
-            the lessons I&apos;ve learned while building real-world
-            applications.
+            I write about the React ecosystem, TypeScript, and the lessons
+            I&apos;ve learned while building real-world applications
           </span>
         </ContentParagraph>
         <Br />
@@ -55,7 +54,7 @@ async function Blogs() {
   return (
     <Carousel>
       <CarouselContent overflowVisible className="-ml-1.5 md:-ml-2">
-        {blogs.slice(0, 3).map((post) => {
+        {blogs.slice(0, 2).map((post) => {
           const slug = post.slug;
           return (
             <BlogItem
@@ -68,7 +67,7 @@ async function Blogs() {
         <CarouselItem className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]">
           <Link
             href="/blog"
-            className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-blue-600 dark:border-blue-400"
+            className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-300 dark:border-neutral-700"
           >
             <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-100">
               <FolderOpen className="h-8 w-8 stroke-1" />

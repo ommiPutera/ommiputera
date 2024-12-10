@@ -33,9 +33,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <BackgroundBeams className="fixed top-0 left-0 h-full w-full" />
           {children}
         </ThemeProvider>
+        <BackgroundBeams className="fixed top-0 left-0 h-full w-full -z-10" />
         <Analytics />
         <SpeedInsights />
       </body>

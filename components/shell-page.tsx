@@ -13,7 +13,7 @@ type THeaderProps = {
 };
 
 export default function ShellPage({
-  title = "ommiputera.com",
+  title = "Ommi Putera",
   withHome = false,
   children,
   withBack = false,
@@ -56,15 +56,19 @@ function Header({ title, withHome }: THeaderProps) {
   return (
     <nav
       role="navigation"
-      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-4 md:pt-6"
+      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3 md:pt-6"
     >
       <header role="banner">
-        <h1 className="text-base font-extrabold">{title}</h1>
+        <h1 className="text-sm font-bold">{title}</h1>
       </header>
       <nav role="navigation">
-        <ul className="flex gap-4 text-sm justify-center md:mt-1">
+        <ul className="flex text-sm justify-center items-center md:mt-1">
           <li className="underline text-muted-foreground">
-            <Link href="/" className="flex items-center">
+            <Link
+              href="https://read.cv/ommiputera"
+              target="_blank"
+              className="flex items-center py-1 px-2 md:px-3"
+            >
               Resume
             </Link>
           </li>
@@ -75,7 +79,7 @@ function Header({ title, withHome }: THeaderProps) {
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
-            <Link href="/blog" className="flex items-center">
+            <Link href="/blog" className="flex items-center py-1 px-2 md:px-3">
               Blog
             </Link>
           </li>
@@ -86,13 +90,18 @@ function Header({ title, withHome }: THeaderProps) {
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
-            <Link href="/projects" className="flex items-center">
+            <Link
+              href="/projects"
+              className="flex items-center py-1 px-2 md:px-3"
+            >
               Projects
             </Link>
           </li>
           {withHome && (
             <li className="underline text-muted-foreground">
-              <Link href="/">Home</Link>
+              <Link href="/" className="flex items-center py-1 px-2 md:px-3">
+                Home
+              </Link>
             </li>
           )}
         </ul>
@@ -104,7 +113,7 @@ function Header({ title, withHome }: THeaderProps) {
 function RoundedBorder() {
   return (
     <div>
-      <div className="w-full h-[1.5px] top-[calc(var(--hero-height-mobile)_-_0.5px)] md:top-[calc(var(--hero-height)_-_0.5px)] absolute overflow-hidden">
+      <div className="w-full h-[1px] top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] z-10 absolute overflow-hidden">
         <div className="w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-t border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden left-2.5 md:left-14">
@@ -121,12 +130,12 @@ function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="px-4 pb-12 pt-28 text-center md:px-6 md:pt-32 md:pb-16"
+      className="px-4 py-12 text-center md:px-6 md:py-24"
     >
       <p className="text-xs prose dark:prose-invert max-w-96 mx-auto">
-        © {new Date().getFullYear()} Ommi Putera. All rights reserved.
+        All rights reserved © Ommi Putera {new Date().getFullYear()}.
       </p>
-      <p className="text-xs prose dark:prose-invert max-w-72 mx-auto">
+      <p className="text-xs prose dark:prose-invert max-w-72 mx-auto mt-1">
         Build with Kapal Api and 76 Mangga.
       </p>
     </footer>

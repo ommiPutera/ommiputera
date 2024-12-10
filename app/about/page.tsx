@@ -35,11 +35,11 @@ function Me() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Hi, I'm Ommi 👋">
+      <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my corner of the web! I&apos;m a Software Engineer based
-            in <b>Jakarta, Indonesia</b> 🇮🇩
+            Welcome to my corner of the internet! I&apos;m a Software Engineer
+            based in <b>Jakarta, Indonesia</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with </span>
@@ -64,25 +64,23 @@ function Me() {
         <Br />
         <ContentParagraph>
           I was born in 1998 in Bengkulu, Indonesia. My journey into tech began
-          in an unexpected way. After earning my degree in economics, I was
-          ready to dive into my career when the COVID-19 pandemic happend in
-          late 2019. With industries facing widespread layoffs, I started
-          searching for new paths — and that&apos;s when I stumbled upon the
-          world of digital technology.
+          unexpectedly. After earning a degree in economics, I was set to start
+          my career when the COVID-19 pandemic disrupted industries in late
+          2019. Facing widespread layoffs, I began exploring new opportunities —
+          and that&apos;s when I discovered digital technology.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          Eager to pivot, I joined{" "}
+          In early 2021, I joined{" "}
           <ContentLink
             href="https://purwadhika.com/"
             target="_blank"
             text=" Purwadhika"
           />{" "}
           Digital Technology School&apos;s Full Stack Web and Mobile Development
-          Bootcamp in early 2021. That&apos;s where I found my passion for
-          coding and web development. It equipped me with key technical skills
-          and sparked my enthusiasm for continuous growth in software
-          engineering.
+          Bootcamp. There, I found my passion for coding and web development.
+          The bootcamp equipped me with essential technical skills and sparked
+          my drive to grow as a software engineer.
         </ContentParagraph>
         <Br />
         <AboutGalery />
@@ -102,50 +100,44 @@ function Values() {
           The principles that guide my work and life.
         </ContentParagraph>
         <div className="mt-2">
-          <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
+          <h2 className="text-sm font-bold tracking-normal mb-1">
             Continuous Learning
           </h2>
           <ContentParagraph>
-            As an engineer, I believe learning is a lifelong journey. Staying
-            curious and embracing new ideas and technologies not only drives my
-            personal growth but also keeps me adaptable in a constantly evolving
-            industry. This mindset fuels innovation and ensures my skills stay
-            sharp.
+            I see learning as an ongoing journey. Staying curious and embracing
+            new ideas and technologies drive my personal growth and keep me
+            adaptable in a fast-changing industry.
           </ContentParagraph>
         </div>
         <Br />
         <div>
-          <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
-            Effective Collaboration
-          </h2>
+          <h2 className="text-sm font-bold tracking-normal mb-1">Empathy</h2>
           <ContentParagraph>
-            Collaboration thrives on humility and mutual respect. I prioritize
-            open communication and value the contributions of every team member,
-            regardless of their background or experience. By fostering a
-            supportive and inclusive environment, I help teams unlock their full
-            potential and achieve success together.
+            Empathy bridges the gap between technology and the people it serves.
+            By understanding the needs and perspectives of users and clients, I
+            create products that are not only functional but also meaningful and
+            impactful.
           </ContentParagraph>
         </div>
         <Br />
         <div>
-          <h2 className="text-sm md:text-base font-bold tracking-normal mb-1">
-            Empathy
+          <h2 className="text-sm font-bold tracking-normal mb-1">
+            A Shared Desire for Life
           </h2>
           <ContentParagraph>
-            Empathy connects technology with the people it serves. By
-            understanding the needs and perspectives of users and clients, I
-            ensure the products and solutions I create are not just functional,
-            but also meaningful, impactful, and aligned with real-world needs.
+            Life is precious — not just for us but for all living beings.
+            Recognizing this shared desire inspires me to live and work with
+            compassion and respect for the world around us.
           </ContentParagraph>
         </div>
         <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/me.webp"
-            width={800}
-            height={400}
+            width={1000}
+            height={1000}
             alt=""
-            className="max-h-[350px] object-cover"
+            className="max-h-[550px] object-cover"
           />
         </div>
         <Br />
