@@ -12,6 +12,7 @@ import ShellPage from "~/components/shell-page";
 import Social from "~/components/social";
 
 import NextTo from "./next.section";
+import { getBase64 } from "~/utils/getImageBlur";
 
 export const metadata: Metadata = {
   title: "About Ommi Putera",
@@ -89,7 +90,8 @@ function Me() {
   );
 }
 
-function Values() {
+async function Values() {
+  const blurredImage = await getBase64("/images/me.webp");
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
@@ -137,7 +139,9 @@ function Values() {
             width={1000}
             height={1000}
             alt=""
-            className="max-h-[550px] object-cover"
+            placeholder="blur"
+            blurDataURL={blurredImage}
+            className="md:h-[550px] h-[450px] object-cover"
           />
         </div>
         <Br />
