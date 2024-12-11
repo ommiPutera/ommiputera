@@ -23,7 +23,7 @@ export default function Work() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <BriefcaseBusiness className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Work Experience">
+      <Content title="Work experience">
         <ContentParagraph>
           As a Full Stack Engineer at Dipay, I&apos;m responsible for developing
           complex, end-to-end solutions that drive business success. I&apos;ve

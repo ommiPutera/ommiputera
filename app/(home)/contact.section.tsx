@@ -12,7 +12,7 @@ export default function Contact() {
       <SectionAvatar>
         <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
       </SectionAvatar>
-      <Content title="Contact Me">
+      <Content title="Contact me">
         <ContentParagraph>
           <span>The best way to get in touch with me is to email </span>
           <b>me@ommiputera.com</b>.

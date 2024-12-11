@@ -22,7 +22,7 @@ export default function ShellPage({
   return (
     <div className="mx-auto max-w-[680px]">
       <div className="flex flex-col relative">
-        <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
+        <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
           {withBack && <BackBtn />}
           <RoundedBorder />
@@ -54,7 +54,7 @@ function Header({ withHome }: THeaderProps) {
   return (
     <nav
       role="navigation"
-      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3 md:pt-6"
+      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3.5 md:pt-6"
     >
       <header role="banner">
         <h1 className="text-sm font-bold">Ommi Putera</h1>
@@ -65,7 +65,7 @@ function Header({ withHome }: THeaderProps) {
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
-              className="flex items-center py-1 px-2 md:px-3"
+              className="flex items-center py-1 px-1.5 md:px-3"
             >
               Resume
             </Link>
@@ -77,7 +77,10 @@ function Header({ withHome }: THeaderProps) {
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
-            <Link href="/blog" className="flex items-center py-1 px-2 md:px-3">
+            <Link
+              href="/blog"
+              className="flex items-center py-1 px-1.5 md:px-3"
+            >
               Blog
             </Link>
           </li>
@@ -90,14 +93,14 @@ function Header({ withHome }: THeaderProps) {
           >
             <Link
               href="/projects"
-              className="flex items-center py-1 px-2 md:px-3"
+              className="flex items-center py-1 px-1.5 md:px-3"
             >
               Projects
             </Link>
           </li>
           {withHome && (
             <li className="underline text-muted-foreground">
-              <Link href="/" className="flex items-center py-1 px-2 md:px-3">
+              <Link href="/" className="flex items-center py-1 px-1.5 md:px-3">
                 Home
               </Link>
             </li>
@@ -111,13 +114,13 @@ function Header({ withHome }: THeaderProps) {
 function RoundedBorder() {
   return (
     <div>
-      <div className="w-full h-[1px] top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] z-10 absolute overflow-hidden">
+      <div className="w-full h-[1px] top-[var(--header-height-mobile)] md:top-[var(--header-height)] z-10 absolute overflow-hidden">
         <div className="w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-t border-neutral-200 dark:border-neutral-800"></div>
       </div>
-      <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden left-2.5 md:left-14">
+      <div className="w-10 h-10 top-[var(--header-height-mobile)] md:top-[var(--header-height)] absolute overflow-hidden left-2.5 md:left-14">
         <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tl-3xl shadow-circle"></div>
       </div>
-      <div className="w-10 h-10 top-[var(--hero-height-mobile)] md:top-[var(--hero-height)] absolute overflow-hidden right-2.5 md:right-14">
+      <div className="w-10 h-10 top-[var(--header-height-mobile)] md:top-[var(--header-height)] absolute overflow-hidden right-2.5 md:right-14">
         <div className="absolute top-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tr-3xl shadow-circle"></div>
       </div>
     </div>

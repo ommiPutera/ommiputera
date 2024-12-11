@@ -33,8 +33,8 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    --hero-height: 92px;
-    --hero-height-mobile: 72px;
+    --header-height: 92px;
+    --header-height-mobile: 76px;
   }
 
   .dark {

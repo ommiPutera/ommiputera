@@ -27,7 +27,7 @@ export default function Blog() {
           className="object-cover overflow-hidden rounded-full"
         />
       </SectionAvatar>
-      <Content title="Featured Blog Posts" description="Ommi Putera">
+      <Content title="My featured blog posts" description="Ommi Putera - Blog">
         <ContentParagraph className="inline">
           <span>
             I write about the React ecosystem, TypeScript, and the lessons
@@ -69,9 +69,9 @@ async function Blogs() {
             className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-300 dark:border-neutral-700"
           >
             <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-50">
-              <FolderOpen className="h-8 w-8 stroke-1" />
-              <p className="text-xs text-center w-full max-w-[150px]">
-                View all my writings here!
+              <FolderOpen className="h-8 w-8" />
+              <p className="text-xs text-center w-full max-w-[150px] font-semibold">
+                Read the blog
               </p>
             </div>
           </Link>

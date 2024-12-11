@@ -24,16 +24,16 @@ type TProject = {
 const projects: TProject[] = [
   {
     title: "Revamped a Landing Page using Next.js",
-    description: "Dipay Indonesia",
+    description: "Dipay Indonesia - 2023",
     summary:
-      "I revamped Dipay's landing page using Next.js, implementing SEO best practices to enhance visibility while delivering a modern, high-performance design that reduced load times and boosted user engagement. 🚀",
+      "I revamped the Dipay landing page using Next.js, implementing SEO best practices to enhance visibility while delivering a modern, high-performance design that reduced load times and boosted user engagement. 🚀",
     slug: "project-dipay-landing",
     coverPath: "/images/projects/personal.png",
     href: "https://dipay.id/",
   },
   {
-    title: "Naufal Ghifari Website",
-    description: "Personal/Porfolio",
+    title: "Naufal Ghifari website",
+    description: "Personal/porfolio",
     summary:
       "I developed Naufal Ghifari's personal portfolio website, transforming a creative design into a responsive, high- performance platform that showcases his skills, projects, and professional journey.",
     slug: "project-naufal-website",
@@ -82,9 +82,9 @@ function Close() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderClosed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="More Project">
+      <Content title="More project?">
         <ContentParagraph>
-          <span>Looking for more? Explore all my projects</span>{" "}
+          <span>Explore all of my projects</span>{" "}
           <Link
             href="/projects"
             className="font-medium text-blue-600 dark:text-blue-400 underline"
@@ -134,7 +134,7 @@ function ReadMore({ href }: { href: LinkProps["href"] }) {
       className="text-sm font-semibold text-blue-600 dark:text-blue-400 underline inline-flex items-center gap-1"
     >
       <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />
-      <span>Read More</span>
+      <span>Read more</span>
     </Link>
   );
 }

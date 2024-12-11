@@ -39,8 +39,8 @@ function Me() {
       <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my corner of the internet! I&apos;m a Software Engineer
-            based in <b>Jakarta, Indonesia</b> 🇮🇩
+            Welcome to my space on the web! I&apos;m a Software Engineer based
+            in <b>Jakarta, Indonesia</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with </span>
@@ -53,35 +53,37 @@ function Me() {
         <Br />
         <ContentParagraph>
           <span>
-            Currently, I&apos;m working as a Full Stack Engineer at a fintech
-            startup that specializes in financial services in Indonesia called
+            Currently, I work as a Full Stack Engineer at{" "}
+            <ContentLink
+              href="https://dipay.id/"
+              target="_blank"
+              text=" Dipay"
+            />
+            , a fintech startup specializing in financial services in Indonesia.
           </span>
-          <ContentLink
-            href="https://dipay.id/"
-            target="_blank"
-            text=" Dipay."
-          />
+        </ContentParagraph>
+        <Br />
+        <ContentParagraph className="font-bold">
+          I was born in 1998 in Bengkulu, Indonesia.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          I was born in 1998 in Bengkulu, Indonesia. My journey into tech began
-          unexpectedly. After earning a degree in economics, I was set to start
-          my career when the COVID-19 pandemic disrupted industries in late
-          2019. Facing widespread layoffs, I began exploring new opportunities —
-          and that&apos;s when I discovered digital technology.
+          My journey into tech began unexpectedly. I started with a degree in
+          economics, but when the COVID-19 pandemic disrupted industries in late
+          2019, I was forced to seek a new direction — and that&apos;s when I
+          discovered digital technology.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          In early 2021, I joined{" "}
+          In 2021, I joined{" "}
           <ContentLink
             href="https://purwadhika.com/"
             target="_blank"
             text=" Purwadhika"
           />{" "}
           Digital Technology School&apos;s Full Stack Web and Mobile Development
-          Bootcamp. There, I found my passion for coding and web development.
-          The bootcamp equipped me with essential technical skills and sparked
-          my drive to grow as a software engineer.
+          Bootcamp. There, I discovered my passion for coding and web
+          development. The program equipped me with essential technical skills.
         </ContentParagraph>
         <Br />
         <AboutGalery />
@@ -102,9 +104,9 @@ async function Values() {
           The principles that guide my work and life.
         </ContentParagraph>
         <div className="mt-2">
-          <h2 className="text-sm font-bold tracking-normal mb-1">
+          <ContentParagraph className="font-bold">
             Continuous Learning
-          </h2>
+          </ContentParagraph>
           <ContentParagraph>
             I see learning as an ongoing journey. Staying curious and embracing
             new ideas and technologies drive my personal growth and keep me
@@ -113,7 +115,7 @@ async function Values() {
         </div>
         <Br />
         <div>
-          <h2 className="text-sm font-bold tracking-normal mb-1">Empathy</h2>
+          <ContentParagraph className="font-bold">Empathy</ContentParagraph>
           <ContentParagraph>
             Empathy bridges the gap between technology and the people it serves.
             By understanding the needs and perspectives of users and clients, I
@@ -123,9 +125,9 @@ async function Values() {
         </div>
         <Br />
         <div>
-          <h2 className="text-sm font-bold tracking-normal mb-1">
+          <ContentParagraph className="font-bold">
             A Shared Desire for Life
-          </h2>
+          </ContentParagraph>
           <ContentParagraph>
             Life is precious — not just for us but for all living beings.
             Recognizing this shared desire inspires me to live and work with

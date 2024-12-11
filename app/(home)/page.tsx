@@ -80,10 +80,10 @@ function About() {
       <SectionAvatar>
         <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
       </SectionAvatar>
-      <Content title="About">
+      <Content title="About me">
         <ContentParagraph>
-          Currently, I&apos;m working as a Full Stack Engineer at a fintech
-          startup that specializes in financial
+          Currently, I work as a Full Stack Engineer at Dipay, a fintech startup
+          specializing in financial
         </ContentParagraph>
         <ContentParagraph>
           <ContentLink href="/about" text="Show more" />
@@ -110,7 +110,7 @@ function Mode() {
         </SectionAvatar>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
           <ContentParagraph>
-            Just click the section to toggle between the two. <ModeEmoji />
+            Click this section to toggle between the two. <ModeEmoji />
           </ContentParagraph>
         </Content>
       </Section>

@@ -11,7 +11,7 @@ export default async function AboutGalery() {
     },
     {
       path: "my-laptop.webp",
-      caption: "My super cozy workspace.",
+      caption: "My super cozy workspace",
       alt: "My setup",
     },
     {
