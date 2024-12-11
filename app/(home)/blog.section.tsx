@@ -28,13 +28,12 @@ export default function Blog() {
         />
       </SectionAvatar>
       <Content title="Featured Blog Posts" description="Ommi Putera">
-        <ContentParagraph>
+        <ContentParagraph className="inline">
           <span>
             I write about the React ecosystem, TypeScript, and the lessons
-            I&apos;ve learned while building real-world applications
+            I&apos;ve learned.
           </span>
-        </ContentParagraph>
-        <Br />
+        </ContentParagraph>{" "}
         <ContentLink href="/blog" text="View all" />
         <Br />
         <Blogs />
@@ -54,7 +53,7 @@ async function Blogs() {
   return (
     <Carousel>
       <CarouselContent overflowVisible className="-ml-1.5 md:-ml-2">
-        {blogs.slice(0, 2).map((post) => {
+        {blogs.slice(0, 3).map((post) => {
           const slug = post.slug;
           return (
             <BlogItem
@@ -69,10 +68,10 @@ async function Blogs() {
             href="/blog"
             className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-300 dark:border-neutral-700"
           >
-            <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-100">
+            <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-50">
               <FolderOpen className="h-8 w-8 stroke-1" />
-              <p className="text-sm text-center w-full max-w-[200px]">
-                Want to dive into more? View all my writings here!
+              <p className="text-xs text-center w-full max-w-[150px]">
+                View all my writings here!
               </p>
             </div>
           </Link>

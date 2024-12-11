@@ -17,8 +17,7 @@ export default function Education() {
         <ContentParagraph>
           This is where my journey in web development began. The comprehensive
           curriculum provided me with a solid foundation in front-end and
-          back-end technologies, while the hands-on approach equipped me to
-          tackle real-world software engineering challenges.
+          back-end.
         </ContentParagraph>
         <Br />
         <Link

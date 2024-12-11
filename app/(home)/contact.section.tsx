@@ -15,13 +15,12 @@ export default function Contact() {
       <Content title="Contact Me">
         <ContentParagraph>
           <span>The best way to get in touch with me is to email </span>
-          <b>me@ommiputera.com</b>. Alternatively, feel free to reach out to me
-          on WhatsApp for a quick chat!
+          <b>me@ommiputera.com</b>.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
           I&apos;d love to hear from you, whether it&apos;s about a project,
-          collaboration, or just a friendly conversation ☺️
+          collaboration, or just a friendly conversation. ☺️
         </ContentParagraph>
       </Content>
       <Br />
@@ -51,7 +50,7 @@ export default function Contact() {
                 <Smartphone className="w-4 h-4 md:w-5 md:h-5" />
               </div>
               <p className="text-xs md:text-sm font-medium whitespace-nowrap">
-                WhatsApp me
+                Chat
               </p>
             </div>
           </Link>

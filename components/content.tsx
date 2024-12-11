@@ -74,7 +74,7 @@ export function ContentLink({
 }: LinkProps & AnchorProps & { text: string }) {
   return (
     <Link
-      className="font-medium text-blue-600 dark:text-blue-400 underline"
+      className="text-sm font-medium text-blue-600 dark:text-blue-400 underline"
       {...props}
     >
       {text}

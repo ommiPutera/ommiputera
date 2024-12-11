@@ -59,7 +59,7 @@ async function Hi() {
             based in <b>Jakarta, Indonesia</b> 🇮🇩
           </span>
           <Br />
-          <span>I love building things with </span>
+          <span>I love building things with</span>{" "}
           <ContentLink
             href="https://remix.run/"
             target="_blank"
@@ -83,7 +83,7 @@ function About() {
       <Content title="About">
         <ContentParagraph>
           Currently, I&apos;m working as a Full Stack Engineer at a fintech
-          startup that specializes
+          startup that specializes in financial
         </ContentParagraph>
         <ContentParagraph>
           <ContentLink href="/about" text="Show more" />
@@ -110,7 +110,7 @@ function Mode() {
         </SectionAvatar>
         <Content title="Prefer dark/light mode?" description="Ommi Putera">
           <ContentParagraph>
-            Just click the section to toggle between the two <ModeEmoji />
+            Just click the section to toggle between the two. <ModeEmoji />
           </ContentParagraph>
         </Content>
       </Section>

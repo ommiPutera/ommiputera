@@ -5,7 +5,7 @@ import ShellPage from "~/components/shell-page";
 
 export default function ProjectDipayDisbursement() {
   return (
-    <ShellPage title="Dipay Disbursement" withHome withBack>
+    <ShellPage withHome withBack>
       <Section className="p-0 md:p-0">
         <Image
           src="/images/projects/dipay-core.jpeg"

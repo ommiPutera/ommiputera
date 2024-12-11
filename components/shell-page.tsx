@@ -9,11 +9,9 @@ import { cn } from "~/lib/utils";
 
 type THeaderProps = {
   withHome?: boolean;
-  title?: string;
 };
 
 export default function ShellPage({
-  title = "Ommi Putera",
   withHome = false,
   children,
   withBack = false,
@@ -25,7 +23,7 @@ export default function ShellPage({
     <div className="mx-auto max-w-[680px]">
       <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--hero-height-mobile)] md:min-h-[var(--hero-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
-          <Header title={title} withHome={withHome} />
+          <Header withHome={withHome} />
           {withBack && <BackBtn />}
           <RoundedBorder />
         </div>
@@ -51,7 +49,7 @@ function BackBtn() {
   );
 }
 
-function Header({ title, withHome }: THeaderProps) {
+function Header({ withHome }: THeaderProps) {
   const pathname = usePathname();
   return (
     <nav
@@ -59,10 +57,10 @@ function Header({ title, withHome }: THeaderProps) {
       className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3 md:pt-6"
     >
       <header role="banner">
-        <h1 className="text-sm font-bold">{title}</h1>
+        <h1 className="text-sm font-bold">Ommi Putera</h1>
       </header>
       <nav role="navigation">
-        <ul className="flex text-sm justify-center items-center md:mt-1">
+        <ul className="flex text-sm justify-center items-center">
           <li className="underline text-muted-foreground">
             <Link
               href="https://read.cv/ommiputera"

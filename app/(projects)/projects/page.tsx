@@ -52,7 +52,7 @@ type TData = {
 
 export default async function ProjectsPage() {
   return (
-    <ShellPage title="The Ommi Putera Projects" withHome withBack>
+    <ShellPage withHome withBack>
       <Section>
         <div className="my-4 overflow-hidden relative">
           <h1 className="relative z-10 text-2xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-500 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-center font-sans font-extrabold">

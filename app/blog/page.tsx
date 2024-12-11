@@ -25,7 +25,7 @@ export default async function BlogPage() {
     return 1;
   });
   return (
-    <ShellPage title="The Ommi Putera Blog" withHome withBack>
+    <ShellPage withHome withBack>
       <Section>
         <div className="mb-4 overflow-hidden relative">
           <h1 className="relative z-10 text-3xl md:text-4xl bg-clip-text text-transparent bg-gradient-to-b from-neutral-500 to-neutral-950 dark:from-neutral-50 dark:to-neutral-300 text-center font-sans font-extrabold">
