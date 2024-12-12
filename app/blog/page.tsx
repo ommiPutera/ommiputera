@@ -10,6 +10,8 @@ import { getBlogPosts, Metadata } from "~/data/blog";
 
 import { cn, formatDate } from "~/lib/utils";
 
+import { getBase64RemoteImage } from "~/utils/getImageBlur";
+
 export const metadata = {
   title: "The Ommi Putera Blog",
   description: "My thoughts on software development, life, and more.",
@@ -58,7 +60,7 @@ export default async function BlogPage() {
   );
 }
 
-function BentoBlog({
+async function BentoBlog({
   slug,
   publishedAt,
   image,
@@ -81,10 +83,12 @@ function BentoBlog({
     >
       <div className="relative rounded-xl">
         <Image
+          alt=""
           src={image}
           width={600}
           height={600}
-          alt=""
+          placeholder="blur"
+          blurDataURL={await getBase64RemoteImage(image)}
           className="object-cover rounded-xl h-[320px] w-full"
         />
         <div className="absolute bottom-0 from-neutral-950 rounded-xl to-transparent bg-gradient-to-t w-full h-1/2"></div>

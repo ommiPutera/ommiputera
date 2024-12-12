@@ -16,9 +16,9 @@ export default function NextTo() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Signpost className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Next">
+      <Content title="More">
         <ContentParagraph>
-          Where to from here? Navigate to another page to dive deeper!
+          Navigate to another page to dive deeper!
         </ContentParagraph>
         <Br />
         <div className="grid grid-cols-2 gap-2">

@@ -9,6 +9,8 @@ import { getBlogPosts, getPost } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
 
+import { getBase64RemoteImage } from "~/utils/getImageBlur";
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({
@@ -27,7 +29,6 @@ export default async function Blog({
   if (!post) {
     notFound();
   }
-
   return (
     <ShellPage withHome withBack>
       <Section>
@@ -64,6 +65,8 @@ export default async function Blog({
                 width={800}
                 height={40}
                 alt=""
+                placeholder="blur"
+                blurDataURL={await getBase64RemoteImage(post.metadata.image)}
                 className="h-[440px] md:h-[340px] object-cover"
               />
             </div>

@@ -41,14 +41,20 @@ function Me() {
         <ContentParagraph>
           <span>
             Welcome to my space on the web! I&apos;m a Software Engineer based
-            in <b>Jakarta, Indonesia</b> 🇮🇩
+            in <b>Jakarta, Indonesia.</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with </span>
           <ContentLink
             href="https://remix.run/"
             target="_blank"
-            text=" Remix."
+            text=" Remix "
+          />
+          and
+          <ContentLink
+            href="https://nextjs.org/"
+            target="_blank"
+            text=" NextJS."
           />
         </ContentParagraph>
         <Br />
