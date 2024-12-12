@@ -12,6 +12,7 @@ import Link, { LinkProps } from "next/link";
 import Br from "~/components/br";
 import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
+import { getBase64Image } from "~/utils/getImageBlur";
 
 type TProject = {
   title: string;
@@ -35,7 +36,7 @@ const projects: TProject[] = [
     title: "Naufal Ghifari website",
     description: "Personal/porfolio",
     summary:
-      "I developed Naufal Ghifari's personal portfolio website, transforming a creative design into a responsive, high- performance platform that showcases his skills, projects, and professional journey.",
+      "I developed Naufal Ghifari's personal website, transforming a creative design into a responsive, high-performance platform that showcases his skills, projects, and professional journey.",
     slug: "project-naufal-website",
     coverPath: "/images/projects/naufal-page.jpeg",
     href: "https://naufalghfr.vercel.app/",
@@ -97,7 +98,7 @@ function Close() {
   );
 }
 
-function Project({
+async function Project({
   title,
   description,
   summary,
@@ -117,7 +118,10 @@ function Project({
       <Content title={title} description={description}>
         <ContentParagraph>{summary}</ContentParagraph>
         <Br />
-        <ProjectCover src={coverPath} />
+        <ProjectCover
+          src={coverPath}
+          blurredImage={await getBase64Image(coverPath)}
+        />
       </Content>
       <div className="flex gap-3 md:gap-6 mt-3 ml-[48px]">
         <ReadMore href={"/" + slug} />
@@ -152,10 +156,24 @@ function Website({ href }: { href: LinkProps["href"] }) {
   );
 }
 
-function ProjectCover({ src }: { src: string }) {
+function ProjectCover({
+  src,
+  blurredImage,
+}: {
+  src: string;
+  blurredImage: string;
+}) {
   return (
-    <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
-      <Image src={src} width={800} height={400} alt="" />
+    <div className="rounded-xl flex flex-col gap-4 overflow-hidden">
+      <Image
+        src={src}
+        width={1000}
+        height={1000}
+        alt=""
+        placeholder="blur"
+        blurDataURL={blurredImage}
+        className="h-full max-h-[280px] object-cover border border-neutral-200 dark:border-neutral-800 rounded-xl"
+      />
     </div>
   );
 }

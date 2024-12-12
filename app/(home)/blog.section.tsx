@@ -14,6 +14,7 @@ import {
 import { getBlogPosts, Metadata } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
+import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 export default function Blog() {
   return (
@@ -50,15 +51,22 @@ async function Blogs() {
       return -1;
     return 1;
   });
+  const blurredImages = await Promise.all(
+    blogs
+      .slice(0, 3)
+      .map((blog) => getBase64RemoteImage(blog?.metadata?.image)),
+  );
   return (
     <Carousel>
       <CarouselContent overflowVisible className="-ml-1.5 md:-ml-2">
-        {blogs.slice(0, 3).map((post) => {
+        {blogs.slice(0, 3).map((post, index) => {
           const slug = post.slug;
           return (
             <BlogItem
               key={post.slug}
               slug={slug}
+              blurredImages={blurredImages}
+              index={index}
               {...(post.metadata as Metadata)}
             />
           );
@@ -82,12 +90,14 @@ async function Blogs() {
 }
 
 function BlogItem({
+  slug,
+  blurredImages,
   publishedAt,
   image,
-  slug,
   summary,
   title,
-}: { slug: string } & Metadata) {
+  index,
+}: { slug: string; blurredImages: string[]; index: number } & Metadata) {
   return (
     <CarouselItem
       className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]"
@@ -99,10 +109,12 @@ function BlogItem({
       >
         <div className="relative">
           <Image
-            src={image}
-            width={600}
-            height={600}
             alt=""
+            src={image}
+            width={1000}
+            height={1000}
+            placeholder="blur"
+            blurDataURL={blurredImages[index]}
             className="object-cover overflow-hidden h-[380px] w-full"
           />
           <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2 dark:h-full"></div>

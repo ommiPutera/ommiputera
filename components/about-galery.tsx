@@ -1,4 +1,4 @@
-import { getBase64 } from "~/utils/getImageBlur";
+import { getBase64Image } from "~/utils/getImageBlur";
 
 import { GaleryCarousel } from "./galery";
 
@@ -27,7 +27,7 @@ export default async function AboutGalery() {
     },
   ];
   const blurredImages = await Promise.all(
-    images.map((image) => getBase64(`/images/${image.path}`)),
+    images.map((image) => getBase64Image(`/images/${image.path}`)),
   );
   return <GaleryCarousel images={images} blurredImages={blurredImages} />;
 }

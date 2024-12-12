@@ -11,8 +11,9 @@ import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import Social from "~/components/social";
 
+import { getBase64Image } from "~/utils/getImageBlur";
+
 import NextTo from "./next.section";
-import { getBase64 } from "~/utils/getImageBlur";
 
 export const metadata: Metadata = {
   title: "About Ommi Putera",
@@ -75,7 +76,7 @@ function Me() {
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          In 2021, I joined{" "}
+          In early 2021, I joined{" "}
           <ContentLink
             href="https://purwadhika.com/"
             target="_blank"
@@ -92,8 +93,8 @@ function Me() {
   );
 }
 
+const blurredImage = await getBase64Image("/images/me.webp");
 async function Values() {
-  const blurredImage = await getBase64("/images/me.webp");
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
@@ -135,7 +136,7 @@ async function Values() {
           </ContentParagraph>
         </div>
         <Br />
-        <div className="border border-neutral-200 dark:border-neutral-800 rounded-xl flex flex-col gap-4 overflow-hidden">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-[400px] md:h-[500px] rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/me.webp"
             width={1000}
@@ -143,7 +144,7 @@ async function Values() {
             alt=""
             placeholder="blur"
             blurDataURL={blurredImage}
-            className="md:h-[550px] h-[450px] object-cover"
+            className="h-full object-cover"
           />
         </div>
         <Br />
