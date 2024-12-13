@@ -20,7 +20,7 @@ export default function ShellPage({
   withBack?: boolean;
 } & THeaderProps) {
   return (
-    <div className="mx-auto max-w-[680px]">
+    <div className="mx-auto w-full max-w-[740px]">
       <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
@@ -42,7 +42,7 @@ export default function ShellPage({
   );
 }
 
-export function BackBtn() {
+function BackBtn() {
   const router = useRouter();
   return (
     <button onClick={() => router.back()} aria-label="back button">
@@ -67,7 +67,7 @@ function Header({ withHome }: THeaderProps) {
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
-              className="flex items-center py-1 px-1 md:px-2"
+              className="flex items-center py-1 px-1.5 md:px-2"
             >
               Resume
             </Link>
@@ -79,7 +79,10 @@ function Header({ withHome }: THeaderProps) {
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
-            <Link href="/blog" className="flex items-center py-1 px-1 md:px-2">
+            <Link
+              href="/blog"
+              className="flex items-center py-1 px-1.5 md:px-2"
+            >
               Blog
             </Link>
           </li>
@@ -92,14 +95,14 @@ function Header({ withHome }: THeaderProps) {
           >
             <Link
               href="/projects"
-              className="flex items-center py-1 px-1 md:px-2"
+              className="flex items-center py-1 px-1.5 md:px-2"
             >
               Projects
             </Link>
           </li>
           {withHome && (
             <li className="underline text-muted-foreground hover:text-blue-700">
-              <Link href="/" className="flex items-center py-1 px-1 md:px-2">
+              <Link href="/" className="flex items-center py-1 px-1.5 md:px-2">
                 Home
               </Link>
             </li>
@@ -126,7 +129,7 @@ function RoundedBorder() {
   );
 }
 
-function Footer() {
+export function Footer() {
   return (
     <footer
       role="contentinfo"

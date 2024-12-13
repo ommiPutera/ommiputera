@@ -8,6 +8,8 @@ import { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
+import { getProjectPosts, TProjectPosts } from "~/data/project";
+
 import { getBase64Image } from "~/utils/getImageBlur";
 
 export const metadata = {
@@ -15,44 +17,8 @@ export const metadata = {
   description: "",
 };
 
-const data: TData[] = [
-  // {
-  //   slug: "project-dipay-disbursement",
-  //   imageSource: "/images/projects/dipay-disburesment.jpeg",
-  //   title: "Building a Dipay Enterprise Disbursement",
-  //   summary:
-  //     "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  // },
-  // {
-  //   slug: "project-dipay-core-dashboard",
-  //   imageSource: "/images/projects/dipay-core.jpeg",
-  //   title: "Building a Dipay Core Dashboard",
-  //   summary:
-  //     "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  // },
-  {
-    slug: "project-dipay-landing",
-    imageSource: "/images/projects/personal.png",
-    title: "Revamped a Landing Page using Next.js",
-    summary:
-      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  },
-  {
-    slug: "project-naufal-website",
-    imageSource: "/images/projects/naufal-page.jpeg",
-    title: "Personal/Porfolio Website for Naufal Ghifari",
-    summary:
-      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  },
-];
-type TData = {
-  slug: string;
-  imageSource: string;
-  title: string;
-  summary: string;
-};
-
 export default async function ProjectsPage() {
+  const projects = getProjectPosts();
   return (
     <ShellPage withHome withBack>
       <Section>
@@ -65,7 +31,7 @@ export default async function ProjectsPage() {
           </ContentParagraph>
         </div>
         <div className="flex flex-col gap-6 md:gap-8 mx-1.5 md:mx-4">
-          {data.map((post) => {
+          {projects.map((post) => {
             const slug = post.slug;
             const imageSource = post.imageSource;
             const title = post.title;
@@ -85,7 +51,7 @@ export default async function ProjectsPage() {
   );
 }
 
-async function Project({ slug, imageSource, title, summary }: TData) {
+async function Project({ slug, imageSource, title, summary }: TProjectPosts) {
   return (
     <Link
       href={`/${slug}`}
@@ -98,10 +64,12 @@ async function Project({ slug, imageSource, title, summary }: TData) {
         height={1000}
         placeholder="blur"
         blurDataURL={await getBase64Image(imageSource)}
-        className="min-h-[240px] h-full max-h-[240px] md:min-h-[300px] md:h-[300px] md:max-h-[300px] object-cover rounded-xl border-b dark:border-neutral-800"
+        className="min-h-[240px] h-full md:h-[340px] object-cover rounded-xl border-b dark:border-neutral-800"
       />
       <div className="p-5 md:p-0 max-w-[380px] md:my-6 md:mx-auto group prose dark:prose-invert">
-        <h2 className="text-sm md:text-base font-bold w-full">{title}</h2>
+        <h2 className="text-sm md:text-base font-bold w-full hover:underline">
+          {title}
+        </h2>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
           {summary}
         </p>

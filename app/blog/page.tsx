@@ -14,7 +14,7 @@ import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 export const metadata = {
   title: "The Ommi Putera Blog",
-  description: "My thoughts on software development, life, and more.",
+  description: "",
 };
 
 export default async function BlogPage() {
@@ -59,6 +59,25 @@ export default async function BlogPage() {
   );
 }
 
+const BentoGrid = ({
+  className,
+  children,
+}: {
+  className?: string;
+  children?: React.ReactNode;
+}) => {
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 mx-1.5 md:mx-4",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+};
+
 async function BentoBlog({
   slug,
   publishedAt,
@@ -72,12 +91,13 @@ async function BentoBlog({
   id?: string;
   index: number;
 } & Metadata) {
+  const i = index + 1;
   return (
     <Link
       href={`/blog/${slug}`}
       className={cn(
         "rounded-xl bg-white dark:bg-background w-full cursor-pointer block h-full overflow-hidden border border-neutral-200 dark:border-neutral-800",
-        index === 2 || index === 5 ? "md:col-span-2" : "",
+        i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
       )}
     >
       <div className="relative rounded-xl">
@@ -102,22 +122,3 @@ async function BentoBlog({
     </Link>
   );
 }
-
-const BentoGrid = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) => {
-  return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 mx-1.5 md:mx-4",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-};
