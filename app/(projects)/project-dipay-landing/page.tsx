@@ -27,7 +27,7 @@ export default async function ProjectDipayDisbursement() {
         </div>
       </Container>
       <FullContainer>
-        <div className="md:bg-neutral-300/30 backdrop-blur-sm md:dark:bg-neutral-800/30 md:py-14 text-center px-4">
+        <div className="md:bg-neutral-200/30 backdrop-blur-sm md:dark:bg-neutral-800/30 md:py-14 text-center px-4">
           <Image
             src="/images/projects/personal.png"
             width={1000}

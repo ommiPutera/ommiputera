@@ -159,7 +159,7 @@ function ProjectCover({
         alt=""
         placeholder="blur"
         blurDataURL={blurredImage}
-        className="h-[170px] md:h-[320px] object-cover border border-neutral-200 dark:border-neutral-800 rounded-xl"
+        className="h-[170px] md:h-[calc(var(--shell-page-width)_/_2.5)] object-cover border border-neutral-200 dark:border-neutral-800 rounded-xl"
       />
     </div>
   );

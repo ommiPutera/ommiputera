@@ -20,7 +20,7 @@ export default function ShellPage({
   withBack?: boolean;
 } & THeaderProps) {
   return (
-    <div className="mx-auto w-full max-w-[740px]">
+    <div className="mx-auto w-full max-w-[var(--shell-page-width)]">
       <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
@@ -59,7 +59,7 @@ function Header({ withHome }: THeaderProps) {
       className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3.5 md:pt-6"
     >
       <header role="banner">
-        <h1 className="text-sm font-bold">Ommi Putera</h1>
+        <h1 className="text-sm font-bold">ommiputera.com</h1>
       </header>
       <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">

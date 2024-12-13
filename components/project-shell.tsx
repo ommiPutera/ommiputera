@@ -5,14 +5,14 @@ import {
   HouseIcon,
   PenLineIcon,
   SunMoonIcon,
+  XIcon,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import { useTheme } from "next-themes";
 import React from "react";
-import { Footer } from "~/components/shell-page";
 
+import { Footer } from "~/components/shell-page";
 import { FloatingDock } from "~/components/ui/floating-dock";
 
 export function ProjectShell({ children }: { children: React.ReactNode }) {
@@ -57,15 +57,16 @@ export function ProjectShell({ children }: { children: React.ReactNode }) {
         <div className="fixed bottom-10 md:bottom-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2">
           <FloatingDock items={links} />
         </div>
+        <div className="fixed top-6 left-6 z-50 flex items-center gap-2">
+          <button
+            className="bg-white/80 dark:bg-black/80 backdrop-blur-sm rounded-full p-2"
+            onClick={() => router.back()}
+          >
+            <XIcon className="h-5 w-5" />
+          </button>
+        </div>
         <header role="banner">
-          <h1 className="text-sm font-medium underline text-center">
-            <Link
-              href="/"
-              className="text-blue-600 dark:text-blue-400 font-bold cursor-pointer"
-            >
-              Ommi Putera
-            </Link>
-          </h1>
+          <h1 className="text-sm font-bold text-center">ommiputera.com</h1>
         </header>
         <main role="main" className="relative overflow-hidden">
           <div className="min-h-screen relative p-2 md:p-0 pb-12 md:pb-32 flex flex-col gap-6 md:gap-14">

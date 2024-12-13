@@ -22,15 +22,26 @@ export default async function ProjectsPage() {
   return (
     <ShellPage withHome withBack>
       <Section>
-        <div className="my-4 overflow-hidden relative">
-          <h1 className="relative z-10 text-2xl md:text-3xl text-center font-sans font-bold mb-2">
-            Projects
-          </h1>
-          <ContentParagraph className="text-center text-sm md:text-base mx-6 md:mx-24 mt-1">
-            Showcase of my latest projects. They&apos;re sure to catch your eye!
-          </ContentParagraph>
+        <div className="overflow-hidden relative mx-1.5 md:mx-4 flex justify-between items-start mt-2 md:mt-0">
+          <div className="max-w-xs flex-1 mt-5 md:mt-7">
+            <h1 className="relative z-10 text-lg md:text-2xl font-bold tracking-tight">
+              Ommi&apos;s Projects
+            </h1>
+            <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
+              Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.
+            </ContentParagraph>
+          </div>
+          <div className="border rounded-full bg-neutral-100">
+            <Image
+              src="/images/profile.jpeg"
+              width={200}
+              height={200}
+              alt=""
+              className="object-cover h-[85px] w-[85px] overflow-hidden rounded-full"
+            />
+          </div>
         </div>
-        <div className="flex flex-col gap-6 md:gap-8 mx-1.5 md:mx-4">
+        <div className="flex flex-col gap-6 md:gap-8 mx-1.5 md:mx-4 mt-8 md:mt-12">
           {projects.map((post) => {
             const slug = post.slug;
             const imageSource = post.imageSource;
@@ -64,7 +75,7 @@ async function Project({ slug, imageSource, title, summary }: TProjectPosts) {
         height={1000}
         placeholder="blur"
         blurDataURL={await getBase64Image(imageSource)}
-        className="min-h-[240px] h-full md:h-[340px] object-cover rounded-xl border-b dark:border-neutral-800"
+        className="h-[240px] md:h-[calc(var(--shell-page-width)_/_2.3)] object-cover rounded-xl border-b dark:border-neutral-800"
       />
       <div className="p-5 md:p-0 max-w-[380px] md:my-6 md:mx-auto group prose dark:prose-invert">
         <h2 className="text-sm md:text-base font-bold w-full hover:underline">
