@@ -16,20 +16,20 @@ export const metadata = {
 };
 
 const data: TData[] = [
-  {
-    slug: "project-dipay-disbursement",
-    imageSource: "/images/projects/dipay-disburesment.jpeg",
-    title: "Building a Dipay Enterprise Disbursement",
-    summary:
-      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  },
-  {
-    slug: "project-dipay-core-dashboard",
-    imageSource: "/images/projects/dipay-core.jpeg",
-    title: "Building a Dipay Core Dashboard",
-    summary:
-      "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
-  },
+  // {
+  //   slug: "project-dipay-disbursement",
+  //   imageSource: "/images/projects/dipay-disburesment.jpeg",
+  //   title: "Building a Dipay Enterprise Disbursement",
+  //   summary:
+  //     "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
+  // },
+  // {
+  //   slug: "project-dipay-core-dashboard",
+  //   imageSource: "/images/projects/dipay-core.jpeg",
+  //   title: "Building a Dipay Core Dashboard",
+  //   summary:
+  //     "Improve the accuracy and efficiency of image recognition technology. By creating our own tools, we can customize the annotation process to fit the specific needs and requirements, rather than relying on third-party tools.",
+  // },
   {
     slug: "project-dipay-landing",
     imageSource: "/images/projects/personal.png",
@@ -57,14 +57,13 @@ export default async function ProjectsPage() {
     <ShellPage withHome withBack>
       <Section>
         <div className="my-4 overflow-hidden relative">
-          <h1 className="relative z-10 text-2xl md:text-4xl text-center font-sans font-extrabold">
+          <h1 className="relative z-10 text-2xl md:text-3xl text-center font-sans font-bold mb-2">
             Projects
           </h1>
           <ContentParagraph className="text-center text-sm md:text-base mx-6 md:mx-24 mt-1">
             Showcase of my latest projects. They&apos;re sure to catch your eye!
           </ContentParagraph>
         </div>
-        <Br />
         <div className="flex flex-col gap-6 md:gap-8 mx-1.5 md:mx-4">
           {data.map((post) => {
             const slug = post.slug;
@@ -99,10 +98,10 @@ async function Project({ slug, imageSource, title, summary }: TData) {
         height={1000}
         placeholder="blur"
         blurDataURL={await getBase64Image(imageSource)}
-        className="min-h-[240px] h-full max-h-[240px] md:min-h-[300px] md:h-[300px] md:max-h-[300px] object-cover rounded-xl"
+        className="min-h-[240px] h-full max-h-[240px] md:min-h-[300px] md:h-[300px] md:max-h-[300px] object-cover rounded-xl border-b dark:border-neutral-800"
       />
       <div className="p-5 md:p-0 max-w-[380px] md:my-6 md:mx-auto group prose dark:prose-invert">
-        <h2 className="text-sm md:text-base font-extrabold w-full">{title}</h2>
+        <h2 className="text-sm md:text-base font-bold w-full">{title}</h2>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
           {summary}
         </p>

@@ -24,7 +24,11 @@ export default function ShellPage({
       <div className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
-          {withBack && <BackBtn />}
+          {withBack && (
+            <div className="absolute -top-0.5 -.5 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
+              <BackBtn />
+            </div>
+          )}
           <RoundedBorder />
         </div>
         <main role="main" className="px-2.5 md:px-14 relative overflow-hidden">
@@ -38,14 +42,12 @@ export default function ShellPage({
   );
 }
 
-function BackBtn() {
+export function BackBtn() {
   const router = useRouter();
   return (
-    <div className="absolute -top-0.5 -.5 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
-      <button onClick={() => router.back()} aria-label="back button">
-        <ArrowLeft className="w-5 h-5 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
-      </button>
-    </div>
+    <button onClick={() => router.back()} aria-label="back button">
+      <ArrowLeft className="w-5 h-5 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
+    </button>
   );
 }
 
@@ -61,46 +63,43 @@ function Header({ withHome }: THeaderProps) {
       </header>
       <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">
-          <li className="underline text-muted-foreground">
+          <li className="underline text-muted-foreground hover:text-blue-700">
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
-              className="flex items-center py-1 px-1.5 md:px-3"
+              className="flex items-center py-1 px-1 md:px-2"
             >
               Resume
             </Link>
           </li>
           <li
             className={cn(
-              "underline text-muted-foreground",
+              "underline text-muted-foreground hover:text-blue-700",
               pathname.startsWith("/blog") &&
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
-            <Link
-              href="/blog"
-              className="flex items-center py-1 px-1.5 md:px-3"
-            >
+            <Link href="/blog" className="flex items-center py-1 px-1 md:px-2">
               Blog
             </Link>
           </li>
           <li
             className={cn(
-              "underline text-muted-foreground",
+              "underline text-muted-foreground hover:text-blue-700",
               pathname.startsWith("/project") &&
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link
               href="/projects"
-              className="flex items-center py-1 px-1.5 md:px-3"
+              className="flex items-center py-1 px-1 md:px-2"
             >
               Projects
             </Link>
           </li>
           {withHome && (
-            <li className="underline text-muted-foreground">
-              <Link href="/" className="flex items-center py-1 px-1.5 md:px-3">
+            <li className="underline text-muted-foreground hover:text-blue-700">
+              <Link href="/" className="flex items-center py-1 px-1 md:px-2">
                 Home
               </Link>
             </li>
@@ -115,7 +114,7 @@ function RoundedBorder() {
   return (
     <div>
       <div className="w-full h-[1px] top-[var(--header-height-mobile)] md:top-[var(--header-height)] z-10 absolute overflow-hidden">
-        <div className="w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-t border-neutral-200 dark:border-neutral-800"></div>
+        <div className="h-[1px] w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-t border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--header-height-mobile)] md:top-[var(--header-height)] absolute overflow-hidden left-2.5 md:left-14">
         <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tl-3xl shadow-circle"></div>
