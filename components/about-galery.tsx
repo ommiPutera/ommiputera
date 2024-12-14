@@ -27,9 +27,14 @@ export default async function AboutGalery() {
       alt: "My setup",
     },
     {
-      path: "teams-work.webp",
+      path: "teams.jpg",
       caption: "",
       alt: "Picture of me with the engineering and product team",
+    },
+    {
+      path: "me-card.webp",
+      caption: "",
+      alt: "",
     },
     {
       path: "beach.jpg",

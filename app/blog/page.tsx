@@ -29,30 +29,42 @@ export default async function BlogPage() {
   return (
     <ShellPage withHome withBack>
       <Section>
-        <div className="my-4 overflow-hidden relative">
-          <h1 className="relative z-10 text-2xl md:text-3xl text-center font-sans font-bold mb-2">
-            The Blog
-          </h1>
-          <ContentParagraph className="text-center text-sm md:text-base mx-6 md:mx-24 mt-1">
-            I write about the React ecosystem, TypeScript, and the lessons
-            I&apos;ve learned while tackling real-world challenges.
-          </ContentParagraph>
+        <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
+          <div className="max-w-xs flex-1 mt-5 md:mt-7">
+            <h1 className="relative z-10 text-lg md:text-2xl font-extrabold tracking-tight">
+              Ommi's Blog
+            </h1>
+            <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
+              I write about the web development and the lessons I've learned.
+            </ContentParagraph>
+          </div>
+          <div className="border rounded-full bg-neutral-100">
+            <Image
+              src="/images/profile.jpeg"
+              width={200}
+              height={200}
+              alt=""
+              className="object-cover h-[85px] w-[85px] overflow-hidden rounded-full"
+            />
+          </div>
         </div>
-        <BentoGrid>
-          {blogs.map((post, index) => {
-            const slug = post.slug;
-            const source = post.source;
-            return (
-              <BentoBlog
-                key={post.slug}
-                source={source}
-                slug={slug}
-                index={index}
-                {...(post.metadata as Metadata)}
-              />
-            );
-          })}
-        </BentoGrid>
+        <div className="mt-8 md:mt-12">
+          <BentoGrid>
+            {blogs.map((post, index) => {
+              const slug = post.slug;
+              const source = post.source;
+              return (
+                <BentoBlog
+                  key={post.slug}
+                  source={source}
+                  slug={slug}
+                  index={index}
+                  {...(post.metadata as Metadata)}
+                />
+              );
+            })}
+          </BentoGrid>
+        </div>
         <Br />
       </Section>
     </ShellPage>
@@ -69,7 +81,7 @@ const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2 mx-1.5 md:mx-4",
+        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2",
         className,
       )}
     >
@@ -113,7 +125,7 @@ async function BentoBlog({
         <div className="absolute bottom-0 from-neutral-950 rounded-xl to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
       <div className="p-9 md:p-4 prose dark:prose-invert">
-        <h2 className="text-lg font-bold w-full leading-7">{title}</h2>
+        <h2 className="text-base font-extrabold leading-6 w-full">{title}</h2>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
           <span>{formatDate(publishedAt)}</span>
           <span>{summary}</span>
