@@ -32,10 +32,10 @@ export default async function BlogPage() {
         <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
           <div className="max-w-xs flex-1 mt-5 md:mt-7">
             <h1 className="relative z-10 text-lg md:text-2xl font-extrabold tracking-tight">
-              Ommi's Blog
+              Ommi&apos;s Blog
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
-              I write about the web development and the lessons I've learned.
+              I write about the web development and the lessons I&apos;ve learned.
             </ContentParagraph>
           </div>
           <div className="border rounded-full bg-neutral-100">
