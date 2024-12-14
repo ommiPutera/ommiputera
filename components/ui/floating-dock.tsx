@@ -43,6 +43,7 @@ const Dock = React.memo(
 export const FloatingDock = React.cache((props: TFloatingDock) => {
   return <Dock {...props} />;
 });
+Dock.displayName = "FloatingDock";
 
 const FloatingDockMobile = ({
   items,

@@ -2,7 +2,7 @@ import React from "react";
 
 import { Footer } from "~/components/shell-page";
 
-import { BackBtn, ProjectNavigation } from "./project-nav";
+import { ProjectNavigation } from "./project-nav";
 
 export function ProjectShell({ children }: { children: React.ReactNode }) {
   return (
