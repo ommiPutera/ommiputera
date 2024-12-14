@@ -71,9 +71,14 @@
 
 @layer base {
   * {
+    -webkit-tap-highlight-color: transparent;
     @apply border-border;
   }
   body {
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
     @apply bg-background text-foreground;
   }
   .shadow-circle {

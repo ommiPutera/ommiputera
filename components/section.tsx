@@ -24,10 +24,11 @@ export default function Section({
 }) {
   const router = useRouter();
   return (
-    <section
+    <div
       id={id}
       className={cn(
         "flex flex-col p-3 md:py-8 md:px-6 overflow-hidden relative",
+        href && "cursor-pointer",
         className,
       )}
       onClick={() => (href ? router.push(href.toString()) : null)}
@@ -41,7 +42,7 @@ export default function Section({
           )}
         />
       )}
-    </section>
+    </div>
   );
 }
 

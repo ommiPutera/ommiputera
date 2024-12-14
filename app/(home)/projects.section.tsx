@@ -54,7 +54,7 @@ export default function Projects() {
 
 function Intro() {
   return (
-    <Section withConnector>
+    <Section>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
       </div>

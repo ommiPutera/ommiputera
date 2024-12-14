@@ -80,6 +80,7 @@ async function Hi() {
 function About() {
   return (
     <Section
+      href="/about"
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >

@@ -35,7 +35,8 @@ export default async function BlogPage() {
               Ommi&apos;s Blog
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
-              I write about the web development and the lessons I&apos;ve learned.
+              I write about the web development and the lessons I&apos;ve
+              learned.
             </ContentParagraph>
           </div>
           <div className="border rounded-full bg-neutral-100">

@@ -21,7 +21,7 @@ export default function ShellPage({
 } & THeaderProps) {
   return (
     <div className="mx-auto w-full max-w-[var(--shell-page-width)]">
-      <div className="flex flex-col relative">
+      <section className="flex flex-col relative">
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
           {withBack && (
@@ -31,13 +31,18 @@ export default function ShellPage({
           )}
           <RoundedBorder />
         </div>
-        <main role="main" className="px-2.5 md:px-14 relative overflow-hidden">
-          <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 divide-y divide-neutral-200 dark:divide-neutral-800 relative">
-            {children}
+        <div className="px-2.5 md:px-14 relative overflow-hidden">
+          <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 relative">
+            <main
+              role="main"
+              className="divide-y divide-neutral-200 dark:divide-neutral-800"
+            >
+              {children}
+            </main>
             <Footer />
           </div>
-        </main>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
@@ -137,12 +142,12 @@ export function Footer() {
   return (
     <footer
       role="contentinfo"
-      className="px-4 py-12 text-center md:px-6 md:py-24"
+      className="px-4 pt-24 pb-6 text-center md:px-6 md:pt-32 md:pb-10"
     >
-      <p className="text-xs prose dark:prose-invert max-w-96 mx-auto">
+      <p className="text-xs max-w-96 mx-auto">
         All rights reserved © Ommi Putera {new Date().getFullYear()}.
       </p>
-      <p className="text-xs prose dark:prose-invert max-w-72 mx-auto mt-1">
+      <p className="text-xs max-w-72 mx-auto mt-1">
         Build with Kapal Api and 76 Mangga.
       </p>
     </footer>

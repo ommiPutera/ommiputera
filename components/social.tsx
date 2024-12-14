@@ -6,11 +6,6 @@ export default function Social() {
       <span>You can follow me on</span>{" "}
       <span className="inline-flex gap-1">
         <ContentLink
-          href="https://twitter.com/Omiputera1/"
-          target="_blank"
-          text="Twitter,"
-        />
-        <ContentLink
           href="https://www.linkedin.com/in/ommiputera/"
           target="_blank"
           text="LinkedIn,"
@@ -21,9 +16,9 @@ export default function Social() {
           text="Github,"
         />
         <ContentLink
-          href="https://www.instagram.com/omiputera/"
+          href="https://twitter.com/Omiputera1/"
           target="_blank"
-          text="Instagram"
+          text="Twitter,"
         />
       </span>
     </ContentParagraph>

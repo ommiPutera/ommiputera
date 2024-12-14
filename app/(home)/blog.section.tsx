@@ -14,11 +14,12 @@ import {
 import { getBlogPosts, Metadata } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
+
 import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 export default function Blog() {
   return (
-    <Section>
+    <Section href="/blog">
       <SectionAvatar>
         <Image
           src="/images/profile.jpeg"
@@ -56,8 +57,10 @@ async function Blogs() {
       .map((blog) => getBase64RemoteImage(blog?.metadata?.image)),
   );
   return (
-    <Carousel>
-      <CarouselContent overflowVisible className="-ml-1.5 md:-ml-2">
+    <Carousel
+      opts={{ loop: false, skipSnaps: true, containScroll: "trimSnaps" }}
+    >
+      <CarouselContent overflowVisible className="-ml-1">
         {blogs.slice(0, 3).map((post, index) => {
           const slug = post.slug;
           return (
@@ -70,10 +73,10 @@ async function Blogs() {
             />
           );
         })}
-        <CarouselItem className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]">
+        <CarouselItem className="pl-1 overflow-hidden max-h-full max-w-[300px]">
           <Link
             href="/blog"
-            className="rounded-xl border bg-background w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-300 dark:border-neutral-700"
+            className="rounded-xl border w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-300 dark:border-neutral-700"
           >
             <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-50">
               <FolderOpen className="h-8 w-8" />
@@ -99,14 +102,14 @@ function BlogItem({
 }: { slug: string; blurredImages: string[]; index: number } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1.5 md:pl-2 overflow-hidden max-h-full max-w-[300px]"
+      className="pl-1 overflow-hidden max-h-full max-w-[300px]"
       key={image}
     >
       <Link
         href={`/blog/${slug}`}
         className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800 bg-white dark:bg-background"
       >
-        <div className="relative">
+        <div className="relative rounded-xl overflow-hidden">
           <Image
             alt=""
             src={image}
@@ -121,7 +124,7 @@ function BlogItem({
             {title}
           </h2>
         </div>
-        <div className="p-4 border-neutral-200 dark:border-neutral-800 prose dark:prose-invert">
+        <div className="py-2 px-4 border-neutral-200 dark:border-neutral-800">
           <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
             <span>{formatDate(publishedAt)}</span>
             <span>{summary}</span>

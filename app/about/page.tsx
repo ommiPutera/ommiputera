@@ -17,6 +17,7 @@ import NextTo from "./next.section";
 
 export const metadata: Metadata = {
   title: "About Ommi Putera",
+  description: "About Ommi Putera",
 };
 
 export default function About() {
