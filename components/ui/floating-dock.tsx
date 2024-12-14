@@ -14,7 +14,6 @@ import React, { useRef, useState } from "react";
 import Link from "next/link";
 
 import { cn } from "~/lib/utils";
-import { useMediaQuery } from "~/hooks/use-media-query";
 
 type TFloatingDock = {
   items: {
@@ -26,18 +25,24 @@ type TFloatingDock = {
   desktopClassName?: string;
   mobileClassName?: string;
 };
-const FloatingDockComp = ({
-  items,
-  desktopClassName,
-  mobileClassName,
-}: TFloatingDock) => {
-  return (
-    <>
-      <FloatingDockDesktop items={items} className={desktopClassName} />
-      <FloatingDockMobile items={items} className={mobileClassName} />
-    </>
-  );
-};
+const Dock = React.memo(
+  ({ items, desktopClassName, mobileClassName }: TFloatingDock) => {
+    return (
+      <div>
+        <div className="block md:hidden">
+          <FloatingDockMobile items={items} className={mobileClassName} />
+        </div>
+        <div className="hidden md:block">
+          <FloatingDockDesktop items={items} className={desktopClassName} />
+        </div>
+      </div>
+    );
+  },
+);
+
+export const FloatingDock = React.cache((props: TFloatingDock) => {
+  return <Dock {...props} />;
+});
 
 const FloatingDockMobile = ({
   items,
@@ -53,7 +58,7 @@ const FloatingDockMobile = ({
 }) => {
   const [open, setOpen] = useState(false);
   return (
-    <div className={cn("relative block md:hidden", className)}>
+    <div className={cn("relative", className)}>
       <AnimatePresence>
         {open && (
           <motion.div
@@ -102,7 +107,7 @@ const FloatingDockMobile = ({
       </AnimatePresence>
       <button
         onClick={() => setOpen(!open)}
-        className="h-10 w-10 rounded-full border bg-neutral-50 backdrop-blur-sm dark:bg-neutral-800 flex items-center justify-center"
+        className="h-10 w-10 rounded-full shadow-md border bg-neutral-50 backdrop-blur-sm dark:bg-neutral-800 flex items-center justify-center"
       >
         <MenuIcon className="h-5 w-5 text-neutral-500 dark:text-neutral-400" />
       </button>
@@ -128,7 +133,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto hidden md:flex h-16 gap-4 items-end border rounded-2xl bg-neutral-50/60 backdrop-blur-sm dark:bg-neutral-900 px-4 pb-3",
+        "mx-auto flex h-16 gap-4 items-end border rounded-2xl bg-neutral-50/60 backdrop-blur-sm dark:bg-neutral-900 px-4 pb-3",
         className,
       )}
     >
@@ -241,9 +246,3 @@ function IconContainer({
     </div>
   );
 }
-
-export const FloatingDock = React.cache((props: TFloatingDock) => {
-  const isMobile = useMediaQuery("(max-width: 425px)");
-  if (isMobile) return <></>;
-  return <FloatingDockComp {...props} />;
-});

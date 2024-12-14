@@ -25,7 +25,7 @@ export default function ShellPage({
         <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
           {withBack && (
-            <div className="absolute -top-0.5 -.5 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
+            <div className="fixed -top-3 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
               <BackBtn />
             </div>
           )}
@@ -45,8 +45,12 @@ export default function ShellPage({
 function BackBtn() {
   const router = useRouter();
   return (
-    <button onClick={() => router.back()} aria-label="back button">
-      <ArrowLeft className="w-5 h-5 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
+    <button
+      onClick={() => router.back()}
+      aria-label="back button"
+      className="p-2 bg-white/30 dark:bg-black/30 backdrop-blur-sm rounded-full border"
+    >
+      <ArrowLeft className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
     </button>
   );
 }

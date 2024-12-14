@@ -75,7 +75,7 @@ async function Project({ slug, imageSource, title, summary }: TProjectPosts) {
         height={1000}
         placeholder="blur"
         blurDataURL={await getBase64Image(imageSource)}
-        className="h-[240px] md:h-[calc(var(--shell-page-width)_/_2.3)] object-cover rounded-xl border-b dark:border-neutral-800"
+        className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2.3)] object-cover rounded-xl border-b dark:border-neutral-800"
       />
       <div className="p-5 md:p-0 max-w-[380px] md:my-6 md:mx-auto group prose dark:prose-invert">
         <h2 className="text-sm md:text-base font-bold w-full hover:underline">

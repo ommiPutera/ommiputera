@@ -15,8 +15,8 @@ export default {
       lg: ["20px", "28px"],
       xl: ["24px", "32px"],
       "2xl": ["28px", "34.5px"],
-      "3xl": ["30px", "37.5px"],
-      "4xl": ["40px", "40px"],
+      "3xl": ["33px", "36.5px"],
+      "4xl": ["38px", "40px"],
       "5xl": ["54px", "1.1em"],
     },
     extend: {
