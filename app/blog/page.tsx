@@ -45,7 +45,7 @@ export default async function BlogPage() {
               width={200}
               height={200}
               alt=""
-              className="object-cover h-[85px] w-[85px] overflow-hidden rounded-full"
+              className="object-cover h-[75px] w-[75px] md:h-[85px] md:w-[85px] overflow-hidden rounded-full"
             />
           </div>
         </div>
@@ -95,7 +95,6 @@ async function BentoBlog({
   slug,
   publishedAt,
   image,
-  summary,
   title,
   index,
 }: {
@@ -109,11 +108,11 @@ async function BentoBlog({
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "rounded-xl bg-white dark:bg-background w-full cursor-pointer block h-full overflow-hidden border border-neutral-200 dark:border-neutral-800",
+        "rounded-xl w-full group cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
         i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
       )}
     >
-      <div className="relative rounded-xl">
+      <div className="relative group-hover:ring-2 group-hover:ring-blue-500 rounded-xl">
         <Image
           alt=""
           src={image}
@@ -123,14 +122,12 @@ async function BentoBlog({
           blurDataURL={await getBase64RemoteImage(image)}
           className="object-cover rounded-xl h-[320px] w-full"
         />
-        <div className="absolute bottom-0 from-neutral-950 rounded-xl to-transparent bg-gradient-to-t w-full h-1/2"></div>
       </div>
-      <div className="p-9 md:p-4 prose dark:prose-invert">
-        <h2 className="text-base font-extrabold leading-6 w-full">{title}</h2>
-        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
+      <div className="px-8 py-4 md:p-4">
+        <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">
           <span>{formatDate(publishedAt)}</span>
-          <span>{summary}</span>
         </p>
+        <h2 className="my-1 text-base md:text-lg font-bold w-full">{title}</h2>
       </div>
     </Link>
   );

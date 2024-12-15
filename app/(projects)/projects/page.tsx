@@ -46,12 +46,12 @@ export default async function ProjectsPage() {
             const slug = post.slug;
             const imageSource = post.imageSource;
             const title = post.title;
-            const summary = post.summary;
+            const description = post.description;
             const props = {
               imageSource,
               slug,
               title,
-              summary,
+              description,
             };
             return <Project key={post.slug} {...props} />;
           })}
@@ -62,7 +62,12 @@ export default async function ProjectsPage() {
   );
 }
 
-async function Project({ slug, imageSource, title, summary }: TProjectPosts) {
+async function Project({
+  slug,
+  imageSource,
+  title,
+  description,
+}: TProjectPosts) {
   return (
     <Link
       href={`/${slug}`}
@@ -82,7 +87,7 @@ async function Project({ slug, imageSource, title, summary }: TProjectPosts) {
           {title}
         </h2>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
-          {summary}
+          {description}
         </p>
         <p className="text-xs font-semibold inline-flex gap-2 not-prose items-center group-hover:text-blue-600 dark:text-blue-400">
           <span>Read more</span>

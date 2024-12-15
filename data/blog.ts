@@ -10,7 +10,7 @@ import { unified } from "unified";
 export type Metadata = {
   title: string;
   publishedAt: string;
-  summary: string;
+  description: string;
   image: string;
   bannerCredit: string;
 };

@@ -58,7 +58,7 @@ export function ContentParagraph({
   className?: string;
 }) {
   return (
-    <p className={cn("text-sm prose dark:prose-invert", className)}>
+    <p className={cn("text-sm prose dark:prose-invert font-medium", className)}>
       {children}
     </p>
   );
@@ -74,7 +74,7 @@ export function ContentLink({
 }: LinkProps & AnchorProps & { text: string }) {
   return (
     <Link
-      className="text-sm font-medium text-blue-600 dark:text-blue-400 underline"
+      className="text-sm font-semibold text-blue-600 dark:text-blue-400 underline"
       {...props}
     >
       {text}

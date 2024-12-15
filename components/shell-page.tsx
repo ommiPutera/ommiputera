@@ -72,7 +72,7 @@ function Header({ withHome }: THeaderProps) {
       </header>
       <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">
-          <li className="underline text-muted-foreground hover:text-blue-700">
+          <li className="text-muted-foreground hover:text-blue-700">
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
@@ -83,7 +83,7 @@ function Header({ withHome }: THeaderProps) {
           </li>
           <li
             className={cn(
-              "underline text-muted-foreground hover:text-blue-700",
+              "text-muted-foreground hover:text-blue-700",
               pathname.startsWith("/blog") &&
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
@@ -97,7 +97,7 @@ function Header({ withHome }: THeaderProps) {
           </li>
           <li
             className={cn(
-              "underline text-muted-foreground hover:text-blue-700",
+              "text-muted-foreground hover:text-blue-700",
               pathname.startsWith("/project") &&
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
@@ -110,7 +110,7 @@ function Header({ withHome }: THeaderProps) {
             </Link>
           </li>
           {withHome && (
-            <li className="underline text-muted-foreground hover:text-blue-700">
+            <li className="text-muted-foreground hover:text-blue-700">
               <Link href="/" className="flex items-center py-1 px-1.5 md:px-2">
                 Home
               </Link>
@@ -144,10 +144,10 @@ export function Footer() {
       role="contentinfo"
       className="px-4 pt-24 pb-6 text-center md:px-6 md:pt-32 md:pb-10"
     >
-      <p className="text-xs max-w-96 mx-auto">
+      <p className="text-xs max-w-96 mx-auto font-medium text-neutral-500">
         All rights reserved © Ommi Putera {new Date().getFullYear()}.
       </p>
-      <p className="text-xs max-w-72 mx-auto mt-1">
+      <p className="text-xs max-w-72 mx-auto mt-1 font-medium text-neutral-500">
         Build with Kapal Api and 76 Mangga.
       </p>
     </footer>

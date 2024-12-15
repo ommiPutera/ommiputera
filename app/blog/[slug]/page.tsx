@@ -55,7 +55,7 @@ export default async function Blog({
               {post.metadata.title}
             </h1>
             <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal">
-              {post.metadata.summary}
+              {post.metadata.description}
             </p>
           </div>
           <div className="w-full">
@@ -87,7 +87,7 @@ export default async function Blog({
             headline: post.metadata.title,
             datePublished: post.metadata.publishedAt,
             dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
+            description: post.metadata.description,
           }),
         }}
       />
