@@ -22,7 +22,7 @@ export default function ShellPage({
   return (
     <div className="mx-auto w-full max-w-[var(--shell-page-width)]">
       <section className="flex flex-col relative">
-        <div className="z-10 flex flex-col space-y-1 min-h-[var(--header-height-mobile)] md:min-h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
+        <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 fixed top-0 pt-12 md:pt-20">
           <Header withHome={withHome} />
           {withBack && (
             <div className="fixed -top-3 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
@@ -31,6 +31,7 @@ export default function ShellPage({
           )}
           <RoundedBorder />
         </div>
+        <div className="h-[var(--header-height-mobile)] md:h-[var(--header-height)]"></div>
         <div className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 relative">
             <main

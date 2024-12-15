@@ -108,11 +108,11 @@ async function BentoBlog({
     <Link
       href={`/blog/${slug}`}
       className={cn(
-        "rounded-xl w-full group cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
+        "rounded-xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
         i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
       )}
     >
-      <div className="relative group-hover:ring-2 group-hover:ring-blue-500 rounded-xl">
+      <div className="relative rounded-xl">
         <Image
           alt=""
           src={image}

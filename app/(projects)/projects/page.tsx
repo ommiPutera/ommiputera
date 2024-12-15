@@ -41,7 +41,7 @@ export default async function ProjectsPage() {
             />
           </div>
         </div>
-        <div className="flex flex-col gap-3 md:gap-2 mt-8 md:mt-12">
+        <div className="flex flex-col gap-3 md:gap-4 mt-8 md:mt-12">
           {projects.map((post) => {
             const slug = post.slug;
             const imageSource = post.imageSource;

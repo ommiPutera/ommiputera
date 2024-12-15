@@ -29,10 +29,10 @@ export default function Education() {
             <div className="w-full max-w-10">
               <Image
                 src="/logos/purwadhika_logo.webp"
-                width={40}
-                height={40}
+                width={80}
+                height={80}
                 alt=""
-                className="overflow-hidden"
+                className="overflow-hidden h-10 w-10"
               />
             </div>
             <div className="w-full">
@@ -51,10 +51,10 @@ export default function Education() {
             <div className="w-full max-w-10">
               <Image
                 src="/logos/unib_logo.webp"
-                width={40}
-                height={40}
+                width={80}
+                height={80}
                 alt=""
-                className="overflow-hidden"
+                className="overflow-hidden h-10 w-10"
               />
             </div>
             <div className="w-full">

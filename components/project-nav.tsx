@@ -19,13 +19,12 @@ export function ProjectNavigation() {
 
   const links = [
     {
-      title: "Back",
+      title: "Toggle dark/light mode",
       icon: (
-        <ArrowLeftIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <SunMoonIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      onClick: () => router.back(),
+      onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
     },
-
     {
       title: "Blog",
       icon: (
@@ -41,11 +40,11 @@ export function ProjectNavigation() {
       href: "/",
     },
     {
-      title: "Toggle dark/light mode",
+      title: "Back",
       icon: (
-        <SunMoonIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
+        <ArrowLeftIcon className="h-full w-full text-neutral-500 dark:text-neutral-300" />
       ),
-      onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
+      onClick: () => router.back(),
     },
   ];
 
