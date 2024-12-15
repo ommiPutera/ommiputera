@@ -106,6 +106,7 @@ function BlogItem({
     >
       <Link
         href={`/blog/${slug}`}
+        prefetch
         className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800 bg-white dark:bg-background"
       >
         <div className="relative rounded-xl overflow-hidden">

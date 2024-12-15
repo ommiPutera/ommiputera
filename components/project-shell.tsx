@@ -37,7 +37,7 @@ function Header() {
 }
 
 export function Container({ children }: { children: React.ReactNode }) {
-  return <div className="px-4 md:px-7 mx-auto max-w-screen-sm">{children}</div>;
+  return <div className="px-4 md:px-7 mx-auto max-w-screen-md">{children}</div>;
 }
 
 export function FullContainer({ children }: { children: React.ReactNode }) {

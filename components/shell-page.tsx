@@ -1,15 +1,4 @@
-"use client";
-
-import { ArrowLeft } from "lucide-react";
-
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-
-import { cn } from "~/lib/utils";
-
-type THeaderProps = {
-  withHome?: boolean;
-};
+import { Header, THeaderProps, BackBtn } from "./shell-page-header";
 
 export default function ShellPage({
   withHome = false,
@@ -31,7 +20,7 @@ export default function ShellPage({
           )}
           <RoundedBorder />
         </div>
-        <div className="h-[var(--header-height-mobile)] md:h-[var(--header-height)]"></div>
+        <div className="h-[var(--header-height-mobile)] md:h-[var(--header-height)] bg-white dark:bg-black"></div>
         <div className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 relative">
             <main
@@ -45,81 +34,6 @@ export default function ShellPage({
         </div>
       </section>
     </div>
-  );
-}
-
-function BackBtn() {
-  const router = useRouter();
-  return (
-    <button
-      onClick={() => router.back()}
-      aria-label="back button"
-      className="p-2 bg-white/30 dark:bg-black/30 backdrop-blur-sm rounded-full border"
-    >
-      <ArrowLeft className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
-    </button>
-  );
-}
-
-function Header({ withHome }: THeaderProps) {
-  const pathname = usePathname();
-  return (
-    <nav
-      role="navigation"
-      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3.5 md:pt-6"
-    >
-      <header role="banner">
-        <h1 className="text-sm font-bold">ommiputera.com</h1>
-      </header>
-      <nav role="navigation">
-        <ul className="flex text-sm justify-center items-center">
-          <li className="text-muted-foreground hover:text-blue-700">
-            <Link
-              href="https://read.cv/ommiputera"
-              target="_blank"
-              className="flex items-center py-1 px-1.5 md:px-2"
-            >
-              Resume
-            </Link>
-          </li>
-          <li
-            className={cn(
-              "text-muted-foreground hover:text-blue-700",
-              pathname.startsWith("/blog") &&
-                "text-blue-600 dark:text-blue-400 font-semibold",
-            )}
-          >
-            <Link
-              href="/blog"
-              className="flex items-center py-1 px-1.5 md:px-2"
-            >
-              Blog
-            </Link>
-          </li>
-          <li
-            className={cn(
-              "text-muted-foreground hover:text-blue-700",
-              pathname.startsWith("/project") &&
-                "text-blue-600 dark:text-blue-400 font-semibold",
-            )}
-          >
-            <Link
-              href="/projects"
-              className="flex items-center py-1 px-1.5 md:px-2"
-            >
-              Projects
-            </Link>
-          </li>
-          {withHome && (
-            <li className="text-muted-foreground hover:text-blue-700">
-              <Link href="/" className="flex items-center py-1 px-1.5 md:px-2">
-                Home
-              </Link>
-            </li>
-          )}
-        </ul>
-      </nav>
-    </nav>
   );
 }
 

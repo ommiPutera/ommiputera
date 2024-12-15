@@ -110,7 +110,7 @@ async function Project({
       className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
-      <Link href={"/" + slug}>
+      <Link href={"/" + slug} prefetch>
         <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
           <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
         </div>
@@ -135,6 +135,7 @@ function ReadMore({ href }: { href: LinkProps["href"] }) {
   return (
     <Link
       href={href}
+      prefetch
       className="text-sm font-semibold text-blue-600 dark:text-blue-400 underline inline-flex items-center gap-1"
     >
       <ArrowUpRight className="w-4 h-4 md:w-5 md:h-5" />

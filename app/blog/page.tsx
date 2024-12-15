@@ -107,6 +107,7 @@ async function BentoBlog({
   return (
     <Link
       href={`/blog/${slug}`}
+      prefetch
       className={cn(
         "rounded-xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
         i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
