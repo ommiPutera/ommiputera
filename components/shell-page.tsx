@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Header, THeaderProps, BackBtn } from "./shell-page-header";
 
 export default function ShellPage({
@@ -55,16 +56,61 @@ function RoundedBorder() {
 
 export function Footer() {
   return (
-    <footer
-      role="contentinfo"
-      className="px-4 pt-24 pb-6 text-center md:px-6 md:pt-32 md:pb-10"
-    >
-      <p className="text-xs max-w-96 mx-auto font-medium text-neutral-500">
-        All rights reserved © Ommi Putera {new Date().getFullYear()}.
-      </p>
-      <p className="text-xs max-w-72 mx-auto mt-1 font-medium text-neutral-500">
-        Build with Kapal Api and 76 Mangga.
-      </p>
-    </footer>
+    <div className="pt-24 md:pt-32">
+      <nav role="navigation" className="pb-12 md:pb-24">
+        <div className="text-center pb-6">
+          <h1 className="text-base font-bold hover:text-neutral-400">
+            <Link href="/">ommiputera.com</Link>
+          </h1>
+          <p className="text-sm text-muted-foreground">Software Engineer</p>
+        </div>
+        <ul className="flex text-sm justify-center items-center">
+          <li className="text-muted-foreground hover:text-neutral-600">
+            <Link
+              href="https://read.cv/ommiputera"
+              target="_blank"
+              className="flex items-center py-1 px-1.5 md:px-2"
+            >
+              Resume
+            </Link>
+          </li>
+          <li className="text-muted-foreground hover:text-neutral-600">
+            <Link
+              href="/blog"
+              className="flex items-center py-1 px-1.5 md:px-2"
+            >
+              Blog
+            </Link>
+          </li>
+          <li className="text-muted-foreground hover:text-neutral-600">
+            <Link
+              href="/about"
+              className="flex items-center py-1 px-1.5 md:px-2"
+            >
+              About
+            </Link>
+          </li>
+          <li className="text-muted-foreground hover:text-neutral-600">
+            <Link
+              href="/projects"
+              className="flex items-center py-1 px-1.5 md:px-2"
+            >
+              Projects
+            </Link>
+          </li>
+        </ul>
+      </nav>
+      <footer
+        role="contentinfo"
+        className="px-4 pb-6 text-center md:px-6 md:pb-10"
+      >
+        <p className="text-xs max-w-96 mx-auto font-medium text-muted-foreground">
+          All rights reserved © Ommi Putera {new Date().getFullYear()}.
+        </p>
+        <p className="text-xs max-w-72 mx-auto font-medium text-muted-foreground">
+          Build with Kapal Api and 76 Mangga.
+        </p>
+      </footer>
+    </div>
   );
 }
