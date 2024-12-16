@@ -82,7 +82,7 @@ const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-2",
+        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-y-3 md:gap-x-2",
         className,
       )}
     >
@@ -121,10 +121,10 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-xl h-[320px] w-full"
+          className="object-cover rounded-xl h-[500px] md:h-[320px] w-full"
         />
       </div>
-      <div className="px-8 py-4 md:p-4">
+      <div className="px-8 py-6 md:p-6">
         <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
           <span>{formatDate(publishedAt)}</span>
         </p>
