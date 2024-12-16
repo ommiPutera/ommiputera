@@ -20,7 +20,7 @@ export default function ShellPage({
           )}
           <RoundedBorder />
         </div>
-        <div className="h-[var(--header-height-mobile)] md:h-[var(--header-height)] bg-white dark:bg-black"></div>
+        <div className="h-[var(--header-height-mobile)] md:h-[var(--header-height)] bg-white dark:bg-black border-x border-neutral-200 dark:border-neutral-800"></div>
         <div className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 relative">
             <main

@@ -1,4 +1,5 @@
 import Link, { type LinkProps } from "next/link";
+
 import { Suspense } from "react";
 
 import { cn } from "~/lib/utils";

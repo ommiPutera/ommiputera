@@ -72,25 +72,13 @@ export default async function Blog({
             </div>
           </div>
         </div>
-        <article
-          className="prose dark:prose-invert mt-6 mx-5 md:mx-auto max-w-[422px] mb-6"
-          dangerouslySetInnerHTML={{ __html: post.source }}
-        ></article>
+        {/* <div className="bg-red-200">
+          <article
+            className="prose dark:prose-invert mt-6 mx-5 md:mx-auto max-w-[422px] mb-6"
+            dangerouslySetInnerHTML={{ __html: post.source }}
+          ></article>
+        </div> */}
       </Section>
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "BlogPosting",
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.description,
-          }),
-        }}
-      />
     </ShellPage>
   );
 }

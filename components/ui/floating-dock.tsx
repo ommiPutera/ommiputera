@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 import {
   AnimatePresence,
   MotionValue,
@@ -10,8 +12,6 @@ import {
 } from "framer-motion";
 import { MenuIcon } from "lucide-react";
 import React, { useRef, useState } from "react";
-
-import Link from "next/link";
 
 import { cn } from "~/lib/utils";
 

@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
-
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+
+import { ArrowLeft } from "lucide-react";
 
 import { cn } from "~/lib/utils";
 
@@ -35,7 +35,7 @@ export function Header({ withHome }: THeaderProps) {
       </header>
       <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">
-          <li className="text-muted-foreground hover:text-blue-700">
+          <li className="text-muted-foreground">
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
@@ -46,7 +46,7 @@ export function Header({ withHome }: THeaderProps) {
           </li>
           <li
             className={cn(
-              "text-muted-foreground hover:text-blue-700",
+              "text-muted-foreground",
               pathname.startsWith("/blog") &&
               "text-blue-600 dark:text-blue-400 font-semibold",
             )}
@@ -60,7 +60,7 @@ export function Header({ withHome }: THeaderProps) {
           </li>
           <li
             className={cn(
-              "text-muted-foreground hover:text-blue-700",
+              "text-muted-foreground",
               pathname.startsWith("/project") &&
               "text-blue-600 dark:text-blue-400 font-semibold",
             )}
@@ -73,7 +73,7 @@ export function Header({ withHome }: THeaderProps) {
             </Link>
           </li>
           {withHome && (
-            <li className="text-muted-foreground hover:text-blue-700">
+            <li className="text-muted-foreground">
               <Link href="/" className="flex items-center py-1 px-1.5 md:px-2">
                 Home
               </Link>
