@@ -125,7 +125,7 @@ async function BentoBlog({
         />
       </div>
       <div className="px-8 py-4 md:p-4">
-        <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">
+        <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
           <span>{formatDate(publishedAt)}</span>
         </p>
         <h2 className="my-1 text-base md:text-lg font-bold w-full">{title}</h2>

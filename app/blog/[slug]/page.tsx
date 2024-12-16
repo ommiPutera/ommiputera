@@ -32,7 +32,7 @@ export default async function Blog({
   return (
     <ShellPage withHome withBack>
       <Section>
-        <div className="flex gap-2 border-b border-neutral-200 w-full dark:border-neutral-800 pb-4 pt-2 md:pt-0 md:pb-7 px-5 md:px-12">
+        <div className="flex gap-2 border-b border-neutral-200 w-full dark:border-neutral-800 pb-4 pt-2 md:pt-0 md:pb-7 md:px-12">
           <div className="w-fit max-w-10">
             <Image
               src="/images/profile.jpeg"
@@ -50,8 +50,8 @@ export default async function Blog({
           </div>
         </div>
         <div className="mt-4 md:mt-7 flex flex-col gap-4">
-          <div className="flex flex-col gap-2 mx-5 md:mx-12">
-            <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
+          <div className="flex flex-col gap-2 md:px-12">
+            <h1 className="text-2xl font-extrabold tracking-tight">
               {post.metadata.title}
             </h1>
             <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal">
@@ -72,12 +72,12 @@ export default async function Blog({
             </div>
           </div>
         </div>
-        {/* <div className="bg-red-200">
+        <div className="block">
           <article
-            className="prose dark:prose-invert mt-6 mx-5 md:mx-auto max-w-[422px] mb-6"
+            className="prose dark:prose-invert mt-6 md:mx-auto max-w-[422px] mb-6"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
-        </div> */}
+        </div>
       </Section>
     </ShellPage>
   );

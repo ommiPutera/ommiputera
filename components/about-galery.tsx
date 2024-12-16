@@ -71,6 +71,7 @@ function GaleryCarousel({
               src={`/images/${image.path}`}
               width={1000}
               height={1000}
+              priority
               placeholder="blur"
               blurDataURL={blurredImages[index]}
               className="border border-neutral-200 dark:border-neutral-700 object-cover overflow-hidden rounded-xl"

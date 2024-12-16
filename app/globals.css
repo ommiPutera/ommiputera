@@ -74,7 +74,7 @@
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior-y: none;
     overscroll-behavior-x: none;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-font-smoothing: antialiased;
     @apply border-border;
   }
@@ -145,7 +145,6 @@ code > [data-line]::before {
   counter-increment: line;
   content: counter(line);
 
-  /* Other styling */
   display: inline-block;
   width: 1rem;
   margin-right: 2rem;

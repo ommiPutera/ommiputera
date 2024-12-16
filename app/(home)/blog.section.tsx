@@ -115,13 +115,14 @@ function BlogItem({
             src={image}
             width={1000}
             height={1000}
+            priority
             placeholder="blur"
             blurDataURL={blurredImages[index]}
             className="object-cover overflow-hidden h-[380px] w-full"
           />
           <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2 dark:h-full"></div>
           <div className="absolute z-10 bottom-6 py-3 px-6 text-center w-full">
-            <p className="text-sm font-medium text-neutral-400 dark:text-neutral-500">
+            <p className="text-sm font-medium text-neutral-300 dark:text-neutral-400">
               <span>{formatDate(publishedAt)}</span>
             </p>
             <h2 className="text-lg font-extrabold leading-7 text-neutral-50 w-full">

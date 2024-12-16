@@ -48,7 +48,7 @@ export function Header({ withHome }: THeaderProps) {
             className={cn(
               "text-muted-foreground",
               pathname.startsWith("/blog") &&
-              "text-blue-600 dark:text-blue-400 font-semibold",
+                "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link
@@ -62,7 +62,7 @@ export function Header({ withHome }: THeaderProps) {
             className={cn(
               "text-muted-foreground",
               pathname.startsWith("/project") &&
-              "text-blue-600 dark:text-blue-400 font-semibold",
+                "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link
