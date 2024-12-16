@@ -1,12 +1,11 @@
 import Image from "next/image";
-import { ContentParagraph } from "~/components/content";
 
+import { ContentParagraph } from "~/components/content";
 import {
   Container,
   FullContainer,
   ProjectShell,
 } from "~/components/project-shell";
-
 import { Website } from "~/components/website";
 
 import { getBase64Image } from "~/utils/getImageBlur";
@@ -15,11 +14,11 @@ export default async function ProjectDipayDisbursement() {
   return (
     <ProjectShell>
       <Container>
-        <div className="text-center mt-12">
+        <div className="text-center mt-12 flex flex-col items-center">
           <h2 className="text-2xl leading-7 sm:text-3xl sm:leading-normal md:text-4xl lg:text-5xl font-extrabold w-full mb-4">
             Revamped a landing page using Next.js
           </h2>
-          <ContentParagraph className="md:text-base">
+          <ContentParagraph className="text-base md:text-lg">
             Implementing SEO best practices to enhance visibility while
             delivering a modern, high-performance design that reduced load times
             and boosted user engagement.
@@ -42,16 +41,7 @@ export default async function ProjectDipayDisbursement() {
           </div>
         </div>
       </FullContainer>
-      <Container>
-        <div>
-          <ContentParagraph>
-            I revamped the Dipay landing page using Next.js, implementing SEO
-            best practices to enhance visibility while delivering a modern,
-            high-performance design that reduced load times and boosted user
-            engagement. 🚀
-          </ContentParagraph>
-        </div>
-      </Container>
+      <Container>test</Container>
     </ProjectShell>
   );
 }

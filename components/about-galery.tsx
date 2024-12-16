@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 
 import { getBase64Image } from "~/utils/getImageBlur";
 
@@ -8,8 +8,14 @@ import {
   CarouselItem,
 } from "~/components/ui/carousel";
 
+import beach from "~/public/images/beach.jpg";
+import meCard from "~/public/images/me-card.webp";
+import myLaptop from "~/public/images/my-laptop.webp";
+import ommiOriginal from "~/public/images/ommi-original.webp";
+import teams from "~/public/images/teams.jpg";
+
 type TGalery = {
-  path: string;
+  path: StaticImageData;
   caption: string;
   alt: string;
 };
@@ -17,27 +23,27 @@ type TGalery = {
 export default async function AboutGalery() {
   const images = [
     {
-      path: "ommi-original.webp",
+      path: ommiOriginal,
       caption: "",
       alt: "Enjoying Jakarta at night",
     },
     {
-      path: "my-laptop.webp",
+      path: myLaptop,
       caption: "My super cozy workspace",
       alt: "My setup",
     },
     {
-      path: "teams.jpg",
+      path: teams,
       caption: "",
       alt: "Picture of me with the engineering and product team",
     },
     {
-      path: "me-card.webp",
+      path: meCard,
       caption: "",
-      alt: "",
+      alt: "me",
     },
     {
-      path: "beach.jpg",
+      path: beach,
       caption:
         "I value life because we are not the only ones who wish to live in this world",
       alt: "A beautiful vibe back home",
@@ -64,11 +70,11 @@ function GaleryCarousel({
         {images.map((image, index) => (
           <CarouselItem
             className="pl-1 overflow-hidden rounded-xl max-h-[500px] max-w-[450px]"
-            key={image.path}
+            key={image.alt}
           >
             <Image
               alt={image.alt}
-              src={`/images/${image.path}`}
+              src={image.path}
               width={1000}
               height={1000}
               priority
