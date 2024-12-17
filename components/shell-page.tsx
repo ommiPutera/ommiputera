@@ -57,9 +57,9 @@ function RoundedBorder() {
 export function Footer() {
   return (
     <div className="pt-24 md:pt-32">
-      <nav role="navigation" className="pb-12 md:pb-24">
+      <nav role="navigation" className="pb-16 md:pb-32">
         <div className="text-center pb-6">
-          <h1 className="text-base font-bold hover:text-neutral-400">
+          <h1 className="text-sm font-bold hover:text-neutral-400">
             <Link href="/">ommiputera.com</Link>
           </h1>
           <p className="text-sm text-muted-foreground">Software Engineer</p>
@@ -100,10 +100,7 @@ export function Footer() {
           </li>
         </ul>
       </nav>
-      <footer
-        role="contentinfo"
-        className="px-4 pb-6 text-center md:px-6 md:pb-10"
-      >
+      <footer role="contentinfo" className="px-4 pb-14 text-center md:px-6">
         <p className="text-xs max-w-96 mx-auto font-medium text-muted-foreground">
           All rights reserved © Ommi Putera {new Date().getFullYear()}.
         </p>

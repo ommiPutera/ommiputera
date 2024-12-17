@@ -121,7 +121,7 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-xl h-[500px] md:h-[320px] w-full"
+          className="object-cover rounded-xl h-[470px] md:h-[420px] w-full"
         />
       </div>
       <div className="px-8 py-6 md:p-6">
