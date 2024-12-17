@@ -29,11 +29,11 @@ export function ModeEmoji() {
 export function ModeClickable({ children }: { children: React.ReactNode }) {
   const { theme, setTheme } = useTheme();
   return (
-    <div
+    <span
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
       className="cursor-pointer"
     >
       {children}
-    </div>
+    </span>
   );
 }

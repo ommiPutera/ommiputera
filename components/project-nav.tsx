@@ -49,7 +49,7 @@ export function ProjectNavigation() {
   ];
 
   return (
-    <div className="fixed bottom-10 md:bottom-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2">
+    <div className="fixed bottom-10 right-0 md:bottom-12 left-1/2 -translate-x-1/2 z-50 flex items-center gap-2">
       <FloatingDock items={links} />
     </div>
   );

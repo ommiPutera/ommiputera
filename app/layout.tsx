@@ -6,6 +6,8 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "~/components/theme-provider";
 import { BackgroundBeams } from "~/components/ui/background-beams";
 
+import NextTopLoader from 'nextjs-toploader';
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -21,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
+        <NextTopLoader color="#1878f2" height={2} showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
