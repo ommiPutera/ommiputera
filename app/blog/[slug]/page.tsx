@@ -34,10 +34,10 @@ export default async function Blog({
       <Section>
         <div className="mt-4 flex flex-col gap-4">
           <div className="flex flex-col gap-2 md:px-12 mx-6">
-            <h1 className="text-xl md:text-2xl font-extrabold leading-7">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight">
               {post.metadata.title}
             </h1>
-            <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal">
+            <p className="text-sm md:text-base font-normal text-neutral-600 dark:text-neutral-300">
               {post.metadata.description}
             </p>
           </div>
