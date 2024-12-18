@@ -32,31 +32,32 @@ export default async function Blog({
   return (
     <ShellPage withHome withBack>
       <Section>
-        <div className="flex px-8 gap-2 border-b border-neutral-200 w-full dark:border-neutral-800 pb-4 pt-2 md:pt-0 md:pb-4 md:px-20">
-          <div className="w-fit max-w-10">
-            <Image
-              src="/images/profile.jpeg"
-              width={40}
-              height={40}
-              alt=""
-              className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
-            />
-          </div>
-          <div className="w-fit">
-            <ContentTitle
-              title="Ommi Putera"
-              description={formatDate(post.metadata.publishedAt)}
-            />
-          </div>
-        </div>
         <div className="mt-4 flex flex-col gap-4">
-          <div className="flex flex-col gap-2 md:px-12 mx-8">
-            <h1 className="text-2xl md:text-2xl font-bold">
+          <div className="flex flex-col gap-2 md:px-12 mx-6">
+            <h1 className="text-xl md:text-2xl font-extrabold leading-7">
               {post.metadata.title}
             </h1>
             <p className="text-sm text-neutral-600 dark:text-neutral-300 font-normal">
               {post.metadata.description}
             </p>
+          </div>
+          <div className="flex px-6 gap-2 pt-2 md:pt-0 md:pb-4 md:px-20">
+            <div className="w-fit max-w-10">
+              <Image
+                src="/images/profile.jpeg"
+                width={40}
+                height={40}
+                alt=""
+                priority
+                className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+              />
+            </div>
+            <div className="w-fit">
+              <ContentTitle
+                title="Ommi Putera"
+                description={formatDate(post.metadata.publishedAt)}
+              />
+            </div>
           </div>
           <div className="w-full my-4">
             <div className="rounded-xl overflow-hidden">
@@ -65,6 +66,7 @@ export default async function Blog({
                 width={800}
                 height={40}
                 alt=""
+                priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
                 className="h-[440px] md:h-[340px] object-cover"
@@ -74,7 +76,7 @@ export default async function Blog({
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert mt-6 mx-8 md:mx-auto max-w-[422px] mb-6 font-medium"
+            className="prose dark:prose-invert mt-6 mx-6 md:mx-auto max-w-[422px] mb-6 font-medium"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>

@@ -6,7 +6,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { ThemeProvider } from "~/components/theme-provider";
 import { BackgroundBeams } from "~/components/ui/background-beams";
 
-import NextTopLoader from 'nextjs-toploader';
+import NextTopLoader from "nextjs-toploader";
 
 import "./globals.css";
 

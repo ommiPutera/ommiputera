@@ -22,7 +22,7 @@ export default function ShellPage({
           )}
           <RoundedBorder />
         </div>
-        <div className="h-[var(--header-height-mobile)] md:h-[var(--header-height)] bg-white dark:bg-black border-x border-neutral-200 dark:border-neutral-800"></div>
+        <div className="sticky top-0 h-[var(--header-height-mobile)] md:h-[var(--header-height)] bg-white dark:bg-black border-x border-neutral-200 dark:border-neutral-800"></div>
         <div className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="min-h-screen bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 relative">
             <main
@@ -76,29 +76,21 @@ export function Footer() {
             </Link>
           </li>
           <li className="text-muted-foreground hover:text-neutral-600">
-            <Link
-              href="/blog"
-              className="flex items-center py-3 px-2 md:px-3"
-            >
+            <Link href="/blog" className="flex items-center py-3 px-2 md:px-3">
               Blog
             </Link>
           </li>
           <li className="text-muted-foreground hover:text-neutral-600">
             <ModeClickable>
-              <span
-                className="flex items-center py-3 px-2 md:px-3"
-              >
-                Ligth/Dark
+              <span className="flex items-center py-3 px-2 md:px-3">
+                Dark/Ligth
               </span>
             </ModeClickable>
           </li>
         </ul>
         <ul className="flex text-sm justify-center items-center">
           <li className="text-muted-foreground hover:text-neutral-600">
-            <Link
-              href="/about"
-              className="flex items-center py-3 px-2 md:px-3"
-            >
+            <Link href="/about" className="flex items-center py-3 px-2 md:px-3">
               About
             </Link>
           </li>

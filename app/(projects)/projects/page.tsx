@@ -36,6 +36,7 @@ export default async function ProjectsPage() {
               src="/images/profile.jpeg"
               width={200}
               height={200}
+              priority
               alt=""
               className="object-cover h-[85px] w-[85px] overflow-hidden rounded-full"
             />
@@ -78,6 +79,7 @@ async function Project({
         src={imageSource}
         width={1000}
         height={1000}
+        priority
         placeholder="blur"
         blurDataURL={await getBase64Image(imageSource)}
         className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2)] object-cover rounded-xl border-b dark:border-neutral-800"

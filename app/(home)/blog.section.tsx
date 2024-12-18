@@ -120,12 +120,12 @@ function BlogItem({
             blurDataURL={blurredImages[index]}
             className="object-cover overflow-hidden h-[380px] w-full"
           />
-          <div className="absolute bottom-0 from-neutral-950 to-transparent bg-gradient-to-t w-full h-1/2 dark:h-full"></div>
+          <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-3/4"></div>
           <div className="absolute z-10 bottom-6 py-3 px-6 text-center w-full">
             <p className="text-xs font-medium text-neutral-300 dark:text-neutral-400">
               <span>{formatDate(publishedAt)}</span>
             </p>
-            <h2 className="text-base font-extrabold text-neutral-50 w-full">
+            <h2 className="text-base leading-5 font-extrabold text-neutral-50 w-full">
               {title}
             </h2>
           </div>
