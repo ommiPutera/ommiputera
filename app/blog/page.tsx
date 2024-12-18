@@ -13,7 +13,7 @@ import { cn, formatDate } from "~/lib/utils";
 import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 export const metadata = {
-  title: "The Ommi Putera Blog"
+  title: "The Ommi Putera Blog",
 };
 
 export default async function BlogPage() {

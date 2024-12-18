@@ -9,7 +9,7 @@ import { getBlogPosts, getPost } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
 
-// import { getBase64RemoteImage } from "~/utils/getImageBlur";
+import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -45,11 +45,11 @@ export default async function Blog({
             <div className="w-fit max-w-10">
               <Image
                 src="/images/profile.jpeg"
-                width={40}
-                height={40}
+                width={1000}
+                height={1000}
                 alt=""
                 priority
-                className="object-cover overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
+                className="object-cover h-10 w-10 overflow-hidden rounded-full border border-neutral-200 dark:border-neutral-800"
               />
             </div>
             <div className="w-fit">
@@ -59,20 +59,20 @@ export default async function Blog({
               />
             </div>
           </div>
-          {/* <div className="w-full my-4">
+          <div className="w-full my-4">
             <div className="rounded-xl overflow-hidden">
               <Image
                 src={post.metadata.image}
-                width={800}
-                height={40}
+                width={1000}
+                height={1000}
                 alt=""
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[440px] md:h-[340px] object-cover"
+                className="h-[480px] md:h-[340px] object-cover"
               />
             </div>
-          </div> */}
+          </div>
         </div>
         <div className="block">
           <article
