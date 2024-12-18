@@ -76,6 +76,7 @@ async function Blogs() {
         <CarouselItem className="pl-1 overflow-hidden max-h-full max-w-[230px]">
           <Link
             href="/blog"
+            prefetch
             className="rounded-xl border w-full cursor-pointer flex flex-col justify-center items-center h-full overflow-hidden border-neutral-300 dark:border-neutral-700"
           >
             <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-50">
@@ -120,8 +121,8 @@ function BlogItem({
             blurDataURL={blurredImages[index]}
             className="object-cover overflow-hidden h-[380px] w-full"
           />
-          <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-3/4"></div>
-          <div className="absolute z-10 bottom-6 py-3 px-6 text-center w-full">
+          <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-1/3"></div>
+          <div className="absolute z-10 bottom-4 py-3 px-6 text-center w-full">
             <p className="text-xs font-medium text-neutral-300 dark:text-neutral-400">
               <span>{formatDate(publishedAt)}</span>
             </p>

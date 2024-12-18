@@ -9,7 +9,7 @@ import { getBlogPosts, getPost } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
 
-import { getBase64RemoteImage } from "~/utils/getImageBlur";
+// import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
@@ -59,7 +59,7 @@ export default async function Blog({
               />
             </div>
           </div>
-          <div className="w-full my-4">
+          {/* <div className="w-full my-4">
             <div className="rounded-xl overflow-hidden">
               <Image
                 src={post.metadata.image}
@@ -72,7 +72,7 @@ export default async function Blog({
                 className="h-[440px] md:h-[340px] object-cover"
               />
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="block">
           <article
