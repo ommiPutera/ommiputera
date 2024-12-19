@@ -23,7 +23,7 @@ const projects: TProject[] = [
     title: "Revamped a Landing Page using Next.js",
     description: "Dipay Indonesia - 2023",
     summary:
-      "I revamped the Dipay landing page using Next.js, implementing SEO best practices to enhance visibility while delivering a modern, high-performance design that reduced load times and boosted user engagement. 🚀",
+      "Enhanced visibility and user engagement through SEO best practices and modern design. 🚀",
     slug: "project-dipay-landing",
     coverPath: "/images/projects/personal.png",
     href: "https://dipay.id/",
@@ -32,7 +32,7 @@ const projects: TProject[] = [
     title: "Naufal Ghifari website",
     description: "Personal/porfolio",
     summary:
-      "I developed Naufal Ghifari's personal website, transforming a creative design into a responsive, high-performance platform that showcases his skills, projects, and professional journey.",
+      "Transformed creative design into responsive, high-performance platform.",
     slug: "project-naufal-website",
     coverPath: "/images/projects/naufal-page.jpeg",
     href: "https://naufalghfr.vercel.app/",
@@ -54,7 +54,7 @@ export default function Projects() {
 
 function Intro() {
   return (
-    <Section>
+    <Section withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
       </div>
@@ -81,14 +81,14 @@ function Close() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <FolderClosed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="More project?">
+      <Content title="More?">
         <ContentParagraph>
-          <span>Explore all of my projects</span>{" "}
+          <span>Explore all</span>{" "}
           <Link
             href="/projects"
             className="font-medium text-blue-600 dark:text-blue-400 underline"
           >
-            here!
+            projects
           </Link>
         </ContentParagraph>
       </Content>

@@ -52,24 +52,18 @@ async function Hi() {
           className="object-cover overflow-hidden rounded-full"
         />
       </SectionAvatar>
-      <Content title="Hi, I'm Ommi Putera 👋" description="Greeting">
+      <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my space on the web! I&apos;m a Software Engineer based
-            in <b>Jakarta, Indonesia.</b> 🇮🇩
+            Welcome to my online space! I&apos;m a Software Engineer based in{" "}
+            <b>Jakarta, Indonesia.</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with</span>{" "}
           <ContentLink
             href="https://remix.run/"
             target="_blank"
-            text=" Remix "
-          />
-          and
-          <ContentLink
-            href="https://nextjs.org/"
-            target="_blank"
-            text=" NextJS."
+            text=" Remix."
           />
         </ContentParagraph>
       </Content>
@@ -115,7 +109,7 @@ function Mode() {
             className="object-cover overflow-hidden rounded-full"
           />
         </SectionAvatar>
-        <Content title="Prefer dark/light mode?" description="Ommi Putera">
+        <Content title="Prefer dark or light mode?" description="Ommi Putera">
           <ContentParagraph>
             Click this section to toggle between the two. <ModeEmoji />
           </ContentParagraph>

@@ -34,8 +34,8 @@ export default async function BlogPage() {
               Ommi&apos;s Blog
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
-              I write about the web development, insights and the lessons
-              I&apos;ve learned.
+              I write about web development, sharing insights and lessons
+              learned.
             </ContentParagraph>
           </div>
           <div className="border rounded-full bg-neutral-100">
@@ -95,6 +95,7 @@ async function BentoBlog({
   publishedAt,
   image,
   title,
+  description,
   index,
 }: {
   slug: string;
@@ -128,6 +129,9 @@ async function BentoBlog({
           <span>{formatDate(publishedAt)}</span>
         </p>
         <h2 className="my-1 text-base md:text-lg font-bold w-full">{title}</h2>
+        <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
+          {description}
+        </p>
       </div>
     </Link>
   );

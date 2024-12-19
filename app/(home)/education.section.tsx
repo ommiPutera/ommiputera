@@ -15,9 +15,10 @@ export default function Education() {
       </div>
       <Content title="Education">
         <ContentParagraph>
-          This is where my journey in web development began. The comprehensive
-          curriculum provided me with a solid foundation in front-end and
-          back-end.
+          Purwadhika was the starting point of my web development journey. Its
+          comprehensive curriculum provided me with a strong foundation in both
+          front-end and back-end development, as well as an understanding of how
+          the web works.
         </ContentParagraph>
         <Br />
         <Link

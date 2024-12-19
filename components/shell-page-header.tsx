@@ -31,7 +31,7 @@ export function Header({ withHome }: THeaderProps) {
       className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3.5 md:pt-6"
     >
       <header role="banner">
-        <h1 className="text-sm font-bold pb-1">ommiputera.com</h1>
+        <h1 className="text-sm font-bold pb-0.5">ommiputera.com</h1>
       </header>
       <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">

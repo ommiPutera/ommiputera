@@ -14,13 +14,13 @@ export default function Contact() {
       </SectionAvatar>
       <Content title="Contact me">
         <ContentParagraph>
-          <span>The best way to get in touch with me is to email </span>
+          <span>The best way to reach me is by email at </span>
           <b>me@ommiputera.com</b>.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          I&apos;d love to hear from you, whether it&apos;s about a project,
-          collaboration, or just a friendly conversation. ☺️
+          I&apos;d love to hear from you about projects, collaborations, or even
+          just a friendly chat. ☺️
         </ContentParagraph>
       </Content>
       <Br />

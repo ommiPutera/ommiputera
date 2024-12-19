@@ -32,9 +32,10 @@ export default function Blog() {
       <Content title="My featured blog posts" description="Ommi Putera - Blog">
         <ContentParagraph className="inline">
           <span>
-            I write about the web development and the lessons I&apos;ve learned.
+            I write about web development, sharing insights and lessons learned.
           </span>
         </ContentParagraph>{" "}
+        <Br />
         <ContentLink href="/blog" text="View all" />
         <Br />
         <Blogs />

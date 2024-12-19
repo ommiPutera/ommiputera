@@ -3,7 +3,7 @@ import { ContentLink, ContentParagraph } from "./content";
 export default function Social() {
   return (
     <ContentParagraph>
-      <span>You can follow me on</span>{" "}
+      <span>You can also find me on</span>{" "}
       <span className="inline-flex gap-1">
         <ContentLink
           href="https://www.linkedin.com/in/ommiputera/"

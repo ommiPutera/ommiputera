@@ -37,8 +37,7 @@ export default function Work() {
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          One of my proudest accomplishments at Dipay was leading the
-          development of
+          One of my accomplishments at Dipay was leading the development of
           <b> Dipay Enterprise (Disbursement)</b> — a web app designed to
           automate mass fund transfers for businesses.
         </ContentParagraph>

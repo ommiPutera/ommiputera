@@ -106,10 +106,8 @@ export function Footer() {
       </nav>
       <footer role="contentinfo" className="px-4 pb-14 text-center md:px-6">
         <p className="text-sm max-w-96 mx-auto text-muted-foreground">
-          All rights reserved © Ommi Putera {new Date().getFullYear()}.
-        </p>
-        <p className="text-sm max-w-72 mx-auto text-muted-foreground">
-          Build with Kapal Api and 76 Mangga.
+          All rights reserved © Ommi Putera {new Date().getFullYear()}. Built
+          with Kapal Api and 76 Mangga.
         </p>
       </footer>
     </div>
