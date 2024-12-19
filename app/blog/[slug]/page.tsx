@@ -66,7 +66,7 @@ export default async function Blog({
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[480px] md:h-[340px] object-cover"
+                className="h-[480px] md:h-[480px] object-cover"
               />
             </div>
           </div>

@@ -17,8 +17,7 @@ export default function Education() {
         <ContentParagraph>
           Purwadhika was the starting point of my web development journey. Its
           comprehensive curriculum provided me with a strong foundation in both
-          front-end and back-end development, as well as an understanding of how
-          the web works.
+          front-end and back-end development.
         </ContentParagraph>
         <Br />
         <Link

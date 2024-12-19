@@ -60,7 +60,7 @@ function Intro() {
       </div>
       <Content title="Projects 🔥">
         <ContentParagraph>
-          Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.
+          Here&apos;s a glimpse of projects and
         </ContentParagraph>
         <ContentParagraph>
           <Link

@@ -7,7 +7,7 @@ import Image from "next/image";
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
 import Content, { ContentLink, ContentParagraph } from "~/components/content";
-import Section from "~/components/section";
+import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import Social from "~/components/social";
 
@@ -35,27 +35,27 @@ export default function About() {
 function Me() {
   return (
     <Section withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <CornerUpRight className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
+      <SectionAvatar>
+        <Image
+          src="/images/profile.jpeg"
+          width={40}
+          height={40}
+          alt=""
+          className="object-cover overflow-hidden rounded-full"
+        />
+      </SectionAvatar>
       <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my space on the web! I&apos;m a Software Engineer based
-            in <b>Jakarta, Indonesia.</b> 🇮🇩
+            Welcome to my online space! I&apos;m a Software Engineer based in{" "}
+            <b>Jakarta, Indonesia.</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with </span>
           <ContentLink
             href="https://remix.run/"
             target="_blank"
-            text=" Remix "
-          />
-          and
-          <ContentLink
-            href="https://nextjs.org/"
-            target="_blank"
-            text=" NextJS."
+            text=" Remix."
           />
         </ContentParagraph>
         <Br />
