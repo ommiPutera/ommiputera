@@ -34,11 +34,25 @@ export default async function Blog({
       <Section>
         <div className="mt-4 flex flex-col gap-4">
           <div className="flex flex-col gap- px-6 md:px-20">
-            <h1 className="text-2xl md:text-3xl font-bold leading-tight tracking-tight">
+            <h1 className="text-2xl font-extrabold leading-tight tracking-tight">
               {post.metadata.title}
             </h1>
           </div>
-          <div className="flex gap-2 pt-2 md:pt-0 px-6 md:px-20">
+          <div className="w-full my-4">
+            <div className="rounded-xl overflow-hidden">
+              <Image
+                src={post.metadata.image}
+                width={1000}
+                height={1000}
+                alt=""
+                priority
+                placeholder="blur"
+                blurDataURL={await getBase64RemoteImage(post.metadata.image)}
+                className="h-[480px] md:h-[540px] object-cover"
+              />
+            </div>
+          </div>
+          <div className="flex gap-2 px-6 md:px-20">
             <div className="w-fit max-w-10">
               <Image
                 src="/images/profile.jpeg"
@@ -56,24 +70,10 @@ export default async function Blog({
               />
             </div>
           </div>
-          <div className="w-full my-4">
-            <div className="rounded-xl overflow-hidden">
-              <Image
-                src={post.metadata.image}
-                width={1000}
-                height={1000}
-                alt=""
-                priority
-                placeholder="blur"
-                blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[480px] md:h-[480px] object-cover"
-              />
-            </div>
-          </div>
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert mt-6 mx-6 md:mx-auto max-w-[422px] mb-6 font-medium"
+            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[422px] mb-6 font-medium"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>

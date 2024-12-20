@@ -1,47 +1,162 @@
+import { ChartNoAxesGantt, Sparkle } from "lucide-react";
 import Image from "next/image";
 
-import { ContentParagraph } from "~/components/content";
-import {
-  Container,
-  FullContainer,
-  ProjectShell,
-} from "~/components/project-shell";
+import Br from "~/components/br";
+import Content, { ContentParagraph, ContentTitle } from "~/components/content";
+import Section from "~/components/section";
+import ShellPage from "~/components/shell-page";
 import { Website } from "~/components/website";
 
 import { getBase64Image } from "~/utils/getImageBlur";
 
-export default async function ProjectDipayDisbursement() {
+export default function DipayDisbursement() {
   return (
-    <ProjectShell>
-      <Container>
-        <div className="text-center mt-12 flex flex-col items-center">
-          <h2 className="text-2xl leading-7 sm:text-3xl sm:leading-normal md:text-4xl lg:text-5xl font-extrabold w-full mb-4">
-            Revamped a landing page using Next.js
-          </h2>
-          <ContentParagraph className="text-base md:text-lg">
-            Implementing SEO best practices to enhance visibility while
-            delivering a modern, high-performance design that reduced load times
-            and boosted user engagement.
+    <ShellPage withHome withBack>
+      <div>
+        <Intro />
+        <Overview />
+        <Recommendation />
+      </div>
+    </ShellPage>
+  );
+}
+
+async function Intro() {
+  return (
+    <Section className="border-b mb-3 md:mb-8">
+      <div className="flex gap-2">
+        <div className="w-fit max-w-10">
+          <Image
+            src="/images/profile.jpeg"
+            width={40}
+            height={40}
+            alt=""
+            className="object-cover overflow-hidden rounded-full"
+          />
+        </div>
+        <div className="w-fit">
+          <ContentTitle
+            title="Revamped a landing page using Next.js"
+            description="Dipay Indonesia - 2023"
+          />
+        </div>
+      </div>
+      <Br />
+      <ContentParagraph>
+        Enhanced visibility and user engagement through SEO best practices and
+        modern design. 🚀
+      </ContentParagraph>
+      <Br />
+      <SingleImage
+        src="/images/projects/personal.png"
+        blurredImage={await getBase64Image("/images/projects/personal.png")}
+      />
+      <div className="mt-3 md:mt-6">
+        <Website href="https://dipay.id" />
+      </div>
+    </Section>
+  );
+}
+
+const blurredImage = await getBase64Image("/images/me.webp");
+async function Overview() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <ChartNoAxesGantt className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Overview">
+        <ContentParagraph>
+          The principles that guide my work and life.
+        </ContentParagraph>
+        <div className="mt-2">
+          <ContentParagraph className="font-bold">
+            Continuous Learning
+          </ContentParagraph>
+          <ContentParagraph>
+            I see learning as an ongoing journey. Staying curious and embracing
+            new ideas and technologies drive my personal growth and keep me
+            adaptable in a fast-changing industry.
           </ContentParagraph>
         </div>
-      </Container>
-      <FullContainer>
-        <div className="md:bg-neutral-300/30 backdrop-blur-sm md:dark:bg-neutral-800/30 md:py-14 text-center px-4">
+        <Br />
+        <div>
+          <ContentParagraph className="font-bold">Empathy</ContentParagraph>
+          <ContentParagraph>
+            Empathy bridges the gap between technology and the people it serves.
+            By understanding the needs and perspectives of users and clients, I
+            create products that are not only functional but also meaningful and
+            impactful.
+          </ContentParagraph>
+        </div>
+        <Br />
+        <div>
+          <ContentParagraph className="font-bold">
+            A Shared Desire for Life
+          </ContentParagraph>
+          <ContentParagraph>
+            Life is precious — not just for us but for all living beings.
+            Recognizing this shared desire inspires me to live and work with
+            compassion and respect for the world around us.
+          </ContentParagraph>
+        </div>
+        <Br />
+        <div className="border border-neutral-200 dark:border-neutral-800 h-[400px] md:h-[500px] rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
-            src="/images/projects/personal.png"
+            src="/images/me.webp"
             width={1000}
             height={1000}
             alt=""
             placeholder="blur"
-            blurDataURL={await getBase64Image("/images/projects/personal.png")}
-            className="object-cover rounded-xl h-[calc(100vw_-_45vw)] md:h-[600px] mx-auto"
+            blurDataURL={blurredImage}
+            className="h-full object-cover"
           />
-          <div className="mt-3 md:mt-6">
-            <Website href="https://dipay.id" />
-          </div>
         </div>
-      </FullContainer>
-      <Container>test</Container>
-    </ProjectShell>
+        <Br />
+        <ContentParagraph>
+          The best way to get in touch with me is to email{" "}
+          <b>me@ommiputera.com</b>
+        </ContentParagraph>
+        <Br />
+      </Content>
+    </Section>
+  );
+}
+
+function Recommendation() {
+  return (
+    <Section className="pt-0 md:pt-0 mb-6">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="More">
+        <ContentParagraph>
+          Navigate to another page to dive deeper!
+        </ContentParagraph>
+        <Br />
+      </Content>
+    </Section>
+  );
+}
+
+function SingleImage({
+  src,
+  blurredImage,
+}: {
+  src: string;
+  blurredImage: string;
+}) {
+  return (
+    <div className="rounded-xl flex flex-col gap-4 overflow-hidden">
+      <Image
+        src={src}
+        width={1000}
+        height={1000}
+        alt=""
+        placeholder="blur"
+        blurDataURL={blurredImage}
+        className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2.1)] object-cover border border-neutral-200 dark:border-neutral-800 rounded-xl"
+      />
+    </div>
   );
 }

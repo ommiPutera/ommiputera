@@ -8,13 +8,20 @@ export default function Content({
   children,
   title,
   description,
+  className,
 }: {
   children: React.ReactNode;
   title: string;
   description?: string;
+  className?: string;
 }) {
   return (
-    <div className="ml-[48px] md:ml-[52px] -mt-10 flex flex-col gap-3 md:gap-4 bg-white dark:bg-black">
+    <div
+      className={cn(
+        "ml-[48px] md:ml-[52px] -mt-10 flex flex-col gap-3 md:gap-4 bg-white dark:bg-black",
+        className,
+      )}
+    >
       <div>
         <ContentTitle title={title} description={description} />
         {children}
