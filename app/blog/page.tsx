@@ -30,7 +30,7 @@ export default async function BlogPage() {
       <Section>
         <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
           <div className="max-w-xs flex-1 mt-5 md:mt-7">
-            <h1 className="relative z-10 text-lg md:text-2xl font-extrabold tracking-tight">
+            <h1 className="relative z-10 text-lg md:text-xl font-bold">
               Ommi&apos;s Blog
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
@@ -128,7 +128,7 @@ async function BentoBlog({
         <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
           <span>{formatDate(publishedAt)}</span>
         </p>
-        <h2 className="my-1 text-base md:text-lg font-bold w-full">{title}</h2>
+        <h2 className="mb-1 text-base font-bold w-full mt-4">{title}</h2>
         <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
           {description}
         </p>

@@ -29,14 +29,13 @@ export default function Blog() {
           className="object-cover overflow-hidden rounded-full"
         />
       </SectionAvatar>
-      <Content title="My featured blog posts" description="Ommi Putera - Blog">
-        <ContentParagraph className="inline">
-          <span>
-            I write about web development, sharing insights and lessons learned.
-          </span>
-        </ContentParagraph>{" "}
-        <Br />
-        <ContentLink href="/blog" text="View all" />
+      <Content title="Blog" description="Ommi Putera">
+        <ContentParagraph>
+          <span>I write about web development, sharing insights and</span>
+        </ContentParagraph>
+        <ContentParagraph>
+          <ContentLink href="/blog" text="Show more" />
+        </ContentParagraph>
         <Br />
         <Blogs />
       </Content>
@@ -124,10 +123,10 @@ function BlogItem({
           />
           <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-1/3"></div>
           <div className="absolute z-10 bottom-4 py-3 px-6 text-center w-full">
-            <p className="text-xs font-medium text-neutral-300 dark:text-neutral-400">
+            <p className="text-xs font-medium text-neutral-100 dark:text-neutral-200 mb-2">
               <span>{formatDate(publishedAt)}</span>
             </p>
-            <h2 className="text-base leading-5 font-extrabold text-neutral-50 w-full">
+            <h2 className="text-base leading-5 font-bold text-neutral-50 w-full">
               {title}
             </h2>
           </div>

@@ -32,11 +32,12 @@ export default async function Blog({
   return (
     <ShellPage withHome withBack>
       <Section>
-        <div className="mt-4 flex flex-col gap-4">
-          <div className="flex flex-col gap- px-6 md:px-20">
-            <h1 className="text-2xl font-extrabold leading-tight tracking-tight">
-              {post.metadata.title}
-            </h1>
+        <div className="mt-4 md:mt-0 flex flex-col gap-4">
+          <div className="flex flex-col gap- px-6 md:px-12">
+            <h2 className="text-xl font-bold">{post.metadata.title}</h2>
+            <h3 className="text-sm text-muted-foreground mt-2">
+              {formatDate(post.metadata.publishedAt)}
+            </h3>
           </div>
           <div className="w-full my-4">
             <div className="rounded-xl overflow-hidden">
@@ -48,11 +49,11 @@ export default async function Blog({
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[480px] md:h-[540px] object-cover"
+                className="h-[480px] object-cover"
               />
             </div>
           </div>
-          <div className="flex gap-2 px-6 md:px-20">
+          <div className="flex gap-2 px-6 md:px-12">
             <div className="w-fit max-w-10">
               <Image
                 src="/images/profile.jpeg"
@@ -66,14 +67,14 @@ export default async function Blog({
             <div className="w-fit">
               <ContentTitle
                 title="Ommi Putera"
-                description={formatDate(post.metadata.publishedAt)}
+                description="Software Engineer"
               />
             </div>
           </div>
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[422px] mb-6 font-medium"
+            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[472px] mb-6 font-medium"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>

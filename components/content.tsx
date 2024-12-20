@@ -66,7 +66,7 @@ export function ContentParagraph({
   className?: string;
 }) {
   return (
-    <p className={cn("text-sm prose dark:prose-invert font-medium", className)}>
+    <p className={cn("text-sm prose dark:prose-invert font-normal", className)}>
       {children}
     </p>
   );
