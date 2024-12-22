@@ -1,21 +1,20 @@
 import Link from "next/link";
 
 import { ModeClickable } from "./mode-toggle";
-import { BackBtn, Header, THeaderProps } from "./shell-page-header";
+import { BackBtn, Header } from "./shell-page-header";
 
 export default function ShellPage({
-  withHome = false,
   children,
   withBack = false,
 }: {
   children: React.ReactNode;
   withBack?: boolean;
-} & THeaderProps) {
+}) {
   return (
     <div className="mx-auto w-full max-w-[var(--shell-page-width)]">
       <section className="flex flex-col relative">
         <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 fixed top-0 pt-12 md:pt-20">
-          <Header withHome={withHome} />
+          <Header />
           {withBack && (
             <div className="fixed -top-3 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
               <BackBtn />

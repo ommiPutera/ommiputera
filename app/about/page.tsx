@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <ShellPage withHome withBack>
+    <ShellPage withBack>
       <div>
         <Me />
         <Values />

@@ -20,10 +20,10 @@ export const metadata = {
 export default async function ProjectsPage() {
   const projects = getProjectPosts();
   return (
-    <ShellPage withHome withBack>
+    <ShellPage withBack>
       <Section>
-        <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
-          <div className="max-w-xs flex-1 mt-5 md:mt-7">
+        <div className="overflow-hidden relative mx-4 md:border md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-6 max-w-lg md:mx-auto">
+          <div className="max-w-xs flex-1">
             <h1 className="relative z-10 text-lg md:text-2xl font-bold">
               Projects
             </h1>
@@ -36,9 +36,8 @@ export default async function ProjectsPage() {
               src="/images/profile.jpeg"
               width={200}
               height={200}
-              priority
               alt=""
-              className="object-cover h-[85px] w-[85px] overflow-hidden rounded-full"
+              className="object-cover h-[60px] w-[60px] md:h-[80px] md:w-[80px] overflow-hidden rounded-full"
             />
           </div>
         </div>
@@ -69,11 +68,11 @@ async function Project({ slug, coverPath, title, summary }: TProject) {
         blurDataURL={await getBase64Image(coverPath)}
         className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2)] object-cover rounded-xl border-b dark:border-neutral-800"
       />
-      <div className="p-5 md:p-0 max-w-[380px] md:my-6 md:mx-auto prose dark:prose-invert">
+      <div className="p-5 md:p-0 max-w-md md:my-12 md:mx-auto prose dark:prose-invert">
         <h2 className="text-sm md:text-base font-bold w-full hover:underline">
           {title}
         </h2>
-        <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
+        <p className="text-xs md:text-sm font-normal md:font-medium text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
           {summary}
         </p>
         <p className="text-xs font-semibold inline-flex gap-2 not-prose items-center dark:text-blue-400">

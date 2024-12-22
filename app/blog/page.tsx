@@ -26,10 +26,10 @@ export default async function BlogPage() {
     return 1;
   });
   return (
-    <ShellPage withHome withBack>
+    <ShellPage withBack>
       <Section>
-        <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
-          <div className="max-w-xs flex-1 mt-5 md:mt-7">
+        <div className="overflow-hidden relative mx-4 md:border md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-6 max-w-lg md:mx-auto">
+          <div className="max-w-xs flex-1">
             <h1 className="relative z-10 text-lg md:text-2xl font-bold">
               Blog
             </h1>
@@ -44,7 +44,7 @@ export default async function BlogPage() {
               width={200}
               height={200}
               alt=""
-              className="object-cover h-[75px] w-[75px] md:h-[85px] md:w-[85px] overflow-hidden rounded-full"
+              className="object-cover h-[60px] w-[60px] md:h-[80px] md:w-[80px] overflow-hidden rounded-full"
             />
           </div>
         </div>

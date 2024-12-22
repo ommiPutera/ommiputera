@@ -30,7 +30,7 @@ export default async function Blog({
     notFound();
   }
   return (
-    <ShellPage withHome withBack>
+    <ShellPage withBack>
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
           <div className="flex flex-col gap- px-6 md:px-12">
@@ -74,7 +74,7 @@ export default async function Blog({
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[472px] mb-6"
+            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[472px] mb-6 font-normal md:font-medium"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>

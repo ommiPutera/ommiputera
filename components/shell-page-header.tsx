@@ -7,9 +7,6 @@ import { ArrowLeft } from "lucide-react";
 
 import { cn } from "~/lib/utils";
 
-export type THeaderProps = {
-  withHome?: boolean;
-};
 export function BackBtn() {
   const router = useRouter();
   return (
@@ -23,7 +20,7 @@ export function BackBtn() {
   );
 }
 
-export function Header({ withHome }: THeaderProps) {
+export function Header() {
   const pathname = usePathname();
   return (
     <nav
@@ -74,13 +71,6 @@ export function Header({ withHome }: THeaderProps) {
               Projects
             </Link>
           </li>
-          {withHome && (
-            <li className="text-muted-foreground hover:text-neutral-600">
-              <Link href="/" className="flex items-center py-1 px-1.5 md:px-2">
-                Home
-              </Link>
-            </li>
-          )}
         </ul>
       </nav>
     </nav>
