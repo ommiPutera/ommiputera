@@ -31,10 +31,10 @@ export default function Blog() {
       </SectionAvatar>
       <Content title="Blog" description="Ommi Putera">
         <ContentParagraph>
-          <span>I write about web development, sharing insights and</span>
+          I write about web development, sharing insights and lessons learned.
         </ContentParagraph>
         <ContentParagraph>
-          <ContentLink href="/blog" text="Show more" />
+          <ContentLink href="/blog" text="View all" />
         </ContentParagraph>
         <Br />
         <Blogs />

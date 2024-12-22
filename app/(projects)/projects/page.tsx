@@ -8,7 +8,7 @@ import { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
-import { getProjectPosts, TProjectPosts } from "~/data/project";
+import { getProjectPosts, TProject } from "~/data/project";
 
 import { getBase64Image } from "~/utils/getImageBlur";
 
@@ -44,17 +44,7 @@ export default async function ProjectsPage() {
         </div>
         <div className="flex flex-col gap-3 md:gap-4 mt-8 md:mt-12">
           {projects.map((post) => {
-            const slug = post.slug;
-            const imageSource = post.imageSource;
-            const title = post.title;
-            const description = post.description;
-            const props = {
-              imageSource,
-              slug,
-              title,
-              description,
-            };
-            return <Project key={post.slug} {...props} />;
+            return <Project key={post.slug} {...post} />;
           })}
         </div>
         <Br />
@@ -63,12 +53,7 @@ export default async function ProjectsPage() {
   );
 }
 
-async function Project({
-  slug,
-  imageSource,
-  title,
-  description,
-}: TProjectPosts) {
+async function Project({ slug, coverPath, title, summary }: TProject) {
   return (
     <Link
       href={`/${slug}`}
@@ -76,12 +61,12 @@ async function Project({
     >
       <Image
         alt=""
-        src={imageSource}
+        src={coverPath}
         width={1000}
         height={1000}
         priority
         placeholder="blur"
-        blurDataURL={await getBase64Image(imageSource)}
+        blurDataURL={await getBase64Image(coverPath)}
         className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2)] object-cover rounded-xl border-b dark:border-neutral-800"
       />
       <div className="p-5 md:p-0 max-w-[380px] md:my-6 md:mx-auto prose dark:prose-invert">
@@ -89,7 +74,7 @@ async function Project({
           {title}
         </h2>
         <p className="text-xs md:text-sm font-normal text-neutral-500 dark:text-neutral-300 inline-flex flex-col gap-2">
-          {description}
+          {summary}
         </p>
         <p className="text-xs font-semibold inline-flex gap-2 not-prose items-center dark:text-blue-400">
           <span>Read more</span>

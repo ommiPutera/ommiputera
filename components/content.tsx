@@ -41,15 +41,15 @@ export function ContentTitle({
     <>
       <h2
         className={cn(
-          "text-sm font-bold text-black dark:text-white tracking-normal md:leading-4 mt-0.5 md:mt-1",
-          !description && "mb-1 md:mb-1.5",
+          "text-sm font-bold text-black dark:text-white tracking-normal md:leading-4 md:mt-0.5",
+          !description && "mb-0.5 md:mb-1",
         )}
       >
         {title}
       </h2>
       {description && (
         <Suspense fallback={<p className="h-5" />}>
-          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1 md:mt-1">
+          <p className="text-xs md:text-sm text-neutral-500 dark:text-neutral-400 mb-1 md:mt-0.5">
             {description}
           </p>
         </Suspense>

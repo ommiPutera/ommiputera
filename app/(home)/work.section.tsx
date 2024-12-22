@@ -23,7 +23,7 @@ export default function Work() {
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <BriefcaseBusiness className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Work experience">
+      <Content title="Experience">
         <ContentParagraph>
           As a Full Stack Engineer at Dipay, I&apos;m responsible for developing
           complex, end-to-end solutions that drive business success. I&apos;ve
@@ -64,7 +64,7 @@ export default function Work() {
               <p className="text-xs md:text-sm mt-0.5 font-normal inline-flex items-center">
                 <span>Full-time</span>
               </p>
-              <p className="text-sm font-normal text-muted-foreground">
+              <p className="text-xs md:text-sm font-normal text-muted-foreground">
                 Jakarta, Indonesia
               </p>
             </div>

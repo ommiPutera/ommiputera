@@ -18,7 +18,7 @@ export default function Social() {
         <ContentLink
           href="https://twitter.com/Omiputera1/"
           target="_blank"
-          text="Twitter"
+          text="X (Twitter)"
         />
       </span>
     </ContentParagraph>

@@ -8,42 +8,17 @@ import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import { Website } from "~/components/website";
 
+import { getProjectPosts, TProject } from "~/data/project";
+
 import { getBase64Image } from "~/utils/getImageBlur";
 
-type TProject = {
-  title: string;
-  description: string;
-  summary: string;
-  slug: string;
-  coverPath: string;
-  href: string;
-};
-const projects: TProject[] = [
-  {
-    title: "Revamped a Landing Page using Next.js",
-    description: "Dipay Indonesia - 2023",
-    summary:
-      "Enhanced visibility and user engagement through SEO best practices and modern design. 🚀",
-    slug: "project-dipay-landing",
-    coverPath: "/images/projects/personal.png",
-    href: "https://dipay.id/",
-  },
-  {
-    title: "Naufal Ghifari website",
-    description: "Personal/porfolio",
-    summary:
-      "Transformed creative design into responsive, high-performance platform.",
-    slug: "project-naufal-website",
-    coverPath: "/images/projects/naufal-page.jpeg",
-    href: "https://naufalghfr.vercel.app/",
-  },
-];
 export default function Projects() {
+  const projects = getProjectPosts();
   return (
     <div>
       <Intro />
       <div className="flex flex-col">
-        {projects.map((project) => (
+        {projects.slice(0, 2).map((project) => (
           <Project key={project.slug} {...project} />
         ))}
       </div>
@@ -60,15 +35,7 @@ function Intro() {
       </div>
       <Content title="Projects 🔥">
         <ContentParagraph>
-          Here&apos;s a glimpse of projects and
-        </ContentParagraph>
-        <ContentParagraph>
-          <Link
-            href="/projects"
-            className="font-medium text-blue-600 dark:text-blue-400 underline"
-          >
-            Show more
-          </Link>
+          Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.
         </ContentParagraph>
       </Content>
     </Section>

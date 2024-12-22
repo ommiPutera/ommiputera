@@ -3,7 +3,7 @@ import Image from "next/image";
 
 import Br from "~/components/br";
 import Content, { ContentParagraph, ContentTitle } from "~/components/content";
-import Section from "~/components/section";
+import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import { Website } from "~/components/website";
 
@@ -24,8 +24,8 @@ export default function DipayDisbursement() {
 async function Intro() {
   return (
     <Section className="border-b mb-3 md:mb-8">
-      <div className="flex gap-2">
-        <div className="w-fit max-w-10">
+      <div className="flex gap-3 mb-2">
+        <SectionAvatar>
           <Image
             src="/images/profile.jpeg"
             width={40}
@@ -33,15 +33,11 @@ async function Intro() {
             alt=""
             className="object-cover overflow-hidden rounded-full"
           />
-        </div>
+        </SectionAvatar>
         <div className="w-fit">
-          <ContentTitle
-            title="Revamped a landing page using Next.js"
-            description="Dipay Indonesia - 2023"
-          />
+          <ContentTitle title="Ommi Putera" description="Software Engineer" />
         </div>
       </div>
-      <Br />
       <ContentParagraph>
         Enhanced visibility and user engagement through SEO best practices and
         modern design. 🚀

@@ -116,7 +116,7 @@ function Mode() {
             className="object-cover overflow-hidden rounded-full"
           />
         </SectionAvatar>
-        <Content title="Prefer dark or light mode?" description="Ommi Putera">
+        <Content title="Prefer Dark or Light mode?" description="Ommi Putera">
           <ContentParagraph>
             Click this section to toggle between the two. <ModeEmoji />
           </ContentParagraph>

@@ -31,9 +31,11 @@ export function Header({ withHome }: THeaderProps) {
       className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-3.5 md:pt-6"
     >
       <header role="banner">
-        <h1 className="text-sm font-bold pb-0.5">ommiputera.com</h1>
+        <h1 className="text-sm font-bold hover:text-neutral-400 pb-0.5">
+          <Link href="/">ommiputera.com</Link>
+        </h1>
       </header>
-      <nav role="navigation">
+      <nav role="navigation" className="cursor-pointer">
         <ul className="flex text-sm justify-center items-center">
           <li className="text-muted-foreground hover:text-neutral-600">
             <Link
