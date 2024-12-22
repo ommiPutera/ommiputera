@@ -73,7 +73,7 @@
   * {
     -webkit-tap-highlight-color: transparent;
     overscroll-behavior-y: none;
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
     -webkit-font-smoothing: antialiased;
     @apply border-border;
   }

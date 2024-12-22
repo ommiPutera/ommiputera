@@ -82,7 +82,7 @@ async function Blogs() {
             <div className="flex flex-col justify-center items-center gap-4 px-4 h-full text-neutral-600 dark:text-neutral-50">
               <FolderOpen className="h-8 w-8" />
               <p className="text-xs text-center w-full max-w-[150px] font-semibold">
-                Read the blog
+                Find the latest of my writing here
               </p>
             </div>
           </Link>

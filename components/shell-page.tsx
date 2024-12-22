@@ -58,7 +58,7 @@ function RoundedBorder() {
 
 export function Footer() {
   return (
-    <div className="pt-24 md:pt-32 font-medium">
+    <div className="pt-24 md:pt-32">
       <nav role="navigation" className="pb-32">
         <div className="text-center pb-6">
           <h1 className="text-sm font-bold hover:text-neutral-400">

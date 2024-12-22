@@ -74,7 +74,7 @@ export default async function Blog({
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[472px] mb-6 font-medium"
+            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[472px] mb-6"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>
