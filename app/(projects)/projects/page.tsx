@@ -24,8 +24,8 @@ export default async function ProjectsPage() {
       <Section>
         <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
           <div className="max-w-xs flex-1 mt-5 md:mt-7">
-            <h1 className="relative z-10 text-lg md:text-xl font-bold">
-              Ommi&apos;s Projects
+            <h1 className="relative z-10 text-lg md:text-2xl font-bold">
+              Projects
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
               Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.

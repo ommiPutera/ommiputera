@@ -64,7 +64,7 @@ export function Footer() {
           <h1 className="text-sm font-bold hover:text-neutral-400">
             <Link href="/">ommiputera.com</Link>
           </h1>
-          <p className="text-xs text-muted-foreground pt-1">
+          <p className="text-sm text-muted-foreground pt-1">
             Built with Kapal Api and 76 Mangga.
           </p>
         </div>
@@ -73,7 +73,7 @@ export function Footer() {
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
-              className="flex items-center py-6 px-4 md:px-3 text-xs"
+              className="flex items-center py-6 px-4 md:px-3 text-sm"
             >
               Resume
             </Link>
@@ -81,14 +81,14 @@ export function Footer() {
           <li className="text-muted-foreground hover:text-neutral-600">
             <Link
               href="/blog"
-              className="flex items-center py-6 px-4 md:px-3 text-xs"
+              className="flex items-center py-6 px-4 md:px-3 text-sm"
             >
               Blog
             </Link>
           </li>
           <li className="text-muted-foreground hover:text-neutral-600">
             <ModeClickable>
-              <span className="flex items-center py-6 px-4 md:px-3 text-xs">
+              <span className="flex items-center py-6 px-4 md:px-3 text-sm">
                 Dark/Ligth
               </span>
             </ModeClickable>
@@ -98,7 +98,7 @@ export function Footer() {
           <li className="text-muted-foreground hover:text-neutral-600">
             <Link
               href="/about"
-              className="flex items-center py-6 px-4 md:px-3 text-xs"
+              className="flex items-center py-6 px-4 md:px-3 text-sm"
             >
               About
             </Link>
@@ -106,7 +106,7 @@ export function Footer() {
           <li className="text-muted-foreground hover:text-neutral-600">
             <Link
               href="/projects"
-              className="flex items-center py-6 px-4 md:px-3 text-xs"
+              className="flex items-center py-6 px-4 md:px-3 text-sm"
             >
               Projects
             </Link>
@@ -114,7 +114,7 @@ export function Footer() {
         </ul>
       </nav>
       <footer role="contentinfo" className="px-6 text-center pb-12 md:px-6">
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           © Ommi Putera {new Date().getFullYear()}. All rights reserved.
         </p>
       </footer>

@@ -101,7 +101,7 @@ async function Overview() {
           </ContentParagraph>
         </div>
         <Br />
-        <div className="border border-neutral-200 dark:border-neutral-800 h-[400px] md:h-[500px] rounded-xl flex flex-col gap-4 overflow-hidden">
+        <div className="border border-neutral-200 dark:border-neutral-800 h-[400px] md:h-[500px] rounded-2xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/me.webp"
             width={1000}
@@ -147,7 +147,7 @@ function SingleImage({
   blurredImage: string;
 }) {
   return (
-    <div className="rounded-xl flex flex-col gap-4 overflow-hidden">
+    <div className="rounded-2xl flex flex-col gap-4 overflow-hidden">
       <Image
         src={src}
         width={1000}
@@ -155,7 +155,7 @@ function SingleImage({
         alt=""
         placeholder="blur"
         blurDataURL={blurredImage}
-        className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2.1)] object-cover border border-neutral-200 dark:border-neutral-800 rounded-xl"
+        className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2.1)] object-cover border border-neutral-200 dark:border-neutral-800 rounded-2xl"
       />
     </div>
   );

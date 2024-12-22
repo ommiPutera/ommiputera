@@ -30,8 +30,8 @@ export default async function BlogPage() {
       <Section>
         <div className="overflow-hidden relative mx-2 md:mx-6 flex justify-between items-start mt-2 md:mt-0">
           <div className="max-w-xs flex-1 mt-5 md:mt-7">
-            <h1 className="relative z-10 text-lg md:text-xl font-bold">
-              Ommi&apos;s Blog
+            <h1 className="relative z-10 text-lg md:text-2xl font-bold">
+              Blog
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
               I write about web development, sharing insights and lessons
@@ -109,11 +109,11 @@ async function BentoBlog({
       href={`/blog/${slug}`}
       prefetch
       className={cn(
-        "rounded-xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
+        "rounded-2xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
         i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
       )}
     >
-      <div className="relative rounded-xl">
+      <div className="relative rounded-2xl">
         <Image
           alt=""
           src={image}
@@ -121,7 +121,7 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-xl h-[470px] md:h-[420px] w-full"
+          className="object-cover rounded-2xl h-[470px] md:h-[420px] w-full"
         />
       </div>
       <div className="px-8 py-6 md:p-6">

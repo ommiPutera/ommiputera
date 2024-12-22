@@ -40,7 +40,7 @@ export default async function Blog({
             </h3>
           </div>
           <div className="w-full my-4">
-            <div className="rounded-xl overflow-hidden">
+            <div className="rounded-2xl overflow-hidden">
               <Image
                 src={post.metadata.image}
                 width={1000}

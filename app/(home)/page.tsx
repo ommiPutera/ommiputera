@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 export default async function Home() {
   return (
     <ShellPage>
-      <div>
+      <div className="border-b border-neutral-200 dark:border-neutral-800">
         <Hi />
         <About />
       </div>

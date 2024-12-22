@@ -69,7 +69,7 @@ function GaleryCarousel({
       <CarouselContent overflowVisible className="-ml-1">
         {images.map((image, index) => (
           <CarouselItem
-            className="pl-1 overflow-hidden rounded-xl max-h-[500px] max-w-[450px]"
+            className="pl-1 overflow-hidden rounded-2xl max-h-[500px] max-w-[450px]"
             key={image.alt}
           >
             <Image
@@ -80,7 +80,7 @@ function GaleryCarousel({
               priority
               placeholder="blur"
               blurDataURL={blurredImages[index]}
-              className="border border-neutral-200 dark:border-neutral-700 object-cover overflow-hidden rounded-xl"
+              className="border border-neutral-200 dark:border-neutral-700 object-cover overflow-hidden rounded-2xl"
             />
           </CarouselItem>
         ))}
