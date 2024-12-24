@@ -47,7 +47,7 @@ function Me() {
       <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my online space! I&apos;m a Software Engineer based in{" "}
+            Welcome to my online space! I&apos;m a Software Engineer (Web) based in{" "}
             <b>Jakarta, Indonesia.</b> 🇮🇩
           </span>
           <Br />

@@ -64,12 +64,12 @@ function GaleryCarousel({
 }) {
   return (
     <Carousel
-      opts={{ loop: false, skipSnaps: true, containScroll: "trimSnaps" }}
+      opts={{ loop: false, skipSnaps: true }}
     >
       <CarouselContent overflowVisible className="-ml-1">
         {images.map((image, index) => (
           <CarouselItem
-            className="pl-1 overflow-hidden rounded-2xl max-h-[500px] max-w-[450px]"
+            className="pl-1 overflow-hidden rounded-2xl max-h-[500px] max-w-[450px] cursor-grab"
             key={image.alt}
           >
             <Image

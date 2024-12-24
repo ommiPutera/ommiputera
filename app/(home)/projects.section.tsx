@@ -1,7 +1,8 @@
-import { ArrowUpRight, FolderClosed, FolderOpen, Sparkle } from "lucide-react";
+import { ArrowUpRight, FolderClosed, FolderOpen } from "lucide-react";
 import Image from "next/image";
 
 import Link, { LinkProps } from "next/link";
+import { OmmiAvatar } from "~/components/avatar";
 
 import Br from "~/components/br";
 import Content, { ContentParagraph } from "~/components/content";
@@ -18,9 +19,14 @@ export default function Projects() {
     <div>
       <Intro />
       <div className="flex flex-col">
-        {projects.slice(0, 2).map((project) => (
-          <Project key={project.slug} {...project} />
-        ))}
+        {projects.slice(0, 2).map((project) => {
+          switch (project.slug) {
+            case "project-dipay-website":
+              return <DipayWebsite key={project.slug} {...project} />
+            default:
+              return <div className="hidden" key={project.slug}></div>
+          }
+        })}
       </div>
       <Close />
     </div>
@@ -63,10 +69,10 @@ function Close() {
   );
 }
 
-async function Project({
+async function DipayWebsite({
   title,
-  description,
-  summary,
+  // description,
+  // summary,
   slug,
   href,
   coverPath,
@@ -78,11 +84,11 @@ async function Project({
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <Link href={"/" + slug} prefetch>
-        <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-          <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
-        </div>
-        <Content title={title} description={description}>
-          <ContentParagraph>{summary}</ContentParagraph>
+        <OmmiAvatar />
+        <Content title="Ommi Putera" description="Software Engineer (Web)">
+          <ContentParagraph>
+            {title}
+          </ContentParagraph>
           <Br />
           <ProjectCover
             src={coverPath}
@@ -95,7 +101,7 @@ async function Project({
         <Website href={href} />
       </div>
     </Section>
-  );
+  )
 }
 
 function ReadMore({ href }: { href: LinkProps["href"] }) {

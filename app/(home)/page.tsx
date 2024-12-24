@@ -1,9 +1,9 @@
 import { Metadata } from "next";
-import Image from "next/image";
 
 import { CornerUpRight } from "lucide-react";
 
 import AboutGalery from "~/components/about-galery";
+import { OmmiAvatar } from "~/components/avatar";
 import Br from "~/components/br";
 import Content, { ContentLink, ContentParagraph } from "~/components/content";
 import { ModeClickable, ModeEmoji } from "~/components/mode-toggle";
@@ -43,19 +43,11 @@ export default async function Home() {
 async function Hi() {
   return (
     <Section withConnector>
-      <SectionAvatar>
-        <Image
-          src="/images/profile.jpeg"
-          width={40}
-          height={40}
-          alt=""
-          className="object-cover overflow-hidden rounded-full"
-        />
-      </SectionAvatar>
+      <OmmiAvatar />
       <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my online space! I&apos;m a Software Engineer based in{" "}
+            Welcome to my online space! I&apos;m a Software Engineer (Web) based in{" "}
             <b>Jakarta, Indonesia.</b> 🇮🇩
           </span>
           <Br />
@@ -107,15 +99,7 @@ function Mode() {
   return (
     <ModeClickable>
       <Section>
-        <SectionAvatar>
-          <Image
-            src="/images/profile.jpeg"
-            width={40}
-            height={40}
-            alt=""
-            className="object-cover overflow-hidden rounded-full"
-          />
-        </SectionAvatar>
+        <OmmiAvatar />
         <Content title="Prefer Dark or Light mode?" description="Ommi Putera">
           <ContentParagraph>
             Click this section to toggle between the two. <ModeEmoji />
@@ -129,15 +113,7 @@ function Mode() {
 function ThankYou() {
   return (
     <Section>
-      <SectionAvatar>
-        <Image
-          src="/images/profile.jpeg"
-          width={40}
-          height={40}
-          alt=""
-          className="object-cover overflow-hidden rounded-full"
-        />
-      </SectionAvatar>
+      <OmmiAvatar />
       <Content title="Thank you for stopping by! 👋" description="Ommi Putera">
         <Social />
       </Content>

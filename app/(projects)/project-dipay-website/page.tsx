@@ -41,7 +41,7 @@ async function Intro() {
           />
         </SectionAvatar>
         <div className="w-fit">
-          <ContentTitle title="Ommi Putera" description="Software Engineer" />
+          <ContentTitle title="Ommi Putera" description="Software Engineer (Web)" />
         </div>
       </div>
       <ContentParagraph>

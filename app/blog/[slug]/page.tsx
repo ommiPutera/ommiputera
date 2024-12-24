@@ -67,7 +67,7 @@ export default async function Blog({
             <div className="w-fit">
               <ContentTitle
                 title="Ommi Putera"
-                description="Software Engineer"
+                description="Software Engineer (Web)"
               />
             </div>
           </div>
