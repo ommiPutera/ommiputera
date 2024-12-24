@@ -7,7 +7,7 @@ import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import { Website } from "~/components/website";
 
-import { getSingleProject } from "~/data/project";
+// import { getSingleProject } from "~/data/project";
 
 import { getBase64Image } from "~/utils/getImageBlur";
 
@@ -27,7 +27,7 @@ export default function DipayWebsite() {
 }
 
 async function Intro() {
-  const project = await getSingleProject("project-dipay-website");
+  // const project = await getSingleProject("project-dipay-website");
   return (
     <Section className="border-b mb-3 md:mb-8">
       <div className="flex gap-3 mb-2">
@@ -41,13 +41,14 @@ async function Intro() {
           />
         </SectionAvatar>
         <div className="w-fit">
-          <ContentTitle title="Ommi Putera" description="Software Engineer (Web)" />
+          <ContentTitle
+            title="Ommi Putera"
+            description="Software Engineer (Web)"
+          />
         </div>
       </div>
       <ContentParagraph>
-        {project.title}
-        <Br />
-        {project?.summary}
+        Revamped the Dipay (.id) website using <b>Next.js 13</b>
       </ContentParagraph>
       <Br />
       <SingleImage

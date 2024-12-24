@@ -1,24 +1,45 @@
+"use client";
+
 import { BookText } from "lucide-react";
 
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
 
 import Br from "~/components/br";
 import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 
 export default function Education() {
+  const [isExpanded, setIsExpanded] = React.useState(false);
   return (
     <Section>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <BookText className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Education">
-        <ContentParagraph>
-          Purwadhika was the starting point of my web development journey. Its
-          comprehensive curriculum provided me with a strong foundation in both
-          front-end and back-end development.
-        </ContentParagraph>
+        {isExpanded ? (
+          <ContentParagraph>
+            Purwadhika was the starting point of my web development journey. Its
+            comprehensive curriculum provided me with a strong foundation in
+            both front-end and back-end development.
+          </ContentParagraph>
+        ) : (
+          <>
+            <ContentParagraph>
+              Purwadhika was the starting point of my web development journey.
+              Its comprehensive curriculum provided
+            </ContentParagraph>
+            <ContentParagraph>
+              <span
+                className="text-sm cursor-pointer font-semibold text-blue-600 dark:text-blue-400 underline"
+                onClick={() => setIsExpanded(true)}
+              >
+                Show more
+              </span>
+            </ContentParagraph>
+          </>
+        )}
         <Br />
         <Link
           href="https://www.linkedin.com/in/ommiputera"

@@ -22,9 +22,9 @@ export default function Projects() {
         {projects.slice(0, 2).map((project) => {
           switch (project.slug) {
             case "project-dipay-website":
-              return <DipayWebsite key={project.slug} {...project} />
+              return <DipayWebsite key={project.slug} {...project} />;
             default:
-              return <div className="hidden" key={project.slug}></div>
+              return <div className="hidden" key={project.slug}></div>;
           }
         })}
       </div>
@@ -40,9 +40,7 @@ function Intro() {
         <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Projects 🔥">
-        <ContentParagraph>
-          Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.
-        </ContentParagraph>
+        <ContentParagraph>Here are some glimpses of my work</ContentParagraph>
       </Content>
     </Section>
   );
@@ -70,7 +68,7 @@ function Close() {
 }
 
 async function DipayWebsite({
-  title,
+  // title,
   // description,
   // summary,
   slug,
@@ -87,7 +85,7 @@ async function DipayWebsite({
         <OmmiAvatar />
         <Content title="Ommi Putera" description="Software Engineer (Web)">
           <ContentParagraph>
-            {title}
+            Revamped the Dipay (.id) website using <b>Next.js 13</b>
           </ContentParagraph>
           <Br />
           <ProjectCover
@@ -101,7 +99,7 @@ async function DipayWebsite({
         <Website href={href} />
       </div>
     </Section>
-  )
+  );
 }
 
 function ReadMore({ href }: { href: LinkProps["href"] }) {

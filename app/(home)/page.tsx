@@ -47,8 +47,8 @@ async function Hi() {
       <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>
-            Welcome to my online space! I&apos;m a Software Engineer (Web) based in{" "}
-            <b>Jakarta, Indonesia.</b> 🇮🇩
+            Welcome to my online space! I&apos;m a Software Engineer (Web) based
+            in <b>Jakarta, Indonesia.</b> 🇮🇩
           </span>
           <Br />
           <span>I love building things with</span>{" "}
@@ -102,7 +102,7 @@ function Mode() {
         <OmmiAvatar />
         <Content title="Prefer Dark or Light mode?" description="Ommi Putera">
           <ContentParagraph>
-            Click this section to toggle between the two. <ModeEmoji />
+            Click this section to toggle <ModeEmoji />
           </ContentParagraph>
         </Content>
       </Section>

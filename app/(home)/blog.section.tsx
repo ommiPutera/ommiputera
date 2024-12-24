@@ -34,7 +34,7 @@ export default function Blog() {
           I write about web development, sharing insights and lessons learned.
         </ContentParagraph>
         <ContentParagraph>
-          <ContentLink href="/blog" text="View all" />
+          <ContentLink href="/blog" text="Show more" />
         </ContentParagraph>
         <Br />
         <Blogs />

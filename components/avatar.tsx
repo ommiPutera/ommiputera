@@ -17,5 +17,5 @@ export async function OmmiAvatar() {
         className="object-cover overflow-hidden rounded-full"
       />
     </SectionAvatar>
-  )
+  );
 }

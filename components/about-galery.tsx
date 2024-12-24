@@ -63,9 +63,7 @@ function GaleryCarousel({
   blurredImages: string[];
 }) {
   return (
-    <Carousel
-      opts={{ loop: false, skipSnaps: true }}
-    >
+    <Carousel opts={{ loop: false, skipSnaps: true }}>
       <CarouselContent overflowVisible className="-ml-1">
         {images.map((image, index) => (
           <CarouselItem
