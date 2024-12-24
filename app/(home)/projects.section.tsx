@@ -85,7 +85,7 @@ async function DipayWebsite({
         <OmmiAvatar />
         <Content title="Ommi Putera" description="Software Engineer (Web)">
           <ContentParagraph>
-            Revamped the Dipay (.id) website using <b>Next.js 13</b>
+            Revamped Dipay (.id) with a major upgrade using <b>Next.js 13</b>! ✨
           </ContentParagraph>
           <Br />
           <ProjectCover

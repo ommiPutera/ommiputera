@@ -1,11 +1,14 @@
-import { ChartNoAxesGantt, Sparkle } from "lucide-react";
+import { ChartNoAxesGantt, CircleDashed } from "lucide-react";
 import Image from "next/image";
 
 import Br from "~/components/br";
-import Content, { ContentParagraph, ContentTitle } from "~/components/content";
+import Content, {
+  ContentLink,
+  ContentParagraph,
+  ContentTitle,
+} from "~/components/content";
 import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
-import { Website } from "~/components/website";
 
 // import { getSingleProject } from "~/data/project";
 
@@ -17,10 +20,7 @@ export default function DipayWebsite() {
       <div>
         <Intro />
         <Overview />
-        <Challenges />
-        <Contribution />
-        <Outcomes />
-        <Recommendation />
+        <Problem />
       </div>
     </ShellPage>
   );
@@ -30,7 +30,7 @@ async function Intro() {
   // const project = await getSingleProject("project-dipay-website");
   return (
     <Section className="border-b mb-3 md:mb-8">
-      <div className="flex gap-3 mb-2">
+      <div className="flex gap-3 mb-0.5">
         <SectionAvatar>
           <Image
             src="/images/profile.jpeg"
@@ -48,16 +48,27 @@ async function Intro() {
         </div>
       </div>
       <ContentParagraph>
-        Revamped the Dipay (.id) website using <b>Next.js 13</b>
+        <span>
+          Revamped Dipay (.id) with a major upgrade using <b>Next.js 13</b>! ✨
+        </span>
+        <Br />
+        <span>
+          ✅ Modern UI
+          <br />
+          ✅ Effortless user experience
+          <br />
+          ✅ Engaging interactions
+          <br />✅ Clean, organized layout with bento grid
+        </span>
+        <Br />
+        <span>Take a look:</span>{" "}
+        <ContentLink href="https://dipay.id/" target="_blank" text="dipay.id" />
       </ContentParagraph>
       <Br />
       <SingleImage
         src="/images/projects/personal.png"
         blurredImage={await getBase64Image("/images/projects/personal.png")}
       />
-      <div className="mt-3 md:mt-6">
-        <Website href="https://dipay.id" />
-      </div>
     </Section>
   );
 }
@@ -70,20 +81,17 @@ async function Overview() {
       </div>
       <Content title="Overview">
         <ContentParagraph>
-          <span>
-            Dipay is a digital wallet designed to make electronic payments fast,
-            practical, and secure. However, its website didn’t live up to those
-            standards. The outdated design, incomplete information, and
-            confusing navigation created friction for users. It became clear
-            that the website wasn’t just visually behind—it was affecting the
-            trust and experience of the users.
-          </span>
+          <span>What does a website transformation really look like? 🤔</span>
           <Br />
           <span>
-            The goal of this project was to rebuild the website with a focus on
-            performance, usability, and modern aesthetics. It wasn’t about
-            superficial changes; it was about creating a platform that users
-            could rely on, enjoy, and return to.
+            It’s about creating an experience that feels seamless, effortless,
+            and fast. With Next.js, Dipay now features:
+            <Br />
+            ⚡ Blazing-fast performance for a smoother experience.
+            <br />
+            🛣️ Intuitive navigation that makes exploring easy.
+            <br />
+            🖼️ Faster image loading to keep users engaged.
           </span>
         </ContentParagraph>
       </Content>
@@ -91,13 +99,13 @@ async function Overview() {
   );
 }
 
-async function Challenges() {
+async function Problem() {
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <ChartNoAxesGantt className="w-4 h-4 md:w-5 md:h-5" />
+        <CircleDashed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Challenges">
+      <Content title="Problem Statement">
         <ContentParagraph>
           <span>
             The first challenge was performance. Pages took too long to load,
@@ -114,86 +122,6 @@ async function Challenges() {
             needed to be scalable, flexible, and future-proof.
           </span>
         </ContentParagraph>
-      </Content>
-    </Section>
-  );
-}
-
-async function Contribution() {
-  return (
-    <Section className="pt-0 md:pt-0" withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <ChartNoAxesGantt className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
-      <Content title="Contribution">
-        <ContentParagraph>
-          <span>
-            I led the migration of the website to Next.js, which immediately
-            addressed many of the performance issues. By leveraging server-side
-            rendering and static generation, we made pages load faster and
-            perform more efficiently.
-          </span>
-          <Br />
-          <span>
-            In collaboration with the design team, I worked on rethinking the
-            website’s layout. We aimed for a clean, modern, and responsive
-            design that worked seamlessly across all devices. This wasn’t just
-            about aesthetics; it was about making navigation intuitive and
-            ensuring that users could find what they needed without any
-            frustration.
-          </span>
-          <Br />
-          <span>
-            I also optimized the technical aspects of the website. Scripts were
-            streamlined, assets were compressed, and the overall structure was
-            simplified. These changes reduced page load times by 40%. Behind the
-            scenes, I implemented a modular architecture that made the codebase
-            easier to maintain and scale for future needs.
-          </span>
-        </ContentParagraph>
-      </Content>
-    </Section>
-  );
-}
-
-async function Outcomes() {
-  return (
-    <Section className="pt-0 md:pt-0" withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <ChartNoAxesGantt className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
-      <Content title="Outcomes">
-        <ContentParagraph>
-          <span>
-            The revamped website delivered results immediately. Page load times
-            improved by 40%, which directly reduced user frustration. Engagement
-            rates increased by 50%, as users found the new design easier to
-            navigate and more enjoyable to use.
-          </span>
-          <Br />
-          <span>
-            Internally, the modular architecture has already proven its value,
-            making updates and new feature development faster and more
-            efficient. The website is now positioned to grow alongside Dipay’s
-            user base, supporting new features and improvements with ease.
-          </span>
-        </ContentParagraph>
-      </Content>
-    </Section>
-  );
-}
-
-function Recommendation() {
-  return (
-    <Section className="pt-0 md:pt-0 mb-6">
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Sparkle className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
-      <Content title="More">
-        <ContentParagraph>
-          Navigate to another page to dive deeper!
-        </ContentParagraph>
-        <Br />
       </Content>
     </Section>
   );
