@@ -1,4 +1,9 @@
-import { ChartNoAxesGantt, CircleDashed } from "lucide-react";
+import {
+  ChartNoAxesGantt,
+  CircleDashed,
+  CircleFadingPlus,
+  Group,
+} from "lucide-react";
 import Image from "next/image";
 
 import Br from "~/components/br";
@@ -21,6 +26,8 @@ export default function DipayWebsite() {
         <Intro />
         <Overview />
         <Problem />
+        <HeroAnimation />
+        <Close />
       </div>
     </ShellPage>
   );
@@ -48,21 +55,22 @@ async function Intro() {
         </div>
       </div>
       <ContentParagraph>
-        <span>
-          Revamped Dipay (.id) with a major upgrade using <b>Next.js 13</b>! ✨
-        </span>
+        <span>🎉 Big news!</span>
+        <Br />
+        <span>1/10 - </span>
+        <ContentLink
+          href="https://dipay.id/"
+          target="_blank"
+          text="dipay.id"
+        />{" "}
+        <span>just got a fresh new look! ✨</span>
         <Br />
         <span>
-          ✅ Modern UI
-          <br />
-          ✅ Effortless user experience
-          <br />
-          ✅ Engaging interactions
-          <br />✅ Clean, organized layout with bento grid
+          We&apos;ve packed it with thoughtful details to make your experience
+          even better.
         </span>
         <Br />
-        <span>Take a look:</span>{" "}
-        <ContentLink href="https://dipay.id/" target="_blank" text="dipay.id" />
+        <span>Check it out! 👇</span>
       </ContentParagraph>
       <Br />
       <SingleImage
@@ -81,17 +89,21 @@ async function Overview() {
       </div>
       <Content title="Overview">
         <ContentParagraph>
-          <span>What does a website transformation really look like? 🤔</span>
+          <span>2/10 - So, what does a website transformation mean? 🤔</span>
           <Br />
           <span>
-            It’s about creating an experience that feels seamless, effortless,
-            and fast. With Next.js, Dipay now features:
-            <Br />
-            ⚡ Blazing-fast performance for a smoother experience.
+            It&apos;s about delivering a seamless, effortless, and
+            lightning-fast experience. 🚀
+          </span>
+          <Br />
+          <span>
+            With Next.js, Dipay now offers:
             <br />
-            🛣️ Intuitive navigation that makes exploring easy.
+            ⚡ Blazing-fast performance for smoother interactions.
             <br />
-            🖼️ Faster image loading to keep users engaged.
+            🛣️ Intuitive navigation to make exploring a breeze.
+            <br />
+            🖼️ Faster image loading to keep you engaged.
           </span>
         </ContentParagraph>
       </Content>
@@ -107,20 +119,54 @@ async function Problem() {
       </div>
       <Content title="Problem Statement">
         <ContentParagraph>
+          <span>3/10 - The challenge we faced?</span>
+          <Br />
           <span>
-            The first challenge was performance. Pages took too long to load,
-            frustrating users and driving them away. This wasn’t just a design
-            issue—it was a technical problem that required a complete overhaul.
+            Slow load times, confusing navigation, and a lack of user engagement
+            were holding us back.
           </span>
           <Br />
           <span>
-            Navigation was another major issue. Users found it hard to locate
-            important information, and the overall layout felt unintuitive.
-            Instead of guiding users, the website left them feeling lost.
-            Finally, the existing codebase was outdated and rigid. Adding new
-            features or making updates was a time-consuming process. The website
-            needed to be scalable, flexible, and future-proof.
+            We knew Dipay deserved a website that matched its potential—fast,
+            intuitive, and delightful to use. 🚀
           </span>
+        </ContentParagraph>
+      </Content>
+    </Section>
+  );
+}
+
+async function HeroAnimation() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Group className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Hero Animation">
+        <ContentParagraph>
+          <span>
+            4/10 - Some pages have hero animations that are incredibly smooth.
+          </span>
+        </ContentParagraph>
+        <Br />
+        <video loop autoPlay className="border rounded-xl">
+          <source src="/videos/hero-animation.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </Content>
+    </Section>
+  );
+}
+
+function Close() {
+  return (
+    <Section className="pt-0 md:pt-0">
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <CircleFadingPlus className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Thanks">
+        <ContentParagraph>
+          10/10 - Thank you for reading this thread.
         </ContentParagraph>
       </Content>
     </Section>

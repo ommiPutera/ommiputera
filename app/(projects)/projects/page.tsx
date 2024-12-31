@@ -28,7 +28,7 @@ export default async function ProjectsPage() {
               Projects
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
-              Here&apos;s a glimpse of projects and ideas I&apos;ve worked on.
+              Here are some glimpses of my work
             </ContentParagraph>
           </div>
           <div className="border rounded-full bg-neutral-100">
