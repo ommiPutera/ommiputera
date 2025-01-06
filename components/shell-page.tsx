@@ -60,12 +60,9 @@ export function Footer() {
     <div className="pt-24 md:pt-32">
       <nav role="navigation" className="pb-32">
         <div className="text-center pb-6">
-          <h1 className="text-sm font-bold hover:text-neutral-400">
-            <Link href="/">ommiputera.com</Link>
+          <h1 className="text-sm font-normal text-muted-foreground max-w-[250px] mx-auto">
+            ommiputera.com was built with Kapal Api and 76 Mangga.
           </h1>
-          <p className="text-sm text-muted-foreground pt-1">
-            Built with Kapal Api and 76 Mangga.
-          </p>
         </div>
         <ul className="flex justify-center items-center">
           <li className="text-muted-foreground hover:text-neutral-600">

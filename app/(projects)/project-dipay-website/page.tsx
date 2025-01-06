@@ -1,8 +1,10 @@
 import {
+  AudioLines,
   ChartNoAxesGantt,
   CircleDashed,
   CircleFadingPlus,
   Group,
+  Package,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -27,6 +29,8 @@ export default function DipayWebsite() {
         <Overview />
         <Problem />
         <HeroAnimation />
+        <AnimatedBento />
+        <PersonalNote />
         <Close />
       </div>
     </ShellPage>
@@ -66,11 +70,11 @@ async function Intro() {
         <span>just got a fresh new look! ✨</span>
         <Br />
         <span>
-          We&apos;ve packed it with thoughtful details to make your experience
-          even better.
+          We&apos;ve packed it with thoughtful details to elevate your
+          experience.
         </span>
         <Br />
-        <span>Check it out! 👇</span>
+        <span>Take a closer look 👇</span>
       </ContentParagraph>
       <Br />
       <SingleImage
@@ -89,10 +93,10 @@ async function Overview() {
       </div>
       <Content title="Overview">
         <ContentParagraph>
-          <span>2/10 - So, what does a website transformation mean? 🤔</span>
+          <span>2/10 - Here&apos;s what a website transformation means:</span>
           <Br />
           <span>
-            It&apos;s about delivering a seamless, effortless, and
+            It&apos;s all about delivering a seamless, effortless, and
             lightning-fast experience. 🚀
           </span>
           <Br />
@@ -101,7 +105,7 @@ async function Overview() {
             <br />
             ⚡ Blazing-fast performance for smoother interactions.
             <br />
-            🛣️ Intuitive navigation to make exploring a breeze.
+            🧭 Intuitive navigation for effortless exploration.
             <br />
             🖼️ Faster image loading to keep you engaged.
           </span>
@@ -119,15 +123,14 @@ async function Problem() {
       </div>
       <Content title="Problem Statement">
         <ContentParagraph>
-          <span>3/10 - The challenge we faced?</span>
+          <span>3/10 - The challenges we tackled:</span>
           <Br />
           <span>
-            Slow load times, confusing navigation, and a lack of user engagement
-            were holding us back.
+            Slow load times, confusing navigation, and low user engagement.
           </span>
           <Br />
           <span>
-            We knew Dipay deserved a website that matched its potential—fast,
+            Dipay deserved a website that matched its potential: fast,
             intuitive, and delightful to use. 🚀
           </span>
         </ContentParagraph>
@@ -145,14 +148,77 @@ async function HeroAnimation() {
       <Content title="Hero Animation">
         <ContentParagraph>
           <span>
-            4/10 - Some pages have hero animations that are incredibly smooth.
+            4/10 - Some pages now feature hero animations that are incredibly
+            smooth.
           </span>
         </ContentParagraph>
         <Br />
-        <video loop autoPlay className="border rounded-xl">
+        <video
+          loop
+          autoPlay
+          playsInline
+          muted
+          className="border rounded-xl h-[calc(100vw_/_2.5)] md:h-[calc(var(--shell-page-width)_/_2.7)]"
+        >
           <source src="/videos/hero-animation.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+      </Content>
+    </Section>
+  );
+}
+
+function AnimatedBento() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Package className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Animated Bento Card">
+        <ContentParagraph>
+          <span>
+            5/10 - Here&apos;s one of my favorite details: the animation for
+            assets in the bento-style layout.
+          </span>
+        </ContentParagraph>
+        <Br />
+        <span>
+          When you hover over a card, the asset zooms in smoothly, adding depth
+          and making interactions feel more immersive. 🎥
+        </span>
+        <Br />
+        <span>
+          This subtle effect enhances the browsing experience and breathes life
+          into the layout.
+        </span>
+        <Br />
+        <video
+          loop
+          autoPlay
+          playsInline
+          muted
+          className="border rounded-xl h-[calc(100vw_/_1.2)] md:h-[calc(var(--shell-page-width)_/_1.27)]"
+        >
+          <source src="/videos/animated-bento.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </Content>
+    </Section>
+  );
+}
+
+function PersonalNote() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <AudioLines className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Personal Note">
+        <ContentParagraph>
+          9/10 - Contributing to this transformation was a rewarding journey!
+          It’s exciting to see how thoughtful design and tech can improve
+          everyday experiences.
+        </ContentParagraph>
       </Content>
     </Section>
   );
@@ -166,7 +232,9 @@ function Close() {
       </div>
       <Content title="Thanks">
         <ContentParagraph>
-          10/10 - Thank you for reading this thread.
+          10/10 - Thank you for reading this thread. I’d love to hear your
+          thoughts on the new look and experience at Dipay. Let’s build the
+          future of cashless, together. 💙
         </ContentParagraph>
       </Content>
     </Section>

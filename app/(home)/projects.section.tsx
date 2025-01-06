@@ -87,12 +87,14 @@ async function DipayWebsite({
           <ContentParagraph>
             <span>🎉 Big news!</span>
             <Br />
-            <span>1/5 - dipay.id just got a fresh new look! ✨</span>
+            <span>1/10 - dipay.id just got a fresh new look! ✨</span>
             <Br />
             <span>
-              We&apos;ve packed it with thoughtful details to make your
-              experience even better.
+              We&apos;ve packed it with thoughtful details to elevate your
+              experience.
             </span>
+            <Br />
+            <span>Take a closer look 👇</span>
           </ContentParagraph>
           <Br />
           <ProjectCover
