@@ -3,7 +3,7 @@ export const getProjectPosts = (): TProject[] => [
     title: "Revamped Dipay Website using Next.js",
     description: "Dipay Indonesia - 2023",
     summary:
-      "Revamping Dipay’s website transformed it into a faster, modern, and user-friendly platform, aligning with its mission to deliver secure and seamless digital payments. 🚀",
+      "We recently revamped dipay.id with a focus on performance, scalability, and user experience.",
     slug: "project-dipay-website",
     coverPath: "/images/projects/personal.png",
     href: "https://dipay.id/",

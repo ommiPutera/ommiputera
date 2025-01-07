@@ -1,10 +1,13 @@
 import {
   AudioLines,
-  ChartNoAxesGantt,
+  Circle,
   CircleDashed,
   CircleFadingPlus,
-  Group,
-  Package,
+  Crown,
+  Globe,
+  Play,
+  Scan,
+  Wrench,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -17,8 +20,6 @@ import Content, {
 import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
-// import { getSingleProject } from "~/data/project";
-
 import { getBase64Image } from "~/utils/getImageBlur";
 
 export default function DipayWebsite() {
@@ -26,10 +27,13 @@ export default function DipayWebsite() {
     <ShellPage withBack>
       <div>
         <Intro />
-        <Overview />
-        <Problem />
+        <Stack />
+        <Challenges />
+        <Solution />
         <HeroAnimation />
         <AnimatedBento />
+        <SEO />
+        <DeveloperProductivity />
         <PersonalNote />
         <Close />
       </div>
@@ -38,7 +42,6 @@ export default function DipayWebsite() {
 }
 
 async function Intro() {
-  // const project = await getSingleProject("project-dipay-website");
   return (
     <Section className="border-b mb-3 md:mb-8">
       <div className="flex gap-3 mb-0.5">
@@ -62,11 +65,8 @@ async function Intro() {
         <span>🎉 Big news!</span>
         <Br />
         <span>1/10 - </span>
-        <ContentLink
-          href="https://dipay.id/"
-          target="_blank"
-          text="dipay.id"
-        />{" "}
+        <ContentLink href="https://dipay.id/" target="_blank" text="Dipay" />
+        {" (.id) "}
         <span>just got a fresh new look! ✨</span>
         <Br />
         <span>
@@ -74,7 +74,7 @@ async function Intro() {
           experience.
         </span>
         <Br />
-        <span>Take a closer look 👇</span>
+        <span>Here&apos;s the behind-the-scenes story. 👇</span>
       </ContentParagraph>
       <Br />
       <SingleImage
@@ -85,29 +85,25 @@ async function Intro() {
   );
 }
 
-async function Overview() {
+function Stack() {
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <ChartNoAxesGantt className="w-4 h-4 md:w-5 md:h-5" />
+        <Wrench className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Overview">
+      <Content title="The Stack">
         <ContentParagraph>
-          <span>2/10 - Here&apos;s what a website transformation means:</span>
-          <Br />
           <span>
-            It&apos;s all about delivering a seamless, effortless, and
-            lightning-fast experience. 🚀
+            2/10 - We rebuilt the entire site using:
+            <Br />
+            ⚡ Next.js for blazing-fast SSR and SSG.
+            <br />
+            🔍 TailwindCSS for clean and maintainable styling.
           </span>
           <Br />
           <span>
-            With Next.js, Dipay now offers:
-            <br />
-            ⚡ Blazing-fast performance for smoother interactions.
-            <br />
-            🧭 Intuitive navigation for effortless exploration.
-            <br />
-            🖼️ Faster image loading to keep you engaged.
+            Every choice was intentional to create a fast, reliable, and
+            scalable website.
           </span>
         </ContentParagraph>
       </Content>
@@ -115,23 +111,27 @@ async function Overview() {
   );
 }
 
-async function Problem() {
+function Challenges() {
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <CircleDashed className="w-4 h-4 md:w-5 md:h-5" />
       </div>
-      <Content title="Problem Statement">
+      <Content title="The Challenges">
         <ContentParagraph>
-          <span>3/10 - The challenges we tackled:</span>
-          <Br />
           <span>
-            Slow load times, confusing navigation, and low user engagement.
+            3/10 - Building something new isn&apos;t without its struggles:
+            <Br />
+            1️⃣ Slow load times were killing the user experience.
+            <br />
+            2️⃣ Scaling was tricky with the old architecture.
+            <br />
+            3️⃣ We needed better tools for seamless updates.
           </span>
           <Br />
           <span>
-            Dipay deserved a website that matched its potential: fast,
-            intuitive, and delightful to use. 🚀
+            These problems weren&apos;t just technical—they directly affected
+            users.
           </span>
         </ContentParagraph>
       </Content>
@@ -139,16 +139,43 @@ async function Problem() {
   );
 }
 
-async function HeroAnimation() {
+function Solution() {
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Group className="w-4 h-4 md:w-5 md:h-5" />
+        <Circle className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="The Solution">
+        <ContentParagraph>
+          <span>
+            4/10 - Our goal: Speed and simplicity.
+            <Br />
+            ✅ Optimized APIs to deliver data faster.
+            <br />
+            ✅ Implemented image optimization to reduce payloads.
+            <br />✅ Built reusable components for consistent UI + maintainable
+            code.
+          </span>
+          <Br />
+          <span>
+            The result? A site that’s 3x faster and infinitely easier to manage.
+          </span>
+        </ContentParagraph>
+      </Content>
+    </Section>
+  );
+}
+
+function HeroAnimation() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Play className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Hero Animation">
         <ContentParagraph>
           <span>
-            4/10 - Some pages now feature hero animations that are incredibly
+            5/10 - Some pages now feature hero animations that are incredibly
             smooth.
           </span>
         </ContentParagraph>
@@ -172,24 +199,21 @@ function AnimatedBento() {
   return (
     <Section className="pt-0 md:pt-0" withConnector>
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <Package className="w-4 h-4 md:w-5 md:h-5" />
+        <Scan className="w-4 h-4 md:w-5 md:h-5" />
       </div>
       <Content title="Animated Bento Card">
         <ContentParagraph>
           <span>
-            5/10 - Here&apos;s one of my favorite details: the animation for
-            assets in the bento-style layout.
+            6/10 - Here&apos;s one of my favorite details:
+            <br />
+            <b>The bento-style card animations.</b>
           </span>
         </ContentParagraph>
         <Br />
         <span>
-          When you hover over a card, the asset zooms in smoothly, adding depth
-          and making interactions feel more immersive. 🎥
-        </span>
-        <Br />
-        <span>
-          This subtle effect enhances the browsing experience and breathes life
-          into the layout.
+          Hovering over a card zooms the asset smoothly, adding depth and making
+          interactions immersive. This subtle effect enhances browsing and
+          breathes life into the layout. 🎥
         </span>
         <Br />
         <video
@@ -207,6 +231,55 @@ function AnimatedBento() {
   );
 }
 
+function SEO() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Globe className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="SEO">
+        <ContentParagraph>
+          <span>7/10 - We also made sure the site is SEO-friendly. 🚀</span>
+          <Br />
+          <span>
+            By optimizing metadata and implementing structured data, we&apos;re
+            helping search engines understand the site better.
+          </span>
+          <Br />
+          <span>Good devs write code. Great devs write accessible code.</span>
+        </ContentParagraph>
+      </Content>
+    </Section>
+  );
+}
+
+function DeveloperProductivity() {
+  return (
+    <Section className="pt-0 md:pt-0" withConnector>
+      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
+        <Crown className="w-4 h-4 md:w-5 md:h-5" />
+      </div>
+      <Content title="Developer Productivity">
+        <ContentParagraph>
+          <span>
+            8/10 - We also focused on developer productivity.
+            <Br />
+            1️⃣ Modularized the codebase with strict TypeScript typing.
+            <br />
+            2️⃣ Set up a CI/CD pipeline for automated testing and deployment.
+            <br />
+            3️⃣ Containerized the app for consistent development environments.
+            <br />
+            4️⃣ Implemented analytics to track performance and user behavior.
+          </span>
+          <Br />
+          <span>Better dev tools = faster iteration cycles.</span>
+        </ContentParagraph>
+      </Content>
+    </Section>
+  );
+}
+
 function PersonalNote() {
   return (
     <Section className="pt-0 md:pt-0" withConnector>
@@ -215,9 +288,21 @@ function PersonalNote() {
       </div>
       <Content title="Personal Note">
         <ContentParagraph>
-          9/10 - Contributing to this transformation was a rewarding journey!
-          It’s exciting to see how thoughtful design and tech can improve
-          everyday experiences.
+          <span>
+            9/10 - Contributing to this transformation was a rewarding journey!
+            It&apos;s exciting to see how thoughtful design and tech can improve
+            everyday experiences.
+          </span>
+          <Br />
+          <span>
+            This was more than just a project; it was a deep dive into what
+            makes great web apps tick.
+          </span>
+          <Br />
+          <span>
+            From solving tricky edge cases to optimizing for scale, it was a
+            reminder of why I love being a developer.
+          </span>
         </ContentParagraph>
       </Content>
     </Section>
@@ -232,9 +317,9 @@ function Close() {
       </div>
       <Content title="Thanks">
         <ContentParagraph>
-          10/10 - Thank you for reading this thread. I’d love to hear your
-          thoughts on the new look and experience at Dipay. Let’s build the
-          future of cashless, together. 💙
+          10/10 - Thank you for reading my thread. The best way to reach me is
+          by email at me@ommiputera.com. Let&apos;s build the future together.
+          💙
         </ContentParagraph>
       </Content>
     </Section>
