@@ -1,0 +1,23 @@
+{
+  "status": "ready",
+  "originalFilePath": "videos/animated-bento.mp4",
+  "provider": "mux",
+  "providerMetadata": {
+    "mux": {
+      "uploadId": "CTj7PawziUcDd01p5lyA8CC00uiNco8J21VQG01Vd2TcFo",
+      "assetId": "kVv00ogxtDOJ63W009YjxtmYNRNu1Zh010002FL0201wlHcUk4",
+      "playbackId": "400BXWyjZOpnDEYhP6YZ9sduMA01fSB702kJP8aqKUZtEQ"
+    }
+  },
+  "createdAt": 1736437529948,
+  "updatedAt": 1736437942727,
+  "size": 462061,
+  "sources": [
+    {
+      "src": "https://stream.mux.com/400BXWyjZOpnDEYhP6YZ9sduMA01fSB702kJP8aqKUZtEQ.m3u8",
+      "type": "application/x-mpegURL"
+    }
+  ],
+  "poster": "https://image.mux.com/400BXWyjZOpnDEYhP6YZ9sduMA01fSB702kJP8aqKUZtEQ/thumbnail.webp",
+  "blurDataURL": "data:image/webp;base64,eyJlcnJvciI6eyJjb2RlIjo5LCJtZXNzYWdlIjoiUGxheWJhY2sgSUQgbm90IHJlYWR5In19"
+}
