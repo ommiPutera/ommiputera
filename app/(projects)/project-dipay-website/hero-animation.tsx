@@ -1,4 +1,5 @@
 import { Play } from "lucide-react";
+import Video from 'next-video';
 
 import { list } from '@vercel/blob';
 
@@ -25,17 +26,16 @@ export default async function HeroAnimation() {
           </span>
         </ContentParagraph>
         <Br />
-        <video
+        <Video
           loop
           autoPlay
-          playsInline
           muted
-          className="border rounded-xl h-[calc(100vw_/_2.5)] md:h-[calc(var(--shell-page-width)_/_2.7)]"
+          controls={false}
+          className="border overflow-hidden rounded-xl h-[calc(100vw_/_2.5)] md:h-[calc(var(--shell-page-width)_/_2.7)]"
         >
           <source src={url} type="video/mp4" />
-          {/* <source src="/videos/hero-animation.mp4" type="video/mp4" /> */}
           Your browser does not support the video tag.
-        </video>
+        </Video>
       </Content>
     </Section>
   );
