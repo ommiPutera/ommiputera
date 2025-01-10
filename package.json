@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev & npx next-video sync -w",
     "format": "prettier --check .prettierignore .",
     "format:fix": "prettier --write .prettierignore .",
     "lint": "next lint",
