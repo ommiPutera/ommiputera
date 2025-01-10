@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev & npx next-video sync -w",
+    "dev": "next dev",
     "format": "prettier --check .prettierignore .",
     "format:fix": "prettier --write .prettierignore .",
     "lint": "next lint",
@@ -22,7 +22,6 @@
     "lucide-react": "^0.460.0",
     "next": "^15.1.0",
     "next-themes": "^0.4.3",
-    "next-video": "^2.0.0",
     "nextjs-toploader": "^3.7.15",
     "plaiceholder": "^3.0.0",
     "react": "^19.0.0",

@@ -1,13 +1,8 @@
-"use client";
-
 import { Play } from "lucide-react";
 
 import Br from "~/components/br";
 import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
-
-import Video from "next-video";
-import getStarted from "/videos/hero-animation.mp4";
 
 export default function HeroAnimation() {
   return (
@@ -23,22 +18,16 @@ export default function HeroAnimation() {
           </span>
         </ContentParagraph>
         <Br />
-        <Video
-          src={getStarted}
-          controls={false}
-          className="border rounded-xl h-[calc(100vw_/_2.5)] md:h-[calc(var(--shell-page-width)_/_2.7)]"
-        />
-        {/* <video
+        <video
           loop
           autoPlay
           playsInline
           muted
-          preload="none"
           className="border rounded-xl h-[calc(100vw_/_2.5)] md:h-[calc(var(--shell-page-width)_/_2.7)]"
         >
           <source src="/videos/hero-animation.mp4" type="video/mp4" />
           Your browser does not support the video tag.
-        </video> */}
+        </video>
       </Content>
     </Section>
   );

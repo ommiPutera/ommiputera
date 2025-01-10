@@ -1,13 +1,8 @@
-"use cliebt";
-
 import { Scan } from "lucide-react";
 
 import Br from "~/components/br";
 import Content, { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
-
-import Video from "next-video";
-import getStarted from "/videos/animated-bento.mp4";
 
 export default function AnimatedBento() {
   return (
@@ -30,22 +25,17 @@ export default function AnimatedBento() {
           breathes life into the layout. 🎥
         </span>
         <Br />
-        <Video
-          src={getStarted}
-          controls={false}
-          className="border rounded-xl h-[calc(100vw_/_1.2)] md:h-[calc(var(--shell-page-width)_/_1.27)]"
-        />
-        {/* <video
+        <video
           loop
           autoPlay
           playsInline
           muted
-          preload="none"
+          src="/videos/animated-bento.mp4"
           className="border rounded-xl h-[calc(100vw_/_1.2)] md:h-[calc(var(--shell-page-width)_/_1.27)]"
         >
-          <source src="/videos/animated-bento.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video> */}
+          {/* <source src="/videos/animated-bento.mp4" type="video/mp4" /> */}
+          {/* Your browser does not support the video tag. */}
+        </video>
       </Content>
     </Section>
   );
