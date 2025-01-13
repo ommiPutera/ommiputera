@@ -63,8 +63,6 @@ async function Intro() {
         </div>
       </div>
       <ContentParagraph>
-        <span>🎉 Big news!</span>
-        <Br />
         <span>1/10 - </span>
         <ContentLink href="https://dipay.id/" target="_blank" text="Dipay" />
         {" (.id) "}

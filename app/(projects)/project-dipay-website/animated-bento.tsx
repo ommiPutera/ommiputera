@@ -30,11 +30,10 @@ export default function AnimatedBento() {
           autoPlay
           playsInline
           muted
-          src="/videos/animated-bento.mp4"
           className="border rounded-xl h-[calc(100vw_/_1.2)] md:h-[calc(var(--shell-page-width)_/_1.27)]"
         >
-          {/* <source src="/videos/animated-bento.mp4" type="video/mp4" /> */}
-          {/* Your browser does not support the video tag. */}
+          <source src="/videos/animated-bento.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
         </video>
       </Content>
     </Section>

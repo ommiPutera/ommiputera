@@ -67,14 +67,7 @@ function Close() {
   );
 }
 
-async function DipayWebsite({
-  // title,
-  // description,
-  // summary,
-  slug,
-  href,
-  coverPath,
-}: TProject) {
+async function DipayWebsite({ slug, href, coverPath }: TProject) {
   return (
     <Section
       withConnector
@@ -85,8 +78,6 @@ async function DipayWebsite({
         <OmmiAvatar />
         <Content title="Ommi Putera" description="Software Engineer (Web)">
           <ContentParagraph>
-            <span>🎉 Big news!</span>
-            <Br />
             <span>1/10 - Dipay (.id) just got a fresh new look! ✨</span>
             <Br />
             <span>
