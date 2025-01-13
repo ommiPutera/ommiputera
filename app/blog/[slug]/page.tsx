@@ -33,7 +33,7 @@ export default async function Blog({
     <ShellPage withBack>
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
-          <div className="flex flex-col gap- px-6 md:px-12">
+          <div className="flex flex-col gap-2 px-4">
             <h2 className="text-xl font-bold">{post.metadata.title}</h2>
             <h3 className="text-sm text-muted-foreground mt-2">
               {formatDate(post.metadata.publishedAt)}
@@ -53,7 +53,7 @@ export default async function Blog({
               />
             </div>
           </div>
-          <div className="flex gap-2 px-6 md:px-12">
+          <div className="flex gap-2 px-4">
             <div className="w-fit max-w-10">
               <Image
                 src="/images/profile.jpeg"
@@ -74,7 +74,7 @@ export default async function Blog({
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert text-sm mt-6 mx-6 md:mx-auto max-w-[472px] mb-6 font-normal md:font-medium"
+            className="prose dark:prose-invert text-sm mt-4 mx-4 md:mx-auto max-w-[572px] mb-4 font-normal md:font-medium"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>

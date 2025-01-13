@@ -10,9 +10,7 @@ Sebagian komponen dari **ommiputera.com** dibangun menggunakan [**Shadcn/UI**](h
 
 ### Alasan utama
 
-Inilah alasan utama saya:
-
-> Shadcn/UI memberikan saya fleksibilitas tinggi dalam menyesuaikan komponen-komponennya dengan berbagai *design system*.
+> Shadcn/UI memberikan saya fleksibilitas dalam menyesuaikan komponennya dengan *design system*.
 
 Jadi, apa artinya? Mari kita bahas..
 
@@ -20,21 +18,21 @@ Jadi, apa artinya? Mari kita bahas..
 
 Dengan Shadcn/UI, saya memiliki kontrol penuh atas kode setiap komponen UI yang saya gunakan. Ini berarti saya dapat:
 
-- Menyesuaikan komponen secara mendetail untuk mencocokkan *design system* apa pun.
-- Melakukan pengembangan lanjutan tanpa terikat pada batasan bawaan framework.
+- Menyesuaikan komponen-komponennya secara mendetail mengikuti *design system* apa pun.
+- Melakukan pengembangan lanjutan atau menambah fitur yang dibutuhkan tanpa terikat pada batasan bawaan _library_.
 - Mengoptimalkan UI untuk memastikan performa tinggi, aksesibilitas, dan kemudahan dalam *maintainance*.
 
-Berbeda dengan framework UI konvensional seperti [**Mantine**](https://mantine.dev/), [**Bootstrap**](https://getbootstrap.com/) yang mengharuskan kita untuk menyesuaikan UI desain berdasarkan aturan mereka dan terkadang sangat *pain* untuk memodifikasi komponennya.
+Berbeda dengan _framework/library_ UI konvensional seperti [**Mantine**](https://mantine.dev/) dan [**Bootstrap**](https://getbootstrap.com/) yang mengharuskan saya untuk menyesuaikan UI desain mereka berdasarkan aturan dan terkadang saya merasa sangat *pain* untuk memodifikasi baik komponennya ataupun stylingnya.
 
 ### Modularitas
 
-> Hanya menginstall komponen yang relevan pada projectX
+> Hanya menginstall komponen yang dibutuhkan pada project
 
-Salah satu keunggulan terbesar Shadcn/UI adalah modularitasnya. Tidak seperti framework UI lain yang mengharuskan saya untuk menginstal seluruh paket komponen, meskipun tidak semuanya dibutuhkan, Shadcn/UI memungkinkan saya untuk hanya menginstal komponen yang relevan dengan proyek.
+Salah satu keunggulan terbesar Shadcn/UI adalah modularitasnya. Tidak seperti _framework/library_ UI lain yang mengharuskan saya untuk menginstal semua _packages_ (paket komponen), meskipun tidak semuanya dibutuhkan, Shadcn/UI memungkinkan saya untuk hanya menginstal komponen yang relevan dengan project.
 
-Pendekatan ini memberikan beberapa manfaat:
+Pendekatan ini memberikan manfaat yang signifkan pada project seperti:
 
-- Menghemat ruang penyimpanan karena Anda tidak perlu menginstal seluruh paket komponen.
+- Menghemat ruang penyimpanan karena saya tidak perlu menginstal seluruh paket komponen.
 - Meningkatkan efisiensi pengembangan dengan memungkinkan fokus pada fitur-fitur yang benar-benar penting.
 
 Misalnya, untuk menambahkan komponen Input:
@@ -43,7 +41,84 @@ Misalnya, untuk menambahkan komponen Input:
 npx shadcn@latest add input
 ```
 
-Dengan hanya menjalankan perintah di atas, saya sudah mendapatkan komponen Input yang aksesibel, modern, dan memiliki desain minimalis yang langsung siap digunakan.
+Dengan hanya menjalankan CLI di atas, saya sudah memiliki kode komponen Input yang aksesibel, modern, dan memiliki desain minimalis yang langsung siap digunakan.
+
+### Kode
+
+Setelah menginstal komponen Input, maka file komponen tersebut berada di dalam folder components/ui, seperti ini: 
+
+```tsx
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    return (
+      <input
+        type={type}
+        className={cn(
+          "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+          className
+        )}
+        ref={ref}
+        {...props}
+      />
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }
+```
+
+Bagaiman kalo saya ingin menambahkan ikon mata untuk melihat password? 
+
+```tsx
+import * as React from "react"
+
+import { cn } from "@/lib/utils"
+
+const Input = React.forwardRef<HTMLInputElement, React.ComponentProps<"input">>(
+  ({ className, type, ...props }, ref) => {
+    let [showPassword, setShowPassword] = React.useState(false);
+    let togglePasswordVisibility = () => {
+      setShowPassword(!showPassword);
+    };
+
+    let inputType = type === "password" && showPassword ? "text" : type;
+    return (
+      <div className="relative">
+        <input
+          type={inputType}
+          className={cn(
+            "flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 md:text-sm",
+            className
+          )}
+          ref={ref}
+          {...props}
+        />
+        {type === "password" && (
+          <div
+            role="button"
+            className="focus-visible:outline-primary-500 absolute right-2 top-1/2 flex h-full w-11 -translate-y-1/2 items-center justify-center rounded-md"
+            onClick={togglePasswordVisibility}
+          >
+            {showPassword ? (
+              // icons.visibility
+            ) : (
+              // icons.visibility_off
+            )}
+          </div>
+        )}
+      </div>
+    )
+  }
+)
+Input.displayName = "Input"
+
+export { Input }
+```
 
 ### Kesimpulan 
 
