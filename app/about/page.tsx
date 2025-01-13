@@ -112,7 +112,7 @@ async function Values() {
           The principles that guide my work and life.
         </ContentParagraph>
         <div className="mt-2">
-          <ContentParagraph className="font-bold">
+          <ContentParagraph className="md:font-bold">
             Continuous Learning
           </ContentParagraph>
           <ContentParagraph>
@@ -123,7 +123,7 @@ async function Values() {
         </div>
         <Br />
         <div>
-          <ContentParagraph className="font-bold">Empathy</ContentParagraph>
+          <ContentParagraph className="md:font-bold">Empathy</ContentParagraph>
           <ContentParagraph>
             Empathy bridges the gap between technology and the people it serves.
             By understanding the needs and perspectives of users and clients, I
@@ -133,7 +133,7 @@ async function Values() {
         </div>
         <Br />
         <div>
-          <ContentParagraph className="font-bold">
+          <ContentParagraph className="md:font-bold">
             A Shared Desire for Life
           </ContentParagraph>
           <ContentParagraph>
