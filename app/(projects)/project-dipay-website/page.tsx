@@ -95,9 +95,21 @@ function Stack() {
           <span>
             2/10 - We rebuilt the entire site using:
             <Br />
-            ⚡ Next.js for blazing-fast SSR and SSG.
+            - Next.js v13
             <br />
-            🔍 TailwindCSS for clean and maintainable styling.
+            - Sass / CSS
+            <br />
+            - TypeScript
+            <br />
+            - Headless UI
+            <br />
+            - Reach UI
+            <br />
+            - Framer Motion
+            <br />
+            - Zustand
+            <br />
+            - Swiper
           </span>
           <Br />
           <span>

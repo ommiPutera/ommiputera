@@ -1,4 +1,4 @@
-import { ArrowUpRight, FolderClosed, FolderOpen } from "lucide-react";
+import { ArrowUpRight, FolderClosed } from "lucide-react";
 import Image from "next/image";
 
 import Link, { LinkProps } from "next/link";
@@ -17,12 +17,13 @@ export default function Projects() {
   const projects = getProjectPosts();
   return (
     <div>
-      <Intro />
       <div className="flex flex-col">
         {projects.slice(0, 2).map((project) => {
           switch (project.slug) {
             case "project-dipay-website":
               return <DipayWebsite key={project.slug} {...project} />;
+            case "project-naufal-website":
+              return <NaufalWebsite key={project.slug} {...project} />;
             default:
               return <div className="hidden" key={project.slug}></div>;
           }
@@ -30,19 +31,6 @@ export default function Projects() {
       </div>
       <Close />
     </div>
-  );
-}
-
-function Intro() {
-  return (
-    <Section withConnector>
-      <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
-        <FolderOpen className="w-4 h-4 md:w-5 md:h-5" />
-      </div>
-      <Content title="Projects 🔥">
-        <ContentParagraph>Here are some glimpses of my work</ContentParagraph>
-      </Content>
-    </Section>
   );
 }
 
@@ -71,7 +59,6 @@ async function DipayWebsite({ slug, href, coverPath }: TProject) {
   return (
     <Section
       withConnector
-      className="pt-0 md:pt-0"
       connectorClassName="top-0 h-[calc(100%_-_0px)]"
     >
       <Link href={"/" + slug} prefetch>
@@ -86,6 +73,34 @@ async function DipayWebsite({ slug, href, coverPath }: TProject) {
             </span>
             <Br />
             <span>Here&apos;s the behind-the-scenes story. 👇</span>
+          </ContentParagraph>
+          <Br />
+          <ProjectCover
+            src={coverPath}
+            blurredImage={await getBase64Image(coverPath)}
+          />
+        </Content>
+      </Link>
+      <div className="flex gap-3 md:gap-6 mt-3 ml-[48px]">
+        <ReadMore href={"/" + slug} />
+        <Website href={href} />
+      </div>
+    </Section>
+  );
+}
+
+async function NaufalWebsite({ slug, href, coverPath }: TProject) {
+  return (
+    <Section
+      withConnector
+      className="pt-0 md:pt-0"
+      connectorClassName="top-0 h-[calc(100%_-_0px)]"
+    >
+      <Link href={"/" + slug} prefetch>
+        <OmmiAvatar />
+        <Content title="Ommi Putera" description="Software Engineer (Web)">
+          <ContentParagraph>
+            <span>Naufal Ghifari <b>Personal Website</b></span>
           </ContentParagraph>
           <Br />
           <ProjectCover

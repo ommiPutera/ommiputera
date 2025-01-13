@@ -8,15 +8,15 @@ export const getProjectPosts = (): TProject[] => [
     coverPath: "/images/projects/personal.png",
     href: "https://dipay.id/",
   },
-  // {
-  //   title: "Naufal Ghifari Website",
-  //   description: "Personal/porfolio",
-  //   summary:
-  //     "Transformed creative design into responsive, high-performance platform.",
-  //   slug: "project-naufal-website",
-  //   coverPath: "/images/projects/naufal-page.jpeg",
-  //   href: "https://naufalghfr.vercel.app/",
-  // },
+  {
+    title: "Naufal Ghifari Website",
+    description: "Personal/porfolio",
+    summary:
+      "Transformed creative design into responsive, high-performance platform.",
+    slug: "project-naufal-website",
+    coverPath: "/images/projects/naufal-page.jpeg",
+    href: "https://naufalghfr.vercel.app/",
+  },
 ];
 
 export function getSingleProject(slug: string) {

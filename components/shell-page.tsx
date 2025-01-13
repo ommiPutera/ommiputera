@@ -61,7 +61,7 @@ export function Footer() {
       <nav role="navigation" className="pb-32">
         <div className="text-center pb-6">
           <h1 className="text-sm font-normal text-muted-foreground max-w-[250px] mx-auto">
-            ommiputera.com was built with Kapal Api and 76 Mangga.
+            Built with Kapal Api and 76 Mangga.
           </h1>
         </div>
         <ul className="flex justify-center items-center">
