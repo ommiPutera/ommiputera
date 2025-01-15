@@ -108,8 +108,7 @@ function Stack() {
             - Framer Motion
             <br />
             - Zustand
-            <br />
-            - Swiper
+            <br />- Swiper
           </span>
           <Br />
           <span>

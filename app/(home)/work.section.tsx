@@ -31,28 +31,28 @@ export default function Work() {
         {isExpanded ? (
           <>
             <ContentParagraph>
-              As a Full Stack Engineer at Dipay, I&apos;m responsible for
+              I work as a Full Stack Engineer at Dipay and am responsible for
               developing complex, end-to-end solutions that drive business
-              success. I&apos;ve worked on everything from improving UI/UX to
-              integrating scalable backend systems.
+              success.
             </ContentParagraph>
             <Br />
             <ContentParagraph>
-              My technical expertise includes React and TypeScript, which I
-              apply to build highly maintainable and efficient applications.
+              My technical expertise includes React and TypeScript, which I use
+              to build highly maintainable and efficient applications.
             </ContentParagraph>
             <Br />
             <ContentParagraph>
-              One of my accomplishments at Dipay was leading the development of
-              <b> Dipay Enterprise (Disbursement)</b> — a web app designed to
-              automate mass fund transfers for businesses.
+              One of my significant achievements at Dipay is leading the
+              development of Dipay Enterprise (Disbursement), a web app designed
+              to automate mass fund transfers for businesses.
             </ContentParagraph>
           </>
         ) : (
           <>
             <ContentParagraph>
-              As a Full Stack Engineer at Dipay, I&apos;m responsible for
+              I work as a Full Stack Engineer at Dipay and am responsible for
               developing complex, end-to-end solutions that drive business
+              success.
             </ContentParagraph>
             <ContentParagraph>
               <span

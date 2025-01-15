@@ -1,7 +1,4 @@
-import {
-  Link,
-  Wrench
-} from "lucide-react";
+import { Link, Wrench } from "lucide-react";
 import Image from "next/image";
 
 import Br from "~/components/br";
@@ -70,8 +67,7 @@ function Stack() {
             - Styled Components
             <br />
             - Mantine
-            <br />
-            - TypeScript
+            <br />- TypeScript
           </span>
         </ContentParagraph>
       </Content>
@@ -87,7 +83,12 @@ function Links() {
       </div>
       <Content title="Link">
         <ContentParagraph>
-          Website: <ContentLink href="https://naufalghfr.vercel.app/" text="Naufal Ghifari" target="_blank" />
+          Website:{" "}
+          <ContentLink
+            href="https://naufalghfr.vercel.app/"
+            text="Naufal Ghifari"
+            target="_blank"
+          />
         </ContentParagraph>
       </Content>
     </Section>

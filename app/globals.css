@@ -33,9 +33,12 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    --shell-page-width: 760px;
+    --shell-page-width: 720px;
     --header-height: 92px;
     --header-height-mobile: 76px;
+
+    --bottom-border-height: 25px;
+    --bottom-border-height-mobile: 0.625rem;
   }
 
   .dark {
@@ -134,7 +137,6 @@ code[data-line-numbers] > [data-line]::before {
   counter-increment: line;
   content: counter(line);
   @apply inline-block w-4 mr-4 text-right text-gray-500;
-
 }
 
 code {

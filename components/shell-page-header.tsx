@@ -32,9 +32,9 @@ export function Header() {
           <Link href="/">ommiputera.com</Link>
         </h1>
       </header>
-      <nav role="navigation" className="cursor-pointer">
+      <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">
-          <li className="text-muted-foreground hover:text-neutral-600">
+          <li className="text-muted-foreground hover:text-neutral-600 cursor-pointer">
             <Link
               href="https://read.cv/ommiputera"
               target="_blank"
@@ -45,7 +45,7 @@ export function Header() {
           </li>
           <li
             className={cn(
-              "text-muted-foreground hover:text-neutral-600",
+              "text-muted-foreground hover:text-neutral-600 cursor-pointer",
               pathname.startsWith("/blog") &&
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}
@@ -59,7 +59,7 @@ export function Header() {
           </li>
           <li
             className={cn(
-              "text-muted-foreground hover:text-neutral-600",
+              "text-muted-foreground hover:text-neutral-600 cursor-pointer",
               pathname.startsWith("/project") &&
                 "text-blue-600 dark:text-blue-400 font-semibold",
             )}

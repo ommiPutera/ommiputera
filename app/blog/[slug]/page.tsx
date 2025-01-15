@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
@@ -11,6 +12,10 @@ import { formatDate } from "~/lib/utils";
 
 import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({
@@ -18,11 +23,15 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Blog({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slug = (await params).slug;
+  const post = await getPost(slug);
+  return {
+    title: post.metadata.title,
+  };
+}
+
+export default async function Blog({ params }: Props) {
   const { slug } = await params;
   const post = await getPost(slug);
 
@@ -33,9 +42,11 @@ export default async function Blog({
     <ShellPage withBack>
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
-          <div className="flex flex-col gap-2 px-4">
-            <h2 className="text-xl font-bold">{post.metadata.title}</h2>
-            <h3 className="text-sm text-muted-foreground mt-2">
+          <div className="flex flex-col gap-1 px-4">
+            <h2 className="text-xl md:text-2xl font-bold leading-tight">
+              {post.metadata.title}
+            </h2>
+            <h3 className="text-sm text-muted-foreground font-semibold mt-1 md:mt-0">
               {formatDate(post.metadata.publishedAt)}
             </h3>
           </div>
@@ -49,7 +60,7 @@ export default async function Blog({
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[480px] object-cover"
+                className="h-[420px] object-cover"
               />
             </div>
           </div>

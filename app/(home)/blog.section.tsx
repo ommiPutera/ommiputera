@@ -73,7 +73,7 @@ async function Blogs() {
             />
           );
         })}
-        <CarouselItem className="pl-1 overflow-hidden max-h-full max-w-[230px]">
+        <CarouselItem className="pl-1 overflow-hidden max-h-full max-w-[250px]">
           <Link
             href="/blog"
             prefetch
@@ -102,7 +102,7 @@ function BlogItem({
 }: { slug: string; blurredImages: string[]; index: number } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1 overflow-hidden max-h-full max-w-[230px]"
+      className="pl-1 overflow-hidden max-h-full max-w-[250px]"
       key={image}
     >
       <Link

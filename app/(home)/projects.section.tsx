@@ -57,10 +57,7 @@ function Close() {
 
 async function DipayWebsite({ slug, href, coverPath }: TProject) {
   return (
-    <Section
-      withConnector
-      connectorClassName="top-0 h-[calc(100%_-_0px)]"
-    >
+    <Section withConnector connectorClassName="top-0 h-[calc(100%_-_0px)]">
       <Link href={"/" + slug} prefetch>
         <OmmiAvatar />
         <Content title="Ommi Putera" description="Software Engineer (Web)">
@@ -100,7 +97,9 @@ async function NaufalWebsite({ slug, href, coverPath }: TProject) {
         <OmmiAvatar />
         <Content title="Ommi Putera" description="Software Engineer (Web)">
           <ContentParagraph>
-            <span>Naufal Ghifari <b>Personal Website</b></span>
+            <span>
+              Naufal Ghifari <b>Personal Website</b>
+            </span>
           </ContentParagraph>
           <Br />
           <ProjectCover
