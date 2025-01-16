@@ -1,6 +1,3 @@
-// import Link from "next/link";
-
-// import { ModeClickable } from "./mode-toggle";
 import { BackBtn, Header } from "./shell-page-header";
 
 export default function ShellPage({
@@ -31,11 +28,17 @@ export default function ShellPage({
             >
               {children}
             </main>
-            <Footer />
           </div>
         </div>
         <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--bottom-border-height-mobile)] md:h-[var(--bottom-border-height)] md:space-y-2 sticky bottom-0">
-          <div className="bg-background h-full w-full absolute"></div>
+          <footer role="contentinfo" className="px-6 text-center pt-10 pb-20 md:px-6 bg-background h-full w-full absolute">
+            <p className="text-xs text-muted-foreground">
+              © {new Date().getFullYear()} Ommi Putera. All Rights Reserved.
+            </p>
+            <p className="text-xs font-normal text-muted-foreground max-w-[250px] mx-auto">
+              Built with Kapal Api and 76 Mangga.
+            </p>
+          </footer>
           <RoundedBorderBottom />
         </div>
       </section>
@@ -71,70 +74,6 @@ function RoundedBorderBottom() {
       <div className="w-10 h-10 bottom-[var(--bottom-border-height-mobile)] md:bottom-[var(--bottom-border-height)] absolute overflow-hidden right-2.5 md:right-14">
         <div className="absolute bottom-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-br-3xl shadow-circle"></div>
       </div>
-    </div>
-  );
-  return <>haii</>;
-}
-
-export function Footer() {
-  return (
-    <div className="pt-24 md:pt-32">
-      {/* <nav role="navigation" className="pb-32">
-        <div className="text-center pb-6">
-          <h1 className="text-sm font-normal text-muted-foreground max-w-[250px] mx-auto">
-            Built with Kapal Api and 76 Mangga.
-          </h1>
-        </div>
-        <ul className="flex justify-center items-center">
-          <li className="text-muted-foreground hover:text-neutral-600">
-            <Link
-              href="https://read.cv/ommiputera"
-              target="_blank"
-              className="flex items-center py-6 px-4 md:px-3 text-sm"
-            >
-              Resume
-            </Link>
-          </li>
-          <li className="text-muted-foreground hover:text-neutral-600">
-            <Link
-              href="/blog"
-              className="flex items-center py-6 px-4 md:px-3 text-sm"
-            >
-              Blog
-            </Link>
-          </li>
-          <li className="text-muted-foreground hover:text-neutral-600">
-            <ModeClickable>
-              <span className="flex items-center py-6 px-4 md:px-3 text-sm">
-                Dark/Ligth
-              </span>
-            </ModeClickable>
-          </li>
-        </ul>
-        <ul className="flex text-sm justify-center items-center">
-          <li className="text-muted-foreground hover:text-neutral-600">
-            <Link
-              href="/about"
-              className="flex items-center py-6 px-4 md:px-3 text-sm"
-            >
-              About
-            </Link>
-          </li>
-          <li className="text-muted-foreground hover:text-neutral-600">
-            <Link
-              href="/projects"
-              className="flex items-center py-6 px-4 md:px-3 text-sm"
-            >
-              Projects
-            </Link>
-          </li>
-        </ul>
-      </nav> */}
-      <footer role="contentinfo" className="px-6 text-center pb-12 md:px-6">
-        <p className="text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Ommi Putera. All Rights Reserved.
-        </p>
-      </footer>
     </div>
   );
 }

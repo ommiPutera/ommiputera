@@ -35,10 +35,10 @@
 
     --shell-page-width: 720px;
     --header-height: 92px;
-    --header-height-mobile: 76px;
+    --header-height-mobile: 68px;
 
-    --bottom-border-height: 25px;
-    --bottom-border-height-mobile: 0.625rem;
+    --bottom-border-height: 30px;
+    --bottom-border-height-mobile: 0.725rem;
   }
 
   .dark {

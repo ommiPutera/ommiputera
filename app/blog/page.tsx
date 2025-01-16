@@ -121,15 +121,15 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-2xl h-[470px] md:h-[420px] w-full"
+          className="object-cover rounded-2xl h-[470px] md:h-[440px] w-full"
         />
       </div>
       <div className="px-8 py-6 md:p-6">
         <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
           <span>{formatDate(publishedAt)}</span>
         </p>
-        <h2 className="mb-1 text-base font-bold w-full mt-4">{title}</h2>
-        <p className="text-sm font-normal text-neutral-600 dark:text-neutral-300">
+        <h2 className="mb-1 text-lg leading-tight font-bold w-full mt-3">{title}</h2>
+        <p className="text-sm mt-1.5 font-medium text-neutral-600 dark:text-neutral-300">
           {description}
         </p>
       </div>
