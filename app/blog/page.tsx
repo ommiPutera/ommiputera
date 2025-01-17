@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Br from "~/components/br";
 import { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
@@ -65,7 +64,6 @@ export default async function BlogPage() {
             })}
           </BentoGrid>
         </div>
-        <Br />
       </Section>
     </ShellPage>
   );
@@ -81,7 +79,7 @@ const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-y-3 md:gap-x-2",
+        "grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-y-3 md:gap-x-2",
         className,
       )}
     >

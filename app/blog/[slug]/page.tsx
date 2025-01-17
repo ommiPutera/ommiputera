@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ContentTitle } from "~/components/content";
@@ -61,11 +62,11 @@ export default async function Blog({ params }: Props) {
     <ShellPage withBack>
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
-          <div className="flex flex-col gap-1 px-4">
+          <div className="flex flex-col gap-1 px-4 md:px-0">
             <h2 className="text-xl md:text-2xl font-bold leading-tight">
               {post.metadata.title}
             </h2>
-            <h3 className="text-xs text-muted-foreground font-semibold mt-1 md:mt-0">
+            <h3 className="text-xs text-muted-foreground font-medium mt-1 md:mt-0">
               {formatDate(post.metadata.publishedAt)}
             </h3>
           </div>
@@ -79,11 +80,11 @@ export default async function Blog({ params }: Props) {
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[420px] object-cover"
+                className="h-[540px] md:h-[680px] object-cover"
               />
             </div>
           </div>
-          <div className="flex gap-2 px-4">
+          <Link href="/about" className="flex gap-2 px-4 md:px-0">
             <div className="w-fit max-w-10">
               <Image
                 src="/images/profile.jpeg"
@@ -100,11 +101,11 @@ export default async function Blog({ params }: Props) {
                 description="Software Engineer (Web)"
               />
             </div>
-          </div>
+          </Link>
         </div>
         <div className="block">
           <article
-            className="prose dark:prose-invert text-sm mt-4 mx-4 md:mx-auto max-w-[572px] mb-4 font-normal md:font-medium"
+            className="prose dark:prose-invert text-sm mt-4 mx-4 md:mx-auto max-w-[572px] mb-4 md:mb-0 font-normal md:font-medium"
             dangerouslySetInnerHTML={{ __html: post.source }}
           ></article>
         </div>

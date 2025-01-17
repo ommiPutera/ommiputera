@@ -12,7 +12,7 @@ import Section from "~/components/section";
 export default function NextTo() {
   const router = useRouter();
   return (
-    <Section className="pt-0 md:pt-0 mb-6">
+    <Section className="pt-0 md:pt-0">
       <div className="border border-neutral-200 dark:border-neutral-800 h-10 bg-neutral-100 dark:bg-neutral-800 w-10 flex justify-center items-center rounded-full">
         <Signpost className="w-4 h-4 md:w-5 md:h-5" />
       </div>

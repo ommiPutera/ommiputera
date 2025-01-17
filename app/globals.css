@@ -99,6 +99,10 @@ h3 code {
   @apply !text-lg md:!text-xl;
 }
 
+.prose :where(hr):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  @apply border-neutral-200 dark:border-neutral-800 my-6 md:my-8;
+}
+
 pre {
   @apply !px-0 rounded-lg overflow-scroll py-2;
 }
