@@ -96,6 +96,7 @@ function BlogItem({
   slug,
   blurredImages,
   publishedAt,
+  readingTime,
   image,
   title,
   index,
@@ -123,12 +124,12 @@ function BlogItem({
           />
           <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-1/3"></div>
           <div className="absolute z-10 bottom-4 py-3 px-6 text-center w-full">
-            <p className="text-xs font-medium text-neutral-100 dark:text-neutral-200 mb-2">
-              <span>{formatDate(publishedAt)}</span>
-            </p>
             <h2 className="text-base leading-tight font-bold text-neutral-50 w-full">
               {title}
             </h2>
+            <p className="text-xs font-medium text-neutral-100 dark:text-neutral-200 mt-2">
+              <span>{readingTime} min read - {formatDate(publishedAt)}</span>
+            </p>
           </div>
         </div>
       </Link>

@@ -7,13 +7,16 @@ import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
 import { unified } from "unified";
 
+import { calculateReadingTime } from "~/utils/calculateReadingTime";
+
 export type Metadata = {
   title: string;
   publishedAt: string;
   description: string;
   image: string;
   bannerCredit: string;
-  language: string; // New field for language
+  language: string; 
+  readingTime: number
 };
 
 export type BlogPost = {
@@ -58,14 +61,15 @@ export async function getPost(
   const source = fs.readFileSync(filePath, "utf-8");
   const { content: rawContent, data } = matter(source);
 
-  // Type assertion for metadata
+  
   const metadata = data as Metadata;
 
+  const readingTime = calculateReadingTime(rawContent);
   const content = await markdownToHTML(rawContent);
 
   return {
     source: content,
-    metadata: { ...metadata, language },
+    metadata: { ...metadata, language, readingTime },
     slug,
   };
 }

@@ -66,9 +66,9 @@ export default async function Blog({ params }: Props) {
             <h2 className="text-xl md:text-2xl font-bold leading-tight">
               {post.metadata.title}
             </h2>
-            <h3 className="text-xs text-muted-foreground font-medium mt-1 md:mt-0">
-              {formatDate(post.metadata.publishedAt)}
-            </h3>
+            <p className="text-sm text-muted-foreground font-medium mt-1 md:mt-0">
+              {post.metadata.readingTime} min read - {formatDate(post.metadata.publishedAt)}
+            </p>
           </div>
           <div className="w-full my-4">
             <div className="rounded-2xl overflow-hidden">

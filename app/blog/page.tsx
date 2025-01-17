@@ -91,6 +91,7 @@ const BentoGrid = ({
 async function BentoBlog({
   slug,
   publishedAt,
+  readingTime,
   image,
   title,
   description,
@@ -124,7 +125,7 @@ async function BentoBlog({
       </div>
       <div className="px-8 py-6 md:p-6">
         <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
-          <span>{formatDate(publishedAt)}</span>
+          <span>{readingTime} min read - {formatDate(publishedAt)}</span>
         </p>
         <h2 className="mb-1 text-lg leading-tight font-bold w-full mt-3">
           {title}
