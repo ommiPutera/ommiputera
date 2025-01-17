@@ -128,7 +128,9 @@ async function BentoBlog({
         <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
           <span>{formatDate(publishedAt)}</span>
         </p>
-        <h2 className="mb-1 text-lg leading-tight font-bold w-full mt-3">{title}</h2>
+        <h2 className="mb-1 text-lg leading-tight font-bold w-full mt-3">
+          {title}
+        </h2>
         <p className="text-sm mt-1.5 font-medium text-neutral-600 dark:text-neutral-300">
           {description}
         </p>

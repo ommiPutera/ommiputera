@@ -47,7 +47,7 @@ export function Header() {
             className={cn(
               "text-muted-foreground hover:text-neutral-600 cursor-pointer",
               pathname.startsWith("/blog") &&
-              "text-blue-600 dark:text-blue-400 font-semibold",
+                "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link
@@ -61,7 +61,7 @@ export function Header() {
             className={cn(
               "text-muted-foreground hover:text-neutral-600 cursor-pointer",
               pathname.startsWith("/project") &&
-              "text-blue-600 dark:text-blue-400 font-semibold",
+                "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link

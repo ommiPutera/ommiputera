@@ -25,7 +25,16 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const slug = (await params).slug;
-  const post = await getPost(slug);
+  let language;
+  switch (slug.split("-")[0]) {
+    case "id":
+      language = "id";
+      break;
+    default:
+      language = "en";
+      break;
+  }
+  const post = await getPost(slug, language);
   return {
     title: post.metadata.title,
   };
@@ -33,7 +42,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function Blog({ params }: Props) {
   const { slug } = await params;
-  const post = await getPost(slug);
+
+  let language;
+  switch (slug.split("-")[0]) {
+    case "id":
+      language = "id";
+      break;
+    default:
+      language = "en";
+      break;
+  }
+  const post = await getPost(slug, language);
 
   if (!post) {
     notFound();
@@ -46,7 +65,7 @@ export default async function Blog({ params }: Props) {
             <h2 className="text-xl md:text-2xl font-bold leading-tight">
               {post.metadata.title}
             </h2>
-            <h3 className="text-sm text-muted-foreground font-semibold mt-1 md:mt-0">
+            <h3 className="text-xs text-muted-foreground font-semibold mt-1 md:mt-0">
               {formatDate(post.metadata.publishedAt)}
             </h3>
           </div>

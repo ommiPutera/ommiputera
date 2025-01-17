@@ -14,14 +14,14 @@ export function formatDate(date: string) {
   const timeDifference = Math.abs(currentDate - targetDate);
   const daysAgo = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-  const fullDate = new Date(date).toLocaleString("id-ID", {
+  const fullDate = new Date(date).toLocaleString("us-US", {
     month: "long",
     day: "numeric",
     year: "numeric",
   });
 
   if (daysAgo < 1) {
-    return "Hari ini";
+    return "Today";
   } else if (daysAgo < 7) {
     return `${fullDate}`;
   } else if (daysAgo < 30) {

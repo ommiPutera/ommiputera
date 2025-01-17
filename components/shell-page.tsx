@@ -31,7 +31,10 @@ export default function ShellPage({
           </div>
         </div>
         <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--bottom-border-height-mobile)] md:h-[var(--bottom-border-height)] md:space-y-2 sticky bottom-0">
-          <footer role="contentinfo" className="px-6 text-center pt-10 pb-20 md:px-6 bg-background h-full w-full absolute">
+          <footer
+            role="contentinfo"
+            className="px-6 text-center pt-10 pb-20 md:px-6 bg-background h-full w-full absolute"
+          >
             <p className="text-xs text-muted-foreground">
               © {new Date().getFullYear()} Ommi Putera. All Rights Reserved.
             </p>
