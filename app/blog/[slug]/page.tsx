@@ -63,11 +63,12 @@ export default async function Blog({ params }: Props) {
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
           <div className="flex flex-col gap-1 px-4 md:px-0">
-            <h2 className="text-xl md:text-2xl font-bold leading-tight">
+            <h2 className="text-xl md:text-2xl font-extrabold leading-tight">
               {post.metadata.title}
             </h2>
-            <p className="text-sm text-muted-foreground font-medium mt-1 md:mt-0">
-              {post.metadata.readingTime} min read - {formatDate(post.metadata.publishedAt)}
+            <p className="text-xs text-muted-foreground font-medium mt-1 md:mt-0">
+              {post.metadata.readingTime} min read -{" "}
+              {formatDate(post.metadata.publishedAt)}
             </p>
           </div>
           <div className="w-full my-4">
@@ -80,7 +81,7 @@ export default async function Blog({ params }: Props) {
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[540px] md:h-[680px] object-cover"
+                className="h-[540px] md:h-[380px] object-cover"
               />
             </div>
           </div>

@@ -73,7 +73,7 @@ async function Blogs() {
             />
           );
         })}
-        <CarouselItem className="pl-1 overflow-hidden max-h-full max-w-[250px]">
+        <CarouselItem className="pl-1 overflow-hidden max-h-full max-w-[270px]">
           <Link
             href="/blog"
             prefetch
@@ -103,7 +103,7 @@ function BlogItem({
 }: { slug: string; blurredImages: string[]; index: number } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1 overflow-hidden max-h-full max-w-[250px]"
+      className="pl-1 overflow-hidden max-h-full max-w-[270px]"
       key={image}
     >
       <Link
@@ -120,7 +120,7 @@ function BlogItem({
             priority
             placeholder="blur"
             blurDataURL={blurredImages[index]}
-            className="object-cover overflow-hidden h-[430px] w-full"
+            className="object-cover overflow-hidden h-[380px] w-full"
           />
           <div className="absolute bottom-0 from-neutral-900 to-transparent bg-gradient-to-t w-full h-1/3"></div>
           <div className="absolute z-10 bottom-4 py-3 px-6 text-center w-full">
@@ -128,7 +128,9 @@ function BlogItem({
               {title}
             </h2>
             <p className="text-xs font-medium text-neutral-100 dark:text-neutral-200 mt-2">
-              <span>{readingTime} min read - {formatDate(publishedAt)}</span>
+              <span>
+                {readingTime} min read - {formatDate(publishedAt)}
+              </span>
             </p>
           </div>
         </div>

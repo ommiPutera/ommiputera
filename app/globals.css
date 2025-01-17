@@ -33,11 +33,11 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    --shell-page-width: 720px;
-    --header-height: 92px;
-    --header-height-mobile: 68px;
+    --shell-page-width: 670px;
+    --header-height: 54px;
+    --header-height-mobile: 64px;
 
-    --bottom-border-height: 30px;
+    --bottom-border-height: 16px;
     --bottom-border-height-mobile: 0.725rem;
   }
 
@@ -115,11 +115,17 @@ code {
   @apply text-sm md:text-base !leading-loose;
 }
 
-.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+.prose :where(code):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
   @apply bg-neutral-100 px-1 py-0.5;
 }
-.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
-.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+.prose
+  :where(code):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  )::before,
+.prose
+  :where(code):not(
+    :where([class~="not-prose"], [class~="not-prose"] *)
+  )::after {
   content: "";
 }
 

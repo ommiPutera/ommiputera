@@ -10,10 +10,10 @@ export default function ShellPage({
   return (
     <div className="mx-auto w-full max-w-[var(--shell-page-width)]">
       <section className="flex flex-col relative">
-        <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 sticky top-0 pt-12 md:pt-20">
+        <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 sticky top-0">
           <Header />
           {withBack && (
-            <div className="fixed -top-3 px-7 md:px-20 pt-4 md:pt-6 w-6 h-6">
+            <div className="fixed -top-1 px-7 md:px-[84px] pt-4 md:pt-1.5 w-6 h-6">
               <BackBtn />
             </div>
           )}

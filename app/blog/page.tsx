@@ -27,7 +27,7 @@ export default async function BlogPage() {
   return (
     <ShellPage withBack>
       <Section>
-        <div className="overflow-hidden relative mx-4 md:border md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-6 max-w-lg md:mx-auto">
+        <div className="overflow-hidden relative mx-4 md:border md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-0 max-w-lg md:mx-auto">
           <div className="max-w-xs flex-1">
             <h1 className="relative z-10 text-lg md:text-2xl font-bold">
               Blog
@@ -47,7 +47,7 @@ export default async function BlogPage() {
             />
           </div>
         </div>
-        <div className="mt-8 md:mt-12">
+        <div className="mt-8 md:mt-6">
           <BentoGrid>
             {blogs.map((post, index) => {
               const slug = post.slug;
@@ -120,17 +120,19 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-2xl h-[470px] md:h-[440px] w-full"
+          className="object-cover rounded-2xl h-[380px] w-full"
         />
       </div>
       <div className="px-8 py-6 md:p-6">
-        <p className="text-sm font-medium text-neutral-500 dark:text-neutral-400">
-          <span>{readingTime} min read - {formatDate(publishedAt)}</span>
+        <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
+          <span>
+            {readingTime} min read - {formatDate(publishedAt)}
+          </span>
         </p>
-        <h2 className="mb-1 text-lg leading-tight font-bold w-full mt-3">
+        <h2 className="mb-1 text-base leading-tight font-bold w-full mt-4">
           {title}
         </h2>
-        <p className="text-sm mt-1.5 font-medium text-neutral-600 dark:text-neutral-300">
+        <p className="text-xs mt-2 font-medium text-neutral-500 dark:text-neutral-400">
           {description}
         </p>
       </div>

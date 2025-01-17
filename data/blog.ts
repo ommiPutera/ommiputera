@@ -15,8 +15,8 @@ export type Metadata = {
   description: string;
   image: string;
   bannerCredit: string;
-  language: string; 
-  readingTime: number
+  language: string;
+  readingTime: number;
 };
 
 export type BlogPost = {
@@ -61,7 +61,6 @@ export async function getPost(
   const source = fs.readFileSync(filePath, "utf-8");
   const { content: rawContent, data } = matter(source);
 
-  
   const metadata = data as Metadata;
 
   const readingTime = calculateReadingTime(rawContent);

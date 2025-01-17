@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 import { ArrowLeft } from "lucide-react";
 
-import { cn } from "~/lib/utils";
+// import { cn } from "~/lib/utils";
 
 export function BackBtn() {
   const router = useRouter();
@@ -13,7 +13,7 @@ export function BackBtn() {
     <button
       onClick={() => router.back()}
       aria-label="back button"
-      className="p-2 bg-white/30 dark:bg-black/30 backdrop-blur-sm rounded-full border"
+      className="p-2 rounded-full border bg-white dark:bg-black"
     >
       <ArrowLeft className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
     </button>
@@ -21,18 +21,19 @@ export function BackBtn() {
 }
 
 export function Header() {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   return (
     <nav
       role="navigation"
-      className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-2.5 md:pt-4"
+      className="absolute top-0 bg-background w-full h-full flex items-center justify-center"
+      // className="absolute top-0 px-7 md:px-20 bg-background text-center w-full h-full pt-2.5 md:pt-4"
     >
       <header role="banner">
-        <h1 className="text-sm font-bold hover:text-neutral-400 pb-0.5">
+        <h1 className="text-sm font-bold hover:text-neutral-400">
           <Link href="/">ommiputera.com</Link>
         </h1>
       </header>
-      <nav role="navigation">
+      {/* <nav role="navigation">
         <ul className="flex text-sm justify-center items-center">
           <li className="text-muted-foreground hover:text-neutral-600 cursor-pointer">
             <Link
@@ -47,7 +48,7 @@ export function Header() {
             className={cn(
               "text-muted-foreground hover:text-neutral-600 cursor-pointer",
               pathname.startsWith("/blog") &&
-                "text-blue-600 dark:text-blue-400 font-semibold",
+              "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link
@@ -61,7 +62,7 @@ export function Header() {
             className={cn(
               "text-muted-foreground hover:text-neutral-600 cursor-pointer",
               pathname.startsWith("/project") &&
-                "text-blue-600 dark:text-blue-400 font-semibold",
+              "text-blue-600 dark:text-blue-400 font-semibold",
             )}
           >
             <Link
@@ -72,7 +73,7 @@ export function Header() {
             </Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
     </nav>
   );
 }
