@@ -20,8 +20,8 @@ export function BackBtn() {
   return (
     <button
       onClick={() => router.back()}
-      aria-label="back button"
-      className="p-2 rounded-full border bg-white dark:bg-black"
+      aria-label="back"
+      className="p-2 rounded-full"
     >
       <ArrowLeft className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
     </button>
@@ -35,7 +35,7 @@ export function Menu() {
       <DropdownMenuTrigger asChild>
         <button
           aria-label="menu"
-          className="p-2 rounded-full border bg-white dark:bg-black"
+          className="p-2 rounded-full"
         >
           <Ellipsis className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
         </button>
@@ -46,7 +46,7 @@ export function Menu() {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="https://read.cv/ommiputera" target="_blank">
-            View Resume
+            View resume
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
@@ -62,7 +62,7 @@ export function Menu() {
           <Link href="/#contact">Contact me</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/blog">Read the Projects</Link>
+          <Link href="/blog">Read the projects</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <button
@@ -80,7 +80,7 @@ export function Menu() {
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/blog/why-i-love-shadcn-ui">Why I Love Shadcn/ui</Link>
+          <Link href="/blog/why-i-love-shadcn-ui">Why I Love shadcn/ui</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
