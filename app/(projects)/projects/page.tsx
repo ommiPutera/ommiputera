@@ -37,7 +37,7 @@ export default async function ProjectsPage() {
               width={200}
               height={200}
               alt=""
-              className="object-cover h-[60px] w-[60px] md:h-[80px] md:w-[80px] overflow-hidden rounded-full"
+              className="object-cover h-[60px] w-[60px] md:h-[70px] md:w-[70px] overflow-hidden rounded-full"
             />
           </div>
         </div>

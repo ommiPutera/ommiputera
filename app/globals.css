@@ -33,11 +33,11 @@
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
 
-    --shell-page-width: 670px;
-    --header-height: 54px;
-    --header-height-mobile: 64px;
+    --shell-page-width: 590px;
+    --header-height: 58px;
+    --header-height-mobile: 56px;
 
-    --bottom-border-height: 16px;
+    --bottom-border-height: 10px;
     --bottom-border-height-mobile: 0.725rem;
   }
 

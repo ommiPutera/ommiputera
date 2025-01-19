@@ -43,11 +43,11 @@ export default async function BlogPage() {
               width={200}
               height={200}
               alt=""
-              className="object-cover h-[60px] w-[60px] md:h-[80px] md:w-[80px] overflow-hidden rounded-full"
+              className="object-cover h-[60px] w-[60px] md:h-[70px] md:w-[70px] overflow-hidden rounded-full"
             />
           </div>
         </div>
-        <div className="mt-8 md:mt-6">
+        <div className="mt-8 md:mt-6 mb-4 md:mb-0">
           <BentoGrid>
             {blogs.map((post, index) => {
               const slug = post.slug;
@@ -120,10 +120,10 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-2xl h-[380px] w-full"
+          className="object-cover rounded-2xl h-[280px] w-full"
         />
       </div>
-      <div className="px-8 py-6 md:p-6">
+      <div className="px-8 py-6 md:px-4 md:py-6">
         <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
           <span>
             {readingTime} min read - {formatDate(publishedAt)}

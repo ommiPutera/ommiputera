@@ -81,7 +81,7 @@ export default async function Blog({ params }: Props) {
                 priority
                 placeholder="blur"
                 blurDataURL={await getBase64RemoteImage(post.metadata.image)}
-                className="h-[540px] md:h-[380px] object-cover"
+                className="h-[470px] md:h-[320px] object-cover"
               />
             </div>
           </div>

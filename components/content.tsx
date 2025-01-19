@@ -18,7 +18,7 @@ export default function Content({
   return (
     <div
       className={cn(
-        "ml-[48px] md:ml-[52px] -mt-10 flex flex-col gap-3 md:gap-4 bg-white dark:bg-black",
+        "ml-[48px] md:ml-[52px] -mt-10 flex flex-col gap-3 md:gap-4",
         className,
       )}
     >
