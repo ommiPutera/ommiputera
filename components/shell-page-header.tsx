@@ -33,10 +33,7 @@ export function Menu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button
-          aria-label="menu"
-          className="p-2 rounded-full"
-        >
+        <button aria-label="menu" className="p-2 rounded-full">
           <Ellipsis className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
         </button>
       </DropdownMenuTrigger>
