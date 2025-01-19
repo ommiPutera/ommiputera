@@ -8,7 +8,7 @@ import Section, { SectionAvatar } from "~/components/section";
 
 export default function Contact() {
   return (
-    <Section>
+    <Section id="contact">
       <SectionAvatar>
         <MonitorSmartphone className="w-4 h-4 md:w-5 md:h-5" />
       </SectionAvatar>
