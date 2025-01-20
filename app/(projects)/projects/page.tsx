@@ -70,7 +70,7 @@ async function Project({ slug, coverPath, title, summary }: TProject) {
         blurDataURL={await getBase64Image(coverPath)}
         className="h-[calc(100vw_/_1.9)] md:h-[calc(var(--shell-page-width)_/_2)] object-cover rounded-xl border-b dark:border-neutral-800"
       />
-      <div className="p-5 md:p-0 max-w-md md:my-12 md:mx-auto prose dark:prose-invert">
+      <div className="p-5 md:px-6 md:py-0 max-w-md md:my-12 md:mx-auto prose dark:prose-invert">
         <h2 className="text-sm md:text-base font-bold w-full hover:underline">
           {title}
         </h2>
