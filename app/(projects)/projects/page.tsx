@@ -7,6 +7,7 @@ import Br from "~/components/br";
 import { ContentParagraph } from "~/components/content";
 import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
+import { DropdownMenuSeparator } from "~/components/ui/dropdown-menu";
 
 import { getProjectPosts, TProject } from "~/data/project";
 
@@ -22,12 +23,12 @@ export default async function ProjectsPage() {
   return (
     <ShellPage withBack>
       <Section>
-        <div className="overflow-hidden relative mx-4 md:border md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-6 max-w-lg md:mx-auto">
+        <div className="overflow-hidden relative mx-4 md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-6 max-w-lg md:mx-auto">
           <div className="max-w-xs flex-1">
             <h1 className="relative z-10 text-lg md:text-2xl font-bold">
               Projects
             </h1>
-            <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-xs">
+            <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-72">
               A glimpses of my work
             </ContentParagraph>
           </div>
@@ -41,6 +42,7 @@ export default async function ProjectsPage() {
             />
           </div>
         </div>
+        <DropdownMenuSeparator />
         <div className="flex flex-col gap-3 md:gap-4 mt-8 md:mt-12">
           {projects.map((post) => {
             return <Project key={post.slug} {...post} />;

@@ -56,10 +56,10 @@ export function Menu() {
           <Link href="/blog">Read the blog</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/#contact">Contact me</Link>
+          <Link href="/projects">Read the projects</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/blog">Read the projects</Link>
+          <Link href="/#contact">Contact me</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <button

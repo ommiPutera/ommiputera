@@ -12,14 +12,11 @@ import { calculateReadingTime } from "~/utils/calculateReadingTime";
 export type Metadata = {
   title: string;
   publishedAt: string;
-  description: string;
-  image: string;
-  bannerCredit: string;
   language: string;
   readingTime: number;
 };
 
-export type BlogPost = {
+export type Post = {
   source: string;
   metadata: Metadata;
   slug: string;
@@ -50,8 +47,8 @@ export async function markdownToHTML(markdown: string): Promise<string> {
 export async function getPost(
   slug: string,
   language: string = "en",
-): Promise<BlogPost> {
-  const filePath = path.join("content", "blog", language, `${slug}.mdx`);
+): Promise<Post> {
+  const filePath = path.join("content", "short", language, `${slug}.mdx`);
   if (!fs.existsSync(filePath)) {
     throw new Error(
       `Post not found for slug "${slug}" in language "${language}"`,
@@ -73,7 +70,7 @@ export async function getPost(
   };
 }
 
-async function getAllPosts(dir: string, language: string): Promise<BlogPost[]> {
+async function getAllPosts(dir: string, language: string): Promise<Post[]> {
   const mdxFiles = getMDXFiles(dir);
   return Promise.all(
     mdxFiles.map(async (file) => {
@@ -83,9 +80,7 @@ async function getAllPosts(dir: string, language: string): Promise<BlogPost[]> {
   );
 }
 
-export async function getBlogPosts(
-  language: string = "en",
-): Promise<BlogPost[]> {
-  const languageDir = path.join(process.cwd(), "content", "blog", language);
+export async function getShortPosts(language: string = "en"): Promise<Post[]> {
+  const languageDir = path.join(process.cwd(), "content", "short", language);
   return getAllPosts(languageDir, language);
 }
