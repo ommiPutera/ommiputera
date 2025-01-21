@@ -28,8 +28,8 @@ export default async function BlogPage() {
   return (
     <ShellPage withBack>
       <Section>
-        <div className="overflow-hidden relative mx-4 md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-0 max-w-lg md:mx-auto">
-          <div className="max-w-xs flex-1">
+        <div className="overflow-hidden relative m-4 md:mb-0 md:p-6 md:rounded-xl flex justify-between items-start md:mt-0 max-w-lg md:mx-auto">
+          <div className="flex-1">
             <h1 className="relative z-10 text-lg md:text-2xl font-bold">
               Blog
             </h1>
@@ -81,7 +81,7 @@ const BentoGrid = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-y-3 md:gap-x-2",
+        "grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4",
         className,
       )}
     >
@@ -110,11 +110,11 @@ async function BentoBlog({
       href={`/blog/${slug}`}
       prefetch
       className={cn(
-        "rounded-2xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
+        "rounded-xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
         i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
       )}
     >
-      <div className="relative rounded-2xl">
+      <div className="relative rounded-xl">
         <Image
           alt=""
           src={image}
@@ -122,7 +122,7 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-2xl h-[310px] w-full"
+          className="object-cover rounded-xl h-[382px] md:h-[238px] w-full"
         />
       </div>
       <div className="px-8 py-6 md:px-4 md:py-6">

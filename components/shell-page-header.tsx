@@ -10,8 +10,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
@@ -37,17 +35,17 @@ export function Menu() {
           <Ellipsis className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[235px]" alignOffset={-10}>
+      <DropdownMenuContent align="end" className="w-[180px]" alignOffset={-10}>
         <DropdownMenuItem asChild>
           <Link href="/">Home</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="https://read.cv/ommiputera" target="_blank">
-            View resume
+            View my resume
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/about">About Ommi</Link>
+          <Link href="/about">About me</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/short">Read the short</Link>
@@ -68,16 +66,6 @@ export function Menu() {
           >
             {theme === "dark" ? "Light" : "Dark"} mode
           </button>
-        </DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuLabel>✨ Featured article</DropdownMenuLabel>
-        <DropdownMenuItem asChild>
-          <Link href="/blog/introducing-ommiputera.com">
-            Introducing ommiputera.com
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/blog/why-i-love-shadcn-ui">Why I Love shadcn/ui</Link>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
