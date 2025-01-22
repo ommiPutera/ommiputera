@@ -31,7 +31,7 @@ export default async function ShortPage() {
             </h1>
             <ContentParagraph className="text-sm mt-2 max-w-56 md:max-w-72">
               This is a collection of short notes of the things I have learned
-              on the daily while working on different technologies.
+              on the daily while working with React ecosystem.
             </ContentParagraph>
           </div>
           <div className="border rounded-full bg-neutral-100">

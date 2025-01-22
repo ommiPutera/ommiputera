@@ -1,7 +1,7 @@
 ---
 title: "Why I Love Shadcn UI"
 publishedAt: "2025-01-13"
-description: "The reasons behind building Reusable and Maintainable Components with shadcn/ui"
+description: "The reasons behind building reusable and maintainable components using shadcn/ui"
 image: "https://images.unsplash.com/photo-1549830382-6335fe6e113c?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 bannerCredit: Photo by [Michael Fousert](https://unsplash.com/photos/lighted-incandescent-lamp-RCw5oZPCHiY)
 ---
@@ -10,22 +10,53 @@ Bisa dibaca dalam Bahasa [Indonesia](/blog/id-why-i-love-shadcn-ui) 🇮🇩
 
 ---
 
-shadcn/ui is a collection of reusable components with an approach that, in my opinion, is highly favored by many developers: "copy and paste." However, beyond that, this approach is also a game changer for developers in building a component library for web application projects.
+[shadcn/ui](https://ui.shadcn.com/) is a collection of reusable components with an approach many developers love: "copy and paste." But beyond that, this approach is a game changer for building UI (User Interface) components in web application development.
 
-So, what does it mean? Let’s dive in...
+So, what does it mean? Let’s dive in…
 
 ![I stole your code!](/images/meme/stole-code.jpeg)
 
 ## Full Control
 
-For developers familiar with or working within the React ecosystem, building a component library from scratch can be a daunting task. UI Component Libraries like Material-UI, Mantine, and Chakra UI provide practical solutions for creating component libraries. However, customizing functionality, UI, and UX to align with a design system can be exhausting, and it’s not uncommon for components to fall short of designer expectations 😭.
+For developers familiar with or working in the React ecosystem, building UI components from scratch can be challenging. "UI Component Libraries" like Material-UI, Mantine, and Chakra UI provide a practical solution for creating components. However, customizing their functionality, UI, and UX to align with a design system can be exhausting. Often, the resulting UI doesn’t meet the designer's expectations 😭.
 
-With shadcn/ui, I have full control over the code for each component, deciding how the components in my project are built and styled. And, of course, I have unlimited freedom to develop each component according to the specific needs of the project.
+With shadcn/ui, I have full control over the code for each component. I can decide how the UI components in a project are built and styled. More importantly, I have unlimited freedom to tailor every component to the specific needs of the project.
 
-## Modularity
+## Accessibility
 
-Most components in shadcn/ui are built using headless component libraries like Radix Primitives, which offer two key features: accessibility and unstyled components.
+Most components in shadcn/ui are built using headless component libraries like [Radix Primitives](https://www.radix-ui.com/primitives), which offer two key features: accessibility and unstyled components.
 
-Each component built with Radix Primitives adheres to the Web Content Accessibility Guidelines (WCAG). This ensures that the components are not only functional but also inclusive and accessible to end users, including those relying on assistive technologies like screen readers.
+Each component built with Radix Primitives adheres to the Web Content Accessibility Guidelines](https://www.w3.org/TR/WCAG21/) (WCAG). This ensures the components are not only functional but also inclusive and accessible for end users, including those using assistive technologies like screen readers.
 
-This modular approach makes shadcn/ui not only quick to implement but also highly adaptable to application requirements, without the additional complexity often associated with manually meeting accessibility standards.
+## Copy & Paste
+
+Here’s the main attraction of shadcn/ui: simplicity. With its "copy and paste" approach or by using its CLI, developers can quickly grab the code for any component, modify it to match their design system, or use the default styling from shadcn/ui, as shown in the image below:
+
+![installation](/images/shadcn-installation.png)
+
+Booom! "You have the components!"
+
+This approach allows us to avoid the constraints that often come with UI libraries.
+
+No more wasting time learning overly complex library configurations or theming systems, especially when using multiple UI libraries in a project (shadcn is truly a lifesaver in situations like this 😂).
+
+## TailwindCSS
+
+shadcn/ui uses [TailwindCSS](https://tailwindcss.com/) as its default styling framework. For developers like me, who prefer not to write CSS manually, TailwindCSS is an ideal solution.
+
+Another advantage is the ease of debugging, which makes the development process much more efficient. The combination of TailwindCSS and shadcn/ui provides powerful tools for building UIs.
+
+## Community
+
+The adoption of shadcn/ui within the open-source community is growing rapidly, including support from platforms like [Vercel](https://vercel.com/). This makes shadcn/ui increasingly relevant and continuously evolving 👍.
+
+If you want to explore more or connect with the community, here are some resources to help:
+
+- [Best of v0 & shadcn/ui](https://best-of-v0.vercel.app/?q=&orderBy=newest&filterBy=all)
+- [awesome-shadcn-ui](https://awesome-shadcn-ui.vercel.app/)
+
+## Kesimpulan
+
+Recently, shadcn/ui won the [Most Popular Projects Overal](https://x.com/shadcn/status/1879560380336521537) award, solidifying its position as one of the most influential projects in web application development.
+
+shadcn/ui is not just about simplicity but also about freedom, accessibility, and the power of community. If you haven’t tried it yet, now might be the perfect time to add it to your development toolkit.

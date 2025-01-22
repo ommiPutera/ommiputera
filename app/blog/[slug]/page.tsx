@@ -63,7 +63,7 @@ export default async function Blog({ params }: Props) {
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
           <div className="flex flex-col gap-1 px-4 md:px-0">
-            <h2 className="text-xl md:text-2xl font-extrabold leading-tight">
+            <h2 className="text-2xl font-extrabold leading-tight">
               {post.metadata.title}
             </h2>
             <p className="text-xs text-muted-foreground font-medium mt-1 md:mt-0">
@@ -84,6 +84,9 @@ export default async function Blog({ params }: Props) {
                 className="h-[470px] md:h-[320px] object-cover"
               />
             </div>
+            <p className="text-xs mt-1.5 text-muted-foreground">
+              Banner Credit: {post.metadata.bannerCredit}
+            </p>
           </div>
           <Link href="/about" className="flex gap-2 px-4 md:px-0">
             <div className="w-fit max-w-10">

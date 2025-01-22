@@ -90,7 +90,7 @@ async function Blog({
         "rounded-xl w-full flex items-center cursor-pointer h-full border border-neutral-200 dark:border-neutral-800",
       )}
     >
-      <div className="relative rounded-xl w-[210px] md:w-[320px]">
+      <div className="relative rounded-xl w-[170px] md:w-[320px]">
         <Image
           alt=""
           src={image}
@@ -101,13 +101,13 @@ async function Blog({
           className="object-cover rounded-xl h-[342px] w-full md:h-[238px]"
         />
       </div>
-      <div className="p-4 md:p-6 w-full">
+      <div className="p-6 md:p-8 w-full">
         <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
           <span>
             {readingTime} min read - {formatDate(publishedAt)}
           </span>
         </p>
-        <h2 className="mb-1 text-base leading-tight font-extrabold w-full mt-4">
+        <h2 className="mb-1 text-lg leading-tight font-extrabold w-full mt-6">
           {title}
         </h2>
         <p className="text-sm mt-2 font-medium text-neutral-500 dark:text-neutral-400">
