@@ -50,71 +50,47 @@ export default async function BlogPage() {
         </div>
         <DropdownMenuSeparator />
         <div className="mt-8 md:mt-6 mb-4 md:mb-0">
-          <BentoGrid>
-            {blogs.map((post, index) => {
+          <div className="flex flex-col gap-4">
+            {blogs.map((post) => {
               const slug = post.slug;
               const source = post.source;
               return (
-                <BentoBlog
+                <Blog
                   key={post.slug}
                   source={source}
                   slug={slug}
-                  index={index}
                   {...(post.metadata as Metadata)}
                 />
               );
             })}
-          </BentoGrid>
+          </div>
         </div>
       </Section>
     </ShellPage>
   );
 }
 
-const BentoGrid = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) => {
-  return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4",
-        className,
-      )}
-    >
-      {children}
-    </div>
-  );
-};
-
-async function BentoBlog({
+async function Blog({
   slug,
   publishedAt,
   readingTime,
   image,
   title,
   description,
-  index,
 }: {
   slug: string;
   source: string;
   id?: string;
-  index: number;
 } & Metadata) {
-  const i = index + 1;
   return (
     <Link
       href={`/blog/${slug}`}
       prefetch
       className={cn(
-        "rounded-xl w-full cursor-pointer block h-full border border-neutral-200 dark:border-neutral-800",
-        i % 3 === 0 && i >= 2 ? "md:col-span-2" : "md:col-span-1",
+        "rounded-xl w-full flex items-center cursor-pointer h-full border border-neutral-200 dark:border-neutral-800",
       )}
     >
-      <div className="relative rounded-xl">
+      <div className="relative rounded-xl w-[210px] md:w-[320px]">
         <Image
           alt=""
           src={image}
@@ -122,19 +98,19 @@ async function BentoBlog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-xl h-[382px] md:h-[238px] w-full"
+          className="object-cover rounded-xl h-[342px] w-full md:h-[238px]"
         />
       </div>
-      <div className="px-8 py-6 md:px-4 md:py-6">
+      <div className="p-4 md:p-6 w-full">
         <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
           <span>
             {readingTime} min read - {formatDate(publishedAt)}
           </span>
         </p>
-        <h2 className="mb-1 text-base leading-tight font-bold w-full mt-4">
+        <h2 className="mb-1 text-base leading-tight font-extrabold w-full mt-4">
           {title}
         </h2>
-        <p className="text-xs mt-2 font-medium text-neutral-500 dark:text-neutral-400">
+        <p className="text-sm mt-2 font-medium text-neutral-500 dark:text-neutral-400">
           {description}
         </p>
       </div>
