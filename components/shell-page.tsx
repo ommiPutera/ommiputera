@@ -59,10 +59,10 @@ function RoundedBorder() {
         <div className="h-[1px] w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute bottom-0 border-t border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 top-[var(--header-height-mobile)] md:top-[var(--header-height)] absolute overflow-hidden left-2.5 md:left-14">
-        <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tl-3xl shadow-circle"></div>
+        <div className="absolute top-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tl-2xl 2xl:rounded-tl-3xl shadow-circle"></div>
       </div>
       <div className="w-10 h-10 top-[var(--header-height-mobile)] md:top-[var(--header-height)] absolute overflow-hidden right-2.5 md:right-14">
-        <div className="absolute top-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tr-3xl shadow-circle"></div>
+        <div className="absolute top-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-tr-2xl 2xl:rounded-tr-3xl shadow-circle"></div>
       </div>
     </div>
   );
@@ -75,10 +75,10 @@ function RoundedBorderBottom() {
         <div className="h-[1px] w-[calc(100%_-_96px)] md:w-[calc(100%_-_190px)] left-1/2 -translate-x-1/2 absolute top-0 border-t border-neutral-200 dark:border-neutral-800"></div>
       </div>
       <div className="w-10 h-10 bottom-[var(--bottom-border-height-mobile)] md:bottom-[var(--bottom-border-height)] absolute overflow-hidden left-2.5 md:left-14">
-        <div className="absolute bottom-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-bl-3xl shadow-circle"></div>
+        <div className="absolute bottom-0 left-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-bl-2xl 2xl:rounded-bl-3xl shadow-circle"></div>
       </div>
       <div className="w-10 h-10 bottom-[var(--bottom-border-height-mobile)] md:bottom-[var(--bottom-border-height)] absolute overflow-hidden right-2.5 md:right-14">
-        <div className="absolute bottom-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-br-3xl shadow-circle"></div>
+        <div className="absolute bottom-0 right-0 w-14 h-12 border border-neutral-200 dark:border-neutral-800 rounded-br-2xl 2xl:rounded-br-3xl shadow-circle"></div>
       </div>
     </div>
   );

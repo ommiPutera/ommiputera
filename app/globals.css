@@ -35,10 +35,10 @@
     --radius: 0.5rem;
 
     --shell-page-width: 640px;
-    --header-height: 62px;
+    --header-height: 48px;
     --header-height-mobile: 56px;
 
-    --bottom-border-height: 10px;
+    --bottom-border-height: 8px;
     --bottom-border-height-mobile: 0.725rem;
   }
 

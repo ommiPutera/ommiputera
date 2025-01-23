@@ -78,9 +78,12 @@ export function Header() {
       role="navigation"
       className="absolute top-0 bg-background w-full h-full flex items-center justify-center"
     >
-      <header role="banner">
-        <h1 className="text-sm font-bold hover:text-neutral-400">
-          <Link href="/">ommiputera.com</Link>
+      <header role="banner" className="inline-flex gap-12 cursor-pointer">
+        <h1 className="text-xs font-bold">
+          <Link href="/">Highlights</Link>
+        </h1>
+        <h1 className="text-xs font-bold">
+          <Link href="/">Posts</Link>
         </h1>
       </header>
     </nav>
