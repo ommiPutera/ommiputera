@@ -38,15 +38,6 @@ export default async function BlogPage() {
               learned.
             </ContentParagraph>
           </div>
-          <div className="border rounded-full bg-neutral-100">
-            <Image
-              src="/images/profile.jpeg"
-              width={200}
-              height={200}
-              alt=""
-              className="object-cover h-[60px] w-[60px] md:h-[70px] md:w-[70px] overflow-hidden rounded-full"
-            />
-          </div>
         </div>
         <DropdownMenuSeparator />
         <div className="mt-8 md:mt-6 mb-4 md:mb-0">
@@ -90,7 +81,7 @@ async function Blog({
         "rounded-2xl w-full flex items-center cursor-pointer h-full border border-neutral-200 dark:border-neutral-800",
       )}
     >
-      <div className="relative rounded-2xl w-[170px] md:w-[320px]">
+      <div className="relative rounded-2xl w-[90px] md:w-[320px]">
         <Image
           alt=""
           src={image}

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { ContentParagraph } from "~/components/content";
@@ -33,15 +32,6 @@ export default async function ShortPage() {
               This is a collection of short notes of the things I have learned
               on the daily while working with React ecosystem.
             </ContentParagraph>
-          </div>
-          <div className="border rounded-full bg-neutral-100">
-            <Image
-              src="/images/profile.jpeg"
-              width={200}
-              height={200}
-              alt=""
-              className="object-cover h-[60px] w-[60px] md:h-[70px] md:w-[70px] overflow-hidden rounded-full"
-            />
           </div>
         </div>
         <DropdownMenuSeparator />

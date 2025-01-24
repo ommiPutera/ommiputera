@@ -32,15 +32,6 @@ export default async function ProjectsPage() {
               A glimpses of my work
             </ContentParagraph>
           </div>
-          <div className="border rounded-full bg-neutral-100">
-            <Image
-              src="/images/profile.jpeg"
-              width={200}
-              height={200}
-              alt=""
-              className="object-cover h-[60px] w-[60px] md:h-[70px] md:w-[70px] overflow-hidden rounded-full"
-            />
-          </div>
         </div>
         <DropdownMenuSeparator />
         <div className="flex flex-col gap-3 md:gap-4 mt-8 md:mt-6 mb-4 md:mb-0">

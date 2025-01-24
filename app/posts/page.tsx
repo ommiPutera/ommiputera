@@ -7,7 +7,7 @@ import Section, { SectionAvatar } from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
 export const metadata: Metadata = {
-  title: "Posts",
+  title: "Ommi Putera",
   description: "",
 };
 
