@@ -26,7 +26,7 @@ export default async function BlogPage() {
     return 1;
   });
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title="Blog">
       <Section>
         <div className="overflow-hidden relative m-4 md:mb-0 md:p-6 md:rounded-xl flex justify-between items-start md:mt-0 max-w-lg md:mx-auto">
           <div className="flex-1">
@@ -87,10 +87,10 @@ async function Blog({
       href={`/blog/${slug}`}
       prefetch
       className={cn(
-        "rounded-xl w-full flex items-center cursor-pointer h-full border border-neutral-200 dark:border-neutral-800",
+        "rounded-2xl w-full flex items-center cursor-pointer h-full border border-neutral-200 dark:border-neutral-800",
       )}
     >
-      <div className="relative rounded-xl w-[170px] md:w-[320px]">
+      <div className="relative rounded-2xl w-[170px] md:w-[320px]">
         <Image
           alt=""
           src={image}
@@ -98,7 +98,7 @@ async function Blog({
           height={600}
           placeholder="blur"
           blurDataURL={await getBase64RemoteImage(image)}
-          className="object-cover rounded-xl h-[342px] w-full md:h-[238px]"
+          className="object-cover rounded-2xl h-[342px] w-full md:h-[238px]"
         />
       </div>
       <div className="p-6 md:p-8 w-full">

@@ -22,7 +22,7 @@ export default async function ShortPage() {
     return 1;
   });
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title="Short">
       <Section>
         <div className="overflow-hidden relative mx-4 md:p-6 md:rounded-2xl flex justify-between items-start mt-4 md:mt-0 max-w-lg md:mx-auto">
           <div className="max-w-xs flex-1">
@@ -75,7 +75,7 @@ async function Short({
 } & Metadata) {
   return (
     <Link href={`/short/${slug}`} prefetch>
-      <div className="px-4 py-2.5 md:px-6 md:py-3 rounded-xl hover:bg-neutral-100 dark:hover:bg-neutral-800">
+      <div className="px-4 py-2.5 md:px-6 md:py-3 rounded-xl border hover:bg-neutral-100 dark:hover:bg-neutral-800">
         <p className="text-xs font-medium text-neutral-500 dark:text-neutral-400">
           {publishedAt}
         </p>

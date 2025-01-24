@@ -103,15 +103,15 @@ function BlogItem({
 }: { slug: string; blurredImages: string[]; index: number } & Metadata) {
   return (
     <CarouselItem
-      className="pl-1 overflow-hidden max-h-full max-w-[240px] md:max-w-[270px]"
+      className="pl-1 overflow-hidden max-h-full max-w-[230px] md:max-w-[240px]"
       key={image}
     >
       <Link
         href={`/blog/${slug}`}
         prefetch
-        className="rounded-xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800 bg-white dark:bg-background"
+        className="rounded-2xl border w-full cursor-pointer block h-full overflow-hidden border-neutral-200 dark:border-neutral-800 bg-white dark:bg-background"
       >
-        <div className="relative rounded-xl overflow-hidden">
+        <div className="relative rounded-2xl overflow-hidden">
           <Image
             alt=""
             src={image}

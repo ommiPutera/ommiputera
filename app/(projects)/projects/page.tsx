@@ -21,7 +21,7 @@ export const metadata = {
 export default async function ProjectsPage() {
   const projects = getProjectPosts();
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title="Projects">
       <Section>
         <div className="overflow-hidden relative m-4 md:mb-0 md:p-6 md:rounded-xl flex justify-between items-start md:mt-0 max-w-lg md:mx-auto">
           <div className="flex-1">

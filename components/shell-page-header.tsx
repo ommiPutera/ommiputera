@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-import { ArrowLeft, Ellipsis } from "lucide-react";
+import { ArrowLeft, ChevronDown } from "lucide-react";
 import { useTheme } from "next-themes";
 
 import {
@@ -12,6 +12,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
+
+import { cn } from "~/lib/utils";
 
 export function BackBtn() {
   const router = useRouter();
@@ -31,13 +33,19 @@ export function Menu() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button aria-label="menu" className="p-2 rounded-full">
-          <Ellipsis className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
+        <button
+          aria-label="menu"
+          className="p-1 mt-0.5 rounded-full border bg-white dark:bg-black"
+        >
+          <ChevronDown className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[180px]" alignOffset={-10}>
+      <DropdownMenuContent align="end" className="w-[160px]" alignOffset={-10}>
         <DropdownMenuItem asChild>
-          <Link href="/">Home</Link>
+          <Link href="/">Highlights</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/posts">Posts</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="https://read.cv/ommiputera" target="_blank">
@@ -72,20 +80,42 @@ export function Menu() {
   );
 }
 
-export function Header() {
+export function Header({ title }: { title: string }) {
+  const pathname = usePathname();
   return (
     <nav
       role="navigation"
       className="absolute top-0 bg-background w-full h-full flex items-center justify-center"
     >
-      <header role="banner" className="inline-flex gap-12 cursor-pointer">
-        <h1 className="text-xs font-bold">
-          <Link href="/">Highlights</Link>
-        </h1>
-        <h1 className="text-xs font-bold">
-          <Link href="/">Posts</Link>
-        </h1>
-      </header>
+      {title ? (
+        <header
+          role="banner"
+          className="inline-flex gap-8 w-full ml-16 md:ml-28"
+        >
+          <h1 className="text-xs text-foreground font-semibold max-w-[300px] md:max-w-[380px] line-clamp-1">
+            {title}
+          </h1>
+        </header>
+      ) : (
+        <header role="banner" className="inline-flex gap-8 cursor-pointer">
+          <h1
+            className={cn(
+              "text-xs text-muted-foreground/80 font-semibold",
+              pathname === "/" && "text-foreground",
+            )}
+          >
+            <Link href="/">Highlights</Link>
+          </h1>
+          <h1
+            className={cn(
+              "text-xs text-muted-foreground/80 font-semibold",
+              pathname === "/posts" && "text-foreground",
+            )}
+          >
+            <Link href="/posts">Posts</Link>
+          </h1>
+        </header>
+      )}
     </nav>
   );
 }

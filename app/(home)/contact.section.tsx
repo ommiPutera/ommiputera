@@ -15,7 +15,7 @@ export default function Contact() {
       <Content title="Contact me">
         <ContentParagraph>
           <span>The best way to reach me is by email at </span>
-          <b>me@ommiputera.com</b>.
+          <b>omiputrakarunia@gmail.com</b>.
         </ContentParagraph>
         <Br />
         <ContentParagraph>
@@ -27,7 +27,7 @@ export default function Contact() {
       <div className="ml-[48px]">
         <div className="flex items-center gap-2">
           <Link
-            href="mailto:me@ommiputera.com"
+            href="mailto:omiputrakarunia@gmail.com"
             target="_blank"
             className="block border w-full border-neutral-200 cursor-pointer dark:border-neutral-700 rounded-xl p-4 bg-neutral-50 dark:bg-neutral-900"
           >

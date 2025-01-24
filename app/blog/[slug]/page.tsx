@@ -59,7 +59,7 @@ export default async function Blog({ params }: Props) {
     notFound();
   }
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title={post.metadata.title}>
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
           <div className="flex flex-col gap-1 px-4 md:px-0">
@@ -84,7 +84,7 @@ export default async function Blog({ params }: Props) {
                 className="h-[470px] md:h-[320px] object-cover"
               />
             </div>
-            <p className="text-xs mt-1.5 text-muted-foreground">
+            <p className="text-xs mt-2 mb-4 text-muted-foreground px-4 md:px-0">
               Banner Credit: {post.metadata.bannerCredit}
             </p>
           </div>

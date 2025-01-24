@@ -3,26 +3,27 @@ import { BackBtn, Header, Menu } from "./shell-page-header";
 export default function ShellPage({
   children,
   withBack = false,
+  title = "",
 }: {
   children: React.ReactNode;
   withBack?: boolean;
+  title?: string;
 }) {
   return (
     <div className="mx-auto w-full max-w-[var(--shell-page-width)]">
       <section className="flex flex-col relative">
-        <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 fixed top-0">
-          <Header />
+        <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 sticky top-0">
+          <Header title={title} />
           {withBack && (
-            <div className="absolute ml-6 md:ml-16 left-0 pt-2 md:pt-1 w-6 h-6">
+            <div className="absolute ml-6 md:ml-16 left-0 pt-2 md:pt-0.5 w-6 h-6">
               <BackBtn />
             </div>
           )}
-          <div className="absolute right-0 mr-6 md:mr-16 pt-2 md:pt-1 w-6 h-6">
+          <div className="absolute right-0 mr-6 md:mr-16 pt-2 md:pt-0.5 w-6 h-6">
             <Menu />
           </div>
           <RoundedBorder />
         </div>
-        <div className="sticky top-0 h-[var(--header-height-mobile)] md:h-[var(--header-height)] bg-white dark:bg-black border-x border-neutral-200 dark:border-neutral-800"></div>
         <div className="px-2.5 md:px-14 relative overflow-hidden">
           <div className="h-fit bg-white dark:bg-black border-x border-b border-neutral-200 dark:border-neutral-800 relative">
             <main

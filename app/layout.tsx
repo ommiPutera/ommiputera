@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        <NextTopLoader color="#1878f2" height={2} showSpinner={false} />
+        <NextTopLoader color="#1878f24d" height={2} showSpinner={false} />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

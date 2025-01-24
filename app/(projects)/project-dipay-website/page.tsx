@@ -25,7 +25,7 @@ import HeroAnimation from "./hero-animation";
 
 export default function DipayWebsite() {
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title="Revamped Dipay Website using Next.js">
       <div>
         <Intro />
         <Stack />
@@ -263,8 +263,8 @@ function Close() {
       <Content title="Thanks">
         <ContentParagraph>
           10/10 - Thank you for reading my thread. The best way to reach me is
-          by email at me@ommiputera.com. Let&apos;s build the future together.
-          💙
+          by email at omiputrakarunia@gmail.com. Let&apos;s build the future
+          together. 💙
         </ContentParagraph>
       </Content>
     </Section>

@@ -14,7 +14,7 @@ import { getBase64Image } from "~/utils/getImageBlur";
 
 export default function NaufalWebsite() {
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title="Naufal Ghifari Website">
       <div>
         <Intro />
         <Stack />

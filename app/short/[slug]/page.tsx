@@ -54,7 +54,7 @@ export default async function Short({ params }: Props) {
     notFound();
   }
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title={post.metadata.title}>
       <Section>
         <div className="mt-4 md:mt-0 flex flex-col gap-4">
           <div className="flex flex-col gap-1 px-4 md:px-0">

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
 
 export default function About() {
   return (
-    <ShellPage withBack>
+    <ShellPage withBack title="About me">
       <div>
         <Me />
         <Values />
@@ -157,7 +157,7 @@ async function Values() {
         <Br />
         <ContentParagraph>
           The best way to get in touch with me is to email{" "}
-          <b>me@ommiputera.com</b>
+          <b>omiputrakarunia@gmail.com</b>
         </ContentParagraph>
         <Br />
         <Social />
