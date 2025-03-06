@@ -7,9 +7,10 @@ import Image from "next/image";
 import AboutGalery from "~/components/about-galery";
 import Br from "~/components/br";
 import Content, { ContentLink, ContentParagraph } from "~/components/content";
-import Section, { SectionAvatar } from "~/components/section";
+import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 import Social from "~/components/social";
+import { OmmiAvatar } from "~/components/avatar";
 
 import { getBase64Image } from "~/utils/getImageBlur";
 
@@ -35,15 +36,7 @@ export default function About() {
 function Me() {
   return (
     <Section withConnector>
-      <SectionAvatar>
-        <Image
-          src="/images/profile.jpeg"
-          width={40}
-          height={40}
-          alt=""
-          className="object-cover overflow-hidden rounded-full"
-        />
-      </SectionAvatar>
+      <OmmiAvatar />
       <Content title="Hi, I'm Ommi Putera 👋">
         <ContentParagraph>
           <span>

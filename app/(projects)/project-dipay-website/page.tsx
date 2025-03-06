@@ -9,13 +9,14 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 
+import { OmmiAvatar } from "~/components/avatar";
 import Br from "~/components/br";
 import Content, {
   ContentLink,
   ContentParagraph,
   ContentTitle,
 } from "~/components/content";
-import Section, { SectionAvatar } from "~/components/section";
+import Section from "~/components/section";
 import ShellPage from "~/components/shell-page";
 
 import { getBase64Image } from "~/utils/getImageBlur";
@@ -46,15 +47,7 @@ async function Intro() {
   return (
     <Section className="border-b mb-3 md:mb-8">
       <div className="flex gap-3 mb-0.5">
-        <SectionAvatar>
-          <Image
-            src="/images/profile.jpeg"
-            width={40}
-            height={40}
-            alt=""
-            className="object-cover overflow-hidden rounded-full"
-          />
-        </SectionAvatar>
+        <OmmiAvatar />
         <div className="w-fit">
           <ContentTitle
             title="Ommi Putera"

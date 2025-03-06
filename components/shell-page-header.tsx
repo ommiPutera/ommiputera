@@ -40,7 +40,7 @@ export function Menu() {
           <ChevronDown className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
         </button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[160px]" alignOffset={-10}>
+      <DropdownMenuContent align="end" className="w-[230px]" alignOffset={-10}>
         <DropdownMenuItem asChild>
           <Link href="/">Highlights</Link>
         </DropdownMenuItem>
@@ -54,6 +54,9 @@ export function Menu() {
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/about">About me</Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/posts">Read the post</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/short">Read the short</Link>

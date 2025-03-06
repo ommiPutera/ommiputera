@@ -2,9 +2,10 @@ import { FolderOpen } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { OmmiAvatar } from "~/components/avatar";
 import Br from "~/components/br";
 import Content, { ContentLink, ContentParagraph } from "~/components/content";
-import Section, { SectionAvatar } from "~/components/section";
+import Section from "~/components/section";
 import {
   Carousel,
   CarouselContent,
@@ -20,15 +21,7 @@ import { getBase64RemoteImage } from "~/utils/getImageBlur";
 export default function Blog() {
   return (
     <Section>
-      <SectionAvatar>
-        <Image
-          src="/images/profile.jpeg"
-          width={40}
-          height={40}
-          alt=""
-          className="object-cover overflow-hidden rounded-full"
-        />
-      </SectionAvatar>
+      <OmmiAvatar />
       <Content title="Blog" description="Ommi Putera">
         <ContentParagraph>
           I write about web development, sharing insights and lessons learned.

@@ -1,6 +1,6 @@
 import Link, { type LinkProps } from "next/link";
 
-import { Suspense } from "react";
+import { HTMLAttributes, Suspense } from "react";
 
 import { cn } from "~/lib/utils";
 
@@ -61,16 +61,15 @@ export function ContentTitle({
 export function ContentParagraph({
   children,
   className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  ...props
+}: HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
       className={cn(
         "text-sm prose dark:prose-invert font-normal md:font-medium",
         className,
       )}
+      {...props}
     >
       {children}
     </p>
