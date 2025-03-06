@@ -1,0 +1,31 @@
+---
+title: "Pengalaman Interview dan Binary Search"
+publishedAt: "2025-02-27"
+parent: ""
+groupCode: ""
+showMore: true
+description: "Setelah lulus dari Job Connector Bootcamp: Fullstack Web and Mobile Development di Purwadhika pada tahun 2021.."
+---
+
+---
+
+Setelah lulus dari **Job Connector Bootcamp: Fullstack Web and Mobile Development** di Purwadhika pada tahun 2021, saya mendapatkan banyak kesempatan interview di berbagai perusahaan. Salah satu yang paling berkesan adalah interview di salah satu perusahaan e-commerce di Indonesia (yang ijo-ijo 🍏).
+
+Sesi interview berjalan lancar, sampai akhirnya user melemparkan sebuah soal yang membuat saya berpikir keras:
+
+> _"Bayangkan kamu bekerja di sebuah pelabuhan dan diberi tugas mencari satu container rusak di antara 1000 container. Setiap container memiliki berat 1 ton, sedangkan container yang rusak hanya 0.9 ton. Bagaimana cara menemukannya dengan seefisien mungkin?"_
+
+Saya mencoba berbagai logika sederhana. Menimbang satu per satu jelas terlalu lama. Membandingkan beberapa sekaligus juga tidak memberikan solusi yang cepat. Setelah berpikir lama dan merasa kehabisan ide, akhirnya saya menyerah 😂😂.
+
+Lalu user menjelaskan solusinya:
+
+- **Timbang seluruh container sekaligus**, hasilnya pasti 999 ton.
+- **Bagi 1000 container menjadi dua kelompok** masing-masing 500 container. Salah satu kelompok pasti memiliki berat 499 ton.
+- **Lanjutkan proses ini**, bagi lagi menjadi 250, lalu 125, dan seterusnya, hingga akhirnya hanya tersisa satu container yang beratnya kurang dari 1 ton.
+
+User menjelaskan bahwa ini merupakan analogi dari algoritma **binary search**, sebuah algoritma pencarian yang efisien untuk menemukan suatu nilai dalam daftar yang sudah diurutkan.
+
+Binary search memiliki kompleksitas **O(log N)**.
+Dengan 1000 container, kita butuh sekitar **log₂(1000) ≈ 10 kali penimbangan** untuk menemukan container yang rusak.
+
+Dari pengalaman ini, saya belajar bahwa **algoritma bukan sekadar teori di dunia pemrograman, tetapi juga cara berpikir yang bisa diterapkan dalam berbagai situasi**.

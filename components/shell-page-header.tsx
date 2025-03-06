@@ -10,6 +10,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "~/components/ui/dropdown-menu";
 
@@ -52,20 +53,19 @@ export function Menu() {
             View my resume
           </Link>
         </DropdownMenuItem>
+        <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/about">About me</Link>
+          <Link href="/short">Read the shorts</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/posts">Read the post</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/short">Read the short</Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link href="/blog">Read the blog</Link>
+          <Link href="/blog">Read the blogs</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/projects">Read the projects</Link>
+        </DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem asChild>
+          <Link href="/about">About me</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link href="/#contact">Contact me</Link>
