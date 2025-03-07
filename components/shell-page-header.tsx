@@ -22,9 +22,10 @@ export function BackBtn() {
     <button
       onClick={() => router.back()}
       aria-label="back"
-      className="p-2 rounded-full"
+      className="inline-flex items-center gap-1 justify-center"
     >
       <ArrowLeft className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
+      <span className="text-xs font-medium">Back</span>
     </button>
   );
 }
@@ -55,13 +56,13 @@ export function Menu() {
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
-          <Link href="/short">Read the shorts</Link>
+          <Link href="/short">Read the Short</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/blog">Read the blogs</Link>
+          <Link href="/blog">Read the Blog</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/projects">Read the projects</Link>
+          <Link href="/projects">Read the Projects</Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
@@ -93,9 +94,9 @@ export function Header({ title }: { title: string }) {
       {title ? (
         <header
           role="banner"
-          className="inline-flex gap-8 w-full ml-16 md:ml-28"
+          className="inline-flex gap-8 w-full ml-20 md:ml-36"
         >
-          <h1 className="text-xs text-foreground font-semibold max-w-[200px] md:max-w-[380px] line-clamp-1">
+          <h1 className="text-xs text-foreground font-bold truncate w-full max-w-[260px] md:max-w-[380px]">
             {title}
           </h1>
         </header>

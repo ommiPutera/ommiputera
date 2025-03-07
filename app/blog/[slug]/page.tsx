@@ -66,7 +66,7 @@ export default async function Blog({ params }: Props) {
             <h2 className="text-2xl font-extrabold leading-tight">
               {post.metadata.title}
             </h2>
-            <p className="text-xs text-muted-foreground font-medium mt-1 md:mt-0">
+            <p className="text-xs text-muted-foreground font-normal mt-1 md:mt-0">
               {post.metadata.readingTime} min read -{" "}
               {formatDate(post.metadata.publishedAt)}
             </p>

@@ -15,7 +15,7 @@ export default function ShellPage({
         <div className="z-10 w-full max-w-[var(--shell-page-width)] mx-auto flex flex-col space-y-1 h-[var(--header-height-mobile)] md:h-[var(--header-height)] md:space-y-2 sticky top-0">
           <Header title={title} />
           {withBack && (
-            <div className="absolute ml-6 md:ml-16 left-0 pt-2 md:pt-0.5 w-6 h-6">
+            <div className="absolute ml-2.5 md:ml-14 left-0 pt-3.5 md:pt-1.5">
               <BackBtn />
             </div>
           )}

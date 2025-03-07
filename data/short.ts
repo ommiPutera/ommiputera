@@ -46,9 +46,10 @@ export async function markdownToHTML(markdown: string): Promise<string> {
 
 export async function getPost(
   slug: string,
-  language: string = "en",
+  language: string = "id",
 ): Promise<Post> {
   const filePath = path.join("content", "short", language, `${slug}.mdx`);
+  console.log("filePath: ", filePath);
   if (!fs.existsSync(filePath)) {
     throw new Error(
       `Post not found for slug "${slug}" in language "${language}"`,
@@ -80,7 +81,7 @@ async function getAllPosts(dir: string, language: string): Promise<Post[]> {
   );
 }
 
-export async function getShortPosts(language: string = "en"): Promise<Post[]> {
+export async function getShortPosts(language: string = "id"): Promise<Post[]> {
   const languageDir = path.join(process.cwd(), "content", "short", language);
   return getAllPosts(languageDir, language);
 }
