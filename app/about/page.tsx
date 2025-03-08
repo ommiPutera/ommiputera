@@ -121,17 +121,6 @@ async function Values() {
           </ContentParagraph>
         </div>
         <Br />
-        <div>
-          <ContentParagraph className="md:font-bold">
-            A Shared Desire for Life
-          </ContentParagraph>
-          <ContentParagraph>
-            Life is precious — not just for us but for all living beings.
-            Recognizing this shared desire inspires me to live and work with
-            compassion and respect for the world around us.
-          </ContentParagraph>
-        </div>
-        <Br />
         <div className="border border-neutral-200 dark:border-neutral-800 h-[400px] md:h-[500px] rounded-xl flex flex-col gap-4 overflow-hidden">
           <Image
             src="/images/me.webp"

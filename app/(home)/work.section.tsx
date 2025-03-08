@@ -104,7 +104,7 @@ export default function Work() {
                 </TimelineHeader>
                 <TimelineContent className="pr-0">
                   <TimelineDate className="flex items-center flex-wrap">
-                    <span>Jul 2024 - Present</span>
+                    <span>Jul 2024 - Mar 2025</span>
                   </TimelineDate>
                 </TimelineContent>
               </TimelineItem>

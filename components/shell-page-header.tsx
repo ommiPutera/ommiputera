@@ -54,7 +54,7 @@ export function Menu() {
             href="https://drive.google.com/file/d/1yBa2D8aH41kfAP4PBijk87wP6mHff7K4/view?usp=sharing"
             target="_blank"
           >
-            View my resume
+            View my Resume
           </Link>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
