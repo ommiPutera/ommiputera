@@ -1,7 +1,7 @@
+import rehypeShiki from "@shikijs/rehype";
 import fs from "fs";
 import matter from "gray-matter";
 import path from "path";
-import rehypePrettyCode from "rehype-pretty-code";
 import rehypeStringify from "rehype-stringify";
 import remarkParse from "remark-parse";
 import remarkRehype from "remark-rehype";
@@ -34,12 +34,11 @@ export async function markdownToHTML(markdown: string): Promise<string> {
   const processed = await unified()
     .use(remarkParse)
     .use(remarkRehype)
-    .use(rehypePrettyCode, {
-      theme: {
-        light: "min-light",
-        dark: "min-dark",
+    .use(rehypeShiki, {
+      themes: {
+        light: "vitesse-light",
+        dark: "vitesse-dark",
       },
-      keepBackground: false,
     })
     .use(rehypeStringify)
     .process(markdown);

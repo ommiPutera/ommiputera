@@ -50,7 +50,10 @@ export function Menu() {
           <Link href="/posts">Posts</Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="https://read.cv/ommiputera" target="_blank">
+          <Link
+            href="https://drive.google.com/file/d/1yBa2D8aH41kfAP4PBijk87wP6mHff7K4/view?usp=sharing"
+            target="_blank"
+          >
             View my resume
           </Link>
         </DropdownMenuItem>
