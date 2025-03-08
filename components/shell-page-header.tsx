@@ -24,8 +24,8 @@ export function BackBtn() {
       aria-label="back"
       className="inline-flex items-center gap-1 justify-center"
     >
-      <ArrowLeft className="w-4 h-4 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
-      <span className="text-xs font-medium">Back</span>
+      <ArrowLeft className="w-5 h-5 stroke-neutral-900 dark:stroke-neutral-100 stroke-3" />
+      <span className="text-[11px] font-medium">Back</span>
     </button>
   );
 }
@@ -99,7 +99,7 @@ export function Header({ title }: { title: string }) {
           role="banner"
           className="inline-flex gap-8 w-full ml-20 md:ml-36"
         >
-          <h1 className="text-xs text-foreground font-bold truncate w-full max-w-[62svw] md:max-w-[380px]">
+          <h1 className="text-xs text-foreground font-bold truncate w-full max-w-[62svw] md:max-w-[33svw]">
             {title}
           </h1>
         </header>
