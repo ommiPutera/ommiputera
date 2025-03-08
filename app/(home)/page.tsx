@@ -75,15 +75,10 @@ function About() {
       </SectionAvatar>
       <Content title="About me">
         <ContentParagraph>
-          <span>
-            Currently, I work as a Full Stack Engineer at{" "}
-            <ContentLink
-              href="https://dipay.id/"
-              target="_blank"
-              text=" Dipay"
-            />
-            , a fintech startup specializing in financial services
-          </span>
+          Previously, I worked as a Full Stack Engineer at{" "}
+          <ContentLink href="https://dipay.id/" target="_blank" text=" Dipay" />{" "}
+          a fintech startup specializing in financial services in Indonesia.
+          Now..
         </ContentParagraph>
         <ContentParagraph>
           <ContentLink href="/about" text="Show more" />

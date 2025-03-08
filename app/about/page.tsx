@@ -53,15 +53,11 @@ function Me() {
         </ContentParagraph>
         <Br />
         <ContentParagraph>
-          <span>
-            Currently, I work as a Full Stack Engineer at{" "}
-            <ContentLink
-              href="https://dipay.id/"
-              target="_blank"
-              text=" Dipay"
-            />
-            , a fintech startup specializing in financial services in Indonesia.
-          </span>
+          Previously, I worked as a Full Stack Engineer at{" "}
+          <ContentLink href="https://dipay.id/" target="_blank" text="Dipay" />{" "}
+          a fintech startup specializing in financial services in Indonesia.
+          Now, I&apos;m focusing on building and refining digital products while
+          continuing to explore the evolving web ecosystem.
         </ContentParagraph>
         <Br />
         <ContentParagraph className="font-bold">

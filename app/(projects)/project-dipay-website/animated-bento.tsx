@@ -25,16 +25,21 @@ export default function AnimatedBento() {
           breathes life into the layout. 🎥
         </span>
         <Br />
-        <video
-          loop
-          autoPlay
-          playsInline
-          muted
-          className="border rounded-xl h-[calc(100vw_/_1.2)] md:h-[calc(var(--shell-page-width)_/_1.27)]"
+        <div
+          style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
         >
-          <source src="/videos/animated-bento.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          <iframe
+            src="https://www.loom.com/embed/424574ee3c694fe9b7f9d8ece36ca1ef?sid=c4d111d5-b0bc-4d51-b6d9-944f37c89eea"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          ></iframe>
+        </div>
       </Content>
     </Section>
   );
