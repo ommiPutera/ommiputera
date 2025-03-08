@@ -99,7 +99,7 @@ export function Header({ title }: { title: string }) {
           role="banner"
           className="inline-flex gap-8 w-full ml-20 md:ml-36"
         >
-          <h1 className="text-xs text-foreground font-bold truncate w-full max-w-[260px] md:max-w-[380px]">
+          <h1 className="text-xs text-foreground font-bold truncate w-full max-w-[62svw] md:max-w-[380px]">
             {title}
           </h1>
         </header>

@@ -18,16 +18,21 @@ export default async function HeroAnimation() {
           </span>
         </ContentParagraph>
         <Br />
-        <video
-          loop
-          autoPlay
-          playsInline
-          muted
-          className="border overflow-hidden rounded-xl h-[calc(100vw_/_2.5)] md:h-[calc(var(--shell-page-width)_/_2.7)]"
+        <div
+          style={{ position: "relative", paddingBottom: "56.25%", height: 0 }}
         >
-          <source src="/videos/hero-animation.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+          <iframe
+            src="https://www.loom.com/embed/b3e8e149c6414f05bd08ec96534bcac1?sid=2ef4e57f-7fe2-4d84-b2fd-8613469c7f47"
+            allowFullScreen
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+            }}
+          ></iframe>
+        </div>
       </Content>
     </Section>
   );
