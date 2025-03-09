@@ -11,7 +11,7 @@ import { getBlogPosts, getPost } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
 
-import { getBase64RemoteImage } from "~/utils/getImageBlur";
+// import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -80,7 +80,7 @@ export default async function Blog({ params }: Props) {
                 alt=""
                 priority
                 placeholder="blur"
-                blurDataURL={await getBase64RemoteImage(post.metadata.image)}
+                // blurDataURL={await getBase64RemoteImage(post.metadata.image)}
                 className="h-[470px] md:h-[320px] object-cover"
               />
             </div>

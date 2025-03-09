@@ -11,7 +11,6 @@ import { createOnigurumaEngine } from "shiki/engine/oniguruma";
 import {
   transformerNotationDiff,
   transformerNotationHighlight,
-  // ...
 } from "@shikijs/transformers";
 
 import { calculateReadingTime } from "~/utils/calculateReadingTime";
