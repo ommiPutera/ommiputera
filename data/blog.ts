@@ -82,40 +82,46 @@ export async function markdownToHTML(markdown: string): Promise<string> {
   return processed.toString();
 }
 
-export async function getPost(
-  slug: string,
-  language: string = "en",
-): Promise<BlogPost> {
+export async function getPost(slug: string, language: string = "en"): Promise<BlogPost | null> {
   const filePath = path.join("content", "blog", language, `${slug}.mdx`);
-  if (!fs.existsSync(filePath)) {
-    throw new Error(
-      `Post not found for slug "${slug}" in language "${language}"`,
-    );
+
+  try {
+    const source = fs.readFileSync(filePath, "utf-8");
+    const { content: rawContent, data } = matter(source);
+
+    const metadata: Metadata = {
+      title: data.title || "Untitled",
+      publishedAt: data.publishedAt || new Date().toISOString(),
+      readingTime: calculateReadingTime(rawContent),
+      description: data.description || "",
+      image: data.image || "",
+      bannerCredit: data.bannerCredit || "",
+      language: language
+    };
+
+    const content = await markdownToHTML(rawContent);
+
+    return {
+      source: content,
+      metadata,
+      slug,
+    };
+  } catch (error) {
+    console.error(`Error reading post: ${slug}`, error);
+    return null;
   }
-
-  const source = fs.readFileSync(filePath, "utf-8");
-  const { content: rawContent, data } = matter(source);
-
-  const metadata = data as Metadata;
-
-  const readingTime = calculateReadingTime(rawContent);
-  const content = await markdownToHTML(rawContent);
-
-  return {
-    source: content,
-    metadata: { ...metadata, language, readingTime },
-    slug,
-  };
 }
 
 async function getAllPosts(dir: string, language: string): Promise<BlogPost[]> {
   const mdxFiles = getMDXFiles(dir);
-  return Promise.all(
+  const posts = await Promise.all(
     mdxFiles.map(async (file) => {
       const slug = path.basename(file, path.extname(file));
       return getPost(slug, language);
     }),
   );
+
+  return posts.filter((post): post is BlogPost => post !== null);
 }
 
 export async function getBlogPosts(
