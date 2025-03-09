@@ -11,7 +11,7 @@ import { getBlogPosts, getPost } from "~/data/blog";
 
 import { formatDate } from "~/lib/utils";
 
-// import { getBase64RemoteImage } from "~/utils/getImageBlur";
+import { getBase64RemoteImage } from "~/utils/getImageBlur";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -20,7 +20,7 @@ type Props = {
 export async function generateStaticParams() {
   const posts = await getBlogPosts();
   return posts.map((post) => ({
-    slug: post.slug,
+    slug: post?.slug,
   }));
 }
 
@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   }
   const post = await getPost(slug, language);
   return {
-    title: post.metadata.title,
+    title: post?.metadata?.title,
   };
 }
 
@@ -67,8 +67,8 @@ export default async function Blog({ params }: Props) {
               {post.metadata.title}
             </h2>
             <p className="text-xs text-muted-foreground font-normal mt-1 md:mt-0">
-              {post.metadata.readingTime} min read -{" "}
-              {formatDate(post.metadata.publishedAt)}
+              {post?.metadata?.readingTime} min read -{" "}
+              {formatDate(post?.metadata?.publishedAt)}
             </p>
           </div>
           <div className="w-full my-4">
@@ -80,7 +80,7 @@ export default async function Blog({ params }: Props) {
                 alt=""
                 priority
                 placeholder="blur"
-                // blurDataURL={await getBase64RemoteImage(post.metadata.image)}
+                blurDataURL={await getBase64RemoteImage(post.metadata.image)}
                 className="h-[470px] md:h-[320px] object-cover"
               />
             </div>
@@ -110,7 +110,7 @@ export default async function Blog({ params }: Props) {
         <div className="block">
           <article
             className="prose dark:prose-invert text-sm mt-4 mx-4 md:mx-auto max-w-[572px] mb-4 md:mb-0 font-normal md:font-medium"
-            dangerouslySetInnerHTML={{ __html: post.source }}
+            dangerouslySetInnerHTML={{ __html: post?.source }}
           ></article>
         </div>
       </Section>
